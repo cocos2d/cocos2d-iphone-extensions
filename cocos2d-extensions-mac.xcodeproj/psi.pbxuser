@@ -1,0 +1,123 @@
+// !$*UTF8*$!
+{
+	29B97313FDCFA39411CA2CEA /* Project object */ = {
+		activeBuildConfigurationName = Debug;
+		activeExecutable = 6DA571E5139C8F1D004D8D0B /* cocos2d-extensions-mac */;
+		activeTarget = E01E663C121CA00A001A484F /* cocos2d */;
+		addToTargets = (
+			E076E4F01225E97900DE0DA2 /* cocos2d-extensions-mac */,
+		);
+		codeSenseManager = 6DA571FD139C8F3B004D8D0B /* Code sense */;
+		executables = (
+			6DA571E5139C8F1D004D8D0B /* cocos2d-extensions-mac */,
+		);
+		perUserDictionary = {
+			PBXConfiguration.PBXFileTableDataSource3.PBXFileTableDataSource = {
+				PBXFileTableDataSourceColumnSortingDirectionKey = "-1";
+				PBXFileTableDataSourceColumnSortingKey = PBXFileDataSource_Filename_ColumnID;
+				PBXFileTableDataSourceColumnWidthsKey = (
+					20,
+					721,
+					20,
+					48,
+					43,
+					43,
+					20,
+				);
+				PBXFileTableDataSourceColumnsKey = (
+					PBXFileDataSource_FiletypeID,
+					PBXFileDataSource_Filename_ColumnID,
+					PBXFileDataSource_Built_ColumnID,
+					PBXFileDataSource_ObjectSize_ColumnID,
+					PBXFileDataSource_Errors_ColumnID,
+					PBXFileDataSource_Warnings_ColumnID,
+					PBXFileDataSource_Target_ColumnID,
+				);
+			};
+			PBXConfiguration.PBXTargetDataSource.PBXTargetDataSource = {
+				PBXFileTableDataSourceColumnSortingDirectionKey = "-1";
+				PBXFileTableDataSourceColumnSortingKey = PBXFileDataSource_Filename_ColumnID;
+				PBXFileTableDataSourceColumnWidthsKey = (
+					20,
+					681,
+					60,
+					20,
+					48.16259765625,
+					43,
+					43,
+				);
+				PBXFileTableDataSourceColumnsKey = (
+					PBXFileDataSource_FiletypeID,
+					PBXFileDataSource_Filename_ColumnID,
+					PBXTargetDataSource_PrimaryAttribute,
+					PBXFileDataSource_Built_ColumnID,
+					PBXFileDataSource_ObjectSize_ColumnID,
+					PBXFileDataSource_Errors_ColumnID,
+					PBXFileDataSource_Warnings_ColumnID,
+				);
+			};
+			PBXPerProjectTemplateStateSaveDate = 329029142;
+			PBXWorkspaceStateSaveDate = 329029142;
+		};
+		sourceControlManager = 6DA571FC139C8F3B004D8D0B /* Source Control */;
+		userBuildSettings = {
+		};
+	};
+	6DA571E5139C8F1D004D8D0B /* cocos2d-extensions-mac */ = {
+		isa = PBXExecutable;
+		activeArgIndices = (
+		);
+		argumentStrings = (
+		);
+		autoAttachOnCrash = 1;
+		breakpointsEnabled = 0;
+		configStateDict = {
+		};
+		customDataFormattersEnabled = 1;
+		dataTipCustomDataFormattersEnabled = 1;
+		dataTipShowTypeColumn = 1;
+		dataTipSortType = 0;
+		debuggerPlugin = GDBDebugging;
+		disassemblyDisplayState = 0;
+		enableDebugStr = 1;
+		environmentEntries = (
+		);
+		executableSystemSymbolLevel = 0;
+		executableUserSymbolLevel = 0;
+		libgmallocEnabled = 0;
+		name = "cocos2d-extensions-mac";
+		showTypeColumn = 0;
+		sourceDirectories = (
+		);
+	};
+	6DA571FC139C8F3B004D8D0B /* Source Control */ = {
+		isa = PBXSourceControlManager;
+		fallbackIsa = XCSourceControlManager;
+		isSCMEnabled = 0;
+		scmConfiguration = {
+			repositoryNamesForRoots = {
+				"" = "";
+			};
+		};
+	};
+	6DA571FD139C8F3B004D8D0B /* Code sense */ = {
+		isa = PBXCodeSenseManager;
+		indexTemplatePath = "";
+	};
+	6DA574A8139C966F004D8D0B /* LICENSE.cocos2d-extensions */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {899, 603}}";
+			sepNavSelRange = "{0, 0}";
+			sepNavVisRange = "{0, 1209}";
+		};
+	};
+	E01E663C121CA00A001A484F /* cocos2d */ = {
+		activeExec = 0;
+	};
+	E076E4F01225E97900DE0DA2 /* cocos2d-extensions-mac */ = {
+		activeExec = 0;
+		executables = (
+			6DA571E5139C8F1D004D8D0B /* cocos2d-extensions-mac */,
+		);
+	};
+}

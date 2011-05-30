@@ -1,0 +1,502 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 45;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		6DA575EC139C96AE004D8D0B /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 6DA575CF139C96AE004D8D0B /* Default.png */; };
+		6DA575ED139C96AE004D8D0B /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6DA575D0139C96AE004D8D0B /* InfoPlist.strings */; };
+		6DA575EE139C96AE004D8D0B /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6DA575D2139C96AE004D8D0B /* MainMenu.xib */; };
+		6DA575EF139C96AE004D8D0B /* fps_images.png in Resources */ = {isa = PBXBuildFile; fileRef = 6DA575D4139C96AE004D8D0B /* fps_images.png */; };
+		6DA575F0139C96AE004D8D0B /* Icon-72.png in Resources */ = {isa = PBXBuildFile; fileRef = 6DA575D5139C96AE004D8D0B /* Icon-72.png */; };
+		6DA575F1139C96AE004D8D0B /* Icon-Small-50.png in Resources */ = {isa = PBXBuildFile; fileRef = 6DA575D6139C96AE004D8D0B /* Icon-Small-50.png */; };
+		6DA575F2139C96AE004D8D0B /* Icon-Small.png in Resources */ = {isa = PBXBuildFile; fileRef = 6DA575D7139C96AE004D8D0B /* Icon-Small.png */; };
+		6DA575F3139C96AE004D8D0B /* Icon-Small@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6DA575D8139C96AE004D8D0B /* Icon-Small@2x.png */; };
+		6DA575F4139C96AE004D8D0B /* icon.icns in Resources */ = {isa = PBXBuildFile; fileRef = 6DA575D9139C96AE004D8D0B /* icon.icns */; };
+		6DA575F5139C96AE004D8D0B /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 6DA575DA139C96AE004D8D0B /* Icon.png */; };
+		6DA575F6139C96AE004D8D0B /* Icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6DA575DB139C96AE004D8D0B /* Icon@2x.png */; };
+		6DA575F7139C96AE004D8D0B /* Info-Mac.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6DA575DC139C96AE004D8D0B /* Info-Mac.plist */; };
+		6DA575F8139C96AE004D8D0B /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6DA575DD139C96AE004D8D0B /* Info.plist */; };
+		6DA575F9139C96AE004D8D0B /* iTunesArtwork in Resources */ = {isa = PBXBuildFile; fileRef = 6DA575DE139C96AE004D8D0B /* iTunesArtwork */; };
+		6DA575FA139C96AE004D8D0B /* cocos2d_extensions_iosAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DA575E2139C96AE004D8D0B /* cocos2d_extensions_iosAppDelegate.m */; };
+		6DA575FB139C96AE004D8D0B /* cocos2d_extensions_macAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DA575E5139C96AE004D8D0B /* cocos2d_extensions_macAppDelegate.m */; };
+		6DA575FC139C96AE004D8D0B /* HelloWorldLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DA575E8139C96AE004D8D0B /* HelloWorldLayer.m */; };
+		6DA575FD139C96AE004D8D0B /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DA575E9139C96AE004D8D0B /* main.m */; };
+		6DA575FE139C96AE004D8D0B /* RootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DA575EB139C96AE004D8D0B /* RootViewController.m */; };
+		E01E6A3E121EDCD3001A484F /* ApplicationServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E01E6A3D121EDCD3001A484F /* ApplicationServices.framework */; };
+		E01E6B36121EDCED001A484F /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E036A79E121B5C870037C5C6 /* QuartzCore.framework */; };
+		E01E6B49121EDCF4001A484F /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E036A79C121B5C720037C5C6 /* OpenGL.framework */; };
+		E076E5B71225E97900DE0DA2 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */; };
+		E076E5B81225E97900DE0DA2 /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E036A79C121B5C720037C5C6 /* OpenGL.framework */; };
+		E076E5B91225E97900DE0DA2 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E036A79E121B5C870037C5C6 /* QuartzCore.framework */; };
+		E076E5BA1225E97900DE0DA2 /* libcocos2d.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E01E663D121CA00A001A484F /* libcocos2d.a */; };
+		E076E5BB1225E97900DE0DA2 /* ApplicationServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E01E6A3D121EDCD3001A484F /* ApplicationServices.framework */; };
+		E076E5BC1225E97900DE0DA2 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = E0F9256D1224207200EF2362 /* libz.dylib */; };
+		E08AA04B12C0EDC8000341BD /* OpenAL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E08AA04A12C0EDC8000341BD /* OpenAL.framework */; };
+		E08AA04D12C0EEC0000341BD /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E08AA04C12C0EEC0000341BD /* AudioToolbox.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		E076E4F21225E97900DE0DA2 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 29B97313FDCFA39411CA2CEA /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = E01E663C121CA00A001A484F;
+			remoteInfo = cocos2d;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = /System/Library/Frameworks/Cocoa.framework; sourceTree = "<absolute>"; };
+		13E42FB307B3F0F600E4EEF1 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = /System/Library/Frameworks/CoreData.framework; sourceTree = "<absolute>"; };
+		29B97324FDCFA39411CA2CEA /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = /System/Library/Frameworks/AppKit.framework; sourceTree = "<absolute>"; };
+		29B97325FDCFA39411CA2CEA /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = /System/Library/Frameworks/Foundation.framework; sourceTree = "<absolute>"; };
+		6DA574A8139C966F004D8D0B /* LICENSE.cocos2d-extensions */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "LICENSE.cocos2d-extensions"; sourceTree = "<group>"; };
+		6DA575CF139C96AE004D8D0B /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
+		6DA575D1139C96AE004D8D0B /* English */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		6DA575D3139C96AE004D8D0B /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/MainMenu.xib; sourceTree = "<group>"; };
+		6DA575D4139C96AE004D8D0B /* fps_images.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = fps_images.png; sourceTree = "<group>"; };
+		6DA575D5139C96AE004D8D0B /* Icon-72.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-72.png"; sourceTree = "<group>"; };
+		6DA575D6139C96AE004D8D0B /* Icon-Small-50.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-Small-50.png"; sourceTree = "<group>"; };
+		6DA575D7139C96AE004D8D0B /* Icon-Small.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-Small.png"; sourceTree = "<group>"; };
+		6DA575D8139C96AE004D8D0B /* Icon-Small@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-Small@2x.png"; sourceTree = "<group>"; };
+		6DA575D9139C96AE004D8D0B /* icon.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = icon.icns; sourceTree = "<group>"; };
+		6DA575DA139C96AE004D8D0B /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon.png; sourceTree = "<group>"; };
+		6DA575DB139C96AE004D8D0B /* Icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon@2x.png"; sourceTree = "<group>"; };
+		6DA575DC139C96AE004D8D0B /* Info-Mac.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Info-Mac.plist"; sourceTree = "<group>"; };
+		6DA575DD139C96AE004D8D0B /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		6DA575DE139C96AE004D8D0B /* iTunesArtwork */ = {isa = PBXFileReference; lastKnownFileType = file; path = iTunesArtwork; sourceTree = "<group>"; };
+		6DA575E0139C96AE004D8D0B /* cocos2d_extensions_ios_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = cocos2d_extensions_ios_Prefix.pch; sourceTree = "<group>"; };
+		6DA575E1139C96AE004D8D0B /* cocos2d_extensions_iosAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = cocos2d_extensions_iosAppDelegate.h; sourceTree = "<group>"; };
+		6DA575E2139C96AE004D8D0B /* cocos2d_extensions_iosAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = cocos2d_extensions_iosAppDelegate.m; sourceTree = "<group>"; };
+		6DA575E3139C96AE004D8D0B /* cocos2d_extensions_mac_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = cocos2d_extensions_mac_Prefix.pch; sourceTree = "<group>"; };
+		6DA575E4139C96AE004D8D0B /* cocos2d_extensions_macAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = cocos2d_extensions_macAppDelegate.h; sourceTree = "<group>"; };
+		6DA575E5139C96AE004D8D0B /* cocos2d_extensions_macAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = cocos2d_extensions_macAppDelegate.m; sourceTree = "<group>"; };
+		6DA575E6139C96AE004D8D0B /* GameConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameConfig.h; sourceTree = "<group>"; };
+		6DA575E7139C96AE004D8D0B /* HelloWorldLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HelloWorldLayer.h; sourceTree = "<group>"; };
+		6DA575E8139C96AE004D8D0B /* HelloWorldLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HelloWorldLayer.m; sourceTree = "<group>"; };
+		6DA575E9139C96AE004D8D0B /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		6DA575EA139C96AE004D8D0B /* RootViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RootViewController.h; sourceTree = "<group>"; };
+		6DA575EB139C96AE004D8D0B /* RootViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RootViewController.m; sourceTree = "<group>"; };
+		E01E663D121CA00A001A484F /* libcocos2d.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libcocos2d.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		E01E6A3D121EDCD3001A484F /* ApplicationServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ApplicationServices.framework; path = System/Library/Frameworks/ApplicationServices.framework; sourceTree = SDKROOT; };
+		E036A79C121B5C720037C5C6 /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = System/Library/Frameworks/OpenGL.framework; sourceTree = SDKROOT; };
+		E036A79E121B5C870037C5C6 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		E076E5C01225E97900DE0DA2 /* cocos2d-extensions-mac.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "cocos2d-extensions-mac.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		E076E61F1225EC1E00DE0DA2 /* LICENSE.cocos2d */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE.cocos2d; sourceTree = "<group>"; };
+		E08AA04A12C0EDC8000341BD /* OpenAL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenAL.framework; path = System/Library/Frameworks/OpenAL.framework; sourceTree = SDKROOT; };
+		E08AA04C12C0EEC0000341BD /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
+		E0F9256D1224207200EF2362 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		E01E663B121CA00A001A484F /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E01E6A3E121EDCD3001A484F /* ApplicationServices.framework in Frameworks */,
+				E01E6B36121EDCED001A484F /* QuartzCore.framework in Frameworks */,
+				E01E6B49121EDCF4001A484F /* OpenGL.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E076E5B61225E97900DE0DA2 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E076E5B71225E97900DE0DA2 /* Cocoa.framework in Frameworks */,
+				E076E5B81225E97900DE0DA2 /* OpenGL.framework in Frameworks */,
+				E076E5B91225E97900DE0DA2 /* QuartzCore.framework in Frameworks */,
+				E076E5BA1225E97900DE0DA2 /* libcocos2d.a in Frameworks */,
+				E076E5BB1225E97900DE0DA2 /* ApplicationServices.framework in Frameworks */,
+				E076E5BC1225E97900DE0DA2 /* libz.dylib in Frameworks */,
+				E08AA04B12C0EDC8000341BD /* OpenAL.framework in Frameworks */,
+				E08AA04D12C0EEC0000341BD /* AudioToolbox.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		1058C7A0FEA54F0111CA2CBB /* Cocos2d Template Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				E0F9256D1224207200EF2362 /* libz.dylib */,
+				E08AA04A12C0EDC8000341BD /* OpenAL.framework */,
+				E08AA04C12C0EEC0000341BD /* AudioToolbox.framework */,
+				E036A79C121B5C720037C5C6 /* OpenGL.framework */,
+				E036A79E121B5C870037C5C6 /* QuartzCore.framework */,
+				E01E6A3D121EDCD3001A484F /* ApplicationServices.framework */,
+				29B97324FDCFA39411CA2CEA /* AppKit.framework */,
+				13E42FB307B3F0F600E4EEF1 /* CoreData.framework */,
+				29B97325FDCFA39411CA2CEA /* Foundation.framework */,
+				1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */,
+			);
+			name = "Cocos2d Template Frameworks";
+			sourceTree = "<group>";
+		};
+		19C28FACFE9D520D11CA2CBB /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				E01E663D121CA00A001A484F /* libcocos2d.a */,
+				E076E5C01225E97900DE0DA2 /* cocos2d-extensions-mac.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		29B97314FDCFA39411CA2CEA /* cocos2d-mac */ = {
+			isa = PBXGroup;
+			children = (
+				E076E61F1225EC1E00DE0DA2 /* LICENSE.cocos2d */,
+				6DA574A8139C966F004D8D0B /* LICENSE.cocos2d-extensions */,
+				6DA575CD139C96AE004D8D0B /* Tests */,
+				29B97323FDCFA39411CA2CEA /* Frameworks */,
+				19C28FACFE9D520D11CA2CBB /* Products */,
+			);
+			name = "cocos2d-mac";
+			sourceTree = "<group>";
+		};
+		29B97323FDCFA39411CA2CEA /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				1058C7A0FEA54F0111CA2CBB /* Cocos2d Template Frameworks */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		6DA575CD139C96AE004D8D0B /* Tests */ = {
+			isa = PBXGroup;
+			children = (
+				6DA575CE139C96AE004D8D0B /* SharedResources */,
+				6DA575DF139C96AE004D8D0B /* SharedSources */,
+			);
+			path = Tests;
+			sourceTree = "<group>";
+		};
+		6DA575CE139C96AE004D8D0B /* SharedResources */ = {
+			isa = PBXGroup;
+			children = (
+				6DA575CF139C96AE004D8D0B /* Default.png */,
+				6DA575D0139C96AE004D8D0B /* InfoPlist.strings */,
+				6DA575D2139C96AE004D8D0B /* MainMenu.xib */,
+				6DA575D4139C96AE004D8D0B /* fps_images.png */,
+				6DA575D5139C96AE004D8D0B /* Icon-72.png */,
+				6DA575D6139C96AE004D8D0B /* Icon-Small-50.png */,
+				6DA575D7139C96AE004D8D0B /* Icon-Small.png */,
+				6DA575D8139C96AE004D8D0B /* Icon-Small@2x.png */,
+				6DA575D9139C96AE004D8D0B /* icon.icns */,
+				6DA575DA139C96AE004D8D0B /* Icon.png */,
+				6DA575DB139C96AE004D8D0B /* Icon@2x.png */,
+				6DA575DC139C96AE004D8D0B /* Info-Mac.plist */,
+				6DA575DD139C96AE004D8D0B /* Info.plist */,
+				6DA575DE139C96AE004D8D0B /* iTunesArtwork */,
+			);
+			path = SharedResources;
+			sourceTree = "<group>";
+		};
+		6DA575DF139C96AE004D8D0B /* SharedSources */ = {
+			isa = PBXGroup;
+			children = (
+				6DA575E0139C96AE004D8D0B /* cocos2d_extensions_ios_Prefix.pch */,
+				6DA575E1139C96AE004D8D0B /* cocos2d_extensions_iosAppDelegate.h */,
+				6DA575E2139C96AE004D8D0B /* cocos2d_extensions_iosAppDelegate.m */,
+				6DA575E3139C96AE004D8D0B /* cocos2d_extensions_mac_Prefix.pch */,
+				6DA575E4139C96AE004D8D0B /* cocos2d_extensions_macAppDelegate.h */,
+				6DA575E5139C96AE004D8D0B /* cocos2d_extensions_macAppDelegate.m */,
+				6DA575E6139C96AE004D8D0B /* GameConfig.h */,
+				6DA575E7139C96AE004D8D0B /* HelloWorldLayer.h */,
+				6DA575E8139C96AE004D8D0B /* HelloWorldLayer.m */,
+				6DA575E9139C96AE004D8D0B /* main.m */,
+				6DA575EA139C96AE004D8D0B /* RootViewController.h */,
+				6DA575EB139C96AE004D8D0B /* RootViewController.m */,
+			);
+			path = SharedSources;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		E01E6639121CA00A001A484F /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		E01E663C121CA00A001A484F /* cocos2d */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = E01E6791121CA045001A484F /* Build configuration list for PBXNativeTarget "cocos2d" */;
+			buildPhases = (
+				E01E6639121CA00A001A484F /* Headers */,
+				E01E663A121CA00A001A484F /* Sources */,
+				E01E663B121CA00A001A484F /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = cocos2d;
+			productName = cocos2d;
+			productReference = E01E663D121CA00A001A484F /* libcocos2d.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+		E076E4F01225E97900DE0DA2 /* cocos2d-extensions-mac */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = E076E5BD1225E97900DE0DA2 /* Build configuration list for PBXNativeTarget "cocos2d-extensions-mac" */;
+			buildPhases = (
+				E076E4F31225E97900DE0DA2 /* Resources */,
+				E076E5B31225E97900DE0DA2 /* Sources */,
+				E076E5B61225E97900DE0DA2 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				E076E4F11225E97900DE0DA2 /* PBXTargetDependency */,
+			);
+			name = "cocos2d-extensions-mac";
+			productInstallPath = "$(HOME)/Applications";
+			productName = "cocos2d-mac";
+			productReference = E076E5C01225E97900DE0DA2 /* cocos2d-extensions-mac.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		29B97313FDCFA39411CA2CEA /* Project object */ = {
+			isa = PBXProject;
+			buildConfigurationList = C01FCF4E08A954540054247B /* Build configuration list for PBXProject "cocos2d-extensions-mac" */;
+			compatibilityVersion = "Xcode 3.1";
+			developmentRegion = English;
+			hasScannedForEncodings = 1;
+			knownRegions = (
+				English,
+				Japanese,
+				French,
+				German,
+			);
+			mainGroup = 29B97314FDCFA39411CA2CEA /* cocos2d-mac */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				E01E663C121CA00A001A484F /* cocos2d */,
+				E076E4F01225E97900DE0DA2 /* cocos2d-extensions-mac */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		E076E4F31225E97900DE0DA2 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6DA575EC139C96AE004D8D0B /* Default.png in Resources */,
+				6DA575ED139C96AE004D8D0B /* InfoPlist.strings in Resources */,
+				6DA575EE139C96AE004D8D0B /* MainMenu.xib in Resources */,
+				6DA575EF139C96AE004D8D0B /* fps_images.png in Resources */,
+				6DA575F0139C96AE004D8D0B /* Icon-72.png in Resources */,
+				6DA575F1139C96AE004D8D0B /* Icon-Small-50.png in Resources */,
+				6DA575F2139C96AE004D8D0B /* Icon-Small.png in Resources */,
+				6DA575F3139C96AE004D8D0B /* Icon-Small@2x.png in Resources */,
+				6DA575F4139C96AE004D8D0B /* icon.icns in Resources */,
+				6DA575F5139C96AE004D8D0B /* Icon.png in Resources */,
+				6DA575F6139C96AE004D8D0B /* Icon@2x.png in Resources */,
+				6DA575F7139C96AE004D8D0B /* Info-Mac.plist in Resources */,
+				6DA575F8139C96AE004D8D0B /* Info.plist in Resources */,
+				6DA575F9139C96AE004D8D0B /* iTunesArtwork in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		E01E663A121CA00A001A484F /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E076E5B31225E97900DE0DA2 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6DA575FA139C96AE004D8D0B /* cocos2d_extensions_iosAppDelegate.m in Sources */,
+				6DA575FB139C96AE004D8D0B /* cocos2d_extensions_macAppDelegate.m in Sources */,
+				6DA575FC139C96AE004D8D0B /* HelloWorldLayer.m in Sources */,
+				6DA575FD139C96AE004D8D0B /* main.m in Sources */,
+				6DA575FE139C96AE004D8D0B /* RootViewController.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		E076E4F11225E97900DE0DA2 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = E01E663C121CA00A001A484F /* cocos2d */;
+			targetProxy = E076E4F21225E97900DE0DA2 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		6DA575D0139C96AE004D8D0B /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				6DA575D1139C96AE004D8D0B /* English */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		6DA575D2139C96AE004D8D0B /* MainMenu.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				6DA575D3139C96AE004D8D0B /* English */,
+			);
+			name = MainMenu.xib;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		C01FCF4F08A954540054247B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"COCOS2D_DEBUG=2",
+					DEBUG,
+				);
+				GCC_TREAT_WARNINGS_AS_ERRORS = NO;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = NO;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.6;
+				ONLY_ACTIVE_ARCH = YES;
+				PREBINDING = NO;
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		C01FCF5008A954540054247B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_TREAT_WARNINGS_AS_ERRORS = NO;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = NO;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.5;
+				PREBINDING = NO;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		E01E663E121CA00A001A484F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = NO;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				PREBINDING = NO;
+				PRODUCT_NAME = cocos2d;
+			};
+			name = Debug;
+		};
+		E01E663F121CA00A001A484F /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_ENABLE_FIX_AND_CONTINUE = NO;
+				PREBINDING = NO;
+				PRODUCT_NAME = cocos2d;
+				ZERO_LINK = NO;
+			};
+			name = Release;
+		};
+		E076E5BE1225E97900DE0DA2 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = NO;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_FIX_AND_CONTINUE = YES;
+				GCC_MODEL_TUNING = G5;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = Resources/cocos2d_extensions_mac_Prefix.pch;
+				INFOPLIST_FILE = "Resources/Info-Mac.plist";
+				INSTALL_PATH = "$(HOME)/Applications";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/build/Debug\"",
+				);
+				PRODUCT_NAME = "cocos2d-extensions-mac";
+			};
+			name = Debug;
+		};
+		E076E5BF1225E97900DE0DA2 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_MODEL_TUNING = G5;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = Resources/cocos2d_extensions_mac_Prefix.pch;
+				INFOPLIST_FILE = "Resources/Info-Mac.plist";
+				INSTALL_PATH = "$(HOME)/Applications";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/build/Debug\"",
+				);
+				PRODUCT_NAME = "cocos2d-extensions-mac";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		C01FCF4E08A954540054247B /* Build configuration list for PBXProject "cocos2d-extensions-mac" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C01FCF4F08A954540054247B /* Debug */,
+				C01FCF5008A954540054247B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		E01E6791121CA045001A484F /* Build configuration list for PBXNativeTarget "cocos2d" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				E01E663E121CA00A001A484F /* Debug */,
+				E01E663F121CA00A001A484F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		E076E5BD1225E97900DE0DA2 /* Build configuration list for PBXNativeTarget "cocos2d-extensions-mac" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				E076E5BE1225E97900DE0DA2 /* Debug */,
+				E076E5BF1225E97900DE0DA2 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 29B97313FDCFA39411CA2CEA /* Project object */;
+}

@@ -1,0 +1,119 @@
+// !$*UTF8*$!
+{
+	1D6058900D05DD3D006BFB54 /* cocos2d-extensions-ios */ = {
+		activeExec = 0;
+		executables = (
+			6DA57618139C97EF004D8D0B /* cocos2d-extensions-ios */,
+		);
+	};
+	29B97313FDCFA39411CA2CEA /* Project object */ = {
+		activeBuildConfigurationName = Debug;
+		activeExecutable = 6DA57618139C97EF004D8D0B /* cocos2d-extensions-ios */;
+		activeTarget = 1D6058900D05DD3D006BFB54 /* cocos2d-extensions-ios */;
+		addToTargets = (
+			1D6058900D05DD3D006BFB54 /* cocos2d-extensions-ios */,
+		);
+		codeSenseManager = 6DA57630139C97F1004D8D0B /* Code sense */;
+		executables = (
+			6DA57618139C97EF004D8D0B /* cocos2d-extensions-ios */,
+		);
+		perUserDictionary = {
+			PBXConfiguration.PBXFileTableDataSource3.PBXFileTableDataSource = {
+				PBXFileTableDataSourceColumnSortingDirectionKey = "-1";
+				PBXFileTableDataSourceColumnSortingKey = PBXFileDataSource_Filename_ColumnID;
+				PBXFileTableDataSourceColumnWidthsKey = (
+					20,
+					341,
+					20,
+					48,
+					43,
+					43,
+					20,
+				);
+				PBXFileTableDataSourceColumnsKey = (
+					PBXFileDataSource_FiletypeID,
+					PBXFileDataSource_Filename_ColumnID,
+					PBXFileDataSource_Built_ColumnID,
+					PBXFileDataSource_ObjectSize_ColumnID,
+					PBXFileDataSource_Errors_ColumnID,
+					PBXFileDataSource_Warnings_ColumnID,
+					PBXFileDataSource_Target_ColumnID,
+				);
+			};
+			PBXPerProjectTemplateStateSaveDate = 329029632;
+			PBXWorkspaceStateSaveDate = 329029632;
+		};
+		perUserProjectItems = {
+			6DA5778F139C984D004D8D0B /* PBXBookmark */ = 6DA5778F139C984D004D8D0B /* PBXBookmark */;
+			6DA57790139C984D004D8D0B /* PBXTextBookmark */ = 6DA57790139C984D004D8D0B /* PBXTextBookmark */;
+		};
+		sourceControlManager = 6DA5762F139C97F1004D8D0B /* Source Control */;
+		userBuildSettings = {
+		};
+	};
+	506EE05D10304ED200A389B3 /* cocos2d libraries */ = {
+		activeExec = 0;
+	};
+	6DA57618139C97EF004D8D0B /* cocos2d-extensions-ios */ = {
+		isa = PBXExecutable;
+		activeArgIndices = (
+		);
+		argumentStrings = (
+		);
+		autoAttachOnCrash = 1;
+		breakpointsEnabled = 0;
+		configStateDict = {
+		};
+		customDataFormattersEnabled = 1;
+		dataTipCustomDataFormattersEnabled = 1;
+		dataTipShowTypeColumn = 1;
+		dataTipSortType = 0;
+		debuggerPlugin = GDBDebugging;
+		disassemblyDisplayState = 0;
+		enableDebugStr = 1;
+		environmentEntries = (
+		);
+		executableSystemSymbolLevel = 0;
+		executableUserSymbolLevel = 0;
+		libgmallocEnabled = 0;
+		name = "cocos2d-extensions-ios";
+		showTypeColumn = 0;
+		sourceDirectories = (
+		);
+	};
+	6DA5762F139C97F1004D8D0B /* Source Control */ = {
+		isa = PBXSourceControlManager;
+		fallbackIsa = XCSourceControlManager;
+		isSCMEnabled = 0;
+		scmConfiguration = {
+			repositoryNamesForRoots = {
+				"" = "";
+			};
+		};
+	};
+	6DA57630139C97F1004D8D0B /* Code sense */ = {
+		isa = PBXCodeSenseManager;
+		indexTemplatePath = "";
+	};
+	6DA5775C139C9827004D8D0B /* LICENSE.cocos2d-extensions */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {558, 299}}";
+			sepNavSelRange = "{0, 0}";
+			sepNavVisRange = "{0, 1041}";
+		};
+	};
+	6DA5778F139C984D004D8D0B /* PBXBookmark */ = {
+		isa = PBXBookmark;
+		fRef = 6DA5775C139C9827004D8D0B /* LICENSE.cocos2d-extensions */;
+	};
+	6DA57790139C984D004D8D0B /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 6DA5775C139C9827004D8D0B /* LICENSE.cocos2d-extensions */;
+		name = "LICENSE.cocos2d-extensions: 1";
+		rLen = 0;
+		rLoc = 0;
+		rType = 0;
+		vrLen = 1041;
+		vrLoc = 0;
+	};
+}
