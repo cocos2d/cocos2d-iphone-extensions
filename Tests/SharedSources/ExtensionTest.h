@@ -24,16 +24,28 @@
  *
  */
 
-
-// When you import this file, you import all the cocos2d classes
 #import "cocos2d.h"
 
-// HelloWorldLayer
-@interface HelloWorldLayer : CCLayer
+#define SYNTHESIZE_EXTENSION_TEST(TEST_LAYER)	\
+												\
+@implementation ExtensionTest					\
+												\
++(CCScene *) scene								\
+{												\
+	CCScene *scene = [CCScene node];			\
+	[scene addChild: [TEST_LAYER node]];		\
+	return scene;								\
+}												\
+												\
+@end
+
+// ExtensionTest - Interface
+// Implementation differs in different ExtensionTests
+@interface ExtensionTest : CCLayer
 {
 }
 
-// returns a CCScene that contains the HelloWorldLayer as the only child
+// Returns a CCScene that contains the test layer. 
 +(CCScene *) scene;
 
 @end

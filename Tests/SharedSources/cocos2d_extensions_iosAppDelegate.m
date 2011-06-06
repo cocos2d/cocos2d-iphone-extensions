@@ -28,7 +28,7 @@
 
 #import "cocos2d_extensions_iosAppDelegate.h"
 #import "GameConfig.h"
-#import "HelloWorldLayer.h"
+#import "ExtensionTest.h"
 #import "RootViewController.h"
 
 @implementation cocos2d_extensions_iosAppDelegate
@@ -128,7 +128,7 @@
 	[self removeStartupFlicker];
 	
 	// Run the intro Scene
-	[[CCDirector sharedDirector] runWithScene: [HelloWorldLayer scene]];
+	[[CCDirector sharedDirector] runWithScene: [ExtensionTest scene]];
 }
 
 

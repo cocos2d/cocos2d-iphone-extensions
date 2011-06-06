@@ -7,10 +7,11 @@
 //
 
 #import "cocos2d_extensions_macAppDelegate.h"
-#import "HelloWorldLayer.h"
+#import "ExtensionTest.h"
 
 @implementation cocos2d_extensions_macAppDelegate
 @synthesize window=window_, glView=glView_;
+
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification
 {
@@ -23,13 +24,32 @@
 	// EXPERIMENTAL stuff.
 	// 'Effects' don't work correctly when autoscale is turned on.
 	// Use kCCDirectorResize_NoScale if you don't want auto-scaling.
-	[director setResizeMode:kCCDirectorResize_AutoScale];
+	[director setResizeMode:kCCDirectorResize_NoScale];
 	
 	// Enable "moving" mouse event. Default no.
 	[window_ setAcceptsMouseMovedEvents:NO];
 	
+	// Start listening to resizeWindow notification
+	[director.openGLView setPostsFrameChangedNotifications: YES];
+	[[NSNotificationCenter defaultCenter] addObserver: self
+											 selector: @selector(updateForScreenReshape:) 
+												 name: NSViewFrameDidChangeNotification 
+											   object: director.openGLView];
 	
-	[director runWithScene:[HelloWorldLayer scene]];
+	
+	[director runWithScene:[ExtensionTest scene]];
+}
+
+- (void) updateForScreenReshape: (NSNotification *) aNotification
+{
+	CCScene *curScene = [[CCDirector sharedDirector] runningScene];
+	
+	if (curScene)
+	{
+		for (CCNode *child in curScene.children)
+			if ([child respondsToSelector:@selector(updateForScreenReshape)])
+				[child performSelector:@selector(updateForScreenReshape)];
+	}
 }
 
 - (BOOL) applicationShouldTerminateAfterLastWindowClosed: (NSApplication *) theApplication
