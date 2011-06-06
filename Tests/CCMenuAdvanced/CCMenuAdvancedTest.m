@@ -32,6 +32,14 @@
 
 SYNTHESIZE_EXTENSION_TEST(DemoMenu)
 
+#define DEMO_MENU_Z_BACKGROUND			1
+#define DEMO_MENU_Z_CONTENT				2
+#define DEMO_MENU_Z_BORDERS				3
+#define DEMO_MENU_Z_COVER				4
+#define DEMO_MENU_Z_CAPTION				5
+#define DEMO_MENU_Z_BACK_BUTTON			6
+#define DEMO_MENU_Z_OVER_BACK_BUTTON	7
+
 @implementation DemoMenu
 
 - (id) init

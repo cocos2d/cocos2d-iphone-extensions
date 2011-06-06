@@ -26,13 +26,11 @@
  *
  */
 
+
 #import <Foundation/Foundation.h>
 #import "cocos2d.h"
 
 @class DemoMenuWidget;
-
-// Main Demo Menu Node - demonstration of how universal menu screen can be created 
-// as subclass of CCNode
 @interface DemoMenu : CCLayer
 {
 	// weak refs of node childs
@@ -50,7 +48,9 @@
 @end
 
 
-// The Menu itself of Demo Screen
+// Holds CCMenuAdvanced on first screen of CCMenuAdvancedTest
+// Tests CCMenuAdvanced's contentSize & horizontal align
+// So it can be scaled for any winSize to fit.
 @interface DemoMenuWidget : CCNode
 {
 }
@@ -60,16 +60,9 @@
 
 @end
 
-#define DEMO_MENU_Z_BACKGROUND			1
-#define DEMO_MENU_Z_CONTENT				2
-#define DEMO_MENU_Z_BORDERS				3
-#define DEMO_MENU_Z_COVER				4
-#define DEMO_MENU_Z_CAPTION				5
-#define DEMO_MENU_Z_BACK_BUTTON			6
-#define DEMO_MENU_Z_OVER_BACK_BUTTON	7
 
-// Abstract Menu Screen, that was used in iTraceur 
-// as a subclass for Choose Leve, Time Trial & Game Progress Menus
+// Abstract Menu Screen
+// Inlcudes back button, which is binded to escapeDelegate (press escape to active this button on Mac).
 @interface GenericDemoMenu : CCNode 
 {
 	// weak refs to self children
@@ -77,27 +70,17 @@
 	CCLayerColor *_background;
 	CCMenuItem *_backMenuItem;
 }
-
-// must be reimplemented in subclasses, 
-// should return sprite frame name for caption sprite at the top
 - (NSString *) captionSpriteFrameName;
-
-// must be called from subclasses implementation of method
 - (void) updateForScreenReshape;
 
 @end
 
 // Demo Menu with list, like TimeTrial menu in iTraceur
-// demonstrates how menu ca be build as a subclass of GenericDemoMenu
+// Tests vertical align and boundaryRect for scrolling menu.
 @interface DemoMenu2 : GenericDemoMenu 
 {
-	//Right Silhouette
 	CCSprite *_sil;
-	
-	// Left List of something (videos, levels, etc)
-	CCNode * _widget;
-	
-	// Faders on top and bottom - to fade the list
+	CCNode *_widget;
 	CCSprite *_topBorder, *_bottomBorder;
 }
 
