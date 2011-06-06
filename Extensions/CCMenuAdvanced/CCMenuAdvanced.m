@@ -242,7 +242,13 @@
 	CCARRAY_FOREACH(children_, item)
 	{
 		CGSize itemSize = item.contentSize;
-		[item setPosition:ccp(x + itemSize.width * item.scaleX / 2.0f, height / 2.0f)];
+		
+		CGPoint curPos = ccp(x + itemSize.width * item.scaleX / 2.0f, height / 2.0f);
+		if (!leftToRight) {
+			curPos.x = x - itemSize.width * item.scaleX / 2.0f;
+		}
+		
+		[item setPosition:curPos];
 		
 		if (leftToRight)
 			x += itemSize.width * item.scaleX + padding;
