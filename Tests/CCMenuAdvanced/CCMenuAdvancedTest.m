@@ -107,12 +107,12 @@ SYNTHESIZE_EXTENSION_TEST(DemoMenu)
 	CGSize activeSize = CGSizeMake( winSize.width, 
 								   winSize.height - _nameLogo.scale * [_nameLogo contentSize].height);
 	
-	//scale and position menu widget
-	_widget.scale = (winSize.width / 2.0f) / [_widget contentSize].width;
+	// scale and position menu widget
+	_widget.scale = (winSize.width) / [_widget contentSize].width;
 	_widget.scale = MIN(_widget.scale, activeSize.height / [_widget contentSize].height);
 	_widget.scale = MIN(_widget.scale, 1.0f);
-	_widget.anchorPoint = ccp(0, 0.5);
-	_widget.position = ccp(0, activeSize.height / 2.0f);
+	_widget.anchorPoint = ccp(0.5f, 0);
+	_widget.position = ccp(winSize.width / 2.0f, 0);
 }
 
 @end
@@ -131,13 +131,16 @@ SYNTHESIZE_EXTENSION_TEST(DemoMenu)
 		
 		// Get all universal sprites
 		CCSprite *dummyButton1 = [CCSprite spriteWithSpriteFrameName:@"dummyButton1.png"];
-		CCSprite *dummyButton1Selected = [CCSprite spriteWithSpriteFrameName:@"dummyButton1Selected.png"];
+		CCSprite *dummyButton1Selected = [CCSprite spriteWithSpriteFrameName:@"dummyButton1.png"];
+		dummyButton1Selected.opacity = 128;
 		
 		CCSprite *dummyButton2 = [CCSprite spriteWithSpriteFrameName:@"dummyButton2.png"];
-		CCSprite *dummyButton2Selected = [CCSprite spriteWithSpriteFrameName:@"dummyButton2Selected.png"];
+		CCSprite *dummyButton2Selected = [CCSprite spriteWithSpriteFrameName:@"dummyButton2.png"];
+		dummyButton2Selected.opacity = 128;
 		
 		CCSprite *listButton = [CCSprite spriteWithSpriteFrameName:@"listButton.png"];
-		CCSprite *listButtonSelected = [CCSprite spriteWithSpriteFrameName:@"listButtonSelected.png"];		
+		CCSprite *listButtonSelected = [CCSprite spriteWithSpriteFrameName:@"listButton.png"];	
+		listButtonSelected.opacity = 128;
 		
 
 		
@@ -168,6 +171,9 @@ SYNTHESIZE_EXTENSION_TEST(DemoMenu)
 		CCMenuAdvanced *menu = [CCMenuAdvanced menuWithItems: dummyMenuItem1, dummyMenuItem2, listMenuItem, nil];
 		menu.anchorPoint = ccp(0,0);
 		menu.position = ccp(0,0);
+		
+		[menu alignItemsHorizontallyWithPadding:50.0f leftToRight:NO];
+		self.contentSize = menu.contentSize;
 		
 		//add keyboard bindings for mac
 #if defined(__MAC_OS_X_VERSION_MAX_ALLOWED)
