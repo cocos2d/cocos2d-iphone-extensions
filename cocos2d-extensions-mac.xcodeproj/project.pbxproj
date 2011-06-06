@@ -199,6 +199,30 @@
 		6DA57D7A139CBB01004D8D0B /* crackedGradient42-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = 6DA57C92139CAAD9004D8D0B /* crackedGradient42-hd.png */; };
 		6DA57D7B139CBB01004D8D0B /* crackedGradient42.fnt in Resources */ = {isa = PBXBuildFile; fileRef = 6DA57C93139CAAD9004D8D0B /* crackedGradient42.fnt */; };
 		6DA57D7C139CBB01004D8D0B /* crackedGradient42.png in Resources */ = {isa = PBXBuildFile; fileRef = 6DA57C94139CAAD9004D8D0B /* crackedGradient42.png */; };
+		6DA57ED1139D561E004D8D0B /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6DA575D0139C96AE004D8D0B /* InfoPlist.strings */; };
+		6DA57ED2139D561E004D8D0B /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6DA575D2139C96AE004D8D0B /* MainMenu.xib */; };
+		6DA57ED3139D561E004D8D0B /* fps_images.png in Resources */ = {isa = PBXBuildFile; fileRef = 6DA575D4139C96AE004D8D0B /* fps_images.png */; };
+		6DA57ED4139D561E004D8D0B /* icon.icns in Resources */ = {isa = PBXBuildFile; fileRef = 6DA575D9139C96AE004D8D0B /* icon.icns */; };
+		6DA57EDC139D561E004D8D0B /* cocos2d_extensions_macAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DA575E5139C96AE004D8D0B /* cocos2d_extensions_macAppDelegate.m */; };
+		6DA57EDD139D561E004D8D0B /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DA575E9139C96AE004D8D0B /* main.m */; };
+		6DA57EE1139D561E004D8D0B /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */; };
+		6DA57EE2139D561E004D8D0B /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E036A79C121B5C720037C5C6 /* OpenGL.framework */; };
+		6DA57EE3139D561E004D8D0B /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E036A79E121B5C870037C5C6 /* QuartzCore.framework */; };
+		6DA57EE4139D561E004D8D0B /* libcocos2d.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E01E663D121CA00A001A484F /* libcocos2d.a */; };
+		6DA57EE5139D561E004D8D0B /* ApplicationServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E01E6A3D121EDCD3001A484F /* ApplicationServices.framework */; };
+		6DA57EE6139D561E004D8D0B /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = E0F9256D1224207200EF2362 /* libz.dylib */; };
+		6DA57EE7139D561E004D8D0B /* OpenAL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E08AA04A12C0EDC8000341BD /* OpenAL.framework */; };
+		6DA57EE8139D561E004D8D0B /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E08AA04C12C0EEC0000341BD /* AudioToolbox.framework */; };
+		6DA57F11139D5F9A004D8D0B /* CCVideoTestLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DA57ECB139D55EF004D8D0B /* CCVideoTestLayer.m */; };
+		6DA57F12139D5FA4004D8D0B /* bait.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 6DA57EC9139D55EF004D8D0B /* bait.mp4 */; };
+		6DA57F13139D5FB4004D8D0B /* videoOverlayView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DA57EBB139D558E004D8D0B /* videoOverlayView.m */; };
+		6DA57F14139D5FB4004D8D0B /* VideoPlayerImpliOS.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DA57EBD139D558E004D8D0B /* VideoPlayerImpliOS.m */; };
+		6DA57F15139D5FB4004D8D0B /* CustomVideoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DA57EC1139D558E004D8D0B /* CustomVideoViewController.m */; };
+		6DA57F16139D5FB4004D8D0B /* MyMovieView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DA57EC3139D558E004D8D0B /* MyMovieView.m */; };
+		6DA57F17139D5FB4004D8D0B /* VideoPlayerImplMac.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DA57EC5139D558E004D8D0B /* VideoPlayerImplMac.m */; };
+		6DA57F18139D5FB4004D8D0B /* VideoPlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DA57EC7139D558E004D8D0B /* VideoPlayer.m */; };
+		6DA57F24139D6011004D8D0B /* QTKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6DA57F23139D6011004D8D0B /* QTKit.framework */; };
+		6DA57F59139D6258004D8D0B /* CustomVideoView.nib in Resources */ = {isa = PBXBuildFile; fileRef = 6DA57EBF139D558E004D8D0B /* CustomVideoView.nib */; };
 		E01E6A3E121EDCD3001A484F /* ApplicationServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E01E6A3D121EDCD3001A484F /* ApplicationServices.framework */; };
 		E01E6B36121EDCED001A484F /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E036A79E121B5C870037C5C6 /* QuartzCore.framework */; };
 		E01E6B49121EDCF4001A484F /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E036A79C121B5C720037C5C6 /* OpenGL.framework */; };
@@ -214,6 +238,13 @@
 
 /* Begin PBXContainerItemProxy section */
 		6DA57C98139CAE19004D8D0B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 29B97313FDCFA39411CA2CEA /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = E01E663C121CA00A001A484F;
+			remoteInfo = cocos2d;
+		};
+		6DA57ECF139D561E004D8D0B /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 29B97313FDCFA39411CA2CEA /* Project object */;
 			proxyType = 1;
@@ -438,6 +469,24 @@
 		6DA57C94139CAAD9004D8D0B /* crackedGradient42.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = crackedGradient42.png; sourceTree = "<group>"; };
 		6DA57CAE139CAE19004D8D0B /* CCMenuAdvancedTest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CCMenuAdvancedTest.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6DA57E9E139CD854004D8D0B /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.md; sourceTree = "<group>"; };
+		6DA57EBA139D558E004D8D0B /* videoOverlayView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = videoOverlayView.h; sourceTree = "<group>"; };
+		6DA57EBB139D558E004D8D0B /* videoOverlayView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = videoOverlayView.m; sourceTree = "<group>"; };
+		6DA57EBC139D558E004D8D0B /* VideoPlayerImpliOS.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VideoPlayerImpliOS.h; sourceTree = "<group>"; };
+		6DA57EBD139D558E004D8D0B /* VideoPlayerImpliOS.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VideoPlayerImpliOS.m; sourceTree = "<group>"; };
+		6DA57EBF139D558E004D8D0B /* CustomVideoView.nib */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; path = CustomVideoView.nib; sourceTree = "<group>"; };
+		6DA57EC0139D558E004D8D0B /* CustomVideoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomVideoViewController.h; sourceTree = "<group>"; };
+		6DA57EC1139D558E004D8D0B /* CustomVideoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomVideoViewController.m; sourceTree = "<group>"; };
+		6DA57EC2139D558E004D8D0B /* MyMovieView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyMovieView.h; sourceTree = "<group>"; };
+		6DA57EC3139D558E004D8D0B /* MyMovieView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyMovieView.m; sourceTree = "<group>"; };
+		6DA57EC4139D558E004D8D0B /* VideoPlayerImplMac.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VideoPlayerImplMac.h; sourceTree = "<group>"; };
+		6DA57EC5139D558E004D8D0B /* VideoPlayerImplMac.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VideoPlayerImplMac.m; sourceTree = "<group>"; };
+		6DA57EC6139D558E004D8D0B /* VideoPlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VideoPlayer.h; sourceTree = "<group>"; };
+		6DA57EC7139D558E004D8D0B /* VideoPlayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VideoPlayer.m; sourceTree = "<group>"; };
+		6DA57EC9139D55EF004D8D0B /* bait.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = bait.mp4; sourceTree = "<group>"; };
+		6DA57ECA139D55EF004D8D0B /* CCVideoTestLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCVideoTestLayer.h; sourceTree = "<group>"; };
+		6DA57ECB139D55EF004D8D0B /* CCVideoTestLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCVideoTestLayer.m; sourceTree = "<group>"; };
+		6DA57EEC139D561E004D8D0B /* CCVideoPlayerTest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CCVideoPlayerTest.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		6DA57F23139D6011004D8D0B /* QTKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QTKit.framework; path = System/Library/Frameworks/QTKit.framework; sourceTree = SDKROOT; };
 		E01E663D121CA00A001A484F /* libcocos2d.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libcocos2d.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		E01E6A3D121EDCD3001A484F /* ApplicationServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ApplicationServices.framework; path = System/Library/Frameworks/ApplicationServices.framework; sourceTree = SDKROOT; };
 		E036A79C121B5C720037C5C6 /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = System/Library/Frameworks/OpenGL.framework; sourceTree = SDKROOT; };
@@ -462,6 +511,22 @@
 				6DA57CA8139CAE19004D8D0B /* libz.dylib in Frameworks */,
 				6DA57CA9139CAE19004D8D0B /* OpenAL.framework in Frameworks */,
 				6DA57CAA139CAE19004D8D0B /* AudioToolbox.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6DA57EE0139D561E004D8D0B /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6DA57EE1139D561E004D8D0B /* Cocoa.framework in Frameworks */,
+				6DA57EE2139D561E004D8D0B /* OpenGL.framework in Frameworks */,
+				6DA57EE3139D561E004D8D0B /* QuartzCore.framework in Frameworks */,
+				6DA57EE4139D561E004D8D0B /* libcocos2d.a in Frameworks */,
+				6DA57EE5139D561E004D8D0B /* ApplicationServices.framework in Frameworks */,
+				6DA57EE6139D561E004D8D0B /* libz.dylib in Frameworks */,
+				6DA57EE7139D561E004D8D0B /* OpenAL.framework in Frameworks */,
+				6DA57EE8139D561E004D8D0B /* AudioToolbox.framework in Frameworks */,
+				6DA57F24139D6011004D8D0B /* QTKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -516,6 +581,7 @@
 				E01E663D121CA00A001A484F /* libcocos2d.a */,
 				E076E5C01225E97900DE0DA2 /* cocos2d-extensions-mac.app */,
 				6DA57CAE139CAE19004D8D0B /* CCMenuAdvancedTest.app */,
+				6DA57EEC139D561E004D8D0B /* CCVideoPlayerTest.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -538,6 +604,7 @@
 		29B97323FDCFA39411CA2CEA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				6DA57F29139D601C004D8D0B /* CCVideoPlayer Frameworks */,
 				1058C7A0FEA54F0111CA2CBB /* Cocos2d Template Frameworks */,
 			);
 			name = Frameworks;
@@ -546,6 +613,7 @@
 		6DA575CD139C96AE004D8D0B /* Tests */ = {
 			isa = PBXGroup;
 			children = (
+				6DA57EC8139D55EF004D8D0B /* CCVideoPlayerTest */,
 				6DA57C8B139CAAD9004D8D0B /* CCMenuAdvanced */,
 				6DA575CE139C96AE004D8D0B /* SharedResources */,
 				6DA575DF139C96AE004D8D0B /* SharedSources */,
@@ -799,6 +867,7 @@
 		6DA57C7D139CAAB6004D8D0B /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				6DA57EB8139D558E004D8D0B /* CCVideoPlayer */,
 				6DA57C7E139CAAB6004D8D0B /* CCMenuAdvanced */,
 				6DA57C81139CAAB6004D8D0B /* CCMenuItemSpriteIndependent */,
 			);
@@ -844,6 +913,60 @@
 				6DA57C94139CAAD9004D8D0B /* crackedGradient42.png */,
 			);
 			path = Resources;
+			sourceTree = "<group>";
+		};
+		6DA57EB8139D558E004D8D0B /* CCVideoPlayer */ = {
+			isa = PBXGroup;
+			children = (
+				6DA57EB9139D558E004D8D0B /* iOS */,
+				6DA57EBE139D558E004D8D0B /* Mac */,
+				6DA57EC6139D558E004D8D0B /* VideoPlayer.h */,
+				6DA57EC7139D558E004D8D0B /* VideoPlayer.m */,
+			);
+			path = CCVideoPlayer;
+			sourceTree = "<group>";
+		};
+		6DA57EB9139D558E004D8D0B /* iOS */ = {
+			isa = PBXGroup;
+			children = (
+				6DA57EBA139D558E004D8D0B /* videoOverlayView.h */,
+				6DA57EBB139D558E004D8D0B /* videoOverlayView.m */,
+				6DA57EBC139D558E004D8D0B /* VideoPlayerImpliOS.h */,
+				6DA57EBD139D558E004D8D0B /* VideoPlayerImpliOS.m */,
+			);
+			path = iOS;
+			sourceTree = "<group>";
+		};
+		6DA57EBE139D558E004D8D0B /* Mac */ = {
+			isa = PBXGroup;
+			children = (
+				6DA57EBF139D558E004D8D0B /* CustomVideoView.nib */,
+				6DA57EC0139D558E004D8D0B /* CustomVideoViewController.h */,
+				6DA57EC1139D558E004D8D0B /* CustomVideoViewController.m */,
+				6DA57EC2139D558E004D8D0B /* MyMovieView.h */,
+				6DA57EC3139D558E004D8D0B /* MyMovieView.m */,
+				6DA57EC4139D558E004D8D0B /* VideoPlayerImplMac.h */,
+				6DA57EC5139D558E004D8D0B /* VideoPlayerImplMac.m */,
+			);
+			path = Mac;
+			sourceTree = "<group>";
+		};
+		6DA57EC8139D55EF004D8D0B /* CCVideoPlayerTest */ = {
+			isa = PBXGroup;
+			children = (
+				6DA57EC9139D55EF004D8D0B /* bait.mp4 */,
+				6DA57ECA139D55EF004D8D0B /* CCVideoTestLayer.h */,
+				6DA57ECB139D55EF004D8D0B /* CCVideoTestLayer.m */,
+			);
+			path = CCVideoPlayerTest;
+			sourceTree = "<group>";
+		};
+		6DA57F29139D601C004D8D0B /* CCVideoPlayer Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				6DA57F23139D6011004D8D0B /* QTKit.framework */,
+			);
+			name = "CCVideoPlayer Frameworks";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -966,6 +1089,25 @@
 			productReference = 6DA57CAE139CAE19004D8D0B /* CCMenuAdvancedTest.app */;
 			productType = "com.apple.product-type.application";
 		};
+		6DA57ECD139D561E004D8D0B /* CCVideoPlayerTest */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 6DA57EE9139D561E004D8D0B /* Build configuration list for PBXNativeTarget "CCVideoPlayerTest" */;
+			buildPhases = (
+				6DA57ED0139D561E004D8D0B /* Resources */,
+				6DA57EDB139D561E004D8D0B /* Sources */,
+				6DA57EE0139D561E004D8D0B /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				6DA57ECE139D561E004D8D0B /* PBXTargetDependency */,
+			);
+			name = CCVideoPlayerTest;
+			productInstallPath = "$(HOME)/Applications";
+			productName = "cocos2d-mac";
+			productReference = 6DA57EEC139D561E004D8D0B /* CCVideoPlayerTest.app */;
+			productType = "com.apple.product-type.application";
+		};
 		E01E663C121CA00A001A484F /* cocos2d */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = E01E6791121CA045001A484F /* Build configuration list for PBXNativeTarget "cocos2d" */;
@@ -983,9 +1125,9 @@
 			productReference = E01E663D121CA00A001A484F /* libcocos2d.a */;
 			productType = "com.apple.product-type.library.static";
 		};
-		E076E4F01225E97900DE0DA2 /* cocos2d-extensions-mac */ = {
+		E076E4F01225E97900DE0DA2 /* Extension Test Template */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = E076E5BD1225E97900DE0DA2 /* Build configuration list for PBXNativeTarget "cocos2d-extensions-mac" */;
+			buildConfigurationList = E076E5BD1225E97900DE0DA2 /* Build configuration list for PBXNativeTarget "Extension Test Template" */;
 			buildPhases = (
 				E076E4F31225E97900DE0DA2 /* Resources */,
 				E076E5B31225E97900DE0DA2 /* Sources */,
@@ -993,10 +1135,11 @@
 			);
 			buildRules = (
 			);
+			comments = "Use this target as a template for test targets.\nDon't build this target itself - it will give you compiler error: \n\tUndefined symbols:\n  \t\"_OBJC_CLASS_$_ExtensionTest\", referenced from:\n      \tobjc-class-ref-to-ExtensionTest in cocos2d_extensions_macAppDelegate.o\n\tld: symbol(s) not found\n\tclang: error: linker command failed with exit code 1 (use -v to see invocation)\n\nIf you get this error in your extension test target - you forgot to:\n#import \"ExtensionTest.h\"\n\nSYNTHESIZE_EXTENSION_TEST(DemoMenu)\n\n";
 			dependencies = (
 				E076E4F11225E97900DE0DA2 /* PBXTargetDependency */,
 			);
-			name = "cocos2d-extensions-mac";
+			name = "Extension Test Template";
 			productInstallPath = "$(HOME)/Applications";
 			productName = "cocos2d-mac";
 			productReference = E076E5C01225E97900DE0DA2 /* cocos2d-extensions-mac.app */;
@@ -1022,8 +1165,9 @@
 			projectRoot = "";
 			targets = (
 				E01E663C121CA00A001A484F /* cocos2d */,
-				E076E4F01225E97900DE0DA2 /* cocos2d-extensions-mac */,
+				E076E4F01225E97900DE0DA2 /* Extension Test Template */,
 				6DA57C96139CAE19004D8D0B /* CCMenuAdvancedTest */,
+				6DA57ECD139D561E004D8D0B /* CCVideoPlayerTest */,
 			);
 		};
 /* End PBXProject section */
@@ -1043,6 +1187,19 @@
 				6DA57D7A139CBB01004D8D0B /* crackedGradient42-hd.png in Resources */,
 				6DA57D7B139CBB01004D8D0B /* crackedGradient42.fnt in Resources */,
 				6DA57D7C139CBB01004D8D0B /* crackedGradient42.png in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6DA57ED0139D561E004D8D0B /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6DA57ED1139D561E004D8D0B /* InfoPlist.strings in Resources */,
+				6DA57ED2139D561E004D8D0B /* MainMenu.xib in Resources */,
+				6DA57ED3139D561E004D8D0B /* fps_images.png in Resources */,
+				6DA57ED4139D561E004D8D0B /* icon.icns in Resources */,
+				6DA57F12139D5FA4004D8D0B /* bait.mp4 in Resources */,
+				6DA57F59139D6258004D8D0B /* CustomVideoView.nib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1068,6 +1225,22 @@
 				6DA57CA1139CAE19004D8D0B /* main.m in Sources */,
 				6DA57CB1139CAEAC004D8D0B /* CCMenuAdvanced.m in Sources */,
 				6DA57CB2139CAEAC004D8D0B /* CCMenuAdvancedTest.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6DA57EDB139D561E004D8D0B /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6DA57EDC139D561E004D8D0B /* cocos2d_extensions_macAppDelegate.m in Sources */,
+				6DA57EDD139D561E004D8D0B /* main.m in Sources */,
+				6DA57F11139D5F9A004D8D0B /* CCVideoTestLayer.m in Sources */,
+				6DA57F13139D5FB4004D8D0B /* videoOverlayView.m in Sources */,
+				6DA57F14139D5FB4004D8D0B /* VideoPlayerImpliOS.m in Sources */,
+				6DA57F15139D5FB4004D8D0B /* CustomVideoViewController.m in Sources */,
+				6DA57F16139D5FB4004D8D0B /* MyMovieView.m in Sources */,
+				6DA57F17139D5FB4004D8D0B /* VideoPlayerImplMac.m in Sources */,
+				6DA57F18139D5FB4004D8D0B /* VideoPlayer.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1171,6 +1344,11 @@
 			target = E01E663C121CA00A001A484F /* cocos2d */;
 			targetProxy = 6DA57C98139CAE19004D8D0B /* PBXContainerItemProxy */;
 		};
+		6DA57ECE139D561E004D8D0B /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = E01E663C121CA00A001A484F /* cocos2d */;
+			targetProxy = 6DA57ECF139D561E004D8D0B /* PBXContainerItemProxy */;
+		};
 		E076E4F11225E97900DE0DA2 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = E01E663C121CA00A001A484F /* cocos2d */;
@@ -1228,6 +1406,39 @@
 				INSTALL_PATH = "$(HOME)/Applications";
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				PRODUCT_NAME = CCMenuAdvancedTest;
+			};
+			name = Release;
+		};
+		6DA57EEA139D561E004D8D0B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = NO;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_FIX_AND_CONTINUE = YES;
+				GCC_MODEL_TUNING = G5;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = Tests/SharedSources/cocos2d_extensions_mac_Prefix.pch;
+				INFOPLIST_FILE = "Tests/SharedResources/Info-Mac.plist";
+				INSTALL_PATH = "$(HOME)/Applications";
+				LIBRARY_SEARCH_PATHS = "$(inherited)";
+				PRODUCT_NAME = CCVideoPlayerTest;
+			};
+			name = Debug;
+		};
+		6DA57EEB139D561E004D8D0B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_MODEL_TUNING = G5;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = Tests/SharedSources/cocos2d_extensions_mac_Prefix.pch;
+				INFOPLIST_FILE = "Tests/SharedResources/Info-Mac.plist";
+				INSTALL_PATH = "$(HOME)/Applications";
+				LIBRARY_SEARCH_PATHS = "$(inherited)";
+				PRODUCT_NAME = CCVideoPlayerTest;
 			};
 			name = Release;
 		};
@@ -1345,6 +1556,15 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
+		6DA57EE9139D561E004D8D0B /* Build configuration list for PBXNativeTarget "CCVideoPlayerTest" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6DA57EEA139D561E004D8D0B /* Debug */,
+				6DA57EEB139D561E004D8D0B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		C01FCF4E08A954540054247B /* Build configuration list for PBXProject "cocos2d-extensions-mac" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
@@ -1363,7 +1583,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		E076E5BD1225E97900DE0DA2 /* Build configuration list for PBXNativeTarget "cocos2d-extensions-mac" */ = {
+		E076E5BD1225E97900DE0DA2 /* Build configuration list for PBXNativeTarget "Extension Test Template" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				E076E5BE1225E97900DE0DA2 /* Debug */,

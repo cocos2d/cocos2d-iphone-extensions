@@ -234,6 +234,38 @@
 		6DA57DE2139CBEE9004D8D0B /* crackedGradient42-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = 6DA57DAD139CBD66004D8D0B /* crackedGradient42-hd.png */; };
 		6DA57DE3139CBEE9004D8D0B /* crackedGradient42.fnt in Resources */ = {isa = PBXBuildFile; fileRef = 6DA57DAE139CBD66004D8D0B /* crackedGradient42.fnt */; };
 		6DA57DE4139CBEE9004D8D0B /* crackedGradient42.png in Resources */ = {isa = PBXBuildFile; fileRef = 6DA57DAF139CBD66004D8D0B /* crackedGradient42.png */; };
+		6DA57F6D139D62C4004D8D0B /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 6DA5775F139C9837004D8D0B /* Default.png */; };
+		6DA57F6E139D62C4004D8D0B /* fps_images.png in Resources */ = {isa = PBXBuildFile; fileRef = 6DA57764139C9837004D8D0B /* fps_images.png */; };
+		6DA57F6F139D62C4004D8D0B /* Icon-72.png in Resources */ = {isa = PBXBuildFile; fileRef = 6DA57765139C9837004D8D0B /* Icon-72.png */; };
+		6DA57F70139D62C4004D8D0B /* Icon-Small-50.png in Resources */ = {isa = PBXBuildFile; fileRef = 6DA57766139C9837004D8D0B /* Icon-Small-50.png */; };
+		6DA57F71139D62C4004D8D0B /* Icon-Small.png in Resources */ = {isa = PBXBuildFile; fileRef = 6DA57767139C9837004D8D0B /* Icon-Small.png */; };
+		6DA57F72139D62C4004D8D0B /* Icon-Small@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6DA57768139C9837004D8D0B /* Icon-Small@2x.png */; };
+		6DA57F73139D62C4004D8D0B /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 6DA5776A139C9837004D8D0B /* Icon.png */; };
+		6DA57F74139D62C4004D8D0B /* Icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6DA5776B139C9837004D8D0B /* Icon@2x.png */; };
+		6DA57F75139D62C4004D8D0B /* iTunesArtwork in Resources */ = {isa = PBXBuildFile; fileRef = 6DA5776E139C9837004D8D0B /* iTunesArtwork */; };
+		6DA57F77139D62C4004D8D0B /* cocos2d_extensions_iosAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DA57772139C9837004D8D0B /* cocos2d_extensions_iosAppDelegate.m */; };
+		6DA57F78139D62C4004D8D0B /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DA57779139C9837004D8D0B /* main.m */; };
+		6DA57F79139D62C4004D8D0B /* RootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DA5777B139C9837004D8D0B /* RootViewController.m */; };
+		6DA57F7B139D62C4004D8D0B /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DCCBF1B60F6022AE0040855A /* CoreGraphics.framework */; };
+		6DA57F7C139D62C4004D8D0B /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DCCBF1B80F6022AE0040855A /* Foundation.framework */; };
+		6DA57F7D139D62C4004D8D0B /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DCCBF1BA0F6022AE0040855A /* OpenGLES.framework */; };
+		6DA57F7E139D62C4004D8D0B /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DCCBF1BC0F6022AE0040855A /* QuartzCore.framework */; };
+		6DA57F7F139D62C4004D8D0B /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DCCBF1BE0F6022AE0040855A /* UIKit.framework */; };
+		6DA57F80139D62C4004D8D0B /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DC6640020F83B3EA000B3E49 /* AudioToolbox.framework */; };
+		6DA57F81139D62C4004D8D0B /* OpenAL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DC6640040F83B3EA000B3E49 /* OpenAL.framework */; };
+		6DA57F82139D62C4004D8D0B /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 506EDB87102F4C4000A389B3 /* libz.dylib */; };
+		6DA57F83139D62C4004D8D0B /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 506EDBA4102F4C9F00A389B3 /* AVFoundation.framework */; };
+		6DA57F84139D62C4004D8D0B /* libcocos2d libraries.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 506EE05E10304ED200A389B3 /* libcocos2d libraries.a */; };
+		6DA57F97139D632F004D8D0B /* bait.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 6DA57F94139D632F004D8D0B /* bait.mp4 */; };
+		6DA57F98139D632F004D8D0B /* CCVideoTestLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DA57F96139D632F004D8D0B /* CCVideoTestLayer.m */; };
+		6DA57FAA139D6361004D8D0B /* videoOverlayView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DA57F9D139D6361004D8D0B /* videoOverlayView.m */; };
+		6DA57FAB139D6361004D8D0B /* VideoPlayerImpliOS.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DA57F9F139D6361004D8D0B /* VideoPlayerImpliOS.m */; };
+		6DA57FAC139D6361004D8D0B /* CustomVideoView.nib in Resources */ = {isa = PBXBuildFile; fileRef = 6DA57FA1139D6361004D8D0B /* CustomVideoView.nib */; };
+		6DA57FAD139D6361004D8D0B /* CustomVideoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DA57FA3139D6361004D8D0B /* CustomVideoViewController.m */; };
+		6DA57FAE139D6361004D8D0B /* MyMovieView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DA57FA5139D6361004D8D0B /* MyMovieView.m */; };
+		6DA57FAF139D6361004D8D0B /* VideoPlayerImplMac.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DA57FA7139D6361004D8D0B /* VideoPlayerImplMac.m */; };
+		6DA57FB0139D6361004D8D0B /* VideoPlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DA57FA9139D6361004D8D0B /* VideoPlayer.m */; };
+		6DA57FB8139D63C0004D8D0B /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6DA57FB7139D63C0004D8D0B /* MediaPlayer.framework */; };
 		DC6640030F83B3EA000B3E49 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DC6640020F83B3EA000B3E49 /* AudioToolbox.framework */; };
 		DC6640050F83B3EA000B3E49 /* OpenAL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DC6640040F83B3EA000B3E49 /* OpenAL.framework */; };
 		DCCBF1B70F6022AE0040855A /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DCCBF1B60F6022AE0040855A /* CoreGraphics.framework */; };
@@ -258,10 +290,17 @@
 			remoteGlobalIDString = 506EE05D10304ED200A389B3;
 			remoteInfo = "cocos2d libraries";
 		};
+		6DA57F6B139D62C4004D8D0B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 29B97313FDCFA39411CA2CEA /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 506EE05D10304ED200A389B3;
+			remoteInfo = "cocos2d libraries";
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		1D6058910D05DD3D006BFB54 /* cocos2d-extensions-ios.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "cocos2d-extensions-ios.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		1D6058910D05DD3D006BFB54 /* CCVideoPlayerTest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CCVideoPlayerTest.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		504DFC6810AF1739006D82FE /* LICENSE.cocos2d */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE.cocos2d; sourceTree = "<group>"; };
 		506EDB87102F4C4000A389B3 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
 		506EDBA4102F4C9F00A389B3 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
@@ -481,6 +520,24 @@
 		6DA57DAF139CBD66004D8D0B /* crackedGradient42.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = crackedGradient42.png; sourceTree = "<group>"; };
 		6DA57DD0139CBD74004D8D0B /* CCMenuAdvancedTest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CCMenuAdvancedTest.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6DA57EAA139CD86A004D8D0B /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.md; sourceTree = "<group>"; };
+		6DA57F88139D62C4004D8D0B /* cocos2d-extensions-ios.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "cocos2d-extensions-ios.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		6DA57F94139D632F004D8D0B /* bait.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = bait.mp4; sourceTree = "<group>"; };
+		6DA57F95139D632F004D8D0B /* CCVideoTestLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCVideoTestLayer.h; sourceTree = "<group>"; };
+		6DA57F96139D632F004D8D0B /* CCVideoTestLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCVideoTestLayer.m; sourceTree = "<group>"; };
+		6DA57F9C139D6361004D8D0B /* videoOverlayView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = videoOverlayView.h; sourceTree = "<group>"; };
+		6DA57F9D139D6361004D8D0B /* videoOverlayView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = videoOverlayView.m; sourceTree = "<group>"; };
+		6DA57F9E139D6361004D8D0B /* VideoPlayerImpliOS.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VideoPlayerImpliOS.h; sourceTree = "<group>"; };
+		6DA57F9F139D6361004D8D0B /* VideoPlayerImpliOS.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VideoPlayerImpliOS.m; sourceTree = "<group>"; };
+		6DA57FA1139D6361004D8D0B /* CustomVideoView.nib */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; path = CustomVideoView.nib; sourceTree = "<group>"; };
+		6DA57FA2139D6361004D8D0B /* CustomVideoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomVideoViewController.h; sourceTree = "<group>"; };
+		6DA57FA3139D6361004D8D0B /* CustomVideoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomVideoViewController.m; sourceTree = "<group>"; };
+		6DA57FA4139D6361004D8D0B /* MyMovieView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyMovieView.h; sourceTree = "<group>"; };
+		6DA57FA5139D6361004D8D0B /* MyMovieView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyMovieView.m; sourceTree = "<group>"; };
+		6DA57FA6139D6361004D8D0B /* VideoPlayerImplMac.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VideoPlayerImplMac.h; sourceTree = "<group>"; };
+		6DA57FA7139D6361004D8D0B /* VideoPlayerImplMac.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VideoPlayerImplMac.m; sourceTree = "<group>"; };
+		6DA57FA8139D6361004D8D0B /* VideoPlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VideoPlayer.h; sourceTree = "<group>"; };
+		6DA57FA9139D6361004D8D0B /* VideoPlayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VideoPlayer.m; sourceTree = "<group>"; };
+		6DA57FB7139D63C0004D8D0B /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = System/Library/Frameworks/MediaPlayer.framework; sourceTree = SDKROOT; };
 		DC6640020F83B3EA000B3E49 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		DC6640040F83B3EA000B3E49 /* OpenAL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenAL.framework; path = System/Library/Frameworks/OpenAL.framework; sourceTree = SDKROOT; };
 		DCCBF1B60F6022AE0040855A /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -539,15 +596,34 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		6DA57F7A139D62C4004D8D0B /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6DA57F7B139D62C4004D8D0B /* CoreGraphics.framework in Frameworks */,
+				6DA57F7C139D62C4004D8D0B /* Foundation.framework in Frameworks */,
+				6DA57F7D139D62C4004D8D0B /* OpenGLES.framework in Frameworks */,
+				6DA57F7E139D62C4004D8D0B /* QuartzCore.framework in Frameworks */,
+				6DA57F7F139D62C4004D8D0B /* UIKit.framework in Frameworks */,
+				6DA57F80139D62C4004D8D0B /* AudioToolbox.framework in Frameworks */,
+				6DA57F81139D62C4004D8D0B /* OpenAL.framework in Frameworks */,
+				6DA57F82139D62C4004D8D0B /* libz.dylib in Frameworks */,
+				6DA57F83139D62C4004D8D0B /* AVFoundation.framework in Frameworks */,
+				6DA57F84139D62C4004D8D0B /* libcocos2d libraries.a in Frameworks */,
+				6DA57FB8139D63C0004D8D0B /* MediaPlayer.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
 		19C28FACFE9D520D11CA2CBB /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				1D6058910D05DD3D006BFB54 /* cocos2d-extensions-ios.app */,
+				1D6058910D05DD3D006BFB54 /* CCVideoPlayerTest.app */,
 				506EE05E10304ED200A389B3 /* libcocos2d libraries.a */,
 				6DA57DD0139CBD74004D8D0B /* CCMenuAdvancedTest.app */,
+				6DA57F88139D62C4004D8D0B /* cocos2d-extensions-ios.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -570,6 +646,7 @@
 		29B97323FDCFA39411CA2CEA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				6DA57FBB139D63C8004D8D0B /* CCVideoPlayer Frameworks */,
 				6DA57646139C980E004D8D0B /* Cocos2D Template Frameworks */,
 			);
 			name = Frameworks;
@@ -594,6 +671,7 @@
 		6DA5775D139C9837004D8D0B /* Tests */ = {
 			isa = PBXGroup;
 			children = (
+				6DA57F93139D632F004D8D0B /* CCVideoPlayerTest */,
 				6DA57DA6139CBD66004D8D0B /* CCMenuAdvanced */,
 				6DA5775E139C9837004D8D0B /* SharedResources */,
 				6DA5776F139C9837004D8D0B /* SharedSources */,
@@ -867,6 +945,7 @@
 		6DA57D98139CBD3C004D8D0B /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				6DA57F9A139D6361004D8D0B /* CCVideoPlayer */,
 				6DA57D99139CBD3C004D8D0B /* CCMenuAdvanced */,
 				6DA57D9C139CBD3C004D8D0B /* CCMenuItemSpriteIndependent */,
 			);
@@ -912,6 +991,60 @@
 				6DA57DAF139CBD66004D8D0B /* crackedGradient42.png */,
 			);
 			path = Resources;
+			sourceTree = "<group>";
+		};
+		6DA57F93139D632F004D8D0B /* CCVideoPlayerTest */ = {
+			isa = PBXGroup;
+			children = (
+				6DA57F94139D632F004D8D0B /* bait.mp4 */,
+				6DA57F95139D632F004D8D0B /* CCVideoTestLayer.h */,
+				6DA57F96139D632F004D8D0B /* CCVideoTestLayer.m */,
+			);
+			path = CCVideoPlayerTest;
+			sourceTree = "<group>";
+		};
+		6DA57F9A139D6361004D8D0B /* CCVideoPlayer */ = {
+			isa = PBXGroup;
+			children = (
+				6DA57F9B139D6361004D8D0B /* iOS */,
+				6DA57FA0139D6361004D8D0B /* Mac */,
+				6DA57FA8139D6361004D8D0B /* VideoPlayer.h */,
+				6DA57FA9139D6361004D8D0B /* VideoPlayer.m */,
+			);
+			path = CCVideoPlayer;
+			sourceTree = "<group>";
+		};
+		6DA57F9B139D6361004D8D0B /* iOS */ = {
+			isa = PBXGroup;
+			children = (
+				6DA57F9C139D6361004D8D0B /* videoOverlayView.h */,
+				6DA57F9D139D6361004D8D0B /* videoOverlayView.m */,
+				6DA57F9E139D6361004D8D0B /* VideoPlayerImpliOS.h */,
+				6DA57F9F139D6361004D8D0B /* VideoPlayerImpliOS.m */,
+			);
+			path = iOS;
+			sourceTree = "<group>";
+		};
+		6DA57FA0139D6361004D8D0B /* Mac */ = {
+			isa = PBXGroup;
+			children = (
+				6DA57FA1139D6361004D8D0B /* CustomVideoView.nib */,
+				6DA57FA2139D6361004D8D0B /* CustomVideoViewController.h */,
+				6DA57FA3139D6361004D8D0B /* CustomVideoViewController.m */,
+				6DA57FA4139D6361004D8D0B /* MyMovieView.h */,
+				6DA57FA5139D6361004D8D0B /* MyMovieView.m */,
+				6DA57FA6139D6361004D8D0B /* VideoPlayerImplMac.h */,
+				6DA57FA7139D6361004D8D0B /* VideoPlayerImplMac.m */,
+			);
+			path = Mac;
+			sourceTree = "<group>";
+		};
+		6DA57FBB139D63C8004D8D0B /* CCVideoPlayer Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				6DA57FB7139D63C0004D8D0B /* MediaPlayer.framework */,
+			);
+			name = "CCVideoPlayer Frameworks";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -1021,9 +1154,9 @@
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
-		1D6058900D05DD3D006BFB54 /* cocos2d-extensions-ios */ = {
+		1D6058900D05DD3D006BFB54 /* Extension Test Template */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 1D6058960D05DD3E006BFB54 /* Build configuration list for PBXNativeTarget "cocos2d-extensions-ios" */;
+			buildConfigurationList = 1D6058960D05DD3E006BFB54 /* Build configuration list for PBXNativeTarget "Extension Test Template" */;
 			buildPhases = (
 				1D60588D0D05DD3D006BFB54 /* Resources */,
 				1D60588E0D05DD3D006BFB54 /* Sources */,
@@ -1034,9 +1167,9 @@
 			dependencies = (
 				506EE1A81030507B00A389B3 /* PBXTargetDependency */,
 			);
-			name = "cocos2d-extensions-ios";
+			name = "Extension Test Template";
 			productName = "cocos2d-extensions-ios";
-			productReference = 1D6058910D05DD3D006BFB54 /* cocos2d-extensions-ios.app */;
+			productReference = 1D6058910D05DD3D006BFB54 /* CCVideoPlayerTest.app */;
 			productType = "com.apple.product-type.application";
 		};
 		506EE05D10304ED200A389B3 /* cocos2d libraries */ = {
@@ -1074,6 +1207,24 @@
 			productReference = 6DA57DD0139CBD74004D8D0B /* CCMenuAdvancedTest.app */;
 			productType = "com.apple.product-type.application";
 		};
+		6DA57F69139D62C4004D8D0B /* CCVideoPlayerTest */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 6DA57F85139D62C4004D8D0B /* Build configuration list for PBXNativeTarget "CCVideoPlayerTest" */;
+			buildPhases = (
+				6DA57F6C139D62C4004D8D0B /* Resources */,
+				6DA57F76139D62C4004D8D0B /* Sources */,
+				6DA57F7A139D62C4004D8D0B /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				6DA57F6A139D62C4004D8D0B /* PBXTargetDependency */,
+			);
+			name = CCVideoPlayerTest;
+			productName = "cocos2d-extensions-ios";
+			productReference = 6DA57F88139D62C4004D8D0B /* cocos2d-extensions-ios.app */;
+			productType = "com.apple.product-type.application";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -1093,9 +1244,10 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				1D6058900D05DD3D006BFB54 /* cocos2d-extensions-ios */,
+				1D6058900D05DD3D006BFB54 /* Extension Test Template */,
 				506EE05D10304ED200A389B3 /* cocos2d libraries */,
 				6DA57DB0139CBD74004D8D0B /* CCMenuAdvancedTest */,
+				6DA57F69139D62C4004D8D0B /* CCVideoPlayerTest */,
 			);
 		};
 /* End PBXProject section */
@@ -1136,6 +1288,24 @@
 				6DA57DE2139CBEE9004D8D0B /* crackedGradient42-hd.png in Resources */,
 				6DA57DE3139CBEE9004D8D0B /* crackedGradient42.fnt in Resources */,
 				6DA57DE4139CBEE9004D8D0B /* crackedGradient42.png in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6DA57F6C139D62C4004D8D0B /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6DA57F6D139D62C4004D8D0B /* Default.png in Resources */,
+				6DA57F6E139D62C4004D8D0B /* fps_images.png in Resources */,
+				6DA57F6F139D62C4004D8D0B /* Icon-72.png in Resources */,
+				6DA57F70139D62C4004D8D0B /* Icon-Small-50.png in Resources */,
+				6DA57F71139D62C4004D8D0B /* Icon-Small.png in Resources */,
+				6DA57F72139D62C4004D8D0B /* Icon-Small@2x.png in Resources */,
+				6DA57F73139D62C4004D8D0B /* Icon.png in Resources */,
+				6DA57F74139D62C4004D8D0B /* Icon@2x.png in Resources */,
+				6DA57F75139D62C4004D8D0B /* iTunesArtwork in Resources */,
+				6DA57F97139D632F004D8D0B /* bait.mp4 in Resources */,
+				6DA57FAC139D6361004D8D0B /* CustomVideoView.nib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1252,6 +1422,23 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		6DA57F76139D62C4004D8D0B /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6DA57F77139D62C4004D8D0B /* cocos2d_extensions_iosAppDelegate.m in Sources */,
+				6DA57F78139D62C4004D8D0B /* main.m in Sources */,
+				6DA57F79139D62C4004D8D0B /* RootViewController.m in Sources */,
+				6DA57F98139D632F004D8D0B /* CCVideoTestLayer.m in Sources */,
+				6DA57FAA139D6361004D8D0B /* videoOverlayView.m in Sources */,
+				6DA57FAB139D6361004D8D0B /* VideoPlayerImpliOS.m in Sources */,
+				6DA57FAD139D6361004D8D0B /* CustomVideoViewController.m in Sources */,
+				6DA57FAE139D6361004D8D0B /* MyMovieView.m in Sources */,
+				6DA57FAF139D6361004D8D0B /* VideoPlayerImplMac.m in Sources */,
+				6DA57FB0139D6361004D8D0B /* VideoPlayer.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -1264,6 +1451,11 @@
 			isa = PBXTargetDependency;
 			target = 506EE05D10304ED200A389B3 /* cocos2d libraries */;
 			targetProxy = 6DA57DB2139CBD74004D8D0B /* PBXContainerItemProxy */;
+		};
+		6DA57F6A139D62C4004D8D0B /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 506EE05D10304ED200A389B3 /* cocos2d libraries */;
+			targetProxy = 6DA57F6B139D62C4004D8D0B /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -1306,7 +1498,7 @@
 					"-ObjC",
 				);
 				PREBINDING = NO;
-				PRODUCT_NAME = "cocos2d-extensions-ios";
+				PRODUCT_NAME = CCVideoPlayerTest;
 				WARNING_CFLAGS = "-Wall";
 			};
 			name = Debug;
@@ -1319,16 +1511,16 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				GCC_ENABLE_FIX_AND_CONTINUE = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = cocos2d_extensions_ios_Prefix.pch;
+				GCC_PREFIX_HEADER = Tests/SharedSources/cocos2d_extensions_ios_Prefix.pch;
 				GCC_TREAT_WARNINGS_AS_ERRORS = NO;
-				INFOPLIST_FILE = Resources/Info.plist;
+				INFOPLIST_FILE = Tests/SharedResources/Info.plist;
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = (
 					"-all_load",
 					"-ObjC",
 				);
 				PREBINDING = NO;
-				PRODUCT_NAME = "cocos2d-extensions-ios";
+				PRODUCT_NAME = CCVideoPlayerTest;
 				WARNING_CFLAGS = "-Wall";
 			};
 			name = Release;
@@ -1406,6 +1598,52 @@
 			};
 			name = Release;
 		};
+		6DA57F86139D62C4004D8D0B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_FIX_AND_CONTINUE = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = Tests/SharedSources/cocos2d_extensions_ios_Prefix.pch;
+				GCC_TREAT_WARNINGS_AS_ERRORS = NO;
+				INFOPLIST_FILE = Tests/SharedResources/Info.plist;
+				ONLY_ACTIVE_ARCH = YES;
+				OTHER_LDFLAGS = (
+					"-all_load",
+					"-ObjC",
+				);
+				PREBINDING = NO;
+				PRODUCT_NAME = "cocos2d-extensions-ios";
+				WARNING_CFLAGS = "-Wall";
+			};
+			name = Debug;
+		};
+		6DA57F87139D62C4004D8D0B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_ENABLE_FIX_AND_CONTINUE = NO;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = Tests/SharedSources/cocos2d_extensions_ios_Prefix.pch;
+				GCC_TREAT_WARNINGS_AS_ERRORS = NO;
+				INFOPLIST_FILE = Tests/SharedResources/Info.plist;
+				ONLY_ACTIVE_ARCH = NO;
+				OTHER_LDFLAGS = (
+					"-all_load",
+					"-ObjC",
+				);
+				PREBINDING = NO;
+				PRODUCT_NAME = "cocos2d-extensions-ios";
+				WARNING_CFLAGS = "-Wall";
+			};
+			name = Release;
+		};
 		C01FCF4F08A954540054247B /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -1458,7 +1696,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		1D6058960D05DD3E006BFB54 /* Build configuration list for PBXNativeTarget "cocos2d-extensions-ios" */ = {
+		1D6058960D05DD3E006BFB54 /* Build configuration list for PBXNativeTarget "Extension Test Template" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				1D6058940D05DD3E006BFB54 /* Debug */,
@@ -1481,6 +1719,15 @@
 			buildConfigurations = (
 				6DA57DCE139CBD74004D8D0B /* Debug */,
 				6DA57DCF139CBD74004D8D0B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		6DA57F85139D62C4004D8D0B /* Build configuration list for PBXNativeTarget "CCVideoPlayerTest" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6DA57F86139D62C4004D8D0B /* Debug */,
+				6DA57F87139D62C4004D8D0B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
