@@ -8,10 +8,10 @@
 
 
 #import "cocos2d.h"
-#import "VideoPlayer.h"
+#import "CCVideoPlayer.h"
 
 
-@interface CCVideoTestLayer : CCLayer <VideoPlayerDelegate>
+@interface CCVideoTestLayer : CCLayer <CCVideoPlayerDelegate>
 {
 }
 

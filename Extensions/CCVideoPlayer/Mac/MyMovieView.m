@@ -1,5 +1,5 @@
 /*
- * CCVideoPlayer
+ * CCCCVideoPlayer
  *
  * cocos2d-extensions
  * https://github.com/cocos2d/cocos2d-iphone-extensions
@@ -29,19 +29,19 @@
 #ifdef __MAC_OS_X_VERSION_MAX_ALLOWED
 
 #import "MyMovieView.h"
-#import "VideoPlayer.h"
+#import "CCVideoPlayer.h"
 
 
 @implementation MyMovieView
 
 - (void)rightMouseDown:(NSEvent *)theEvent
 {
-	[VideoPlayer cancelPlaying];
+	[CCVideoPlayer cancelPlaying];
 }
 
 - (void)otherMouseDown:(NSEvent *)theEvent
 {
-	[VideoPlayer cancelPlaying];
+	[CCVideoPlayer cancelPlaying];
 }
 
 - (void)scrollWheel:(NSEvent *)theEvent
@@ -50,19 +50,19 @@
 
 - (void) mouseDown:(NSEvent *)theEvent
 {
-	[VideoPlayer cancelPlaying];
+	[CCVideoPlayer cancelPlaying];
 }
 
 - (void) keyDown:(NSEvent *)theEvent
 {
 	if ( ![theEvent isARepeat] )
-		[VideoPlayer cancelPlaying];
+		[CCVideoPlayer cancelPlaying];
 }
 
 -(BOOL) ccKeyDown:(NSEvent*)event
 {
 	if ( ![event isARepeat] )
-		[VideoPlayer cancelPlaying];
+		[CCVideoPlayer cancelPlaying];
 	
 	return NO;
 }

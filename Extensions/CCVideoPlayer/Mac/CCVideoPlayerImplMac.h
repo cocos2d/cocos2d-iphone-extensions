@@ -26,30 +26,34 @@
  *
  */
 
-#import <Foundation/Foundation.h>
+#if __MAC_OS_X_VERSION_MAX_ALLOWED
 
-@protocol VideoPlayerDelegate <NSObject>
+#import <Cocoa/Cocoa.h>
+#import <QTKit/QTKit.h>
+#import "CCVideoPlayer.h"
 
-- (void) movieStartsPlaying;
-- (void) moviePlaybackFinished;
+@class CustomVideoViewController;
+@class MyMovieView;
 
-@end
-
-
-@interface VideoPlayer : NSObject
-{
+#define VIDEO_PLAYER_IMPL_SUPER_CLASS CCVideoPlayerImplMac
+@interface CCVideoPlayerImplMac : NSObject
+{	
+	NSViewController *videoViewController;	
+	NSView *retainedView;
+	
+	//weak ref
+	id<CCVideoPlayerDelegate> delegate;
 }
+//private property
+@property (readwrite, retain) NSViewController *videoViewController;
+@property (readwrite, retain) NSView *retainedView;
 
-// sets new delegate, replaces old if it exists, doesn't retain it
-+ (void) setDelegate: (id<VideoPlayerDelegate>) aDelegate;
+- (void)playMovieAtURL:(NSURL*)theURL;
+- (void)playMovieAtURL:(NSURL*)theURL attachedInView: (NSView *) aView;
+- (void)cancelPlaying;
 
-+ (void) playMovieWithFile: (NSString *) file;
-
-+ (void) cancelPlaying;
-
-#ifdef __IPHONE_OS_VERSION_MAX_ALLOWED
-// update only if landscape left or landscape right
-+ (void) updateOrientationWithOrientation: (UIDeviceOrientation) newOrientation;
-#endif
+- (void)setDelegate: (id<CCVideoPlayerDelegate>) aDelegate;
 
 @end
+
+#endif

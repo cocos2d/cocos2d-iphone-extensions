@@ -28,14 +28,14 @@
 
 #ifdef __IPHONE_OS_VERSION_MAX_ALLOWED
 
-#import "VideoPlayer.h"
-#import "VideoPlayerImpliOS.h"
+#import "CCVideoPlayer.h"
+#import "CCVideoPlayerImpliOS.h"
 #import "MediaPlayer/MediaPlayer.h"
 #import "videoOverlayView.h"
 #import "cocos2d.h"
 
 
-@implementation VideoPlayerImpliOS
+@implementation CCVideoPlayerImpliOS
 
 @synthesize isPlaying = _playing;
 
@@ -181,7 +181,7 @@
     }
 }
 
-- (void)setDelegate: (id<VideoPlayerDelegate>) aDelegate
+- (void)setDelegate: (id<CCVideoPlayerDelegate>) aDelegate
 {
 	_delegate = aDelegate;
 }

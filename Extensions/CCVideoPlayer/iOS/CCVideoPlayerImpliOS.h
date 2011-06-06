@@ -26,33 +26,39 @@
  *
  */
 
-#if __MAC_OS_X_VERSION_MAX_ALLOWED
 
-#import <Cocoa/Cocoa.h>
-#import <QTKit/QTKit.h>
-#import "VideoPlayer.h"
+#ifdef __IPHONE_OS_VERSION_MAX_ALLOWED
 
-@class CustomVideoViewController;
-@class MyMovieView;
+#import <Foundation/Foundation.h>
 
-#define VIDEO_PLAYER_IMPL_SUPER_CLASS VideoPlayerImplMac
-@interface VideoPlayerImplMac : NSObject
-{	
-	NSViewController *videoViewController;	
-	NSView *retainedView;
+@class MPMoviePlayerController;
+@class VideoOverlayView;
+
+
+
+#define VIDEO_PLAYER_IMPL_SUPER_CLASS CCVideoPlayerImpliOS
+@interface CCVideoPlayerImpliOS : NSObject
+{
+    MPMoviePlayerController *_theMovie;
+    VideoOverlayView *_videoOverlayView;	
+	
+	BOOL _playing;
 	
 	//weak ref
-	id<VideoPlayerDelegate> delegate;
+	id<CCVideoPlayerDelegate> _delegate;	
 }
-//private property
-@property (readwrite, retain) NSViewController *videoViewController;
-@property (readwrite, retain) NSView *retainedView;
 
+@property (readonly) BOOL isPlaying;
 - (void)playMovieAtURL:(NSURL*)theURL;
-- (void)playMovieAtURL:(NSURL*)theURL attachedInView: (NSView *) aView;
+- (void)movieFinishedCallback:(NSNotification*)aNotification;
+
 - (void)cancelPlaying;
 
-- (void)setDelegate: (id<VideoPlayerDelegate>) aDelegate;
+- (void)setDelegate: (id<CCVideoPlayerDelegate>) aDelegate;
+
+- (void) updateOrientationWithOrientation: (UIDeviceOrientation) newOrientation;
+- (void) updateOrientationWithOrientationNumber: (NSNumber *) newOrientationNumber;
+
 
 @end
 

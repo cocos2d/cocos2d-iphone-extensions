@@ -26,26 +26,26 @@
  *
  */
 
-#import "VideoPlayer.h"
+#import "CCVideoPlayer.h"
 
-#import "VideoPlayerImplMac.h"
-#import "VideoPlayerImpliOS.h"
+#import "CCVideoPlayerImplMac.h"
+#import "CCVideoPlayerImpliOS.h"
 
 
-@interface VideoPlayerImpl : VIDEO_PLAYER_IMPL_SUPER_CLASS
+@interface CCVideoPlayerImpl : VIDEO_PLAYER_IMPL_SUPER_CLASS
 
 + (id) newImpl;
 
 @end
 
-@implementation VideoPlayerImpl
+@implementation CCVideoPlayerImpl
 
 + (id) newImpl
 {
 #ifdef __IPHONE_OS_VERSION_MAX_ALLOWED
-	return [ [VideoPlayerImpliOS alloc] init ];
+	return [ [CCVideoPlayerImpliOS alloc] init ];
 #elif defined(__MAC_OS_X_VERSION_MAX_ALLOWED)
-	return [ [VideoPlayerImplMac alloc] init ];
+	return [ [CCVideoPlayerImplMac alloc] init ];
 #endif
 }
 
@@ -55,7 +55,7 @@
 
 
 
-@interface VideoPlayer (Private)
+@interface CCVideoPlayer (Private)
 
 + (void) initialize;
 
@@ -67,20 +67,20 @@
 @end
 
 
-//===== VideoPlayer =====
-@implementation VideoPlayer
+//===== CCVideoPlayer =====
+@implementation CCVideoPlayer
 
-static  VideoPlayerImpl *_impl = nil;
+static  CCVideoPlayerImpl *_impl = nil;
 
 
 //----- initialize -----
 + (void) initialize
 {
-   if (self == [VideoPlayer class])
+   if (self == [CCVideoPlayer class])
    {
 	   @synchronized( self)
 	   {
-		   _impl = [VideoPlayerImpl newImpl];
+		   _impl = [CCVideoPlayerImpl newImpl];
 	   }
    }
 }
@@ -166,7 +166,7 @@ static  VideoPlayerImpl *_impl = nil;
 						  waitUntilDone: [NSThread isMainThread]  ];
 }
 
-+ (void) setDelegate: (id<VideoPlayerDelegate>) aDelegate
++ (void) setDelegate: (id<CCVideoPlayerDelegate>) aDelegate
 {
 	// If the current thread is the main thread,than
 	// this message will be processed immediately.

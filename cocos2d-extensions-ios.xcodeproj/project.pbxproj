@@ -259,11 +259,11 @@
 		6DA57F97139D632F004D8D0B /* bait.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 6DA57F94139D632F004D8D0B /* bait.mp4 */; };
 		6DA57F98139D632F004D8D0B /* CCVideoTestLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DA57F96139D632F004D8D0B /* CCVideoTestLayer.m */; };
 		6DA57FAA139D6361004D8D0B /* videoOverlayView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DA57F9D139D6361004D8D0B /* videoOverlayView.m */; };
-		6DA57FAB139D6361004D8D0B /* VideoPlayerImpliOS.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DA57F9F139D6361004D8D0B /* VideoPlayerImpliOS.m */; };
+		6DA57FAB139D6361004D8D0B /* CCVideoPlayerImpliOS.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DA57F9F139D6361004D8D0B /* CCVideoPlayerImpliOS.m */; };
 		6DA57FAC139D6361004D8D0B /* CustomVideoView.nib in Resources */ = {isa = PBXBuildFile; fileRef = 6DA57FA1139D6361004D8D0B /* CustomVideoView.nib */; };
 		6DA57FAE139D6361004D8D0B /* MyMovieView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DA57FA5139D6361004D8D0B /* MyMovieView.m */; };
-		6DA57FAF139D6361004D8D0B /* VideoPlayerImplMac.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DA57FA7139D6361004D8D0B /* VideoPlayerImplMac.m */; };
-		6DA57FB0139D6361004D8D0B /* VideoPlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DA57FA9139D6361004D8D0B /* VideoPlayer.m */; };
+		6DA57FAF139D6361004D8D0B /* CCVideoPlayerImplMac.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DA57FA7139D6361004D8D0B /* CCVideoPlayerImplMac.m */; };
+		6DA57FB0139D6361004D8D0B /* CCVideoPlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DA57FA9139D6361004D8D0B /* CCVideoPlayer.m */; };
 		6DA57FB8139D63C0004D8D0B /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6DA57FB7139D63C0004D8D0B /* MediaPlayer.framework */; };
 		DC6640030F83B3EA000B3E49 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DC6640020F83B3EA000B3E49 /* AudioToolbox.framework */; };
 		DC6640050F83B3EA000B3E49 /* OpenAL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DC6640040F83B3EA000B3E49 /* OpenAL.framework */; };
@@ -525,15 +525,15 @@
 		6DA57F96139D632F004D8D0B /* CCVideoTestLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCVideoTestLayer.m; sourceTree = "<group>"; };
 		6DA57F9C139D6361004D8D0B /* videoOverlayView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = videoOverlayView.h; sourceTree = "<group>"; };
 		6DA57F9D139D6361004D8D0B /* videoOverlayView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = videoOverlayView.m; sourceTree = "<group>"; };
-		6DA57F9E139D6361004D8D0B /* VideoPlayerImpliOS.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VideoPlayerImpliOS.h; sourceTree = "<group>"; };
-		6DA57F9F139D6361004D8D0B /* VideoPlayerImpliOS.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VideoPlayerImpliOS.m; sourceTree = "<group>"; };
+		6DA57F9E139D6361004D8D0B /* CCVideoPlayerImpliOS.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCVideoPlayerImpliOS.h; sourceTree = "<group>"; };
+		6DA57F9F139D6361004D8D0B /* CCVideoPlayerImpliOS.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCVideoPlayerImpliOS.m; sourceTree = "<group>"; };
 		6DA57FA1139D6361004D8D0B /* CustomVideoView.nib */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; path = CustomVideoView.nib; sourceTree = "<group>"; };
 		6DA57FA4139D6361004D8D0B /* MyMovieView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyMovieView.h; sourceTree = "<group>"; };
 		6DA57FA5139D6361004D8D0B /* MyMovieView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyMovieView.m; sourceTree = "<group>"; };
-		6DA57FA6139D6361004D8D0B /* VideoPlayerImplMac.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VideoPlayerImplMac.h; sourceTree = "<group>"; };
-		6DA57FA7139D6361004D8D0B /* VideoPlayerImplMac.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VideoPlayerImplMac.m; sourceTree = "<group>"; };
-		6DA57FA8139D6361004D8D0B /* VideoPlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VideoPlayer.h; sourceTree = "<group>"; };
-		6DA57FA9139D6361004D8D0B /* VideoPlayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VideoPlayer.m; sourceTree = "<group>"; };
+		6DA57FA6139D6361004D8D0B /* CCVideoPlayerImplMac.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCVideoPlayerImplMac.h; sourceTree = "<group>"; };
+		6DA57FA7139D6361004D8D0B /* CCVideoPlayerImplMac.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCVideoPlayerImplMac.m; sourceTree = "<group>"; };
+		6DA57FA8139D6361004D8D0B /* CCVideoPlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCVideoPlayer.h; sourceTree = "<group>"; };
+		6DA57FA9139D6361004D8D0B /* CCVideoPlayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCVideoPlayer.m; sourceTree = "<group>"; };
 		6DA57FB7139D63C0004D8D0B /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = System/Library/Frameworks/MediaPlayer.framework; sourceTree = SDKROOT; };
 		DC6640020F83B3EA000B3E49 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		DC6640040F83B3EA000B3E49 /* OpenAL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenAL.framework; path = System/Library/Frameworks/OpenAL.framework; sourceTree = SDKROOT; };
@@ -1005,8 +1005,8 @@
 			children = (
 				6DA57F9B139D6361004D8D0B /* iOS */,
 				6DA57FA0139D6361004D8D0B /* Mac */,
-				6DA57FA8139D6361004D8D0B /* VideoPlayer.h */,
-				6DA57FA9139D6361004D8D0B /* VideoPlayer.m */,
+				6DA57FA8139D6361004D8D0B /* CCVideoPlayer.h */,
+				6DA57FA9139D6361004D8D0B /* CCVideoPlayer.m */,
 			);
 			path = CCVideoPlayer;
 			sourceTree = "<group>";
@@ -1016,8 +1016,8 @@
 			children = (
 				6DA57F9C139D6361004D8D0B /* videoOverlayView.h */,
 				6DA57F9D139D6361004D8D0B /* videoOverlayView.m */,
-				6DA57F9E139D6361004D8D0B /* VideoPlayerImpliOS.h */,
-				6DA57F9F139D6361004D8D0B /* VideoPlayerImpliOS.m */,
+				6DA57F9E139D6361004D8D0B /* CCVideoPlayerImpliOS.h */,
+				6DA57F9F139D6361004D8D0B /* CCVideoPlayerImpliOS.m */,
 			);
 			path = iOS;
 			sourceTree = "<group>";
@@ -1028,8 +1028,8 @@
 				6DA57FA1139D6361004D8D0B /* CustomVideoView.nib */,
 				6DA57FA4139D6361004D8D0B /* MyMovieView.h */,
 				6DA57FA5139D6361004D8D0B /* MyMovieView.m */,
-				6DA57FA6139D6361004D8D0B /* VideoPlayerImplMac.h */,
-				6DA57FA7139D6361004D8D0B /* VideoPlayerImplMac.m */,
+				6DA57FA6139D6361004D8D0B /* CCVideoPlayerImplMac.h */,
+				6DA57FA7139D6361004D8D0B /* CCVideoPlayerImplMac.m */,
 			);
 			path = Mac;
 			sourceTree = "<group>";
@@ -1426,10 +1426,10 @@
 				6DA57F79139D62C4004D8D0B /* RootViewController.m in Sources */,
 				6DA57F98139D632F004D8D0B /* CCVideoTestLayer.m in Sources */,
 				6DA57FAA139D6361004D8D0B /* videoOverlayView.m in Sources */,
-				6DA57FAB139D6361004D8D0B /* VideoPlayerImpliOS.m in Sources */,
+				6DA57FAB139D6361004D8D0B /* CCVideoPlayerImpliOS.m in Sources */,
 				6DA57FAE139D6361004D8D0B /* MyMovieView.m in Sources */,
-				6DA57FAF139D6361004D8D0B /* VideoPlayerImplMac.m in Sources */,
-				6DA57FB0139D6361004D8D0B /* VideoPlayer.m in Sources */,
+				6DA57FAF139D6361004D8D0B /* CCVideoPlayerImplMac.m in Sources */,
+				6DA57FB0139D6361004D8D0B /* CCVideoPlayer.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -29,14 +29,14 @@
 #ifdef __IPHONE_OS_VERSION_MAX_ALLOWED
 
 #import "videoOverlayView.h"
-#import "VideoPlayer.h"
+#import "CCVideoPlayer.h"
 
 
 @implementation VideoOverlayView
 
 
 - (id)initWithFrame:(CGRect)frame {
-    if (self = [super initWithFrame:frame]) {
+    if ((self = [super initWithFrame:frame])) {
         // Initialization code
         
         //self.alpha = 0.0f;
@@ -60,7 +60,7 @@
     if ( _touch )
     {
         // stop video
-        [VideoPlayer cancelPlaying];
+        [CCVideoPlayer cancelPlaying];
     }
     _touch = NO;
 }

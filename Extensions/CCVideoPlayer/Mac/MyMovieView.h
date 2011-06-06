@@ -1,5 +1,5 @@
 /*
- * CCVideoPlayer
+ * CCCCVideoPlayer
  *
  * cocos2d-extensions
  * https://github.com/cocos2d/cocos2d-iphone-extensions

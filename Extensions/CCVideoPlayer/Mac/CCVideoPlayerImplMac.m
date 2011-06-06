@@ -26,13 +26,13 @@
  *
  */
 
-#import "VideoPlayerImplMac.h"
+#import "CCVideoPlayerImplMac.h"
 #import "cocos2d.h"
 #import "MyMovieView.h"
 
 #if __MAC_OS_X_VERSION_MAX_ALLOWED
 
-@interface VideoPlayerImplMac  (Private) <CCKeyboardEventDelegate>
+@interface CCVideoPlayerImplMac  (Private) <CCKeyboardEventDelegate>
 
 -(void)movieFinishedCallback:(NSNotification*)aNotification;
 -(BOOL) ccKeyDown:(NSEvent*)event;
@@ -41,7 +41,7 @@
 
 
 
-@implementation VideoPlayerImplMac
+@implementation CCVideoPlayerImplMac
 
 NSString *const kVideoTitle		= @"CustomVideoView";
 
@@ -106,7 +106,7 @@ NSString *const kVideoTitle		= @"CustomVideoView";
 	[self movieFinishedCallback: nil];
 }
 
-- (void)setDelegate: (id<VideoPlayerDelegate>) aDelegate;
+- (void)setDelegate: (id<CCVideoPlayerDelegate>) aDelegate;
 {
 	delegate = aDelegate;
 }

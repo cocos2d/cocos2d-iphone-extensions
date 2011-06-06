@@ -9,7 +9,7 @@
 
 // Import the interfaces
 #import "CCVideoTestLayer.h"
-#import "VideoPlayer.h"
+#import "CCVideoPlayer.h"
 #import "ExtensionTest.h"
 
 SYNTHESIZE_EXTENSION_TEST(CCVideoTestLayer)
@@ -28,7 +28,7 @@ SYNTHESIZE_EXTENSION_TEST(CCVideoTestLayer)
 		CCLabelTTF *label = [CCLabelTTF labelWithString:@"Play video" fontName:@"Marker Felt" fontSize:64];
 		CCMenuItemLabel *labelItem = [CCMenuItemLabel itemWithLabel:label 
 															 target: self 
-														   selector: @selector(testVideoPlayer)];
+														   selector: @selector(testCCVideoPlayer)];
 		
 		CCMenu *menu = [CCMenu menuWithItems: labelItem, nil];
 		[menu alignItemsHorizontally];
@@ -36,14 +36,14 @@ SYNTHESIZE_EXTENSION_TEST(CCVideoTestLayer)
 	
 		
 		// Init Video Player
-		[VideoPlayer setDelegate: self];
+		[CCVideoPlayer setDelegate: self];
 	}
 	return self;
 }
 
-- (void) testVideoPlayer
+- (void) testCCVideoPlayer
 {
-	[VideoPlayer playMovieWithFile: @"bait.mp4"];
+	[CCVideoPlayer playMovieWithFile: @"bait.mp4"];
 }
 
 - (void) moviePlaybackFinished

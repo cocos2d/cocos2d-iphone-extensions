@@ -26,40 +26,30 @@
  *
  */
 
-
-#ifdef __IPHONE_OS_VERSION_MAX_ALLOWED
-
 #import <Foundation/Foundation.h>
 
-@class MPMoviePlayerController;
-@class VideoOverlayView;
+@protocol CCVideoPlayerDelegate <NSObject>
 
-
-
-#define VIDEO_PLAYER_IMPL_SUPER_CLASS VideoPlayerImpliOS
-@interface VideoPlayerImpliOS : NSObject
-{
-    MPMoviePlayerController *_theMovie;
-    VideoOverlayView *_videoOverlayView;	
-	
-	BOOL _playing;
-	
-	//weak ref
-	id<VideoPlayerDelegate> _delegate;	
-}
-
-@property (readonly) BOOL isPlaying;
-- (void)playMovieAtURL:(NSURL*)theURL;
-- (void)movieFinishedCallback:(NSNotification*)aNotification;
-
-- (void)cancelPlaying;
-
-- (void)setDelegate: (id<VideoPlayerDelegate>) aDelegate;
-
-- (void) updateOrientationWithOrientation: (UIDeviceOrientation) newOrientation;
-- (void) updateOrientationWithOrientationNumber: (NSNumber *) newOrientationNumber;
-
+- (void) movieStartsPlaying;
+- (void) moviePlaybackFinished;
 
 @end
 
+
+@interface CCVideoPlayer : NSObject
+{
+}
+
+// sets new delegate, replaces old if it exists, doesn't retain it
++ (void) setDelegate: (id<CCVideoPlayerDelegate>) aDelegate;
+
++ (void) playMovieWithFile: (NSString *) file;
+
++ (void) cancelPlaying;
+
+#ifdef __IPHONE_OS_VERSION_MAX_ALLOWED
+// update only if landscape left or landscape right
++ (void) updateOrientationWithOrientation: (UIDeviceOrientation) newOrientation;
 #endif
+
+@end
