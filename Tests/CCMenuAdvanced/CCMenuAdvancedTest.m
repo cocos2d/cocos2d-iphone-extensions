@@ -296,16 +296,13 @@ SYNTHESIZE_EXTENSION_TEST(DemoMenu)
 
 - (NSString *) captionSpriteFrameName
 {
-	NSAssert(NO, @"iTraceurMenu#captionSpriteFrameName called! This method should be reimplemented.");
-	return @"PARKOUR!!!";
+	NSAssert(NO, @"DemoMenuWidget#captionSpriteFrameName called! This method should be reimplemented.");
+	return nil;
 }
 
 - (void) backPressed
 {	
-	/**** Commented in CCMenuAdvanced demo, cause i don't have GameDirector here ***
-	 //FORWARD this msg to GD with iTraceurMenu subclass as sender
-	 [[GameDirector sharedGameDirector] iTraceurMenuBackPressed: self ];
-	 */
+	// nothing here
 }
 
 @end
