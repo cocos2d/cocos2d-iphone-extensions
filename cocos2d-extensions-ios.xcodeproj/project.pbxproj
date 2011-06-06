@@ -480,6 +480,7 @@
 		6DA57DAE139CBD66004D8D0B /* crackedGradient42.fnt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = crackedGradient42.fnt; sourceTree = "<group>"; };
 		6DA57DAF139CBD66004D8D0B /* crackedGradient42.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = crackedGradient42.png; sourceTree = "<group>"; };
 		6DA57DD0139CBD74004D8D0B /* CCMenuAdvancedTest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CCMenuAdvancedTest.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		6DA57EAA139CD86A004D8D0B /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.md; sourceTree = "<group>"; };
 		DC6640020F83B3EA000B3E49 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		DC6640040F83B3EA000B3E49 /* OpenAL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenAL.framework; path = System/Library/Frameworks/OpenAL.framework; sourceTree = SDKROOT; };
 		DCCBF1B60F6022AE0040855A /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -554,6 +555,7 @@
 		29B97314FDCFA39411CA2CEA /* CustomTemplate */ = {
 			isa = PBXGroup;
 			children = (
+				6DA57EAA139CD86A004D8D0B /* README.md */,
 				504DFC6810AF1739006D82FE /* LICENSE.cocos2d */,
 				6DA5775C139C9827004D8D0B /* LICENSE.cocos2d-extensions */,
 				6DA578B0139C9C04004D8D0B /* cocos2d */,
