@@ -485,6 +485,7 @@
 		6DA57EEC139D561E004D8D0B /* CCVideoPlayerTest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CCVideoPlayerTest.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6DA57F23139D6011004D8D0B /* QTKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QTKit.framework; path = System/Library/Frameworks/QTKit.framework; sourceTree = SDKROOT; };
 		6DA5802C139D68E6004D8D0B /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.md; sourceTree = "<group>"; };
+		6DA58032139D696D004D8D0B /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.md; sourceTree = "<group>"; };
 		E01E663D121CA00A001A484F /* libcocos2d.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libcocos2d.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		E01E6A3D121EDCD3001A484F /* ApplicationServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ApplicationServices.framework; path = System/Library/Frameworks/ApplicationServices.framework; sourceTree = SDKROOT; };
 		E036A79C121B5C720037C5C6 /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = System/Library/Frameworks/OpenGL.framework; sourceTree = SDKROOT; };
@@ -875,6 +876,7 @@
 		6DA57C7E139CAAB6004D8D0B /* CCMenuAdvanced */ = {
 			isa = PBXGroup;
 			children = (
+				6DA58032139D696D004D8D0B /* README.md */,
 				6DA57C7F139CAAB6004D8D0B /* CCMenuAdvanced.h */,
 				6DA57C80139CAAB6004D8D0B /* CCMenuAdvanced.m */,
 			);

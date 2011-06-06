@@ -536,6 +536,7 @@
 		6DA57FA9139D6361004D8D0B /* CCVideoPlayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCVideoPlayer.m; sourceTree = "<group>"; };
 		6DA57FB7139D63C0004D8D0B /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = System/Library/Frameworks/MediaPlayer.framework; sourceTree = SDKROOT; };
 		6DA58027139D6819004D8D0B /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.md; sourceTree = "<group>"; };
+		6DA58033139D697B004D8D0B /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.md; sourceTree = "<group>"; };
 		DC6640020F83B3EA000B3E49 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		DC6640040F83B3EA000B3E49 /* OpenAL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenAL.framework; path = System/Library/Frameworks/OpenAL.framework; sourceTree = SDKROOT; };
 		DCCBF1B60F6022AE0040855A /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -953,6 +954,7 @@
 		6DA57D99139CBD3C004D8D0B /* CCMenuAdvanced */ = {
 			isa = PBXGroup;
 			children = (
+				6DA58033139D697B004D8D0B /* README.md */,
 				6DA57D9A139CBD3C004D8D0B /* CCMenuAdvanced.h */,
 				6DA57D9B139CBD3C004D8D0B /* CCMenuAdvanced.m */,
 			);
