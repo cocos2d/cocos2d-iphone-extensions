@@ -19,6 +19,8 @@ Files & Folders
 * **cocos2d** - cocos2d-iphone submodule.
 * **Extensions** - folders with extensions sources, that can be inlcuded in your project.
 * **Tests** - sources & resources of Extensions demos.
+   * **SharedResources** - resources shared between all tests (icons, fps images, etc...)
+   * **SharedSources** - sources shared between all tests (appDelegates, pch's, etc...)
 * **cocos2d-extensions-ios.xcodeproj** - XCode Project containing all extensions and their demos/tests for iOS Platform.
 * **cocos2d-extensions-mac.xcodeproj** - XCode Project containing all extensions and their demos/tests for Mac OS X Platform.
 
