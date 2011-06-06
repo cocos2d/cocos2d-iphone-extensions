@@ -9,7 +9,6 @@
 #import "VideoPlayerImplMac.h"
 #import "cocos2d.h"
 #import "MyMovieView.h"
-#import "CustomVideoViewController.h"
 
 #if __MAC_OS_X_VERSION_MAX_ALLOWED
 
@@ -57,7 +56,7 @@ NSString *const kVideoTitle		= @"CustomVideoView";
 	
 	//Get Movie View
 	self.videoViewController =
-		[[[CustomVideoViewController alloc] initWithNibName:kVideoTitle bundle:nil] autorelease];
+		[[[NSViewController alloc] initWithNibName:kVideoTitle bundle:nil] autorelease];
 	[(MyMovieView*)[self.videoViewController view] setMovie:movie];
 	[(MyMovieView*)[self.videoViewController view] setPreservesAspectRatio:YES];
 	[(MyMovieView*)[self.videoViewController view] setControllerVisible:NO];

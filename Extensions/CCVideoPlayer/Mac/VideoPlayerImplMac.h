@@ -18,14 +18,14 @@
 #define VIDEO_PLAYER_IMPL_SUPER_CLASS VideoPlayerImplMac
 @interface VideoPlayerImplMac : NSObject
 {	
-	CustomVideoViewController *videoViewController;	
+	NSViewController *videoViewController;	
 	NSView *retainedView;
 	
 	//weak ref
 	id<VideoPlayerDelegate> delegate;
 }
 //private property
-@property (readwrite, retain) CustomVideoViewController *videoViewController;
+@property (readwrite, retain) NSViewController *videoViewController;
 @property (readwrite, retain) NSView *retainedView;
 
 - (void)playMovieAtURL:(NSURL*)theURL;

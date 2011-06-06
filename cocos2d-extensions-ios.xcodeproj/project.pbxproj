@@ -261,7 +261,6 @@
 		6DA57FAA139D6361004D8D0B /* videoOverlayView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DA57F9D139D6361004D8D0B /* videoOverlayView.m */; };
 		6DA57FAB139D6361004D8D0B /* VideoPlayerImpliOS.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DA57F9F139D6361004D8D0B /* VideoPlayerImpliOS.m */; };
 		6DA57FAC139D6361004D8D0B /* CustomVideoView.nib in Resources */ = {isa = PBXBuildFile; fileRef = 6DA57FA1139D6361004D8D0B /* CustomVideoView.nib */; };
-		6DA57FAD139D6361004D8D0B /* CustomVideoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DA57FA3139D6361004D8D0B /* CustomVideoViewController.m */; };
 		6DA57FAE139D6361004D8D0B /* MyMovieView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DA57FA5139D6361004D8D0B /* MyMovieView.m */; };
 		6DA57FAF139D6361004D8D0B /* VideoPlayerImplMac.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DA57FA7139D6361004D8D0B /* VideoPlayerImplMac.m */; };
 		6DA57FB0139D6361004D8D0B /* VideoPlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DA57FA9139D6361004D8D0B /* VideoPlayer.m */; };
@@ -529,8 +528,6 @@
 		6DA57F9E139D6361004D8D0B /* VideoPlayerImpliOS.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VideoPlayerImpliOS.h; sourceTree = "<group>"; };
 		6DA57F9F139D6361004D8D0B /* VideoPlayerImpliOS.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VideoPlayerImpliOS.m; sourceTree = "<group>"; };
 		6DA57FA1139D6361004D8D0B /* CustomVideoView.nib */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; path = CustomVideoView.nib; sourceTree = "<group>"; };
-		6DA57FA2139D6361004D8D0B /* CustomVideoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomVideoViewController.h; sourceTree = "<group>"; };
-		6DA57FA3139D6361004D8D0B /* CustomVideoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomVideoViewController.m; sourceTree = "<group>"; };
 		6DA57FA4139D6361004D8D0B /* MyMovieView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyMovieView.h; sourceTree = "<group>"; };
 		6DA57FA5139D6361004D8D0B /* MyMovieView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyMovieView.m; sourceTree = "<group>"; };
 		6DA57FA6139D6361004D8D0B /* VideoPlayerImplMac.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VideoPlayerImplMac.h; sourceTree = "<group>"; };
@@ -1029,8 +1026,6 @@
 			isa = PBXGroup;
 			children = (
 				6DA57FA1139D6361004D8D0B /* CustomVideoView.nib */,
-				6DA57FA2139D6361004D8D0B /* CustomVideoViewController.h */,
-				6DA57FA3139D6361004D8D0B /* CustomVideoViewController.m */,
 				6DA57FA4139D6361004D8D0B /* MyMovieView.h */,
 				6DA57FA5139D6361004D8D0B /* MyMovieView.m */,
 				6DA57FA6139D6361004D8D0B /* VideoPlayerImplMac.h */,
@@ -1432,7 +1427,6 @@
 				6DA57F98139D632F004D8D0B /* CCVideoTestLayer.m in Sources */,
 				6DA57FAA139D6361004D8D0B /* videoOverlayView.m in Sources */,
 				6DA57FAB139D6361004D8D0B /* VideoPlayerImpliOS.m in Sources */,
-				6DA57FAD139D6361004D8D0B /* CustomVideoViewController.m in Sources */,
 				6DA57FAE139D6361004D8D0B /* MyMovieView.m in Sources */,
 				6DA57FAF139D6361004D8D0B /* VideoPlayerImplMac.m in Sources */,
 				6DA57FB0139D6361004D8D0B /* VideoPlayer.m in Sources */,
