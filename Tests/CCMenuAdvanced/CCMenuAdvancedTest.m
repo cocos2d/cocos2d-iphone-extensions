@@ -50,8 +50,11 @@ SYNTHESIZE_EXTENSION_TEST(DemoMenu)
 		_nameLogo = [CCSprite spriteWithSpriteFrameName:@"topCaption.png"];
 		[self addChild: _nameLogo];
 		
-		_widget = [DemoMenuWidget node];
+		_widget = [DemoMenuWidget menuWidgetWithReversedOrder: NO];
 		[self addChild: _widget];
+		
+		_widget2 = [DemoMenuWidget menuWidgetWithReversedOrder: YES];
+		[self addChild: _widget2];
 		
 		// update positions and scalex of children
 		[self updateForScreenReshape];
@@ -108,11 +111,12 @@ SYNTHESIZE_EXTENSION_TEST(DemoMenu)
 								   winSize.height - _nameLogo.scale * [_nameLogo contentSize].height);
 	
 	// scale and position menu widget
-	_widget.scale = (winSize.width) / [_widget contentSize].width;
-	_widget.scale = MIN(_widget.scale, activeSize.height / [_widget contentSize].height);
-	_widget.scale = MIN(_widget.scale, 1.0f);
-	_widget.anchorPoint = ccp(0.5f, 0);
+	_widget2.scale = _widget.scale = (winSize.width) / [_widget contentSize].width;
+	_widget2.scale = _widget.scale = MIN(_widget.scale, activeSize.height / [_widget contentSize].height);
+	_widget2.scale = _widget.scale = MIN(_widget.scale, 1.0f);
+	_widget2.anchorPoint = _widget.anchorPoint = ccp(0.5f, 0);
 	_widget.position = ccp(winSize.width / 2.0f, 0);
+	_widget2.position = ccp(winSize.width / 2.0f, [_widget boundingBox].size.height);
 }
 
 @end
@@ -121,7 +125,12 @@ SYNTHESIZE_EXTENSION_TEST(DemoMenu)
 
 @implementation DemoMenuWidget 
 
-- (id) init
++ (id) menuWidgetWithReversedOrder: (BOOL) rightToLeft
+{
+	return [[[self alloc] initWithReversedOrder:rightToLeft] autorelease];
+}
+
+- (id) initWithReversedOrder: (BOOL) rightToLeft
 {
 	if ( (self = [super init]) )
 	{
@@ -172,7 +181,7 @@ SYNTHESIZE_EXTENSION_TEST(DemoMenu)
 		menu.anchorPoint = ccp(0,0);
 		menu.position = ccp(0,0);
 		
-		[menu alignItemsHorizontallyWithPadding:50.0f leftToRight:NO];
+		[menu alignItemsHorizontallyWithPadding:50.0f leftToRight:!rightToLeft];
 		self.contentSize = menu.contentSize;
 		
 		//add keyboard bindings for mac

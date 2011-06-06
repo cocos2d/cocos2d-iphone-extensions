@@ -41,7 +41,8 @@
 	CCSprite *_cornerSil;
 	CCSprite *_nameLogo;
 	
-	DemoMenuWidget *_widget;	
+	DemoMenuWidget *_widget;
+	DemoMenuWidget *_widget2;
 }
 
 - (void) updateForScreenReshape;
@@ -53,6 +54,9 @@
 @interface DemoMenuWidget : CCNode
 {
 }
+
++ (id) menuWidgetWithReversedOrder: (BOOL) rightToLeft;
+- (id) initWithReversedOrder: (BOOL) rightToLeft;
 
 @end
 
