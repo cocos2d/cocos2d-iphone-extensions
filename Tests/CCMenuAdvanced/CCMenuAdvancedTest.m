@@ -104,8 +104,6 @@ SYNTHESIZE_EXTENSION_TEST(DemoMenu)
 	_cornerSil.anchorPoint = ccp(1,0);
 	_cornerSil.position = ccp(winSize.width, 0); 
 	
-	
-	
 	// active Size is space that left for menu after caption
 	CGSize activeSize = CGSizeMake( winSize.width, 
 								   winSize.height - _nameLogo.scale * [_nameLogo contentSize].height);
@@ -183,13 +181,7 @@ SYNTHESIZE_EXTENSION_TEST(DemoMenu)
 		
 		[menu alignItemsHorizontallyWithPadding:50.0f leftToRight:!rightToLeft];
 		self.contentSize = menu.contentSize;
-		
-		//add keyboard bindings for mac
-#if defined(__MAC_OS_X_VERSION_MAX_ALLOWED)
-		menu.nextItemButtonBind = NSDownArrowFunctionKey;
-		menu.prevItemButtonBind = NSUpArrowFunctionKey;
-#endif
-		
+
 		[self addChild: menu];
 		
 	}
