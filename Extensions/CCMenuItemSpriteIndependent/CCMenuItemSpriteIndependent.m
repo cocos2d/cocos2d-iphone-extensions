@@ -35,7 +35,7 @@
 // contentSize_ is set in init with normalImage_ content size
 -(CGRect) rect
 {
-	return CGRectMake( 0, 0, normalImage.contentSize.width, normalImage_.height );	
+	return CGRectMake( 0, 0, normalImage_.contentSize.width, normalImage_.contentSize.height );	
 }
 
 // delegates point conversion to normalImage_
