@@ -470,6 +470,10 @@
 	screenRect.origin = [self convertToNodeSpace: CGPointMake(0, 0 )];
 	screenRect.size = [[CCDirector sharedDirector] winSize];
 	
+	/* 
+	 TODO: try to uncomment this to support rotation/scale/etc transform
+	 screnRect = CGRectApplyAffineTransform(screenRect, [self worldToNodeTransform] ); */
+	
 	// get level's must-be-loaded-part rect
 	_loadedRect = CGRectMake(screenRect.origin.x - _screenLoadRectExtension.width,
 							 screenRect.origin.y - _screenLoadRectExtension.height,
