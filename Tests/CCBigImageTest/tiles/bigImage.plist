@@ -1,0 +1,496 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>Source</key>
+	<dict>
+		<key>Filename</key>
+		<string>bigImage.png</string>
+		<key>Size</key>
+		<string>{5120, 1024}</string>
+	</dict>
+	<key>Tiles</key>
+	<array>
+		<dict>
+			<key>Name</key>
+			<string>bigImage_0_0.png</string>
+			<key>Rect</key>
+			<string>{{0, 0}, {256, 256}}</string>
+		</dict>
+		<dict>
+			<key>Name</key>
+			<string>bigImage_0_1.png</string>
+			<key>Rect</key>
+			<string>{{256, 0}, {256, 256}}</string>
+		</dict>
+		<dict>
+			<key>Name</key>
+			<string>bigImage_0_2.png</string>
+			<key>Rect</key>
+			<string>{{512, 0}, {256, 256}}</string>
+		</dict>
+		<dict>
+			<key>Name</key>
+			<string>bigImage_0_3.png</string>
+			<key>Rect</key>
+			<string>{{768, 0}, {256, 256}}</string>
+		</dict>
+		<dict>
+			<key>Name</key>
+			<string>bigImage_0_4.png</string>
+			<key>Rect</key>
+			<string>{{1024, 0}, {256, 256}}</string>
+		</dict>
+		<dict>
+			<key>Name</key>
+			<string>bigImage_0_5.png</string>
+			<key>Rect</key>
+			<string>{{1280, 0}, {256, 256}}</string>
+		</dict>
+		<dict>
+			<key>Name</key>
+			<string>bigImage_0_6.png</string>
+			<key>Rect</key>
+			<string>{{1536, 0}, {256, 256}}</string>
+		</dict>
+		<dict>
+			<key>Name</key>
+			<string>bigImage_0_7.png</string>
+			<key>Rect</key>
+			<string>{{1792, 0}, {256, 256}}</string>
+		</dict>
+		<dict>
+			<key>Name</key>
+			<string>bigImage_0_8.png</string>
+			<key>Rect</key>
+			<string>{{2048, 0}, {256, 256}}</string>
+		</dict>
+		<dict>
+			<key>Name</key>
+			<string>bigImage_0_9.png</string>
+			<key>Rect</key>
+			<string>{{2304, 0}, {256, 256}}</string>
+		</dict>
+		<dict>
+			<key>Name</key>
+			<string>bigImage_0_10.png</string>
+			<key>Rect</key>
+			<string>{{2560, 0}, {256, 256}}</string>
+		</dict>
+		<dict>
+			<key>Name</key>
+			<string>bigImage_0_11.png</string>
+			<key>Rect</key>
+			<string>{{2816, 0}, {256, 256}}</string>
+		</dict>
+		<dict>
+			<key>Name</key>
+			<string>bigImage_0_12.png</string>
+			<key>Rect</key>
+			<string>{{3072, 0}, {256, 256}}</string>
+		</dict>
+		<dict>
+			<key>Name</key>
+			<string>bigImage_0_13.png</string>
+			<key>Rect</key>
+			<string>{{3328, 0}, {256, 256}}</string>
+		</dict>
+		<dict>
+			<key>Name</key>
+			<string>bigImage_0_14.png</string>
+			<key>Rect</key>
+			<string>{{3584, 0}, {256, 256}}</string>
+		</dict>
+		<dict>
+			<key>Name</key>
+			<string>bigImage_0_15.png</string>
+			<key>Rect</key>
+			<string>{{3840, 0}, {256, 256}}</string>
+		</dict>
+		<dict>
+			<key>Name</key>
+			<string>bigImage_0_16.png</string>
+			<key>Rect</key>
+			<string>{{4096, 0}, {256, 256}}</string>
+		</dict>
+		<dict>
+			<key>Name</key>
+			<string>bigImage_0_17.png</string>
+			<key>Rect</key>
+			<string>{{4352, 0}, {256, 256}}</string>
+		</dict>
+		<dict>
+			<key>Name</key>
+			<string>bigImage_0_18.png</string>
+			<key>Rect</key>
+			<string>{{4608, 0}, {256, 256}}</string>
+		</dict>
+		<dict>
+			<key>Name</key>
+			<string>bigImage_0_19.png</string>
+			<key>Rect</key>
+			<string>{{4864, 0}, {256, 256}}</string>
+		</dict>
+		<dict>
+			<key>Name</key>
+			<string>bigImage_1_0.png</string>
+			<key>Rect</key>
+			<string>{{0, 256}, {256, 256}}</string>
+		</dict>
+		<dict>
+			<key>Name</key>
+			<string>bigImage_1_1.png</string>
+			<key>Rect</key>
+			<string>{{256, 256}, {256, 256}}</string>
+		</dict>
+		<dict>
+			<key>Name</key>
+			<string>bigImage_1_2.png</string>
+			<key>Rect</key>
+			<string>{{512, 256}, {256, 256}}</string>
+		</dict>
+		<dict>
+			<key>Name</key>
+			<string>bigImage_1_3.png</string>
+			<key>Rect</key>
+			<string>{{768, 256}, {256, 256}}</string>
+		</dict>
+		<dict>
+			<key>Name</key>
+			<string>bigImage_1_4.png</string>
+			<key>Rect</key>
+			<string>{{1024, 256}, {256, 256}}</string>
+		</dict>
+		<dict>
+			<key>Name</key>
+			<string>bigImage_1_5.png</string>
+			<key>Rect</key>
+			<string>{{1280, 256}, {256, 256}}</string>
+		</dict>
+		<dict>
+			<key>Name</key>
+			<string>bigImage_1_6.png</string>
+			<key>Rect</key>
+			<string>{{1536, 256}, {256, 256}}</string>
+		</dict>
+		<dict>
+			<key>Name</key>
+			<string>bigImage_1_7.png</string>
+			<key>Rect</key>
+			<string>{{1792, 256}, {256, 256}}</string>
+		</dict>
+		<dict>
+			<key>Name</key>
+			<string>bigImage_1_8.png</string>
+			<key>Rect</key>
+			<string>{{2048, 256}, {256, 256}}</string>
+		</dict>
+		<dict>
+			<key>Name</key>
+			<string>bigImage_1_9.png</string>
+			<key>Rect</key>
+			<string>{{2304, 256}, {256, 256}}</string>
+		</dict>
+		<dict>
+			<key>Name</key>
+			<string>bigImage_1_10.png</string>
+			<key>Rect</key>
+			<string>{{2560, 256}, {256, 256}}</string>
+		</dict>
+		<dict>
+			<key>Name</key>
+			<string>bigImage_1_11.png</string>
+			<key>Rect</key>
+			<string>{{2816, 256}, {256, 256}}</string>
+		</dict>
+		<dict>
+			<key>Name</key>
+			<string>bigImage_1_12.png</string>
+			<key>Rect</key>
+			<string>{{3072, 256}, {256, 256}}</string>
+		</dict>
+		<dict>
+			<key>Name</key>
+			<string>bigImage_1_13.png</string>
+			<key>Rect</key>
+			<string>{{3328, 256}, {256, 256}}</string>
+		</dict>
+		<dict>
+			<key>Name</key>
+			<string>bigImage_1_14.png</string>
+			<key>Rect</key>
+			<string>{{3584, 256}, {256, 256}}</string>
+		</dict>
+		<dict>
+			<key>Name</key>
+			<string>bigImage_1_15.png</string>
+			<key>Rect</key>
+			<string>{{3840, 256}, {256, 256}}</string>
+		</dict>
+		<dict>
+			<key>Name</key>
+			<string>bigImage_1_16.png</string>
+			<key>Rect</key>
+			<string>{{4096, 256}, {256, 256}}</string>
+		</dict>
+		<dict>
+			<key>Name</key>
+			<string>bigImage_1_17.png</string>
+			<key>Rect</key>
+			<string>{{4352, 256}, {256, 256}}</string>
+		</dict>
+		<dict>
+			<key>Name</key>
+			<string>bigImage_1_18.png</string>
+			<key>Rect</key>
+			<string>{{4608, 256}, {256, 256}}</string>
+		</dict>
+		<dict>
+			<key>Name</key>
+			<string>bigImage_1_19.png</string>
+			<key>Rect</key>
+			<string>{{4864, 256}, {256, 256}}</string>
+		</dict>
+		<dict>
+			<key>Name</key>
+			<string>bigImage_2_0.png</string>
+			<key>Rect</key>
+			<string>{{0, 512}, {256, 256}}</string>
+		</dict>
+		<dict>
+			<key>Name</key>
+			<string>bigImage_2_1.png</string>
+			<key>Rect</key>
+			<string>{{256, 512}, {256, 256}}</string>
+		</dict>
+		<dict>
+			<key>Name</key>
+			<string>bigImage_2_2.png</string>
+			<key>Rect</key>
+			<string>{{512, 512}, {256, 256}}</string>
+		</dict>
+		<dict>
+			<key>Name</key>
+			<string>bigImage_2_3.png</string>
+			<key>Rect</key>
+			<string>{{768, 512}, {256, 256}}</string>
+		</dict>
+		<dict>
+			<key>Name</key>
+			<string>bigImage_2_4.png</string>
+			<key>Rect</key>
+			<string>{{1024, 512}, {256, 256}}</string>
+		</dict>
+		<dict>
+			<key>Name</key>
+			<string>bigImage_2_5.png</string>
+			<key>Rect</key>
+			<string>{{1280, 512}, {256, 256}}</string>
+		</dict>
+		<dict>
+			<key>Name</key>
+			<string>bigImage_2_6.png</string>
+			<key>Rect</key>
+			<string>{{1536, 512}, {256, 256}}</string>
+		</dict>
+		<dict>
+			<key>Name</key>
+			<string>bigImage_2_7.png</string>
+			<key>Rect</key>
+			<string>{{1792, 512}, {256, 256}}</string>
+		</dict>
+		<dict>
+			<key>Name</key>
+			<string>bigImage_2_8.png</string>
+			<key>Rect</key>
+			<string>{{2048, 512}, {256, 256}}</string>
+		</dict>
+		<dict>
+			<key>Name</key>
+			<string>bigImage_2_9.png</string>
+			<key>Rect</key>
+			<string>{{2304, 512}, {256, 256}}</string>
+		</dict>
+		<dict>
+			<key>Name</key>
+			<string>bigImage_2_10.png</string>
+			<key>Rect</key>
+			<string>{{2560, 512}, {256, 256}}</string>
+		</dict>
+		<dict>
+			<key>Name</key>
+			<string>bigImage_2_11.png</string>
+			<key>Rect</key>
+			<string>{{2816, 512}, {256, 256}}</string>
+		</dict>
+		<dict>
+			<key>Name</key>
+			<string>bigImage_2_12.png</string>
+			<key>Rect</key>
+			<string>{{3072, 512}, {256, 256}}</string>
+		</dict>
+		<dict>
+			<key>Name</key>
+			<string>bigImage_2_13.png</string>
+			<key>Rect</key>
+			<string>{{3328, 512}, {256, 256}}</string>
+		</dict>
+		<dict>
+			<key>Name</key>
+			<string>bigImage_2_14.png</string>
+			<key>Rect</key>
+			<string>{{3584, 512}, {256, 256}}</string>
+		</dict>
+		<dict>
+			<key>Name</key>
+			<string>bigImage_2_15.png</string>
+			<key>Rect</key>
+			<string>{{3840, 512}, {256, 256}}</string>
+		</dict>
+		<dict>
+			<key>Name</key>
+			<string>bigImage_2_16.png</string>
+			<key>Rect</key>
+			<string>{{4096, 512}, {256, 256}}</string>
+		</dict>
+		<dict>
+			<key>Name</key>
+			<string>bigImage_2_17.png</string>
+			<key>Rect</key>
+			<string>{{4352, 512}, {256, 256}}</string>
+		</dict>
+		<dict>
+			<key>Name</key>
+			<string>bigImage_2_18.png</string>
+			<key>Rect</key>
+			<string>{{4608, 512}, {256, 256}}</string>
+		</dict>
+		<dict>
+			<key>Name</key>
+			<string>bigImage_2_19.png</string>
+			<key>Rect</key>
+			<string>{{4864, 512}, {256, 256}}</string>
+		</dict>
+		<dict>
+			<key>Name</key>
+			<string>bigImage_3_0.png</string>
+			<key>Rect</key>
+			<string>{{0, 768}, {256, 256}}</string>
+		</dict>
+		<dict>
+			<key>Name</key>
+			<string>bigImage_3_1.png</string>
+			<key>Rect</key>
+			<string>{{256, 768}, {256, 256}}</string>
+		</dict>
+		<dict>
+			<key>Name</key>
+			<string>bigImage_3_2.png</string>
+			<key>Rect</key>
+			<string>{{512, 768}, {256, 256}}</string>
+		</dict>
+		<dict>
+			<key>Name</key>
+			<string>bigImage_3_3.png</string>
+			<key>Rect</key>
+			<string>{{768, 768}, {256, 256}}</string>
+		</dict>
+		<dict>
+			<key>Name</key>
+			<string>bigImage_3_4.png</string>
+			<key>Rect</key>
+			<string>{{1024, 768}, {256, 256}}</string>
+		</dict>
+		<dict>
+			<key>Name</key>
+			<string>bigImage_3_5.png</string>
+			<key>Rect</key>
+			<string>{{1280, 768}, {256, 256}}</string>
+		</dict>
+		<dict>
+			<key>Name</key>
+			<string>bigImage_3_6.png</string>
+			<key>Rect</key>
+			<string>{{1536, 768}, {256, 256}}</string>
+		</dict>
+		<dict>
+			<key>Name</key>
+			<string>bigImage_3_7.png</string>
+			<key>Rect</key>
+			<string>{{1792, 768}, {256, 256}}</string>
+		</dict>
+		<dict>
+			<key>Name</key>
+			<string>bigImage_3_8.png</string>
+			<key>Rect</key>
+			<string>{{2048, 768}, {256, 256}}</string>
+		</dict>
+		<dict>
+			<key>Name</key>
+			<string>bigImage_3_9.png</string>
+			<key>Rect</key>
+			<string>{{2304, 768}, {256, 256}}</string>
+		</dict>
+		<dict>
+			<key>Name</key>
+			<string>bigImage_3_10.png</string>
+			<key>Rect</key>
+			<string>{{2560, 768}, {256, 256}}</string>
+		</dict>
+		<dict>
+			<key>Name</key>
+			<string>bigImage_3_11.png</string>
+			<key>Rect</key>
+			<string>{{2816, 768}, {256, 256}}</string>
+		</dict>
+		<dict>
+			<key>Name</key>
+			<string>bigImage_3_12.png</string>
+			<key>Rect</key>
+			<string>{{3072, 768}, {256, 256}}</string>
+		</dict>
+		<dict>
+			<key>Name</key>
+			<string>bigImage_3_13.png</string>
+			<key>Rect</key>
+			<string>{{3328, 768}, {256, 256}}</string>
+		</dict>
+		<dict>
+			<key>Name</key>
+			<string>bigImage_3_14.png</string>
+			<key>Rect</key>
+			<string>{{3584, 768}, {256, 256}}</string>
+		</dict>
+		<dict>
+			<key>Name</key>
+			<string>bigImage_3_15.png</string>
+			<key>Rect</key>
+			<string>{{3840, 768}, {256, 256}}</string>
+		</dict>
+		<dict>
+			<key>Name</key>
+			<string>bigImage_3_16.png</string>
+			<key>Rect</key>
+			<string>{{4096, 768}, {256, 256}}</string>
+		</dict>
+		<dict>
+			<key>Name</key>
+			<string>bigImage_3_17.png</string>
+			<key>Rect</key>
+			<string>{{4352, 768}, {256, 256}}</string>
+		</dict>
+		<dict>
+			<key>Name</key>
+			<string>bigImage_3_18.png</string>
+			<key>Rect</key>
+			<string>{{4608, 768}, {256, 256}}</string>
+		</dict>
+		<dict>
+			<key>Name</key>
+			<string>bigImage_3_19.png</string>
+			<key>Rect</key>
+			<string>{{4864, 768}, {256, 256}}</string>
+		</dict>
+	</array>
+</dict>
+</plist>
