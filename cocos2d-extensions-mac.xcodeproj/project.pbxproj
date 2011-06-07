@@ -486,6 +486,11 @@
 		6DA58527139E6285004D8D0B /* btn-play-normal.png in Resources */ = {isa = PBXBuildFile; fileRef = 6DA5851F139E6285004D8D0B /* btn-play-normal.png */; };
 		6DA58528139E6285004D8D0B /* btn-play-selected.png in Resources */ = {isa = PBXBuildFile; fileRef = 6DA58520139E6285004D8D0B /* btn-play-selected.png */; };
 		6DA58529139E6299004D8D0B /* CCMenuItemSpriteIndependent.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DA57C83139CAAB6004D8D0B /* CCMenuItemSpriteIndependent.m */; };
+		6DA58582139E8016004D8D0B /* CCSlider.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DA58580139E8016004D8D0B /* CCSlider.m */; };
+		6DA58583139E8016004D8D0B /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 6DA58581139E8016004D8D0B /* README.md */; };
+		6DA58589139E8027004D8D0B /* CCSliderTestLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DA58586139E8027004D8D0B /* CCSliderTestLayer.m */; };
+		6DA5858A139E8027004D8D0B /* sliderBG.png in Resources */ = {isa = PBXBuildFile; fileRef = 6DA58587139E8027004D8D0B /* sliderBG.png */; };
+		6DA5858B139E8027004D8D0B /* sliderThumb.png in Resources */ = {isa = PBXBuildFile; fileRef = 6DA58588139E8027004D8D0B /* sliderThumb.png */; };
 		E01E6A3E121EDCD3001A484F /* ApplicationServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E01E6A3D121EDCD3001A484F /* ApplicationServices.framework */; };
 		E01E6B36121EDCED001A484F /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E036A79E121B5C870037C5C6 /* QuartzCore.framework */; };
 		E01E6B49121EDCF4001A484F /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E036A79C121B5C720037C5C6 /* OpenGL.framework */; };
@@ -835,7 +840,7 @@
 		6DA5802C139D68E6004D8D0B /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.md; sourceTree = "<group>"; };
 		6DA58032139D696D004D8D0B /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.md; sourceTree = "<group>"; };
 		6DA58117139E3CF9004D8D0B /* CCBigImageTest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CCBigImageTest.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		6DA58131139E3CFC004D8D0B /* CCBigImageTest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CCBigImageTest.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		6DA58131139E3CFC004D8D0B /* CCScrollLayerTest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CCScrollLayerTest.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6DA5814B139E3CFF004D8D0B /* CCMenuItemSpriteIndependent.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CCMenuItemSpriteIndependent.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6DA58165139E3D01004D8D0B /* CCSliderTest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CCSliderTest.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6DA5817F139E3D04004D8D0B /* FilesDownloaderTest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FilesDownloaderTest.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -1021,6 +1026,13 @@
 		6DA5851E139E6285004D8D0B /* btn-highscores-selected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "btn-highscores-selected.png"; sourceTree = "<group>"; };
 		6DA5851F139E6285004D8D0B /* btn-play-normal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "btn-play-normal.png"; sourceTree = "<group>"; };
 		6DA58520139E6285004D8D0B /* btn-play-selected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "btn-play-selected.png"; sourceTree = "<group>"; };
+		6DA5857F139E8016004D8D0B /* CCSlider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCSlider.h; sourceTree = "<group>"; };
+		6DA58580139E8016004D8D0B /* CCSlider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCSlider.m; sourceTree = "<group>"; };
+		6DA58581139E8016004D8D0B /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.md; sourceTree = "<group>"; };
+		6DA58585139E8027004D8D0B /* CCSliderTestLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCSliderTestLayer.h; sourceTree = "<group>"; };
+		6DA58586139E8027004D8D0B /* CCSliderTestLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCSliderTestLayer.m; sourceTree = "<group>"; };
+		6DA58587139E8027004D8D0B /* sliderBG.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = sliderBG.png; sourceTree = "<group>"; };
+		6DA58588139E8027004D8D0B /* sliderThumb.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = sliderThumb.png; sourceTree = "<group>"; };
 		E01E663D121CA00A001A484F /* libcocos2d.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libcocos2d.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		E01E6A3D121EDCD3001A484F /* ApplicationServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ApplicationServices.framework; path = System/Library/Frameworks/ApplicationServices.framework; sourceTree = SDKROOT; };
 		E036A79C121B5C720037C5C6 /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = System/Library/Frameworks/OpenGL.framework; sourceTree = SDKROOT; };
@@ -1192,7 +1204,7 @@
 				6DA57CAE139CAE19004D8D0B /* CCMenuAdvancedTest.app */,
 				6DA57EEC139D561E004D8D0B /* CCVideoPlayerTest.app */,
 				6DA58117139E3CF9004D8D0B /* CCBigImageTest.app */,
-				6DA58131139E3CFC004D8D0B /* CCBigImageTest.app */,
+				6DA58131139E3CFC004D8D0B /* CCScrollLayerTest.app */,
 				6DA5814B139E3CFF004D8D0B /* CCMenuItemSpriteIndependent.app */,
 				6DA58165139E3D01004D8D0B /* CCSliderTest.app */,
 				6DA5817F139E3D04004D8D0B /* FilesDownloaderTest.app */,
@@ -1227,6 +1239,7 @@
 		6DA575CD139C96AE004D8D0B /* Tests */ = {
 			isa = PBXGroup;
 			children = (
+				6DA58584139E8027004D8D0B /* CCSliderTest */,
 				6DA58516139E6285004D8D0B /* CCMenuItemIndependentTest */,
 				6DA581BA139E474E004D8D0B /* CCBigImageTest */,
 				6DA57EC8139D55EF004D8D0B /* CCVideoPlayerTest */,
@@ -1483,6 +1496,7 @@
 		6DA57C7D139CAAB6004D8D0B /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				6DA5857E139E8016004D8D0B /* CCSlider */,
 				6DA581B1139E4713004D8D0B /* CCBigImage */,
 				6DA57EB8139D558E004D8D0B /* CCVideoPlayer */,
 				6DA57C7E139CAAB6004D8D0B /* CCMenuAdvanced */,
@@ -1813,6 +1827,27 @@
 			path = Resources;
 			sourceTree = "<group>";
 		};
+		6DA5857E139E8016004D8D0B /* CCSlider */ = {
+			isa = PBXGroup;
+			children = (
+				6DA5857F139E8016004D8D0B /* CCSlider.h */,
+				6DA58580139E8016004D8D0B /* CCSlider.m */,
+				6DA58581139E8016004D8D0B /* README.md */,
+			);
+			path = CCSlider;
+			sourceTree = "<group>";
+		};
+		6DA58584139E8027004D8D0B /* CCSliderTest */ = {
+			isa = PBXGroup;
+			children = (
+				6DA58585139E8027004D8D0B /* CCSliderTestLayer.h */,
+				6DA58586139E8027004D8D0B /* CCSliderTestLayer.m */,
+				6DA58587139E8027004D8D0B /* sliderBG.png */,
+				6DA58588139E8027004D8D0B /* sliderThumb.png */,
+			);
+			path = CCSliderTest;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -1989,7 +2024,7 @@
 			name = CCScrollLayerTest;
 			productInstallPath = "$(HOME)/Applications";
 			productName = "cocos2d-mac";
-			productReference = 6DA58131139E3CFC004D8D0B /* CCBigImageTest.app */;
+			productReference = 6DA58131139E3CFC004D8D0B /* CCScrollLayerTest.app */;
 			productType = "com.apple.product-type.application";
 		};
 		6DA58134139E3CFF004D8D0B /* CCMenuItemSpriteIndependentTest */ = {
@@ -2363,6 +2398,9 @@
 				6DA58153139E3D01004D8D0B /* MainMenu.xib in Resources */,
 				6DA58154139E3D01004D8D0B /* fps_images.png in Resources */,
 				6DA58155139E3D01004D8D0B /* icon.icns in Resources */,
+				6DA58583139E8016004D8D0B /* README.md in Resources */,
+				6DA5858A139E8027004D8D0B /* sliderBG.png in Resources */,
+				6DA5858B139E8027004D8D0B /* sliderThumb.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2455,6 +2493,8 @@
 			files = (
 				6DA58157139E3D01004D8D0B /* cocos2d_extensions_macAppDelegate.m in Sources */,
 				6DA58158139E3D01004D8D0B /* main.m in Sources */,
+				6DA58582139E8016004D8D0B /* CCSlider.m in Sources */,
+				6DA58589139E8027004D8D0B /* CCSliderTestLayer.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2781,7 +2821,7 @@
 					"$(inherited)",
 					"\\\"$(SRCROOT)/build/Debug\\\"",
 				);
-				PRODUCT_NAME = CCBigImageTest;
+				PRODUCT_NAME = CCScrollLayerTest;
 			};
 			name = Debug;
 		};
@@ -2799,7 +2839,7 @@
 					"$(inherited)",
 					"\\\"$(SRCROOT)/build/Debug\\\"",
 				);
-				PRODUCT_NAME = CCBigImageTest;
+				PRODUCT_NAME = CCScrollLayerTest;
 			};
 			name = Release;
 		};
@@ -2857,7 +2897,7 @@
 				INSTALL_PATH = "$(HOME)/Applications";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					"\\\"$(SRCROOT)/build/Debug\\\"",
+					"\"$(SRCROOT)/build/Debug\"",
 				);
 				PRODUCT_NAME = CCSliderTest;
 			};
@@ -2875,7 +2915,7 @@
 				INSTALL_PATH = "$(HOME)/Applications";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					"\\\"$(SRCROOT)/build/Debug\\\"",
+					"\"$(SRCROOT)/build/Debug\"",
 				);
 				PRODUCT_NAME = CCSliderTest;
 			};

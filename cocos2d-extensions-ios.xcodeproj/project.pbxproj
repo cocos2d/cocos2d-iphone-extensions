@@ -568,6 +568,11 @@
 		6DA584E0139E58A0004D8D0B /* btn-play-normal.png in Resources */ = {isa = PBXBuildFile; fileRef = 6DA584D8139E58A0004D8D0B /* btn-play-normal.png */; };
 		6DA584E1139E58A0004D8D0B /* btn-play-selected.png in Resources */ = {isa = PBXBuildFile; fileRef = 6DA584D9139E58A0004D8D0B /* btn-play-selected.png */; };
 		6DA584F5139E61BB004D8D0B /* CCMenuItemSpriteIndependent.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DA57D9E139CBD3C004D8D0B /* CCMenuItemSpriteIndependent.m */; };
+		6DA58565139E7B65004D8D0B /* CCSlider.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DA58563139E7B65004D8D0B /* CCSlider.m */; };
+		6DA58566139E7B65004D8D0B /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 6DA58564139E7B65004D8D0B /* README.md */; };
+		6DA5857B139E7F16004D8D0B /* CCSliderTestLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DA58578139E7F16004D8D0B /* CCSliderTestLayer.m */; };
+		6DA5857C139E7F16004D8D0B /* sliderBG.png in Resources */ = {isa = PBXBuildFile; fileRef = 6DA58579139E7F16004D8D0B /* sliderBG.png */; };
+		6DA5857D139E7F16004D8D0B /* sliderThumb.png in Resources */ = {isa = PBXBuildFile; fileRef = 6DA5857A139E7F16004D8D0B /* sliderThumb.png */; };
 		DC6640030F83B3EA000B3E49 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DC6640020F83B3EA000B3E49 /* AudioToolbox.framework */; };
 		DC6640050F83B3EA000B3E49 /* OpenAL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DC6640040F83B3EA000B3E49 /* OpenAL.framework */; };
 		DCCBF1B70F6022AE0040855A /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DCCBF1B60F6022AE0040855A /* CoreGraphics.framework */; };
@@ -1111,6 +1116,13 @@
 		6DA584D7139E58A0004D8D0B /* btn-highscores-selected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "btn-highscores-selected.png"; sourceTree = "<group>"; };
 		6DA584D8139E58A0004D8D0B /* btn-play-normal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "btn-play-normal.png"; sourceTree = "<group>"; };
 		6DA584D9139E58A0004D8D0B /* btn-play-selected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "btn-play-selected.png"; sourceTree = "<group>"; };
+		6DA58562139E7B65004D8D0B /* CCSlider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCSlider.h; sourceTree = "<group>"; };
+		6DA58563139E7B65004D8D0B /* CCSlider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCSlider.m; sourceTree = "<group>"; };
+		6DA58564139E7B65004D8D0B /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.md; sourceTree = "<group>"; };
+		6DA58577139E7F16004D8D0B /* CCSliderTestLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCSliderTestLayer.h; sourceTree = "<group>"; };
+		6DA58578139E7F16004D8D0B /* CCSliderTestLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCSliderTestLayer.m; sourceTree = "<group>"; };
+		6DA58579139E7F16004D8D0B /* sliderBG.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = sliderBG.png; sourceTree = "<group>"; };
+		6DA5857A139E7F16004D8D0B /* sliderThumb.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = sliderThumb.png; sourceTree = "<group>"; };
 		DC6640020F83B3EA000B3E49 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		DC6640040F83B3EA000B3E49 /* OpenAL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenAL.framework; path = System/Library/Frameworks/OpenAL.framework; sourceTree = SDKROOT; };
 		DCCBF1B60F6022AE0040855A /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -1334,6 +1346,7 @@
 		6DA5775D139C9837004D8D0B /* Tests */ = {
 			isa = PBXGroup;
 			children = (
+				6DA58576139E7F16004D8D0B /* CCSliderTest */,
 				6DA584CF139E58A0004D8D0B /* CCMenuItemIndependentTest */,
 				6DA58365139E513A004D8D0B /* CCBigImageTest */,
 				6DA57F93139D632F004D8D0B /* CCVideoPlayerTest */,
@@ -1610,6 +1623,7 @@
 		6DA57D98139CBD3C004D8D0B /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				6DA58561139E7B65004D8D0B /* CCSlider */,
 				6DA584B7139E514A004D8D0B /* CCBigImage */,
 				6DA57F9A139D6361004D8D0B /* CCVideoPlayer */,
 				6DA57D99139CBD3C004D8D0B /* CCMenuAdvanced */,
@@ -1938,6 +1952,27 @@
 				6DA584D9139E58A0004D8D0B /* btn-play-selected.png */,
 			);
 			path = Resources;
+			sourceTree = "<group>";
+		};
+		6DA58561139E7B65004D8D0B /* CCSlider */ = {
+			isa = PBXGroup;
+			children = (
+				6DA58562139E7B65004D8D0B /* CCSlider.h */,
+				6DA58563139E7B65004D8D0B /* CCSlider.m */,
+				6DA58564139E7B65004D8D0B /* README.md */,
+			);
+			path = CCSlider;
+			sourceTree = "<group>";
+		};
+		6DA58576139E7F16004D8D0B /* CCSliderTest */ = {
+			isa = PBXGroup;
+			children = (
+				6DA58577139E7F16004D8D0B /* CCSliderTestLayer.h */,
+				6DA58578139E7F16004D8D0B /* CCSliderTestLayer.m */,
+				6DA58579139E7F16004D8D0B /* sliderBG.png */,
+				6DA5857A139E7F16004D8D0B /* sliderThumb.png */,
+			);
+			path = CCSliderTest;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -2527,6 +2562,9 @@
 				6DA580B0139E39CB004D8D0B /* Icon.png in Resources */,
 				6DA580B1139E39CB004D8D0B /* Icon@2x.png in Resources */,
 				6DA580B2139E39CB004D8D0B /* iTunesArtwork in Resources */,
+				6DA58566139E7B65004D8D0B /* README.md in Resources */,
+				6DA5857C139E7F16004D8D0B /* sliderBG.png in Resources */,
+				6DA5857D139E7F16004D8D0B /* sliderThumb.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2717,6 +2755,8 @@
 				6DA580B4139E39CB004D8D0B /* cocos2d_extensions_iosAppDelegate.m in Sources */,
 				6DA580B5139E39CB004D8D0B /* main.m in Sources */,
 				6DA580B6139E39CB004D8D0B /* RootViewController.m in Sources */,
+				6DA58565139E7B65004D8D0B /* CCSlider.m in Sources */,
+				6DA5857B139E7F16004D8D0B /* CCSliderTestLayer.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
