@@ -733,7 +733,7 @@
 		6DA57DAF139CBD66004D8D0B /* crackedGradient42.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = crackedGradient42.png; sourceTree = "<group>"; };
 		6DA57DD0139CBD74004D8D0B /* CCMenuAdvancedTest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CCMenuAdvancedTest.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6DA57EAA139CD86A004D8D0B /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.md; sourceTree = "<group>"; };
-		6DA57F88139D62C4004D8D0B /* cocos2d-extensions-ios.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "cocos2d-extensions-ios.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		6DA57F88139D62C4004D8D0B /* cocos2d-extensions-ios.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; name = "cocos2d-extensions-ios.app"; path = "/Users/psi/Documents/cocos2d-iphone-extensions/build/Debug-iphonesimulator/cocos2d-extensions-ios.app"; sourceTree = "<absolute>"; };
 		6DA57F94139D632F004D8D0B /* bait.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = bait.mp4; sourceTree = "<group>"; };
 		6DA57F95139D632F004D8D0B /* CCVideoTestLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCVideoTestLayer.h; sourceTree = "<group>"; };
 		6DA57F96139D632F004D8D0B /* CCVideoTestLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCVideoTestLayer.m; sourceTree = "<group>"; };
@@ -926,7 +926,6 @@
 				1D6058910D05DD3D006BFB54 /* ExtensionTestTemplate.app */,
 				506EE05E10304ED200A389B3 /* libcocos2d libraries.a */,
 				6DA57DD0139CBD74004D8D0B /* CCMenuAdvancedTest.app */,
-				6DA57F88139D62C4004D8D0B /* cocos2d-extensions-ios.app */,
 				6DA5805F139E39BF004D8D0B /* CCBigImageTest.app */,
 				6DA58081139E39C4004D8D0B /* CCScrollLayerTest.app */,
 				6DA580A3139E39C7004D8D0B /* CCMenuItemSpriteIndependentTest.app */,
