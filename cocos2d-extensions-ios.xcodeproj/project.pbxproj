@@ -638,49 +638,49 @@
 			isa = PBXContainerItemProxy;
 			containerPortal = 29B97313FDCFA39411CA2CEA /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = 6DA57DB0139CBD74004D8D0B /* CCMenuAdvancedTest */;
+			remoteGlobalIDString = 6DA57DB0139CBD74004D8D0B;
 			remoteInfo = CCMenuAdvancedTest;
 		};
 		6DA580EF139E3C05004D8D0B /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 29B97313FDCFA39411CA2CEA /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = 6DA57F69139D62C4004D8D0B /* CCVideoPlayerTest */;
+			remoteGlobalIDString = 6DA57F69139D62C4004D8D0B;
 			remoteInfo = CCVideoPlayerTest;
 		};
 		6DA580F1139E3C05004D8D0B /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 29B97313FDCFA39411CA2CEA /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = 6DA58040139E39BF004D8D0B /* CCBigImageTest */;
+			remoteGlobalIDString = 6DA58040139E39BF004D8D0B;
 			remoteInfo = CCBigImageTest;
 		};
 		6DA580F3139E3C05004D8D0B /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 29B97313FDCFA39411CA2CEA /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = 6DA58062139E39C4004D8D0B /* CCScrollLayerTest */;
+			remoteGlobalIDString = 6DA58062139E39C4004D8D0B;
 			remoteInfo = CCScrollLayerTest;
 		};
 		6DA580F5139E3C05004D8D0B /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 29B97313FDCFA39411CA2CEA /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = 6DA58084139E39C7004D8D0B /* CCMenuItemSpriteIndependentTest */;
+			remoteGlobalIDString = 6DA58084139E39C7004D8D0B;
 			remoteInfo = CCMenuItemSpriteIndependentTest;
 		};
 		6DA580F7139E3C05004D8D0B /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 29B97313FDCFA39411CA2CEA /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = 6DA580A6139E39CB004D8D0B /* CCSliderTest */;
+			remoteGlobalIDString = 6DA580A6139E39CB004D8D0B;
 			remoteInfo = CCSliderTest;
 		};
 		6DA580F9139E3C05004D8D0B /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 29B97313FDCFA39411CA2CEA /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = 6DA580C8139E39D0004D8D0B /* FilesDownloaderTest */;
+			remoteGlobalIDString = 6DA580C8139E39D0004D8D0B;
 			remoteInfo = FilesDownloaderTest;
 		};
 /* End PBXContainerItemProxy section */
@@ -928,7 +928,7 @@
 		6DA580A3139E39C7004D8D0B /* CCMenuItemSpriteIndependentTest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CCMenuItemSpriteIndependentTest.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6DA580C5139E39CB004D8D0B /* CCSliderTest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CCSliderTest.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6DA580E7139E39D0004D8D0B /* FilesDownloaderTest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FilesDownloaderTest.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		6DA58360139E510B004D8D0B /* cocos2d-extensions-ios.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "cocos2d-extensions-ios.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		6DA58360139E510B004D8D0B /* CCVideoPlayerTest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CCVideoPlayerTest.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6DA58366139E513A004D8D0B /* CCBigImageTestLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCBigImageTestLayer.h; sourceTree = "<group>"; };
 		6DA58367139E513A004D8D0B /* CCBigImageTestLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCBigImageTestLayer.m; sourceTree = "<group>"; };
 		6DA58369139E513A004D8D0B /* bigImage-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bigImage-hd.png"; sourceTree = "<group>"; };
@@ -1286,7 +1286,7 @@
 				6DA580A3139E39C7004D8D0B /* CCMenuItemSpriteIndependentTest.app */,
 				6DA580C5139E39CB004D8D0B /* CCSliderTest.app */,
 				6DA580E7139E39D0004D8D0B /* FilesDownloaderTest.app */,
-				6DA58360139E510B004D8D0B /* cocos2d-extensions-ios.app */,
+				6DA58360139E510B004D8D0B /* CCVideoPlayerTest.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -2115,7 +2115,7 @@
 			);
 			name = CCVideoPlayerTest;
 			productName = "cocos2d-extensions-ios";
-			productReference = 6DA58360139E510B004D8D0B /* cocos2d-extensions-ios.app */;
+			productReference = 6DA58360139E510B004D8D0B /* CCVideoPlayerTest.app */;
 			productType = "com.apple.product-type.application";
 		};
 		6DA58040139E39BF004D8D0B /* CCBigImageTest */ = {
@@ -2968,7 +2968,7 @@
 					"-ObjC",
 				);
 				PREBINDING = NO;
-				PRODUCT_NAME = "cocos2d-extensions-ios";
+				PRODUCT_NAME = CCVideoPlayerTest;
 				WARNING_CFLAGS = "-Wall";
 			};
 			name = Debug;
@@ -2990,7 +2990,7 @@
 					"-ObjC",
 				);
 				PREBINDING = NO;
-				PRODUCT_NAME = "cocos2d-extensions-ios";
+				PRODUCT_NAME = CCVideoPlayerTest;
 				WARNING_CFLAGS = "-Wall";
 			};
 			name = Release;
