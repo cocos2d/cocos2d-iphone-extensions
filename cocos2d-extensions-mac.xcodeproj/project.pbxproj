@@ -477,6 +477,15 @@
 		6DA58309139E474E004D8D0B /* bigImage_3_8.png in Resources */ = {isa = PBXBuildFile; fileRef = 6DA58262139E474E004D8D0B /* bigImage_3_8.png */; };
 		6DA5830A139E474E004D8D0B /* bigImage_3_9-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = 6DA58263139E474E004D8D0B /* bigImage_3_9-hd.png */; };
 		6DA5830B139E474E004D8D0B /* bigImage_3_9.png in Resources */ = {isa = PBXBuildFile; fileRef = 6DA58264139E474E004D8D0B /* bigImage_3_9.png */; };
+		6DA58521139E6285004D8D0B /* CCMenuItemSpriteIndependentTestLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DA58518139E6285004D8D0B /* CCMenuItemSpriteIndependentTestLayer.m */; };
+		6DA58522139E6285004D8D0B /* btn-about-spritesheet.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6DA5851A139E6285004D8D0B /* btn-about-spritesheet.plist */; };
+		6DA58523139E6285004D8D0B /* btn-about-spritesheet.png in Resources */ = {isa = PBXBuildFile; fileRef = 6DA5851B139E6285004D8D0B /* btn-about-spritesheet.png */; };
+		6DA58524139E6285004D8D0B /* btn-about-spritesheet.zss in Resources */ = {isa = PBXBuildFile; fileRef = 6DA5851C139E6285004D8D0B /* btn-about-spritesheet.zss */; };
+		6DA58525139E6285004D8D0B /* btn-highscores-normal.png in Resources */ = {isa = PBXBuildFile; fileRef = 6DA5851D139E6285004D8D0B /* btn-highscores-normal.png */; };
+		6DA58526139E6285004D8D0B /* btn-highscores-selected.png in Resources */ = {isa = PBXBuildFile; fileRef = 6DA5851E139E6285004D8D0B /* btn-highscores-selected.png */; };
+		6DA58527139E6285004D8D0B /* btn-play-normal.png in Resources */ = {isa = PBXBuildFile; fileRef = 6DA5851F139E6285004D8D0B /* btn-play-normal.png */; };
+		6DA58528139E6285004D8D0B /* btn-play-selected.png in Resources */ = {isa = PBXBuildFile; fileRef = 6DA58520139E6285004D8D0B /* btn-play-selected.png */; };
+		6DA58529139E6299004D8D0B /* CCMenuItemSpriteIndependent.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DA57C83139CAAB6004D8D0B /* CCMenuItemSpriteIndependent.m */; };
 		E01E6A3E121EDCD3001A484F /* ApplicationServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E01E6A3D121EDCD3001A484F /* ApplicationServices.framework */; };
 		E01E6B36121EDCED001A484F /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E036A79E121B5C870037C5C6 /* QuartzCore.framework */; };
 		E01E6B49121EDCF4001A484F /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E036A79C121B5C720037C5C6 /* OpenGL.framework */; };
@@ -1003,6 +1012,15 @@
 		6DA58262139E474E004D8D0B /* bigImage_3_8.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bigImage_3_8.png; sourceTree = "<group>"; };
 		6DA58263139E474E004D8D0B /* bigImage_3_9-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bigImage_3_9-hd.png"; sourceTree = "<group>"; };
 		6DA58264139E474E004D8D0B /* bigImage_3_9.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bigImage_3_9.png; sourceTree = "<group>"; };
+		6DA58517139E6285004D8D0B /* CCMenuItemSpriteIndependentTestLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCMenuItemSpriteIndependentTestLayer.h; sourceTree = "<group>"; };
+		6DA58518139E6285004D8D0B /* CCMenuItemSpriteIndependentTestLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCMenuItemSpriteIndependentTestLayer.m; sourceTree = "<group>"; };
+		6DA5851A139E6285004D8D0B /* btn-about-spritesheet.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "btn-about-spritesheet.plist"; sourceTree = "<group>"; };
+		6DA5851B139E6285004D8D0B /* btn-about-spritesheet.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "btn-about-spritesheet.png"; sourceTree = "<group>"; };
+		6DA5851C139E6285004D8D0B /* btn-about-spritesheet.zss */ = {isa = PBXFileReference; lastKnownFileType = file; path = "btn-about-spritesheet.zss"; sourceTree = "<group>"; };
+		6DA5851D139E6285004D8D0B /* btn-highscores-normal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "btn-highscores-normal.png"; sourceTree = "<group>"; };
+		6DA5851E139E6285004D8D0B /* btn-highscores-selected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "btn-highscores-selected.png"; sourceTree = "<group>"; };
+		6DA5851F139E6285004D8D0B /* btn-play-normal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "btn-play-normal.png"; sourceTree = "<group>"; };
+		6DA58520139E6285004D8D0B /* btn-play-selected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "btn-play-selected.png"; sourceTree = "<group>"; };
 		E01E663D121CA00A001A484F /* libcocos2d.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libcocos2d.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		E01E6A3D121EDCD3001A484F /* ApplicationServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ApplicationServices.framework; path = System/Library/Frameworks/ApplicationServices.framework; sourceTree = SDKROOT; };
 		E036A79C121B5C720037C5C6 /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = System/Library/Frameworks/OpenGL.framework; sourceTree = SDKROOT; };
@@ -1209,6 +1227,7 @@
 		6DA575CD139C96AE004D8D0B /* Tests */ = {
 			isa = PBXGroup;
 			children = (
+				6DA58516139E6285004D8D0B /* CCMenuItemIndependentTest */,
 				6DA581BA139E474E004D8D0B /* CCBigImageTest */,
 				6DA57EC8139D55EF004D8D0B /* CCVideoPlayerTest */,
 				6DA57C8B139CAAD9004D8D0B /* CCMenuAdvancedTest */,
@@ -1770,6 +1789,30 @@
 			path = tiles;
 			sourceTree = "<group>";
 		};
+		6DA58516139E6285004D8D0B /* CCMenuItemIndependentTest */ = {
+			isa = PBXGroup;
+			children = (
+				6DA58517139E6285004D8D0B /* CCMenuItemSpriteIndependentTestLayer.h */,
+				6DA58518139E6285004D8D0B /* CCMenuItemSpriteIndependentTestLayer.m */,
+				6DA58519139E6285004D8D0B /* Resources */,
+			);
+			path = CCMenuItemIndependentTest;
+			sourceTree = "<group>";
+		};
+		6DA58519139E6285004D8D0B /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				6DA5851A139E6285004D8D0B /* btn-about-spritesheet.plist */,
+				6DA5851B139E6285004D8D0B /* btn-about-spritesheet.png */,
+				6DA5851C139E6285004D8D0B /* btn-about-spritesheet.zss */,
+				6DA5851D139E6285004D8D0B /* btn-highscores-normal.png */,
+				6DA5851E139E6285004D8D0B /* btn-highscores-selected.png */,
+				6DA5851F139E6285004D8D0B /* btn-play-normal.png */,
+				6DA58520139E6285004D8D0B /* btn-play-selected.png */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -2302,6 +2345,13 @@
 				6DA58139139E3CFF004D8D0B /* MainMenu.xib in Resources */,
 				6DA5813A139E3CFF004D8D0B /* fps_images.png in Resources */,
 				6DA5813B139E3CFF004D8D0B /* icon.icns in Resources */,
+				6DA58522139E6285004D8D0B /* btn-about-spritesheet.plist in Resources */,
+				6DA58523139E6285004D8D0B /* btn-about-spritesheet.png in Resources */,
+				6DA58524139E6285004D8D0B /* btn-about-spritesheet.zss in Resources */,
+				6DA58525139E6285004D8D0B /* btn-highscores-normal.png in Resources */,
+				6DA58526139E6285004D8D0B /* btn-highscores-selected.png in Resources */,
+				6DA58527139E6285004D8D0B /* btn-play-normal.png in Resources */,
+				6DA58528139E6285004D8D0B /* btn-play-selected.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2394,6 +2444,8 @@
 			files = (
 				6DA5813D139E3CFF004D8D0B /* cocos2d_extensions_macAppDelegate.m in Sources */,
 				6DA5813E139E3CFF004D8D0B /* main.m in Sources */,
+				6DA58521139E6285004D8D0B /* CCMenuItemSpriteIndependentTestLayer.m in Sources */,
+				6DA58529139E6299004D8D0B /* CCMenuItemSpriteIndependent.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2766,7 +2818,7 @@
 				INSTALL_PATH = "$(HOME)/Applications";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					"\\\"$(SRCROOT)/build/Debug\\\"",
+					"\"$(SRCROOT)/build/Debug\"",
 				);
 				PRODUCT_NAME = CCMenuItemSpriteIndependent;
 			};
@@ -2784,7 +2836,7 @@
 				INSTALL_PATH = "$(HOME)/Applications";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					"\\\"$(SRCROOT)/build/Debug\\\"",
+					"\"$(SRCROOT)/build/Debug\"",
 				);
 				PRODUCT_NAME = CCMenuItemSpriteIndependent;
 			};
