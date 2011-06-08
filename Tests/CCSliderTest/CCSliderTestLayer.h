@@ -35,6 +35,6 @@
 {
 }
 
-- (void) updateOnScreenReshape;
+- (void) updateForScreenReshape;
 
 @end
