@@ -8,7 +8,8 @@ Examples
 ===============
 
 Basic usage:
-```obj-c
+
+```
    CCSendMessages *remove = [CCSendMessages actionWithTarget:someNode];  // Create object with a target (someNode)
    [[remove addMessage] removeFromParentAndCleanup:YES];  // queue removeFromParentAndCleanup: selector
    [someOtherNode runAction:remove];   // CCSendMessages will run removeFromParentAndCleanup: on its target (someNode)
@@ -16,7 +17,8 @@ Basic usage:
 ```
 
 Works with standard C types, structures and objects:
-```obj-c
+
+```
    CCSendMessages *crazy = [CCSendMessages actionWithTarget:someNode];
    [[crazy addMessage] doSomethingWithInt:5 andPoint:ccp(0,8) andObject:@"Some string.."];
    [someOtherNode runAction:crazy];
