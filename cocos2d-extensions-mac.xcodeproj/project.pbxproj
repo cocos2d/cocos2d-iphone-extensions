@@ -491,6 +491,23 @@
 		6DA58589139E8027004D8D0B /* CCSliderTestLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DA58586139E8027004D8D0B /* CCSliderTestLayer.m */; };
 		6DA5858A139E8027004D8D0B /* sliderBG.png in Resources */ = {isa = PBXBuildFile; fileRef = 6DA58587139E8027004D8D0B /* sliderBG.png */; };
 		6DA5858B139E8027004D8D0B /* sliderThumb.png in Resources */ = {isa = PBXBuildFile; fileRef = 6DA58588139E8027004D8D0B /* sliderThumb.png */; };
+		6DA5863D13A0232C004D8D0B /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6DA575D0139C96AE004D8D0B /* InfoPlist.strings */; };
+		6DA5863E13A0232C004D8D0B /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6DA575D2139C96AE004D8D0B /* MainMenu.xib */; };
+		6DA5863F13A0232C004D8D0B /* fps_images.png in Resources */ = {isa = PBXBuildFile; fileRef = 6DA575D4139C96AE004D8D0B /* fps_images.png */; };
+		6DA5864013A0232C004D8D0B /* icon.icns in Resources */ = {isa = PBXBuildFile; fileRef = 6DA575D9139C96AE004D8D0B /* icon.icns */; };
+		6DA5864213A0232C004D8D0B /* cocos2d_extensions_macAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DA575E5139C96AE004D8D0B /* cocos2d_extensions_macAppDelegate.m */; };
+		6DA5864313A0232C004D8D0B /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DA575E9139C96AE004D8D0B /* main.m */; };
+		6DA5864513A0232C004D8D0B /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */; };
+		6DA5864613A0232C004D8D0B /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E036A79C121B5C720037C5C6 /* OpenGL.framework */; };
+		6DA5864713A0232C004D8D0B /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E036A79E121B5C870037C5C6 /* QuartzCore.framework */; };
+		6DA5864813A0232C004D8D0B /* libcocos2d.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E01E663D121CA00A001A484F /* libcocos2d.a */; };
+		6DA5864913A0232C004D8D0B /* ApplicationServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E01E6A3D121EDCD3001A484F /* ApplicationServices.framework */; };
+		6DA5864A13A0232C004D8D0B /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = E0F9256D1224207200EF2362 /* libz.dylib */; };
+		6DA5864B13A0232C004D8D0B /* OpenAL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E08AA04A12C0EDC8000341BD /* OpenAL.framework */; };
+		6DA5864C13A0232C004D8D0B /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E08AA04C12C0EEC0000341BD /* AudioToolbox.framework */; };
+		6DA5865813A0237E004D8D0B /* CCSendMessages.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DA5865613A0237E004D8D0B /* CCSendMessages.m */; };
+		6DA5865913A0237E004D8D0B /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 6DA5865713A0237E004D8D0B /* README.md */; };
+		6DA5866513A0295D004D8D0B /* CCSendMessagesTestLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DA5866413A0295D004D8D0B /* CCSendMessagesTestLayer.m */; };
 		E01E6A3E121EDCD3001A484F /* ApplicationServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E01E6A3D121EDCD3001A484F /* ApplicationServices.framework */; };
 		E01E6B36121EDCED001A484F /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E036A79E121B5C870037C5C6 /* QuartzCore.framework */; };
 		E01E6B49121EDCF4001A484F /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E036A79C121B5C720037C5C6 /* OpenGL.framework */; };
@@ -602,6 +619,13 @@
 			proxyType = 1;
 			remoteGlobalIDString = 6DA58168139E3D04004D8D0B /* FilesDownloaderTest */;
 			remoteInfo = FilesDownloaderTest;
+		};
+		6DA5863B13A0232C004D8D0B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 29B97313FDCFA39411CA2CEA /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = E01E663C121CA00A001A484F;
+			remoteInfo = cocos2d;
 		};
 		E076E4F21225E97900DE0DA2 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -1033,6 +1057,12 @@
 		6DA58586139E8027004D8D0B /* CCSliderTestLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCSliderTestLayer.m; sourceTree = "<group>"; };
 		6DA58587139E8027004D8D0B /* sliderBG.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = sliderBG.png; sourceTree = "<group>"; };
 		6DA58588139E8027004D8D0B /* sliderThumb.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = sliderThumb.png; sourceTree = "<group>"; };
+		6DA5865013A0232C004D8D0B /* CCSendMessagesTest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CCSendMessagesTest.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		6DA5865513A0237E004D8D0B /* CCSendMessages.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCSendMessages.h; sourceTree = "<group>"; };
+		6DA5865613A0237E004D8D0B /* CCSendMessages.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCSendMessages.m; sourceTree = "<group>"; };
+		6DA5865713A0237E004D8D0B /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.md; sourceTree = "<group>"; };
+		6DA5866313A0295D004D8D0B /* CCSendMessagesTestLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCSendMessagesTestLayer.h; sourceTree = "<group>"; };
+		6DA5866413A0295D004D8D0B /* CCSendMessagesTestLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCSendMessagesTestLayer.m; sourceTree = "<group>"; };
 		E01E663D121CA00A001A484F /* libcocos2d.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libcocos2d.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		E01E6A3D121EDCD3001A484F /* ApplicationServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ApplicationServices.framework; path = System/Library/Frameworks/ApplicationServices.framework; sourceTree = SDKROOT; };
 		E036A79C121B5C720037C5C6 /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = System/Library/Frameworks/OpenGL.framework; sourceTree = SDKROOT; };
@@ -1151,6 +1181,21 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		6DA5864413A0232C004D8D0B /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6DA5864513A0232C004D8D0B /* Cocoa.framework in Frameworks */,
+				6DA5864613A0232C004D8D0B /* OpenGL.framework in Frameworks */,
+				6DA5864713A0232C004D8D0B /* QuartzCore.framework in Frameworks */,
+				6DA5864813A0232C004D8D0B /* libcocos2d.a in Frameworks */,
+				6DA5864913A0232C004D8D0B /* ApplicationServices.framework in Frameworks */,
+				6DA5864A13A0232C004D8D0B /* libz.dylib in Frameworks */,
+				6DA5864B13A0232C004D8D0B /* OpenAL.framework in Frameworks */,
+				6DA5864C13A0232C004D8D0B /* AudioToolbox.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		E01E663B121CA00A001A484F /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -1208,6 +1253,7 @@
 				6DA5814B139E3CFF004D8D0B /* CCMenuItemSpriteIndependent.app */,
 				6DA58165139E3D01004D8D0B /* CCSliderTest.app */,
 				6DA5817F139E3D04004D8D0B /* FilesDownloaderTest.app */,
+				6DA5865013A0232C004D8D0B /* CCSendMessagesTest.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -1239,6 +1285,7 @@
 		6DA575CD139C96AE004D8D0B /* Tests */ = {
 			isa = PBXGroup;
 			children = (
+				6DA5866213A0295D004D8D0B /* CCSendMessagesTest */,
 				6DA58584139E8027004D8D0B /* CCSliderTest */,
 				6DA58516139E6285004D8D0B /* CCMenuItemIndependentTest */,
 				6DA581BA139E474E004D8D0B /* CCBigImageTest */,
@@ -1496,6 +1543,7 @@
 		6DA57C7D139CAAB6004D8D0B /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				6DA5865413A0237E004D8D0B /* CCSendMessages */,
 				6DA5857E139E8016004D8D0B /* CCSlider */,
 				6DA581B1139E4713004D8D0B /* CCBigImage */,
 				6DA57EB8139D558E004D8D0B /* CCVideoPlayer */,
@@ -1508,9 +1556,9 @@
 		6DA57C7E139CAAB6004D8D0B /* CCMenuAdvanced */ = {
 			isa = PBXGroup;
 			children = (
-				6DA58032139D696D004D8D0B /* README.md */,
 				6DA57C7F139CAAB6004D8D0B /* CCMenuAdvanced.h */,
 				6DA57C80139CAAB6004D8D0B /* CCMenuAdvanced.m */,
+				6DA58032139D696D004D8D0B /* README.md */,
 			);
 			path = CCMenuAdvanced;
 			sourceTree = "<group>";
@@ -1552,9 +1600,9 @@
 			children = (
 				6DA57EB9139D558E004D8D0B /* iOS */,
 				6DA57EBE139D558E004D8D0B /* Mac */,
-				6DA5802C139D68E6004D8D0B /* README.md */,
 				6DA57EC6139D558E004D8D0B /* CCVideoPlayer.h */,
 				6DA57EC7139D558E004D8D0B /* CCVideoPlayer.m */,
+				6DA5802C139D68E6004D8D0B /* README.md */,
 			);
 			path = CCVideoPlayer;
 			sourceTree = "<group>";
@@ -1848,6 +1896,25 @@
 			path = CCSliderTest;
 			sourceTree = "<group>";
 		};
+		6DA5865413A0237E004D8D0B /* CCSendMessages */ = {
+			isa = PBXGroup;
+			children = (
+				6DA5865513A0237E004D8D0B /* CCSendMessages.h */,
+				6DA5865613A0237E004D8D0B /* CCSendMessages.m */,
+				6DA5865713A0237E004D8D0B /* README.md */,
+			);
+			path = CCSendMessages;
+			sourceTree = "<group>";
+		};
+		6DA5866213A0295D004D8D0B /* CCSendMessagesTest */ = {
+			isa = PBXGroup;
+			children = (
+				6DA5866313A0295D004D8D0B /* CCSendMessagesTestLayer.h */,
+				6DA5866413A0295D004D8D0B /* CCSendMessagesTestLayer.m */,
+			);
+			path = CCSendMessagesTest;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -2087,6 +2154,26 @@
 			productReference = 6DA5817F139E3D04004D8D0B /* FilesDownloaderTest.app */;
 			productType = "com.apple.product-type.application";
 		};
+		6DA5863913A0232C004D8D0B /* CCSendMessagesTest */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 6DA5864D13A0232C004D8D0B /* Build configuration list for PBXNativeTarget "CCSendMessagesTest" */;
+			buildPhases = (
+				6DA5863C13A0232C004D8D0B /* Resources */,
+				6DA5864113A0232C004D8D0B /* Sources */,
+				6DA5864413A0232C004D8D0B /* Frameworks */,
+			);
+			buildRules = (
+			);
+			comments = "Use this target as a template for test targets.\nDon't build this target itself - it will give you compiler error: \n\tUndefined symbols:\n  \t\"_OBJC_CLASS_$_ExtensionTest\", referenced from:\n      \tobjc-class-ref-to-ExtensionTest in cocos2d_extensions_macAppDelegate.o\n\tld: symbol(s) not found\n\tclang: error: linker command failed with exit code 1 (use -v to see invocation)\n\nIf you get this error in your extension test target - you forgot to:\n#import \"ExtensionTest.h\"\n\nSYNTHESIZE_EXTENSION_TEST(DemoMenu)\n\n";
+			dependencies = (
+				6DA5863A13A0232C004D8D0B /* PBXTargetDependency */,
+			);
+			name = CCSendMessagesTest;
+			productInstallPath = "$(HOME)/Applications";
+			productName = "cocos2d-mac";
+			productReference = 6DA5865013A0232C004D8D0B /* CCSendMessagesTest.app */;
+			productType = "com.apple.product-type.application";
+		};
 		E01E663C121CA00A001A484F /* cocos2d */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = E01E6791121CA045001A484F /* Build configuration list for PBXNativeTarget "cocos2d" */;
@@ -2153,6 +2240,7 @@
 				6DA58134139E3CFF004D8D0B /* CCMenuItemSpriteIndependentTest */,
 				6DA5814E139E3D01004D8D0B /* CCSliderTest */,
 				6DA58168139E3D04004D8D0B /* FilesDownloaderTest */,
+				6DA5863913A0232C004D8D0B /* CCSendMessagesTest */,
 			);
 		};
 /* End PBXProject section */
@@ -2415,6 +2503,18 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		6DA5863C13A0232C004D8D0B /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6DA5863D13A0232C004D8D0B /* InfoPlist.strings in Resources */,
+				6DA5863E13A0232C004D8D0B /* MainMenu.xib in Resources */,
+				6DA5863F13A0232C004D8D0B /* fps_images.png in Resources */,
+				6DA5864013A0232C004D8D0B /* icon.icns in Resources */,
+				6DA5865913A0237E004D8D0B /* README.md in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		E076E4F31225E97900DE0DA2 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -2504,6 +2604,17 @@
 			files = (
 				6DA58171139E3D04004D8D0B /* cocos2d_extensions_macAppDelegate.m in Sources */,
 				6DA58172139E3D04004D8D0B /* main.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6DA5864113A0232C004D8D0B /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6DA5864213A0232C004D8D0B /* cocos2d_extensions_macAppDelegate.m in Sources */,
+				6DA5864313A0232C004D8D0B /* main.m in Sources */,
+				6DA5865813A0237E004D8D0B /* CCSendMessages.m in Sources */,
+				6DA5866513A0295D004D8D0B /* CCSendMessagesTestLayer.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2671,6 +2782,11 @@
 			isa = PBXTargetDependency;
 			target = 6DA58168139E3D04004D8D0B /* FilesDownloaderTest */;
 			targetProxy = 6DA581AC139E3E1E004D8D0B /* PBXContainerItemProxy */;
+		};
+		6DA5863A13A0232C004D8D0B /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = E01E663C121CA00A001A484F /* cocos2d */;
+			targetProxy = 6DA5863B13A0232C004D8D0B /* PBXContainerItemProxy */;
 		};
 		E076E4F11225E97900DE0DA2 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
@@ -2981,6 +3097,45 @@
 			};
 			name = Release;
 		};
+		6DA5864E13A0232C004D8D0B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = NO;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_FIX_AND_CONTINUE = YES;
+				GCC_MODEL_TUNING = G5;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = Tests/SharedSources/cocos2d_extensions_mac_Prefix.pch;
+				INFOPLIST_FILE = "Tests/SharedResources/Info-Mac.plist";
+				INSTALL_PATH = "$(HOME)/Applications";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/build/Debug\"",
+				);
+				PRODUCT_NAME = CCSendMessagesTest;
+			};
+			name = Debug;
+		};
+		6DA5864F13A0232C004D8D0B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_MODEL_TUNING = G5;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = Tests/SharedSources/cocos2d_extensions_mac_Prefix.pch;
+				INFOPLIST_FILE = "Tests/SharedResources/Info-Mac.plist";
+				INSTALL_PATH = "$(HOME)/Applications";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/build/Debug\"",
+				);
+				PRODUCT_NAME = CCSendMessagesTest;
+			};
+			name = Release;
+		};
 		C01FCF4F08A954540054247B /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -3154,6 +3309,15 @@
 			buildConfigurations = (
 				6DA5819E139E3E18004D8D0B /* Debug */,
 				6DA5819F139E3E18004D8D0B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		6DA5864D13A0232C004D8D0B /* Build configuration list for PBXNativeTarget "CCSendMessagesTest" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6DA5864E13A0232C004D8D0B /* Debug */,
+				6DA5864F13A0232C004D8D0B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

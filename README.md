@@ -31,6 +31,7 @@ Extensions
  * [iOS/Mac] **CCVideoPlayer** - Simple Video Player for Cocos2D apps.
  * [iOS/Mac] **CCBigImage** - Dynamic Tiled Node for holding Large Images.
  * [iOS/Mac] **CCSlider** - Little Slider Control to allow the user to set the music/sfx/etc level in the range of 0.0f to 1.0f.
+ * [iOS/Mac] **CCSendMessages** - CCActionInstant subclass, that is more flexible than other CCActions that run functions. Can be used in many cases as blocks replacement. 
  
 Contributing
 ================

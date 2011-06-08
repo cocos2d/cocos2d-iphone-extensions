@@ -573,6 +573,31 @@
 		6DA5857B139E7F16004D8D0B /* CCSliderTestLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DA58578139E7F16004D8D0B /* CCSliderTestLayer.m */; };
 		6DA5857C139E7F16004D8D0B /* sliderBG.png in Resources */ = {isa = PBXBuildFile; fileRef = 6DA58579139E7F16004D8D0B /* sliderBG.png */; };
 		6DA5857D139E7F16004D8D0B /* sliderThumb.png in Resources */ = {isa = PBXBuildFile; fileRef = 6DA5857A139E7F16004D8D0B /* sliderThumb.png */; };
+		6DA5861513A022E8004D8D0B /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 6DA5775F139C9837004D8D0B /* Default.png */; };
+		6DA5861613A022E8004D8D0B /* fps_images.png in Resources */ = {isa = PBXBuildFile; fileRef = 6DA57764139C9837004D8D0B /* fps_images.png */; };
+		6DA5861713A022E8004D8D0B /* Icon-72.png in Resources */ = {isa = PBXBuildFile; fileRef = 6DA57765139C9837004D8D0B /* Icon-72.png */; };
+		6DA5861813A022E8004D8D0B /* Icon-Small-50.png in Resources */ = {isa = PBXBuildFile; fileRef = 6DA57766139C9837004D8D0B /* Icon-Small-50.png */; };
+		6DA5861913A022E8004D8D0B /* Icon-Small.png in Resources */ = {isa = PBXBuildFile; fileRef = 6DA57767139C9837004D8D0B /* Icon-Small.png */; };
+		6DA5861A13A022E8004D8D0B /* Icon-Small@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6DA57768139C9837004D8D0B /* Icon-Small@2x.png */; };
+		6DA5861B13A022E8004D8D0B /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 6DA5776A139C9837004D8D0B /* Icon.png */; };
+		6DA5861C13A022E8004D8D0B /* Icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6DA5776B139C9837004D8D0B /* Icon@2x.png */; };
+		6DA5861D13A022E8004D8D0B /* iTunesArtwork in Resources */ = {isa = PBXBuildFile; fileRef = 6DA5776E139C9837004D8D0B /* iTunesArtwork */; };
+		6DA5861F13A022E8004D8D0B /* cocos2d_extensions_iosAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DA57772139C9837004D8D0B /* cocos2d_extensions_iosAppDelegate.m */; };
+		6DA5862013A022E8004D8D0B /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DA57779139C9837004D8D0B /* main.m */; };
+		6DA5862113A022E8004D8D0B /* RootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DA5777B139C9837004D8D0B /* RootViewController.m */; };
+		6DA5862313A022E8004D8D0B /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DCCBF1B60F6022AE0040855A /* CoreGraphics.framework */; };
+		6DA5862413A022E8004D8D0B /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DCCBF1B80F6022AE0040855A /* Foundation.framework */; };
+		6DA5862513A022E8004D8D0B /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DCCBF1BA0F6022AE0040855A /* OpenGLES.framework */; };
+		6DA5862613A022E8004D8D0B /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DCCBF1BC0F6022AE0040855A /* QuartzCore.framework */; };
+		6DA5862713A022E8004D8D0B /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DCCBF1BE0F6022AE0040855A /* UIKit.framework */; };
+		6DA5862813A022E8004D8D0B /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DC6640020F83B3EA000B3E49 /* AudioToolbox.framework */; };
+		6DA5862913A022E8004D8D0B /* OpenAL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DC6640040F83B3EA000B3E49 /* OpenAL.framework */; };
+		6DA5862A13A022E8004D8D0B /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 506EDB87102F4C4000A389B3 /* libz.dylib */; };
+		6DA5862B13A022E8004D8D0B /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 506EDBA4102F4C9F00A389B3 /* AVFoundation.framework */; };
+		6DA5862C13A022E8004D8D0B /* libcocos2d libraries.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 506EE05E10304ED200A389B3 /* libcocos2d libraries.a */; };
+		6DA5868913A02E52004D8D0B /* CCSendMessagesTestLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DA5868813A02E52004D8D0B /* CCSendMessagesTestLayer.m */; };
+		6DA5868E13A02E64004D8D0B /* CCSendMessages.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DA5868C13A02E64004D8D0B /* CCSendMessages.m */; };
+		6DA5868F13A02E64004D8D0B /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 6DA5868D13A02E64004D8D0B /* README.md */; };
 		DC6640030F83B3EA000B3E49 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DC6640020F83B3EA000B3E49 /* AudioToolbox.framework */; };
 		DC6640050F83B3EA000B3E49 /* OpenAL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DC6640040F83B3EA000B3E49 /* OpenAL.framework */; };
 		DCCBF1B70F6022AE0040855A /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DCCBF1B60F6022AE0040855A /* CoreGraphics.framework */; };
@@ -687,6 +712,13 @@
 			proxyType = 1;
 			remoteGlobalIDString = 6DA580C8139E39D0004D8D0B;
 			remoteInfo = FilesDownloaderTest;
+		};
+		6DA5861313A022E8004D8D0B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 29B97313FDCFA39411CA2CEA /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 506EE05D10304ED200A389B3;
+			remoteInfo = "cocos2d libraries";
 		};
 /* End PBXContainerItemProxy section */
 
@@ -1123,6 +1155,12 @@
 		6DA58578139E7F16004D8D0B /* CCSliderTestLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCSliderTestLayer.m; sourceTree = "<group>"; };
 		6DA58579139E7F16004D8D0B /* sliderBG.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = sliderBG.png; sourceTree = "<group>"; };
 		6DA5857A139E7F16004D8D0B /* sliderThumb.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = sliderThumb.png; sourceTree = "<group>"; };
+		6DA5863013A022E8004D8D0B /* CCSendMessagesTest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CCSendMessagesTest.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		6DA5868713A02E52004D8D0B /* CCSendMessagesTestLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCSendMessagesTestLayer.h; sourceTree = "<group>"; };
+		6DA5868813A02E52004D8D0B /* CCSendMessagesTestLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCSendMessagesTestLayer.m; sourceTree = "<group>"; };
+		6DA5868B13A02E64004D8D0B /* CCSendMessages.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCSendMessages.h; sourceTree = "<group>"; };
+		6DA5868C13A02E64004D8D0B /* CCSendMessages.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCSendMessages.m; sourceTree = "<group>"; };
+		6DA5868D13A02E64004D8D0B /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.md; sourceTree = "<group>"; };
 		DC6640020F83B3EA000B3E49 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		DC6640040F83B3EA000B3E49 /* OpenAL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenAL.framework; path = System/Library/Frameworks/OpenAL.framework; sourceTree = SDKROOT; };
 		DCCBF1B60F6022AE0040855A /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -1284,6 +1322,23 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		6DA5862213A022E8004D8D0B /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6DA5862313A022E8004D8D0B /* CoreGraphics.framework in Frameworks */,
+				6DA5862413A022E8004D8D0B /* Foundation.framework in Frameworks */,
+				6DA5862513A022E8004D8D0B /* OpenGLES.framework in Frameworks */,
+				6DA5862613A022E8004D8D0B /* QuartzCore.framework in Frameworks */,
+				6DA5862713A022E8004D8D0B /* UIKit.framework in Frameworks */,
+				6DA5862813A022E8004D8D0B /* AudioToolbox.framework in Frameworks */,
+				6DA5862913A022E8004D8D0B /* OpenAL.framework in Frameworks */,
+				6DA5862A13A022E8004D8D0B /* libz.dylib in Frameworks */,
+				6DA5862B13A022E8004D8D0B /* AVFoundation.framework in Frameworks */,
+				6DA5862C13A022E8004D8D0B /* libcocos2d libraries.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -1299,6 +1354,7 @@
 				6DA580C5139E39CB004D8D0B /* CCSliderTest.app */,
 				6DA580E7139E39D0004D8D0B /* FilesDownloaderTest.app */,
 				6DA58360139E510B004D8D0B /* CCVideoPlayerTest.app */,
+				6DA5863013A022E8004D8D0B /* CCSendMessagesTest.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -1346,6 +1402,7 @@
 		6DA5775D139C9837004D8D0B /* Tests */ = {
 			isa = PBXGroup;
 			children = (
+				6DA5868613A02E52004D8D0B /* CCSendMessagesTest */,
 				6DA58576139E7F16004D8D0B /* CCSliderTest */,
 				6DA584CF139E58A0004D8D0B /* CCMenuItemIndependentTest */,
 				6DA58365139E513A004D8D0B /* CCBigImageTest */,
@@ -1623,6 +1680,7 @@
 		6DA57D98139CBD3C004D8D0B /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				6DA5868A13A02E64004D8D0B /* CCSendMessages */,
 				6DA58561139E7B65004D8D0B /* CCSlider */,
 				6DA584B7139E514A004D8D0B /* CCBigImage */,
 				6DA57F9A139D6361004D8D0B /* CCVideoPlayer */,
@@ -1975,6 +2033,25 @@
 			path = CCSliderTest;
 			sourceTree = "<group>";
 		};
+		6DA5868613A02E52004D8D0B /* CCSendMessagesTest */ = {
+			isa = PBXGroup;
+			children = (
+				6DA5868713A02E52004D8D0B /* CCSendMessagesTestLayer.h */,
+				6DA5868813A02E52004D8D0B /* CCSendMessagesTestLayer.m */,
+			);
+			path = CCSendMessagesTest;
+			sourceTree = "<group>";
+		};
+		6DA5868A13A02E64004D8D0B /* CCSendMessages */ = {
+			isa = PBXGroup;
+			children = (
+				6DA5868B13A02E64004D8D0B /* CCSendMessages.h */,
+				6DA5868C13A02E64004D8D0B /* CCSendMessages.m */,
+				6DA5868D13A02E64004D8D0B /* README.md */,
+			);
+			path = CCSendMessages;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -2243,6 +2320,24 @@
 			productReference = 6DA580E7139E39D0004D8D0B /* FilesDownloaderTest.app */;
 			productType = "com.apple.product-type.application";
 		};
+		6DA5861113A022E8004D8D0B /* CCSendMessagesTest */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 6DA5862D13A022E8004D8D0B /* Build configuration list for PBXNativeTarget "CCSendMessagesTest" */;
+			buildPhases = (
+				6DA5861413A022E8004D8D0B /* Resources */,
+				6DA5861E13A022E8004D8D0B /* Sources */,
+				6DA5862213A022E8004D8D0B /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				6DA5861213A022E8004D8D0B /* PBXTargetDependency */,
+			);
+			name = CCSendMessagesTest;
+			productName = "cocos2d-extensions-ios";
+			productReference = 6DA5863013A022E8004D8D0B /* CCSendMessagesTest.app */;
+			productType = "com.apple.product-type.application";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -2272,6 +2367,7 @@
 				6DA58084139E39C7004D8D0B /* CCMenuItemSpriteIndependentTest */,
 				6DA580A6139E39CB004D8D0B /* CCSliderTest */,
 				6DA580C8139E39D0004D8D0B /* FilesDownloaderTest */,
+				6DA5861113A022E8004D8D0B /* CCSendMessagesTest */,
 			);
 		};
 /* End PBXProject section */
@@ -2584,6 +2680,23 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		6DA5861413A022E8004D8D0B /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6DA5861513A022E8004D8D0B /* Default.png in Resources */,
+				6DA5861613A022E8004D8D0B /* fps_images.png in Resources */,
+				6DA5861713A022E8004D8D0B /* Icon-72.png in Resources */,
+				6DA5861813A022E8004D8D0B /* Icon-Small-50.png in Resources */,
+				6DA5861913A022E8004D8D0B /* Icon-Small.png in Resources */,
+				6DA5861A13A022E8004D8D0B /* Icon-Small@2x.png in Resources */,
+				6DA5861B13A022E8004D8D0B /* Icon.png in Resources */,
+				6DA5861C13A022E8004D8D0B /* Icon@2x.png in Resources */,
+				6DA5861D13A022E8004D8D0B /* iTunesArtwork in Resources */,
+				6DA5868F13A02E64004D8D0B /* README.md in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -2770,6 +2883,18 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		6DA5861E13A022E8004D8D0B /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6DA5861F13A022E8004D8D0B /* cocos2d_extensions_iosAppDelegate.m in Sources */,
+				6DA5862013A022E8004D8D0B /* main.m in Sources */,
+				6DA5862113A022E8004D8D0B /* RootViewController.m in Sources */,
+				6DA5868913A02E52004D8D0B /* CCSendMessagesTestLayer.m in Sources */,
+				6DA5868E13A02E64004D8D0B /* CCSendMessages.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -2847,6 +2972,11 @@
 			isa = PBXTargetDependency;
 			target = 6DA580C8139E39D0004D8D0B /* FilesDownloaderTest */;
 			targetProxy = 6DA580F9139E3C05004D8D0B /* PBXContainerItemProxy */;
+		};
+		6DA5861213A022E8004D8D0B /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 506EE05D10304ED200A389B3 /* cocos2d libraries */;
+			targetProxy = 6DA5861313A022E8004D8D0B /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -3286,6 +3416,52 @@
 			};
 			name = Release;
 		};
+		6DA5862E13A022E8004D8D0B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_FIX_AND_CONTINUE = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = Tests/SharedSources/cocos2d_extensions_ios_Prefix.pch;
+				GCC_TREAT_WARNINGS_AS_ERRORS = NO;
+				INFOPLIST_FILE = Tests/SharedResources/Info.plist;
+				ONLY_ACTIVE_ARCH = YES;
+				OTHER_LDFLAGS = (
+					"-all_load",
+					"-ObjC",
+				);
+				PREBINDING = NO;
+				PRODUCT_NAME = CCSendMessagesTest;
+				WARNING_CFLAGS = "-Wall";
+			};
+			name = Debug;
+		};
+		6DA5862F13A022E8004D8D0B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_ENABLE_FIX_AND_CONTINUE = NO;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = Tests/SharedSources/cocos2d_extensions_ios_Prefix.pch;
+				GCC_TREAT_WARNINGS_AS_ERRORS = NO;
+				INFOPLIST_FILE = Tests/SharedResources/Info.plist;
+				ONLY_ACTIVE_ARCH = NO;
+				OTHER_LDFLAGS = (
+					"-all_load",
+					"-ObjC",
+				);
+				PREBINDING = NO;
+				PRODUCT_NAME = CCSendMessagesTest;
+				WARNING_CFLAGS = "-Wall";
+			};
+			name = Release;
+		};
 		C01FCF4F08A954540054247B /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -3424,6 +3600,15 @@
 			buildConfigurations = (
 				6DA580EB139E3BF7004D8D0B /* Debug */,
 				6DA580EC139E3BF7004D8D0B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		6DA5862D13A022E8004D8D0B /* Build configuration list for PBXNativeTarget "CCSendMessagesTest" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6DA5862E13A022E8004D8D0B /* Debug */,
+				6DA5862F13A022E8004D8D0B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
