@@ -13,12 +13,44 @@
 
 @implementation CCSlider
 
+
++ (id) sliderWithBackgroundFile: (NSString *) bgFile thumbFile: (NSString *) thumbFile
+{
+	return [  [ [self alloc]  initWithBackgroundFile: bgFile 
+										   thumbFile: thumbFile ]  autorelease  ];
+}
+
 +(id) sliderWithBackgroundSprite: (CCSprite *) bgSprite thumbMenuItem: (CCMenuItem *) aThumb
 {
 	return [  [ [self alloc]  initWithBackgroundSprite: bgSprite 
 										 thumbMenuItem: aThumb ]  autorelease  ];
 }
 
+// Easy init
+- (id) initWithBackgroundFile: (NSString *) bgFile thumbFile: (NSString *) thumbFile
+{	
+	// Prepare background for slider.
+	CCSprite *bg = [CCSprite spriteWithFile:bgFile];
+	
+	// Prepare thumb (menuItem) for slider.
+	CCSprite *thumbNormal = [CCSprite spriteWithFile: thumbFile];
+	CCSprite *thumbSelected = [CCSprite spriteWithFile: thumbFile];
+	thumbSelected.color = ccGRAY;		
+	CCMenuItemSprite *thumbMenuItem = [CCMenuItemSprite itemFromNormalSprite:thumbNormal selectedSprite: thumbSelected];
+	
+	// Continue with designated init on successfull prepare.
+	if (thumbNormal && thumbSelected && thumbMenuItem && bg)
+	{
+		self = [self initWithBackgroundSprite:bg thumbMenuItem: thumbMenuItem];
+		return self;
+	}
+		
+	// Don't leak & return nil on fail.
+	[self release];
+	return nil;
+}
+
+// Designated init
 -(id) initWithBackgroundSprite: (CCSprite *) bgSprite thumbMenuItem: (CCMenuItem *) aThumb  
 {  
 	if ((self = [super init]))  

@@ -31,7 +31,17 @@ static const NSInteger kCCSliderPriority = kCCMenuTouchPriority - 2;
 @property (nonatomic, assign) float value;  
 @property (nonatomic, retain) id<CCSliderControlDelegate> delegate; 
 
-+(id) sliderWithBackgroundSprite: (CCSprite *) bgSprite thumbMenuItem: (CCMenuItem *) aThumb;  
+// Creates slider with backround image filename & thumb image filename.
++ (id) sliderWithBackgroundFile: (NSString *) bgFile thumbFile: (NSString *) thumbFile;
+
+// Creates slider with given bg sprite and menu item as a thumb.
++(id) sliderWithBackgroundSprite: (CCSprite *) bgSprite thumbMenuItem: (CCMenuItem *) aThumb;
+
+// Easy init - filenames instead of CCSprite & CCMenuItem.
+// Uses designated init inside, thumb selected image is created by copying making darker normal sprite.
+- (id) initWithBackgroundFile: (NSString *) bgFile thumbFile: (NSString *) thumbFile;
+
+// Designated init.
 -(id) initWithBackgroundSprite: (CCSprite *) bgSprite thumbMenuItem: (CCMenuItem *) aThumb;
 
 @end  
