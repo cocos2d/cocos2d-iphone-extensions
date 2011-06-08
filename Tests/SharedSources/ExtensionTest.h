@@ -37,7 +37,30 @@
 	return scene;								\
 }												\
 												\
-@end
++ (BOOL) isRetinaDisplaySupported				\
+{												\
+	return YES;									\
+}												\
+												\
+@end											\
+
+#define SYNTHESIZE_EXTENSION_TEST_WITHOUT_RETINA(TEST_LAYER)	\
+																\
+@implementation ExtensionTest									\
+																\
++(CCScene *) scene												\
+{																\
+	CCScene *scene = [CCScene node];							\
+	[scene addChild: [TEST_LAYER node]];						\
+	return scene;												\
+}																\
+																\
++(BOOL) isRetinaDisplaySupported								\
+{																\
+	return YES;													\
+}																\
+																\
+@end															\
 
 // ExtensionTest - Interface
 // Implementation differs in different ExtensionTests
@@ -47,5 +70,7 @@
 
 // Returns a CCScene that contains the test layer. 
 +(CCScene *) scene;
+
++(BOOL) isRetinaDisplaySupported;
 
 @end
