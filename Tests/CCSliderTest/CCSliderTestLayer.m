@@ -34,14 +34,13 @@
 
 SYNTHESIZE_EXTENSION_TEST(CCSliderTestLayer)
 
-// HelloWorldLayer implementation
-@implementation CCSliderTestLayer
-
 enum nodeTags
 {
 	kLabelTag,
 	kSliderTag,
 };
+
+@implementation CCSliderTestLayer
 
 // on "init" you need to initialize your instance
 -(id) init
@@ -50,19 +49,29 @@ enum nodeTags
 	// Apple recommends to re-assign "self" with the "super" return value
 	if( (self=[super init])) {
 		
-		// Add button
+		// Add label
 		CCLabelTTF *label = [CCLabelTTF labelWithString:@"Move the slider thumb!" fontName:@"Marker Felt" fontSize:32];
 		[self addChild: label z: 0 tag: kLabelTag];
 		
-		// Prepare thumb (menuItem) for slider.
-		CCSprite *thumbNormal = [CCSprite spriteWithFile:@"sliderThumb.png"];
-		CCSprite *thumbSelected = [CCSprite spriteWithFile:@"sliderThumb.png"];
-		thumbSelected.color = ccGRAY;		
-		CCMenuItemSprite *thumbMenuItem = [CCMenuItemSprite itemFromNormalSprite:thumbNormal selectedSprite: thumbSelected];
+		CCSlider *slider = [CCSlider sliderWithBackgroundFile:@"sliderBG.png" thumbFile:@"sliderThumb.png"];
 		
-		// Create & Add Slider.
-		CCSlider *slider = [CCSlider sliderWithBackgroundSprite: [CCSprite spriteWithFile:@"sliderBG.png"]
-												  thumbMenuItem: thumbMenuItem  ];
+		/*
+		 //Note: if you want to customize normal/selected images of the thumb, or 
+		 // use your own subclass on CCSprite for background - you can use
+		 // [ CCSlider sliderWithBackgroundSprite: thumbMenuItem: ] 
+		 // like this:
+		 
+		 // Prepare thumb (menuItem) for slider.
+		 CCSprite *thumbNormal = [CCSprite spriteWithFile:@"sliderThumb.png"];
+		 CCSprite *thumbSelected = [CCSprite spriteWithFile:@"sliderThumb.png"];
+		 thumbSelected.color = ccGRAY;		
+		 CCMenuItemSprite *thumbMenuItem = [CCMenuItemSprite itemFromNormalSprite:thumbNormal selectedSprite: thumbSelected];
+		 
+		 // Easy Create & Add Slider.
+		 CCSlider *slider = [CCSlider sliderWithBackgroundSprite: [CCSprite spriteWithFile:@"sliderBG.png"]
+		 thumbMenuItem: thumbMenuItem  ];		 
+		 */
+		
 		slider.delegate = self;
 		[self addChild:slider z: 0 tag: kSliderTag];
 		
@@ -96,3 +105,5 @@ enum nodeTags
 }
 
 @end
+
+
