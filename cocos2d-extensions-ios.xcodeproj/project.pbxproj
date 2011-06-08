@@ -598,6 +598,9 @@
 		6DA5868913A02E52004D8D0B /* CCSendMessagesTestLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DA5868813A02E52004D8D0B /* CCSendMessagesTestLayer.m */; };
 		6DA5868E13A02E64004D8D0B /* CCSendMessages.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DA5868C13A02E64004D8D0B /* CCSendMessages.m */; };
 		6DA5868F13A02E64004D8D0B /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 6DA5868D13A02E64004D8D0B /* README.md */; };
+		6DA5872613A0331D004D8D0B /* CCScrollLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DA586FA13A0331D004D8D0B /* CCScrollLayer.m */; };
+		6DA5872713A0331D004D8D0B /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 6DA586FB13A0331D004D8D0B /* README.md */; };
+		6DA5872C13A0355B004D8D0B /* CCScrollLayerTestLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DA5872B13A0355B004D8D0B /* CCScrollLayerTestLayer.m */; };
 		DC6640030F83B3EA000B3E49 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DC6640020F83B3EA000B3E49 /* AudioToolbox.framework */; };
 		DC6640050F83B3EA000B3E49 /* OpenAL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DC6640040F83B3EA000B3E49 /* OpenAL.framework */; };
 		DCCBF1B70F6022AE0040855A /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DCCBF1B60F6022AE0040855A /* CoreGraphics.framework */; };
@@ -1161,6 +1164,11 @@
 		6DA5868B13A02E64004D8D0B /* CCSendMessages.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCSendMessages.h; sourceTree = "<group>"; };
 		6DA5868C13A02E64004D8D0B /* CCSendMessages.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCSendMessages.m; sourceTree = "<group>"; };
 		6DA5868D13A02E64004D8D0B /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.md; sourceTree = "<group>"; };
+		6DA586F913A0331D004D8D0B /* CCScrollLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCScrollLayer.h; sourceTree = "<group>"; };
+		6DA586FA13A0331D004D8D0B /* CCScrollLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCScrollLayer.m; sourceTree = "<group>"; };
+		6DA586FB13A0331D004D8D0B /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.md; sourceTree = "<group>"; };
+		6DA5872A13A0355B004D8D0B /* CCScrollLayerTestLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCScrollLayerTestLayer.h; sourceTree = "<group>"; };
+		6DA5872B13A0355B004D8D0B /* CCScrollLayerTestLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCScrollLayerTestLayer.m; sourceTree = "<group>"; };
 		DC6640020F83B3EA000B3E49 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		DC6640040F83B3EA000B3E49 /* OpenAL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenAL.framework; path = System/Library/Frameworks/OpenAL.framework; sourceTree = SDKROOT; };
 		DCCBF1B60F6022AE0040855A /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -1402,6 +1410,7 @@
 		6DA5775D139C9837004D8D0B /* Tests */ = {
 			isa = PBXGroup;
 			children = (
+				6DA5872913A0355B004D8D0B /* CCScrollLayerTest */,
 				6DA5868613A02E52004D8D0B /* CCSendMessagesTest */,
 				6DA58576139E7F16004D8D0B /* CCSliderTest */,
 				6DA584CF139E58A0004D8D0B /* CCMenuItemIndependentTest */,
@@ -1680,6 +1689,7 @@
 		6DA57D98139CBD3C004D8D0B /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				6DA586A913A0331D004D8D0B /* CCScrollLayer */,
 				6DA5868A13A02E64004D8D0B /* CCSendMessages */,
 				6DA58561139E7B65004D8D0B /* CCSlider */,
 				6DA584B7139E514A004D8D0B /* CCBigImage */,
@@ -2050,6 +2060,25 @@
 				6DA5868D13A02E64004D8D0B /* README.md */,
 			);
 			path = CCSendMessages;
+			sourceTree = "<group>";
+		};
+		6DA586A913A0331D004D8D0B /* CCScrollLayer */ = {
+			isa = PBXGroup;
+			children = (
+				6DA586F913A0331D004D8D0B /* CCScrollLayer.h */,
+				6DA586FA13A0331D004D8D0B /* CCScrollLayer.m */,
+				6DA586FB13A0331D004D8D0B /* README.md */,
+			);
+			path = CCScrollLayer;
+			sourceTree = "<group>";
+		};
+		6DA5872913A0355B004D8D0B /* CCScrollLayerTest */ = {
+			isa = PBXGroup;
+			children = (
+				6DA5872A13A0355B004D8D0B /* CCScrollLayerTestLayer.h */,
+				6DA5872B13A0355B004D8D0B /* CCScrollLayerTestLayer.m */,
+			);
+			path = CCScrollLayerTest;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -2620,6 +2649,7 @@
 				6DA5806C139E39C4004D8D0B /* Icon.png in Resources */,
 				6DA5806D139E39C4004D8D0B /* Icon@2x.png in Resources */,
 				6DA5806E139E39C4004D8D0B /* iTunesArtwork in Resources */,
+				6DA5872713A0331D004D8D0B /* README.md in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2846,6 +2876,8 @@
 				6DA58070139E39C4004D8D0B /* cocos2d_extensions_iosAppDelegate.m in Sources */,
 				6DA58071139E39C4004D8D0B /* main.m in Sources */,
 				6DA58072139E39C4004D8D0B /* RootViewController.m in Sources */,
+				6DA5872613A0331D004D8D0B /* CCScrollLayer.m in Sources */,
+				6DA5872C13A0355B004D8D0B /* CCScrollLayerTestLayer.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
