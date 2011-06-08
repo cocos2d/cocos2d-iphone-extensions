@@ -28,8 +28,9 @@ Extensions
 =================
  * [iOS/Mac] **CCMenuAdvanced** - CCMenu subclass with additional features: relativeAnchor, more align options, priority property, scrolling with swipe/trackpad/mousewheel
  * [iOS/Mac] **CCMenuItemSpriteIndependent** - CCMenuItemSprite Subclass, that doesnt add normal/selected/disabled images (sprites) as children. It retains them and delegates rect & convertToNodeSpace: methods to normalImage_. So it's possible to use CCSpriteBatchNode & add position sprites of menuItem anyway you want.
- * [iOS/MAc] **CCVideoPlayer** - Simple Video Player for Cocos2D apps.
- * [iOS/MAc] **CCBigImage** - Dynamic Tiled Node for holding Large Images.
+ * [iOS/Mac] **CCVideoPlayer** - Simple Video Player for Cocos2D apps.
+ * [iOS/Mac] **CCBigImage** - Dynamic Tiled Node for holding Large Images.
+ * [iOS/Mac] **CCSlider** - Little Slider Control to allow the user to set the music/sfx/etc level in the range of 0.0f to 1.0f.
  
 Contributing
 ================
