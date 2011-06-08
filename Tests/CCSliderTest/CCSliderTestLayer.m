@@ -51,27 +51,48 @@ enum nodeTags
 	if( (self=[super init])) {
 		
 		// Add button
-		CCLabelTTF *label = [CCLabelTTF labelWithString:@"Move the slider thumb!" fontName:@"Marker Felt" fontSize:64];
+		CCLabelTTF *label = [CCLabelTTF labelWithString:@"Move the slider thumb!" fontName:@"Marker Felt" fontSize:32];
 		[self addChild: label z: 0 tag: kLabelTag];
 		
-		//TODO: add slider
+		// Prepare thumb (menuItem) for slider.
+		CCSprite *thumbNormal = [CCSprite spriteWithFile:@"sliderThumb.png"];
+		CCSprite *thumbSelected = [CCSprite spriteWithFile:@"sliderThumb.png"];
+		thumbSelected.color = ccGRAY;		
+		CCMenuItemSprite *thumbMenuItem = [CCMenuItemSprite itemFromNormalSprite:thumbNormal selectedSprite: thumbSelected];
 		
-		// set self as slider delegate
+		// Create & Add Slider.
+		CCSlider *slider = [CCSlider sliderWithBackgroundSprite: [CCSprite spriteWithFile:@"sliderBG.png"]
+												  thumbMenuItem: thumbMenuItem  ];
+		slider.delegate = self;
+		[self addChild:slider z: 0 tag: kSliderTag];
 		
-		[self updateOnScreenReshape];
+		[self updateForScreenReshape];
 	
 	}
 	return self;
 }
 
-- (void) updateOnScreenReshape
+- (void) updateForScreenReshape
 {
-	//TODO: position slider & label
+	CGSize s = [CCDirector sharedDirector].winSize;
+	
+	CCNode *label = [self getChildByTag: kLabelTag];
+	label.anchorPoint = ccp(0.5f, -1 );
+	
+	CCNode *slider = [self getChildByTag: kSliderTag];
+	slider.anchorPoint = ccp(0.5f, 1 );
+	
+	label.position = slider.position = ccp(s.width/2.0f, s.height/2.0f );
+	
 }
   
 - (void) valueChanged: (float) value tag: (int) tag
 {
-	//TODO: change value of label
+	// Get label.
+	CCLabelTTF *label = (CCLabelTTF *)[self getChildByTag: kLabelTag];
+	
+	// Change value of label.
+	label.string = [NSString stringWithFormat:@"Value = %f", value];	
 }
 
 @end
