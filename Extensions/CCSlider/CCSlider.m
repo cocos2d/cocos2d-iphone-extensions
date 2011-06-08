@@ -87,8 +87,14 @@
 
 -(BOOL) isTouchForMe:(CGPoint)touchLocation
 {
-    CCSprite *bg = _bg;
-    return CGRectContainsPoint([bg boundingBox], touchLocation);
+    if (CGRectContainsPoint([_bg boundingBox], touchLocation))
+		return YES;
+	
+	// Enlarge touch zone, when bg is thinner than thumb.
+	if (CGRectContainsPoint([_thumb boundingBox], touchLocation))
+		return YES;
+	
+	return NO;
 }
 
 #ifdef __IPHONE_OS_VERSION_MAX_ALLOWED
