@@ -9,7 +9,7 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "FileDownloader.h"
+#import "SingleFileDownloader.h"
 
 typedef enum
 {
@@ -29,7 +29,7 @@ typedef enum
 @end
 
 
-@interface FilesDownloader : NSObject <FileDownloaderDelegate>
+@interface FilesDownloader : NSObject <SingleFileDownloaderDelegate>
 {    
     NSArray *_filenames;
 	NSString *_sourcePath;

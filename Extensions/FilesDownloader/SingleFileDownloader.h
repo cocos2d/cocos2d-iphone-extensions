@@ -1,5 +1,5 @@
 //
-//  FileDownloader.h
+//  SingleFileDownloader.h
 //  iTraceur - Parkour / Freerunning Platform Game
 //  
 //
@@ -12,7 +12,7 @@
 
 static const NSTimeInterval fileDownloaderDefaultTimeout = 15.0;
 
-@protocol FileDownloaderDelegate <NSObject>
+@protocol SingleFileDownloaderDelegate <NSObject>
 
 - (void) downloadSizeUpdated;
 - (void) downloadFailedWithError: (NSString *) errorDescription;
@@ -20,19 +20,19 @@ static const NSTimeInterval fileDownloaderDefaultTimeout = 15.0;
 
 @end
 
-/**  FileDownloader - class that uses NSURLConnection to download file from URL, 
+/**  SingleFileDownloader - class that uses NSURLConnection to download file from URL, 
  that is set by concatanating source URL (i.e http://foo.com/files/ ) and file name
  (i.e. bar.png ), so URL for this file will be http://foo.com/files/bar.png 
  
- to /Library/Caches . At the first FileDownloader creates tmp file and downloads contents into it,
+ to /Library/Caches . At the first SingleFileDownloader creates tmp file and downloads contents into it,
  only after downloading successfully ends - it renames tmp file to destination filename
  
- FileDownloader is used internally in FilesDownloader class.
+ SingleFileDownloader is used internally in FilesDownloader class.
  
  Probably they should be named more different to avoid confusion ;)
  **/
 
-@interface FileDownloader : NSObject 
+@interface SingleFileDownloader : NSObject 
 {
     BOOL _downloading;
     
@@ -42,7 +42,7 @@ static const NSTimeInterval fileDownloaderDefaultTimeout = 15.0;
     
     NSString *_filename, *_sourcePath;
     
-    NSObject<FileDownloaderDelegate> *_delegate;
+    NSObject<SingleFileDownloaderDelegate> *_delegate;
     
     NSUInteger _bytesReceived, _bytesTotal;
 }
@@ -50,11 +50,11 @@ static const NSTimeInterval fileDownloaderDefaultTimeout = 15.0;
 // creation
 + (id) fileDownloaderWithSourcePath: (NSString *) sourcePath 
 					 targetFilename: (NSString *) aTargetFilename 
-						   delegate: (id<FileDownloaderDelegate>) aDelegate;
+						   delegate: (id<SingleFileDownloaderDelegate>) aDelegate;
 
 - (id) initWithSourcePath: (NSString *) sourcePath 
 		   targetFilename: (NSString *) aTargetFilename 
-				 delegate: (id<FileDownloaderDelegate>) aDelegate;
+				 delegate: (id<SingleFileDownloaderDelegate>) aDelegate;
 
 // download controls
 - (void) startDownload;

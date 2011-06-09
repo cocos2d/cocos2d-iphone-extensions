@@ -1,5 +1,5 @@
 //
-//  FileDownloader.m
+//  SingleFileDownloader.m
 //  iTraceur - Parkour / Freerunning Platform Game
 //  
 //
@@ -8,10 +8,10 @@
 //
 
 #ifdef __IPHONE_OS_VERSION_MAX_ALLOWED
-	//< NSURLConnection is available in Mac OS X, so FileDownloader should work on Mac
+	//< NSURLConnection is available in Mac OS X, so SingleFileDownloader should work on Mac
 	//< but i didn't tested it yet.
 
-#import "FileDownloader.h"
+#import "SingleFileDownloader.h"
 
 #ifndef MYLOG
 	#ifdef DEBUG
@@ -21,7 +21,7 @@
 	#endif
 #endif
 
-@interface FileDownloader (Private)
+@interface SingleFileDownloader (Private)
 
 + (NSString *) destinationDirectoryPath;
 + (NSString *) tmpSuffix;
@@ -29,7 +29,7 @@
 
 @end
 
-@interface FileDownloader (NSURLConnectionDelegate) 
+@interface SingleFileDownloader (NSURLConnectionDelegate) 
 
 - (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response;
 - (NSURLRequest *)connection:(NSURLConnection *)connection willSendRequest:(NSURLRequest *)request redirectResponse:(NSURLResponse *)response;
@@ -39,7 +39,7 @@
 
 @end
 
-@implementation FileDownloader
+@implementation SingleFileDownloader
 
 + (NSString *) tmpSuffix
 {
@@ -48,7 +48,7 @@
 
 + (NSString *) tmpPathWithFilename: (NSString *) aFilename
 {
-    return [NSString stringWithFormat:@"%@/%@%@", [FileDownloader destinationDirectoryPath], aFilename, [self tmpSuffix]];
+    return [NSString stringWithFormat:@"%@/%@%@", [SingleFileDownloader destinationDirectoryPath], aFilename, [self tmpSuffix]];
 }
 
 + (NSString *) destinationDirectoryPath
@@ -62,38 +62,38 @@
 + (NSFileHandle *) newFileWithName: (NSString *) newFilename
 {    
     //creating caches directory if needed
-    NSString *cachesDirectoryPath = [FileDownloader destinationDirectoryPath];
+    NSString *cachesDirectoryPath = [SingleFileDownloader destinationDirectoryPath];
     
     BOOL isDirectory = NO;
     BOOL exists = [ [NSFileManager defaultManager] fileExistsAtPath:cachesDirectoryPath isDirectory:&isDirectory];
     
     if ( exists && isDirectory )
     {
-        MYLOG(@"FileDownloader#newFileWithName: %@ exists",cachesDirectoryPath);
+        MYLOG(@"SingleFileDownloader#newFileWithName: %@ exists",cachesDirectoryPath);
     }
     else
     {
-        MYLOG(@"FileDownloader#newFileWithName: %@ not exists! Creating...",cachesDirectoryPath );
+        MYLOG(@"SingleFileDownloader#newFileWithName: %@ not exists! Creating...",cachesDirectoryPath );
         if ( [ [NSFileManager defaultManager] createDirectoryAtPath:cachesDirectoryPath withIntermediateDirectories: YES attributes: nil error: NULL] ) 
         {
-            MYLOG(@"FileDownloader#newFileWithName: SUCCESSFULL creating caches directory!");
+            MYLOG(@"SingleFileDownloader#newFileWithName: SUCCESSFULL creating caches directory!");
         }
         else
         {
-            MYLOG(@"FileDownloader#newFileWithName: creating caches directory FAILED!");
+            MYLOG(@"SingleFileDownloader#newFileWithName: creating caches directory FAILED!");
             return nil;
         }
     }
     
-    NSString * myFilePath = [FileDownloader tmpPathWithFilename: newFilename];
+    NSString * myFilePath = [SingleFileDownloader tmpPathWithFilename: newFilename];
     
     if ( [ [NSFileManager defaultManager] createFileAtPath:myFilePath contents:nil attributes:nil] )
     {
-        MYLOG(@"FileDownloader#newFileWithName: %@ created OK!", myFilePath);
+        MYLOG(@"SingleFileDownloader#newFileWithName: %@ created OK!", myFilePath);
     }
     else
     {
-        MYLOG(@"FileDownloader#newFileWithName: %@ creation FAILED!", myFilePath);
+        MYLOG(@"SingleFileDownloader#newFileWithName: %@ creation FAILED!", myFilePath);
         return nil;
     }
     
@@ -101,7 +101,7 @@
 }
 
 
-+ (id) fileDownloaderWithSourcePath: (NSString *) sourcePath targetFilename: (NSString *) aTargetFilename delegate: (id<FileDownloaderDelegate>) aDelegate
++ (id) fileDownloaderWithSourcePath: (NSString *) sourcePath targetFilename: (NSString *) aTargetFilename delegate: (id<SingleFileDownloaderDelegate>) aDelegate
 {
     return [ [ [self alloc] initWithSourcePath:sourcePath targetFilename: aTargetFilename delegate:aDelegate ] autorelease ];
 }
@@ -118,7 +118,7 @@
         _bytesTotal = 0;
         _delegate = aDelegate;
         
-        _fileHandle = [ [FileDownloader newFileWithName: _filename] retain];
+        _fileHandle = [ [SingleFileDownloader newFileWithName: _filename] retain];
     }
     
     return self;
@@ -126,7 +126,7 @@
 
 - (void) dealloc
 {
-    MYLOG(@"FileDownloader#dealloc");
+    MYLOG(@"SingleFileDownloader#dealloc");
     
     if ( _downloading )
         [self cancelDownload];
@@ -143,7 +143,7 @@
 {
     if ( [ [NSFileManager defaultManager] fileExistsAtPath: [self targetPath] ] )
     {
-        MYLOG(@"FileDownloader#startDownload file already downloaded and exist at %@", [self targetPath]);
+        MYLOG(@"SingleFileDownloader#startDownload file already downloaded and exist at %@", [self targetPath]);
         [self cancelDownload];
         
         NSDictionary *dict = [ [NSFileManager defaultManager] attributesOfItemAtPath: [self targetPath] error: NULL];
@@ -154,13 +154,13 @@
             [_delegate downloadSizeUpdated];
         }
         else
-            MYLOG(@"FileDownloader#startDownload exists, but no dict for attr!");
+            MYLOG(@"SingleFileDownloader#startDownload exists, but no dict for attr!");
         
         [ _delegate downloadFinished ];
         return;
     }
     
-    MYLOG(@"FileDownloader#startDownload URL=", _sourcePath);
+    MYLOG(@"SingleFileDownloader#startDownload URL=", _sourcePath);
     NSURLRequest *request = [NSURLRequest requestWithURL: [NSURL URLWithString: _sourcePath]
                                              cachePolicy: NSURLRequestUseProtocolCachePolicy
                                          timeoutInterval: fileDownloaderDefaultTimeout];
@@ -179,19 +179,19 @@
     
     if ( err )
     {
-        MYLOG(@"FileDownloader#startDownload download failed with error: %@!", err);
+        MYLOG(@"SingleFileDownloader#startDownload download failed with error: %@!", err);
         [_delegate downloadFailedWithError: err];
         return;
     }
     
     _downloading = YES;
-    MYLOG(@"FileDownloader#startDownload download started!");
+    MYLOG(@"SingleFileDownloader#startDownload download started!");
     
 }
 
 - (void) cancelDownload
 {
-    MYLOG(@"FileDownloader#cancelDownload %@ download cancelled",_sourcePath);
+    MYLOG(@"SingleFileDownloader#cancelDownload %@ download cancelled",_sourcePath);
     
     _downloading = NO;
     
@@ -206,7 +206,7 @@
         [_fileHandle closeFile];
     
     // delete tmp file
-    NSString *tmpPath = [NSString stringWithFormat:@"%@/%@%@", [FileDownloader destinationDirectoryPath], _filename, [FileDownloader tmpSuffix]];
+    NSString *tmpPath = [NSString stringWithFormat:@"%@/%@%@", [SingleFileDownloader destinationDirectoryPath], _filename, [SingleFileDownloader tmpSuffix]];
     [[NSFileManager defaultManager] removeItemAtPath: tmpPath error: NULL];
     
     _connection = nil;
@@ -217,7 +217,7 @@
 
 - (NSString *) targetPath
 {
-    return [NSString stringWithFormat:@"%@/%@", [FileDownloader destinationDirectoryPath], _filename];
+    return [NSString stringWithFormat:@"%@/%@", [SingleFileDownloader destinationDirectoryPath], _filename];
 }
 
 - (NSUInteger) contentDownloaded
@@ -253,13 +253,13 @@
     
     [_delegate downloadSizeUpdated];
     
-    MYLOG(@"FileDownloader#connection: %@ didReceiveResponse: %@", connection,  response);
+    MYLOG(@"SingleFileDownloader#connection: %@ didReceiveResponse: %@", connection,  response);
 }
 
 
 - (NSURLRequest *)connection:(NSURLConnection *)connection willSendRequest:(NSURLRequest *)request redirectResponse:(NSURLResponse *)response
 {
-    MYLOG(@"FileDownloader#connection: %@ willSendRequest: %@ redirectResponse: %@", connection, request,  response );
+    MYLOG(@"SingleFileDownloader#connection: %@ willSendRequest: %@ redirectResponse: %@", connection, request,  response );
     
     if (response)
     {
@@ -278,7 +278,7 @@
 {
     _bytesReceived += [data length];
     
-    MYLOG(@"FileDownloader#connection:%@ did receive data: [%d] Progress: %d/%d", 
+    MYLOG(@"SingleFileDownloader#connection:%@ did receive data: [%d] Progress: %d/%d", 
           connection,
           (int)[data length],
           (int)_bytesReceived, 
@@ -298,13 +298,13 @@
     [_fileHandle closeFile];
     
     //rename ready file
-    NSString *tmpPath = [ FileDownloader tmpPathWithFilename: _filename ];
+    NSString *tmpPath = [ SingleFileDownloader tmpPathWithFilename: _filename ];
     NSString *destPath = [self targetPath];
     if ( ! [ [NSFileManager defaultManager] moveItemAtPath: tmpPath toPath: destPath error: &error] )
     {
         [self cancelDownload];
         
-        MYLOG(@"FileDownloader#connectionDidFinishLoading FAILED: %@ Description: %@", 
+        MYLOG(@"SingleFileDownloader#connectionDidFinishLoading FAILED: %@ Description: %@", 
               [error localizedFailureReason], [error localizedDescription] );
         
         NSString *errString = [error localizedDescription];
@@ -316,13 +316,13 @@
     
     [self cancelDownload];
     [_delegate downloadFinished];
-    MYLOG(@"FileDownloader#connectionDidFinishLoading: %@", connection );
+    MYLOG(@"SingleFileDownloader#connectionDidFinishLoading: %@", connection );
 }
 
 
 - (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error
 {
-    MYLOG(@"FileDownloader#connectionDidFailWithError: %@ Description: %@", [error localizedFailureReason], [error localizedDescription]);
+    MYLOG(@"SingleFileDownloader#connectionDidFailWithError: %@ Description: %@", [error localizedFailureReason], [error localizedDescription]);
     
     [self cancelDownload];
     

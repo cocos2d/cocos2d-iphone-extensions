@@ -87,7 +87,7 @@
     {
         NSString *sourcePath = [NSString stringWithFormat:@"%@%@", self.sourcePath, filename];
 		MYLOG(@"FilesDownloader#startSizeChecking sourcePath = %@", sourcePath );
-        [ _sizeCheckers addObject: [FileDownloader fileDownloaderWithSourcePath: sourcePath
+        [ _sizeCheckers addObject: [SingleFileDownloader fileDownloaderWithSourcePath: sourcePath
                                                                  targetFilename: filename
                                                                        delegate:self ] ];
     }
@@ -145,7 +145,7 @@
     for ( NSString *filename in _filenames )
     {
         NSString *sourcePath = [NSString stringWithFormat:@"%@%@", self.sourcePath, filename];
-        [ _fileDownloaders addObject: [FileDownloader fileDownloaderWithSourcePath: sourcePath
+        [ _fileDownloaders addObject: [SingleFileDownloader fileDownloaderWithSourcePath: sourcePath
 																	targetFilename: filename
 																		  delegate:self ] ];
     }
