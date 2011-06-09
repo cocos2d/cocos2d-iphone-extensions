@@ -47,6 +47,11 @@
  Limitations: 
 	1. Mac OS X not supported.
 	2. Standard Touch Delegates will still receive touch events after layer starts sliding.
+ 
+ ATTENTION:
+	If you have dots (page indicator) rendering artifacts - use 2d projection if it's possible.
+ Or try to move CCScrollLayer' parent (dots are rendered in parent transform) by fractional deltas,
+ to remove the artifacts.
  */
 @interface CCScrollLayer : CCLayer {
 	

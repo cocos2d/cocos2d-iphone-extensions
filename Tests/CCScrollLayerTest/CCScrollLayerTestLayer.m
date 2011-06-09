@@ -48,6 +48,9 @@ SYNTHESIZE_EXTENSION_TEST(CCScrollLayerTestLayer)
 		// get screen size
 		CGSize screenSize = [CCDirector sharedDirector].winSize;
 		
+		//  Use 2D Projection to avoid issue #23
+		[[CCDirector sharedDirector] setProjection: kCCDirectorProjection2D];
+		
 		/////////////////////////////////////////////////
 		// PAGE 1
 		////////////////////////////////////////////////
