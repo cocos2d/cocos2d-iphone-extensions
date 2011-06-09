@@ -1063,6 +1063,7 @@
 		6DA5865713A0237E004D8D0B /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.md; sourceTree = "<group>"; };
 		6DA5866313A0295D004D8D0B /* CCSendMessagesTestLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCSendMessagesTestLayer.h; sourceTree = "<group>"; };
 		6DA5866413A0295D004D8D0B /* CCSendMessagesTestLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCSendMessagesTestLayer.m; sourceTree = "<group>"; };
+		6DA5886D13A050B4004D8D0B /* AUTHORS.cocos2d-extensions */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "AUTHORS.cocos2d-extensions"; sourceTree = "<group>"; };
 		E01E663D121CA00A001A484F /* libcocos2d.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libcocos2d.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		E01E6A3D121EDCD3001A484F /* ApplicationServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ApplicationServices.framework; path = System/Library/Frameworks/ApplicationServices.framework; sourceTree = SDKROOT; };
 		E036A79C121B5C720037C5C6 /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = System/Library/Frameworks/OpenGL.framework; sourceTree = SDKROOT; };
@@ -1264,6 +1265,7 @@
 				6DA57E9E139CD854004D8D0B /* README.md */,
 				E076E61F1225EC1E00DE0DA2 /* LICENSE.cocos2d */,
 				6DA574A8139C966F004D8D0B /* LICENSE.cocos2d-extensions */,
+				6DA5886D13A050B4004D8D0B /* AUTHORS.cocos2d-extensions */,
 				6DA57A3B139C9D02004D8D0B /* cocos2d */,
 				6DA57C7D139CAAB6004D8D0B /* Extensions */,
 				6DA575CD139C96AE004D8D0B /* Tests */,
