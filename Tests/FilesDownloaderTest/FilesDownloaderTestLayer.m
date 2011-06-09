@@ -6,9 +6,121 @@
 //  Copyright 2011 Parkour Games. All rights reserved.
 //
 
-#import "DownloadingLayer.h"
+#import "FilesDownloaderTestLayer.h"
 #import "iTraceurProgressBar.h"
-#import "HelloWorldLayer.h"
+#import "ExtensionTest.h"
+SYNTHESIZE_EXTENSION_TEST(FilesDownloaderTestLayer);
+
+@implementation FilesDownloaderTestLayer
+
+// on "init" you need to initialize your instance
+-(id) init
+{
+	// always call "super" init
+	// Apple recommends to re-assign "self" with the "super" return value
+	if( (self=[super init])) {
+		
+		// Add download button
+		CCLabelTTF *labelDownload = [CCLabelTTF labelWithString:@"Download" fontName:@"Marker Felt" fontSize:64];
+		CCMenuItemLabel *downloadMenuItem = [CCMenuItemLabel itemWithLabel:labelDownload
+																	target: self
+																  selector: @selector(downloadPressed)]; 
+		
+		// Add Delete Button
+		CCLabelTTF *labelDelete = [CCLabelTTF labelWithString:@"Delete Downloaded" fontName:@"Marker Felt" fontSize:36];
+		CCMenuItemLabel *deleteMenuItem = [CCMenuItemLabel itemWithLabel:labelDelete
+																  target: self
+																selector: @selector(deletePressed)]; 
+		
+		// ask director the the window size
+		CGSize size = [[CCDirector sharedDirector] winSize];
+		
+		// position the label on the center of the screen
+		downloadMenuItem.position =  ccp( size.width /2 , size.height/2 );
+		
+		// create and add menu
+		CCMenu *menu = [CCMenu menuWithItems: downloadMenuItem, deleteMenuItem, nil];
+		[menu alignItemsVertically];
+		[self addChild: menu z: 1];
+		
+		//Add downloaded files as children if images downloaded
+		SpritesDownloadingLayer *downloader = [SpritesDownloadingLayer node];
+		NSUInteger i = 0;
+		CGPoint lastSpriteEnd = ccp(0,0);
+		CGFloat direction = 0.5f;
+		for (NSString *filename in [downloader files])
+		{
+			CCSprite *spriteForCurFilename  = (CCSprite *)[downloader getChildByTag: i];
+			
+			if ([downloader isFileDownloaded: filename] && !spriteForCurFilename )
+			{
+				spriteForCurFilename = [CCSprite spriteWithFile: [downloader downloadedFileWithFilename: filename]];
+				spriteForCurFilename.anchorPoint = ccp(0,0);
+				spriteForCurFilename.position = lastSpriteEnd;
+				spriteForCurFilename.scale = MIN(spriteForCurFilename.scale, 0.33f * size.height / [spriteForCurFilename contentSize].height);
+				spriteForCurFilename.scale = MIN(spriteForCurFilename.scale, 1.0f);
+				
+				
+				// change direction of adding sprites at screen borders
+				if ( (lastSpriteEnd.x > size.width) || (lastSpriteEnd.x < 0) )
+				{
+					direction *= -1.0f;
+				}
+				
+				lastSpriteEnd = ccpAdd(lastSpriteEnd, ccp(direction * spriteForCurFilename.contentSize.width, 0));
+				
+				[self addChild:spriteForCurFilename z:0 tag: i];
+			}
+			
+			++i;
+		}
+		
+		[deleteMenuItem setIsEnabled:[downloader allFilesDownloaded]];
+		
+		
+	}
+	return self;
+}
+
+// on "dealloc" you need to release all your retained objects
+- (void) dealloc
+{
+	// in case you have something to dealloc, do it in this method
+	// in this particular example nothing needs to be released.
+	// cocos2d will automatically release all the children (Label)
+	
+	// don't forget to call "super dealloc"
+	[super dealloc];
+}
+
+- (void) downloadPressed
+{
+	CCScene *scene = [CCScene node];
+	SpritesDownloadingLayer *layer = [SpritesDownloadingLayer node];
+	[scene addChild: layer];
+	[[CCDirector sharedDirector] replaceScene: scene];	
+}
+
+- (void) deletePressed
+{
+	// purge texture cache
+	[[CCDirector sharedDirector] purgeCachedData];
+	
+	// delete files
+	SpritesDownloadingLayer *downloader = [SpritesDownloadingLayer node];
+	for ( NSString *filename in [downloader files])
+	{
+		NSString *curPath = [downloader downloadedFileWithFilename: filename];
+		[[NSFileManager defaultManager] removeItemAtPath:curPath error: NULL];
+	}
+	
+	// reset current scene
+	[[CCDirector sharedDirector] replaceScene: [HelloWorldLayer scene]];
+}
+
+@end
+
+#pragma mark Downloading Layers
 
 @implementation DownloadingLayer 
 
@@ -178,6 +290,8 @@
 
 - (void) downloadFailedWithError: (NSString *) errorDescription
 {    
+	//TODO: use cocos error layer instead of alertview
+	
 	_alertView = [ [UIAlertView alloc] initWithTitle: @"Error" 
 											 message: errorDescription 
 											delegate: self 
@@ -214,6 +328,7 @@
 }
 
 @end
+
 
 
 @implementation SpritesDownloadingLayer

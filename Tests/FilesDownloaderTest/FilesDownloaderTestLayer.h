@@ -11,6 +11,15 @@
 
 @class iTraceurProgressBar;
 
+@interface FilesDownloaderTestLayer : CCLayer
+{
+}
+
+@end
+
+
+#pragma mark Downloading Layers
+
 /* 
  * Abstract super class for downloading screens.
  */
@@ -52,7 +61,6 @@
 - (BOOL) allFilesDownloaded;
 
 @end
-
 
 
 @interface SpritesDownloadingLayer : DownloadingLayer
