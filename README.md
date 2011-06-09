@@ -35,6 +35,10 @@ Extensions
  * [iOS] **CCScrollLayer** - CCLayer subclass that lets you pass-in an array of layers and it will then create a smooth scroller. Complete with the "snapping" effect.
  * [iOS/Mac] **FilesDownloader** - Downloader for a group of files with shared source path.
  
+ Video Overview and more Info can be found on the [Wiki](https://github.com/cocos2d/cocos2d-iphone-extensions/wiki "Wiki")
+ Detailed README for each extension is available in it's folder (i.e. Extensions/CCSlider/README.md).   
+ On the GitHub it will be automatically shown under files list in the extension folder.
+ 
 Contributing
 ================
 Looking for Roadmap or TODO's? Check the [issues](https://github.com/cocos2d/cocos2d-iphone-extensions/issues "Issues") page.  
