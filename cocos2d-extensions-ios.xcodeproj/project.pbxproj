@@ -603,6 +603,15 @@
 		6DA5872C13A0355B004D8D0B /* CCScrollLayerTestLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DA5872B13A0355B004D8D0B /* CCScrollLayerTestLayer.m */; };
 		6DA5885513A04F39004D8D0B /* sliderBG-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = 6DA5885313A04F39004D8D0B /* sliderBG-hd.png */; };
 		6DA5885613A04F39004D8D0B /* sliderThumb-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = 6DA5885413A04F39004D8D0B /* sliderThumb-hd.png */; };
+		6DA5890C13A06E25004D8D0B /* FilesDownloaderTestLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DA5890413A06E25004D8D0B /* FilesDownloaderTestLayer.m */; };
+		6DA5890D13A06E25004D8D0B /* iTraceurProgressBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DA5890613A06E25004D8D0B /* iTraceurProgressBar.m */; };
+		6DA5890E13A06E25004D8D0B /* closeButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 6DA5890813A06E25004D8D0B /* closeButton.png */; };
+		6DA5890F13A06E25004D8D0B /* iTraceurProgressBar.png in Resources */ = {isa = PBXBuildFile; fileRef = 6DA5890913A06E25004D8D0B /* iTraceurProgressBar.png */; };
+		6DA5891013A06E25004D8D0B /* iTraceurProgressBarBackground.png in Resources */ = {isa = PBXBuildFile; fileRef = 6DA5890A13A06E25004D8D0B /* iTraceurProgressBarBackground.png */; };
+		6DA5891113A06E25004D8D0B /* iTraceurProgressBarCover.png in Resources */ = {isa = PBXBuildFile; fileRef = 6DA5890B13A06E25004D8D0B /* iTraceurProgressBarCover.png */; };
+		6DA5891813A06E33004D8D0B /* FilesDownloader.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DA5891413A06E33004D8D0B /* FilesDownloader.m */; };
+		6DA5891913A06E33004D8D0B /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 6DA5891513A06E33004D8D0B /* README.md */; };
+		6DA5891A13A06E33004D8D0B /* SingleFileDownloader.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DA5891713A06E33004D8D0B /* SingleFileDownloader.m */; };
 		DC6640030F83B3EA000B3E49 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DC6640020F83B3EA000B3E49 /* AudioToolbox.framework */; };
 		DC6640050F83B3EA000B3E49 /* OpenAL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DC6640040F83B3EA000B3E49 /* OpenAL.framework */; };
 		DCCBF1B70F6022AE0040855A /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DCCBF1B60F6022AE0040855A /* CoreGraphics.framework */; };
@@ -1174,6 +1183,19 @@
 		6DA5885313A04F39004D8D0B /* sliderBG-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "sliderBG-hd.png"; sourceTree = "<group>"; };
 		6DA5885413A04F39004D8D0B /* sliderThumb-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "sliderThumb-hd.png"; sourceTree = "<group>"; };
 		6DA5886413A0503E004D8D0B /* AUTHORS.cocos2d-extensions */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "AUTHORS.cocos2d-extensions"; sourceTree = "<group>"; };
+		6DA5890313A06E25004D8D0B /* FilesDownloaderTestLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FilesDownloaderTestLayer.h; sourceTree = "<group>"; };
+		6DA5890413A06E25004D8D0B /* FilesDownloaderTestLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FilesDownloaderTestLayer.m; sourceTree = "<group>"; };
+		6DA5890513A06E25004D8D0B /* iTraceurProgressBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iTraceurProgressBar.h; sourceTree = "<group>"; };
+		6DA5890613A06E25004D8D0B /* iTraceurProgressBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = iTraceurProgressBar.m; sourceTree = "<group>"; };
+		6DA5890813A06E25004D8D0B /* closeButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = closeButton.png; sourceTree = "<group>"; };
+		6DA5890913A06E25004D8D0B /* iTraceurProgressBar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = iTraceurProgressBar.png; sourceTree = "<group>"; };
+		6DA5890A13A06E25004D8D0B /* iTraceurProgressBarBackground.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = iTraceurProgressBarBackground.png; sourceTree = "<group>"; };
+		6DA5890B13A06E25004D8D0B /* iTraceurProgressBarCover.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = iTraceurProgressBarCover.png; sourceTree = "<group>"; };
+		6DA5891313A06E33004D8D0B /* FilesDownloader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FilesDownloader.h; sourceTree = "<group>"; };
+		6DA5891413A06E33004D8D0B /* FilesDownloader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FilesDownloader.m; sourceTree = "<group>"; };
+		6DA5891513A06E33004D8D0B /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.md; sourceTree = "<group>"; };
+		6DA5891613A06E33004D8D0B /* SingleFileDownloader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SingleFileDownloader.h; sourceTree = "<group>"; };
+		6DA5891713A06E33004D8D0B /* SingleFileDownloader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SingleFileDownloader.m; sourceTree = "<group>"; };
 		DC6640020F83B3EA000B3E49 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		DC6640040F83B3EA000B3E49 /* OpenAL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenAL.framework; path = System/Library/Frameworks/OpenAL.framework; sourceTree = SDKROOT; };
 		DCCBF1B60F6022AE0040855A /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -1416,6 +1438,7 @@
 		6DA5775D139C9837004D8D0B /* Tests */ = {
 			isa = PBXGroup;
 			children = (
+				6DA5890213A06E25004D8D0B /* FilesDownloaderTest */,
 				6DA5872913A0355B004D8D0B /* CCScrollLayerTest */,
 				6DA5868613A02E52004D8D0B /* CCSendMessagesTest */,
 				6DA58576139E7F16004D8D0B /* CCSliderTest */,
@@ -1695,6 +1718,7 @@
 		6DA57D98139CBD3C004D8D0B /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				6DA5891213A06E33004D8D0B /* FilesDownloader */,
 				6DA586A913A0331D004D8D0B /* CCScrollLayer */,
 				6DA5868A13A02E64004D8D0B /* CCSendMessages */,
 				6DA58561139E7B65004D8D0B /* CCSlider */,
@@ -2087,6 +2111,41 @@
 				6DA5872B13A0355B004D8D0B /* CCScrollLayerTestLayer.m */,
 			);
 			path = CCScrollLayerTest;
+			sourceTree = "<group>";
+		};
+		6DA5890213A06E25004D8D0B /* FilesDownloaderTest */ = {
+			isa = PBXGroup;
+			children = (
+				6DA5890313A06E25004D8D0B /* FilesDownloaderTestLayer.h */,
+				6DA5890413A06E25004D8D0B /* FilesDownloaderTestLayer.m */,
+				6DA5890513A06E25004D8D0B /* iTraceurProgressBar.h */,
+				6DA5890613A06E25004D8D0B /* iTraceurProgressBar.m */,
+				6DA5890713A06E25004D8D0B /* Resources */,
+			);
+			path = FilesDownloaderTest;
+			sourceTree = "<group>";
+		};
+		6DA5890713A06E25004D8D0B /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				6DA5890813A06E25004D8D0B /* closeButton.png */,
+				6DA5890913A06E25004D8D0B /* iTraceurProgressBar.png */,
+				6DA5890A13A06E25004D8D0B /* iTraceurProgressBarBackground.png */,
+				6DA5890B13A06E25004D8D0B /* iTraceurProgressBarCover.png */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		6DA5891213A06E33004D8D0B /* FilesDownloader */ = {
+			isa = PBXGroup;
+			children = (
+				6DA5891613A06E33004D8D0B /* SingleFileDownloader.h */,
+				6DA5891713A06E33004D8D0B /* SingleFileDownloader.m */,
+				6DA5891313A06E33004D8D0B /* FilesDownloader.h */,
+				6DA5891413A06E33004D8D0B /* FilesDownloader.m */,
+				6DA5891513A06E33004D8D0B /* README.md */,
+			);
+			path = FilesDownloader;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -2717,6 +2776,11 @@
 				6DA580D2139E39D0004D8D0B /* Icon.png in Resources */,
 				6DA580D3139E39D0004D8D0B /* Icon@2x.png in Resources */,
 				6DA580D4139E39D0004D8D0B /* iTunesArtwork in Resources */,
+				6DA5890E13A06E25004D8D0B /* closeButton.png in Resources */,
+				6DA5890F13A06E25004D8D0B /* iTraceurProgressBar.png in Resources */,
+				6DA5891013A06E25004D8D0B /* iTraceurProgressBarBackground.png in Resources */,
+				6DA5891113A06E25004D8D0B /* iTraceurProgressBarCover.png in Resources */,
+				6DA5891913A06E33004D8D0B /* README.md in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2922,6 +2986,10 @@
 				6DA580D6139E39D0004D8D0B /* cocos2d_extensions_iosAppDelegate.m in Sources */,
 				6DA580D7139E39D0004D8D0B /* main.m in Sources */,
 				6DA580D8139E39D0004D8D0B /* RootViewController.m in Sources */,
+				6DA5890C13A06E25004D8D0B /* FilesDownloaderTestLayer.m in Sources */,
+				6DA5890D13A06E25004D8D0B /* iTraceurProgressBar.m in Sources */,
+				6DA5891813A06E33004D8D0B /* FilesDownloader.m in Sources */,
+				6DA5891A13A06E33004D8D0B /* SingleFileDownloader.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
