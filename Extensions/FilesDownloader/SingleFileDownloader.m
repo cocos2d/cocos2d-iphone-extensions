@@ -7,10 +7,6 @@
 //  Copyright 2010-2011 Parkour Games. All rights reserved.
 //
 
-#ifdef __IPHONE_OS_VERSION_MAX_ALLOWED
-	//< NSURLConnection is available in Mac OS X, so SingleFileDownloader should work on Mac
-	//< but i didn't tested it yet.
-
 #import "SingleFileDownloader.h"
 
 #ifndef MYLOG
@@ -106,7 +102,7 @@
     return [ [ [self alloc] initWithSourcePath:sourcePath targetFilename: aTargetFilename delegate:aDelegate ] autorelease ];
 }
 
-- (id) initWithSourcePath: (NSString *) sourcePath targetFilename: (NSString *) aTargetFilename delegate: (id<FileDownloaderDelegate>) aDelegate
+- (id) initWithSourcePath: (NSString *) sourcePath targetFilename: (NSString *) aTargetFilename delegate: (id<SingleFileDownloaderDelegate>) aDelegate
 {
     if ( (self = [super init]) )
     {
@@ -160,7 +156,7 @@
         return;
     }
     
-    MYLOG(@"SingleFileDownloader#startDownload URL=", _sourcePath);
+    MYLOG(@"SingleFileDownloader#startDownload URL= %@", _sourcePath);
     NSURLRequest *request = [NSURLRequest requestWithURL: [NSURL URLWithString: _sourcePath]
                                              cachePolicy: NSURLRequestUseProtocolCachePolicy
                                          timeoutInterval: fileDownloaderDefaultTimeout];
@@ -333,5 +329,3 @@
 
 
 @end
-
-#endif

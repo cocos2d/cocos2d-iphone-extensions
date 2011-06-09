@@ -33,7 +33,7 @@
 	
 	// retained refs
 	FilesDownloader *_downloader;
-	UIAlertView *_alertView;
+	//UIAlertView *_alertView;
 }
 
 #pragma mark Node Look

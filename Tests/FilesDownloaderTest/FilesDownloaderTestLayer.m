@@ -115,7 +115,7 @@ SYNTHESIZE_EXTENSION_TEST(FilesDownloaderTestLayer);
 	}
 	
 	// reset current scene
-	[[CCDirector sharedDirector] replaceScene: [HelloWorldLayer scene]];
+	[[CCDirector sharedDirector] replaceScene: [ExtensionTest scene]];
 }
 
 @end
@@ -235,7 +235,7 @@ SYNTHESIZE_EXTENSION_TEST(FilesDownloaderTestLayer);
 
 - (void) closePressed
 {	
-	[[CCDirector sharedDirector] replaceScene:[HelloWorldLayer scene]];
+	[[CCDirector sharedDirector] replaceScene:[ExtensionTest scene]];
 }
 
 - (void) updateProgress
@@ -292,17 +292,18 @@ SYNTHESIZE_EXTENSION_TEST(FilesDownloaderTestLayer);
 {    
 	//TODO: use cocos error layer instead of alertview
 	
-	_alertView = [ [UIAlertView alloc] initWithTitle: @"Error" 
+	/*_alertView = [ [UIAlertView alloc] initWithTitle: @"Error" 
 											 message: errorDescription 
 											delegate: self 
 								   cancelButtonTitle: @"OK" 
 								   otherButtonTitles: nil ];
-	[_alertView show];
+	[_alertView show];*/
 	
 	[_downloader cancel];
+	[self closePressed];
 }
 
-- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+/*- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
 	if (alertView == _alertView)
 	{
@@ -311,7 +312,7 @@ SYNTHESIZE_EXTENSION_TEST(FilesDownloaderTestLayer);
 	}
 	
 	[self closePressed];
-}
+}*/
 
 #pragma mark Virtual Methods
 

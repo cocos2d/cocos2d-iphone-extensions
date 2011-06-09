@@ -7,7 +7,6 @@
 //  Copyright 2010-2011 Parkour Games. All rights reserved.
 //
 
-#ifdef __IPHONE_OS_VERSION_MAX_ALLOWED
 #import <Foundation/Foundation.h>
 
 static const NSTimeInterval fileDownloaderDefaultTimeout = 15.0;
@@ -70,6 +69,4 @@ static const NSTimeInterval fileDownloaderDefaultTimeout = 15.0;
 - (NSUInteger) contentLength;
 
 @end
-
-#endif
 
