@@ -124,6 +124,11 @@ SYNTHESIZE_EXTENSION_TEST(FilesDownloaderTestLayer);
 
 @implementation DownloadingLayer 
 
+enum nodeTags
+{
+	kErrorLayer,
+};
+
 - (id) init
 {
 	if ( (self = [super init]) )
@@ -231,6 +236,11 @@ SYNTHESIZE_EXTENSION_TEST(FilesDownloaderTestLayer);
 	// position progress bar a little under center
 	_bar.anchorPoint = ccp(0.5f, 0);
 	_bar.position = ccp(winSize.width / 2.0f, winSize.height / 8.0f);
+	
+	// update error screen if it exists
+	CCNode *errorScreen = [self getChildByTag:kErrorLayer];
+	errorScreen.contentSize = winSize;
+	[[errorScreen.children objectAtIndex:0] setPosition:ccp(winSize.width/2.0f, winSize.height/2.0f)];
 }
 
 - (void) closePressed
@@ -290,29 +300,22 @@ SYNTHESIZE_EXTENSION_TEST(FilesDownloaderTestLayer);
 
 - (void) downloadFailedWithError: (NSString *) errorDescription
 {    
-	//TODO: use cocos error layer instead of alertview
+	// Present error screen.
+	CCLayer *bgErrorLayer = [CCLayerColor layerWithColor: ccc4(0, 0, 0, 196)];
+	CCLabelTTF *label = [CCLabelTTF labelWithString:@"Connection Error\n See console for description." fontName:@"Marker Felt" fontSize:32];
+	[bgErrorLayer addChild:label];
+	[bgErrorLayer runAction:[CCSequence actions:
+							 [CCDelayTime actionWithDuration:3.0f],
+							 [CCCallFunc actionWithTarget:self selector:@selector(closePressed)],
+							 nil]];
+	[self addChild:bgErrorLayer z:0 tag:kErrorLayer];
 	
-	/*_alertView = [ [UIAlertView alloc] initWithTitle: @"Error" 
-											 message: errorDescription 
-											delegate: self 
-								   cancelButtonTitle: @"OK" 
-								   otherButtonTitles: nil ];
-	[_alertView show];*/
-	
+	// Cancel downloading.
 	[_downloader cancel];
-	[self closePressed];
-}
-
-/*- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
-{
-	if (alertView == _alertView)
-	{
-		[_alertView release];
-		_alertView = nil;
-	}
 	
-	[self closePressed];
-}*/
+	// Position the error screen.
+	[self updateForScreenReshape];
+}
 
 #pragma mark Virtual Methods
 

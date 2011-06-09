@@ -11,6 +11,7 @@
 
 @class iTraceurProgressBar;
 
+// First screen of this test: inlcudes "Download" & "Delete Downloaded" Buttons
 @interface FilesDownloaderTestLayer : CCLayer
 {
 }
@@ -33,7 +34,6 @@
 	
 	// retained refs
 	FilesDownloader *_downloader;
-	//UIAlertView *_alertView;
 }
 
 #pragma mark Node Look
@@ -62,7 +62,12 @@
 
 @end
 
-
+/*
+ * Concrete class, that defines files and path to download by reimplementing
+ * -(NSString *)sourcePath; 
+ *      and
+ * - (NSArray *) files; methods.
+ */
 @interface SpritesDownloadingLayer : DownloadingLayer
 @end
 
