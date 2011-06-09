@@ -13,17 +13,17 @@ FilesDownloader consists of:
 It also gives user knowledge of how many percents of all files are downloaded.
 
 
-Demo features
+Test features
 -------------
-This repo contains iOS XCode project, that shows how to use FilesDownloader for downloading sprites from internet.
-DownloadLayer is designed as a very simple super class for downloading different stuff, so it's pretty for you to create your own Download Scene, based on this class.
+FilesDownloaderTest shows how to use FilesDownloader for downloading sprites from internet.   
+DownloadLayer is designed as a very simple super class for downloading different stuff, so it should be pretty easy for you to create your own Download Scene, based on this class.
 
 Issues
 ------------
 
-1. No redirect support, any redirect will lead to error
+1. No redirect support, any redirect will lead to connection error.
 1. It's possible to restart download, when everything is downloaded. This will lead to infinite loop. 
-Demo app shows how to avoid this (See DownloadLayer.m)
+Test shows how to avoid this (See FilesDownloaderTestLayer.m:184)
 
 Despite all these issues, FilesDownloader is very stable and works perfect with direct links.
 

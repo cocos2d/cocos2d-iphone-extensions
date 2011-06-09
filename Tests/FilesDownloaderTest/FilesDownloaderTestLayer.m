@@ -181,6 +181,7 @@ enum nodeTags
 		_bar = [iTraceurProgressBar progressBar];
 		[self addChild: _bar ];		
 				
+		// Do not go into infinite loop if everything is downloaded.
 		if ( [self allFilesDownloaded] )
 		{
 			// change text
