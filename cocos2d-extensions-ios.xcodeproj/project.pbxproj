@@ -601,6 +601,8 @@
 		6DA5872613A0331D004D8D0B /* CCScrollLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DA586FA13A0331D004D8D0B /* CCScrollLayer.m */; };
 		6DA5872713A0331D004D8D0B /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 6DA586FB13A0331D004D8D0B /* README.md */; };
 		6DA5872C13A0355B004D8D0B /* CCScrollLayerTestLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DA5872B13A0355B004D8D0B /* CCScrollLayerTestLayer.m */; };
+		6DA5885513A04F39004D8D0B /* sliderBG-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = 6DA5885313A04F39004D8D0B /* sliderBG-hd.png */; };
+		6DA5885613A04F39004D8D0B /* sliderThumb-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = 6DA5885413A04F39004D8D0B /* sliderThumb-hd.png */; };
 		DC6640030F83B3EA000B3E49 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DC6640020F83B3EA000B3E49 /* AudioToolbox.framework */; };
 		DC6640050F83B3EA000B3E49 /* OpenAL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DC6640040F83B3EA000B3E49 /* OpenAL.framework */; };
 		DCCBF1B70F6022AE0040855A /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DCCBF1B60F6022AE0040855A /* CoreGraphics.framework */; };
@@ -1169,6 +1171,8 @@
 		6DA586FB13A0331D004D8D0B /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.md; sourceTree = "<group>"; };
 		6DA5872A13A0355B004D8D0B /* CCScrollLayerTestLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCScrollLayerTestLayer.h; sourceTree = "<group>"; };
 		6DA5872B13A0355B004D8D0B /* CCScrollLayerTestLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCScrollLayerTestLayer.m; sourceTree = "<group>"; };
+		6DA5885313A04F39004D8D0B /* sliderBG-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "sliderBG-hd.png"; sourceTree = "<group>"; };
+		6DA5885413A04F39004D8D0B /* sliderThumb-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "sliderThumb-hd.png"; sourceTree = "<group>"; };
 		DC6640020F83B3EA000B3E49 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		DC6640040F83B3EA000B3E49 /* OpenAL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenAL.framework; path = System/Library/Frameworks/OpenAL.framework; sourceTree = SDKROOT; };
 		DCCBF1B60F6022AE0040855A /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -2037,6 +2041,8 @@
 			children = (
 				6DA58577139E7F16004D8D0B /* CCSliderTestLayer.h */,
 				6DA58578139E7F16004D8D0B /* CCSliderTestLayer.m */,
+				6DA5885313A04F39004D8D0B /* sliderBG-hd.png */,
+				6DA5885413A04F39004D8D0B /* sliderThumb-hd.png */,
 				6DA58579139E7F16004D8D0B /* sliderBG.png */,
 				6DA5857A139E7F16004D8D0B /* sliderThumb.png */,
 			);
@@ -2691,6 +2697,8 @@
 				6DA58566139E7B65004D8D0B /* README.md in Resources */,
 				6DA5857C139E7F16004D8D0B /* sliderBG.png in Resources */,
 				6DA5857D139E7F16004D8D0B /* sliderThumb.png in Resources */,
+				6DA5885513A04F39004D8D0B /* sliderBG-hd.png in Resources */,
+				6DA5885613A04F39004D8D0B /* sliderThumb-hd.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
