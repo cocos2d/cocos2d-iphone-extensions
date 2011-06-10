@@ -30,15 +30,113 @@
 #import "CCMenuAdvancedTest.h"
 #import "ExtensionTest.h"
 
-SYNTHESIZE_EXTENSION_TEST(DemoMenu)
+SYNTHESIZE_EXTENSION_TEST(CCMenuAdvancedTestLayer)
 
-#define DEMO_MENU_Z_BACKGROUND			1
-#define DEMO_MENU_Z_CONTENT				2
-#define DEMO_MENU_Z_BORDERS				3
-#define DEMO_MENU_Z_COVER				4
-#define DEMO_MENU_Z_CAPTION				5
-#define DEMO_MENU_Z_BACK_BUTTON			6
-#define DEMO_MENU_Z_OVER_BACK_BUTTON	7
+@implementation CCMenuAdvancedTestLayer
+
+enum nodeTags
+{
+	// Tags to distinguish what button was pressed.
+	kItemVerticalTest,
+	kItemHorizontalTest,
+	kItemPriorityTest,
+	
+	// Tag to get children in updateForScreenReshape
+	kMenu,
+	kAdvice,
+};
+
+- (id) init
+{
+	if ( (self=[super init]) )
+	{
+		// Create advice label.		
+		CCLabelTTF *label = [CCLabelTTF labelWithString:@"Choose the test." fontName:@"Marker Felt" fontSize:24];
+		CCLabelTTF *label2 = [CCLabelTTF labelWithString:@"Menu should be at the the screen center." fontName:@"Marker Felt" fontSize:24];
+		label2.anchorPoint = ccp(0.5f, 1);
+		label2.position = ccp(0.5f * label.contentSize.width, 0);
+		[label addChild: label2];
+		[self addChild: label z:1 tag: kAdvice];
+		
+		
+		// Prepare Menu Items.
+		CCMenuItemSprite *verticalTestItem = 
+			[CCMenuItemSprite itemFromNormalSprite: [CCSprite spriteWithFile: @"verticalTestButton.png"]
+									selectedSprite: [CCSprite spriteWithFile: @"verticalTestButton.png"]
+											target: self
+										  selector: @selector(itemPressed:)];
+		
+		CCMenuItemSprite *horizontalTestItem = 
+		[CCMenuItemSprite itemFromNormalSprite: [CCSprite spriteWithFile: @"horizontalTestButton.png"]
+								selectedSprite: [CCSprite spriteWithFile: @"horizontalTestButton.png"]
+										target: self
+									  selector: @selector(itemPressed:)];
+		
+		CCMenuItemSprite *priorityTestItem = 
+		[CCMenuItemSprite itemFromNormalSprite: [CCSprite spriteWithFile: @"priorityTestButton.png"]
+								selectedSprite: [CCSprite spriteWithFile: @"priorityTestButton.png"]
+										target: self
+									  selector: @selector(itemPressed:)];
+		
+		// Distinguish Normal/Selected State of Menu Items.
+		[verticalTestItem.selectedImage setColor:ccGRAY];
+		[horizontalTestItem.selectedImage setColor:ccGRAY];
+		[priorityTestItem.selectedImage setColor:ccGRAY];
+			
+		// Set Menu Items Tags.
+		verticalTestItem.tag = kItemVerticalTest;
+		horizontalTestItem.tag = kItemHorizontalTest;
+		priorityTestItem.tag = kItemPriorityTest;
+		
+		// Create & Add Menu.
+		CCMenuAdvanced *menu = [CCMenuAdvanced menuWithItems:verticalTestItem, horizontalTestItem, priorityTestItem, nil];
+		[menu alignItemsHorizontallyWithPadding: 0.33 * verticalTestItem.contentSize.width ];
+		[self addChild: menu z:0 tag: kMenu];
+		
+		// Do initial layout.
+		[self updateForScreenReshape];
+	}
+	
+	return self;
+}
+
+- (void) updateForScreenReshape
+{
+	CGSize s = [CCDirector sharedDirector].winSize;
+	
+	// Position label at top.
+	CCLabelTTF *label = (CCLabelTTF *)[self getChildByTag: kAdvice];
+	label.anchorPoint = ccp(0.5f,1);
+	label.position = ccp( 0.5f * s.width, 0.9f * s.height);
+	
+	// Position Menu at Center.
+	CCMenuAdvanced *menu = (CCMenuAdvanced *)[self getChildByTag: kMenu];
+	menu.anchorPoint = ccp(0.5f,0.5f);
+	menu.position = ccp( 0.5f * s.width, 0.5f * s.height);
+}
+
+- (void) itemPressed: (CCNode *) item
+{
+	switch (item.tag) {
+		case kItemVerticalTest:
+			NSLog(@"vertical pressed");
+			break;
+		case kItemHorizontalTest:
+			NSLog(@"horizontal pressed");
+			break;
+		case kItemPriorityTest:
+			NSLog(@"priority pressed");
+			break;
+		default:
+			break;
+	}
+}
+
+@end
+
+
+
+#ifdef __NOT_USED
 
 @implementation DemoMenu
 
@@ -529,3 +627,5 @@ SYNTHESIZE_EXTENSION_TEST(DemoMenu)
 }
 
 @end
+
+#endif

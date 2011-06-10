@@ -30,59 +30,63 @@
 #import <Foundation/Foundation.h>
 #import "cocos2d.h"
 
-@class DemoMenuWidget;
-@interface DemoMenu : CCLayer
-{
-	// weak refs of node childs
-	CCLayerColor *_backgroundLayer;	
-	
-	CCSprite *_cornerSil;
-	CCSprite *_nameLogo;
-	
-	DemoMenuWidget *_widget;
-	DemoMenuWidget *_widget2;
-}
+/* 
+	First screen of CCMenuAdvancedTest.
+ Presents CCMenuAdvanced which allow you too choose
+ Vertical, Horizontal or Priority Test.
+ 
+ Demonstrates natural pisitioning of CCMenuAdvanced.
+ (contentSize is set automatically based on menu's children)
+ 
+ ADVICE: Use mac project and resize the window, too see how natural positioning
+ of CCMenuAdvanced works with updateForScreenReshape.
+ */
+@interface CCMenuAdvancedTestLayer : CCLayer
+{}
 
 - (void) updateForScreenReshape;
 
 @end
 
+/*
+	This test demonstrates vertical scrollable menu (boundaryRect property).
+ Use mouse wheel to scroll on mac, swipe to scroll on iOS.
+ 
+ On Mac OS X it also demosntrates escapeDelegate menuItem (press esc to go back)
+ and upArrow/DownArrow automatic keybinding on alignItemsVertically.
+ */
+@interface CCMenuAdvancedVerticalTestLayer : CCLayer
+{}
 
-// Holds CCMenuAdvanced on first screen of CCMenuAdvancedTest
-// Tests CCMenuAdvanced's contentSize & horizontal align
-// So it can be scaled for any winSize to fit.
-@interface DemoMenuWidget : CCNode
-{
-}
-
-+ (id) menuWidgetWithReversedOrder: (BOOL) rightToLeft;
-- (id) initWithReversedOrder: (BOOL) rightToLeft;
-
-@end
-
-
-// Abstract Menu Screen
-// Inlcudes back button, which is binded to escapeDelegate (press escape to active this button on Mac).
-@interface GenericDemoMenu : CCNode 
-{
-	// weak refs to self children
-	CCSprite *_caption;
-	CCLayerColor *_background;
-	CCMenuItem *_backMenuItem;
-}
-- (NSString *) captionSpriteFrameName;
 - (void) updateForScreenReshape;
 
 @end
 
-// Demo Menu with list, like TimeTrial menu in iTraceur
-// Tests vertical align and boundaryRect for scrolling menu.
-@interface DemoMenu2 : GenericDemoMenu 
-{
-	CCSprite *_sil;
-	CCNode *_widget;
-	CCSprite *_topBorder, *_bottomBorder;
-}
+/*
+ This test demonstrates horizontal scrollable menu (boundaryRect property).
+ Use mouse wheel to scroll on mac, swipe to scroll on iOS.
+ 
+ On Mac OS X it also demosntrates escapeDelegate menuItem (press esc to go back)
+ and leftArrow/rightArrow automatic keybinding on alignItemsHorizontally.
+ */
+@interface CCMenuAdvancedHorizontalTestLayer : CCLayer
+{}
+
+- (void) updateForScreenReshape;
 
 @end
+
+/*
+ This test demonstrates ability to set ccMouseDelegate & ccTouchDelegate Priority
+ (priority property).
+ 
+ Note: priority must be set before CCMenuADvanced's onEnter will be called.
+ */
+@interface CCMenuAdvancedPriorityTestLayer : CCLayer
+{}
+
+- (void) updateForScreenReshape;
+
+@end
+
 
