@@ -97,6 +97,11 @@ enum nodeTags
 		[menu alignItemsHorizontallyWithPadding: 0.33 * verticalTestItem.contentSize.width ];
 		[self addChild: menu z:0 tag: kMenu];
 		
+		// Enable Debug Draw (available only when DEBUG is defined )
+#ifdef DEBUG
+		menu.debugDraw = YES;
+#endif
+		
 		// Do initial layout.
 		[self updateForScreenReshape];
 	}
@@ -169,6 +174,11 @@ enum nodeTags
 		[backMenuItem.selectedImage setColor: ccGRAY];
 		CCMenuAdvanced *menu = [CCMenuAdvanced menuWithItems:backMenuItem, nil];
 		[self addChild:menu z:0 tag: kBackButtonMenu];
+		
+		// Enable Debug Draw (available only when DEBUG is defined )
+#ifdef DEBUG
+		menu.debugDraw = YES;
+#endif
 		
 		// Bind keyboard for mac.
 #ifdef __MAC_OS_X_VERSION_MAX_ALLOWED
@@ -287,7 +297,12 @@ enum nodeTags
 	// Prepare Menu
 	CCMenuAdvanced *menu = [CCMenuAdvanced menuWithItems: nil];	
 	for (CCMenuItem *item in menuItems)
-		[menu addChild: item];		
+		[menu addChild: item];	
+	
+	// Enable Debug Draw (available only when DEBUG is defined )
+#ifdef DEBUG
+	menu.debugDraw = YES;
+#endif
 	
 	// Setup Menu Alignment
 	[menu alignItemsVerticallyWithPadding: 5 bottomToTop: NO]; //< also sets contentSize and keyBindings on Mac

@@ -222,6 +222,10 @@
 			y -= itemSize.height * item.scaleY + padding;
 	}
 	
+	// Fix position of menuItem if it's the only one.
+	if ([children_ count] == 1)
+		[[children_ objectAtIndex: 0] setPosition: ccp(width / 2.0f, height / 2.0f ) ];
+	
 #ifdef __MAC_OS_X_VERSION_MAX_ALLOWED
 	if (bottomToTop)
 	{
