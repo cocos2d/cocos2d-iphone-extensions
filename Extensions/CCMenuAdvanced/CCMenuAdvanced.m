@@ -344,6 +344,9 @@
 	// NEXT
 	if ( [keyCharacters rangeOfString:[NSString stringWithUnichar: downKeyBinding]].location != NSNotFound )
 	{
+		if ([children_ count] < 2)
+			return NO;
+		
 		[self selectNextMenuItem];
 		return YES;
 	}
@@ -351,6 +354,9 @@
 	// PREV
 	if ( [keyCharacters rangeOfString:[NSString stringWithUnichar: upKeyBinding]].location != NSNotFound)
 	{
+		if ([children_ count] < 2)
+			return NO;
+		
 		[self selectPrevMenuItem];
 		return YES;
 	}
@@ -358,6 +364,9 @@
 	// ENTER
 	if ( [keyCharacters rangeOfString:[NSString stringWithUnichar: enterKeyBinding]].location != NSNotFound)
 	{
+		if (selectedItemNumber_ < 0)
+			return NO;
+		
 		[self activateSelectedItem];
 		return YES;
 	}	
