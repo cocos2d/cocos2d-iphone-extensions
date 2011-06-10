@@ -45,9 +45,12 @@ enum nodeTags
 	kMenu,
 	kAdvice,
 	
-	// Vertical Test Node Tags
+	// Vertical Test Node Additional Tags
 	kBackButtonMenu,
 	kWidget,
+	
+	// Priority Test Node Additional Tags
+	kMenu2,
 };
 
 - (id) init
@@ -141,7 +144,7 @@ enum nodeTags
 			[self changeSceneWithLayer:[CCMenuAdvancedHorizontalTestLayer node]];
 			break;
 		case kItemPriorityTest:
-			NSLog(@"priority pressed");
+			[self changeSceneWithLayer:[CCMenuAdvancedPriorityTestLayer node]];
 			break;
 		default:
 			break;
@@ -436,3 +439,102 @@ enum nodeTags
 }
 
 @end
+
+@implementation CCMenuAdvancedPriorityTestLayer
+
+- (CCLabelTTF *) adviceLabel
+{
+	CCLabelTTF *label = [CCLabelTTF labelWithString:@"Priority Test." fontName:@"Marker Felt" fontSize:24];
+	CCLabelTTF *label2 = [CCLabelTTF labelWithString:@"Items 1&3 have more priority than 3&4." fontName:@"Marker Felt" fontSize:24];
+	label2.anchorPoint = ccp(0.5f, 1);
+	label2.position = ccp(0.5f * label.contentSize.width, 0);
+	[label addChild: label2];
+	
+#ifdef __MAC_OS_X_VERSION_MAX_ALLOWED
+	CCLabelTTF *label3 = [CCLabelTTF labelWithString:@"(Controls: left, right, enter, esc)" fontName:@"Marker Felt" fontSize:24];
+	label3.anchorPoint = ccp(0.5f, 1);
+	label3.position = ccp(0.5f * label2.contentSize.width, 0);
+	[label2 addChild: label3];
+	CCLabelTTF *label4 = [CCLabelTTF labelWithString:@"(Only items 1&3 should be controlled by keyboard)" fontName:@"Marker Felt" fontSize:24];
+	label4.anchorPoint = ccp(0.5f, 1);
+	label4.position = ccp(0.5f * label3.contentSize.width, 0);
+	[label3 addChild: label4];
+#endif
+	
+	return label;
+}
+
+- (CCNode *) widget
+{
+	CCNode *widget = [CCNode node];
+	widget.isRelativeAnchorPoint = YES;
+	
+	// Prepare menuItems
+	CCMenuItemSprite *itemOne = 
+	[CCMenuItemSprite itemFromNormalSprite: [CCSprite spriteWithFile: @"priorityOne.png"]
+							selectedSprite: [CCSprite spriteWithFile: @"priorityOne.png"]
+									target: self
+								  selector: @selector(itemPressed:)];
+	CCMenuItemSprite *itemTwo = 
+	[CCMenuItemSprite itemFromNormalSprite: [CCSprite spriteWithFile: @"priorityTwo.png"]
+							selectedSprite: [CCSprite spriteWithFile: @"priorityTwo.png"]
+									target: self
+								  selector: @selector(itemPressed:)];
+	CCMenuItemSprite *itemThree = 
+	[CCMenuItemSprite itemFromNormalSprite: [CCSprite spriteWithFile: @"priorityThree.png"]
+							selectedSprite: [CCSprite spriteWithFile: @"priorityThree.png"]
+									target: self
+								  selector: @selector(itemPressed:)];
+	CCMenuItemSprite *itemFour = 
+	[CCMenuItemSprite itemFromNormalSprite: [CCSprite spriteWithFile: @"priorityFour.png"]
+							selectedSprite: [CCSprite spriteWithFile: @"priorityFour.png"]
+									target: self
+								  selector: @selector(itemPressed:)];
+	
+	// Distinguish Normal/Selected State of Menu Items.
+	[itemOne.selectedImage setColor: ccGRAY];
+	[itemTwo.selectedImage setColor: ccGRAY];
+	[itemThree.selectedImage setColor: ccGRAY];
+	[itemFour.selectedImage setColor: ccGRAY];
+	
+	// Create & add menu for Items 1 & 3.
+	CCMenuAdvanced *menu = [CCMenuAdvanced menuWithItems: itemOne, itemThree, nil];
+	[menu alignItemsHorizontallyWithPadding:20.0f];
+	menu.anchorPoint = ccp(0.5f, 0.2f);
+	[widget addChild: menu z: 1];
+	
+	// Create & add menu for Items 2 & 4
+	CCMenuAdvanced *menu2 = [CCMenuAdvanced menuWithItems: itemTwo, itemFour, nil];
+	[menu2 alignItemsHorizontallyWithPadding: 120.0f];
+	menu2.anchorPoint = ccp(0.5f, 0.5f);
+	[widget addChild: menu2 z: 0];	
+	
+	// Set widget size.
+	widget.contentSize = menu.contentSize;
+	
+	// Position menus
+	menu2.position =
+	menu.position = ccp(0.5f * widget.contentSize.width, 0.5f * widget.contentSize.height);
+	
+	// Set menus priority.
+	menu.priority = 0;
+	menu2.priority = 1;
+	
+	return widget;
+}
+
+- (void) updateWidget
+{
+	CGSize winSize = [[CCDirector sharedDirector] winSize];
+	
+	// Get widget. 
+	CCNode *widget = (CCMenuAdvanced *) [self getChildByTag:kWidget]; 
+	
+	// Position menu at center.	
+	widget.anchorPoint = ccp(0.5f, 0);
+	widget.position = ccp(0.5f * winSize.width, 0);
+
+}
+
+@end
+

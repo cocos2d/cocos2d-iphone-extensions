@@ -91,7 +91,7 @@
  
  Note: priority must be set before CCMenuADvanced's onEnter will be called.
  */
-@interface CCMenuAdvancedPriorityTestLayer : CCLayer
+@interface CCMenuAdvancedPriorityTestLayer : CCMenuAdvancedVerticalTestLayer
 {}
 
 @end
