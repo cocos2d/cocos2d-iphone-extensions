@@ -133,8 +133,10 @@ enum
 		
 		// Set GL Values
 		glEnable(GL_POINT_SMOOTH);
-		glHint(GL_POINT_SMOOTH_HINT, GL_NICEST);
-		glPointSize(6.0f * CC_CONTENT_SCALE_FACTOR());
+		GLboolean blendWasEnabled = glIsEnabled( GL_BLEND );
+		glEnable(GL_BLEND);
+		glBlendFunc( GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA );
+		glPointSize( 6.0 * CC_CONTENT_SCALE_FACTOR() );
 		
 		// Draw Gray Points
 		glColor4ub(0x96,0x96,0x96,0xFF);
@@ -146,8 +148,9 @@ enum
 		
 		// Restore GL Values
 		glPointSize(1.0f);
-		glHint(GL_POINT_SMOOTH_HINT,GL_FASTEST);
 		glDisable(GL_POINT_SMOOTH);
+		if (! blendWasEnabled)
+			glDisable(GL_BLEND);
 	}
 }
 

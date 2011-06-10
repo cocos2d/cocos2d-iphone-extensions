@@ -14,6 +14,9 @@ People/companies who were/are contributing code to cocos2d-iphone-extensions (al
 
 	* Israel Roth (http://srooltheknife.blogspot.com/)
 		CCSliderControl author
+		
+	* Jeff Keeme (cjkeeme) (http://www.myblackdogbooks.com/)
+		Fix for issue #23 (CCScrollLayer page indicator artifacts)
 
 	* Simon Skinner (twitter: @vultuk) (http://www.dk101.net/)
 		CCScrollLayer original author
