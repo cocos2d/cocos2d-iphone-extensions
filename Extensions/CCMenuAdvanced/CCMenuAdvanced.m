@@ -98,6 +98,11 @@
 	return priority_;
 }
 
+-(NSInteger) keyboardDelegatePriority
+{
+	return priority_;
+}
+
 #ifdef __IPHONE_OS_VERSION_MAX_ALLOWED
 -(void) registerWithTouchDispatcher
 {
