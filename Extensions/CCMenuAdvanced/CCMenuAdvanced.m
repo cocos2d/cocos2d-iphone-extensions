@@ -118,6 +118,7 @@
 
 #pragma mark Advanced Menu - Draw
 
+#ifdef DEBUG
 - (void) draw
 {
 	[super draw];
@@ -132,6 +133,7 @@
 		ccDrawPoly(vertices, 4, YES);
 	}
 }
+#endif
 
 #pragma mark Advanced Menu - Selecting/Activating Items
 
