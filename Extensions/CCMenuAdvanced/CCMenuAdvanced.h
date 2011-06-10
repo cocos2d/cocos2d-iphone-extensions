@@ -60,11 +60,21 @@
 	unichar prevItemButtonBind_;
 	unichar nextItemButtonBind_;	
 #endif
+	
+#ifdef DEBUG
+	BOOL debugDraw_;
+#endif
+	
 }
 
 @property(readwrite, assign) CGRect boundaryRect;
 @property(readwrite, assign) CGFloat minimumTouchLengthToSlide;
 @property(readwrite, assign) NSInteger priority;
+
+#ifdef DEBUG
+// Debug: draw rectangle around CCMenuAdvanced.
+@property(readwrite, assign) BOOL debugDraw;
+#endif
 
 #ifdef __MAC_OS_X_VERSION_MAX_ALLOWED
 @property(readwrite, retain) CCMenuItem *escapeDelegate;

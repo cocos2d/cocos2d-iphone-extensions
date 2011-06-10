@@ -60,6 +60,11 @@
 @synthesize minimumTouchLengthToSlide = minimumTouchLengthToSlide_;
 @synthesize priority = priority_;
 
+#ifdef DEBUG
+@synthesize debugDraw = debugDraw_;
+#endif
+
+#pragma mark Init/DeInit
 
 -(id) initWithItems: (CCMenuItem*) item vaList: (va_list) args
 {
@@ -101,6 +106,23 @@
 											  swallowsTouches: YES ];
 }
 #endif
+
+#pragma mark Advanced Menu - Draw
+
+- (void) draw
+{
+	[super draw];
+	
+	if (self.debugDraw)
+	{
+		CGSize s = [self contentSize];
+		CGPoint vertices[4]={
+			ccp(0,0),ccp(s.width,0),
+			ccp(s.width,s.height),ccp(0,s.height),
+		};
+		ccDrawPoly(vertices, 4, YES);
+	}
+}
 
 #pragma mark Advanced Menu - Selecting/Activating Items
 
@@ -501,5 +523,6 @@
 }
 
 #endif
+
 @end
 
