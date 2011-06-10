@@ -181,8 +181,11 @@
 	if (selectedItemNumber_ < 0)
 		return;
 	
+	// Unselect selected menu item.
 	CCMenuItem *item = [children_ objectAtIndex: selectedItemNumber_];
 	[item unselected];
+	selectedItemNumber_ = -1;
+	
 	[item activate];
 	
 }
