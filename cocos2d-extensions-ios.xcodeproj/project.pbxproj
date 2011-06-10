@@ -51,6 +51,8 @@
 		6D7F4FC013A284670022601B /* priorityTwo.png in Resources */ = {isa = PBXBuildFile; fileRef = 6D7F4FB213A284670022601B /* priorityTwo.png */; };
 		6D7F4FC113A284670022601B /* verticalTestButton-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = 6D7F4FB313A284670022601B /* verticalTestButton-hd.png */; };
 		6D7F4FC213A284670022601B /* verticalTestButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 6D7F4FB413A284670022601B /* verticalTestButton.png */; };
+		6D7F4FF213A28D5C0022601B /* b1-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = 6D7F4FF013A28D5C0022601B /* b1-hd.png */; };
+		6D7F4FF313A28D5C0022601B /* b1.png in Resources */ = {isa = PBXBuildFile; fileRef = 6D7F4FF113A28D5C0022601B /* b1.png */; };
 		6DA5777C139C9837004D8D0B /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 6DA5775F139C9837004D8D0B /* Default.png */; };
 		6DA5777F139C9837004D8D0B /* fps_images.png in Resources */ = {isa = PBXBuildFile; fileRef = 6DA57764139C9837004D8D0B /* fps_images.png */; };
 		6DA57780139C9837004D8D0B /* Icon-72.png in Resources */ = {isa = PBXBuildFile; fileRef = 6DA57765139C9837004D8D0B /* Icon-72.png */; };
@@ -768,6 +770,8 @@
 		6D7F4FB213A284670022601B /* priorityTwo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = priorityTwo.png; sourceTree = "<group>"; };
 		6D7F4FB313A284670022601B /* verticalTestButton-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "verticalTestButton-hd.png"; sourceTree = "<group>"; };
 		6D7F4FB413A284670022601B /* verticalTestButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = verticalTestButton.png; sourceTree = "<group>"; };
+		6D7F4FF013A28D5C0022601B /* b1-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "b1-hd.png"; sourceTree = "<group>"; };
+		6D7F4FF113A28D5C0022601B /* b1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = b1.png; sourceTree = "<group>"; };
 		6DA5775C139C9827004D8D0B /* LICENSE.cocos2d-extensions */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "LICENSE.cocos2d-extensions"; sourceTree = "<group>"; };
 		6DA5775F139C9837004D8D0B /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
 		6DA57761139C9837004D8D0B /* English */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/InfoPlist.strings; sourceTree = "<group>"; };
@@ -1786,6 +1790,8 @@
 		6DA57DA9139CBD66004D8D0B /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				6D7F4FF013A28D5C0022601B /* b1-hd.png */,
+				6D7F4FF113A28D5C0022601B /* b1.png */,
 				6D7F4FA713A284670022601B /* horizontalTestButton-hd.png */,
 				6D7F4FA813A284670022601B /* horizontalTestButton.png */,
 				6D7F4FA913A284670022601B /* priorityFour-hd.png */,
@@ -2552,6 +2558,8 @@
 				6D7F4FC013A284670022601B /* priorityTwo.png in Resources */,
 				6D7F4FC113A284670022601B /* verticalTestButton-hd.png in Resources */,
 				6D7F4FC213A284670022601B /* verticalTestButton.png in Resources */,
+				6D7F4FF213A28D5C0022601B /* b1-hd.png in Resources */,
+				6D7F4FF313A28D5C0022601B /* b1.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
