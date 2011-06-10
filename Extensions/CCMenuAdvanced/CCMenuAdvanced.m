@@ -45,14 +45,18 @@
 
 @end
 
-#ifdef __IPHONE_OS_VERSION_MAX_ALLOWED
+
 @interface CCMenu (Private) 
 
+#ifdef __IPHONE_OS_VERSION_MAX_ALLOWED
 -(CCMenuItem *) itemForTouch: (UITouch *) touch;
+#elif __MAC_OS_X_VERSION_MAX_ALLOWED
+-(CCMenuItem *) itemForMouseEvent: (NSEvent *) event;
+#endif
 
 @end
 
-#endif
+
 
 
 @implementation CCMenuAdvanced
@@ -315,6 +319,41 @@
 {
 	[self alignItemsVerticallyWithPadding: padding bottomToTop: YES];
 }
+
+#pragma mark Advanced Menu - Mouse Controls
+
+#if defined(__MAC_OS_X_VERSION_MAX_ALLOWED)
+ 
+-(BOOL) ccMouseDown:(NSEvent *)event
+{
+	if( ! visible_ )
+		return NO;
+	
+	selectedItem_ = [self itemForMouseEvent:event];
+	
+	// Unselect previous selected by keyboard item.
+	if (children_.count > selectedItemNumber_ && selectedItemNumber_ >= 0)
+	{
+		CCMenuItem *item = [children_ objectAtIndex: selectedItemNumber_];
+		
+		if (selectedItem_ != item)
+		{
+			[item unselected];
+			selectedItemNumber_ = -1;
+		}
+	}
+	
+	[selectedItem_ selected];
+	
+	if( selectedItem_ ) {
+		state_ = kCCMenuStateTrackingTouch;
+		return YES;
+	}
+	
+	return NO;	
+}
+
+#endif //< Advanced Menu - Mouse Controls
 
 #pragma mark Advanced Menu - Keyboard Controls
 
