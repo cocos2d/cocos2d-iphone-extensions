@@ -466,14 +466,15 @@
 // returns YES if touch is inside our boundingBox
 -(BOOL) isTouchForMe:(UITouch *) touch
 {
-	CGPoint point = [touch locationInView: [touch view]];
-	CGPoint locationInParent = [parent_ convertToNodeSpace: point];
+	CGPoint point = [self convertToNodeSpace:[[CCDirector sharedDirector] convertToGL:[touch locationInView: [touch view]]]];
+	CGPoint prevPoint = [self convertToNodeSpace:[[CCDirector sharedDirector] convertToGL:[touch previousLocationInView: [touch view]]]];
 	
-	CGPoint prevPoint = [touch previousLocationInView: [touch view]];
-	CGPoint prevLocationInParent = [parent_ convertToNodeSpace: prevPoint];
+	CGRect rect = CGRectMake(0, 0, self.contentSize.width, self.contentSize.height);
 	
-    return ( CGRectContainsPoint([self boundingBox], locationInParent)
-			|| CGRectContainsPoint([self boundingBox], prevLocationInParent) );
+    if ( CGRectContainsPoint(rect, point) || CGRectContainsPoint(rect, prevPoint) )
+		return YES;
+	
+	return NO;
 }
 
 -(BOOL) ccTouchBegan:(UITouch *)touch withEvent:(UIEvent *)event
