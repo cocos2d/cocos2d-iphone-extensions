@@ -283,6 +283,30 @@ enum nodeTags
 					  [CCMenuItemLabel itemWithLabel: [CCLabelBMFont labelWithString:@"WAAAZAAAAAAAA!!! =)" fntFile:@"crackedGradient42.fnt"]
 											  target: self 
 											selector: @selector(itemPressed:)],
+					  
+					  [CCMenuItemLabel itemWithLabel: [CCLabelBMFont labelWithString:@"..." fntFile:@"crackedGradient42.fnt"]
+											  target: self 
+											selector: @selector(itemPressed:)],
+					  
+					  [CCMenuItemLabel itemWithLabel: [CCLabelBMFont labelWithString:@"..." fntFile:@"crackedGradient42.fnt"]
+											  target: self 
+											selector: @selector(itemPressed:)],
+					  
+					  [CCMenuItemLabel itemWithLabel: [CCLabelBMFont labelWithString:@"..." fntFile:@"crackedGradient42.fnt"]
+											  target: self 
+											selector: @selector(itemPressed:)],
+					  
+					  [CCMenuItemLabel itemWithLabel: [CCLabelBMFont labelWithString:@"..." fntFile:@"crackedGradient42.fnt"]
+											  target: self 
+											selector: @selector(itemPressed:)],
+					  
+					  [CCMenuItemLabel itemWithLabel: [CCLabelBMFont labelWithString:@"..." fntFile:@"crackedGradient42.fnt"]
+											  target: self 
+											selector: @selector(itemPressed:)],
+					  
+					  [CCMenuItemLabel itemWithLabel: [CCLabelBMFont labelWithString:@"Last Menu Item" fntFile:@"crackedGradient42.fnt"]
+											  target: self 
+											selector: @selector(itemPressed:)],
 					  nil  ];
 	
 	return array;
