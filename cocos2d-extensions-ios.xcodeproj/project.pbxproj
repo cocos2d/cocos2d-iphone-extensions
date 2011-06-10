@@ -20,6 +20,7 @@
 				6DA580F6139E3C05004D8D0B /* PBXTargetDependency */,
 				6DA580F8139E3C05004D8D0B /* PBXTargetDependency */,
 				6DA580FA139E3C05004D8D0B /* PBXTargetDependency */,
+				6D7F520B13A2E29C0022601B /* PBXTargetDependency */,
 			);
 			name = BuildAllTests;
 			productName = BuildAllTests;
@@ -644,6 +645,13 @@
 			proxyType = 1;
 			remoteGlobalIDString = 506EE05D10304ED200A389B3;
 			remoteInfo = "cocos2d libraries";
+		};
+		6D7F520A13A2E29C0022601B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 29B97313FDCFA39411CA2CEA /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 6DA5861113A022E8004D8D0B /* CCSendMessagesTest */;
+			remoteInfo = CCSendMessagesTest;
 		};
 		6DA57DB2139CBD74004D8D0B /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -3076,6 +3084,11 @@
 			isa = PBXTargetDependency;
 			target = 506EE05D10304ED200A389B3 /* cocos2d libraries */;
 			targetProxy = 506EE1A71030507B00A389B3 /* PBXContainerItemProxy */;
+		};
+		6D7F520B13A2E29C0022601B /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 6DA5861113A022E8004D8D0B /* CCSendMessagesTest */;
+			targetProxy = 6D7F520A13A2E29C0022601B /* PBXContainerItemProxy */;
 		};
 		6DA57DB1139CBD74004D8D0B /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;

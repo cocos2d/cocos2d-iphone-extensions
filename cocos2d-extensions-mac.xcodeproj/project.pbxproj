@@ -19,6 +19,7 @@
 				6DA581A9139E3E1E004D8D0B /* PBXTargetDependency */,
 				6DA581AB139E3E1E004D8D0B /* PBXTargetDependency */,
 				6DA581AD139E3E1E004D8D0B /* PBXTargetDependency */,
+				6D7F521413A2E2B90022601B /* PBXTargetDependency */,
 			);
 			name = BuildAllTests;
 			productName = BuildAllTests;
@@ -532,6 +533,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		6D7F521313A2E2B90022601B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 29B97313FDCFA39411CA2CEA /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 6DA5863913A0232C004D8D0B /* CCSendMessagesTest */;
+			remoteInfo = CCSendMessagesTest;
+		};
 		6DA57C98139CAE19004D8D0B /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 29B97313FDCFA39411CA2CEA /* Project object */;
@@ -2760,6 +2768,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		6D7F521413A2E2B90022601B /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 6DA5863913A0232C004D8D0B /* CCSendMessagesTest */;
+			targetProxy = 6D7F521313A2E2B90022601B /* PBXContainerItemProxy */;
+		};
 		6DA57C97139CAE19004D8D0B /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = E01E663C121CA00A001A484F /* cocos2d */;
