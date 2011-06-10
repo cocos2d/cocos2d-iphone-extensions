@@ -44,6 +44,10 @@ enum nodeTags
 	// Tag to get children in updateForScreenReshape
 	kMenu,
 	kAdvice,
+	
+	// Vertical Test Node Tags
+	kBackButtonMenu,
+	kWidget,
 };
 
 - (id) init
@@ -115,11 +119,18 @@ enum nodeTags
 	menu.position = ccp( 0.5f * s.width, 0.5f * s.height);
 }
 
+- (void) changeSceneWithLayer: (CCLayer *) layer
+{														
+	CCScene *scene = [CCScene node];							
+	[scene addChild: layer];						
+	[[CCDirector sharedDirector] replaceScene: scene];										
+}
+
 - (void) itemPressed: (CCNode *) item
 {
 	switch (item.tag) {
 		case kItemVerticalTest:
-			NSLog(@"vertical pressed");
+			[self changeSceneWithLayer:[CCMenuAdvancedVerticalTestLayer node]];
 			break;
 		case kItemHorizontalTest:
 			NSLog(@"horizontal pressed");
@@ -133,6 +144,186 @@ enum nodeTags
 }
 
 @end
+
+@implementation CCMenuAdvancedVerticalTestLayer
+
+- (id) init
+{
+	if ( (self = [super init]) )
+	{		
+		// Create advice label.		
+		CCLabelTTF *label = [CCLabelTTF labelWithString:@"Vertical Test." fontName:@"Marker Felt" fontSize:24];
+		CCLabelTTF *label2 = [CCLabelTTF labelWithString:@"Scrollable menu should be at the the left." fontName:@"Marker Felt" fontSize:24];
+		label2.anchorPoint = ccp(0.5f, 1);
+		label2.position = ccp(0.5f * label.contentSize.width, 0);
+		[label addChild: label2];
+		[self addChild: label z:1 tag: kAdvice];
+		
+		// Create back button menu item.
+		CCMenuItemSprite *backMenuItem = 
+				[CCMenuItemSprite itemFromNormalSprite: [CCSprite spriteWithFile:@"b1.png"]
+										selectedSprite: [CCSprite spriteWithFile:@"b1.png"]
+												target: self
+											  selector: @selector(backPressed)
+						 ];
+		[backMenuItem.selectedImage setColor: ccGRAY];
+		CCMenuAdvanced *menu = [CCMenuAdvanced menuWithItems:backMenuItem, nil];
+		[self addChild:menu z:0 tag: kBackButtonMenu];
+		
+		// Bind keyboard for mac.
+#ifdef __MAC_OS_X_VERSION_MAX_ALLOWED
+		menu.escapeDelegate = backMenuItem;
+#endif
+		
+		// Create vertical scroll widget.
+		CCNode *widget = [self newWidget];
+		[self addChild: widget z: 0 tag: kWidget];		
+		
+		// Do initial layout.
+		[self updateForScreenReshape];	
+	}
+	
+	return self;
+}
+
+
+- (void) updateForScreenReshape
+{
+	CGSize s = [[CCDirector sharedDirector] winSize];
+	
+	// Position label at top.
+	CCLabelTTF *label = (CCLabelTTF *)[self getChildByTag: kAdvice];
+	label.anchorPoint = ccp(0.5f,1);
+	label.position = ccp( 0.5f * s.width, 0.9f * s.height);
+	
+	// Position back button at the top-left corner.
+	CCMenuAdvanced *menu = (CCMenuAdvanced *)[self getChildByTag: kBackButtonMenu];
+	menu.anchorPoint = ccp(0, 1);
+	menu.position = ccp(0, s.height);
+	
+	[self updateWidget];
+}
+
+// Go back to the default ExtensionTest Layer.
+- (void) backPressed
+{	
+	[[CCDirector sharedDirector] replaceScene: [ExtensionTest scene]];
+}
+
+#pragma mark Vertical Scroll Widget
+
+- (NSArray *) menuItemsArray
+{	
+	NSArray *array = [NSArray arrayWithObjects:
+					  [CCMenuItemLabel itemWithLabel:[CCLabelBMFont labelWithString: @"Level #1" fntFile:@"crackedGradient42.fnt"]
+											  target: self 
+											selector: @selector(itemPressed:)],
+					  
+					  [CCMenuItemLabel itemWithLabel: [CCLabelBMFont labelWithString:@"Level #2" fntFile:@"crackedGradient42.fnt"]
+											  target: self 
+											selector: @selector(itemPressed:)],
+					  
+					  [CCMenuItemLabel itemWithLabel:[CCLabelBMFont labelWithString: @"Level #3" fntFile:@"crackedGradient42.fnt"]
+											  target: self 
+											selector: @selector(itemPressed:)],
+					  
+					  [CCMenuItemLabel itemWithLabel:[CCLabelBMFont labelWithString: @"Level +10050" fntFile:@"crackedGradient42.fnt"]
+											  target: self 
+											selector: @selector(itemPressed:)],
+					  
+					  [CCMenuItemLabel itemWithLabel: [CCLabelBMFont labelWithString:@"Level #nil" fntFile:@"crackedGradient42.fnt"]
+											  target: self 
+											selector: @selector(itemPressed:)],
+					  
+					  [CCMenuItemLabel itemWithLabel: [CCLabelBMFont labelWithString:@"Level Kill" fntFile:@"crackedGradient42.fnt"]
+											  target: self 
+											selector: @selector(itemPressed:)],
+					  
+					  [CCMenuItemLabel itemWithLabel: [CCLabelBMFont labelWithString:@"Level Kill Bill" fntFile:@"crackedGradient42.fnt"]
+											  target: self 
+											selector: @selector(itemPressed:)],
+					  
+					  [CCMenuItemLabel itemWithLabel: [CCLabelBMFont labelWithString:@"Whatever..." fntFile:@"crackedGradient42.fnt"]
+											  target: self 
+											selector: @selector(itemPressed:)],
+					  
+					  [CCMenuItemLabel itemWithLabel: [CCLabelBMFont labelWithString:@"Oh, commoooooOON!!!" fntFile:@"crackedGradient42.fnt"]
+											  target: self 
+											selector: @selector(itemPressed:)],
+					  
+					  [CCMenuItemLabel itemWithLabel: [CCLabelBMFont labelWithString:@"Fork you!" fntFile:@"crackedGradient42.fnt"]
+											  target: self 
+											selector: @selector(itemPressed:)],
+					  
+					  [CCMenuItemLabel itemWithLabel: [CCLabelBMFont labelWithString:@"FORK YOU!!!" fntFile:@"crackedGradient42.fnt"]
+											  target: self 
+											selector: @selector(itemPressed:)],
+					  
+					  [CCMenuItemLabel itemWithLabel: [CCLabelBMFont labelWithString:@"..." fntFile:@"crackedGradient42.fnt"]
+											  target: self 
+											selector: @selector(itemPressed:)],
+					  
+					  [CCMenuItemLabel itemWithLabel: [CCLabelBMFont labelWithString:@"...." fntFile:@"crackedGradient42.fnt"]
+											  target: self 
+											selector: @selector(itemPressed:)],
+					  
+					  [CCMenuItemLabel itemWithLabel: [CCLabelBMFont labelWithString:@"..." fntFile:@"crackedGradient42.fnt"]
+											  target: self 
+											selector: @selector(itemPressed:)],
+					  
+					  [CCMenuItemLabel itemWithLabel: [CCLabelBMFont labelWithString:@"WAAAZAAAAAAAA!!! =)" fntFile:@"crackedGradient42.fnt"]
+											  target: self 
+											selector: @selector(itemPressed:)],
+					  nil  ];
+	
+	return array;
+}
+
+- (CCNode *) newWidget
+{
+	// Get Menu Items
+	NSArray *menuItems = [self menuItemsArray];
+	
+	// Prepare Menu
+	CCMenuAdvanced *menu = [CCMenuAdvanced menuWithItems: nil];	
+	for (CCMenuItem *item in menuItems)
+		[menu addChild: item];		
+	
+	// Setup Menu Alignment
+	[menu alignItemsVerticallyWithPadding: 5 bottomToTop: NO]; //< also sets contentSize and keyBindings on Mac
+	menu.isRelativeAnchorPoint = YES;	
+	
+	return menu;
+}
+
+- (void) updateWidget
+{
+	CGSize winSize = [[CCDirector sharedDirector] winSize];
+	
+	CCMenuAdvanced *menu = (CCMenuAdvanced *) [self getChildByTag:kWidget]; 
+	
+	//widget	
+	menu.anchorPoint = ccp(0.5f, 1);
+	menu.position = ccp(winSize.width / 4, winSize.height);
+	
+	menu.scale = MIN ((winSize.width / 2.0f) / menu.contentSize.width, 0.75f );
+	
+	menu.boundaryRect = CGRectMake(MAX(0, winSize.width / 4.0f - [menu boundingBox].size.width / 2.0f), 
+								   25.0f, 
+								   [menu boundingBox].size.width, 
+								   winSize.height - 50.0f );
+	
+	[menu fixPosition];	
+}
+
+- (void) itemPressed: (CCNode *) sender
+{
+	NSLog(@"CCMenuAdvancedVerticalTestLayer#itemPressed: %@", sender);
+}
+
+@end
+
+
 
 
 

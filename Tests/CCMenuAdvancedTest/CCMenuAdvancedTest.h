@@ -58,7 +58,15 @@
 @interface CCMenuAdvancedVerticalTestLayer : CCLayer
 {}
 
+// Creates widget (can be anything you want, in Vertical Test it is a vertical menu).
+- (CCNode *) newWidget;
+
+// Updates layout of the children.
 - (void) updateForScreenReshape;
+
+// Updates position for node with tag kWidget (Used in updateForScreenReshape).
+- (void) updateWidget;
+
 
 @end
 
