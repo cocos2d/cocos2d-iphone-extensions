@@ -138,7 +138,7 @@ enum nodeTags
 			[self changeSceneWithLayer:[CCMenuAdvancedVerticalTestLayer node]];
 			break;
 		case kItemHorizontalTest:
-			NSLog(@"horizontal pressed");
+			[self changeSceneWithLayer:[CCMenuAdvancedHorizontalTestLayer node]];
 			break;
 		case kItemPriorityTest:
 			NSLog(@"priority pressed");
@@ -157,11 +157,7 @@ enum nodeTags
 	if ( (self = [super init]) )
 	{		
 		// Create advice label.		
-		CCLabelTTF *label = [CCLabelTTF labelWithString:@"Vertical Test." fontName:@"Marker Felt" fontSize:24];
-		CCLabelTTF *label2 = [CCLabelTTF labelWithString:@"Scrollable menu should be at the the left." fontName:@"Marker Felt" fontSize:24];
-		label2.anchorPoint = ccp(0.5f, 1);
-		label2.position = ccp(0.5f * label.contentSize.width, 0);
-		[label addChild: label2];
+		CCLabelTTF  *label = [self adviceLabel];
 		[self addChild: label z:1 tag: kAdvice];
 		
 		// Create back button menu item.
@@ -186,7 +182,7 @@ enum nodeTags
 #endif
 		
 		// Create vertical scroll widget.
-		CCNode *widget = [self newWidget];
+		CCNode *widget = [self widget];
 		[self addChild: widget z: 0 tag: kWidget];		
 		
 		// Do initial layout.
@@ -289,7 +285,25 @@ enum nodeTags
 	return array;
 }
 
-- (CCNode *) newWidget
+- (CCLabelTTF *) adviceLabel
+{
+	CCLabelTTF *label = [CCLabelTTF labelWithString:@"Vertical Test." fontName:@"Marker Felt" fontSize:24];
+	CCLabelTTF *label2 = [CCLabelTTF labelWithString:@"Scrollable menu should be at the the left." fontName:@"Marker Felt" fontSize:24];
+	label2.anchorPoint = ccp(0.5f, 1);
+	label2.position = ccp(0.5f * label.contentSize.width, 0);
+	[label addChild: label2];
+	
+#ifdef __MAC_OS_X_VERSION_MAX_ALLOWED
+	CCLabelTTF *label3 = [CCLabelTTF labelWithString:@"(Controls: up, down, enter, esc)" fontName:@"Marker Felt" fontSize:24];
+	label3.anchorPoint = ccp(0.5f, 1);
+	label3.position = ccp(0.5f * label2.contentSize.width, 0);
+	[label2 addChild: label3];
+#endif
+	
+	return label;
+}
+
+- (CCNode *) widget
 {
 	// Get Menu Items
 	NSArray *menuItems = [self menuItemsArray];
@@ -338,6 +352,90 @@ enum nodeTags
 
 @end
 
+@implementation CCMenuAdvancedHorizontalTestLayer
+
+
+- (CCLabelTTF *) adviceLabel
+{
+	CCLabelTTF *label = [CCLabelTTF labelWithString:@"Horizontal Test." fontName:@"Marker Felt" fontSize:24];
+	CCLabelTTF *label2 = [CCLabelTTF labelWithString:@"Scrollable menu should be at the center." fontName:@"Marker Felt" fontSize:24];
+	label2.anchorPoint = ccp(0.5f, 1);
+	label2.position = ccp(0.5f * label.contentSize.width, 0);
+	[label addChild: label2];
+	
+#ifdef __MAC_OS_X_VERSION_MAX_ALLOWED
+	CCLabelTTF *label3 = [CCLabelTTF labelWithString:@"(Controls: left, right, enter, esc)" fontName:@"Marker Felt" fontSize:24];
+	label3.anchorPoint = ccp(0.5f, 1);
+	label3.position = ccp(0.5f * label2.contentSize.width, 0);
+	[label2 addChild: label3];
+#endif
+	
+	return label;
+}
+
+- (CCNode *) widget
+{	
+	// Prepare Menu.
+	CCMenuAdvanced *menu = [CCMenuAdvanced menuWithItems: nil];	
+	
+	// Prepare menu items.
+	for (int i = 0; i <= 31; ++i)
+	{
+		// Create menu item.
+		CCMenuItemSprite *item = 
+		[CCMenuItemSprite itemFromNormalSprite: [CCSprite spriteWithFile: @"blankTestButton.png"]
+								selectedSprite: [CCSprite spriteWithFile: @"blankTestButton.png"]
+										target: self
+									  selector: @selector(itemPressed:)];
+		
+		// Add order number.
+		CCLabelTTF *label = [CCLabelTTF labelWithString:[NSString stringWithFormat:@"%d", i] fontName:@"Marker Felt" fontSize:24];
+		label.anchorPoint = ccp(0.5f, 0.5f);
+		label.position =  ccp(0.5f * item.contentSize.width, 0.5f* item.contentSize.height);
+		[item addChild: label z: 1];
+		
+		// Distinguish normal/selected state of menu items.
+		[item.selectedImage setColor:ccGRAY];
+		
+		// Add it.
+		[menu addChild: item];
+	}
+	
+	// Enable Debug Draw (available only when DEBUG is defined )
+#ifdef DEBUG
+	menu.debugDraw = YES;
+#endif
+	
+	// Setup Menu Alignment.
+	[menu alignItemsHorizontally]; //< also sets contentSize and keyBindings on Mac		
+	
+	return menu;
+}
+
+- (void) updateWidget
+{
+	CGSize winSize = [[CCDirector sharedDirector] winSize];
+	
+	CCMenuAdvanced *menu = (CCMenuAdvanced *) [self getChildByTag:kWidget]; 
+	
+	// Initial position.	
+	menu.anchorPoint = ccp(0.5f, 0.5f);
+	menu.position = ccp(0.5f * winSize.width, 0.5f * winSize.height);
+	
+	menu.scale = MIN ((winSize.height / 2.0f) / menu.contentSize.height, 0.75f );
+	
+	menu.boundaryRect = CGRectMake( 25.0f, 
+								   0.5f * winSize.height - 0.5f * [menu boundingBox].size.height ,
+								   winSize.width - 50.0f,
+								   [menu boundingBox].size.height );
+	
+	// Show first menuItem (scroll max to the left).
+	menu.position = ccp(menu.contentSize.width / 2.0f, 0.5f * winSize.height);
+	
+	[menu fixPosition];	
+}
+
+@end
 
 
 

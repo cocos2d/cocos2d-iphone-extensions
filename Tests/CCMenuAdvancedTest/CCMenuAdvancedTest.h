@@ -58,8 +58,11 @@
 @interface CCMenuAdvancedVerticalTestLayer : CCLayer
 {}
 
+// Creates advice label (test description)
+- (CCLabelTTF *) adviceLabel;
+
 // Creates widget (can be anything you want, in Vertical Test it is a vertical menu).
-- (CCNode *) newWidget;
+- (CCNode *) widget;
 
 // Updates layout of the children.
 - (void) updateForScreenReshape;
@@ -77,10 +80,8 @@
  On Mac OS X it also demosntrates escapeDelegate menuItem (press esc to go back)
  and leftArrow/rightArrow automatic keybinding on alignItemsHorizontally.
  */
-@interface CCMenuAdvancedHorizontalTestLayer : CCLayer
+@interface CCMenuAdvancedHorizontalTestLayer : CCMenuAdvancedVerticalTestLayer
 {}
-
-- (void) updateForScreenReshape;
 
 @end
 
@@ -92,8 +93,6 @@
  */
 @interface CCMenuAdvancedPriorityTestLayer : CCLayer
 {}
-
-- (void) updateForScreenReshape;
 
 @end
 
