@@ -62,6 +62,12 @@ enum nodeTags
 		CCLabelTTF *label2 = [CCLabelTTF labelWithString:@"Menu should be at the screen center." fontName:@"Marker Felt" fontSize:24];
 		label2.anchorPoint = ccp(0.5f, 1);
 		label2.position = ccp(0.5f * label.contentSize.width, 0);
+#ifdef __MAC_OS_X_VERSION_MAX_ALLOWED
+		CCLabelTTF *label3 = [CCLabelTTF labelWithString:@"(Resize the window)" fontName:@"Marker Felt" fontSize:24];
+		label3.anchorPoint = ccp(0.5f, 1);
+		label3.position = ccp(0.5f * label2.contentSize.width, 0);
+		[label2 addChild: label3];
+#endif
 		[label addChild: label2];
 		[self addChild: label z:1 tag: kAdvice];
 		
