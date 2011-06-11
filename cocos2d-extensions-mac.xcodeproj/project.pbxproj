@@ -537,7 +537,7 @@
 			isa = PBXContainerItemProxy;
 			containerPortal = 29B97313FDCFA39411CA2CEA /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = 6DA5863913A0232C004D8D0B /* CCSendMessagesTest */;
+			remoteGlobalIDString = 6DA5863913A0232C004D8D0B;
 			remoteInfo = CCSendMessagesTest;
 		};
 		6DA57C98139CAE19004D8D0B /* PBXContainerItemProxy */ = {
@@ -2946,10 +2946,7 @@
 				GCC_PREFIX_HEADER = Tests/SharedSources/cocos2d_extensions_mac_Prefix.pch;
 				INFOPLIST_FILE = "Tests/SharedResources/Info-Mac.plist";
 				INSTALL_PATH = "$(HOME)/Applications";
-				LIBRARY_SEARCH_PATHS = (
-					"\"$(SRCROOT)/build/Debug\"",
-					"$(inherited)",
-				);
+				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				PRODUCT_NAME = CCBigImageTest;
 			};
 			name = Debug;
@@ -2964,10 +2961,7 @@
 				GCC_PREFIX_HEADER = Tests/SharedSources/cocos2d_extensions_mac_Prefix.pch;
 				INFOPLIST_FILE = "Tests/SharedResources/Info-Mac.plist";
 				INSTALL_PATH = "$(HOME)/Applications";
-				LIBRARY_SEARCH_PATHS = (
-					"\"$(SRCROOT)/build/Debug\"",
-					"$(inherited)",
-				);
+				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				PRODUCT_NAME = CCBigImageTest;
 			};
 			name = Release;
@@ -2985,10 +2979,7 @@
 				GCC_PREFIX_HEADER = Tests/SharedSources/cocos2d_extensions_mac_Prefix.pch;
 				INFOPLIST_FILE = "Tests/SharedResources/Info-Mac.plist";
 				INSTALL_PATH = "$(HOME)/Applications";
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					"\"$(SRCROOT)/build/Debug\"",
-				);
+				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				PRODUCT_NAME = CCMenuItemSpriteIndependent;
 			};
 			name = Debug;
@@ -3003,10 +2994,7 @@
 				GCC_PREFIX_HEADER = Tests/SharedSources/cocos2d_extensions_mac_Prefix.pch;
 				INFOPLIST_FILE = "Tests/SharedResources/Info-Mac.plist";
 				INSTALL_PATH = "$(HOME)/Applications";
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					"\"$(SRCROOT)/build/Debug\"",
-				);
+				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				PRODUCT_NAME = CCMenuItemSpriteIndependent;
 			};
 			name = Release;
@@ -3024,10 +3012,7 @@
 				GCC_PREFIX_HEADER = Tests/SharedSources/cocos2d_extensions_mac_Prefix.pch;
 				INFOPLIST_FILE = "Tests/SharedResources/Info-Mac.plist";
 				INSTALL_PATH = "$(HOME)/Applications";
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					"\"$(SRCROOT)/build/Debug\"",
-				);
+				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				PRODUCT_NAME = CCSliderTest;
 			};
 			name = Debug;
@@ -3042,10 +3027,7 @@
 				GCC_PREFIX_HEADER = Tests/SharedSources/cocos2d_extensions_mac_Prefix.pch;
 				INFOPLIST_FILE = "Tests/SharedResources/Info-Mac.plist";
 				INSTALL_PATH = "$(HOME)/Applications";
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					"\"$(SRCROOT)/build/Debug\"",
-				);
+				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				PRODUCT_NAME = CCSliderTest;
 			};
 			name = Release;
@@ -3063,10 +3045,7 @@
 				GCC_PREFIX_HEADER = Tests/SharedSources/cocos2d_extensions_mac_Prefix.pch;
 				INFOPLIST_FILE = "Tests/SharedResources/Info-Mac.plist";
 				INSTALL_PATH = "$(HOME)/Applications";
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					"\"$(SRCROOT)/build/Debug\"",
-				);
+				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				PRODUCT_NAME = FilesDownloaderTest;
 			};
 			name = Debug;
@@ -3081,10 +3060,7 @@
 				GCC_PREFIX_HEADER = Tests/SharedSources/cocos2d_extensions_mac_Prefix.pch;
 				INFOPLIST_FILE = "Tests/SharedResources/Info-Mac.plist";
 				INSTALL_PATH = "$(HOME)/Applications";
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					"\"$(SRCROOT)/build/Debug\"",
-				);
+				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				PRODUCT_NAME = FilesDownloaderTest;
 			};
 			name = Release;
@@ -3123,10 +3099,7 @@
 				GCC_PREFIX_HEADER = Tests/SharedSources/cocos2d_extensions_mac_Prefix.pch;
 				INFOPLIST_FILE = "Tests/SharedResources/Info-Mac.plist";
 				INSTALL_PATH = "$(HOME)/Applications";
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					"\"$(SRCROOT)/build/Debug\"",
-				);
+				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				PRODUCT_NAME = CCSendMessagesTest;
 			};
 			name = Debug;
@@ -3141,10 +3114,7 @@
 				GCC_PREFIX_HEADER = Tests/SharedSources/cocos2d_extensions_mac_Prefix.pch;
 				INFOPLIST_FILE = "Tests/SharedResources/Info-Mac.plist";
 				INSTALL_PATH = "$(HOME)/Applications";
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					"\"$(SRCROOT)/build/Debug\"",
-				);
+				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				PRODUCT_NAME = CCSendMessagesTest;
 			};
 			name = Release;
@@ -3227,10 +3197,7 @@
 				GCC_PREFIX_HEADER = Tests/SharedSources/cocos2d_extensions_mac_Prefix.pch;
 				INFOPLIST_FILE = "Tests/SharedResources/Info-Mac.plist";
 				INSTALL_PATH = "$(HOME)/Applications";
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					"\"$(SRCROOT)/build/Debug\"",
-				);
+				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				PRODUCT_NAME = ExtensionTestTemplate;
 			};
 			name = Debug;
@@ -3245,10 +3212,7 @@
 				GCC_PREFIX_HEADER = Tests/SharedSources/cocos2d_extensions_mac_Prefix.pch;
 				INFOPLIST_FILE = "Tests/SharedResources/Info-Mac.plist";
 				INSTALL_PATH = "$(HOME)/Applications";
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					"\"$(SRCROOT)/build/Debug\"",
-				);
+				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				PRODUCT_NAME = ExtensionTestTemplate;
 			};
 			name = Release;
