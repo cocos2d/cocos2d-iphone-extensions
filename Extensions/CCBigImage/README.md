@@ -11,7 +11,7 @@ Files
 (Has more performance than CCTextureCache's addImageAsync:target:selector: cause uses only one thread, that created only ones, instead of creating thread each texture load)
 * Tile-Cutter is inlcuded as compiled commandLine tool in prepareResoures folder. Source code of Tile-Cutter is available here: https://github.com/psineur/Tile-Cutter
 
-Demo features
+CCMenuAdvancedTest features
 -------------
 * iPad/ iPhone / Retina project
 * Slide node with finger.
@@ -30,3 +30,7 @@ Like this:
      
 If you have texturePacker - tilesCompress.sh will help you to compress all tiles automatically.
 Just execute it in folder with png's and it will compress them all to RGBA4444 pvr.ccz format
+
+CCMenuAdvancedTest uses pvr.ccz now. Cause with png it was too long build.
+Compressed tiles in 8e67e772174ba57536380fc7bebf19cb88194f9a
+Replaced all 'png' with 'pvr.ccz' in 072fdd4d621902c22f13254e81bb850f90405450
