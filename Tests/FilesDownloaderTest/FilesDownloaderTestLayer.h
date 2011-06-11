@@ -70,7 +70,8 @@
 // Must be reimplemented in Subclasses
 - (NSArray *) files;
 
-#pragma mark Downloaded Checks
+#pragma mark Downloaded Info
+
 // returns absolute path of file in Cached directory
 - (NSString *) downloadedFileWithFilename: (NSString *) filename;
 
