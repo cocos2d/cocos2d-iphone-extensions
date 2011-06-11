@@ -76,6 +76,14 @@ SYNTHESIZE_EXTENSION_TEST(CCVideoTestLayer)
 	[[CCDirector sharedDirector] stopAnimation];
 }
 
+#ifdef __IPHONE_OS_VERSION_MAX_ALLOWED
+// Updates orientation of CCVideoPlayer. Called from SharedSources/RootViewController.m
+- (void) updateOrientationWithOrientation: (UIDeviceOrientation) newOrientation
+{
+	[CCVideoPlayer updateOrientationWithOrientation:newOrientation ];
+}
+#endif
+
 // on "dealloc" you need to release all your retained objects
 - (void) dealloc
 {

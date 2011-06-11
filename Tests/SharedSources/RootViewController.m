@@ -34,6 +34,13 @@
 #import "RootViewController.h"
 #import "GameConfig.h"
 
+@protocol UpdateOrientation <NSObject>
+
+- (void) updateOrientationWithOrientation: (UIDeviceOrientation) orientation;
+
+@end
+
+
 @implementation RootViewController
 
 /*
@@ -143,6 +150,16 @@
 		rect.size.height *= contentScaleFactor;
 	}
 	glView.frame = rect;
+	
+
+	// Let current test know that orientation was changed.
+	CCScene *curScene = [[CCDirector sharedDirector] runningScene];	
+	if (curScene)
+	{
+		for (id <UpdateOrientation> child in curScene.children)
+			if ([child respondsToSelector:@selector(updateOrientationWithOrientation:)])
+				[child updateOrientationWithOrientation:toInterfaceOrientation ];
+	}
 }
 #endif // GAME_AUTOROTATION == kGameAutorotationUIViewController
 
