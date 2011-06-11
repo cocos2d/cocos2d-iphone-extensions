@@ -13,12 +13,6 @@ Complete with the "snapping" effect. You can create screens with anything that c
 Also there's an option to change the width of each layer for the "Angry Birds" style preview effect.
 (In a fact layer contentSize isn't changed, but widthOffset is used for pages (CCLayer) positioning inside the CCScrollLayer)
 
-Artifacts
-==============
-ATTENTION:
-	If you have dots (page indicator) rendering artifacts - use 2d projection if it's possible.
- Or try to move CCScrollLayer' parent (dots are rendered in parent transform) by fractional deltas,
- to remove the artifacts.
 
 Usage
 =============

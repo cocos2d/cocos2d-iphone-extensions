@@ -2,8 +2,8 @@ CCMenuAdvanced
 ==================
 
 CCMenuAdvanced is CCMenu with keyboard support for Mac (esc/arrows/enter), a little bit different alignment options,
-and possibility to slide.It should be easy to add CCMenuAdvanced to CCMenu as a patch, not a subclass.
-I don't know when i will have time to prepare it for pull request to cocos2d, so feel free to do it instead of me ;)
+and possibility to slide. Unlike original CCMenu it uses natural positioning system:isRelativeAnchorPoint is YES by
+ default & contentSize depends on the children of the CCMenuAdvanced (set automatically at init & each align).
 
 Short video demo: [CCMenuAdvanced.MOV](http://dl.getdropbox.com/u/1765875/CCMenuAdvanced.MOV "CCMenuAdvanced video demo")
 Screenshots: [Wiki/Sreenshots](https://github.com/psineur/CCMenuAdvanced/wiki/Screenshots "Screenshots" )

@@ -31,19 +31,19 @@ To play videofile foo.mp4 simply use:
 	// First tries to find file in NSCachesDirectory and play it from there
 	// Second tries to find file in resources directory
 	// Does nothing if file not found 
-    [VideoPlayer playMovieWithFile: @"bait.mp4"];
+    [CCVideoPlayer playMovieWithFile: @"bait.mp4"];
 
-VideoPlayer ignores orientation change by itself, but you can manually change it's orientation:
+CCVideoPlayer ignores orientation change by itself, but you can manually change it's orientation:
 
     UIDeviceOrientation deviceOrientation = (UIDeviceOrientation)toInterfaceOrientation;
-    [VideoPlayer updateOrientationWithOrientation: deviceOrientation ];
+    [CCVideoPlayer updateOrientationWithOrientation: deviceOrientation ];
 
 Playing video uses a lot of resources, so it's recommended to stop gpu render and other heavy tasks, while playing video.
-You can do this by setting a VideoPlayer delegate:
+You can do this by setting a CCVideoPlayer delegate:
 
-    [VideoPlayer setDelegate: self]; 
+    [CCVideoPlayer setDelegate: self]; 
 
-Your delegate class should conform to VideoPlayerDelegate and implement these methods:
+Your delegate class should conform to CCVideoPlayerDelegate and implement these methods:
 
     - (void) moviePlaybackFinished
     {
