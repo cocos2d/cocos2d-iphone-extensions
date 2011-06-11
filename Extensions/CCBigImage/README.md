@@ -31,6 +31,6 @@ Like this:
 If you have texturePacker - tilesCompress.sh will help you to compress all tiles automatically.
 Just execute it in folder with png's and it will compress them all to RGBA4444 pvr.ccz format
 
-CCMenuAdvancedTest uses pvr.ccz now. Cause with png it was too long build.
+CCMenuAdvancedTest uses pvr.ccz now. Cause with png it was too long to build.
 Compressed tiles in 8e67e772174ba57536380fc7bebf19cb88194f9a
 Replaced all 'png' with 'pvr.ccz' in 072fdd4d621902c22f13254e81bb850f90405450

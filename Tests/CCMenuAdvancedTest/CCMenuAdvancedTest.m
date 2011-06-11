@@ -59,7 +59,7 @@ enum nodeTags
 	{
 		// Create advice label.		
 		CCLabelTTF *label = [CCLabelTTF labelWithString:@"Choose the test." fontName:@"Marker Felt" fontSize:24];
-		CCLabelTTF *label2 = [CCLabelTTF labelWithString:@"Menu should be at the the screen center." fontName:@"Marker Felt" fontSize:24];
+		CCLabelTTF *label2 = [CCLabelTTF labelWithString:@"Menu should be at the screen center." fontName:@"Marker Felt" fontSize:24];
 		label2.anchorPoint = ccp(0.5f, 1);
 		label2.position = ccp(0.5f * label.contentSize.width, 0);
 		[label addChild: label2];
@@ -315,7 +315,7 @@ enum nodeTags
 - (CCLabelTTF *) adviceLabel
 {
 	CCLabelTTF *label = [CCLabelTTF labelWithString:@"Vertical Test." fontName:@"Marker Felt" fontSize:24];
-	CCLabelTTF *label2 = [CCLabelTTF labelWithString:@"Scrollable menu should be at the the left." fontName:@"Marker Felt" fontSize:24];
+	CCLabelTTF *label2 = [CCLabelTTF labelWithString:@"Scrollable menu should be at the left." fontName:@"Marker Felt" fontSize:24];
 	label2.anchorPoint = ccp(0.5f, 1);
 	label2.position = ccp(0.5f * label.contentSize.width, 0);
 	[label addChild: label2];
