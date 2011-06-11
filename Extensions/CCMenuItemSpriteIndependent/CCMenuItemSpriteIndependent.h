@@ -29,7 +29,7 @@
 #import <Foundation/Foundation.h>
 #import "cocos2d.h"
 
-/* CCMenuItemSprite is CCMenuItemSprite that doesn't add normal, selected
+/* CCMenuItemSpriteIndependent is CCMenuItemSprite that doesn't add normal, selected
  * and disabled images as children. Instead of that its just retain them.
  * So you can place images anyhow you want.
  *

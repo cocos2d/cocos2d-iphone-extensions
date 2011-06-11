@@ -29,7 +29,7 @@
 #ifdef __IPHONE_OS_VERSION_MAX_ALLOWED
 #import <UIKit/UIKit.h>
 
-
+// VideoOverlayView is view that added on video view and cancels video on touch.
 @interface VideoOverlayView : UIView {
     
     BOOL _touch;
