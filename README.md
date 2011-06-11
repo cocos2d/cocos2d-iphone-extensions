@@ -39,6 +39,12 @@ Extensions
  Detailed README for each extension is available in it's folder (i.e. Extensions/CCSlider/README.md).   
  On the GitHub it will be automatically shown under files list in the extension folder.
  
+Building & Running Tests
+=========================
+Agregate target "BuildAllTests" will build all extensions tests - just set it as active target and change only active excecutable to choose the test.   
+Extension Test Template is used only as a template for new extensions test targets. It should not build, cause there's no ExtensionTest class implementation for this target.   
+SYNTHESIZE_EXTENSION_TEST() macro is used (only once in each extension test) to implement ExtensionTest class, that creates scene with default extension test layer.
+ 
 Contributing
 ================
 Looking for Roadmap or TODO's? Check the [issues](https://github.com/cocos2d/cocos2d-iphone-extensions/issues "Issues") page.  
