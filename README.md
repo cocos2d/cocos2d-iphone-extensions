@@ -10,7 +10,7 @@ While gh-pages is main branch you need to execute this, to clone the repo and ge
     git clone git@github.com:cocos2d/cocos2d-iphone-extensions.git
     cd cocos2d-iphone-extensions
     git fetch origin
-    git checkout -t origin/develop
+    git checkout -t origin/master
     git submodule update --init
 ```
 
