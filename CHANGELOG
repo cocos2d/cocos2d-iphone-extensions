@@ -1,0 +1,14 @@
+
+0.1.1 - 12-June-2011
+   * Edited README: master is a default branch now.
+   * Added CHANGELOG.
+
+0.1 - 11-June-2011
+   * [iOS/Mac] CCMenuAdvanced
+   * [iOS/Mac] CCMenuItemSpriteIndependent 
+   * [iOS/Mac] CCVideoPlayer
+   * [iOS/Mac] CCBigImage
+   * [iOS/Mac] CCSlider
+   * [iOS/Mac] CCSendMessages 
+   * [iOS] CCScrollLayer 
+   * [iOS/Mac] FilesDownloader
