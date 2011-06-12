@@ -825,6 +825,7 @@
 		6D7F540C13A2E51E0022601B /* bigImage_3_9-hd.pvr.ccz */ = {isa = PBXFileReference; lastKnownFileType = file; path = "bigImage_3_9-hd.pvr.ccz"; sourceTree = "<group>"; };
 		6D7F540D13A2E51E0022601B /* bigImage_3_9.pvr.ccz */ = {isa = PBXFileReference; lastKnownFileType = file; path = bigImage_3_9.pvr.ccz; sourceTree = "<group>"; };
 		6D7F556E13A343000022601B /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.md; sourceTree = "<group>"; };
+		6D8DA81613A49824008F263B /* CHANGELOG */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = CHANGELOG; sourceTree = "<group>"; };
 		6DA574A8139C966F004D8D0B /* LICENSE.cocos2d-extensions */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "LICENSE.cocos2d-extensions"; sourceTree = "<group>"; };
 		6DA575CF139C96AE004D8D0B /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
 		6DA575D1139C96AE004D8D0B /* English */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/InfoPlist.strings; sourceTree = "<group>"; };
@@ -1280,6 +1281,7 @@
 			isa = PBXGroup;
 			children = (
 				6DA57E9E139CD854004D8D0B /* README.md */,
+				6D8DA81613A49824008F263B /* CHANGELOG */,
 				E076E61F1225EC1E00DE0DA2 /* LICENSE.cocos2d */,
 				6DA574A8139C966F004D8D0B /* LICENSE.cocos2d-extensions */,
 				6DA5886D13A050B4004D8D0B /* AUTHORS.cocos2d-extensions */,
