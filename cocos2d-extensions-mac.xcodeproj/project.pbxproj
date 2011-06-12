@@ -2285,8 +2285,8 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				E076E4F01225E97900DE0DA2 /* Extension Test Template */,
 				6DA5819D139E3E18004D8D0B /* BuildAllTests */,
+				E076E4F01225E97900DE0DA2 /* Extension Test Template */,
 				E01E663C121CA00A001A484F /* cocos2d */,
 				6DA57C96139CAE19004D8D0B /* CCMenuAdvancedTest */,
 				6DA57ECD139D561E004D8D0B /* CCVideoPlayerTest */,
