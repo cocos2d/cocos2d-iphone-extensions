@@ -1,6 +1,7 @@
 Cocos2d Extensions
 =================
-This repo is a collection of different 3rd party extensions for the Cocos2d-iPhone Engine.
+This repo is a collection of different 3rd party extensions for the Cocos2D-iPhone Engine.   
+Cocos2D Extensions subforum: http://www.cocos2d-iphone.org/forum/forum/17
 
 How to get the source
 ===================== 
