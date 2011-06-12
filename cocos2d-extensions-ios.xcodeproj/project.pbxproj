@@ -2514,7 +2514,6 @@
 			projectRoot = "";
 			targets = (
 				6DA580EA139E3BF7004D8D0B /* BuildAllTests */,
-				1D6058900D05DD3D006BFB54 /* Extension Test Template */,
 				506EE05D10304ED200A389B3 /* cocos2d libraries */,
 				6DA57DB0139CBD74004D8D0B /* CCMenuAdvancedTest */,
 				6DA57F69139D62C4004D8D0B /* CCVideoPlayerTest */,
@@ -2524,6 +2523,7 @@
 				6DA580A6139E39CB004D8D0B /* CCSliderTest */,
 				6DA580C8139E39D0004D8D0B /* FilesDownloaderTest */,
 				6DA5861113A022E8004D8D0B /* CCSendMessagesTest */,
+				1D6058900D05DD3D006BFB54 /* Extension Test Template */,
 			);
 		};
 /* End PBXProject section */

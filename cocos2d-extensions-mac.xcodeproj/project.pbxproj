@@ -1265,7 +1265,6 @@
 			isa = PBXGroup;
 			children = (
 				E01E663D121CA00A001A484F /* libcocos2d.a */,
-				E076E5C01225E97900DE0DA2 /* ExtensionTestTemplate.app */,
 				6DA57CAE139CAE19004D8D0B /* CCMenuAdvancedTest.app */,
 				6DA57EEC139D561E004D8D0B /* CCVideoPlayerTest.app */,
 				6DA58117139E3CF9004D8D0B /* CCBigImageTest.app */,
@@ -1273,6 +1272,7 @@
 				6DA58165139E3D01004D8D0B /* CCSliderTest.app */,
 				6DA5817F139E3D04004D8D0B /* FilesDownloaderTest.app */,
 				6DA5865013A0232C004D8D0B /* CCSendMessagesTest.app */,
+				E076E5C01225E97900DE0DA2 /* ExtensionTestTemplate.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -2286,7 +2286,6 @@
 			projectRoot = "";
 			targets = (
 				6DA5819D139E3E18004D8D0B /* BuildAllTests */,
-				E076E4F01225E97900DE0DA2 /* Extension Test Template */,
 				E01E663C121CA00A001A484F /* cocos2d */,
 				6DA57C96139CAE19004D8D0B /* CCMenuAdvancedTest */,
 				6DA57ECD139D561E004D8D0B /* CCVideoPlayerTest */,
@@ -2295,6 +2294,7 @@
 				6DA5814E139E3D01004D8D0B /* CCSliderTest */,
 				6DA58168139E3D04004D8D0B /* FilesDownloaderTest */,
 				6DA5863913A0232C004D8D0B /* CCSendMessagesTest */,
+				E076E4F01225E97900DE0DA2 /* Extension Test Template */,
 			);
 		};
 /* End PBXProject section */
