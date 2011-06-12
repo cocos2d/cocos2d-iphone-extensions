@@ -3,15 +3,17 @@ Cocos2d Extensions
 This repo is a collection of different 3rd party extensions for the Cocos2d-iPhone Engine.
 
 How to get the source
-=================
-While gh-pages is main branch you need to execute this, to clone the repo and get to the extensions source: 
+===================== 
 
 ```
     git clone git@github.com:cocos2d/cocos2d-iphone-extensions.git
     cd cocos2d-iphone-extensions
-    git fetch origin
-    git checkout -t origin/master
+	
+	# init cocos2d-iphone submodule in order to build & run the tests.
     git submodule update --init
+	
+	# to get latest source from develop branch, use this command:
+	git checkout -t origin/develop
 ```
 
 Files & Folders
