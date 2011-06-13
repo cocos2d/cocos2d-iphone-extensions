@@ -26,16 +26,23 @@
 #
 
 # Create directory
-mkdir Resources/tiles
+mkdir tiles
 
 # Prepare SD Tiles
-preparingResoures/tileCutter --rigidTilesSize --tileWidth 256 --tileHeight 256 --inputFile preparingResoures/bigImage.png --outputFile Resources/tiles/bigImage
+echo Preparing SD Tiles
+./tileCutter --rigidTilesSize --tileWidth 256 --tileHeight 256 --inputFile bigImage.jpg --outputFile tiles/bigImage
 
 # Prepare HD Tiles
-preparingResoures/tileCutter --rigidTilesSize --tileWidth 512 --tileHeight 512 --inputFile preparingResoures/bigImage-hd.png --outputFile Resources/tiles/bigImage --outputSuffix -hd
+echo Preparing HD Tiles
+./tileCutter --rigidTilesSize --tileWidth 512 --tileHeight 512 --inputFile bigImage-hd.jpg --outputFile tiles/bigImage --outputSuffix -hd
 
 # Remove HD Tiles PLISTs
-rm Resources/tiles/bigImage-hd.plist
+rm tiles/bigImage-hd.plist
+
+# Compress tiles to pvr.ccz
+echo Converting Tiles to pvr.ccz
+cd tiles
+../tilesCompress.sh
 
 
 

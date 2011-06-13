@@ -2,6 +2,7 @@
 0.1.1 - 12-June-2011
    * Edited README: master is a default branch now.
    * Added CHANGELOG.
+   * Reduced repo work tree size.
 
 0.1 - 11-June-2011
    * [iOS/Mac] CCMenuAdvanced
