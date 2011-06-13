@@ -1,7 +1,20 @@
 Cocos2d Extensions
 =================
-This repo is a collection of different 3rd party extensions for the Cocos2D-iPhone Engine.   
-Cocos2D Extensions subforum: http://www.cocos2d-iphone.org/forum/forum/17
+This repo is a collection of quality 3rd party extensions and additions for the Cocos2D-iPhone Engine.  
+Everything that doesn’t modify Cocos2D itself, while bringing new functionality can become a part of Cocos2D-iPhone-Extensions Repo: alternative versions of existing classes, additional categories, new nodes, actions, etc…     
+Cocos2D Extensions subforum: http://www.cocos2d-iphone.org/forum/forum/17  
+
+All extensions are well documented,shipped with testcases and are compatible with latest stable Cocos2D-iPhone version.  
+With rare exceptions, they are designed for both Mac & iOS.
+  
+As well as Cocos2D, Cocos2D Extensions are licensed under the MIT License.
+
+Build & Runtime Requirements
+====================
+
+  * Mac OS X 10.6, Xcode 3.2.3 (or newer)
+  * iOS 3.0 or newer for iOS games
+  * Snow Leopard (v10.5) or newer for Mac games
 
 How to get the source
 ===================== 
