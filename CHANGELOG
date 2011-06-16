@@ -1,4 +1,8 @@
 
+0.1.2 - XX-Jule-2011
+   * CCScrollLayer: Public moveToPage and test for it.
+   * CCScrollLayer: Standard pages numbering starting from zero: [0;totalScreens-1] instead of [1; totalScreens].
+
 0.1.1 - 12-June-2011
    * Edited README: master is a default branch now.
    * Added CHANGELOG.
