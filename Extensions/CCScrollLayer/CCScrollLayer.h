@@ -8,6 +8,7 @@
 //  http://www.givp.org/blog/2010/12/30/scrolling-menus-in-cocos2d/
 //
 //  Copyright 2011 Stepan Generalov
+//  Copyright 2011 Brian Feller
 //
 //  Permission is hereby granted, free of charge, to any person obtaining a copy
 //  of this software and associated documentation files (the "Software"), to deal
@@ -81,8 +82,16 @@
 @property(readonly) int totalScreens;
 @property(readonly) int currentScreen;
 
+#pragma mark Init/Creation
 +(id) nodeWithLayers:(NSArray *)layers widthOffset: (int) widthOffset; 
 -(id) initWithLayers:(NSArray *)layers widthOffset: (int) widthOffset;
+
+#pragma mark Pages Control
+
+/* Changes page to page with given number. 
+ Does nothing if number > totalScreens or <= 0.
+ */
+-(void) moveToPage:(int)page;
 
 @end
 

@@ -8,6 +8,8 @@
 //  http://www.givp.org/blog/2010/12/30/scrolling-menus-in-cocos2d/
 //
 //  Copyright 2011 Stepan Generalov
+//  Copyright 2011 Jeff Keeme
+//  Copyright 2011 Brian Feller
 //
 //  Permission is hereby granted, free of charge, to any person obtaining a copy
 //  of this software and associated documentation files (the "Software"), to deal
@@ -158,9 +160,15 @@ enum
 
 -(void) moveToPage:(int)page
 {
+    if (page <= 0 || page > totalScreens_) {
+        CCLOGERROR(@"CCScrollLayer#moveToPage: %d - wrong page number, out of bounds. ");
+		return;
+    }
+
 	id changePage = [CCMoveTo actionWithDuration:0.3 position:ccp(-((page-1)*scrollWidth_),0)];
-	[self runAction:changePage];
-	currentScreen_ = page;
+    [self runAction:changePage];
+    currentScreen_ = page;
+
 }
 
 #pragma mark Hackish Stuff
