@@ -44,6 +44,8 @@
 	3. Added factory class method.
 	4. Code cleanup.
 	5. Added current page number indicator (iOS Style Dots).
+	6. moveToPage is public method.
+	7. Standard pages numbering starting from zero: [0;totalScreens-1] instead of [1; totalScreens]
  
  Limitations: 
 	1. Mac OS X not supported. (Note #ifndef wrappers ;) )
@@ -76,10 +78,22 @@
 	int state_;
 	
 }
+
+// Calibration property. Minimum moving touch length that is enough
+// to cancel menu items and start scrolling a layer.
 @property(readwrite, assign) CGFloat minimumTouchLengthToSlide;
+
+// Calibration property. Minimum moving touch length that is enough to change
+// the page, without snapping back to the previous selected page.
 @property(readwrite, assign) CGFloat minimumTouchLengthToChangePage;
+
+// Whenever show or not white/grey dots under the scroll layer.
 @property(readwrite, assign) BOOL showPagesIndicator;
+
+// Total pages available in scrollLayer.
 @property(readonly) int totalScreens;
+
+// Current page number, that is shown. Belongs to the [0, totalScreen] interval.
 @property(readonly) int currentScreen;
 
 #pragma mark Init/Creation
