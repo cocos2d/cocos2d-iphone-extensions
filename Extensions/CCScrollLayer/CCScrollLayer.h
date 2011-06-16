@@ -89,7 +89,7 @@
 #pragma mark Pages Control
 
 /* Changes page to page with given number. 
- Does nothing if number > totalScreens or <= 0.
+ Does nothing if number >= totalScreens or < 0.
  */
 -(void) moveToPage:(int)page;
 

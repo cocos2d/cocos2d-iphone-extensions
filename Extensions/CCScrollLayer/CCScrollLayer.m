@@ -86,7 +86,7 @@ enum
 		self.showPagesIndicator = YES;
 		
 		// Set up the starting variables
-		currentScreen_ = 1;
+		currentScreen_ = 0;
 		
 		// offset added to show preview of next/previous screens
 		scrollWidth_ = [[CCDirector sharedDirector] winSize].width - widthOffset;
@@ -146,7 +146,7 @@ enum
 		
 		// Draw White Point for Selected Page
 		glColor4ub(0xFF,0xFF,0xFF,0xFF);
-		ccDrawPoint(points[currentScreen_ - 1]);
+		ccDrawPoint(points[currentScreen_]);
 		
 		// Restore GL Values
 		glPointSize(1.0f);
@@ -160,12 +160,12 @@ enum
 
 -(void) moveToPage:(int)page
 {
-    if (page <= 0 || page > totalScreens_) {
+    if (page < 0 || page >= totalScreens_) {
         CCLOGERROR(@"CCScrollLayer#moveToPage: %d - wrong page number, out of bounds. ");
 		return;
     }
 
-	id changePage = [CCMoveTo actionWithDuration:0.3 position:ccp(-((page-1)*scrollWidth_),0)];
+	id changePage = [CCMoveTo actionWithDuration:0.3 position:ccp( - page * scrollWidth_, 0.0f )];
     [self runAction:changePage];
     currentScreen_ = page;
 
@@ -237,7 +237,7 @@ enum
 	}
 	
 	if (state_ == kCCScrollLayerStateSliding)
-		self.position = ccp((-(currentScreen_-1)*scrollWidth_)+(touchPoint.x-startSwipe_),0);	
+		self.position = ccp( (- currentScreen_ * scrollWidth_) + (touchPoint.x-startSwipe_),0);	
 	
 }
 
@@ -248,11 +248,11 @@ enum
 	
 	int newX = touchPoint.x;	
 	
-	if ( (newX - startSwipe_) < -self.minimumTouchLengthToChangePage && (currentScreen_+1) <= totalScreens_ )
+	if ( (newX - startSwipe_) < -self.minimumTouchLengthToChangePage && (currentScreen_+1) < totalScreens_ )
 	{		
 		[self moveToPage: currentScreen_+1];		
 	}
-	else if ( (newX - startSwipe_) > self.minimumTouchLengthToChangePage && (currentScreen_-1) > 0 )
+	else if ( (newX - startSwipe_) > self.minimumTouchLengthToChangePage && currentScreen_ > 0 )
 	{		
 		[self moveToPage: currentScreen_-1];		
 	}

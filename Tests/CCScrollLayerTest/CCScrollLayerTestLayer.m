@@ -99,7 +99,7 @@ enum nodeTags
 		
 		// Add fast-page-change menu.
 		CCMenu *fastPageChangeMenu = [CCMenu menuWithItems: nil];
-		for (int i = 1; i <= scroller.totalScreens; ++i)
+		for (int i = 0; i < scroller.totalScreens; ++i)
 		{
 			NSString *numberString = [NSString stringWithFormat:@"%d", i];
 			CCLabelTTF *labelWithNumber = [CCLabelTTF labelWithString:numberString fontName:@"Marker Felt" fontSize:22];		
