@@ -174,6 +174,18 @@ enum
 
 }
 
+-(void) selectPage:(int)page
+{
+    if (page < 0 || page >= totalScreens_) {
+        CCLOGERROR(@"CCScrollLayer#moveToPage: %d - wrong page number, out of bounds. ");
+		return;
+    }
+	
+    self.position = ccp( - page * scrollWidth_, 0.0f );
+    currentScreen_ = page;
+	
+}
+
 #pragma mark Hackish Stuff
 
 - (void) claimTouch: (UITouch *) aTouch

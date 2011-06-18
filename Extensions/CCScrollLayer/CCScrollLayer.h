@@ -108,10 +108,15 @@
 
 #pragma mark Pages Control
 
-/* Changes page to page with given number. 
+/* Moves scrollLayer to page with given number. 
  Does nothing if number >= totalScreens or < 0.
  */
 -(void) moveToPage:(int)page;
+
+/* Immedeatly moves scrollLayer to page with given number without running CCMoveTo. 
+ Does nothing if number >= totalScreens or < 0.
+ */
+-(void) selectPage:(int)page;
 
 @end
 

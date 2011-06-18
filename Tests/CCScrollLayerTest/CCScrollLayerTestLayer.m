@@ -94,6 +94,7 @@ enum nodeTags
 		scroller.pagesIndicatorPosition = ccp(screenSize.width * 0.5f, screenSize.height - 30.0f);
 		// finally add the scroller to your scene
 		[self addChild:scroller z: 0 tag: kScrollLayer];
+		[scroller selectPage: 1];
 		
 		///////////////////////////////////////////////
 		
