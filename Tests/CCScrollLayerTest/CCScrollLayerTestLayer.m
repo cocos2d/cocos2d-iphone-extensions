@@ -91,7 +91,7 @@ enum nodeTags
 		
 		// now create the scroller and pass-in the pages (set widthOffset to 0 for fullscreen pages)
 		CCScrollLayer *scroller = [[CCScrollLayer alloc] initWithLayers:[NSMutableArray arrayWithObjects: pageOne,pageTwo,pageThree,nil] widthOffset: 230];
-		
+		scroller.pagesIndicatorPosition = ccp(screenSize.width * 0.5f, screenSize.height - 30.0f);
 		// finally add the scroller to your scene
 		[self addChild:scroller z: 0 tag: kScrollLayer];
 		

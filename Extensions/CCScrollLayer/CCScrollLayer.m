@@ -63,6 +63,7 @@ enum
 @synthesize totalScreens = totalScreens_;
 @synthesize currentScreen = currentScreen_;
 @synthesize showPagesIndicator = showPagesIndicator_;
+@synthesize pagesIndicatorPosition = pagesIndicatorPosition_;
 
 +(id) nodeWithLayers:(NSArray *)layers widthOffset: (int) widthOffset
 {
@@ -84,6 +85,8 @@ enum
 		
 		// Show indicator by default.
 		self.showPagesIndicator = YES;
+		self.pagesIndicatorPosition = ccp(0.5f * self.contentSize.width, ceilf ( self.contentSize.height / 8.0f ));
+		//<TODO: update this value in updateForScreenReshape for Mac Support ( #22 )
 		
 		// Set up the starting variables
 		currentScreen_ = 0;
@@ -124,12 +127,12 @@ enum
 	{
 		// Prepare Points Array
 		CGFloat n = (CGFloat)totalScreens_; //< Total points count in CGFloat.
-		CGFloat pY = ceilf ( self.contentSize.height / 8.0f ); //< Points y-coord in parent coord sys.
+		CGFloat pY = self.pagesIndicatorPosition.y; //< Points y-coord in parent coord sys.
 		CGFloat d = 16.0f; //< Distance between points.
 		CGPoint points[totalScreens_];	
 		for (int i=0; i < totalScreens_; ++i)
 		{
-			CGFloat pX = 0.5f * self.contentSize.width + d * ( (CGFloat)i - 0.5f*(n-1.0f) );
+			CGFloat pX = self.pagesIndicatorPosition.x + d * ( (CGFloat)i - 0.5f*(n-1.0f) );
 			points[i] = ccp (pX, pY);
 		}
 		

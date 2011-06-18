@@ -43,7 +43,7 @@
     2. Added touches lengths & screens properties.
 	3. Added factory class method.
 	4. Code cleanup.
-	5. Added current page number indicator (iOS Style Dots).
+	5. Added current page number indicator (iOS Style Dots) with positioning.
 	6. moveToPage is public method.
 	7. Standard pages numbering starting from zero: [0;totalScreens-1] instead of [1; totalScreens]
  
@@ -73,6 +73,7 @@
 	
 	// Whenever show or not gray/white dots under scrolling content.
 	BOOL showPagesIndicator_;
+	CGPoint pagesIndicatorPosition_;
 	
 	// Internal state of scrollLayer (scrolling or idle).
 	int state_;
@@ -88,7 +89,12 @@
 @property(readwrite, assign) CGFloat minimumTouchLengthToChangePage;
 
 // Whenever show or not white/grey dots under the scroll layer.
+// If yes - dots will be rendered in parents transform (rendered after scroller visit).
 @property(readwrite, assign) BOOL showPagesIndicator;
+
+// Position of dots center in parent coordinates. 
+// (Default value is screenWidth/2, screenHeight/4)
+@property(readwrite, assign) CGPoint pagesIndicatorPosition;
 
 // Total pages available in scrollLayer.
 @property(readonly) int totalScreens;

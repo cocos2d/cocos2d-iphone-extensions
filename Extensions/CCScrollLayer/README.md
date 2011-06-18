@@ -28,7 +28,9 @@ Additions since Giv Parvaneh version
 2. Added touches lengths & screens properties.
 3. Added factory class method.
 4. Code cleanup.
-5. Added current page number indicator (iOS Style Dots).
+5. Added current page number indicator (iOS Style Dots) with positioning.
+6. moveToPage is public method.
+7. Standard pages numbering starting from zero: [0;totalScreens-1] instead of [1; totalScreens]
  
 Limitations
 =============
