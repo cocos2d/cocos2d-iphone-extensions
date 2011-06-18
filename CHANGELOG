@@ -1,8 +1,7 @@
 
-0.1.2 - XX-Jule-2011
-   * CCScrollLayer: Added pagesIndicatorPosition property.
-   * CCScrollLayer: Made moveToPage public and added test for it.
-   * CCScrollLayer: Changed pages numbering to start from zero: [0;totalScreens-1] instead of [1; totalScreens].
+0.1.2 - XX-June-2011
+   * Enhancements to CCScrollLayer: added pagesIndicatorPosition property, 
+   moveToPage: & selectPage: methods, changed pages numbering to start from zero.
 
 0.1.1 - 12-June-2011
    * Edited README: master is a default branch now.
