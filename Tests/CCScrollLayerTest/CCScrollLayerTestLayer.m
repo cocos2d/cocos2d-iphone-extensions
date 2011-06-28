@@ -38,6 +38,11 @@ SYNTHESIZE_EXTENSION_TEST(CCScrollLayerTestLayer)
 
 @implementation CCScrollLayerTestLayer
 
+enum nodeTags
+{
+	kScrollLayer = 256,
+};
+
 // on "init" you need to initialize your instance
 -(id) init
 {
@@ -86,9 +91,37 @@ SYNTHESIZE_EXTENSION_TEST(CCScrollLayerTestLayer)
 		
 		// now create the scroller and pass-in the pages (set widthOffset to 0 for fullscreen pages)
 		CCScrollLayer *scroller = [[CCScrollLayer alloc] initWithLayers:[NSMutableArray arrayWithObjects: pageOne,pageTwo,pageThree,nil] widthOffset: 230];
-		
+		scroller.pagesIndicatorPosition = ccp(screenSize.width * 0.5f, screenSize.height - 30.0f);
 		// finally add the scroller to your scene
-		[self addChild:scroller];
+		[self addChild:scroller z: 0 tag: kScrollLayer];
+		[scroller selectPage: 1];
+		
+		///////////////////////////////////////////////
+		
+		// Add fast-page-change menu.
+		CCMenu *fastPageChangeMenu = [CCMenu menuWithItems: nil];
+		for (int i = 0; i < scroller.totalScreens; ++i)
+		{
+			NSString *numberString = [NSString stringWithFormat:@"%d", i];
+			CCLabelTTF *labelWithNumber = [CCLabelTTF labelWithString:numberString fontName:@"Marker Felt" fontSize:22];		
+			CCMenuItemLabel *item = [CCMenuItemLabel itemWithLabel:labelWithNumber target:self selector:@selector(fastMenuItemPressed:)];
+			[fastPageChangeMenu addChild: item z: 0 tag: i];
+		}
+		[fastPageChangeMenu alignItemsHorizontally];
+		fastPageChangeMenu.position = ccp(240.0f, 15.0f); 
+		//< simple position menu at the bottom, this is bad bottom menu implementation:
+		// use editor and position items manually with it or
+		// use CCMenuAdvanced instead.
+		// This positioning method is used here only because tests should have minimum
+		// dependencies. 
+		[self addChild: fastPageChangeMenu];
+		
+		// Add advice about how to use the test
+		CCLabelTTF *adviceLabel = [CCLabelTTF labelWithString:@"Press numbers at the bottom, or swipe to change screen." fontName:@"Marker Felt" fontSize:20];
+		adviceLabel.anchorPoint = ccp(0.5f, 1.0f);
+		adviceLabel.position = ccp(0.5f * screenSize.width, screenSize.height);
+		[self addChild: adviceLabel];
+		
 	
 	}
 	return self;
@@ -97,6 +130,13 @@ SYNTHESIZE_EXTENSION_TEST(CCScrollLayerTestLayer)
 - (void) testCallback: (CCNode *) sender
 {
 	NSLog(@"test callback called!");
+}
+
+- (void) fastMenuItemPressed: (CCNode *) sender
+{
+	CCScrollLayer *scroller = (CCScrollLayer *)[self getChildByTag:kScrollLayer];
+	
+	[scroller moveToPage: sender.tag];
 }
 
 @end

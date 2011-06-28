@@ -6,6 +6,9 @@ Repo Maintainer:
 
 People/companies who were/are contributing code to cocos2d-iphone-extensions (alphabetically ordered):
 
+	* Brian Feller (http://infinitesimplicity.com/)
+		CCScrollLayer#moveToPage: bounds checking
+
 	* Darren Clark (http://darrenclark.ca/)
 		CCSendMessages author
 

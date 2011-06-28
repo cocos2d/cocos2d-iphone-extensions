@@ -1,15 +1,20 @@
 
+0.1.2 - XX-June-2011
+   * Enhancements to CCScrollLayer: added pagesIndicatorPosition property, 
+   moveToPage: & selectPage: methods, changed pages numbering to start from zero.
+
 0.1.1 - 12-June-2011
    * Edited README: master is a default branch now.
    * Added CHANGELOG.
    * Reduced repo work tree size.
 
 0.1 - 11-June-2011
-   * [iOS/Mac] CCMenuAdvanced
-   * [iOS/Mac] CCMenuItemSpriteIndependent 
-   * [iOS/Mac] CCVideoPlayer
-   * [iOS/Mac] CCBigImage
-   * [iOS/Mac] CCSlider
-   * [iOS/Mac] CCSendMessages 
-   * [iOS] CCScrollLayer 
-   * [iOS/Mac] FilesDownloader
+   * Initial release with following extensions:
+      * [iOS/Mac] CCMenuAdvanced
+      * [iOS/Mac] CCMenuItemSpriteIndependent 
+      * [iOS/Mac] CCVideoPlayer
+      * [iOS/Mac] CCBigImage
+      * [iOS/Mac] CCSlider
+      * [iOS/Mac] CCSendMessages 
+      * [iOS]     CCScrollLayer 
+      * [iOS/Mac] FilesDownloader

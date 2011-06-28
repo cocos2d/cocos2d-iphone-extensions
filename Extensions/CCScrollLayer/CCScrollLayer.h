@@ -8,6 +8,7 @@
 //  http://www.givp.org/blog/2010/12/30/scrolling-menus-in-cocos2d/
 //
 //  Copyright 2011 Stepan Generalov
+//  Copyright 2011 Brian Feller
 //
 //  Permission is hereby granted, free of charge, to any person obtaining a copy
 //  of this software and associated documentation files (the "Software"), to deal
@@ -42,7 +43,9 @@
     2. Added touches lengths & screens properties.
 	3. Added factory class method.
 	4. Code cleanup.
-	5. Added current page number indicator (iOS Style Dots).
+	5. Added current page number indicator (iOS Style Dots) with positioning.
+	6. moveToPage is public method.
+	7. Standard pages numbering starting from zero: [0;totalScreens-1] instead of [1; totalScreens]
  
  Limitations: 
 	1. Mac OS X not supported. (Note #ifndef wrappers ;) )
@@ -70,19 +73,50 @@
 	
 	// Whenever show or not gray/white dots under scrolling content.
 	BOOL showPagesIndicator_;
+	CGPoint pagesIndicatorPosition_;
 	
 	// Internal state of scrollLayer (scrolling or idle).
 	int state_;
 	
 }
+
+// Calibration property. Minimum moving touch length that is enough
+// to cancel menu items and start scrolling a layer.
 @property(readwrite, assign) CGFloat minimumTouchLengthToSlide;
+
+// Calibration property. Minimum moving touch length that is enough to change
+// the page, without snapping back to the previous selected page.
 @property(readwrite, assign) CGFloat minimumTouchLengthToChangePage;
+
+// Whenever show or not white/grey dots under the scroll layer.
+// If yes - dots will be rendered in parents transform (rendered after scroller visit).
 @property(readwrite, assign) BOOL showPagesIndicator;
+
+// Position of dots center in parent coordinates. 
+// (Default value is screenWidth/2, screenHeight/4)
+@property(readwrite, assign) CGPoint pagesIndicatorPosition;
+
+// Total pages available in scrollLayer.
 @property(readonly) int totalScreens;
+
+// Current page number, that is shown. Belongs to the [0, totalScreen] interval.
 @property(readonly) int currentScreen;
 
+#pragma mark Init/Creation
 +(id) nodeWithLayers:(NSArray *)layers widthOffset: (int) widthOffset; 
 -(id) initWithLayers:(NSArray *)layers widthOffset: (int) widthOffset;
+
+#pragma mark Pages Control
+
+/* Moves scrollLayer to page with given number. 
+ Does nothing if number >= totalScreens or < 0.
+ */
+-(void) moveToPage:(int)page;
+
+/* Immedeatly moves scrollLayer to page with given number without running CCMoveTo. 
+ Does nothing if number >= totalScreens or < 0.
+ */
+-(void) selectPage:(int)page;
 
 @end
 

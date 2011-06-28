@@ -8,6 +8,8 @@
 //  http://www.givp.org/blog/2010/12/30/scrolling-menus-in-cocos2d/
 //
 //  Copyright 2011 Stepan Generalov
+//  Copyright 2011 Jeff Keeme
+//  Copyright 2011 Brian Feller
 //
 //  Permission is hereby granted, free of charge, to any person obtaining a copy
 //  of this software and associated documentation files (the "Software"), to deal
@@ -61,6 +63,7 @@ enum
 @synthesize totalScreens = totalScreens_;
 @synthesize currentScreen = currentScreen_;
 @synthesize showPagesIndicator = showPagesIndicator_;
+@synthesize pagesIndicatorPosition = pagesIndicatorPosition_;
 
 +(id) nodeWithLayers:(NSArray *)layers widthOffset: (int) widthOffset
 {
@@ -82,9 +85,11 @@ enum
 		
 		// Show indicator by default.
 		self.showPagesIndicator = YES;
+		self.pagesIndicatorPosition = ccp(0.5f * self.contentSize.width, ceilf ( self.contentSize.height / 8.0f ));
+		//<TODO: update this value in updateForScreenReshape for Mac Support ( #22 )
 		
 		// Set up the starting variables
-		currentScreen_ = 1;
+		currentScreen_ = 0;
 		
 		// offset added to show preview of next/previous screens
 		scrollWidth_ = [[CCDirector sharedDirector] winSize].width - widthOffset;
@@ -122,12 +127,12 @@ enum
 	{
 		// Prepare Points Array
 		CGFloat n = (CGFloat)totalScreens_; //< Total points count in CGFloat.
-		CGFloat pY = ceilf ( self.contentSize.height / 8.0f ); //< Points y-coord in parent coord sys.
+		CGFloat pY = self.pagesIndicatorPosition.y; //< Points y-coord in parent coord sys.
 		CGFloat d = 16.0f; //< Distance between points.
 		CGPoint points[totalScreens_];	
 		for (int i=0; i < totalScreens_; ++i)
 		{
-			CGFloat pX = 0.5f * self.contentSize.width + d * ( (CGFloat)i - 0.5f*(n-1.0f) );
+			CGFloat pX = self.pagesIndicatorPosition.x + d * ( (CGFloat)i - 0.5f*(n-1.0f) );
 			points[i] = ccp (pX, pY);
 		}
 		
@@ -144,7 +149,7 @@ enum
 		
 		// Draw White Point for Selected Page
 		glColor4ub(0xFF,0xFF,0xFF,0xFF);
-		ccDrawPoint(points[currentScreen_ - 1]);
+		ccDrawPoint(points[currentScreen_]);
 		
 		// Restore GL Values
 		glPointSize(1.0f);
@@ -158,9 +163,27 @@ enum
 
 -(void) moveToPage:(int)page
 {
-	id changePage = [CCMoveTo actionWithDuration:0.3 position:ccp(-((page-1)*scrollWidth_),0)];
-	[self runAction:changePage];
-	currentScreen_ = page;
+    if (page < 0 || page >= totalScreens_) {
+        CCLOGERROR(@"CCScrollLayer#moveToPage: %d - wrong page number, out of bounds. ");
+		return;
+    }
+
+	id changePage = [CCMoveTo actionWithDuration:0.3 position:ccp( - page * scrollWidth_, 0.0f )];
+    [self runAction:changePage];
+    currentScreen_ = page;
+
+}
+
+-(void) selectPage:(int)page
+{
+    if (page < 0 || page >= totalScreens_) {
+        CCLOGERROR(@"CCScrollLayer#moveToPage: %d - wrong page number, out of bounds. ");
+		return;
+    }
+	
+    self.position = ccp( - page * scrollWidth_, 0.0f );
+    currentScreen_ = page;
+	
 }
 
 #pragma mark Hackish Stuff
@@ -229,7 +252,7 @@ enum
 	}
 	
 	if (state_ == kCCScrollLayerStateSliding)
-		self.position = ccp((-(currentScreen_-1)*scrollWidth_)+(touchPoint.x-startSwipe_),0);	
+		self.position = ccp( (- currentScreen_ * scrollWidth_) + (touchPoint.x-startSwipe_),0);	
 	
 }
 
@@ -240,11 +263,11 @@ enum
 	
 	int newX = touchPoint.x;	
 	
-	if ( (newX - startSwipe_) < -self.minimumTouchLengthToChangePage && (currentScreen_+1) <= totalScreens_ )
+	if ( (newX - startSwipe_) < -self.minimumTouchLengthToChangePage && (currentScreen_+1) < totalScreens_ )
 	{		
 		[self moveToPage: currentScreen_+1];		
 	}
-	else if ( (newX - startSwipe_) > self.minimumTouchLengthToChangePage && (currentScreen_-1) > 0 )
+	else if ( (newX - startSwipe_) > self.minimumTouchLengthToChangePage && currentScreen_ > 0 )
 	{		
 		[self moveToPage: currentScreen_-1];		
 	}
