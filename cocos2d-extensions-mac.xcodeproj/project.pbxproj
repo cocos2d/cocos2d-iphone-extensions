@@ -27,6 +27,25 @@
 /* End PBXAggregateTarget section */
 
 /* Begin PBXBuildFile section */
+		1E1EF41D13B9A99F00C12616 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6DA575D0139C96AE004D8D0B /* InfoPlist.strings */; };
+		1E1EF41E13B9A99F00C12616 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6DA575D2139C96AE004D8D0B /* MainMenu.xib */; };
+		1E1EF41F13B9A99F00C12616 /* fps_images.png in Resources */ = {isa = PBXBuildFile; fileRef = 6DA575D4139C96AE004D8D0B /* fps_images.png */; };
+		1E1EF42013B9A99F00C12616 /* icon.icns in Resources */ = {isa = PBXBuildFile; fileRef = 6DA575D9139C96AE004D8D0B /* icon.icns */; };
+		1E1EF42213B9A99F00C12616 /* cocos2d_extensions_macAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DA575E5139C96AE004D8D0B /* cocos2d_extensions_macAppDelegate.m */; };
+		1E1EF42313B9A99F00C12616 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DA575E9139C96AE004D8D0B /* main.m */; };
+		1E1EF42513B9A99F00C12616 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */; };
+		1E1EF42613B9A99F00C12616 /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E036A79C121B5C720037C5C6 /* OpenGL.framework */; };
+		1E1EF42713B9A99F00C12616 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E036A79E121B5C870037C5C6 /* QuartzCore.framework */; };
+		1E1EF42813B9A99F00C12616 /* libcocos2d.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E01E663D121CA00A001A484F /* libcocos2d.a */; };
+		1E1EF42913B9A99F00C12616 /* ApplicationServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E01E6A3D121EDCD3001A484F /* ApplicationServices.framework */; };
+		1E1EF42A13B9A99F00C12616 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = E0F9256D1224207200EF2362 /* libz.dylib */; };
+		1E1EF42B13B9A99F00C12616 /* OpenAL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E08AA04A12C0EDC8000341BD /* OpenAL.framework */; };
+		1E1EF42C13B9A99F00C12616 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E08AA04C12C0EEC0000341BD /* AudioToolbox.framework */; };
+		1E1EF43213B9A9F000C12616 /* HKTMXLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E1EF41513B9A96200C12616 /* HKTMXLayer.m */; };
+		1E1EF43313B9A9F000C12616 /* HKTMXTiledMap.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E1EF41713B9A96200C12616 /* HKTMXTiledMap.m */; };
+		1E1EF43413B9A9F000C12616 /* HKTMXTiledMapTestLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E1EF40E13B9A95A00C12616 /* HKTMXTiledMapTestLayer.m */; };
+		1E1EF43513B9AA0100C12616 /* testmap.tmx in Resources */ = {isa = PBXBuildFile; fileRef = 1E1EF41013B9A95A00C12616 /* testmap.tmx */; };
+		1E1EF43613B9AA0100C12616 /* tiles.png in Resources */ = {isa = PBXBuildFile; fileRef = 1E1EF41113B9A95A00C12616 /* tiles.png */; };
 		6D7F4F6F13A27ECE0022601B /* horizontalTestButton-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = 6D7F4F6113A27ECE0022601B /* horizontalTestButton-hd.png */; };
 		6D7F4F7013A27ECE0022601B /* horizontalTestButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 6D7F4F6213A27ECE0022601B /* horizontalTestButton.png */; };
 		6D7F4F7113A27ECE0022601B /* priorityFour-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = 6D7F4F6313A27ECE0022601B /* priorityFour-hd.png */; };
@@ -533,6 +552,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		1E1EF41B13B9A99F00C12616 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 29B97313FDCFA39411CA2CEA /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = E01E663C121CA00A001A484F;
+			remoteInfo = cocos2d;
+		};
 		6D7F521313A2E2B90022601B /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 29B97313FDCFA39411CA2CEA /* Project object */;
@@ -643,6 +669,16 @@
 /* Begin PBXFileReference section */
 		1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = /System/Library/Frameworks/Cocoa.framework; sourceTree = "<absolute>"; };
 		13E42FB307B3F0F600E4EEF1 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = /System/Library/Frameworks/CoreData.framework; sourceTree = "<absolute>"; };
+		1E1EF40D13B9A95A00C12616 /* HKTMXTiledMapTestLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HKTMXTiledMapTestLayer.h; sourceTree = "<group>"; };
+		1E1EF40E13B9A95A00C12616 /* HKTMXTiledMapTestLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HKTMXTiledMapTestLayer.m; sourceTree = "<group>"; };
+		1E1EF41013B9A95A00C12616 /* testmap.tmx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = testmap.tmx; sourceTree = "<group>"; };
+		1E1EF41113B9A95A00C12616 /* tiles.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tiles.png; sourceTree = "<group>"; };
+		1E1EF41413B9A96200C12616 /* HKTMXLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HKTMXLayer.h; sourceTree = "<group>"; };
+		1E1EF41513B9A96200C12616 /* HKTMXLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HKTMXLayer.m; sourceTree = "<group>"; };
+		1E1EF41613B9A96200C12616 /* HKTMXTiledMap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HKTMXTiledMap.h; sourceTree = "<group>"; };
+		1E1EF41713B9A96200C12616 /* HKTMXTiledMap.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HKTMXTiledMap.m; sourceTree = "<group>"; };
+		1E1EF41813B9A96200C12616 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.md; sourceTree = "<group>"; };
+		1E1EF43013B9A9A000C12616 /* HKTMXTIledMap Test.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "HKTMXTIledMap Test.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		29B97324FDCFA39411CA2CEA /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = /System/Library/Frameworks/AppKit.framework; sourceTree = "<absolute>"; };
 		29B97325FDCFA39411CA2CEA /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = /System/Library/Frameworks/Foundation.framework; sourceTree = "<absolute>"; };
 		6D7F4F6113A27ECE0022601B /* horizontalTestButton-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "horizontalTestButton-hd.png"; sourceTree = "<group>"; };
@@ -1110,6 +1146,21 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		1E1EF42413B9A99F00C12616 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1E1EF42513B9A99F00C12616 /* Cocoa.framework in Frameworks */,
+				1E1EF42613B9A99F00C12616 /* OpenGL.framework in Frameworks */,
+				1E1EF42713B9A99F00C12616 /* QuartzCore.framework in Frameworks */,
+				1E1EF42813B9A99F00C12616 /* libcocos2d.a in Frameworks */,
+				1E1EF42913B9A99F00C12616 /* ApplicationServices.framework in Frameworks */,
+				1E1EF42A13B9A99F00C12616 /* libz.dylib in Frameworks */,
+				1E1EF42B13B9A99F00C12616 /* OpenAL.framework in Frameworks */,
+				1E1EF42C13B9A99F00C12616 /* AudioToolbox.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		6DA57CA2139CAE19004D8D0B /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -1273,8 +1324,40 @@
 				6DA5817F139E3D04004D8D0B /* FilesDownloaderTest.app */,
 				6DA5865013A0232C004D8D0B /* CCSendMessagesTest.app */,
 				E076E5C01225E97900DE0DA2 /* ExtensionTestTemplate.app */,
+				1E1EF43013B9A9A000C12616 /* HKTMXTIledMap Test.app */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		1E1EF40C13B9A95A00C12616 /* HKTMXTiledMapTest */ = {
+			isa = PBXGroup;
+			children = (
+				1E1EF40D13B9A95A00C12616 /* HKTMXTiledMapTestLayer.h */,
+				1E1EF40E13B9A95A00C12616 /* HKTMXTiledMapTestLayer.m */,
+				1E1EF40F13B9A95A00C12616 /* Resources */,
+			);
+			path = HKTMXTiledMapTest;
+			sourceTree = "<group>";
+		};
+		1E1EF40F13B9A95A00C12616 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				1E1EF41013B9A95A00C12616 /* testmap.tmx */,
+				1E1EF41113B9A95A00C12616 /* tiles.png */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		1E1EF41313B9A96200C12616 /* HKTMXTiledMap */ = {
+			isa = PBXGroup;
+			children = (
+				1E1EF41413B9A96200C12616 /* HKTMXLayer.h */,
+				1E1EF41513B9A96200C12616 /* HKTMXLayer.m */,
+				1E1EF41613B9A96200C12616 /* HKTMXTiledMap.h */,
+				1E1EF41713B9A96200C12616 /* HKTMXTiledMap.m */,
+				1E1EF41813B9A96200C12616 /* README.md */,
+			);
+			path = HKTMXTiledMap;
 			sourceTree = "<group>";
 		};
 		29B97314FDCFA39411CA2CEA /* cocos2d-mac */ = {
@@ -1474,6 +1557,7 @@
 		6DA575CD139C96AE004D8D0B /* Tests */ = {
 			isa = PBXGroup;
 			children = (
+				1E1EF40C13B9A95A00C12616 /* HKTMXTiledMapTest */,
 				6DA588A913A05EA1004D8D0B /* FilesDownloaderTest */,
 				6DA5866213A0295D004D8D0B /* CCSendMessagesTest */,
 				6DA58584139E8027004D8D0B /* CCSliderTest */,
@@ -1733,6 +1817,7 @@
 		6DA57C7D139CAAB6004D8D0B /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				1E1EF41313B9A96200C12616 /* HKTMXTiledMap */,
 				6DA5888713A05D20004D8D0B /* FilesDownloader */,
 				6DA5865413A0237E004D8D0B /* CCSendMessages */,
 				6DA5857E139E8016004D8D0B /* CCSlider */,
@@ -2091,6 +2176,26 @@
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
+		1E1EF41913B9A99F00C12616 /* HKTMXTiledMap Test */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 1E1EF42D13B9A99F00C12616 /* Build configuration list for PBXNativeTarget "HKTMXTiledMap Test" */;
+			buildPhases = (
+				1E1EF41C13B9A99F00C12616 /* Resources */,
+				1E1EF42113B9A99F00C12616 /* Sources */,
+				1E1EF42413B9A99F00C12616 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			comments = "Use this target as a template for test targets.\nDon't build this target itself - it will give you compiler error: \n\tUndefined symbols:\n  \t\"_OBJC_CLASS_$_ExtensionTest\", referenced from:\n      \tobjc-class-ref-to-ExtensionTest in cocos2d_extensions_macAppDelegate.o\n\tld: symbol(s) not found\n\tclang: error: linker command failed with exit code 1 (use -v to see invocation)\n\nIf you get this error in your extension test target - you forgot to:\n#import \"ExtensionTest.h\"\n\nSYNTHESIZE_EXTENSION_TEST(DemoMenu)\n\n";
+			dependencies = (
+				1E1EF41A13B9A99F00C12616 /* PBXTargetDependency */,
+			);
+			name = "HKTMXTiledMap Test";
+			productInstallPath = "$(HOME)/Applications";
+			productName = "cocos2d-mac";
+			productReference = 1E1EF43013B9A9A000C12616 /* HKTMXTIledMap Test.app */;
+			productType = "com.apple.product-type.application";
+		};
 		6DA57C96139CAE19004D8D0B /* CCMenuAdvancedTest */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 6DA57CAB139CAE19004D8D0B /* Build configuration list for PBXNativeTarget "CCMenuAdvancedTest" */;
@@ -2295,11 +2400,25 @@
 				6DA58168139E3D04004D8D0B /* FilesDownloaderTest */,
 				6DA5863913A0232C004D8D0B /* CCSendMessagesTest */,
 				E076E4F01225E97900DE0DA2 /* Extension Test Template */,
+				1E1EF41913B9A99F00C12616 /* HKTMXTiledMap Test */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		1E1EF41C13B9A99F00C12616 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1E1EF43513B9AA0100C12616 /* testmap.tmx in Resources */,
+				1E1EF43613B9AA0100C12616 /* tiles.png in Resources */,
+				1E1EF41D13B9A99F00C12616 /* InfoPlist.strings in Resources */,
+				1E1EF41E13B9A99F00C12616 /* MainMenu.xib in Resources */,
+				1E1EF41F13B9A99F00C12616 /* fps_images.png in Resources */,
+				1E1EF42013B9A99F00C12616 /* icon.icns in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		6DA57C99139CAE19004D8D0B /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -2593,6 +2712,18 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		1E1EF42113B9A99F00C12616 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1E1EF43213B9A9F000C12616 /* HKTMXLayer.m in Sources */,
+				1E1EF43313B9A9F000C12616 /* HKTMXTiledMap.m in Sources */,
+				1E1EF43413B9A9F000C12616 /* HKTMXTiledMapTestLayer.m in Sources */,
+				1E1EF42213B9A99F00C12616 /* cocos2d_extensions_macAppDelegate.m in Sources */,
+				1E1EF42313B9A99F00C12616 /* main.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		6DA57C9E139CAE19004D8D0B /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -2772,6 +2903,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		1E1EF41A13B9A99F00C12616 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = E01E663C121CA00A001A484F /* cocos2d */;
+			targetProxy = 1E1EF41B13B9A99F00C12616 /* PBXContainerItemProxy */;
+		};
 		6D7F521413A2E2B90022601B /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 6DA5863913A0232C004D8D0B /* CCSendMessagesTest */;
@@ -2869,6 +3005,39 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		1E1EF42E13B9A99F00C12616 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = NO;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_FIX_AND_CONTINUE = YES;
+				GCC_MODEL_TUNING = G5;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = Tests/SharedSources/cocos2d_extensions_mac_Prefix.pch;
+				INFOPLIST_FILE = "Tests/SharedResources/Info-Mac.plist";
+				INSTALL_PATH = "$(HOME)/Applications";
+				LIBRARY_SEARCH_PATHS = "$(inherited)";
+				PRODUCT_NAME = "HKTMXTIledMap Test";
+			};
+			name = Debug;
+		};
+		1E1EF42F13B9A99F00C12616 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_MODEL_TUNING = G5;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = Tests/SharedSources/cocos2d_extensions_mac_Prefix.pch;
+				INFOPLIST_FILE = "Tests/SharedResources/Info-Mac.plist";
+				INSTALL_PATH = "$(HOME)/Applications";
+				LIBRARY_SEARCH_PATHS = "$(inherited)";
+				PRODUCT_NAME = "HKTMXTIledMap Test";
+			};
+			name = Release;
+		};
 		6DA57CAC139CAE19004D8D0B /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -3222,6 +3391,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		1E1EF42D13B9A99F00C12616 /* Build configuration list for PBXNativeTarget "HKTMXTiledMap Test" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1E1EF42E13B9A99F00C12616 /* Debug */,
+				1E1EF42F13B9A99F00C12616 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		6DA57CAB139CAE19004D8D0B /* Build configuration list for PBXNativeTarget "CCMenuAdvancedTest" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

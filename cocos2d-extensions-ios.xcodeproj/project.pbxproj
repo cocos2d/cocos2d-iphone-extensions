@@ -13,6 +13,7 @@
 			buildPhases = (
 			);
 			dependencies = (
+				1E1EF3F313B9A01600C12616 /* PBXTargetDependency */,
 				6DA580EE139E3C05004D8D0B /* PBXTargetDependency */,
 				6DA580F0139E3C05004D8D0B /* PBXTargetDependency */,
 				6DA580F2139E3C05004D8D0B /* PBXTargetDependency */,
@@ -28,6 +29,33 @@
 /* End PBXAggregateTarget section */
 
 /* Begin PBXBuildFile section */
+		1E11750A13B99DB50062E519 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 6DA5775F139C9837004D8D0B /* Default.png */; };
+		1E11750B13B99DB50062E519 /* fps_images.png in Resources */ = {isa = PBXBuildFile; fileRef = 6DA57764139C9837004D8D0B /* fps_images.png */; };
+		1E11750C13B99DB50062E519 /* Icon-72.png in Resources */ = {isa = PBXBuildFile; fileRef = 6DA57765139C9837004D8D0B /* Icon-72.png */; };
+		1E11750D13B99DB50062E519 /* Icon-Small-50.png in Resources */ = {isa = PBXBuildFile; fileRef = 6DA57766139C9837004D8D0B /* Icon-Small-50.png */; };
+		1E11750E13B99DB50062E519 /* Icon-Small.png in Resources */ = {isa = PBXBuildFile; fileRef = 6DA57767139C9837004D8D0B /* Icon-Small.png */; };
+		1E11750F13B99DB50062E519 /* Icon-Small@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6DA57768139C9837004D8D0B /* Icon-Small@2x.png */; };
+		1E11751013B99DB50062E519 /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 6DA5776A139C9837004D8D0B /* Icon.png */; };
+		1E11751113B99DB50062E519 /* Icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6DA5776B139C9837004D8D0B /* Icon@2x.png */; };
+		1E11751213B99DB50062E519 /* iTunesArtwork in Resources */ = {isa = PBXBuildFile; fileRef = 6DA5776E139C9837004D8D0B /* iTunesArtwork */; };
+		1E11751413B99DB50062E519 /* cocos2d_extensions_iosAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DA57772139C9837004D8D0B /* cocos2d_extensions_iosAppDelegate.m */; };
+		1E11751513B99DB50062E519 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DA57779139C9837004D8D0B /* main.m */; };
+		1E11751613B99DB50062E519 /* RootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DA5777B139C9837004D8D0B /* RootViewController.m */; };
+		1E11751813B99DB50062E519 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DCCBF1B60F6022AE0040855A /* CoreGraphics.framework */; };
+		1E11751913B99DB50062E519 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DCCBF1B80F6022AE0040855A /* Foundation.framework */; };
+		1E11751A13B99DB50062E519 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DCCBF1BA0F6022AE0040855A /* OpenGLES.framework */; };
+		1E11751B13B99DB50062E519 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DCCBF1BC0F6022AE0040855A /* QuartzCore.framework */; };
+		1E11751C13B99DB50062E519 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DCCBF1BE0F6022AE0040855A /* UIKit.framework */; };
+		1E11751D13B99DB50062E519 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DC6640020F83B3EA000B3E49 /* AudioToolbox.framework */; };
+		1E11751E13B99DB50062E519 /* OpenAL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DC6640040F83B3EA000B3E49 /* OpenAL.framework */; };
+		1E11751F13B99DB50062E519 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 506EDB87102F4C4000A389B3 /* libz.dylib */; };
+		1E11752013B99DB50062E519 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 506EDBA4102F4C9F00A389B3 /* AVFoundation.framework */; };
+		1E11752113B99DB50062E519 /* libcocos2d libraries.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 506EE05E10304ED200A389B3 /* libcocos2d libraries.a */; };
+		1E1EF3ED13B99FDD00C12616 /* HKTMXTiledMapTestLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E11750213B99C9E0062E519 /* HKTMXTiledMapTestLayer.m */; };
+		1E1EF3EF13B99FFF00C12616 /* HKTMXLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E1174FF13B999960062E519 /* HKTMXLayer.m */; };
+		1E1EF3F113B99FFF00C12616 /* HKTMXTiledMap.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E1174FC13B994C20062E519 /* HKTMXTiledMap.m */; };
+		1E1EF3F413B9A15D00C12616 /* testmap.tmx in Resources */ = {isa = PBXBuildFile; fileRef = 1E11750413B99C9E0062E519 /* testmap.tmx */; };
+		1E1EF3F513B9A15D00C12616 /* tiles.png in Resources */ = {isa = PBXBuildFile; fileRef = 1E11750513B99C9E0062E519 /* tiles.png */; };
 		505574581045D68500A31725 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 506EDBA4102F4C9F00A389B3 /* AVFoundation.framework */; };
 		505574591045D68500A31725 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DC6640020F83B3EA000B3E49 /* AudioToolbox.framework */; };
 		5055745A1045D68500A31725 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DCCBF1B60F6022AE0040855A /* CoreGraphics.framework */; };
@@ -639,6 +667,20 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		1E11750813B99DB50062E519 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 29B97313FDCFA39411CA2CEA /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 506EE05D10304ED200A389B3;
+			remoteInfo = "cocos2d libraries";
+		};
+		1E1EF3F213B9A01600C12616 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 29B97313FDCFA39411CA2CEA /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 1E11750613B99DB50062E519;
+			remoteInfo = HKTMXTiledMapTest;
+		};
 		506EE1A71030507B00A389B3 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 29B97313FDCFA39411CA2CEA /* Project object */;
@@ -762,6 +804,16 @@
 
 /* Begin PBXFileReference section */
 		1D6058910D05DD3D006BFB54 /* ExtensionTestTemplate.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ExtensionTestTemplate.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		1E1174F913B994C20062E519 /* HKTMXLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HKTMXLayer.h; sourceTree = "<group>"; };
+		1E1174FB13B994C20062E519 /* HKTMXTiledMap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HKTMXTiledMap.h; sourceTree = "<group>"; };
+		1E1174FC13B994C20062E519 /* HKTMXTiledMap.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HKTMXTiledMap.m; sourceTree = "<group>"; };
+		1E1174FD13B994C20062E519 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.md; sourceTree = "<group>"; };
+		1E1174FF13B999960062E519 /* HKTMXLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HKTMXLayer.m; sourceTree = "<group>"; };
+		1E11750113B99C9E0062E519 /* HKTMXTiledMapTestLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HKTMXTiledMapTestLayer.h; sourceTree = "<group>"; };
+		1E11750213B99C9E0062E519 /* HKTMXTiledMapTestLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HKTMXTiledMapTestLayer.m; sourceTree = "<group>"; };
+		1E11750413B99C9E0062E519 /* testmap.tmx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = testmap.tmx; sourceTree = "<group>"; };
+		1E11750513B99C9E0062E519 /* tiles.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tiles.png; sourceTree = "<group>"; };
+		1E11752513B99DB50062E519 /* HKTMXTIledMap.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HKTMXTIledMap.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		504DFC6810AF1739006D82FE /* LICENSE.cocos2d */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE.cocos2d; sourceTree = "<group>"; };
 		506EDB87102F4C4000A389B3 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
 		506EDBA4102F4C9F00A389B3 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
@@ -1265,6 +1317,23 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		1E11751713B99DB50062E519 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1E11751813B99DB50062E519 /* CoreGraphics.framework in Frameworks */,
+				1E11751913B99DB50062E519 /* Foundation.framework in Frameworks */,
+				1E11751A13B99DB50062E519 /* OpenGLES.framework in Frameworks */,
+				1E11751B13B99DB50062E519 /* QuartzCore.framework in Frameworks */,
+				1E11751C13B99DB50062E519 /* UIKit.framework in Frameworks */,
+				1E11751D13B99DB50062E519 /* AudioToolbox.framework in Frameworks */,
+				1E11751E13B99DB50062E519 /* OpenAL.framework in Frameworks */,
+				1E11751F13B99DB50062E519 /* libz.dylib in Frameworks */,
+				1E11752013B99DB50062E519 /* AVFoundation.framework in Frameworks */,
+				1E11752113B99DB50062E519 /* libcocos2d libraries.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		506EE05C10304ED200A389B3 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -1432,8 +1501,40 @@
 				6DA580E7139E39D0004D8D0B /* FilesDownloaderTest.app */,
 				6DA58360139E510B004D8D0B /* CCVideoPlayerTest.app */,
 				6DA5863013A022E8004D8D0B /* CCSendMessagesTest.app */,
+				1E11752513B99DB50062E519 /* HKTMXTIledMap.app */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		1E1174F813B994C20062E519 /* HKTMXTiledMap */ = {
+			isa = PBXGroup;
+			children = (
+				1E1174F913B994C20062E519 /* HKTMXLayer.h */,
+				1E1174FF13B999960062E519 /* HKTMXLayer.m */,
+				1E1174FB13B994C20062E519 /* HKTMXTiledMap.h */,
+				1E1174FC13B994C20062E519 /* HKTMXTiledMap.m */,
+				1E1174FD13B994C20062E519 /* README.md */,
+			);
+			path = HKTMXTiledMap;
+			sourceTree = "<group>";
+		};
+		1E11750013B99C9E0062E519 /* HKTMXTiledMapTest */ = {
+			isa = PBXGroup;
+			children = (
+				1E11750113B99C9E0062E519 /* HKTMXTiledMapTestLayer.h */,
+				1E11750213B99C9E0062E519 /* HKTMXTiledMapTestLayer.m */,
+				1E11750313B99C9E0062E519 /* Resources */,
+			);
+			path = HKTMXTiledMapTest;
+			sourceTree = "<group>";
+		};
+		1E11750313B99C9E0062E519 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				1E11750413B99C9E0062E519 /* testmap.tmx */,
+				1E11750513B99C9E0062E519 /* tiles.png */,
+			);
+			path = Resources;
 			sourceTree = "<group>";
 		};
 		29B97314FDCFA39411CA2CEA /* CustomTemplate */ = {
@@ -1649,6 +1750,7 @@
 		6DA5775D139C9837004D8D0B /* Tests */ = {
 			isa = PBXGroup;
 			children = (
+				1E11750013B99C9E0062E519 /* HKTMXTiledMapTest */,
 				6DA5890213A06E25004D8D0B /* FilesDownloaderTest */,
 				6DA5872913A0355B004D8D0B /* CCScrollLayerTest */,
 				6DA5868613A02E52004D8D0B /* CCSendMessagesTest */,
@@ -1929,6 +2031,7 @@
 		6DA57D98139CBD3C004D8D0B /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				1E1174F813B994C20062E519 /* HKTMXTiledMap */,
 				6DA5891213A06E33004D8D0B /* FilesDownloader */,
 				6DA586A913A0331D004D8D0B /* CCScrollLayer */,
 				6DA5868A13A02E64004D8D0B /* CCSendMessages */,
@@ -2333,6 +2436,24 @@
 			productReference = 1D6058910D05DD3D006BFB54 /* ExtensionTestTemplate.app */;
 			productType = "com.apple.product-type.application";
 		};
+		1E11750613B99DB50062E519 /* HKTMXTiledMapTest */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 1E11752213B99DB50062E519 /* Build configuration list for PBXNativeTarget "HKTMXTiledMapTest" */;
+			buildPhases = (
+				1E11750913B99DB50062E519 /* Resources */,
+				1E11751313B99DB50062E519 /* Sources */,
+				1E11751713B99DB50062E519 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				1E11750713B99DB50062E519 /* PBXTargetDependency */,
+			);
+			name = HKTMXTiledMapTest;
+			productName = "cocos2d-extensions-ios";
+			productReference = 1E11752513B99DB50062E519 /* HKTMXTIledMap.app */;
+			productType = "com.apple.product-type.application";
+		};
 		506EE05D10304ED200A389B3 /* cocos2d libraries */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 506EE06410304F0100A389B3 /* Build configuration list for PBXNativeTarget "cocos2d libraries" */;
@@ -2524,6 +2645,7 @@
 				6DA580C8139E39D0004D8D0B /* FilesDownloaderTest */,
 				6DA5861113A022E8004D8D0B /* CCSendMessagesTest */,
 				1D6058900D05DD3D006BFB54 /* Extension Test Template */,
+				1E11750613B99DB50062E519 /* HKTMXTiledMapTest */,
 			);
 		};
 /* End PBXProject section */
@@ -2542,6 +2664,24 @@
 				6DA57785139C9837004D8D0B /* Icon.png in Resources */,
 				6DA57786139C9837004D8D0B /* Icon@2x.png in Resources */,
 				6DA57789139C9837004D8D0B /* iTunesArtwork in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		1E11750913B99DB50062E519 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1E1EF3F413B9A15D00C12616 /* testmap.tmx in Resources */,
+				1E1EF3F513B9A15D00C12616 /* tiles.png in Resources */,
+				1E11750A13B99DB50062E519 /* Default.png in Resources */,
+				1E11750B13B99DB50062E519 /* fps_images.png in Resources */,
+				1E11750C13B99DB50062E519 /* Icon-72.png in Resources */,
+				1E11750D13B99DB50062E519 /* Icon-Small-50.png in Resources */,
+				1E11750E13B99DB50062E519 /* Icon-Small.png in Resources */,
+				1E11750F13B99DB50062E519 /* Icon-Small@2x.png in Resources */,
+				1E11751013B99DB50062E519 /* Icon.png in Resources */,
+				1E11751113B99DB50062E519 /* Icon@2x.png in Resources */,
+				1E11751213B99DB50062E519 /* iTunesArtwork in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2890,6 +3030,19 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		1E11751313B99DB50062E519 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1E1EF3EF13B99FFF00C12616 /* HKTMXLayer.m in Sources */,
+				1E1EF3F113B99FFF00C12616 /* HKTMXTiledMap.m in Sources */,
+				1E1EF3ED13B99FDD00C12616 /* HKTMXTiledMapTestLayer.m in Sources */,
+				1E11751413B99DB50062E519 /* cocos2d_extensions_iosAppDelegate.m in Sources */,
+				1E11751513B99DB50062E519 /* main.m in Sources */,
+				1E11751613B99DB50062E519 /* RootViewController.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		506EE05B10304ED200A389B3 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -3084,6 +3237,16 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		1E11750713B99DB50062E519 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 506EE05D10304ED200A389B3 /* cocos2d libraries */;
+			targetProxy = 1E11750813B99DB50062E519 /* PBXContainerItemProxy */;
+		};
+		1E1EF3F313B9A01600C12616 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 1E11750613B99DB50062E519 /* HKTMXTiledMapTest */;
+			targetProxy = 1E1EF3F213B9A01600C12616 /* PBXContainerItemProxy */;
+		};
 		506EE1A81030507B00A389B3 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 506EE05D10304ED200A389B3 /* cocos2d libraries */;
@@ -3233,6 +3396,52 @@
 				);
 				PREBINDING = NO;
 				PRODUCT_NAME = ExtensionTestTemplate;
+				WARNING_CFLAGS = "-Wall";
+			};
+			name = Release;
+		};
+		1E11752313B99DB50062E519 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_FIX_AND_CONTINUE = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = Tests/SharedSources/cocos2d_extensions_ios_Prefix.pch;
+				GCC_TREAT_WARNINGS_AS_ERRORS = NO;
+				INFOPLIST_FILE = Tests/SharedResources/Info.plist;
+				ONLY_ACTIVE_ARCH = YES;
+				OTHER_LDFLAGS = (
+					"-all_load",
+					"-ObjC",
+				);
+				PREBINDING = NO;
+				PRODUCT_NAME = HKTMXTIledMap;
+				WARNING_CFLAGS = "-Wall";
+			};
+			name = Debug;
+		};
+		1E11752413B99DB50062E519 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_ENABLE_FIX_AND_CONTINUE = NO;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = Tests/SharedSources/cocos2d_extensions_ios_Prefix.pch;
+				GCC_TREAT_WARNINGS_AS_ERRORS = NO;
+				INFOPLIST_FILE = Tests/SharedResources/Info.plist;
+				ONLY_ACTIVE_ARCH = NO;
+				OTHER_LDFLAGS = (
+					"-all_load",
+					"-ObjC",
+				);
+				PREBINDING = NO;
+				PRODUCT_NAME = HKTMXTIledMap;
 				WARNING_CFLAGS = "-Wall";
 			};
 			name = Release;
@@ -3710,6 +3919,15 @@
 			buildConfigurations = (
 				1D6058940D05DD3E006BFB54 /* Debug */,
 				1D6058950D05DD3E006BFB54 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		1E11752213B99DB50062E519 /* Build configuration list for PBXNativeTarget "HKTMXTiledMapTest" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1E11752313B99DB50062E519 /* Debug */,
+				1E11752413B99DB50062E519 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
