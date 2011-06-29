@@ -47,6 +47,8 @@ SYNTHESIZE_EXTENSION_TEST(HKTMXTiledMapTestLayer)
 		// prepare scroll stuff
 #ifdef __IPHONE_OS_VERSION_MAX_ALLOWED
 		self.isTouchEnabled = YES;
+        // setting this, and running on an iPhone 4 causes a crash / assert
+        //[[CCDirector sharedDirector] enableRetinaDisplay:YES];
 #elif __MAC_OS_X_VERSION_MIN_REQUIRED
 		self.isMouseEnabled = YES;
         [[CCDirector sharedDirector] setResizeMode:kCCDirectorResize_AutoScale];

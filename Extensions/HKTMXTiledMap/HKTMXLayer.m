@@ -1,3 +1,36 @@
+/*
+ * HKTMXTiledMap
+ *
+ * cocos2d-extensions
+ * https://github.com/cocos2d/cocos2d-iphone-extensions
+ * 
+ * HKASoftware
+ * http://hkasoftware.com
+ *
+ * Copyright (c) 2011 HKASoftware
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in
+ * all copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+ * THE SOFTWARE.
+ *
+ * TMX Tiled Map support:
+ * http://www.mapeditor.org
+ *
+ */
 
 #import "HKTMXLayer.h"
 #import "CCTMXTiledMap.h"
@@ -134,8 +167,9 @@
 		__block int animCount = 0;
 		// read relevant tile properties from the map
 		animRules_ = calloc(maxGID_ - minGID_ + 1, sizeof *animRules_);
-		animCache_ = calloc(maxGID_ - minGID_ + 1, sizeof *animCache_);
-		[mapInfo.tileProperties enumerateKeysAndObjectsUsingBlock:
+		animCache_ = calloc(maxGID_ - minGID_ + 1, sizeof *animCache_);        
+#if NS_BLOCKS_AVAILABLE
+        [mapInfo.tileProperties enumerateKeysAndObjectsUsingBlock:
 		 ^(id key, id obj, BOOL *stop)
 		 {
 			 unsigned int idx = [key unsignedIntValue] - minGID_;
@@ -148,6 +182,22 @@
 				 animCount++;
 			 }
 		 }];
+#else
+		
+        for(id key in [mapInfo.tileProperties keyEnumerator])
+        {
+            unsigned int idx = [key unsignedIntValue] - minGID_;
+            if (idx > maxGID_) continue;
+            id obj = [mapInfo.tileProperties objectForKey:key];
+            unsigned int next = [[obj objectForKey:@"Next"] intValue];
+            double delay = [[obj objectForKey:@"Delay"] doubleValue];
+            if (next && delay > 0) {
+                animRules_[idx].delay = delay;
+                animRules_[idx].next = next;
+                animCount++;
+            }
+        }
+#endif
 		// find animation cycles and annotate
 		for (int gid=minGID_; gid <= maxGID_; gid++)
 		{
@@ -248,7 +298,7 @@
 	dirtyAt_ = -INFINITY;
 }
 
--(void) addChild: (CCNode*)node z:(int)z tag:(int)tag
+-(void) addChild: (CCNode*)node z:(NSInteger)z tag:(NSInteger)tag
 {
 	NSAssert(NO, @"addChild: is not supported on CCTMXLayer. Instead use setTileGID:at:/tileGIDAt:");
 }
