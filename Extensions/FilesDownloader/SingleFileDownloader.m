@@ -112,7 +112,7 @@
         return nil;
     }
     
-    return [NSFileHandle fileHandleForWritingAtPath: myFilePath];
+    return [[NSFileHandle fileHandleForWritingAtPath: myFilePath] retain];
 }
 
 
@@ -133,7 +133,7 @@
         _bytesTotal = 0;
         _delegate = aDelegate;
         
-        _fileHandle = [ [SingleFileDownloader newFileWithName: _filename] retain];
+        _fileHandle = [SingleFileDownloader newFileWithName: _filename];
     }
     
     return self;
