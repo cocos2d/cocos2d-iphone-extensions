@@ -40,7 +40,9 @@
 {
 }
 
-// sets new delegate, replaces old if it exists, doesn't retain it
+// Sets new delegate (weak ref).
+// ATTENTION: You need to call this method before invoking playMovieWithFile:
+// or you will not receive movieStartsPlaying callback.
 + (void) setDelegate: (id<CCVideoPlayerDelegate>) aDelegate;
 
 + (void) playMovieWithFile: (NSString *) file;
@@ -48,7 +50,8 @@
 + (void) cancelPlaying;
 
 #ifdef __IPHONE_OS_VERSION_MAX_ALLOWED
-// update only if landscape left or landscape right
+// Updates video player view transform for newOrientation.
+// Supports only landscape left or landscape right, for other orientations does nothing.
 + (void) updateOrientationWithOrientation: (UIDeviceOrientation) newOrientation;
 #endif
 
