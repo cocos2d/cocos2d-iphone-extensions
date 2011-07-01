@@ -42,11 +42,14 @@
 	NSView *retainedView;
 	
 	//weak ref
-	id<CCVideoPlayerDelegate> delegate;
+	NSObject<CCVideoPlayerDelegate> *delegate;
+	
+	BOOL isPlaying;
 }
 //private property
 @property (readwrite, retain) NSViewController *videoViewController;
 @property (readwrite, retain) NSView *retainedView;
+@property (readonly) BOOL isPlaying;
 
 - (void)playMovieAtURL:(NSURL*)theURL;
 - (void)playMovieAtURL:(NSURL*)theURL attachedInView: (NSView *) aView;

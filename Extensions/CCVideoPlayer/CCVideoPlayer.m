@@ -175,6 +175,11 @@ static  CCVideoPlayerImpl *_impl = nil;
 						  waitUntilDone: [NSThread isMainThread]  ];
 }
 
++ (BOOL) isPlaying
+{
+	return [_impl isPlaying];
+}
+
 #ifdef __IPHONE_OS_VERSION_MAX_ALLOWED
 + (void) updateOrientationWithOrientation: (UIDeviceOrientation) newOrientation
 {

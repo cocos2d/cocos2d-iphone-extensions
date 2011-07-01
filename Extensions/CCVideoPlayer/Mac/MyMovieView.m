@@ -61,8 +61,11 @@
 
 -(BOOL) ccKeyDown:(NSEvent*)event
 {
-	if ( ![event isARepeat] )
+	if ( ![event isARepeat] && [CCVideoPlayer isPlaying] )
+	{
 		[CCVideoPlayer cancelPlaying];
+		return YES;
+	}
 	
 	return NO;
 }

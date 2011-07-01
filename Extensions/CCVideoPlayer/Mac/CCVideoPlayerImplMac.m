@@ -32,10 +32,9 @@
 
 #if __MAC_OS_X_VERSION_MAX_ALLOWED
 
-@interface CCVideoPlayerImplMac  (Private) <CCKeyboardEventDelegate>
+@interface CCVideoPlayerImplMac  (Private)
 
 -(void)movieFinishedCallback:(NSNotification*)aNotification;
--(BOOL) ccKeyDown:(NSEvent*)event;
 
 @end
 
@@ -46,7 +45,7 @@
 NSString *const kVideoTitle		= @"CustomVideoView";
 
 @synthesize videoViewController;
-@synthesize retainedView;
+@synthesize retainedView, isPlaying;
 
 
 #pragma mark Interface 
@@ -66,8 +65,10 @@ NSString *const kVideoTitle		= @"CustomVideoView";
 	if ( ! movie )
 		return;
 	
+	isPlaying = YES;
+	
 	// Prepare other systems for Playback
-	[delegate movieStartsPlaying];
+	[delegate performSelector: @selector(movieStartsPlaying) onThread:[NSThread mainThread] withObject:nil waitUntilDone:NO ];
 	
 	//Setup Movie	
 	[movie setAttribute:[NSNumber numberWithBool: YES] forKey:QTMovieOpenAsyncRequiredAttribute ];
@@ -119,6 +120,8 @@ NSString *const kVideoTitle		= @"CustomVideoView";
 	if (! self.videoViewController)
 		return;
 	
+	isPlaying = NO;	
+	
 	// Stop receiving notifications
 	QTMovie *movie = (QTMovie *)[aNotification object];	
     [[NSNotificationCenter defaultCenter] removeObserver: self
@@ -128,6 +131,9 @@ NSString *const kVideoTitle		= @"CustomVideoView";
 	// Stop Playing
 	[movie stop];
 	[(MyMovieView*)[self.videoViewController view] setMovie:nil];
+	
+	// Disable keyboard for MyMoviewView.
+	[[CCEventDispatcher sharedDispatcher] removeKeyboardDelegate: (MyMovieView*)[self.videoViewController view] ];
     
 	// switch from movie to retained view
 	NSView *windowContentView = [[self.videoViewController view] superview];
@@ -145,7 +151,7 @@ NSString *const kVideoTitle		= @"CustomVideoView";
 	self.retainedView = nil;
 	self.videoViewController = nil;
 	
-	[delegate moviePlaybackFinished];
+	[delegate performSelector: @selector(moviePlaybackFinished) onThread:[NSThread mainThread] withObject:nil waitUntilDone:NO ];
 }
 
 @end

@@ -49,6 +49,8 @@
 
 + (void) cancelPlaying;
 
++ (BOOL) isPlaying;
+
 #ifdef __IPHONE_OS_VERSION_MAX_ALLOWED
 // Updates video player view transform for newOrientation.
 // Supports only landscape left or landscape right, for other orientations does nothing.
