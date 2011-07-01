@@ -115,6 +115,10 @@ NSString *const kVideoTitle		= @"CustomVideoView";
 
 -(void)movieFinishedCallback:(NSNotification*)aNotification
 {		
+	// Do nothing if movie is already finished.
+	if (! self.videoViewController)
+		return;
+	
 	// Stop receiving notifications
 	QTMovie *movie = (QTMovie *)[aNotification object];	
     [[NSNotificationCenter defaultCenter] removeObserver: self
