@@ -23,7 +23,7 @@ Locks issues on Mac
 Sometimes it's possible to FilesDownloader block the CCDirector's runLoop.   
 It happens when you use CCDirectorDisplayLink with CC_DIRECTOR_MAC_USE_DISPLAY_LINK_THREAD = 1 (the default one) on Mac OS X.   
 So no frames will be rendered and fps counter will not change, until download finishes.   
-To avoid this behavior - use main (or other that CCDirector#runningThread) thread for invoking FilesDownloader#start / FilesDownloader#cancel:   
+To avoid this behavior - use main (or other than CCDirector#runningThread) thread for invoking FilesDownloader#start / FilesDownloader#cancel:   
 
     #ifdef __MAC_OS_X_VERSION_MAX_ALLOWED
         [_downloader performSelectorOnMainThread:@selector(start) withObject:nil waitUntilDone:NO];
