@@ -180,6 +180,8 @@ static  CCVideoPlayerImpl *_impl = nil;
 	return [_impl isPlaying];
 }
 
+#pragma mark Platform Specific Interface
+
 #ifdef __IPHONE_OS_VERSION_MAX_ALLOWED
 + (void) updateOrientationWithOrientation: (UIDeviceOrientation) newOrientation
 {
@@ -189,6 +191,13 @@ static  CCVideoPlayerImpl *_impl = nil;
 							 withObject: [NSNumber numberWithInt: (int)newOrientation]
 						  waitUntilDone: [NSThread isMainThread]  ];
 }
+#elif defined(__MAC_OS_X_VERSION_MAX_ALLOWED)
+
++ (void) reAttachView
+{
+    [_impl reAttachView];
+}
+
 #endif
 
 @end

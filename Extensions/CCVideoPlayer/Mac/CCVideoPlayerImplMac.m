@@ -112,6 +112,18 @@ NSString *const kVideoTitle		= @"CustomVideoView";
 	delegate = aDelegate;
 }
 
+- (void) reAttachView
+{
+	if (!self.isPlaying)
+		return;
+	
+	[[self.videoViewController view] removeFromSuperview];
+	
+	NSView *windowContentView = [self.retainedView superview];
+	[windowContentView addSubview:[self.videoViewController view]];
+	[[self.videoViewController view] setFrame: [windowContentView bounds]];
+}
+
 #pragma mark Other Stuff
 
 -(void)movieFinishedCallback:(NSNotification*)aNotification

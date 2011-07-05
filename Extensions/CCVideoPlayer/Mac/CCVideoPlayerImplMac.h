@@ -57,6 +57,10 @@
 
 - (void)setDelegate: (id<CCVideoPlayerDelegate>) aDelegate;
 
+/** reattaches MyMovieView to the Cocos Window.
+ Call it after changing to/from fullscreen. */
+- (void) reAttachView;
+
 @end
 
 #endif

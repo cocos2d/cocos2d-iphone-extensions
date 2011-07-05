@@ -55,6 +55,12 @@
 // Updates video player view transform for newOrientation.
 // Supports only landscape left or landscape right, for other orientations does nothing.
 + (void) updateOrientationWithOrientation: (UIDeviceOrientation) newOrientation;
+#elif defined(__MAC_OS_X_VERSION_MAX_ALLOWED)
+
+/** Reattaches movie view to the Cocos Window.
+ Call it after changing to/from fullscreen. (Mac only) */
++ (void) reAttachView;
+
 #endif
 
 @end
