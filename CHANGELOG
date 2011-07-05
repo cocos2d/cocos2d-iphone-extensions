@@ -1,5 +1,7 @@
 
-0.1.2 - XX-June-2011
+0.1.2 - XX-Jule-2011
+   * CCVideoPlayer: minor stability, analyzer & documentation issues fixes (CCVideoPLayer, CCBigImage, FilesDownloader).
+   * CCVideoPlayer: toggleFullscreen support on Mac. (Issue #31)
    * Enhancements to CCScrollLayer: added pagesIndicatorPosition property, 
    moveToPage: & selectPage: methods, changed pages numbering to start from zero.
 
