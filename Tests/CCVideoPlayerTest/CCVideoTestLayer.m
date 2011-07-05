@@ -31,6 +31,7 @@
 #import "CCVideoTestLayer.h"
 #import "CCVideoPlayer.h"
 #import "ExtensionTest.h"
+#import "cocos2d_extensions_macAppDelegate.h"
 
 SYNTHESIZE_EXTENSION_TEST(CCVideoTestLayer)
 
@@ -57,6 +58,16 @@ SYNTHESIZE_EXTENSION_TEST(CCVideoTestLayer)
 		
 		// Init Video Player
 		[CCVideoPlayer setDelegate: self];
+		
+		// Listen for toggleFullscreen notifications
+		[[NSNotificationCenter defaultCenter] addObserverForName: appDelegateToggleFullscreenNotification 
+														  object: nil 
+														   queue: nil 
+													  usingBlock: ^(NSNotification *notification)
+		 {
+			 [CCVideoPlayer reAttachView];
+		 }
+		 ];
 	}
 	return self;
 }
@@ -87,11 +98,8 @@ SYNTHESIZE_EXTENSION_TEST(CCVideoTestLayer)
 // on "dealloc" you need to release all your retained objects
 - (void) dealloc
 {
-	// in case you have something to dealloc, do it in this method
-	// in this particular example nothing needs to be released.
-	// cocos2d will automatically release all the children (Label)
+	[[NSNotificationCenter defaultCenter] removeObserver:self];
 	
-	// don't forget to call "super dealloc"
 	[super dealloc];
 }
 @end
