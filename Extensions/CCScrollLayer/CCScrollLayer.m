@@ -64,6 +64,8 @@ enum
 @synthesize showPagesIndicator = showPagesIndicator_;
 @synthesize pagesIndicatorPosition = pagesIndicatorPosition_;
 @synthesize pagesWidthOffset = pagesWidthOffset_;
+@synthesize pages = layers_;
+
 @dynamic totalScreens;
 - (int) totalScreens
 {

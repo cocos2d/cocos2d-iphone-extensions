@@ -119,6 +119,9 @@
 /** Offset, that can be used to let user see next/previous page. */
 @property(readwrite) CGFloat pagesWidthOffset;
 
+/** Returns array of pages CCLayer's  */
+@property(readonly) NSArray *pages;
+
 #pragma mark Init/Creation
 +(id) nodeWithLayers:(NSArray *)layers widthOffset: (int) widthOffset; 
 -(id) initWithLayers:(NSArray *)layers widthOffset: (int) widthOffset;
