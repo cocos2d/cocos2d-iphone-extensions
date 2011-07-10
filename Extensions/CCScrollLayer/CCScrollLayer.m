@@ -58,6 +58,7 @@ enum
 
 @implementation CCScrollLayer
 
+@synthesize delegate = delegate_;
 @synthesize minimumTouchLengthToSlide = minimumTouchLengthToSlide_;
 @synthesize minimumTouchLengthToChangePage = minimumTouchLengthToChangePage_;
 @synthesize currentScreen = currentScreen_;
@@ -115,6 +116,8 @@ enum
 
 - (void) dealloc
 {
+	self.delegate = nil;
+	
 	[layers_ release];
 	layers_ = nil;
 	
@@ -182,6 +185,12 @@ enum
 
 #pragma mark Moving To / Selecting Pages
 
+- (void) moveToPageEnded
+{
+	if ([self.delegate respondsToSelector:@selector(scrollLayer:scrolledToPageNumber:)])
+		[self.delegate scrollLayer: self scrolledToPageNumber: currentScreen_];
+}
+
 -(void) moveToPage:(int)page
 {	
     if (page < 0 || page >= [layers_ count]) {
@@ -190,6 +199,7 @@ enum
     }
 
 	id changePage = [CCMoveTo actionWithDuration:0.3 position:ccp( - page * (self.contentSize.width - self.pagesWidthOffset), 0.0f )];
+	changePage = [CCSequence actions: changePage,[CCCallFunc actionWithTarget:self selector:@selector(moveToPageEnded)], nil];
     [self runAction:changePage];
     currentScreen_ = page;
 
@@ -198,7 +208,7 @@ enum
 -(void) selectPage:(int)page
 {
     if (page < 0 || page >= [layers_ count]) {
-        CCLOGERROR(@"CCScrollLayer#moveToPage: %d - wrong page number, out of bounds. ", page);
+        CCLOGERROR(@"CCScrollLayer#selectPage: %d - wrong page number, out of bounds. ", page);
 		return;
     }
 	
@@ -208,7 +218,6 @@ enum
 }
 
 #pragma mark Dynamic Pages Control
-
 
 - (void) addPage: (CCLayer *) aPage
 {
@@ -309,11 +318,16 @@ enum
 		// Avoid jerk after state change.
 		startSwipe_ = touchPoint.x;
 		
-		[self cancelAndStoleTouch: touch withEvent: event];		
+		[self cancelAndStoleTouch: touch withEvent: event];
+		
+		if ([self.delegate respondsToSelector:@selector(scrollLayerScrollingStarted:)])
+		{
+			[self.delegate scrollLayerScrollingStarted: self];
+		}
 	}
 	
 	if (state_ == kCCScrollLayerStateSliding)
-		self.position = ccp( (- currentScreen_ * scrollWidth_) + (touchPoint.x-startSwipe_),0);	
+		self.position = ccp( (- currentScreen_ * (self.contentSize.width - self.pagesWidthOffset)) + (touchPoint.x-startSwipe_),0);	
 	
 }
 

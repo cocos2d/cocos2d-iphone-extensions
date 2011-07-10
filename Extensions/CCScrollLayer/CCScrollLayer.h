@@ -31,6 +31,22 @@
 #import <Foundation/Foundation.h>
 #import "cocos2d.h"
 
+@class CCScrollLayer;
+@protocol CCScrollLayerDelegate
+
+@optional
+
+/** Called when scroll layer begins scrolling.
+ * Usefull to cancel CCTouchDispatcher standardDelegates.
+ */
+- (void) scrollLayerScrollingStarted:(CCScrollLayer *) sender;
+
+/** Called at the end of moveToPage:
+ * Doesn't get called in selectPage:
+ */
+- (void) scrollLayer: (CCScrollLayer *) sender scrolledToPageNumber: (int) page;
+
+@end
 
 /** Scrolling layer for Menus, like iOS Springboard Screen.
  *
@@ -40,6 +56,8 @@
  */
 @interface CCScrollLayer : CCLayer 
 {	
+	NSObject <CCScrollLayerDelegate> *delegate_;
+	
 	// Holds the current page being displayed.
 	int currentScreen_;
 	
@@ -69,8 +87,9 @@
 	
 	// Holds current pages width offset.
 	CGFloat pagesWidthOffset_;
-	
 }
+
+@property (readwrite, retain) NSObject <CCScrollLayerDelegate> *delegate;
 
 #pragma mark Scroll Config Properties
 
@@ -145,7 +164,8 @@
 
 #pragma mark Moving/Selecting Pages
 
-/* Moves scrollLayer to page with given number. 
+/* Moves scrollLayer to page with given number & invokes delegate
+ * method scrollLayer:scrolledToPageNumber: at the end of CCMoveTo action. 
  * Does nothing if number >= totalScreens or < 0.
  */
 -(void) moveToPage:(int)page;

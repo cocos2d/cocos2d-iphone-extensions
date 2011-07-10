@@ -95,11 +95,14 @@ enum nodeTags
 	// ReCreate Scroll Layer for each Screen Reshape (slow, but easy).
 	CCScrollLayer *scrollLayer = (CCScrollLayer *)[self getChildByTag:kScrollLayer];
 	if (scrollLayer)
+	{
 		[self removeChild:scrollLayer cleanup:YES];
+	}
 	
 	scrollLayer = [self scrollLayer];
 	[self addChild: scrollLayer z: 0 tag: kScrollLayer];
 	[scrollLayer selectPage: 1];
+	scrollLayer.delegate = self;
 }
 
 #pragma mark ScrollLayer Creation
@@ -143,7 +146,7 @@ enum nodeTags
 
 - (void) testCallback: (CCNode *) sender
 {
-	NSLog(@"test callback called!");
+	NSLog(@"CCScrollLayerTestLayer#testCallback: called!");
 }
 
 - (void) fastMenuItemPressed: (CCNode *) sender
@@ -151,6 +154,16 @@ enum nodeTags
 	CCScrollLayer *scroller = (CCScrollLayer *)[self getChildByTag:kScrollLayer];
 	
 	[scroller moveToPage: sender.tag];
+}
+
+- (void) scrollLayerScrollingStarted:(CCScrollLayer *) sender
+{
+	NSLog(@"CCScrollLayerTestLayer#scrollLayerScrollingStarted: %@", sender);
+}
+
+- (void) scrollLayer: (CCScrollLayer *) sender scrolledToPageNumber: (int) page
+{
+	NSLog(@"CCScrollLayerTestLayer#scrollLayer:scrolledToPageNumber: %@ %d", sender, page);
 }
 
 @end
