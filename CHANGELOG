@@ -1,9 +1,17 @@
 
 0.1.2 - XX-Jule-2011
-   * CCVideoPlayer: minor stability, analyzer & documentation issues fixes (CCVideoPLayer, CCBigImage, FilesDownloader).
    * CCVideoPlayer: toggleFullscreen support on Mac. (Issue #31)
-   * Enhancements to CCScrollLayer: added pagesIndicatorPosition property, 
-   moveToPage: & selectPage: methods, changed pages numbering to start from zero.
+   * A lot for CCScrollLayer: 
+      1. Added pagesIndicatorPosition property, moveToPage: & selectPage: methods.
+      2. Changed pages numbering to start from zero.
+      3. Mac Support & testcase in Mac Project. (Issue #22)
+      4. Added Delegate Property.
+      5. Added Pages array Property.
+	  6. Fixed jumpy behavior when scrolling with two or more fingers.
+   * CCSendMessages: fixed issue #30, added testcase (return nil on initWithTarget: nil).
+   * Minor stability, analyzer & documentation issues fixes (CCVideoPLayer, CCBigImage, FilesDownloader).
+
+   
 
 0.1.1 - 12-June-2011
    * Edited README: master is a default branch now.
