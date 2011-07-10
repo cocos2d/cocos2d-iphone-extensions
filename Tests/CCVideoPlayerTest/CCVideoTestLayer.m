@@ -31,7 +31,10 @@
 #import "CCVideoTestLayer.h"
 #import "CCVideoPlayer.h"
 #import "ExtensionTest.h"
+
+#ifdef __MAC_OS_X_VERSION_MAX_ALLOWED
 #import "cocos2d_extensions_macAppDelegate.h"
+#endif
 
 SYNTHESIZE_EXTENSION_TEST(CCVideoTestLayer)
 
@@ -59,7 +62,8 @@ SYNTHESIZE_EXTENSION_TEST(CCVideoTestLayer)
 		// Init Video Player
 		[CCVideoPlayer setDelegate: self];
 		
-		// Listen for toggleFullscreen notifications
+		// Listen for toggleFullscreen notifications on Mac.
+#ifdef __MAC_OS_X_VERSION_MAX_ALLOWED
 		[[NSNotificationCenter defaultCenter] addObserverForName: appDelegateToggleFullscreenNotification 
 														  object: nil 
 														   queue: nil 
@@ -68,6 +72,7 @@ SYNTHESIZE_EXTENSION_TEST(CCVideoTestLayer)
 			 [CCVideoPlayer reAttachView];
 		 }
 		 ];
+#endif
 	}
 	return self;
 }
