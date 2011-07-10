@@ -48,14 +48,10 @@
 	7. Standard pages numbering starting from zero: [0;totalScreens-1] instead of [1; totalScreens]
  
  Limitations: 
-	1. Mac OS X not supported. (Note #ifndef wrappers ;) )
-	2. Standard Touch Delegates will still receive touch events after layer starts sliding.
+	1. Standard Touch Delegates will still receive touch events after layer starts sliding.
  */
-@interface CCScrollLayer : CCLayer {
-	
-	// Holds the current width of the screen substracting offset.
-	CGFloat scrollWidth_;
-	
+@interface CCScrollLayer : CCLayer 
+{	
 	// Holds the current page being displayed.
 	int currentScreen_;
 	
@@ -80,7 +76,11 @@
 	UITouch *scrollTouch_;
 #endif
 	
+	// Holds pages.
 	NSMutableArray *layers_;
+	
+	// Holds current pages width offset.
+	CGFloat pagesWidthOffset_;
 	
 }
 
@@ -110,9 +110,19 @@
 /** Current page number, that is shown. Belongs to the [0, totalScreen] interval. */
 @property(readonly) int currentScreen;
 
+/** Offset, that can be used to let user see next/previous page. */
+@property(readwrite) CGFloat pagesWidthOffset;
+
 #pragma mark Init/Creation
 +(id) nodeWithLayers:(NSArray *)layers widthOffset: (int) widthOffset; 
 -(id) initWithLayers:(NSArray *)layers widthOffset: (int) widthOffset;
+
+#pragma mark Updates 
+/** Updates all pages positions & adds them as children if needed.
+ * Can be used to update position of pages after screen reshape, or 
+ * for update after dynamic page add/remove. 
+ */
+- (void) updatePages;
 
 #pragma mark Adding/Removing Pages
 

@@ -56,7 +56,6 @@ enum
 @end
 #endif
 
-
 @implementation CCScrollLayer
 
 @synthesize minimumTouchLengthToSlide = minimumTouchLengthToSlide_;
@@ -64,6 +63,7 @@ enum
 @synthesize currentScreen = currentScreen_;
 @synthesize showPagesIndicator = showPagesIndicator_;
 @synthesize pagesIndicatorPosition = pagesIndicatorPosition_;
+@synthesize pagesWidthOffset = pagesWidthOffset_;
 @dynamic totalScreens;
 - (int) totalScreens
 {
@@ -95,26 +95,17 @@ enum
 		// Show indicator by default.
 		self.showPagesIndicator = YES;
 		self.pagesIndicatorPosition = ccp(0.5f * self.contentSize.width, ceilf ( self.contentSize.height / 8.0f ));
-		//<TODO: update this value in updateForScreenReshape for Mac Support ( #22 )
 		
 		// Set up the starting variables
-		currentScreen_ = 0;
+		currentScreen_ = 0;	
 		
-		// offset added to show preview of next/previous screens
-		scrollWidth_ = [[CCDirector sharedDirector] winSize].width - widthOffset;
+		// Save offset.
+		self.pagesWidthOffset = widthOffset;			
 		
 		// Save array of layers.
 		layers_ = [[NSMutableArray alloc] initWithArray:layers copyItems:NO];
 		
-		// Loop through the array and add the screens
-		int i = 0;
-		for (CCLayer *l in layers_)
-		{
-			l.anchorPoint = ccp(0,0);
-			l.position = ccp((i*scrollWidth_),0);
-			[self addChild:l];
-			i++;
-		}	
+		[self updatePages];			
 		
 	}
 	return self;
@@ -126,6 +117,21 @@ enum
 	layers_ = nil;
 	
 	[super dealloc];
+}
+
+- (void) updatePages
+{
+	// Loop through the array and add the screens if needed.
+	int i = 0;
+	for (CCLayer *l in layers_)
+	{
+		l.anchorPoint = ccp(0,0);
+		l.contentSize = [CCDirector sharedDirector].winSize;
+		l.position = ccp(  (i * (self.contentSize.width - self.pagesWidthOffset)), 0  );
+		if (!l.parent)
+			[self addChild:l];
+		i++;
+	}
 }
 
 #pragma mark CCLayer Methods ReImpl
@@ -181,7 +187,7 @@ enum
 		return;
     }
 
-	id changePage = [CCMoveTo actionWithDuration:0.3 position:ccp( - page * scrollWidth_, 0.0f )];
+	id changePage = [CCMoveTo actionWithDuration:0.3 position:ccp( - page * (self.contentSize.width - self.pagesWidthOffset), 0.0f )];
     [self runAction:changePage];
     currentScreen_ = page;
 
@@ -194,7 +200,7 @@ enum
 		return;
     }
 	
-    self.position = ccp( - page * scrollWidth_, 0.0f );
+    self.position = ccp( - page * (self.contentSize.width - self.pagesWidthOffset), 0.0f );
     currentScreen_ = page;
 	
 }
