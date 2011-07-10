@@ -32,7 +32,8 @@
 #import "cocos2d.h"
 
 
-/* 
+/** Scrolling layer for Menus, like iOS Springboard Screen.
+ 
  It is a very clean and elegant subclass of CCLayer that lets you pass-in an array 
  of layers and it will then create a smooth scroller. 
  Complete with the "snapping" effect. You can create screens with anything that can be added to a CCLayer.
@@ -83,26 +84,30 @@
 	
 }
 
-// Calibration property. Minimum moving touch length that is enough
-// to cancel menu items and start scrolling a layer.
+/** Calibration property. Minimum moving touch length that is enough
+ * to cancel menu items and start scrolling a layer. 
+ */
 @property(readwrite, assign) CGFloat minimumTouchLengthToSlide;
 
-// Calibration property. Minimum moving touch length that is enough to change
-// the page, without snapping back to the previous selected page.
+/** Calibration property. Minimum moving touch length that is enough to change
+ * the page, without snapping back to the previous selected page.
+ */
 @property(readwrite, assign) CGFloat minimumTouchLengthToChangePage;
 
-// Whenever show or not white/grey dots under the scroll layer.
-// If yes - dots will be rendered in parents transform (rendered after scroller visit).
+/** Whenever show or not white/grey dots under the scroll layer.
+ * If yes - dots will be rendered in parents transform (rendered after scroller visit).
+ */
 @property(readwrite, assign) BOOL showPagesIndicator;
 
-// Position of dots center in parent coordinates. 
-// (Default value is screenWidth/2, screenHeight/4)
+/** Position of dots center in parent coordinates. 
+ * (Default value is screenWidth/2, screenHeight/4)
+ */
 @property(readwrite, assign) CGPoint pagesIndicatorPosition;
 
-// Total pages available in scrollLayer.
+/** Total pages available in scrollLayer. */
 @property(readonly) int totalScreens;
 
-// Current page number, that is shown. Belongs to the [0, totalScreen] interval.
+/** Current page number, that is shown. Belongs to the [0, totalScreen] interval. */
 @property(readonly) int currentScreen;
 
 #pragma mark Init/Creation
@@ -134,12 +139,12 @@
 #pragma mark Moving/Selecting Pages
 
 /* Moves scrollLayer to page with given number. 
- Does nothing if number >= totalScreens or < 0.
+ * Does nothing if number >= totalScreens or < 0.
  */
 -(void) moveToPage:(int)page;
 
 /* Immedeatly moves scrollLayer to page with given number without running CCMoveTo. 
- Does nothing if number >= totalScreens or < 0.
+ * Does nothing if number >= totalScreens or < 0.
  */
 -(void) selectPage:(int)page;
 
