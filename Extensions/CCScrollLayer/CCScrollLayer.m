@@ -61,10 +61,14 @@ enum
 
 @synthesize minimumTouchLengthToSlide = minimumTouchLengthToSlide_;
 @synthesize minimumTouchLengthToChangePage = minimumTouchLengthToChangePage_;
-@synthesize totalScreens = totalScreens_;
 @synthesize currentScreen = currentScreen_;
 @synthesize showPagesIndicator = showPagesIndicator_;
 @synthesize pagesIndicatorPosition = pagesIndicatorPosition_;
+@dynamic totalScreens;
+- (int) totalScreens
+{
+	return [layers_ count];
+}
 
 +(id) nodeWithLayers:(NSArray *)layers widthOffset: (int) widthOffset
 {
@@ -99,21 +103,29 @@ enum
 		// offset added to show preview of next/previous screens
 		scrollWidth_ = [[CCDirector sharedDirector] winSize].width - widthOffset;
 		
+		// Save array of layers.
+		layers_ = [[NSMutableArray alloc] initWithArray:layers copyItems:NO];
+		
 		// Loop through the array and add the screens
 		int i = 0;
-		for (CCLayer *l in layers)
+		for (CCLayer *l in layers_)
 		{
 			l.anchorPoint = ccp(0,0);
 			l.position = ccp((i*scrollWidth_),0);
 			[self addChild:l];
 			i++;
-		}
-		
-		// Setup a count of the available screens
-		totalScreens_ = [layers count];
+		}	
 		
 	}
 	return self;
+}
+
+- (void) dealloc
+{
+	[layers_ release];
+	layers_ = nil;
+	
+	[super dealloc];
 }
 
 #pragma mark CCLayer Methods ReImpl
@@ -124,12 +136,14 @@ enum
 	
 	if (self.showPagesIndicator)
 	{
+		int totalScreens = [layers_ count];
+		
 		// Prepare Points Array
-		CGFloat n = (CGFloat)totalScreens_; //< Total points count in CGFloat.
+		CGFloat n = (CGFloat)totalScreens; //< Total points count in CGFloat.
 		CGFloat pY = self.pagesIndicatorPosition.y; //< Points y-coord in parent coord sys.
 		CGFloat d = 16.0f; //< Distance between points.
-		CGPoint points[totalScreens_];	
-		for (int i=0; i < totalScreens_; ++i)
+		CGPoint points[totalScreens];	
+		for (int i=0; i < totalScreens; ++i)
 		{
 			CGFloat pX = self.pagesIndicatorPosition.x + d * ( (CGFloat)i - 0.5f*(n-1.0f) );
 			points[i] = ccp (pX, pY);
@@ -144,7 +158,7 @@ enum
 		
 		// Draw Gray Points
 		glColor4ub(0x96,0x96,0x96,0xFF);
-		ccDrawPoints( points, totalScreens_ );
+		ccDrawPoints( points, totalScreens );
 		
 		// Draw White Point for Selected Page
 		glColor4ub(0xFF,0xFF,0xFF,0xFF);
@@ -158,11 +172,11 @@ enum
 	}
 }
 
-#pragma mark Pages Control 
+#pragma mark Moving To / Selecting Pages
 
 -(void) moveToPage:(int)page
-{
-    if (page < 0 || page >= totalScreens_) {
+{	
+    if (page < 0 || page >= [layers_ count]) {
         CCLOGERROR(@"CCScrollLayer#moveToPage: %d - wrong page number, out of bounds. ", page);
 		return;
     }
@@ -175,7 +189,7 @@ enum
 
 -(void) selectPage:(int)page
 {
-    if (page < 0 || page >= totalScreens_) {
+    if (page < 0 || page >= [layers_ count]) {
         CCLOGERROR(@"CCScrollLayer#moveToPage: %d - wrong page number, out of bounds. ", page);
 		return;
     }
@@ -283,7 +297,7 @@ enum
 	
 	int newX = touchPoint.x;	
 	
-	if ( (newX - startSwipe_) < -self.minimumTouchLengthToChangePage && (currentScreen_+1) < totalScreens_ )
+	if ( (newX - startSwipe_) < -self.minimumTouchLengthToChangePage && (currentScreen_+1) < [layers_ count] )
 	{		
 		[self moveToPage: currentScreen_+1];		
 	}

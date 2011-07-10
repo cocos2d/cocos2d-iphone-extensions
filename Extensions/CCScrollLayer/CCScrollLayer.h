@@ -58,9 +58,6 @@
 	// Holds the current page being displayed.
 	int currentScreen_;
 	
-	// A count of the total screens available.
-	int totalScreens_;
-	
 	// The x coord of initial point the user starts their swipe.
 	CGFloat startSwipe_;
 	
@@ -81,6 +78,8 @@
 	// Holds the touch that started the scroll
 	UITouch *scrollTouch_;
 #endif
+	
+	NSMutableArray *layers_;
 	
 }
 
