@@ -145,21 +145,18 @@
 /** Adds new page and reorders pages trying to set given number for newly added page.
  If number > pages count - adds new page to the right end of the scroll layer.
  If number <= 0 - adds new page to the left end of the scroll layer. 
- @attention Designated addPage method.
- @todo implement this method ;) (Issue #36). */
+ @attention Designated addPage method. */
 - (void) addPage: (CCLayer *) aPage withNumber: (int) pageNumber;
 
-/** Adds new page to the right end of the scroll layer. 
- @todo implement this method ;) (Issue #36). */
+/** Adds new page to the right end of the scroll layer. */
 - (void) addPage: (CCLayer *) aPage;
 
 /** Removes page if it's one of scroll layers pages (not children)
  Does nothing if not found.
- @todo implement this method ;) (Issue #36).*/
+ @todo Debug this method (Issue #36).*/
 - (void) removePage: (CCLayer *) aPage;
 
-/** Removes page with given number. Doesn nothing if there's no page for such number.
- @todo implement this method ;) (Issue #36). */
+/** Removes page with given number. Doesn nothing if there's no page for such number. */
 - (void) removePageWithNumber: (int) page;
 
 #pragma mark Moving/Selecting Pages

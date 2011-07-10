@@ -246,17 +246,31 @@ enum
 
 - (void) addPage: (CCLayer *) aPage withNumber: (int) pageNumber
 {
-	//TODO: not implemented, does nothing.
+	pageNumber = MIN(pageNumber, [layers_ count]);
+	pageNumber = MAX(pageNumber, 0);
+	
+	[layers_ insertObject: aPage atIndex: pageNumber];
+	
+	[self updatePages];
+	
+	[self moveToPage: currentScreen_];
 }
 
 - (void) removePage: (CCLayer *) aPage
 {
-	//TODO: not implemented, does nothing.
+	[layers_ removeObject: aPage];
+	[self removeChild: aPage cleanup: YES];
+	
+	[self updatePages];
+	
+	currentScreen_ = MIN(currentScreen_, [layers_ count]);
+	[self moveToPage: currentScreen_];
 }
 
 - (void) removePageWithNumber: (int) page
 {
-	//TODO: not implemented, does nothing.
+	if (page >= 0 && page < [layers_ count])
+		[self removePage:[layers_ objectAtIndex: page]];
 }
 
 #pragma mark Touches
