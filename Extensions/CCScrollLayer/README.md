@@ -31,11 +31,12 @@ Additions since Giv Parvaneh version
 5. Added current page number indicator (iOS Style Dots) with positioning.
 6. moveToPage is public method.
 7. Standard pages numbering starting from zero: [0;totalScreens-1] instead of [1; totalScreens]
+8. iOS: scroll with only one touch.
+9. Mac Support, more flexible.
  
 Limitations
 =============
 
-1. Currently only iOS is supported. Implement ccMouseDelegate and/or ccKeyboardDelegate & remove #ifdef wrappers to add Mac OS X support.
-2. Standard Touch Delegates will still receive touch events after layer starts sliding.
+1. Standard Touch Delegates will still receive touch events after layer starts sliding.
 
 

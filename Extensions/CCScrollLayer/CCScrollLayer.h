@@ -33,22 +33,10 @@
 
 
 /** Scrolling layer for Menus, like iOS Springboard Screen.
- 
- It is a very clean and elegant subclass of CCLayer that lets you pass-in an array 
- of layers and it will then create a smooth scroller. 
- Complete with the "snapping" effect. You can create screens with anything that can be added to a CCLayer.
- 
- Additions since Giv Parvaneh version:
-	1. Added ability to swipe above targetedTouchDelegates.
-    2. Added touches lengths & screens properties.
-	3. Added factory class method.
-	4. Code cleanup.
-	5. Added current page number indicator (iOS Style Dots) with positioning.
-	6. moveToPage is public method.
-	7. Standard pages numbering starting from zero: [0;totalScreens-1] instead of [1; totalScreens]
- 
- Limitations: 
-	1. Standard Touch Delegates will still receive touch events after layer starts sliding.
+ *
+ * It is a very clean and elegant subclass of CCLayer that lets you pass-in an array 
+ * of layers and it will then create a smooth scroller. 
+ * Complete with the "snapping" effect. You can create screens with anything that can be added to a CCLayer.
  */
 @interface CCScrollLayer : CCLayer 
 {	

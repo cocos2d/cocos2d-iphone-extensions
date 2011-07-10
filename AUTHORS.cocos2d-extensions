@@ -26,6 +26,9 @@ People/companies who were/are contributing code to cocos2d-iphone-extensions (al
 
 	* Simon Skinner (twitter: @vultuk) (http://www.dk101.net/)
 		CCScrollLayer original author
+		
+	* Wilczarz (http://www.cocos2d-iphone.org/forum/profile/31820)
+		CCScrollLayer: scroll with only one touch to avoid jumpy behaviour in multitouch (issue #35)
  
 
 Do you have a homepage, twitter account, etc? Please, send me the URL. I'll add it next to your name. Thanks.
