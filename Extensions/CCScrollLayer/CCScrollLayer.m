@@ -358,5 +358,72 @@ enum
 
 #endif
 
+#pragma mark Mouse
+#ifdef __MAC_OS_X_VERSION_MAX_ALLOWED
+
+- (NSInteger) mouseDelegatePriority
+{
+	return kCCMenuMousePriority - 1;
+}
+
+-(BOOL) ccMouseDown:(NSEvent*)event
+{
+	CGPoint touchPoint = [[CCDirector sharedDirector] convertEventToGL: event];
+	
+	startSwipe_ = touchPoint.x;
+	state_ = kCCScrollLayerStateIdle;
+	
+	return NO;
+}
+
+-(BOOL) ccMouseDragged:(NSEvent*)event
+{
+	CGPoint touchPoint = [[CCDirector sharedDirector] convertEventToGL:event];
+	
+	// If mouse is dragged for more distance then minimum - start sliding.
+	if ( (state_ != kCCScrollLayerStateSliding) 
+		&& (fabsf(touchPoint.x-startSwipe_) >= self.minimumTouchLengthToSlide) )
+	{
+		state_ = kCCScrollLayerStateSliding;
+		
+		// Avoid jerk after state change.
+		startSwipe_ = touchPoint.x;
+		
+		if ([self.delegate respondsToSelector:@selector(scrollLayerScrollingStarted:)])
+		{
+			[self.delegate scrollLayerScrollingStarted: self];
+		}
+	}
+	
+	if (state_ == kCCScrollLayerStateSliding)
+		self.position = ccp( (- currentScreen_ * (self.contentSize.width - self.pagesWidthOffset)) + (touchPoint.x-startSwipe_),0);	
+	
+	return NO;
+}
+
+- (BOOL)ccMouseUp:(NSEvent *)event
+{
+	CGPoint touchPoint = [[CCDirector sharedDirector] convertEventToGL:event];
+	
+	int newX = touchPoint.x;	
+	
+	if ( (newX - startSwipe_) < -self.minimumTouchLengthToChangePage && (currentScreen_+1) < [layers_ count] )
+	{		
+		[self moveToPage: currentScreen_+1];		
+	}
+	else if ( (newX - startSwipe_) > self.minimumTouchLengthToChangePage && currentScreen_ > 0 )
+	{		
+		[self moveToPage: currentScreen_-1];		
+	}
+	else
+	{		
+		[self moveToPage:currentScreen_];		
+	}	
+	
+	return NO;
+}
+
+#endif
+
 @end
 
