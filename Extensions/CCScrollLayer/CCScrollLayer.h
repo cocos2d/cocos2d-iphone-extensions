@@ -84,6 +84,8 @@
 	
 }
 
+#pragma mark Scroll Config Properties
+
 /** Calibration property. Minimum moving touch length that is enough
  * to cancel menu items and start scrolling a layer. 
  */
@@ -94,6 +96,8 @@
  */
 @property(readwrite, assign) CGFloat minimumTouchLengthToChangePage;
 
+#pragma mark Pages Indicator Properties
+
 /** Whenever show or not white/grey dots under the scroll layer.
  * If yes - dots will be rendered in parents transform (rendered after scroller visit).
  */
@@ -103,6 +107,8 @@
  * (Default value is screenWidth/2, screenHeight/4)
  */
 @property(readwrite, assign) CGPoint pagesIndicatorPosition;
+
+#pragma mark Pages Control Properties
 
 /** Total pages available in scrollLayer. */
 @property(readonly) int totalScreens;
