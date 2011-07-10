@@ -191,6 +191,26 @@ enum
 		[self.delegate scrollLayer: self scrolledToPageNumber: currentScreen_];
 }
 
+- (int) pageNumberForPosition: (CGPoint) position
+{
+	CGFloat pageFloat = - self.position.x / (self.contentSize.width - self.pagesWidthOffset);
+	int pageNumber = ceilf(pageFloat);
+	if ( (CGFloat)pageNumber - pageFloat  >= 0.5f)
+		pageNumber--;
+	
+	
+	pageNumber = MAX(0, pageNumber);
+	pageNumber = MIN([layers_ count] - 1, pageNumber);
+	
+	return pageNumber;
+}
+	
+
+- (CGPoint) positionForPageWithNumber: (int) pageNumber
+{
+	return ccp( - pageNumber * (self.contentSize.width - self.pagesWidthOffset), 0.0f );
+}
+
 -(void) moveToPage:(int)page
 {	
     if (page < 0 || page >= [layers_ count]) {
@@ -198,7 +218,7 @@ enum
 		return;
     }
 
-	id changePage = [CCMoveTo actionWithDuration:0.3 position:ccp( - page * (self.contentSize.width - self.pagesWidthOffset), 0.0f )];
+	id changePage = [CCMoveTo actionWithDuration:0.3 position: [self positionForPageWithNumber: page]];
 	changePage = [CCSequence actions: changePage,[CCCallFunc actionWithTarget:self selector:@selector(moveToPageEnded)], nil];
     [self runAction:changePage];
     currentScreen_ = page;
@@ -212,7 +232,7 @@ enum
 		return;
     }
 	
-    self.position = ccp( - page * (self.contentSize.width - self.pagesWidthOffset), 0.0f );
+    self.position = [self positionForPageWithNumber: page];
     currentScreen_ = page;
 	
 }
@@ -421,6 +441,21 @@ enum
 	}	
 	
 	return NO;
+}
+
+- (BOOL)ccScrollWheel:(NSEvent *)theEvent
+{
+	CGFloat deltaX = [theEvent deltaX];
+	
+	CGPoint newPos = ccpAdd( self.position, ccp(deltaX, 0.0f) );
+	newPos.x = MIN(newPos.x, [self positionForPageWithNumber: 0].x);
+	newPos.x = MAX(newPos.x, [self positionForPageWithNumber: [layers_ count] - 1].x);
+	
+	self.position = newPos;
+	currentScreen_ = [self pageNumberForPosition:self.position];
+	
+	return NO;
+	
 }
 
 #endif
