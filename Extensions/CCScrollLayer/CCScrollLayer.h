@@ -109,7 +109,29 @@
 +(id) nodeWithLayers:(NSArray *)layers widthOffset: (int) widthOffset; 
 -(id) initWithLayers:(NSArray *)layers widthOffset: (int) widthOffset;
 
-#pragma mark Pages Control
+#pragma mark Adding/Removing Pages
+
+/** Adds new page and reorders pages trying to set given number for newly added page.
+ If number > pages count - adds new page to the right end of the scroll layer.
+ If number <= 0 - adds new page to the left end of the scroll layer. 
+ @attention Designated addPage method.
+ @todo implement this method ;) (Issue #36). */
+- (void) addPage: (CCLayer *) aPage withNumber: (int) pageNumber;
+
+/** Adds new page to the right end of the scroll layer. 
+ @todo implement this method ;) (Issue #36). */
+- (void) addPage: (CCLayer *) aPage;
+
+/** Removes page if it's one of scroll layers pages (not children)
+ Does nothing if not found.
+ @todo implement this method ;) (Issue #36).*/
+- (void) removePage: (CCLayer *) aPage;
+
+/** Removes page with given number. Doesn nothing if there's no page for such number.
+ @todo implement this method ;) (Issue #36). */
+- (void) removePageWithNumber: (int) page;
+
+#pragma mark Moving/Selecting Pages
 
 /* Moves scrollLayer to page with given number. 
  Does nothing if number >= totalScreens or < 0.

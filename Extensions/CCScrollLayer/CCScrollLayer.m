@@ -199,6 +199,29 @@ enum
 	
 }
 
+#pragma mark Dynamic Pages Control
+
+
+- (void) addPage: (CCLayer *) aPage
+{
+	[self addPage: aPage withNumber: [layers_ count]];
+}
+
+- (void) addPage: (CCLayer *) aPage withNumber: (int) pageNumber
+{
+	//TODO: not implemented, does nothing.
+}
+
+- (void) removePage: (CCLayer *) aPage
+{
+	//TODO: not implemented, does nothing.
+}
+
+- (void) removePageWithNumber: (int) page
+{
+	//TODO: not implemented, does nothing.
+}
+
 #pragma mark Touches
 #ifdef __IPHONE_OS_VERSION_MAX_ALLOWED
 
