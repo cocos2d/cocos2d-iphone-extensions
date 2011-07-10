@@ -33,6 +33,7 @@ Additions since Giv Parvaneh version
 7. Standard pages numbering starting from zero: [0;totalScreens-1] instead of [1; totalScreens]
 8. iOS: scroll with only one touch.
 9. Mac Support, more flexible.
+10. Dynamic Pages Control - Add / Remove pages after CCScrollLayer init & onEnter.
  
 Limitations
 =============
