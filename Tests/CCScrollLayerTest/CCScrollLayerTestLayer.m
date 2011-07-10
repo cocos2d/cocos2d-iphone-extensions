@@ -119,9 +119,12 @@ enum nodeTags
 	
 	// PAGE 2 - Custom Font Menu in the center.
 	CCLayer *pageTwo = [CCLayer node];
-	CCLabelTTF *labelTwo = [CCLabelTTF labelWithString:@"Press Me!" fontName:@"Marker Felt" fontSize:44];		
+	CCLabelTTF *labelTwo = [CCLabelTTF labelWithString:@"Add Page!" fontName:@"Marker Felt" fontSize:44];		
 	CCMenuItemLabel *titem = [CCMenuItemLabel itemWithLabel:labelTwo target:self selector:@selector(testCallback:)];
-	CCMenu *menu = [CCMenu menuWithItems: titem, nil];
+	CCLabelTTF *labelTwo2 = [CCLabelTTF labelWithString:@"Remove Page!" fontName:@"Marker Felt" fontSize:44];		
+	CCMenuItemLabel *titem2 = [CCMenuItemLabel itemWithLabel:labelTwo2 target:self selector:@selector(testCallback2:)];
+	CCMenu *menu = [CCMenu menuWithItems: titem, titem2,nil];
+	[menu alignItemsVertically];
 	menu.position = ccp(screenSize.width/2, screenSize.height/2);
 	[pageTwo addChild:menu];
 	
@@ -147,6 +150,18 @@ enum nodeTags
 - (void) testCallback: (CCNode *) sender
 {
 	NSLog(@"CCScrollLayerTestLayer#testCallback: called!");
+	
+	CCLayer *pageX = [CCLayerColor layerWithColor:ccc4(255, 0, 128, 128)];
+	CCScrollLayer *scroller = (CCScrollLayer *)[self getChildByTag:kScrollLayer];
+	[scroller addPage: pageX];
+}
+
+- (void) testCallback2: (CCNode *) sender
+{
+	NSLog(@"CCScrollLayerTestLayer#testCallback2: called!");
+	
+	CCScrollLayer *scroller = (CCScrollLayer *)[self getChildByTag:kScrollLayer];
+	[scroller removePageWithNumber: [scroller.pages count] - 1];
 }
 
 - (void) fastMenuItemPressed: (CCNode *) sender
