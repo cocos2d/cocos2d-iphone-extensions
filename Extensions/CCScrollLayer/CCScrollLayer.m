@@ -163,7 +163,7 @@ enum
 -(void) moveToPage:(int)page
 {
     if (page < 0 || page >= totalScreens_) {
-        CCLOGERROR(@"CCScrollLayer#moveToPage: %d - wrong page number, out of bounds. ");
+        CCLOGERROR(@"CCScrollLayer#moveToPage: %d - wrong page number, out of bounds. ", page);
 		return;
     }
 
@@ -176,7 +176,7 @@ enum
 -(void) selectPage:(int)page
 {
     if (page < 0 || page >= totalScreens_) {
-        CCLOGERROR(@"CCScrollLayer#moveToPage: %d - wrong page number, out of bounds. ");
+        CCLOGERROR(@"CCScrollLayer#moveToPage: %d - wrong page number, out of bounds. ", page);
 		return;
     }
 	
