@@ -77,6 +77,11 @@
 	// Internal state of scrollLayer (scrolling or idle).
 	int state_;
 	
+#ifdef __IPHONE_OS_VERSION_MAX_ALLOWED
+	// Holds the touch that started the scroll
+	UITouch *scrollTouch_;
+#endif
+	
 }
 
 // Calibration property. Minimum moving touch length that is enough

@@ -230,6 +230,12 @@ enum
 
 -(BOOL) ccTouchBegan:(UITouch *)touch withEvent:(UIEvent *)event
 {
+	if( scrollTouch_ == nil ) {
+		scrollTouch_ = touch;
+	} else {
+		return NO;
+	}
+	
 	CGPoint touchPoint = [touch locationInView:[touch view]];
 	touchPoint = [[CCDirector sharedDirector] convertToGL:touchPoint];
 	
@@ -240,6 +246,10 @@ enum
 
 - (void)ccTouchMoved:(UITouch *)touch withEvent:(UIEvent *)event
 {
+	if( scrollTouch_ != touch ) {
+		return;
+	}
+	
 	CGPoint touchPoint = [touch locationInView:[touch view]];
 	touchPoint = [[CCDirector sharedDirector] convertToGL:touchPoint];
 	
@@ -264,6 +274,10 @@ enum
 
 - (void)ccTouchEnded:(UITouch *)touch withEvent:(UIEvent *)event
 {
+	if( scrollTouch_ == touch ) {
+		scrollTouch_ = nil;
+	}
+	
 	CGPoint touchPoint = [touch locationInView:[touch view]];
 	touchPoint = [[CCDirector sharedDirector] convertToGL:touchPoint];
 	
