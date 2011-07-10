@@ -31,7 +31,6 @@
 #import <Foundation/Foundation.h>
 #import "cocos2d.h"
 
-#ifndef __MAC_OS_X_VERSION_MAX_ALLOWED
 
 /* 
  It is a very clean and elegant subclass of CCLayer that lets you pass-in an array 
@@ -120,4 +119,3 @@
 
 @end
 
-#endif

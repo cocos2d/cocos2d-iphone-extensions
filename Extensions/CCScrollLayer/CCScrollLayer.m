@@ -29,7 +29,6 @@
 //  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 //  THE SOFTWARE.
 
-#ifndef __MAC_OS_X_VERSION_MAX_ALLOWED
 
 #import "CCScrollLayer.h"
 #import "CCGL.h"
@@ -40,6 +39,7 @@ enum
 	kCCScrollLayerStateSliding,
 };
 
+#ifdef __IPHONE_OS_VERSION_MAX_ALLOWED
 @interface CCTouchDispatcher (targetedHandlersGetter)
 
 - (NSMutableArray *) targetedHandlers;
@@ -54,6 +54,7 @@ enum
 }
 
 @end
+#endif
 
 
 @implementation CCScrollLayer
@@ -76,8 +77,12 @@ enum
 	{
 		NSAssert([layers count], @"CCScrollLayer#initWithLayers:widthOffset: you must provide at least one layer!");
 		
-		// Enable touches.
+		// Enable Touches/Mouse.
+#ifdef __IPHONE_OS_VERSION_MAX_ALLOWED
 		self.isTouchEnabled = YES;
+#elif defined(__MAC_OS_X_VERSION_MAX_ALLOWED)
+        self.isMouseEnabled = YES;
+#endif
 		
 		// Set default minimum touch length to scroll.
 		self.minimumTouchLengthToSlide = 30.0f;
@@ -112,12 +117,6 @@ enum
 }
 
 #pragma mark CCLayer Methods ReImpl
-
-// Register with more priority than CCMenu's but don't swallow touches
--(void) registerWithTouchDispatcher
-{	
-	[[CCTouchDispatcher sharedDispatcher] addTargetedDelegate:self priority:kCCMenuTouchPriority - 1 swallowsTouches:NO];
-}
 
 - (void) visit
 {
@@ -186,8 +185,17 @@ enum
 	
 }
 
-#pragma mark Hackish Stuff
+#pragma mark Touches
+#ifdef __IPHONE_OS_VERSION_MAX_ALLOWED
 
+/** Register with more priority than CCMenu's but don't swallow touches. */
+-(void) registerWithTouchDispatcher
+{	
+	[[CCTouchDispatcher sharedDispatcher] addTargetedDelegate:self priority:kCCMenuTouchPriority - 1 swallowsTouches:NO];
+}
+
+/** Hackish stuff - stole touches from other CCTouchDispatcher targeted delegates. 
+ Used to claim touch without receiving ccTouchBegan. */
 - (void) claimTouch: (UITouch *) aTouch
 {
 	// Enumerate through all targeted handlers.
@@ -219,8 +227,6 @@ enum
 	// Squirrel away the touch
 	[self claimTouch: touch];
 }
-
-#pragma mark Touches 
 
 -(BOOL) ccTouchBegan:(UITouch *)touch withEvent:(UIEvent *)event
 {
@@ -277,6 +283,7 @@ enum
 	}	
 }
 
+#endif
+
 @end
 
-#endif
