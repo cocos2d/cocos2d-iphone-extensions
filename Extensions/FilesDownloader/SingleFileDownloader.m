@@ -41,6 +41,7 @@
 + (NSString *) destinationDirectoryPath;
 + (NSString *) tmpSuffix;
 + (NSFileHandle *) newFileWithName: (NSString *) newFilename; 
++ (BOOL)checkTargetDirectory:(NSString *)targetPath;
 
 @end
 
@@ -74,30 +75,50 @@
     return cachesDirectoryPath;
 }
 
-+ (NSFileHandle *) newFileWithName: (NSString *) newFilename
-{    
-    //creating caches directory if needed
-    NSString *cachesDirectoryPath = [SingleFileDownloader destinationDirectoryPath];
-    
++ (BOOL)checkTargetDirectory:(NSString *)targetPath
+{
     BOOL isDirectory = NO;
-    BOOL exists = [ [NSFileManager defaultManager] fileExistsAtPath:cachesDirectoryPath isDirectory:&isDirectory];
     
-    if ( exists && isDirectory )
+    NSString *targetDirectory = [targetPath stringByDeletingLastPathComponent];
+    NSArray *pathComponents = [targetDirectory pathComponents];
+    NSString *currentTargetPath = @"";
+    
+    for (int i = 0; i < [pathComponents count]; i++)
     {
-        MYLOG(@"SingleFileDownloader#newFileWithName: %@ exists",cachesDirectoryPath);
-    }
-    else
-    {
-        MYLOG(@"SingleFileDownloader#newFileWithName: %@ not exists! Creating...",cachesDirectoryPath );
-        if ( [ [NSFileManager defaultManager] createDirectoryAtPath:cachesDirectoryPath withIntermediateDirectories: YES attributes: nil error: NULL] ) 
+        currentTargetPath = [currentTargetPath stringByAppendingPathComponent:[pathComponents objectAtIndex:i]];
+        BOOL exists = [[NSFileManager defaultManager] fileExistsAtPath:currentTargetPath isDirectory:&isDirectory];
+
+        if (exists && isDirectory)
         {
-            MYLOG(@"SingleFileDownloader#newFileWithName: SUCCESSFULL creating caches directory!");
+            MYLOG(@"SingleFileDownloader#newFileWithName: %@ exists", currentTargetPath);
         }
         else
         {
-            MYLOG(@"SingleFileDownloader#newFileWithName: creating caches directory FAILED!");
-            return nil;
+            MYLOG(@"SingleFileDownloader#newFileWithName: %@ not exists! Creating...", currentTargetPath);
+            if ([[NSFileManager defaultManager] createDirectoryAtPath:currentTargetPath withIntermediateDirectories: YES attributes: nil error: NULL])
+            {
+                MYLOG(@"SingleFileDownloader#newFileWithName: SUCCESSFULL creating directory %@!", currentTargetPath);
+            }
+            else
+            {
+                MYLOG(@"SingleFileDownloader#newFileWithName: creating directory %@ FAILED!", currentTargetPath);
+                return FALSE;
+            }
         }
+    }
+    
+    return TRUE;
+}
+
++ (NSFileHandle *) newFileWithName: (NSString *) newFilename
+{
+    //creating caches directory if needed
+    NSString *cachesDirectoryPath = [SingleFileDownloader destinationDirectoryPath];
+
+    // creating target directory if needed
+    if (![self checkTargetDirectory:[cachesDirectoryPath stringByAppendingPathComponent:newFilename]])
+    {
+        return nil;
     }
     
     NSString * myFilePath = [SingleFileDownloader tmpPathWithFilename: newFilename];
