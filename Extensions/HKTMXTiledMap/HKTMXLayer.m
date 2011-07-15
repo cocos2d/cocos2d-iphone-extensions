@@ -71,7 +71,7 @@
 	if((self=[super init]))
 	{
 		texture_ = [[CCTextureCache sharedTextureCache] addImage:tilesetInfo.sourceImage];
-		tilesetInfo.imageSize = texture_.contentSize;
+		tilesetInfo.imageSize = texture_.contentSizeInPixels;
 		
 		// layerInfo
 		layerName_ = [layerInfo.name copy];
@@ -96,9 +96,9 @@
 		
 		// offset (after layer orientation is set);
 		CGPoint offset = [self calculateLayerOffset:layerInfo.offset];
-		[self setPosition:offset];
+		[self setPositionInPixels:offset];
 		
-		[self setContentSize: CGSizeMake( layerSize_.width * mapTileSize_.width, layerSize_.height * mapTileSize_.height )];
+		[self setContentSizeInPixels: CGSizeMake( layerSize_.width * mapTileSize_.width, layerSize_.height * mapTileSize_.height )];
 		
 		// adjust and validate tile IDs
 		NSAssert1(minGID_ <= maxGID_ + 1 && maxGID_ - minGID_ < 1000000,
@@ -113,7 +113,7 @@
 				@"TMX: Only one tileset per layer is supported");
 		}
 		
-		CGSize screenSize = [CCDirector sharedDirector].winSize;
+		CGSize screenSize = [CCDirector sharedDirector].winSizeInPixels;
 		screenGridSize_.width = ceil(screenSize.width / mapTileSize_.width) + 1;
 		screenGridSize_.height = ceil(screenSize.height / mapTileSize_.height) + 1;
 		int screenTileCount = screenGridSize_.width * screenGridSize_.height;
