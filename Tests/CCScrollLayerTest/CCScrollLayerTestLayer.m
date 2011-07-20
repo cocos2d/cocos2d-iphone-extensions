@@ -81,6 +81,7 @@ enum nodeTags
 	return self;
 }
 
+//TODO: try to fix crashes on DEBUG MAC, while resizing window.
 - (void) updateForScreenReshape
 {
 	CGSize screenSize = [CCDirector sharedDirector].winSize;
@@ -120,18 +121,15 @@ enum nodeTags
 	// PAGE 2 - Custom Font Menu in the center.
 	CCLayer *pageTwo = [CCLayer node];
 	CCLabelTTF *labelTwo = [CCLabelTTF labelWithString:@"Add Page!" fontName:@"Marker Felt" fontSize:44];		
-	CCMenuItemLabel *titem = [CCMenuItemLabel itemWithLabel:labelTwo target:self selector:@selector(testCallback:)];
+	CCMenuItemLabel *titem = [CCMenuItemLabel itemWithLabel:labelTwo target:self selector:@selector(addPagePressed:)];
 	CCLabelTTF *labelTwo2 = [CCLabelTTF labelWithString:@"Remove Page!" fontName:@"Marker Felt" fontSize:44];		
-	CCMenuItemLabel *titem2 = [CCMenuItemLabel itemWithLabel:labelTwo2 target:self selector:@selector(testCallback2:)];
+	CCMenuItemLabel *titem2 = [CCMenuItemLabel itemWithLabel:labelTwo2 target:self selector:@selector(removePagePressed:)];
 	CCMenu *menu = [CCMenu menuWithItems: titem, titem2,nil];
 	[menu alignItemsVertically];
 	menu.position = ccp(screenSize.width/2, screenSize.height/2);
-	[pageTwo addChild:menu];
+	[pageTwo addChild:menu];	
 	
-	// PAGE 3 - Red Layer.
-	CCLayer *pageThree = [CCLayerColor layerWithColor:ccc4(255, 0, 0, 128)];	
-	
-	return [NSArray arrayWithObjects: pageOne,pageTwo,pageThree,nil];
+	return [NSArray arrayWithObjects: pageOne,pageTwo,nil];
 }
 
 - (CCScrollLayer *) scrollLayer
@@ -147,21 +145,42 @@ enum nodeTags
 
 #pragma mark Callbacks
 
-- (void) testCallback: (CCNode *) sender
+- (void) addPagePressed: (CCNode *) sender
 {
-	NSLog(@"CCScrollLayerTestLayer#testCallback: called!");
+	NSLog(@"CCScrollLayerTestLayer#addPagePressed: called!");
 	
-	CCLayer *pageX = [CCLayerColor layerWithColor:ccc4(255, 0, 128, 128)];
+	CGSize screenSize = [CCDirector sharedDirector].winSize;
+	
 	CCScrollLayer *scroller = (CCScrollLayer *)[self getChildByTag:kScrollLayer];
+	
+	int x = [scroller.pages count] + 1;
+	CCLayer *pageX = [CCLayer node];
+	CCLabelTTF *label = [CCLabelTTF labelWithString: [NSString stringWithFormat:@"Page %d", x] 
+										   fontName: @"Arial Rounded MT Bold" 
+										   fontSize:44];
+	label.position =  ccp( screenSize.width /2 , screenSize.height/2 );
+	[pageX addChild:label];
+	
 	[scroller addPage: pageX];
+	
+	//TODO: update fast page change menu
 }
 
-- (void) testCallback2: (CCNode *) sender
+- (void) removePagePressed: (CCNode *) sender
 {
-	NSLog(@"CCScrollLayerTestLayer#testCallback2: called!");
-	
+	[self runAction:[CCSequence actions:
+					 [CCDelayTime actionWithDuration:0.2f],
+					 [CCCallFunc actionWithTarget:self selector:@selector(removePage)],
+					 nil]
+	 ];
+}
+
+- (void) removePage
+{
 	CCScrollLayer *scroller = (CCScrollLayer *)[self getChildByTag:kScrollLayer];
 	[scroller removePageWithNumber: [scroller.pages count] - 1];
+	
+	//TODO: update fast page change menu
 }
 
 - (void) fastMenuItemPressed: (CCNode *) sender
