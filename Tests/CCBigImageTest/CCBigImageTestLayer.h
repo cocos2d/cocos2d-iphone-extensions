@@ -30,9 +30,9 @@
 #import "cocos2d.h"
 
 
-@interface CCBigImageTestLayer : CCLayer
+@interface CCBigImageTestLayer : CCLayer 
 {}
 
-- (void) fixPosition;
+- (void) updateForScreenReshape;
 
 @end
