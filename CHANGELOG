@@ -1,6 +1,9 @@
 
 0.1.2 - XX-Jule-2011
-   * CCVideoPlayer: toggleFullscreen support on Mac. (Issue #31)
+   * CCVideoPlayer: 
+      1. ToggleFullscreen support on Mac. (Issue #31)
+	  2. Prepare to play to prevent view flicker while movie is preloading.
+	  3. Actually hides the controls on pre 3.2 devices.
    * A lot for CCScrollLayer: 
       1. Added pagesIndicatorPosition property, moveToPage: & selectPage: methods.
       2. Changed pages numbering to start from zero.
