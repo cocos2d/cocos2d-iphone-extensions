@@ -4,6 +4,7 @@
       1. ToggleFullscreen support on Mac. (Issue #31)
 	  2. Prepare to play to prevent view flicker while movie is preloading.
 	  3. Actually hides the controls on pre 3.2 devices.
+	  4. Ability to disable video skip by user (key/mouse/touch event).
    * A lot for CCScrollLayer: 
       1. Added pagesIndicatorPosition property, moveToPage: & selectPage: methods.
       2. Changed pages numbering to start from zero.

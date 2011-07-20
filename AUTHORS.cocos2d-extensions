@@ -23,6 +23,7 @@ People/companies who were/are contributing code to cocos2d-iphone-extensions (al
 		
 	* Jonathan Dixon (http://www.cocos2d-iphone.org/forum/profile/4062)
 		Solution for issue #31 (CCVideoPlayer toggleFullscreen support).
+		CCVideoPlayer#setNoSkip implementation.
 		
 	* Patrick Wolowicz (twitter: @subzero_eu) (http://blog.subzero.eu/)
 		CCVideoPlayer patch: preload movie, prevent flickering & hide controls when compiled on older SDKs.
