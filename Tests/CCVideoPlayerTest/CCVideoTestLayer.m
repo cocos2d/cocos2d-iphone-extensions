@@ -54,8 +54,14 @@ SYNTHESIZE_EXTENSION_TEST(CCVideoTestLayer)
 															 target: self 
 														   selector: @selector(testCCVideoPlayer)];
 		
-		CCMenu *menu = [CCMenu menuWithItems: labelItem, nil];
-		[menu alignItemsHorizontally];
+		// Add button 2 - playback without skip.
+		CCLabelTTF *labelNoSkip = [CCLabelTTF labelWithString:@"Play video(No skip)" fontName:@"Marker Felt" fontSize:64];
+		CCMenuItemLabel *labelItemNoSkip = [CCMenuItemLabel itemWithLabel:labelNoSkip 
+															 target: self 
+														   selector: @selector(testCCVideoPlayerNoSkip)];
+		
+		CCMenu *menu = [CCMenu menuWithItems: labelItem, labelItemNoSkip, nil];
+		[menu alignItemsVertically];
 		[self addChild: menu];
 	
 		
@@ -79,6 +85,13 @@ SYNTHESIZE_EXTENSION_TEST(CCVideoTestLayer)
 
 - (void) testCCVideoPlayer
 {
+	[CCVideoPlayer setNoSkip: NO];
+	[CCVideoPlayer playMovieWithFile: @"bait.m4v"];
+}
+
+- (void) testCCVideoPlayerNoSkip
+{
+	[CCVideoPlayer setNoSkip: YES];
 	[CCVideoPlayer playMovieWithFile: @"bait.m4v"];
 }
 
