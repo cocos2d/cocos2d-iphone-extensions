@@ -1,5 +1,6 @@
 
 0.1.2 - XX-Jule-2011
+   * CCBigImage - implemented full transform support.
    * CCVideoPlayer: 
       1. ToggleFullscreen support on Mac. (Issue #31)
 	  2. Prepare to play to prevent view flicker while movie is preloading.
@@ -14,9 +15,7 @@
 	  6. Fixed jumpy behavior when scrolling with two or more fingers.
 	  7. Added Dynamic Pages Control.
    * CCSendMessages: fixed issue #30, added testcase (return nil on initWithTarget: nil).
-   * Minor stability, analyzer & documentation issues fixes (CCVideoPLayer, CCBigImage, FilesDownloader).
-
-   
+   * Minor stability, analyzer & documentation issues fixes (CCVideoPLayer, CCBigImage, FilesDownloader).   
 
 0.1.1 - 12-June-2011
    * Edited README: master is a default branch now.
