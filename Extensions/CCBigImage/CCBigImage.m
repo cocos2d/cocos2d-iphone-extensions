@@ -466,13 +466,10 @@
 - (void) updateLoadRect
 {	
 	// get screen rect
-	CGRect screenRect = CGRectZero;
-	screenRect.origin = [self convertToNodeSpace: CGPointMake(0, 0 )];
+	CGRect screenRect = CGRectZero;;
 	screenRect.size = [[CCDirector sharedDirector] winSize];
 	
-	/* 
-	 TODO: try to uncomment this to support rotation/scale/etc transform
-	 screnRect = CGRectApplyAffineTransform(screenRect, [self worldToNodeTransform] ); */
+	screenRect = CGRectApplyAffineTransform(screenRect, [self worldToNodeTransform] );
 	
 	// get level's must-be-loaded-part rect
 	_loadedRect = CGRectMake(screenRect.origin.x - _screenLoadRectExtension.width,
