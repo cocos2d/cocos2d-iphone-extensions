@@ -263,7 +263,7 @@ enum
 	
 	[self updatePages];
 	
-	currentScreen_ = MIN(currentScreen_, [layers_ count]);
+	currentScreen_ = MIN(currentScreen_, [layers_ count] - 1);
 	[self moveToPage: currentScreen_];
 }
 
