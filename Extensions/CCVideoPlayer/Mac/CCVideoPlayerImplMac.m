@@ -102,6 +102,18 @@ NSString *const kVideoTitle		= @"CustomVideoView";
 	[movie release];	
 }
 
+- (void) setNoSkip:(BOOL)value;
+{
+    noSkip=value;
+}
+
+- (void) userCancelPlaying
+{
+	if (!noSkip) {
+		[self cancelPlaying];
+	}
+}
+
 - (void) cancelPlaying
 {	
 	[self movieFinishedCallback: nil];

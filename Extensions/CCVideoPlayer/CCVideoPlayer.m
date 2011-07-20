@@ -72,7 +72,6 @@
 
 static  CCVideoPlayerImpl *_impl = nil;
 
-
 //----- initialize -----
 + (void) initialize
 {
@@ -132,7 +131,24 @@ static  CCVideoPlayerImpl *_impl = nil;
     [pool release];    
 }
 
-#pragma mark Interface
+#pragma mark Properties
+
++ (void) setDelegate: (id<CCVideoPlayerDelegate>) aDelegate
+{
+	// If the current thread is the main thread,than
+	// this message will be processed immediately.
+	[ _impl performSelectorOnMainThread: @selector(setDelegate:) 
+							 withObject: aDelegate
+						  waitUntilDone: [NSThread isMainThread]  ];
+}
+
++ (void) setNoSkip:(BOOL)value
+{
+    [_impl setNoSkip:value];
+}
+
+#pragma mark Playback
+
 + (void) playMovieWithFile: (NSString *) file
 {	
     //test for file in caches - play if exists
@@ -157,6 +173,11 @@ static  CCVideoPlayerImpl *_impl = nil;
     
 }
 
++ (void)userCancelPlaying
+{
+	[_impl userCancelPlaying];
+}
+
 + (void) cancelPlaying
 {
 	// If the current thread is the main thread,than
@@ -166,21 +187,12 @@ static  CCVideoPlayerImpl *_impl = nil;
 						  waitUntilDone: [NSThread isMainThread]  ];
 }
 
-+ (void) setDelegate: (id<CCVideoPlayerDelegate>) aDelegate
-{
-	// If the current thread is the main thread,than
-	// this message will be processed immediately.
-	[ _impl performSelectorOnMainThread: @selector(setDelegate:) 
-							 withObject: aDelegate
-						  waitUntilDone: [NSThread isMainThread]  ];
-}
-
 + (BOOL) isPlaying
 {
 	return [_impl isPlaying];
 }
 
-#pragma mark Platform Specific Interface
+#pragma mark Updates - Platform Specific
 
 #ifdef __IPHONE_OS_VERSION_MAX_ALLOWED
 + (void) updateOrientationWithOrientation: (UIDeviceOrientation) newOrientation

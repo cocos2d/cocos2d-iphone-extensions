@@ -45,6 +45,7 @@
 	NSObject<CCVideoPlayerDelegate> *delegate;
 	
 	BOOL isPlaying;
+	BOOL noSkip;
 }
 //private property
 @property (readwrite, retain) NSViewController *videoViewController;
@@ -53,6 +54,10 @@
 
 - (void)playMovieAtURL:(NSURL*)theURL;
 - (void)playMovieAtURL:(NSURL*)theURL attachedInView: (NSView *) aView;
+
+- (void)setNoSkip:(BOOL)value;
+
+- (void)userCancelPlaying;
 - (void)cancelPlaying;
 
 - (void)setDelegate: (id<CCVideoPlayerDelegate>) aDelegate;

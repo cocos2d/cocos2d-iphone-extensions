@@ -43,6 +43,7 @@
     VideoOverlayView *_videoOverlayView;	
 	
 	BOOL _playing;
+	BOOL noSkip;
 	
 	//weak ref
 	id<CCVideoPlayerDelegate> _delegate;	
@@ -52,6 +53,9 @@
 - (void)playMovieAtURL:(NSURL*)theURL;
 - (void)movieFinishedCallback:(NSNotification*)aNotification;
 
+- (void)setNoSkip:(BOOL)value;
+
+- (void)userCancelPlaying;
 - (void)cancelPlaying;
 
 - (void)setDelegate: (id<CCVideoPlayerDelegate>) aDelegate;

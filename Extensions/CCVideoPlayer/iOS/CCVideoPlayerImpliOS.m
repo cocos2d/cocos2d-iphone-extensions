@@ -188,6 +188,19 @@
     
 	
 }
+
+- (void) setNoSkip:(BOOL)value;
+{
+    noSkip=value;
+}
+
+- (void) userCancelPlaying
+{
+	if (!noSkip) {
+		[self cancelPlaying];
+	}
+}
+
 - (void) cancelPlaying
 {
     if (_theMovie)

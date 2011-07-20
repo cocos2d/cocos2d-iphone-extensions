@@ -50,6 +50,10 @@
  */
 + (void) setDelegate: (id<CCVideoPlayerDelegate>) aDelegate;
 
+/** If YES - user can't skip video by mouse/key/touch event. Default is NO. 
+ */
++ (void) setNoSkip:(BOOL)value;
+
 #pragma mark Playback
 
 /** Start playing movie with given filename
@@ -59,6 +63,10 @@
 /** Stop playing video if it's playing.
  */
 + (void) cancelPlaying;
+
+/** Stop playing video if it's playing and noSkip is NO.
+ */
++ (void)userCancelPlaying;
 
 /** Returns YES if video is currently playing. Otherwise returns NO.
  */
