@@ -483,8 +483,13 @@
 	CGRect screenRect = CGRectZero;;
 	screenRect.size = [[CCDirector sharedDirector] winSize];
 	
+	screenRect.size.width *= CC_CONTENT_SCALE_FACTOR();
+	screenRect.size.height *= CC_CONTENT_SCALE_FACTOR();
 	screenRect = CGRectApplyAffineTransform(screenRect, [self worldToNodeTransform] );
-	
+	screenRect.origin = ccpMult(screenRect.origin, 1/CC_CONTENT_SCALE_FACTOR() );
+	screenRect.size.width /= CC_CONTENT_SCALE_FACTOR();
+	screenRect.size.height /= CC_CONTENT_SCALE_FACTOR();
+	 
 	// get level's must-be-loaded-part rect
 	_loadedRect = CGRectMake(screenRect.origin.x - _screenLoadRectExtension.width,
 							 screenRect.origin.y - _screenLoadRectExtension.height,
