@@ -28,6 +28,7 @@
 /* End PBXAggregateTarget section */
 
 /* Begin PBXBuildFile section */
+		6D77EF8613D6D61F00B82EF1 /* bait.m4v in Resources */ = {isa = PBXBuildFile; fileRef = 6D77EF8513D6D61F00B82EF1 /* bait.m4v */; };
 		6D7BFF4C13C9D4F800FBAC1A /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6DA575D0139C96AE004D8D0B /* InfoPlist.strings */; };
 		6D7BFF4D13C9D4F800FBAC1A /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6DA575D2139C96AE004D8D0B /* MainMenu.xib */; };
 		6D7BFF4E13C9D4F800FBAC1A /* fps_images.png in Resources */ = {isa = PBXBuildFile; fileRef = 6DA575D4139C96AE004D8D0B /* fps_images.png */; };
@@ -429,7 +430,6 @@
 		6DA57EE7139D561E004D8D0B /* OpenAL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E08AA04A12C0EDC8000341BD /* OpenAL.framework */; };
 		6DA57EE8139D561E004D8D0B /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E08AA04C12C0EEC0000341BD /* AudioToolbox.framework */; };
 		6DA57F11139D5F9A004D8D0B /* CCVideoTestLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DA57ECB139D55EF004D8D0B /* CCVideoTestLayer.m */; };
-		6DA57F12139D5FA4004D8D0B /* bait.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 6DA57EC9139D55EF004D8D0B /* bait.mp4 */; };
 		6DA57F13139D5FB4004D8D0B /* videoOverlayView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DA57EBB139D558E004D8D0B /* videoOverlayView.m */; };
 		6DA57F14139D5FB4004D8D0B /* CCVideoPlayerImpliOS.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DA57EBD139D558E004D8D0B /* CCVideoPlayerImpliOS.m */; };
 		6DA57F16139D5FB4004D8D0B /* MyMovieView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DA57EC3139D558E004D8D0B /* MyMovieView.m */; };
@@ -562,63 +562,63 @@
 			isa = PBXContainerItemProxy;
 			containerPortal = 29B97313FDCFA39411CA2CEA /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = 6D7BFF4813C9D4F800FBAC1A /* Extension Test Template copy */;
+			remoteGlobalIDString = 6D7BFF4813C9D4F800FBAC1A;
 			remoteInfo = "Extension Test Template copy";
 		};
 		6D7BFFAD13C9D77800FBAC1A /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 29B97313FDCFA39411CA2CEA /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = 6D7BFF4813C9D4F800FBAC1A /* CCScrollLayerTest */;
+			remoteGlobalIDString = 6D7BFF4813C9D4F800FBAC1A;
 			remoteInfo = CCScrollLayerTest;
 		};
 		6D7BFFB113C9D78200FBAC1A /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 29B97313FDCFA39411CA2CEA /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = 6DA5863913A0232C004D8D0B /* CCSendMessagesTest */;
+			remoteGlobalIDString = 6DA5863913A0232C004D8D0B;
 			remoteInfo = CCSendMessagesTest;
 		};
 		6D7BFFB813C9D7A100FBAC1A /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 29B97313FDCFA39411CA2CEA /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = 6DA57C96139CAE19004D8D0B /* CCMenuAdvancedTest */;
+			remoteGlobalIDString = 6DA57C96139CAE19004D8D0B;
 			remoteInfo = CCMenuAdvancedTest;
 		};
 		6D7BFFBA13C9D7A100FBAC1A /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 29B97313FDCFA39411CA2CEA /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = 6DA57ECD139D561E004D8D0B /* CCVideoPlayerTest */;
+			remoteGlobalIDString = 6DA57ECD139D561E004D8D0B;
 			remoteInfo = CCVideoPlayerTest;
 		};
 		6D7BFFBC13C9D7A100FBAC1A /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 29B97313FDCFA39411CA2CEA /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = 6DA58100139E3CF9004D8D0B /* CCBigImageTest */;
+			remoteGlobalIDString = 6DA58100139E3CF9004D8D0B;
 			remoteInfo = CCBigImageTest;
 		};
 		6D7BFFBE13C9D7A100FBAC1A /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 29B97313FDCFA39411CA2CEA /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = 6DA58134139E3CFF004D8D0B /* CCMenuItemSpriteIndependentTest */;
+			remoteGlobalIDString = 6DA58134139E3CFF004D8D0B;
 			remoteInfo = CCMenuItemSpriteIndependentTest;
 		};
 		6D7BFFC013C9D7A100FBAC1A /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 29B97313FDCFA39411CA2CEA /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = 6DA5814E139E3D01004D8D0B /* CCSliderTest */;
+			remoteGlobalIDString = 6DA5814E139E3D01004D8D0B;
 			remoteInfo = CCSliderTest;
 		};
 		6D7BFFC213C9D7A100FBAC1A /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 29B97313FDCFA39411CA2CEA /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = 6DA58168139E3D04004D8D0B /* FilesDownloaderTest */;
+			remoteGlobalIDString = 6DA58168139E3D04004D8D0B;
 			remoteInfo = FilesDownloaderTest;
 		};
 		6DA57C98139CAE19004D8D0B /* PBXContainerItemProxy */ = {
@@ -684,6 +684,7 @@
 		13E42FB307B3F0F600E4EEF1 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = /System/Library/Frameworks/CoreData.framework; sourceTree = "<absolute>"; };
 		29B97324FDCFA39411CA2CEA /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = /System/Library/Frameworks/AppKit.framework; sourceTree = "<absolute>"; };
 		29B97325FDCFA39411CA2CEA /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = /System/Library/Frameworks/Foundation.framework; sourceTree = "<absolute>"; };
+		6D77EF8513D6D61F00B82EF1 /* bait.m4v */ = {isa = PBXFileReference; lastKnownFileType = file; path = bait.m4v; sourceTree = "<group>"; };
 		6D7BFF5F13C9D4F800FBAC1A /* CCScrollLayerTest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CCScrollLayerTest.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6D7BFF6B13C9D5B300FBAC1A /* CCScrollLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCScrollLayer.h; sourceTree = "<group>"; };
 		6D7BFF6C13C9D5B300FBAC1A /* CCScrollLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCScrollLayer.m; sourceTree = "<group>"; };
@@ -1084,7 +1085,6 @@
 		6DA57EC5139D558E004D8D0B /* CCVideoPlayerImplMac.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCVideoPlayerImplMac.m; sourceTree = "<group>"; };
 		6DA57EC6139D558E004D8D0B /* CCVideoPlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCVideoPlayer.h; sourceTree = "<group>"; };
 		6DA57EC7139D558E004D8D0B /* CCVideoPlayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCVideoPlayer.m; sourceTree = "<group>"; };
-		6DA57EC9139D55EF004D8D0B /* bait.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = bait.mp4; sourceTree = "<group>"; };
 		6DA57ECA139D55EF004D8D0B /* CCVideoTestLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCVideoTestLayer.h; sourceTree = "<group>"; };
 		6DA57ECB139D55EF004D8D0B /* CCVideoTestLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCVideoTestLayer.m; sourceTree = "<group>"; };
 		6DA57EEC139D561E004D8D0B /* CCVideoPlayerTest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CCVideoPlayerTest.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -1923,7 +1923,7 @@
 		6DA57EC8139D55EF004D8D0B /* CCVideoPlayerTest */ = {
 			isa = PBXGroup;
 			children = (
-				6DA57EC9139D55EF004D8D0B /* bait.mp4 */,
+				6D77EF8513D6D61F00B82EF1 /* bait.m4v */,
 				6DA57ECA139D55EF004D8D0B /* CCVideoTestLayer.h */,
 				6DA57ECB139D55EF004D8D0B /* CCVideoTestLayer.m */,
 			);
@@ -2457,8 +2457,8 @@
 				6DA57ED2139D561E004D8D0B /* MainMenu.xib in Resources */,
 				6DA57ED3139D561E004D8D0B /* fps_images.png in Resources */,
 				6DA57ED4139D561E004D8D0B /* icon.icns in Resources */,
-				6DA57F12139D5FA4004D8D0B /* bait.mp4 in Resources */,
 				6DA57F59139D6258004D8D0B /* CustomVideoView.nib in Resources */,
+				6D77EF8613D6D61F00B82EF1 /* bait.m4v in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

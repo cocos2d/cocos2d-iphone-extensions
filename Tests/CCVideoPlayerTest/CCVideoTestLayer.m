@@ -79,7 +79,7 @@ SYNTHESIZE_EXTENSION_TEST(CCVideoTestLayer)
 
 - (void) testCCVideoPlayer
 {
-	[CCVideoPlayer playMovieWithFile: @"bait.mp4"];
+	[CCVideoPlayer playMovieWithFile: @"bait.m4v"];
 }
 
 - (void) moviePlaybackFinished
