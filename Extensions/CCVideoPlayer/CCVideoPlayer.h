@@ -35,30 +35,51 @@
 
 @end
 
-
+/** @class CCVideoPlayer - Simple Video Player for Cocos2D apps.
+ */
 @interface CCVideoPlayer : NSObject
 {
 }
 
-// Sets new delegate (weak ref).
-// ATTENTION: You need to call this method before invoking playMovieWithFile:
-// or you will not receive movieStartsPlaying callback.
+#pragma mark Properties
+
+/** Sets new delegate (weak ref) for playback start/stop callbacs.
+ *
+ * ATTENTION: You need to call this method before invoking playMovieWithFile:
+ * or you will not receive movieStartsPlaying callback.
+ */
 + (void) setDelegate: (id<CCVideoPlayerDelegate>) aDelegate;
 
+#pragma mark Playback
+
+/** Start playing movie with given filename
+ */
 + (void) playMovieWithFile: (NSString *) file;
 
+/** Stop playing video if it's playing.
+ */
 + (void) cancelPlaying;
 
+/** Returns YES if video is currently playing. Otherwise returns NO.
+ */
 + (BOOL) isPlaying;
 
+#pragma mark Updates - Platform Specific
+
 #ifdef __IPHONE_OS_VERSION_MAX_ALLOWED
-// Updates video player view transform for newOrientation.
-// Supports only landscape left or landscape right, for other orientations does nothing.
+
+/** Updates video player view transform for newOrientation.
+ *
+ * Supports only landscape left or landscape right, for other orientations does nothing.
+ */
 + (void) updateOrientationWithOrientation: (UIDeviceOrientation) newOrientation;
+
 #elif defined(__MAC_OS_X_VERSION_MAX_ALLOWED)
 
-/** Reattaches movie view to the Cocos Window.
- Call it after changing to/from fullscreen. (Mac only) */
+/** Reattaches movie view to the Cocos Window. (Mac only)
+ *
+ * Call it after changing to/from fullscreen.  
+ */
 + (void) reAttachView;
 
 #endif
