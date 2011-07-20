@@ -19,6 +19,7 @@ CCMenuAdvancedTest features
 Using CCBigImage
 --------------------------------------------------
 See comments in CCBigImage.h, code in CCBigImageTestLayer for more info.
+Use CC_BIGIMAGE_DEBUG_DRAW to enable drawing rect around CCBigImage content.
 
 Performance
 --------------------------------------------------

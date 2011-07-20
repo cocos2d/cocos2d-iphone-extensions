@@ -409,6 +409,20 @@
 	}
 }
 
+#if CC_BIGIMAGE_DEBUG_DRAW
+- (void) draw
+{
+	[super draw];
+	
+	CGSize s = [self contentSize];
+	CGPoint vertices[4]={
+		ccp(0,0),ccp(s.width,0),
+		ccp(s.width,s.height),ccp(0,s.height),
+	};
+	ccDrawPoly(vertices, 4, YES);
+}
+#endif
+
 
 #pragma mark Dynamic Tiles Stuff
 
