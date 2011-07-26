@@ -378,11 +378,11 @@ enum
 	
 	if ( (newX - startSwipe_) < -self.minimumTouchLengthToChangePage && (currentScreen_+1) < [layers_ count] )
 	{		
-		[self moveToPage: currentScreen_+1];		
+		[self moveToPage: [self pageNumberForPosition:self.position] ];		
 	}
 	else if ( (newX - startSwipe_) > self.minimumTouchLengthToChangePage && currentScreen_ > 0 )
 	{		
-		[self moveToPage: currentScreen_-1];		
+		[self moveToPage: [self pageNumberForPosition:self.position] ];		
 	}
 	else
 	{		
@@ -443,11 +443,11 @@ enum
 	
 	if ( (newX - startSwipe_) < -self.minimumTouchLengthToChangePage && (currentScreen_+1) < [layers_ count] )
 	{		
-		[self moveToPage: currentScreen_+1];		
+		[self moveToPage: [self pageNumberForPosition: self.position] ];		
 	}
 	else if ( (newX - startSwipe_) > self.minimumTouchLengthToChangePage && currentScreen_ > 0 )
 	{		
-		[self moveToPage: currentScreen_-1];		
+		[self moveToPage: [self pageNumberForPosition:self.position] ];		
 	}
 	else
 	{		

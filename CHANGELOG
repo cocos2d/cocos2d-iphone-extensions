@@ -14,6 +14,7 @@
       5. Added Pages array Property.
 	  6. Fixed jumpy behavior when scrolling with two or more fingers.
 	  7. Added Dynamic Pages Control.
+	  8. Move to nearest page, not just next/prev by swipe/mouseDrag
    * CCSendMessages: fixed issue #30, added testcase (return nil on initWithTarget: nil).
    * Minor stability, analyzer & documentation issues fixes (CCVideoPLayer, CCBigImage, FilesDownloader).   
 
