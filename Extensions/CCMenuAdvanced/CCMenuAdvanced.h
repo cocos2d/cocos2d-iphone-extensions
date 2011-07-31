@@ -36,14 +36,16 @@
 @end
 
 
-// CCMenuAdvanced adds these features to CCMenu:
-//		1) Selecting and activating CCMenuItems with Keyboard (by default next/prev
-// bindings aren't set - set them manually or use one of align methods to 
-// bind arrows for this.
-//		2) One of CCMenuItems can be set as escapeDelegate - so it will be activated by pressing escape
-//		3) align left->right, right->left, bottom->top, top->bottom with autosetting self contentSize
-//		4) externalBoundsRect - if it is set then menu items will be scrollable inside these bounds
-//		5) priority property - must be set before onEnter to make it register with that priority
+/** @class CCMenuAdvanced CCMenu with some aditional features.
+ *
+ *		1) Selecting and activating CCMenuItems with Keyboard 
+ * (by default next/prev bindings aren't set - set them manually or use one of align methods to bind arrows for this).
+ *		2) One of CCMenuItems can be set as escapeDelegate - so it will be activated by pressing escape
+ *		3) align left->right, right->left, bottom->top, top->bottom with autosetting self contentSize
+ *		4) externalBoundsRect - if it is set then menu items will be scrollable inside these bounds
+ *		5) priority property - must be set before onEnter to make it register with that priority
+ * @todo add columns and rows alignment methods
+*/
 @interface CCMenuAdvanced : CCMenu  
 {
 	NSInteger priority_;
@@ -67,12 +69,24 @@
 	
 }
 
+/** Rectangle in parent's coordinate system, which menu must fill with it's boundingBox.
+ *
+ * Note: boundaryRect must have greater size then menu's boundingBox to make scrolling possible.
+ * Think about boundaryRect like about hole in paper sheet under which you would like to put CCMenuAdvanced
+ * and scroll it, but you never want to see the table - hole must be covered with paper. 
+ */
 @property(readwrite, assign) CGRect boundaryRect;
+
+/** Minimum length of touch, that will disable selected menu item & start scrolling. */
 @property(readwrite, assign) CGFloat minimumTouchLengthToSlide;
+
+/** Priprity property for touch, mouse & keyboard for menu.
+ * Must be set before onEnter called.
+ */
 @property(readwrite, assign) NSInteger priority;
 
 #ifdef DEBUG
-// Debug: draw rectangle around CCMenuAdvanced.
+/** If YES - draw rectangle around CCMenuAdvanced. */
 @property(readwrite, assign) BOOL debugDraw;
 #endif
 
@@ -83,21 +97,33 @@
 #endif
 
 #pragma mark Advanced Menu - Align
-// alignHorizontal from left to right
+/** AlignH items horizontal from left to right. 
+ * @param padding space between elements.
+ */
 -(void) alignItemsHorizontallyWithPadding:(float)padding;
 
-// designated alignVerticall from bottom to top
+/** Designated alignVerticall from bottom to top.
+ * @param padding space between elements.
+ */
 -(void) alignItemsVerticallyWithPadding:(float)padding;
 
-// designated alignHorizontal Method
+/** Designated alignHorizontal Method 
+ *
+ * @param padding space between elements.
+ * @param leftRoRight If YES - align items from left to right, if NO - right to left.
+ */
 -(void) alignItemsHorizontallyWithPadding:(float)padding leftToRight: (BOOL) leftToRight;
 
-// designated alignVerticall Method
+/** Designated alignVerticall Method
+ *
+ * @param padding space between elements.
+ * @param bottomToTop If YES - align items from bottom to top, if NO - top to bottom.
+ */
 -(void) alignItemsVerticallyWithPadding:(float)padding bottomToTop: (BOOL) bottomToTop;
 
 #pragma mark Advanced Menu - Scrolling
 
-// changes menu position to stay inside of boundaryRect if it is non-null
+/** Changes menu position to stay inside of boundaryRect if it is non-null. */
 - (void) fixPosition;
 
 @end

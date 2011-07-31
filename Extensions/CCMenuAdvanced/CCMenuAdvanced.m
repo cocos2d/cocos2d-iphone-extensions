@@ -310,8 +310,6 @@
 #endif
 }
 
-// TODO: add columns and rows alignment methods
-
 -(void) alignItemsHorizontallyWithPadding:(float)padding
 {
 	[self alignItemsHorizontallyWithPadding: padding leftToRight: YES];
