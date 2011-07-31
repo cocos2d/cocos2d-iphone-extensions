@@ -1,5 +1,6 @@
 
 0.1.2 - XX-Jule-2011
+   * Better comments for some extensions - preparing for full Doxygen documentation (JavaDoc Style).
    * CCBigImage - implemented full transform support.
    * CCVideoPlayer: 
       1. ToggleFullscreen support on Mac. (Issue #31)
@@ -14,7 +15,9 @@
       5. Added Pages array Property.
 	  6. Fixed jumpy behavior when scrolling with two or more fingers.
 	  7. Added Dynamic Pages Control.
-	  8. Move to nearest page, not just next/prev by swipe/mouseDrag
+	  8. Move to nearest page, not just next/prev by swipe/mouseDrag.
+	  9. Ability to disable stealing touches (stealTouches property).
+	  10. Do not cancel scroll when stealing touch (Issue #38).
    * CCSendMessages: fixed issue #30, added testcase (return nil on initWithTarget: nil).
    * Minor stability, analyzer & documentation issues fixes (CCVideoPLayer, CCBigImage, FilesDownloader).   
 
