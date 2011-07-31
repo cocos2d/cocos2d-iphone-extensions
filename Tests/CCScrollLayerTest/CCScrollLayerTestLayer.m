@@ -81,7 +81,6 @@ enum nodeTags
 	return self;
 }
 
-//TODO: try to fix crashes on DEBUG MAC, while resizing window.
 - (void) updateForScreenReshape
 {
 	CGSize screenSize = [CCDirector sharedDirector].winSize;
@@ -192,6 +191,7 @@ enum nodeTags
 
 - (void) scrollLayerScrollingStarted:(CCScrollLayer *) sender
 {
+	// TODO: cancel menus on scrollLayer's pages
 	NSLog(@"CCScrollLayerTestLayer#scrollLayerScrollingStarted: %@", sender);
 }
 
