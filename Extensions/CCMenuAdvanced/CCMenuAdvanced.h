@@ -54,6 +54,8 @@
 	CGRect boundaryRect_; //< external boundaries in which menu can slide
 	CGFloat minimumTouchLengthToSlide_; //< how long user must slide finger to start scrolling menu
 	CGFloat curTouchLength_;
+	
+	BOOL isDisabled_;
 
 #ifdef __MAC_OS_X_VERSION_MAX_ALLOWED
 	// menu item that can be fast activated byt pressing Esc
@@ -80,10 +82,16 @@
 /** Minimum length of touch, that will disable selected menu item & start scrolling. */
 @property(readwrite, assign) CGFloat minimumTouchLengthToSlide;
 
-/** Priprity property for touch, mouse & keyboard for menu.
+/** Priority property for touch, mouse & keyboard for menu.
  * Must be set before onEnter called.
  */
 @property(readwrite, assign) NSInteger priority;
+
+/** If YES - all touches & keyboard events will be ignored.
+ * If NO - all events will work, except for disabled items.
+ * Default is NO.
+ */
+@property(readwrite, assign) BOOL isDisabled;
 
 #ifdef DEBUG
 /** If YES - draw rectangle around CCMenuAdvanced. */
@@ -125,5 +133,13 @@
 
 /** Changes menu position to stay inside of boundaryRect if it is non-null. */
 - (void) fixPosition;
+
+#pragma mark Advanced Menu - Selecting Items
+- (void) selectNextMenuItem;
+- (void) selectPrevMenuItem;
+
+#pragma mark Advanced Menu - Activating/Cancelling Selected Items.
+- (void) activateSelectedItem;
+- (void) cancelSelectedItem;
 
 @end
