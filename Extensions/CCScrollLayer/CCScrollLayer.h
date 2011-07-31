@@ -77,6 +77,8 @@
 	// Internal state of scrollLayer (scrolling or idle).
 	int state_;
 	
+	BOOL stealTouches_;
+	
 #ifdef __IPHONE_OS_VERSION_MAX_ALLOWED
 	// Holds the touch that started the scroll
 	UITouch *scrollTouch_;
@@ -102,6 +104,14 @@
  * the page, without snapping back to the previous selected page.
  */
 @property(readwrite, assign) CGFloat minimumTouchLengthToChangePage;
+
+/** If YES - when starting scrolling CCScrollLayer will claim touches, that are 
+ * already claimed by others targetedTouchDelegates by calling CCTouchDispatcher#touchesCancelled
+ * Usefull to have ability to scroll with touch above menus in pages.
+ * If NO - scrolling will start, but no touches will be cancelled.
+ * Default is YES.
+ */
+@property(readwrite) BOOL stealTouches;
 
 #pragma mark Pages Indicator Properties
 
@@ -152,8 +162,8 @@
 - (void) addPage: (CCLayer *) aPage;
 
 /** Removes page if it's one of scroll layers pages (not children)
- Does nothing if not found.
- @todo Debug this method (Issue #36).*/
+ * Does nothing if page not found.
+ */
 - (void) removePage: (CCLayer *) aPage;
 
 /** Removes page with given number. Doesn nothing if there's no page for such number. */

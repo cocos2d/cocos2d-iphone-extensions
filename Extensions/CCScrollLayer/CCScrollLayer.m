@@ -66,6 +66,7 @@ enum
 @synthesize pagesIndicatorPosition = pagesIndicatorPosition_;
 @synthesize pagesWidthOffset = pagesWidthOffset_;
 @synthesize pages = layers_;
+@synthesize stealTouches = stealTouches_;
 
 @dynamic totalScreens;
 - (int) totalScreens
@@ -90,6 +91,8 @@ enum
 #elif defined(__MAC_OS_X_VERSION_MAX_ALLOWED)
         self.isMouseEnabled = YES;
 #endif
+		
+		self.stealTouches = YES;
 		
 		// Set default minimum touch length to scroll.
 		self.minimumTouchLengthToSlide = 30.0f;
@@ -352,7 +355,8 @@ enum
 		// Avoid jerk after state change.
 		startSwipe_ = touchPoint.x;
 		
-		[self cancelAndStoleTouch: touch withEvent: event];
+		if (self.stealTouches)
+			[self cancelAndStoleTouch: touch withEvent: event];
 		
 		if ([self.delegate respondsToSelector:@selector(scrollLayerScrollingStarted:)])
 		{
