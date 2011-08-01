@@ -78,6 +78,7 @@
 	int state_;
 	
 	BOOL stealTouches_;
+	BOOL stealingTouchInProgress_;
 	
 #ifdef __IPHONE_OS_VERSION_MAX_ALLOWED
 	// Holds the touch that started the scroll
