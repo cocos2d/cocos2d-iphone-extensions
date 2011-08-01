@@ -1,6 +1,7 @@
 
 0.1.2 - XX-Jule-2011
    * Better comments for some extensions - preparing for full Doxygen documentation (JavaDoc Style).
+   * FilesDownloader - added support for subpaths in filenames. Locally replicate the folder structure. (Issue #40)
    * CCBigImage - implemented full transform support.
    * CCVideoPlayer: 
       1. ToggleFullscreen support on Mac. (Issue #31)

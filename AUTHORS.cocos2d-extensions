@@ -31,6 +31,9 @@ People/companies who were/are contributing code to cocos2d-iphone-extensions (al
 	* Simon Skinner (twitter: @vultuk) (http://www.dk101.net/)
 		CCScrollLayer original author
 		
+	* Todd Lee (http://www.imvu.com/)
+		Subpaths support for FilesDownloader (Issue #40).
+		
 	* Wilczarz (http://www.cocos2d-iphone.org/forum/profile/31820)
 		CCScrollLayer: scroll with only one touch to avoid jumpy behaviour in multitouch (issue #35)
  
