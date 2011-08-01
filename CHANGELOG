@@ -1,5 +1,6 @@
 
 0.1.2 - XX-Jule-2011
+   * Updated Cocos2D-iPhone 1.0.1 Release.
    * Better comments for some extensions - preparing for full Doxygen documentation (JavaDoc Style).
    * FilesDownloader - added support for subpaths in filenames. Locally replicate the folder structure. (Issue #40)
    * CCBigImage - implemented full transform support.
