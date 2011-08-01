@@ -39,6 +39,7 @@ SYNTHESIZE_EXTENSION_TEST(CCScrollLayerTestLayer)
 
 - (NSArray *) scrollLayerPages;
 - (CCScrollLayer *) scrollLayer;
+- (void) updateFastPageChangeMenu;
 
 @end
 
@@ -59,17 +60,8 @@ enum nodeTags
 	// Apple recommends to re-assign "self" with the "super" return value
 	if( (self=[super init])) {
 		
-		// Add fast-page-change menu.
-		CCMenu *fastPageChangeMenu = [CCMenu menuWithItems: nil];
-		for (int i = 0; i < [[self scrollLayerPages]count]; ++i)
-		{
-			NSString *numberString = [NSString stringWithFormat:@"%d", i];
-			CCLabelTTF *labelWithNumber = [CCLabelTTF labelWithString:numberString fontName:@"Marker Felt" fontSize:22];		
-			CCMenuItemLabel *item = [CCMenuItemLabel itemWithLabel:labelWithNumber target:self selector:@selector(fastMenuItemPressed:)];
-			[fastPageChangeMenu addChild: item z: 0 tag: i];
-		}
-		[fastPageChangeMenu alignItemsHorizontally];
-		[self addChild: fastPageChangeMenu z: 0 tag: kFastPageChangeMenu];
+		// Add fast page change menu.
+		[self updateFastPageChangeMenu];
 		
 		// Add advice about how to use the test
 		CCLabelTTF *adviceLabel = [CCLabelTTF labelWithString:@"Press numbers at the bottom, or swipe to change screen." fontName:@"Marker Felt" fontSize:20];
@@ -79,6 +71,36 @@ enum nodeTags
 		[self updateForScreenReshape];
 	}
 	return self;
+}
+
+- (void) updateFastPageChangeMenu
+{
+	// Remove fast page change menu if it exists.
+	[self removeChildByTag:kFastPageChangeMenu cleanup:YES];
+	
+	// Get total current pages count.
+	int pagesCount = [[self scrollLayerPages]count];
+	CCScrollLayer *scroller = (CCScrollLayer *)[self getChildByTag:kScrollLayer];
+	if (scroller)
+	{
+		pagesCount = [[scroller pages] count];
+	}
+	
+	// Create & add fast-page-change menu.
+	CCMenu *fastPageChangeMenu = [CCMenu menuWithItems: nil];
+	for (int i = 0; i < pagesCount ; ++i)
+	{
+		NSString *numberString = [NSString stringWithFormat:@"%d", i];
+		CCLabelTTF *labelWithNumber = [CCLabelTTF labelWithString:numberString fontName:@"Marker Felt" fontSize:22];		
+		CCMenuItemLabel *item = [CCMenuItemLabel itemWithLabel:labelWithNumber target:self selector:@selector(fastMenuItemPressed:)];
+		[fastPageChangeMenu addChild: item z: 0 tag: i];
+	}
+	[fastPageChangeMenu alignItemsHorizontally];
+	[self addChild: fastPageChangeMenu z: 0 tag: kFastPageChangeMenu];
+	
+	// Position fast page change menu without calling updateForScreenReshape.
+	CGSize screenSize = [CCDirector sharedDirector].winSize;
+	fastPageChangeMenu.position = ccp( 0.5f * screenSize.width, 15.0f);
 }
 
 - (void) updateForScreenReshape
@@ -148,6 +170,7 @@ enum nodeTags
 {
 	NSLog(@"CCScrollLayerTestLayer#addPagePressed: called!");
 	
+	// Add page with label with number.
 	CGSize screenSize = [CCDirector sharedDirector].winSize;
 	
 	CCScrollLayer *scroller = (CCScrollLayer *)[self getChildByTag:kScrollLayer];
@@ -162,11 +185,13 @@ enum nodeTags
 	
 	[scroller addPage: pageX];
 	
-	//TODO: update fast page change menu
+	//Update fast page change menu.
+	[self updateFastPageChangeMenu];
 }
 
 - (void) removePagePressed: (CCNode *) sender
 {
+	// Run action with page removal on cocos2d thread.
 	[self runAction:[CCSequence actions:
 					 [CCDelayTime actionWithDuration:0.2f],
 					 [CCCallFunc actionWithTarget:self selector:@selector(removePage)],
@@ -176,10 +201,12 @@ enum nodeTags
 
 - (void) removePage
 {
+	// Actually remove page.
 	CCScrollLayer *scroller = (CCScrollLayer *)[self getChildByTag:kScrollLayer];
 	[scroller removePageWithNumber: [scroller.pages count] - 1];
 	
-	//TODO: update fast page change menu
+	// Update fast page change menu.
+	[self updateFastPageChangeMenu];
 }
 
 - (void) fastMenuItemPressed: (CCNode *) sender
