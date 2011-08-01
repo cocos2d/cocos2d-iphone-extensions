@@ -361,43 +361,43 @@ enum nodeTags
 - (NSArray *) files
 {	
 	NSArray *array = [NSArray arrayWithObjects: 
-					    @"b1-hd.png",
-						@"b1.png",
-						@"b2.png",
-						@"blocks-hd.png",
-						@"btn-about-normal.png",
-						@"btn-about-selected.png",
-						@"btn-highscores-normal.png",
-						@"btn-highscores-selected.png",
-						@"btn-play-normal.png",
-						@"btn-play-selected.png",
-						@"grossini_dance_01.png",
-						@"grossini_dance_02.png",
-						@"grossini_dance_03.png",
-						@"grossini_dance_04.png",
-						@"grossini_dance_05.png",
-						@"grossini_dance_06.png", 
-						@"grossini_dance_07.png",
-						@"grossini_dance_08.png",
-						@"grossini_dance_09.png",
-						@"grossini_dance_10.png",
-						@"grossini_dance_11.png",
-						@"grossini_dance_12.png",
-						@"grossini_dance_13.png",
-						@"grossini_dance_14.png",
-						@"grossini-hd.png",
-						@"grossini.png",
-						@"grossinis_sister1.png",
-						@"grossinis_sister2.png",
-						@"test_blend.bmp",
-						@"test_image.bmp", 
+					    @"img/b1-hd.png",
+						@"img/b1.png",
+						@"img/b2.png",
+						@"img/blocks-hd.png",
+						@"img/btn-about-normal.png",
+						@"img/btn-about-selected.png",
+						@"img/btn-highscores-normal.png",
+						@"img/btn-highscores-selected.png",
+						@"img/btn-play-normal.png",
+						@"img/btn-play-selected.png",
+						@"img/grossini_dance_01.png",
+						@"img/grossini_dance_02.png",
+						@"img/grossini_dance_03.png",
+						@"img/grossini_dance_04.png",
+						@"img/grossini_dance_05.png",
+						@"img/grossini_dance_06.png", 
+						@"img/grossini_dance_07.png",
+						@"img/grossini_dance_08.png",
+						@"img/grossini_dance_09.png",
+						@"img/grossini_dance_10.png",
+						@"img/grossini_dance_11.png",
+						@"img/grossini_dance_12.png",
+						@"img/grossini_dance_13.png",
+						@"img/grossini_dance_14.png",
+						@"img/grossini-hd.png",
+						@"img/grossini.png",
+						@"img/grossinis_sister1.png",
+						@"img/grossinis_sister2.png",
+						@"img/test_blend.bmp",
+						@"img/test_image.bmp", 
 					  nil ];
 	return array;	
 }
 
 - (NSString *) sourcePath
 {
-	return @"http://itraceur.ru/img/";
+	return @"http://itraceur.ru/";
 }
 
 @end
