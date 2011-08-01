@@ -35,6 +35,26 @@
 
 SYNTHESIZE_EXTENSION_TEST(CCScrollLayerTestLayer)
 
+@interface CCMenu (UnselectSelectedItem)
+- (void) unselectSelectedItem;
+@end
+
+@implementation CCMenu (UnselectSelectedItem)
+
+- (void) unselectSelectedItem
+{
+	if(state_ == kCCMenuStateTrackingTouch)
+	{
+		[selectedItem_ unselected];		
+		state_ = kCCMenuStateWaiting;
+		selectedItem_ = nil;
+	}
+}
+
+@end
+
+#pragma mark -
+
 @interface CCScrollLayerTestLayer (ScrollLayerCreation)
 
 - (NSArray *) scrollLayerPages;
@@ -216,10 +236,33 @@ enum nodeTags
 	[scroller moveToPage: sender.tag];
 }
 
+#pragma mark Scroll Layer Callbacks
+
+// Unselects all selected menu items in node - used in scroll layer callbacks to 
+// cancel menu items when scrolling started.
+-(void)unselectAllMenusInNode:(CCNode *)node
+{
+	for (CCNode *child in node.children) 
+	{
+		if ([child isKindOfClass:[CCMenu class]]) 
+		{
+			// Child here is CCMenu subclass - unselect.
+			[(CCMenu *)child unselectSelectedItem];
+		}
+		else
+		{
+			// Child here is some other CCNode subclass.
+			[self unselectAllMenusInNode: child];
+		}
+	}
+}
+
 - (void) scrollLayerScrollingStarted:(CCScrollLayer *) sender
 {
-	// TODO: cancel menus on scrollLayer's pages
 	NSLog(@"CCScrollLayerTestLayer#scrollLayerScrollingStarted: %@", sender);
+	
+	// No buttons can be touched after scroll started.
+	[self unselectAllMenusInNode: self];
 }
 
 - (void) scrollLayer: (CCScrollLayer *) sender scrolledToPageNumber: (int) page
