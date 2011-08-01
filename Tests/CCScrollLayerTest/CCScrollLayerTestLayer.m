@@ -93,6 +93,7 @@ enum nodeTags
 	return self;
 }
 
+// Removes old "0 1 2" menu and creates new for actual pages count.
 - (void) updateFastPageChangeMenu
 {
 	// Remove fast page change menu if it exists.
@@ -123,6 +124,9 @@ enum nodeTags
 	fastPageChangeMenu.position = ccp( 0.5f * screenSize.width, 15.0f);
 }
 
+// Positions children of CCScrollLayerTestLayer.
+// ScrollLayer is updated via deleting old and creating new one. 
+// (Cause it's created with pages - normal CCLayer, which contentSize = winSize)
 - (void) updateForScreenReshape
 {
 	CGSize screenSize = [CCDirector sharedDirector].winSize;
@@ -149,6 +153,7 @@ enum nodeTags
 
 #pragma mark ScrollLayer Creation
 
+// Returns array of CCLayers - pages for ScrollLayer.
 - (NSArray *) scrollLayerPages
 {
 	CGSize screenSize = [CCDirector sharedDirector].winSize;
@@ -173,6 +178,7 @@ enum nodeTags
 	return [NSArray arrayWithObjects: pageOne,pageTwo,nil];
 }
 
+// Creates new Scroll Layer with pages returned from scrollLayerPages.
 - (CCScrollLayer *) scrollLayer
 {
 	CGSize screenSize = [CCDirector sharedDirector].winSize;
@@ -186,6 +192,7 @@ enum nodeTags
 
 #pragma mark Callbacks
 
+// "Add Page" Button Callback - adds new page & updates fast page change menu.
 - (void) addPagePressed: (CCNode *) sender
 {
 	NSLog(@"CCScrollLayerTestLayer#addPagePressed: called!");
@@ -209,6 +216,7 @@ enum nodeTags
 	[self updateFastPageChangeMenu];
 }
 
+// "Remove page" menu callback - removes pages through running new action with delay.
 - (void) removePagePressed: (CCNode *) sender
 {
 	// Run action with page removal on cocos2d thread.
@@ -229,6 +237,7 @@ enum nodeTags
 	[self updateFastPageChangeMenu];
 }
 
+// "0 1 2" menu callback - used for fast page change.
 - (void) fastMenuItemPressed: (CCNode *) sender
 {
 	CCScrollLayer *scroller = (CCScrollLayer *)[self getChildByTag:kScrollLayer];
