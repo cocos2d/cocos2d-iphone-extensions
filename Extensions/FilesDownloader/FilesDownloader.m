@@ -210,7 +210,11 @@
     
     for ( int i = 0; i < [_filenames count]; ++i )
     {
-        bytesReady += [ [_fileDownloaders objectAtIndex: i ] contentDownloaded];
+        SingleFileDownloader *downloader = nil;
+        if ([_fileDownloaders count] > i)
+            downloader = [_fileDownloaders objectAtIndex: i ];
+        
+        bytesReady += [ downloader contentDownloaded];
     }
 	
 	return bytesReady;	
