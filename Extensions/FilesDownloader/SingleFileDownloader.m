@@ -68,10 +68,14 @@
 
 + (NSString *) destinationDirectoryPath
 {
-    NSString *cachesDirectoryPath =
-        [ NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES) objectAtIndex: 0];
+	NSString *path = [NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+	
+#ifdef __MAC_OS_X_VERSION_MAX_ALLOWED
+	NSString *appBundleID = [[NSBundle mainBundle] bundleIdentifier];
+	path = [path stringByAppendingPathComponent:appBundleID];
+#endif
     
-    return cachesDirectoryPath;
+    return path;
 }
 
 + (NSFileHandle *) newFileWithName: (NSString *) newFilename
