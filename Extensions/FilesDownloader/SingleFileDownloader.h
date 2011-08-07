@@ -32,24 +32,25 @@ static const NSTimeInterval fileDownloaderDefaultTimeout = 15.0;
 
 @protocol SingleFileDownloaderDelegate <NSObject>
 
+/** Called each time, when total content size changes.*/
 - (void) downloadSizeUpdated;
 - (void) downloadFailedWithError: (NSString *) errorDescription;
 - (void) downloadFinished;
 
 @end
 
-/**  SingleFileDownloader - class that uses NSURLConnection to download file from URL, 
- that is set by concatanating source URL (i.e http://foo.com/files/ ) and file name
- (i.e. bar.png ), so URL for this file will be http://foo.com/files/bar.png 
- 
- to /Library/Caches . At the first SingleFileDownloader creates tmp file and downloads contents into it,
- only after downloading successfully ends - it renames tmp file to destination filename
- 
- SingleFileDownloader is used internally in FilesDownloader class.
- 
- Probably they should be named more different to avoid confusion ;)
- **/
-
+/** @class SingleFileDownloader Class that uses NSURLConnection to download file from URL, 
+ * that is set by concatanating source URL (i.e http://foo.com/files/ ) and file name
+ * (i.e. bar.png ), so URL for this file will be http://foo.com/files/bar.png ,
+ * to /Library/Caches on iOS or to ~/Library/Caches/APP_BUNDLE_ID on Mac (According to
+ * Mac OS X File System Guide ). 
+ *
+ * At the first SingleFileDownloader creates tmp file and downloads contents into it,
+ * only after downloading successfully ends - it renames tmp file to destination filename.
+ *
+ * SingleFileDownloader is used internally in FilesDownloader class, if you're downloading many 
+ * files at time from one place - you don't need to use SingleFileDownloader - use FilesDownloader instead.
+ */
 @interface SingleFileDownloader : NSObject 
 {
     BOOL _downloading;
@@ -65,26 +66,56 @@ static const NSTimeInterval fileDownloaderDefaultTimeout = 15.0;
     NSUInteger _bytesReceived, _bytesTotal;
 }
 
-// creation
+#pragma mark Init / Creation
+
+/** Creates SingleFileDownloader with given source path, target filename & delegate.
+ * 
+ * @param sourcePath - path from which to download file, without filename. I.e.
+ * @"http://foo.com/files/"
+ *
+ * @param aTargetFilename subPath that will be added to sourcePath to determine
+ * full URL for a file. I.e. @"foo/bar/file.txt"
+ *
+ * @param aDelegate delegate for SingleFileDownloader status callbacks.
+ */
 + (id) fileDownloaderWithSourcePath: (NSString *) sourcePath 
 					 targetFilename: (NSString *) aTargetFilename 
 						   delegate: (id<SingleFileDownloaderDelegate>) aDelegate;
 
+/** Inits SingleFileDownloader with given source path, target filename & delegate.
+ * 
+ * @param sourcePath - path from which to download file, without filename. I.e.
+ * @"http://foo.com/files/"
+ *
+ * @param aTargetFilename subPath that will be added to sourcePath to determine
+ * full URL for a file. I.e. @"foo/bar/file.txt"
+ *
+ * @param aDelegate delegate for SingleFileDownloader status callbacks.
+ */
 - (id) initWithSourcePath: (NSString *) sourcePath 
 		   targetFilename: (NSString *) aTargetFilename 
 				 delegate: (id<SingleFileDownloaderDelegate>) aDelegate;
 
-// download controls
+#pragma mark Download Controls
+
+/** Starts downloading. */
 - (void) startDownload;
+
+/** Stops downloading. */
 - (void) cancelDownload;
 
-// /Library/Caches/targetFileName
+/** Returns full target path for file, that will be downloaded
+ * I.e. @"/Library/Caches/fooBar.png" (iOS)
+ * or @"~/Library/Caches/APP_BUNDLE_ID" (Mac)
+ */
 - (NSString *) targetPath;
 
-// content size in bytes downloaded
+/** Returns downloaded content size in bytes. */
 - (NSUInteger) contentDownloaded;
 
-// content size in bytes total
+/** Returns total content size in bytes. This value can be changed each.
+ * Use this method in downloadSizeUpdated delegate method to determine new 
+ * expected content size. */
 - (NSUInteger) contentLength;
 
 @end
