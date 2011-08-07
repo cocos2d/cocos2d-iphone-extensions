@@ -70,10 +70,14 @@
 
 + (NSString *) destinationDirectoryPath
 {
-    NSString *cachesDirectoryPath =
-        [ NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES) objectAtIndex: 0];
-    
-    return cachesDirectoryPath;
+	NSString *path = [NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+	
+#ifdef __MAC_OS_X_VERSION_MAX_ALLOWED
+	NSString *appBundleID = [[NSBundle mainBundle] bundleIdentifier];
+	path = [path stringByAppendingPathComponent:appBundleID];
+#endif
+	
+	return path;
 }
 
 + (BOOL)checkTargetDirectory:(NSString *)targetPath
