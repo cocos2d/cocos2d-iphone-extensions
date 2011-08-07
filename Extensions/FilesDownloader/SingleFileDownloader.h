@@ -42,8 +42,8 @@ static const NSTimeInterval fileDownloaderDefaultTimeout = 15.0;
 /** @class SingleFileDownloader Class that uses NSURLConnection to download file from URL, 
  * that is set by concatanating source URL (i.e http://foo.com/files/ ) and file name
  * (i.e. bar.png ), so URL for this file will be http://foo.com/files/bar.png ,
- * to /Library/Caches on iOS or to ~/Library/Caches/APP_BUNDLE_ID on Mac (According to
- * Mac OS X File System Guide ). 
+ * to APP_SANDBOX/Library/Caches on iOS or to ~/Library/Caches/APP_BUNDLE_ID on Mac (According to
+ * Mac OS X File System Guide ).
  *
  * At the first SingleFileDownloader creates tmp file and downloads contents into it,
  * only after downloading successfully ends - it renames tmp file to destination filename.
@@ -113,7 +113,7 @@ static const NSTimeInterval fileDownloaderDefaultTimeout = 15.0;
 + (NSString *) destinationDirectoryPath;
 
 /** Returns full target path for file, that will be downloaded
- * I.e. @"/Library/Caches/fooBar.png" (iOS)
+ * I.e. @"APP_SANDBOX/Library/Caches/fooBar.png" (iOS)
  * or @"~/Library/Caches/APP_BUNDLE_ID" (Mac)
  */
 - (NSString *) targetPath;
