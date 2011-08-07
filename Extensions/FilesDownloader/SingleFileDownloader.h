@@ -104,6 +104,14 @@ static const NSTimeInterval fileDownloaderDefaultTimeout = 15.0;
 /** Stops downloading. */
 - (void) cancelDownload;
 
+#pragma mark Download Info
+
+/** Returns shared destination path part for all files
+ * ~/Library/Caches/APP_BUNDLE_ID on Mac &
+ * APP_SANDBOX/Library/Caches on iOS.
+ */
++ (NSString *) destinationDirectoryPath;
+
 /** Returns full target path for file, that will be downloaded
  * I.e. @"/Library/Caches/fooBar.png" (iOS)
  * or @"~/Library/Caches/APP_BUNDLE_ID" (Mac)

@@ -103,7 +103,12 @@ typedef enum
 /** Cancels downloading. */
 - (void) cancel; 
 
-#pragma mark Download Status 
+#pragma mark Download Info
+
+/** Returns destination path which aFilename should be downloaded to.
+ * Doesn't check does aFilename exist in _filenames array.
+ */
+- (NSString *) destinationPathForFileWithName: (NSString *) aFilename;
 
 /** Returns download progress completion in percents. */
 - (float) totalPercentsDone;
