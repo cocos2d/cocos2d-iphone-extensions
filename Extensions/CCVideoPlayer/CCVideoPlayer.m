@@ -171,7 +171,8 @@ static  CCVideoPlayerImpl *_impl = nil;
 	
 	// Try to play from Caches Bundle ID (FilesDownloader 0.1.2 Mac Compatible).
 	NSString *appBundleID = [[NSBundle mainBundle] bundleIdentifier];
-	cachedVideoPath = [cachedVideoPath stringByAppendingPathComponent:appBundleID];
+	cachedVideoPath = [cachesDirectoryPath stringByAppendingPathComponent:appBundleID];
+	cachedVideoPath = [cachedVideoPath stringByAppendingPathComponent: file];
 	if ( [[NSFileManager defaultManager] fileExistsAtPath: cachedVideoPath] )
     {
         NSURL *url = [NSURL fileURLWithPath: cachedVideoPath];
