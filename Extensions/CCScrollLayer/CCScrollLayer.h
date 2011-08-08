@@ -154,9 +154,10 @@
 #pragma mark Adding/Removing Pages
 
 /** Adds new page and reorders pages trying to set given number for newly added page.
- If number > pages count - adds new page to the right end of the scroll layer.
- If number <= 0 - adds new page to the left end of the scroll layer. 
- @attention Designated addPage method. */
+ * If number > pages count - adds new page to the right end of the scroll layer.
+ * If number <= 0 - adds new page to the left end of the scroll layer. 
+ * @attention Designated addPage method. 
+ */
 - (void) addPage: (CCLayer *) aPage withNumber: (int) pageNumber;
 
 /** Adds new page to the right end of the scroll layer. */
