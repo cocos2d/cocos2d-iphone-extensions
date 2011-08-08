@@ -44,7 +44,7 @@ static const NSInteger kCCSliderPriority = kCCMenuTouchPriority - 2;
  *
  * @param tag Tag of CCSlider with changed value.
  *
- * @todo Remove, KVO is better for such things and should be used instead. 
+ * @todo [v0.2] Remove, KVO is better for such things and should be used instead. 
  */
 - (void) valueChanged: (float) value tag: (int) tag;
 
