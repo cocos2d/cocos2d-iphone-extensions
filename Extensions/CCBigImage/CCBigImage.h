@@ -47,7 +47,7 @@
  * However, even in staticMode tiles that aren't visible now in screen rect will be not
  * rendered to increase performance.
  *
- * LIMITATIONS: scaling not supported, CCCamera not supported.
+ * LIMITATIONS: CCCamera may be not supported.
  */
 @interface CCBigImage : CCNode
 {	
