@@ -279,12 +279,7 @@ enum nodeTags
 // returns absolute path of file in Cached directory
 - (NSString *) downloadedFileWithFilename: (NSString *) filename
 {
-	NSString *cachesDirectoryPath =
-	[ NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES) objectAtIndex: 0];
-	
-	NSString *filePathInCachedDirectory = [cachesDirectoryPath stringByAppendingPathComponent: filename];
-	
-	return filePathInCachedDirectory;
+	return [_downloader destinationPathForFileWithName: filename];
 }
 
 // returns YES if file is available in Cached directory

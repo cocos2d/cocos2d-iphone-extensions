@@ -28,6 +28,9 @@ People/companies who were/are contributing code to cocos2d-iphone-extensions (al
 	* Patrick Wolowicz (twitter: @subzero_eu) (http://blog.subzero.eu/)
 		CCVideoPlayer patch: preload movie, prevent flickering & hide controls when compiled on older SDKs.
 
+	* Sergey Tikhonov (twitter: @sthaqu) (http://www.haqu.net)
+		Solution for Issue #53 fix (FilesDownloader compatibility with Mac OS X File System Guide).
+
 	* Simon Skinner (twitter: @vultuk) (http://www.dk101.net/)
 		CCScrollLayer original author
 		

@@ -157,7 +157,23 @@ static  CCVideoPlayerImpl *_impl = nil;
     
     NSString *cachedVideoPath = [cachesDirectoryPath stringByAppendingPathComponent: file];
     
+	// Try to play from Caches.
     if ( [[NSFileManager defaultManager] fileExistsAtPath: cachedVideoPath] )
+    {
+        NSURL *url = [NSURL fileURLWithPath: cachedVideoPath];
+        // If the current thread is the main thread,than
+		// this message will be processed immediately.
+		[ _impl performSelectorOnMainThread: @selector(playMovieAtURL:) 
+								 withObject: url
+							  waitUntilDone: [NSThread isMainThread]  ];
+        return;
+    }
+	
+	// Try to play from Caches Bundle ID (FilesDownloader 0.1.2 Mac Compatible).
+	NSString *appBundleID = [[NSBundle mainBundle] bundleIdentifier];
+	cachedVideoPath = [cachesDirectoryPath stringByAppendingPathComponent:appBundleID];
+	cachedVideoPath = [cachedVideoPath stringByAppendingPathComponent: file];
+	if ( [[NSFileManager defaultManager] fileExistsAtPath: cachedVideoPath] )
     {
         NSURL *url = [NSURL fileURLWithPath: cachedVideoPath];
         // If the current thread is the main thread,than

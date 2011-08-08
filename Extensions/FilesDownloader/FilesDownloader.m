@@ -187,6 +187,17 @@
     [_delegate downloadFinished];
 }
 
+#pragma mark Download Info
+
+- (NSString *) destinationPathForFileWithName: (NSString *) aFilename
+{
+	NSString *destPath = [ SingleFileDownloader destinationDirectoryPath ];
+	
+	destPath = [destPath stringByAppendingPathComponent: aFilename];
+	
+	return destPath;
+}
+
 - (float) totalPercentsDone
 {
 	float totalContentLength = (float)[self totalContentLength];
@@ -210,7 +221,11 @@
     
     for ( int i = 0; i < [_filenames count]; ++i )
     {
-        bytesReady += [ [_fileDownloaders objectAtIndex: i ] contentDownloaded];
+        SingleFileDownloader *downloader = nil;
+        if ([_fileDownloaders count] > i)
+            downloader = [_fileDownloaders objectAtIndex: i ];
+        
+        bytesReady += [ downloader contentDownloaded];
     }
 	
 	return bytesReady;	

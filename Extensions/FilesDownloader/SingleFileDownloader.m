@@ -65,15 +65,19 @@
 
 + (NSString *) tmpPathWithFilename: (NSString *) aFilename
 {
-    return [NSString stringWithFormat:@"%@/%@%@", [SingleFileDownloader destinationDirectoryPath], aFilename, [self tmpSuffix]];
+    return [NSString stringWithFormat:@"%@/%@%@", [self destinationDirectoryPath], aFilename, [self tmpSuffix]];
 }
 
 + (NSString *) destinationDirectoryPath
 {
-    NSString *cachesDirectoryPath =
-        [ NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES) objectAtIndex: 0];
-    
-    return cachesDirectoryPath;
+	NSString *path = [NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+	
+#ifdef __MAC_OS_X_VERSION_MAX_ALLOWED
+	NSString *appBundleID = [[NSBundle mainBundle] bundleIdentifier];
+	path = [path stringByAppendingPathComponent:appBundleID];
+#endif
+	
+	return path;
 }
 
 + (BOOL)checkTargetDirectory:(NSString *)targetPath
@@ -114,7 +118,7 @@
 + (NSFileHandle *) newFileWithName: (NSString *) newFilename
 {
     //creating caches directory if needed
-    NSString *cachesDirectoryPath = [SingleFileDownloader destinationDirectoryPath];
+    NSString *cachesDirectoryPath = [self destinationDirectoryPath];
 
     // creating target directory if needed
     if (![self checkTargetDirectory:[cachesDirectoryPath stringByAppendingPathComponent:newFilename]])
@@ -122,7 +126,7 @@
         return nil;
     }
     
-    NSString * myFilePath = [SingleFileDownloader tmpPathWithFilename: newFilename];
+    NSString * myFilePath = [self tmpPathWithFilename: newFilename];
     
     if ( [ [NSFileManager defaultManager] createFileAtPath:myFilePath contents:nil attributes:nil] )
     {
@@ -155,7 +159,7 @@
         _bytesTotal = 0;
         _delegate = aDelegate;
         
-        _fileHandle = [SingleFileDownloader newFileWithName: _filename];
+        _fileHandle = [[self class] newFileWithName: _filename];
     }
     
     return self;
@@ -243,7 +247,7 @@
         [_fileHandle closeFile];
     
     // delete tmp file
-    NSString *tmpPath = [NSString stringWithFormat:@"%@/%@%@", [SingleFileDownloader destinationDirectoryPath], _filename, [SingleFileDownloader tmpSuffix]];
+    NSString *tmpPath = [NSString stringWithFormat:@"%@/%@%@", [[self class] destinationDirectoryPath], _filename, [[self class] tmpSuffix]];
     [[NSFileManager defaultManager] removeItemAtPath: tmpPath error: NULL];
     
     _connection = nil;
@@ -254,7 +258,7 @@
 
 - (NSString *) targetPath
 {
-    return [NSString stringWithFormat:@"%@/%@", [SingleFileDownloader destinationDirectoryPath], _filename];
+    return [NSString stringWithFormat:@"%@/%@", [[self class] destinationDirectoryPath], _filename];
 }
 
 - (NSUInteger) contentDownloaded
@@ -335,7 +339,7 @@
     [_fileHandle closeFile];
     
     //rename ready file
-    NSString *tmpPath = [ SingleFileDownloader tmpPathWithFilename: _filename ];
+    NSString *tmpPath = [ [self class] tmpPathWithFilename: _filename ];
     NSString *destPath = [self targetPath];
     if ( ! [ [NSFileManager defaultManager] moveItemAtPath: tmpPath toPath: destPath error: &error] )
     {
