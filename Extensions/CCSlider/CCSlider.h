@@ -34,10 +34,23 @@
 
 static const NSInteger kCCSliderPriority = kCCMenuTouchPriority - 2;
 
+
 @protocol CCSliderControlDelegate  
-- (void) valueChanged: (float) value tag: (int) tag;  
+
+/** Send to delegate each time, when CCSlider's value changed via property.
+ *
+ * @param value new value, that's set. 
+ * Old value is still accessable via CCSlider.value property during this callback.
+ *
+ * @param tag Tag of CCSlider with changed value.
+ *
+ * @todo [v0.2] Remove, KVO is better for such things and should be used instead. 
+ */
+- (void) valueChanged: (float) value tag: (int) tag;
+
 @end  
 
+/** @class CCSlider Slider control for Cocos2D. Designed with SFX/Music level options in mind. */
 @interface CCSlider : CCLayer 
 {  
 	float value;  
@@ -50,20 +63,41 @@ static const NSInteger kCCSliderPriority = kCCMenuTouchPriority - 2;
 	CCSprite *_bg;
 }  
 
+/** Current chosen value, min is 0.0f, max is 1.0f. */
 @property (nonatomic, assign) float value;  
+
+/** Delegate for valueChanged callbacks. */
 @property (nonatomic, retain) id<CCSliderControlDelegate> delegate; 
 
-// Creates slider with backround image filename & thumb image filename.
+/** Creates slider with backround image filename & thumb image filename. 
+ *
+ * @see initWithBackgroundFile:thumbFile: 
+ */
 + (id) sliderWithBackgroundFile: (NSString *) bgFile thumbFile: (NSString *) thumbFile;
 
-// Creates slider with given bg sprite and menu item as a thumb.
+/** Creates slider with given bg sprite and menu item as a thumb. 
+ *
+ * @see initWithBackgroundSprite: thumbMenuItem:
+ */
 +(id) sliderWithBackgroundSprite: (CCSprite *) bgSprite thumbMenuItem: (CCMenuItem *) aThumb;
 
-// Easy init - filenames instead of CCSprite & CCMenuItem.
-// Uses designated init inside, thumb selected image is created by copying making darker normal sprite.
+/** Easy init - filenames instead of CCSprite & CCMenuItem. Uses designated init inside.
+ *
+ * @param thumbFile Filename, that is used to create normal & selected images for
+ * thumbMenuItem. Selected sprite is darker than normal sprite.
+ *
+ * @param bgFile Filename for background CCSprite.
+ */
 - (id) initWithBackgroundFile: (NSString *) bgFile thumbFile: (NSString *) thumbFile;
 
-// Designated init.
+/** Designated init.
+ *
+ * @param bgSprite CCSprite, that is used as a background. It's bounding box is used
+ * to determine max & min x position for a thumb menu item.
+ *
+ * @param aThumb MenuItem that is used as a thumb. Used without CCMenu, so CCMenuItem#activate
+ * doesn't get called.
+ */
 -(id) initWithBackgroundSprite: (CCSprite *) bgSprite thumbMenuItem: (CCMenuItem *) aThumb;
 
 @end  

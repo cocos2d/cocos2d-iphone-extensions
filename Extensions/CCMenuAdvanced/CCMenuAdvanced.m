@@ -63,6 +63,7 @@
 @synthesize boundaryRect = boundaryRect_;
 @synthesize minimumTouchLengthToSlide = minimumTouchLengthToSlide_;
 @synthesize priority = priority_;
+@synthesize isDisabled = isDisabled_;
 
 #ifdef DEBUG
 @synthesize debugDraw = debugDraw_;
@@ -201,6 +202,18 @@
 	
 }
 
+- (void) cancelSelectedItem
+{
+	if( selectedItem_ ) {
+		[selectedItem_ unselected];
+		selectedItem_ = nil;
+	}
+	
+	selectedItemNumber_ = -1;
+
+	state_ = kCCMenuStateWaiting;
+}
+
 #pragma mark Advanced Menu - Alignment
 // differences from std impl:
 //		* 1 auto setContentSize 
@@ -310,8 +323,6 @@
 #endif
 }
 
-// TODO: add columns and rows alignment methods
-
 -(void) alignItemsHorizontallyWithPadding:(float)padding
 {
 	[self alignItemsHorizontallyWithPadding: padding leftToRight: YES];
@@ -325,10 +336,26 @@
 #pragma mark Advanced Menu - Mouse Controls
 
 #if defined(__MAC_OS_X_VERSION_MAX_ALLOWED)
+
+-(BOOL) ccMouseUp:(NSEvent *)event
+{
+    if (self.isDisabled)
+        return NO;
+    
+    return [super ccMouseUp: event];
+}
+
+-(BOOL) ccMouseDragged:(NSEvent *)event
+{
+	if (self.isDisabled)
+		return NO;
+	
+	return [super ccMouseDragged: event];
+}
  
 -(BOOL) ccMouseDown:(NSEvent *)event
 {
-	if( ! visible_ )
+	if( ! visible_ || self.isDisabled)
 		return NO;
 	
 	selectedItem_ = [self itemForMouseEvent:event];
@@ -367,7 +394,7 @@
 	unichar upKeyBinding = [self prevItemButtonBind];
 	unichar downKeyBinding = [self nextItemButtonBind];
 	
-	if (! self.visible)
+	if (! self.visible || self.isDisabled)
 		return NO;
 	
 	NSString *keyCharacters = [event charactersIgnoringModifiers];
@@ -481,7 +508,7 @@
 
 -(BOOL) ccTouchBegan:(UITouch *)touch withEvent:(UIEvent *)event
 {	
-	if( state_ != kCCMenuStateWaiting || !visible_ )
+	if( state_ != kCCMenuStateWaiting || !visible_ || self.isDisabled )
 		return NO;
 	
 	curTouchLength_ = 0; //< every new touch should reset previous touch length

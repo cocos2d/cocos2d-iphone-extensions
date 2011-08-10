@@ -6,6 +6,9 @@ Repo Maintainer:
 
 People/companies who were/are contributing code to cocos2d-iphone-extensions (alphabetically ordered):
 
+	* Brian Feller (http://infinitesimplicity.com/)
+		CCScrollLayer#moveToPage: bounds checking
+
 	* Darren Clark (http://darrenclark.ca/)
 		CCSendMessages author
 
@@ -17,9 +20,25 @@ People/companies who were/are contributing code to cocos2d-iphone-extensions (al
 		
 	* Jeff Keeme (cjkeeme) (http://www.myblackdogbooks.com/)
 		Fix for issue #23 (CCScrollLayer page indicator artifacts)
+		
+	* Jonathan Dixon (http://www.cocos2d-iphone.org/forum/profile/4062)
+		Solution for issue #31 (CCVideoPlayer toggleFullscreen support).
+		CCVideoPlayer#setNoSkip implementation.
+		
+	* Patrick Wolowicz (twitter: @subzero_eu) (http://blog.subzero.eu/)
+		CCVideoPlayer patch: preload movie, prevent flickering & hide controls when compiled on older SDKs.
+
+	* Sergey Tikhonov (twitter: @sthaqu) (http://www.haqu.net)
+		Solution for Issue #53 fix (FilesDownloader compatibility with Mac OS X File System Guide).
 
 	* Simon Skinner (twitter: @vultuk) (http://www.dk101.net/)
 		CCScrollLayer original author
+		
+	* Todd Lee (http://www.imvu.com/)
+		Subpaths support for FilesDownloader (Issue #40).
+		
+	* Wilczarz (http://www.cocos2d-iphone.org/forum/profile/31820)
+		CCScrollLayer: scroll with only one touch to avoid jumpy behaviour in multitouch (issue #35)
  
 
 Do you have a homepage, twitter account, etc? Please, send me the URL. I'll add it next to your name. Thanks.

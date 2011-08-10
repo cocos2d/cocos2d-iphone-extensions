@@ -72,7 +72,6 @@
 
 static  CCVideoPlayerImpl *_impl = nil;
 
-
 //----- initialize -----
 + (void) initialize
 {
@@ -132,7 +131,24 @@ static  CCVideoPlayerImpl *_impl = nil;
     [pool release];    
 }
 
-#pragma mark Interface
+#pragma mark Properties
+
++ (void) setDelegate: (id<CCVideoPlayerDelegate>) aDelegate
+{
+	// If the current thread is the main thread,than
+	// this message will be processed immediately.
+	[ _impl performSelectorOnMainThread: @selector(setDelegate:) 
+							 withObject: aDelegate
+						  waitUntilDone: [NSThread isMainThread]  ];
+}
+
++ (void) setNoSkip:(BOOL)value
+{
+    [_impl setNoSkip:value];
+}
+
+#pragma mark Playback
+
 + (void) playMovieWithFile: (NSString *) file
 {	
     //test for file in caches - play if exists
@@ -141,7 +157,23 @@ static  CCVideoPlayerImpl *_impl = nil;
     
     NSString *cachedVideoPath = [cachesDirectoryPath stringByAppendingPathComponent: file];
     
+	// Try to play from Caches.
     if ( [[NSFileManager defaultManager] fileExistsAtPath: cachedVideoPath] )
+    {
+        NSURL *url = [NSURL fileURLWithPath: cachedVideoPath];
+        // If the current thread is the main thread,than
+		// this message will be processed immediately.
+		[ _impl performSelectorOnMainThread: @selector(playMovieAtURL:) 
+								 withObject: url
+							  waitUntilDone: [NSThread isMainThread]  ];
+        return;
+    }
+	
+	// Try to play from Caches Bundle ID (FilesDownloader 0.1.2 Mac Compatible).
+	NSString *appBundleID = [[NSBundle mainBundle] bundleIdentifier];
+	cachedVideoPath = [cachesDirectoryPath stringByAppendingPathComponent:appBundleID];
+	cachedVideoPath = [cachedVideoPath stringByAppendingPathComponent: file];
+	if ( [[NSFileManager defaultManager] fileExistsAtPath: cachedVideoPath] )
     {
         NSURL *url = [NSURL fileURLWithPath: cachedVideoPath];
         // If the current thread is the main thread,than
@@ -157,6 +189,11 @@ static  CCVideoPlayerImpl *_impl = nil;
     
 }
 
++ (void)userCancelPlaying
+{
+	[_impl userCancelPlaying];
+}
+
 + (void) cancelPlaying
 {
 	// If the current thread is the main thread,than
@@ -166,14 +203,12 @@ static  CCVideoPlayerImpl *_impl = nil;
 						  waitUntilDone: [NSThread isMainThread]  ];
 }
 
-+ (void) setDelegate: (id<CCVideoPlayerDelegate>) aDelegate
++ (BOOL) isPlaying
 {
-	// If the current thread is the main thread,than
-	// this message will be processed immediately.
-	[ _impl performSelectorOnMainThread: @selector(setDelegate:) 
-							 withObject: aDelegate
-						  waitUntilDone: [NSThread isMainThread]  ];
+	return [_impl isPlaying];
 }
+
+#pragma mark Updates - Platform Specific
 
 #ifdef __IPHONE_OS_VERSION_MAX_ALLOWED
 + (void) updateOrientationWithOrientation: (UIDeviceOrientation) newOrientation
@@ -184,6 +219,13 @@ static  CCVideoPlayerImpl *_impl = nil;
 							 withObject: [NSNumber numberWithInt: (int)newOrientation]
 						  waitUntilDone: [NSThread isMainThread]  ];
 }
+#elif defined(__MAC_OS_X_VERSION_MAX_ALLOWED)
+
++ (void) reAttachView
+{
+    [_impl reAttachView];
+}
+
 #endif
 
 @end

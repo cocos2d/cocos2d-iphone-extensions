@@ -8,6 +8,7 @@
 //  http://www.givp.org/blog/2010/12/30/scrolling-menus-in-cocos2d/
 //
 //  Copyright 2011 Stepan Generalov
+//  Copyright 2011 Brian Feller
 //
 //  Permission is hereby granted, free of charge, to any person obtaining a copy
 //  of this software and associated documentation files (the "Software"), to deal
@@ -30,34 +31,35 @@
 #import <Foundation/Foundation.h>
 #import "cocos2d.h"
 
-#ifndef __MAC_OS_X_VERSION_MAX_ALLOWED
+@class CCScrollLayer;
+@protocol CCScrollLayerDelegate
 
-/* 
- It is a very clean and elegant subclass of CCLayer that lets you pass-in an array 
- of layers and it will then create a smooth scroller. 
- Complete with the "snapping" effect. You can create screens with anything that can be added to a CCLayer.
- 
- Additions since Giv Parvaneh version:
-	1. Added ability to swipe above targetedTouchDelegates.
-    2. Added touches lengths & screens properties.
-	3. Added factory class method.
-	4. Code cleanup.
-	5. Added current page number indicator (iOS Style Dots).
- 
- Limitations: 
-	1. Mac OS X not supported. (Note #ifndef wrappers ;) )
-	2. Standard Touch Delegates will still receive touch events after layer starts sliding.
+@optional
+
+/** Called when scroll layer begins scrolling.
+ * Usefull to cancel CCTouchDispatcher standardDelegates.
  */
-@interface CCScrollLayer : CCLayer {
-	
-	// Holds the current width of the screen substracting offset.
-	CGFloat scrollWidth_;
+- (void) scrollLayerScrollingStarted:(CCScrollLayer *) sender;
+
+/** Called at the end of moveToPage:
+ * Doesn't get called in selectPage:
+ */
+- (void) scrollLayer: (CCScrollLayer *) sender scrolledToPageNumber: (int) page;
+
+@end
+
+/** Scrolling layer for Menus, like iOS Springboard Screen.
+ *
+ * It is a very clean and elegant subclass of CCLayer that lets you pass-in an array 
+ * of layers and it will then create a smooth scroller. 
+ * Complete with the "snapping" effect. You can create screens with anything that can be added to a CCLayer.
+ */
+@interface CCScrollLayer : CCLayer 
+{	
+	NSObject <CCScrollLayerDelegate> *delegate_;
 	
 	// Holds the current page being displayed.
 	int currentScreen_;
-	
-	// A count of the total screens available.
-	int totalScreens_;
 	
 	// The x coord of initial point the user starts their swipe.
 	CGFloat startSwipe_;
@@ -70,20 +72,117 @@
 	
 	// Whenever show or not gray/white dots under scrolling content.
 	BOOL showPagesIndicator_;
+	CGPoint pagesIndicatorPosition_;
 	
 	// Internal state of scrollLayer (scrolling or idle).
 	int state_;
 	
+	BOOL stealTouches_;
+	BOOL stealingTouchInProgress_;
+	
+#ifdef __IPHONE_OS_VERSION_MAX_ALLOWED
+	// Holds the touch that started the scroll
+	UITouch *scrollTouch_;
+#endif
+	
+	// Holds pages.
+	NSMutableArray *layers_;
+	
+	// Holds current pages width offset.
+	CGFloat pagesWidthOffset_;
 }
+
+@property (readwrite, retain) NSObject <CCScrollLayerDelegate> *delegate;
+
+#pragma mark Scroll Config Properties
+
+/** Calibration property. Minimum moving touch length that is enough
+ * to cancel menu items and start scrolling a layer. 
+ */
 @property(readwrite, assign) CGFloat minimumTouchLengthToSlide;
+
+/** Calibration property. Minimum moving touch length that is enough to change
+ * the page, without snapping back to the previous selected page.
+ */
 @property(readwrite, assign) CGFloat minimumTouchLengthToChangePage;
+
+/** If YES - when starting scrolling CCScrollLayer will claim touches, that are 
+ * already claimed by others targetedTouchDelegates by calling CCTouchDispatcher#touchesCancelled
+ * Usefull to have ability to scroll with touch above menus in pages.
+ * If NO - scrolling will start, but no touches will be cancelled.
+ * Default is YES.
+ */
+@property(readwrite) BOOL stealTouches;
+
+#pragma mark Pages Indicator Properties
+
+/** Whenever show or not white/grey dots under the scroll layer.
+ * If yes - dots will be rendered in parents transform (rendered after scroller visit).
+ */
 @property(readwrite, assign) BOOL showPagesIndicator;
+
+/** Position of dots center in parent coordinates. 
+ * (Default value is screenWidth/2, screenHeight/4)
+ */
+@property(readwrite, assign) CGPoint pagesIndicatorPosition;
+
+#pragma mark Pages Control Properties
+
+/** Total pages available in scrollLayer. */
 @property(readonly) int totalScreens;
+
+/** Current page number, that is shown. Belongs to the [0, totalScreen] interval. */
 @property(readonly) int currentScreen;
 
+/** Offset, that can be used to let user see next/previous page. */
+@property(readwrite) CGFloat pagesWidthOffset;
+
+/** Returns array of pages CCLayer's  */
+@property(readonly) NSArray *pages;
+
+#pragma mark Init/Creation
 +(id) nodeWithLayers:(NSArray *)layers widthOffset: (int) widthOffset; 
 -(id) initWithLayers:(NSArray *)layers widthOffset: (int) widthOffset;
 
+#pragma mark Updates 
+/** Updates all pages positions & adds them as children if needed.
+ * Can be used to update position of pages after screen reshape, or 
+ * for update after dynamic page add/remove. 
+ */
+- (void) updatePages;
+
+#pragma mark Adding/Removing Pages
+
+/** Adds new page and reorders pages trying to set given number for newly added page.
+ * If number > pages count - adds new page to the right end of the scroll layer.
+ * If number <= 0 - adds new page to the left end of the scroll layer. 
+ * @attention Designated addPage method. 
+ */
+- (void) addPage: (CCLayer *) aPage withNumber: (int) pageNumber;
+
+/** Adds new page to the right end of the scroll layer. */
+- (void) addPage: (CCLayer *) aPage;
+
+/** Removes page if it's one of scroll layers pages (not children)
+ * Does nothing if page not found.
+ */
+- (void) removePage: (CCLayer *) aPage;
+
+/** Removes page with given number. Doesn nothing if there's no page for such number. */
+- (void) removePageWithNumber: (int) page;
+
+#pragma mark Moving/Selecting Pages
+
+/* Moves scrollLayer to page with given number & invokes delegate
+ * method scrollLayer:scrolledToPageNumber: at the end of CCMoveTo action. 
+ * Does nothing if number >= totalScreens or < 0.
+ */
+-(void) moveToPage:(int)page;
+
+/* Immedeatly moves scrollLayer to page with given number without running CCMoveTo. 
+ * Does nothing if number >= totalScreens or < 0.
+ */
+-(void) selectPage:(int)page;
+
 @end
 
-#endif

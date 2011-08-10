@@ -409,6 +409,20 @@
 	}
 }
 
+#if CC_BIGIMAGE_DEBUG_DRAW
+- (void) draw
+{
+	[super draw];
+	
+	CGSize s = [self contentSize];
+	CGPoint vertices[4]={
+		ccp(0,0),ccp(s.width,0),
+		ccp(s.width,s.height),ccp(0,s.height),
+	};
+	ccDrawPoly(vertices, 4, YES);
+}
+#endif
+
 
 #pragma mark Dynamic Tiles Stuff
 
@@ -466,14 +480,16 @@
 - (void) updateLoadRect
 {	
 	// get screen rect
-	CGRect screenRect = CGRectZero;
-	screenRect.origin = [self convertToNodeSpace: CGPointMake(0, 0 )];
+	CGRect screenRect = CGRectZero;;
 	screenRect.size = [[CCDirector sharedDirector] winSize];
 	
-	/* 
-	 TODO: try to uncomment this to support rotation/scale/etc transform
-	 screnRect = CGRectApplyAffineTransform(screenRect, [self worldToNodeTransform] ); */
-	
+	screenRect.size.width *= CC_CONTENT_SCALE_FACTOR();
+	screenRect.size.height *= CC_CONTENT_SCALE_FACTOR();
+	screenRect = CGRectApplyAffineTransform(screenRect, [self worldToNodeTransform] );
+	screenRect.origin = ccpMult(screenRect.origin, 1/CC_CONTENT_SCALE_FACTOR() );
+	screenRect.size.width /= CC_CONTENT_SCALE_FACTOR();
+	screenRect.size.height /= CC_CONTENT_SCALE_FACTOR();
+	 
 	// get level's must-be-loaded-part rect
 	_loadedRect = CGRectMake(screenRect.origin.x - _screenLoadRectExtension.width,
 							 screenRect.origin.y - _screenLoadRectExtension.height,

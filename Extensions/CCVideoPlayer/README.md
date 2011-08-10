@@ -55,7 +55,7 @@ Your delegate class should conform to CCVideoPlayerDelegate and implement these 
         [[CCDirector sharedDirector] stopAnimation];
     }
 
-It's a weak link, so don't forget to set delegate to nil in dealloc.
+It's a weak ref, so don't forget to set CCVideoPlayer's delegate to nil in delegates dealloc or before.
 
 Dependencies
 ----------------------------

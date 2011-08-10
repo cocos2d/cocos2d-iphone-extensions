@@ -178,6 +178,7 @@ enum nodeTags
 						 ];
 		[backMenuItem.selectedImage setColor: ccGRAY];
 		CCMenuAdvanced *menu = [CCMenuAdvanced menuWithItems:backMenuItem, nil];
+        menu.priority = kCCMenuTouchPriority - 1;
 		[self addChild:menu z:0 tag: kBackButtonMenu];
 		
 		// Enable Debug Draw (available only when DEBUG is defined )

@@ -60,7 +60,7 @@
     if ( _touch )
     {
         // stop video
-        [CCVideoPlayer cancelPlaying];
+        [CCVideoPlayer userCancelPlaying];
     }
     _touch = NO;
 }

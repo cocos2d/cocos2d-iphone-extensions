@@ -36,12 +36,12 @@
 
 - (void)rightMouseDown:(NSEvent *)theEvent
 {
-	[CCVideoPlayer cancelPlaying];
+	[CCVideoPlayer userCancelPlaying];
 }
 
 - (void)otherMouseDown:(NSEvent *)theEvent
 {
-	[CCVideoPlayer cancelPlaying];
+	[CCVideoPlayer userCancelPlaying];
 }
 
 - (void)scrollWheel:(NSEvent *)theEvent
@@ -50,19 +50,22 @@
 
 - (void) mouseDown:(NSEvent *)theEvent
 {
-	[CCVideoPlayer cancelPlaying];
+	[CCVideoPlayer userCancelPlaying];
 }
 
 - (void) keyDown:(NSEvent *)theEvent
 {
 	if ( ![theEvent isARepeat] )
-		[CCVideoPlayer cancelPlaying];
+		[CCVideoPlayer userCancelPlaying];
 }
 
 -(BOOL) ccKeyDown:(NSEvent*)event
 {
-	if ( ![event isARepeat] )
-		[CCVideoPlayer cancelPlaying];
+	if ( ![event isARepeat] && [CCVideoPlayer isPlaying] )
+	{
+		[CCVideoPlayer userCancelPlaying];
+		return YES;
+	}
 	
 	return NO;
 }

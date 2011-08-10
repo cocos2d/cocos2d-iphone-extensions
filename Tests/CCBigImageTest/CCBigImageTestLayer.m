@@ -37,6 +37,10 @@ SYNTHESIZE_EXTENSION_TEST(CCBigImageTestLayer)
 // HelloWorldLayer implementation
 @implementation CCBigImageTestLayer
 
+enum nodeTags {
+	kBigNode,
+};
+
 // on "init" you need to initialize your instance
 -(id) init
 {
@@ -57,9 +61,24 @@ SYNTHESIZE_EXTENSION_TEST(CCBigImageTestLayer)
 		// size of bigImage.png in points
 		self.contentSize = node.contentSize;
 		
-		// Add node as child
-		node.position = ccp(0,0);
-		[self addChild: node];
+		// Add node as child.
+		node.scale = 0.2f;
+		[self addChild: node z:0 tag: kBigNode];
+		
+#ifdef __MAC_OS_X_VERSION_MIN_REQUIRED
+		// Run Infinite Rotate & Scale Actions for testing issue #19 on Mac.
+		id action = [CCSpawn actions: 
+					 [CCRotateBy actionWithDuration:6.0f angle: 360.0f],
+					 [CCSequence actions:
+						[CCScaleTo actionWithDuration:3.0f scale:0.05f],
+						[CCScaleTo actionWithDuration:3.0f scale:0.2f],
+					  nil],
+					 nil];
+		action = [CCRepeatForever actionWithAction: action];
+		[node runAction: action];
+#endif
+		
+		[self updateForScreenReshape];
 	}
 	return self;
 }
@@ -77,7 +96,10 @@ SYNTHESIZE_EXTENSION_TEST(CCBigImageTestLayer)
 
 - (void) updateForScreenReshape
 {
-	[self fixPosition];
+	CGSize s = [[CCDirector sharedDirector] winSize];
+	CCNode *node = [self getChildByTag:kBigNode];
+	node.anchorPoint = ccp(0.5f, 0.5f);
+	node.position = ccp(0.5f * s.width, 0.5f * s.height);
 }
 
 
@@ -112,13 +134,11 @@ SYNTHESIZE_EXTENSION_TEST(CCBigImageTestLayer)
 		
 		CGPoint newPosition = ccpAdd(self.position, delta );	
 		self.position = newPosition;
-		
-		// stay in externalBorders
-		[self fixPosition];
 	}
 }
 
 #elif __MAC_OS_X_VERSION_MIN_REQUIRED
+
 -(BOOL) ccMouseDragged:(NSEvent*)event
 {
 	CGPoint delta = ccp( [event deltaX], - [event deltaY] );
@@ -130,9 +150,6 @@ SYNTHESIZE_EXTENSION_TEST(CCBigImageTestLayer)
 	CGPoint newPosition = ccpAdd(self.position, delta );	
 	self.position = newPosition;
 	
-	// stay in externalBorders
-	[self fixPosition];
-	
 	return NO;
 }
 
@@ -143,9 +160,6 @@ SYNTHESIZE_EXTENSION_TEST(CCBigImageTestLayer)
 	// add delta
 	CGPoint newPosition = ccpAdd(self.position, delta );	
 	self.position = newPosition;
-	
-	// stay in externalBorders
-	[self fixPosition];
 	
 	return NO;
 }

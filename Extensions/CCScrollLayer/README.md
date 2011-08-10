@@ -28,12 +28,16 @@ Additions since Giv Parvaneh version
 2. Added touches lengths & screens properties.
 3. Added factory class method.
 4. Code cleanup.
-5. Added current page number indicator (iOS Style Dots).
+5. Added current page number indicator (iOS Style Dots) with positioning.
+6. moveToPage is public method.
+7. Standard pages numbering starting from zero: [0;totalScreens-1] instead of [1; totalScreens]
+8. iOS: scroll with only one touch.
+9. Mac Support, more flexible.
+10. Dynamic Pages Control - Add / Remove pages after CCScrollLayer init & onEnter.
  
 Limitations
 =============
 
-1. Currently only iOS is supported. Implement ccMouseDelegate and/or ccKeyboardDelegate & remove #ifdef wrappers to add Mac OS X support.
-2. Standard Touch Delegates will still receive touch events after layer starts sliding.
+1. Standard Touch Delegates will still receive touch events after layer starts sliding.
 
 

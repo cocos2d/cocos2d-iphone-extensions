@@ -5,6 +5,7 @@
  * https://github.com/cocos2d/cocos2d-iphone-extensions
  *
  * Copyright (c) 2010-2011 Stepan Generalov
+ * Copyright (c) 2011 Patrick Wolowicz
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -48,6 +49,50 @@
     return self;
 }
 
+
+- (void) setupViewAndPlay {
+    UIWindow *keyWindow = [[UIApplication sharedApplication] keyWindow];	
+	
+	// iOS 4.0 video player
+	if ([_theMovie respondsToSelector: @selector(view)])
+	{		
+		[keyWindow addSubview: [_theMovie view]];				
+		[ [_theMovie view] setHidden:  NO];		
+		[ [_theMovie view] setFrame: CGRectMake( 0, 0, keyWindow.frame.size.height, keyWindow.frame.size.width)];				
+		[ [_theMovie view] setCenter: keyWindow.center ];
+        
+		[self updateOrientationWithOrientation: [[UIApplication sharedApplication] statusBarOrientation]];
+		
+		// Movie playback is asynchronous, so this method returns immediately.
+		[_theMovie play];
+		
+		
+		CGSize winSize = [ [CCDirector sharedDirector] winSize];
+		
+		_videoOverlayView = [ [VideoOverlayView alloc] initWithFrame:CGRectMake(0, 0, winSize.height, winSize.width)];
+		
+		[keyWindow addSubview: _videoOverlayView ];
+	}
+	else // iPhone OS 2.2.1 video player
+	{
+		[_theMovie play];		
+		
+		// add videoOVerlayView
+		NSArray *windows = [[UIApplication sharedApplication] windows];
+		if ([windows count] > 1)
+		{
+			// Locate the movie player window
+			UIWindow *moviePlayerWindow = [[UIApplication sharedApplication] keyWindow];
+			// Add our overlay view to the movie player's subviews so it is 
+			// displayed above it.
+			
+			CGSize winSize = [ [CCDirector sharedDirector] winSize];
+			_videoOverlayView = [ [VideoOverlayView alloc] initWithFrame:CGRectMake(0, 0, winSize.height, winSize.width)];			
+			[moviePlayerWindow addSubview: _videoOverlayView ];
+		}
+	}
+
+}
 //----- playMovieAtURL: ------
 -(void)playMovieAtURL:(NSURL*)theURL
 {
@@ -65,15 +110,15 @@
 	{
 		[ theMovie setControlStyle: MPMovieControlStyleNone ];
 	}
-#ifdef __IPHONE_OS_VERSION_MIN_ALLOWED
-#if __IPHONE_OS_VERSION_MAX_ALLOWED < 30200
+//#ifdef __IPHONE_OS_VERSION_MIN_ALLOWED
+//#if __IPHONE_OS_VERSION_MAX_ALLOWED < 30200
 	else if ( [theMovie respondsToSelector:@selector(setMovieControlMode:)] )
 	{
 		
 		[theMovie setMovieControlMode: MPMovieControlModeHidden]; 
 	}
-#endif
-#endif
+//#endif
+//#endif
 	
 	
     // Register for the playback finished notification.
@@ -81,50 +126,23 @@
                                              selector:@selector(movieFinishedCallback:)
                                                  name:MPMoviePlayerPlaybackDidFinishNotification
                                                object:theMovie];
-	
-	
-	
-	UIWindow *keyWindow = [[UIApplication sharedApplication] keyWindow];	
-	
-	// iOS 4.0 video player
-	if ([theMovie respondsToSelector: @selector(view)])
-	{		
-		[keyWindow addSubview: [theMovie view]];				
-		[ [theMovie view] setHidden:  NO];		
-		[ [theMovie view] setFrame: CGRectMake( 0, 0, keyWindow.frame.size.height, keyWindow.frame.size.width)];				
-		[ [theMovie view] setCenter: keyWindow.center ];
+    
+    if ([theMovie respondsToSelector:@selector(prepareToPlay)]) {
+        [[NSNotificationCenter defaultCenter] addObserver:self
+                                                 selector:@selector(preparedToPlayerCallback:)
+                                                     name:MPMediaPlaybackIsPreparedToPlayDidChangeNotification
+                                                   object:theMovie];
         
-		[self updateOrientationWithOrientation: [[UIApplication sharedApplication] statusBarOrientation]];
-		
-		// Movie playback is asynchronous, so this method returns immediately.
-		[theMovie play];
-		
-		
-		CGSize winSize = [ [CCDirector sharedDirector] winSize];
-		
-		_videoOverlayView = [ [VideoOverlayView alloc] initWithFrame:CGRectMake(0, 0, winSize.height, winSize.width)];
-		
-		[keyWindow addSubview: _videoOverlayView ];
+        
+        [theMovie prepareToPlay];
+    } else {
+        //old iOS does not know how to prepareToPlay, so the flicker cannot be avoided
+        [self setupViewAndPlay];
+        
+    }
+
+
 	}
-	else // iPhone OS 2.2.1 video player
-	{
-		[theMovie play];		
-		
-		// add videoOVerlayView
-		NSArray *windows = [[UIApplication sharedApplication] windows];
-		if ([windows count] > 1)
-		{
-			// Locate the movie player window
-			UIWindow *moviePlayerWindow = [[UIApplication sharedApplication] keyWindow];
-			// Add our overlay view to the movie player's subviews so it is 
-			// displayed above it.
-			
-			CGSize winSize = [ [CCDirector sharedDirector] winSize];
-			_videoOverlayView = [ [VideoOverlayView alloc] initWithFrame:CGRectMake(0, 0, winSize.height, winSize.width)];			
-			[moviePlayerWindow addSubview: _videoOverlayView ];
-		}
-	}
-}
 
 
 //----- movieFinishedCallback -----
@@ -152,6 +170,35 @@
     [_videoOverlayView release];
 	
     [ _delegate moviePlaybackFinished]; 
+}
+
+
+-(void)preparedToPlayerCallback:(NSNotification*)aNotification
+{
+    MPMoviePlayerController* theMovie = [aNotification object];
+    
+    if (theMovie.isPreparedToPlay) {
+        [[NSNotificationCenter defaultCenter] removeObserver:self
+                                                        name:MPMediaPlaybackIsPreparedToPlayDidChangeNotification
+                                                      object:theMovie];
+        [self setupViewAndPlay];
+    }
+
+    
+    
+	
+}
+
+- (void) setNoSkip:(BOOL)value;
+{
+    noSkip=value;
+}
+
+- (void) userCancelPlaying
+{
+	if (!noSkip) {
+		[self cancelPlaying];
+	}
 }
 
 - (void) cancelPlaying

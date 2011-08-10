@@ -28,10 +28,12 @@
 
 
 #import "cocos2d.h"
+#import "CCScrollLayer.h"
 
-@interface CCScrollLayerTestLayer : CCLayer
+@interface CCScrollLayerTestLayer : CCLayer <CCScrollLayerDelegate>
 {
 }
 
+- (void) updateForScreenReshape;
 
 @end

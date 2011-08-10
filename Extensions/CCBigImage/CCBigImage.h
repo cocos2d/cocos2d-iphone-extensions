@@ -32,7 +32,7 @@
 // How many times visit should be called to call removeUnusedTexture
 #define CCBIGIMAGE_TEXTURE_UNLOAD_PERIOD 3
 
-/* CCBigImage is a node, that holds parts of big image as 
+/** @class CCBigImage Node, that holds parts of big image as 
  * an idvididual dynamically unloadable tiles.
  * Besides dynamic tiles this node can have normal children, such as CCSprite, layer, etc...
  *
@@ -47,7 +47,7 @@
  * However, even in staticMode tiles that aren't visible now in screen rect will be not
  * rendered to increase performance.
  *
- * LIMITATIONS: scaling not supported, CCCamera not supported.
+ * LIMITATIONS: CCCamera may be not supported.
  */
 @interface CCBigImage : CCNode
 {	
@@ -74,29 +74,41 @@
 // private property
 @property(retain) NSThread *tilesLoadThread; 
 
-// Shows in what distance beyond each side of the screen tiles should be loaded
-// to avoid holes when levels scrolls fast.
-// By default it's equal to first tile's size.
+/** Returns size that describes in what distance beyond each side of the screen tiles should be loaded
+ * to avoid holes when levels scrolls fast.
+ * By default it's equal to first tile's size.
+ */
 @property (readwrite) CGSize screenLoadRectExtension;
 
-// if YES - then only needed (visible in screen rect) tiles will be loaded at the moment
-//   via independent thread
-// if NO - all tiles will be preloaded and no no additional thread will be used
-// This property can be changed at runtime in both directions.
-// On the Mac by default this property is OFF
-// On the iOS devices by default this property is ON
+/** if YES - then only needed (visible in screen rect) tiles will be loaded at the moment
+ *   via independent thread
+ * if NO - all tiles will be preloaded and no no additional thread will be used
+ * This property can be changed at runtime in both directions.
+ * On the Mac by default this property is OFF
+ * On the iOS devices by default this property is ON
+ */
 @property (readwrite) BOOL dynamicMode;
 
+/** Returns new CCBigImage. @see initWithTilesFile:tilesExtension:tilesZ: */
 + (id) nodeWithTilesFile: (NSString *) filename 
 		  tilesExtension: (NSString *) extension 
 				  tilesZ: (int) tilesZ;
 
-// designated initializer
+/** Inits CCBigImage. Designated initializer.
+ *
+ * @param filename plist filename from Tile-Cutter. 
+ *
+ * @param extension file extension, that will be used for all tiles instead of their 
+ * extensions that are in plist file. Pass nil to kep original extension from plist file.
+ *
+ * @param tilesZ zOrder, that will be used for all tiles. Usefull when you have 
+ * other nodes added as children to CCBigImage.
+ */
 - (id) initWithTilesFile: (NSString *) filename 
 		  tilesExtension: (NSString *) extension 
 				  tilesZ: (int) tilesZ;
 
-// load tiles by request in given rect
+/** Load tiles by request in a given rect (in nodes coordinates) */
 - (void) loadTilesInRect: (CGRect) loadRect;
 
 @end

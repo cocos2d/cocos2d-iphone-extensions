@@ -1,15 +1,42 @@
 
+0.1.2 - XX-Jule-2011
+   * Critical fix for FilesDownloader to be compatible with Mac OS X File System Guide.
+   * Updated Cocos2D-iPhone 1.0.1 Release.
+   * Better comments for some extensions - preparing for full Doxygen documentation (JavaDoc Style).
+   * FilesDownloader - added support for subpaths in filenames. Locally replicate the folder structure. (Issue #40)
+   * CCBigImage - implemented full transform support.
+   * CCVideoPlayer: 
+      1. ToggleFullscreen support on Mac. (Issue #31)
+	  2. Prepare to play to prevent view flicker while movie is preloading.
+	  3. Actually hides the controls on pre 3.2 devices.
+	  4. Ability to disable video skip by user (key/mouse/touch event).
+	  5. Added compatibility with latest FilesDownloader changes (Issue #53 fix) on Mac.
+   * A lot for CCScrollLayer: 
+      1. Added pagesIndicatorPosition property, moveToPage: & selectPage: methods.
+      2. Changed pages numbering to start from zero.
+      3. Mac Support & testcase in Mac Project. (Issue #22)
+      4. Added Delegate Property.
+      5. Added Pages array Property.
+	  6. Fixed jumpy behavior when scrolling with two or more fingers.
+	  7. Added Dynamic Pages Control.
+	  8. Move to nearest page, not just next/prev by swipe/mouseDrag.
+	  9. Ability to disable stealing touches (stealTouches property).
+	  10. Do not cancel scroll when stealing touch (Issue #38).
+   * CCSendMessages: fixed issue #30, added testcase (return nil on initWithTarget: nil).
+   * Minor stability, analyzer & documentation issues fixes (CCVideoPLayer, CCBigImage, FilesDownloader).   
+
 0.1.1 - 12-June-2011
    * Edited README: master is a default branch now.
    * Added CHANGELOG.
    * Reduced repo work tree size.
 
 0.1 - 11-June-2011
-   * [iOS/Mac] CCMenuAdvanced
-   * [iOS/Mac] CCMenuItemSpriteIndependent 
-   * [iOS/Mac] CCVideoPlayer
-   * [iOS/Mac] CCBigImage
-   * [iOS/Mac] CCSlider
-   * [iOS/Mac] CCSendMessages 
-   * [iOS] CCScrollLayer 
-   * [iOS/Mac] FilesDownloader
+   * Initial release with following extensions:
+      * [iOS/Mac] CCMenuAdvanced
+      * [iOS/Mac] CCMenuItemSpriteIndependent 
+      * [iOS/Mac] CCVideoPlayer
+      * [iOS/Mac] CCBigImage
+      * [iOS/Mac] CCSlider
+      * [iOS/Mac] CCSendMessages 
+      * [iOS]     CCScrollLayer 
+      * [iOS/Mac] FilesDownloader

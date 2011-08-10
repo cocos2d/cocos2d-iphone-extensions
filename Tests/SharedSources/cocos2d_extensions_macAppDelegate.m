@@ -70,6 +70,8 @@
 {
 	CCDirectorMac *director = (CCDirectorMac*) [CCDirector sharedDirector];
 	[director setFullScreen: ! [director isFullScreen] ];
+	
+	[[NSNotificationCenter defaultCenter] postNotificationName:appDelegateToggleFullscreenNotification object: self];
 }
 
 @end

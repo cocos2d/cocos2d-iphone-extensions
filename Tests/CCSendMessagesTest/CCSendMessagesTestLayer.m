@@ -93,13 +93,17 @@ enum nodeTags
 	CCSendMessages *action6 = [CCSendMessages actionWithTarget:[self getChildByTag: kLabelTag]];
 	[[action6 addMessage] runAction: actionForLabel];
 	
+	// CCSendMessage Action with target = nil.
+	CCSendMessages *badAction = [CCSendMessages actionWithTarget: nil];
+	[[badAction addMessage] setString:@"THIS WILL NOT WORK!"];
+	
 	// Prepare sequence on all this CCSendMessages actions with delays between them.
 	id actionSequenceForSelf = [CCSequence actions: action, [CCDelayTime actionWithDuration:0.3f], 
 								action2, [CCDelayTime actionWithDuration:0.5f], 
 								action3, [CCDelayTime actionWithDuration:0.5f], 
 								action4, [CCDelayTime actionWithDuration:0.5f], 
 								action5, [CCDelayTime actionWithDuration:0.5f],
-								action6, nil];
+								action6, badAction, nil];
 	
 	// Run action on self (CCSendMessagesTestLayer), that will send messages to CCLabel via CCSendMessages
 	[self runAction: actionSequenceForSelf ];

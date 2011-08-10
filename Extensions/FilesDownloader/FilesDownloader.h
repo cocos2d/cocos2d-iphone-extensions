@@ -47,6 +47,9 @@ typedef enum
 @end
 
 
+/** @class FilesDownloader Simple files downloader. Uses multiple SingleFileDownloader's
+ for size checking before & downloading.
+ */
 @interface FilesDownloader : NSObject <SingleFileDownloaderDelegate>
 {    
     NSArray *_filenames;
@@ -62,20 +65,58 @@ typedef enum
 	id <FilesDownloaderDelegate> _delegate;
 }
 
+/** Path from which to download file, without filename. I.e.
+ * @"http://foo.com/files/"
+ */
 @property (readwrite, copy) NSString *sourcePath;
+
+/** Delegate for download status callbacks. */
 @property (readwrite, retain) id <FilesDownloaderDelegate> delegate;
 
 #pragma mark Init
+
+/** Creates FilesDownloader with given source path & filenames.
+ *
+ * @param files Array of NSStrings of filenames. Each string is subPath that will 
+ * be added to aSourcePath to determine full URL for single file. I.e. @"foo/bar/file.txt"
+ * 
+ * @param aSourcePath - path to download from (shared part for all files) I.e. @"http://foo.com/files/"
+ *
+ */
 + (id) downloaderWithFiles: (NSArray *) files withSourcePath: (NSString *) aSourcePath;
+
+/** Inits FilesDownloader with given source path & filenames.
+ *
+ * @param files Array of NSStrings of filenames. Each string is subPath that will 
+ * be added to aSourcePath to determine full URL for single file. I.e. @"foo/bar/file.txt"
+ * 
+ * @param aSourcePath - path to download from (shared part for all files) I.e. @"http://foo.com/files/"
+ *
+ */
 - (id) initWithFiles: (NSArray *) files withSourcePath: (NSString *) aSourcePath;
 
 #pragma mark Start/Stop Downloading 
+
+/** Starts downloading. */
 - (void) start;
+
+/** Cancels downloading. */
 - (void) cancel; 
 
-#pragma mark Download Status 
+#pragma mark Download Info
+
+/** Returns destination path which aFilename should be downloaded to.
+ * Doesn't check does aFilename exist in _filenames array.
+ */
+- (NSString *) destinationPathForFileWithName: (NSString *) aFilename;
+
+/** Returns download progress completion in percents. */
 - (float) totalPercentsDone;
+
+/** Returns total bytes count downloaded. */
 - (int) totalContentDownloaded;
+
+/** Returns total size for all content in bytes. */
 - (int) totalContentLength;
 
 @end

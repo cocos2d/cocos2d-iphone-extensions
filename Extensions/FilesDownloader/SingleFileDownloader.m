@@ -5,6 +5,7 @@
  * https://github.com/cocos2d/cocos2d-iphone-extensions
  *
  * Copyright (c) 2010-2011 Stepan Generalov
+ * Copyright (c) 2011 Todd Lee
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -41,6 +42,7 @@
 + (NSString *) destinationDirectoryPath;
 + (NSString *) tmpSuffix;
 + (NSFileHandle *) newFileWithName: (NSString *) newFilename; 
++ (BOOL)checkTargetDirectory:(NSString *)targetPath;
 
 @end
 
@@ -63,44 +65,68 @@
 
 + (NSString *) tmpPathWithFilename: (NSString *) aFilename
 {
-    return [NSString stringWithFormat:@"%@/%@%@", [SingleFileDownloader destinationDirectoryPath], aFilename, [self tmpSuffix]];
+    return [NSString stringWithFormat:@"%@/%@%@", [self destinationDirectoryPath], aFilename, [self tmpSuffix]];
 }
 
 + (NSString *) destinationDirectoryPath
 {
-    NSString *cachesDirectoryPath =
-        [ NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES) objectAtIndex: 0];
-    
-    return cachesDirectoryPath;
+	NSString *path = [NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+	
+#ifdef __MAC_OS_X_VERSION_MAX_ALLOWED
+	NSString *appBundleID = [[NSBundle mainBundle] bundleIdentifier];
+	path = [path stringByAppendingPathComponent:appBundleID];
+#endif
+	
+	return path;
 }
 
-+ (NSFileHandle *) newFileWithName: (NSString *) newFilename
-{    
-    //creating caches directory if needed
-    NSString *cachesDirectoryPath = [SingleFileDownloader destinationDirectoryPath];
-    
++ (BOOL)checkTargetDirectory:(NSString *)targetPath
+{
     BOOL isDirectory = NO;
-    BOOL exists = [ [NSFileManager defaultManager] fileExistsAtPath:cachesDirectoryPath isDirectory:&isDirectory];
     
-    if ( exists && isDirectory )
+    NSString *targetDirectory = [targetPath stringByDeletingLastPathComponent];
+    NSArray *pathComponents = [targetDirectory pathComponents];
+    NSString *currentTargetPath = @"";
+    
+    for (int i = 0; i < [pathComponents count]; i++)
     {
-        MYLOG(@"SingleFileDownloader#newFileWithName: %@ exists",cachesDirectoryPath);
-    }
-    else
-    {
-        MYLOG(@"SingleFileDownloader#newFileWithName: %@ not exists! Creating...",cachesDirectoryPath );
-        if ( [ [NSFileManager defaultManager] createDirectoryAtPath:cachesDirectoryPath withIntermediateDirectories: YES attributes: nil error: NULL] ) 
+        currentTargetPath = [currentTargetPath stringByAppendingPathComponent:[pathComponents objectAtIndex:i]];
+        BOOL exists = [[NSFileManager defaultManager] fileExistsAtPath:currentTargetPath isDirectory:&isDirectory];
+
+        if (exists && isDirectory)
         {
-            MYLOG(@"SingleFileDownloader#newFileWithName: SUCCESSFULL creating caches directory!");
+            MYLOG(@"SingleFileDownloader#newFileWithName: %@ exists", currentTargetPath);
         }
         else
         {
-            MYLOG(@"SingleFileDownloader#newFileWithName: creating caches directory FAILED!");
-            return nil;
+            MYLOG(@"SingleFileDownloader#newFileWithName: %@ not exists! Creating...", currentTargetPath);
+            if ([[NSFileManager defaultManager] createDirectoryAtPath:currentTargetPath withIntermediateDirectories: YES attributes: nil error: NULL])
+            {
+                MYLOG(@"SingleFileDownloader#newFileWithName: SUCCESSFULL creating directory %@!", currentTargetPath);
+            }
+            else
+            {
+                MYLOG(@"SingleFileDownloader#newFileWithName: creating directory %@ FAILED!", currentTargetPath);
+                return FALSE;
+            }
         }
     }
     
-    NSString * myFilePath = [SingleFileDownloader tmpPathWithFilename: newFilename];
+    return TRUE;
+}
+
++ (NSFileHandle *) newFileWithName: (NSString *) newFilename
+{
+    //creating caches directory if needed
+    NSString *cachesDirectoryPath = [self destinationDirectoryPath];
+
+    // creating target directory if needed
+    if (![self checkTargetDirectory:[cachesDirectoryPath stringByAppendingPathComponent:newFilename]])
+    {
+        return nil;
+    }
+    
+    NSString * myFilePath = [self tmpPathWithFilename: newFilename];
     
     if ( [ [NSFileManager defaultManager] createFileAtPath:myFilePath contents:nil attributes:nil] )
     {
@@ -112,7 +138,7 @@
         return nil;
     }
     
-    return [NSFileHandle fileHandleForWritingAtPath: myFilePath];
+    return [[NSFileHandle fileHandleForWritingAtPath: myFilePath] retain];
 }
 
 
@@ -133,7 +159,7 @@
         _bytesTotal = 0;
         _delegate = aDelegate;
         
-        _fileHandle = [ [SingleFileDownloader newFileWithName: _filename] retain];
+        _fileHandle = [[self class] newFileWithName: _filename];
     }
     
     return self;
@@ -221,7 +247,7 @@
         [_fileHandle closeFile];
     
     // delete tmp file
-    NSString *tmpPath = [NSString stringWithFormat:@"%@/%@%@", [SingleFileDownloader destinationDirectoryPath], _filename, [SingleFileDownloader tmpSuffix]];
+    NSString *tmpPath = [NSString stringWithFormat:@"%@/%@%@", [[self class] destinationDirectoryPath], _filename, [[self class] tmpSuffix]];
     [[NSFileManager defaultManager] removeItemAtPath: tmpPath error: NULL];
     
     _connection = nil;
@@ -232,7 +258,7 @@
 
 - (NSString *) targetPath
 {
-    return [NSString stringWithFormat:@"%@/%@", [SingleFileDownloader destinationDirectoryPath], _filename];
+    return [NSString stringWithFormat:@"%@/%@", [[self class] destinationDirectoryPath], _filename];
 }
 
 - (NSUInteger) contentDownloaded
@@ -313,7 +339,7 @@
     [_fileHandle closeFile];
     
     //rename ready file
-    NSString *tmpPath = [ SingleFileDownloader tmpPathWithFilename: _filename ];
+    NSString *tmpPath = [ [self class] tmpPathWithFilename: _filename ];
     NSString *destPath = [self targetPath];
     if ( ! [ [NSFileManager defaultManager] moveItemAtPath: tmpPath toPath: destPath error: &error] )
     {

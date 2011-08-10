@@ -42,17 +42,29 @@
 	NSView *retainedView;
 	
 	//weak ref
-	id<CCVideoPlayerDelegate> delegate;
+	NSObject<CCVideoPlayerDelegate> *delegate;
+	
+	BOOL isPlaying;
+	BOOL noSkip;
 }
 //private property
 @property (readwrite, retain) NSViewController *videoViewController;
 @property (readwrite, retain) NSView *retainedView;
+@property (readonly) BOOL isPlaying;
 
 - (void)playMovieAtURL:(NSURL*)theURL;
 - (void)playMovieAtURL:(NSURL*)theURL attachedInView: (NSView *) aView;
+
+- (void)setNoSkip:(BOOL)value;
+
+- (void)userCancelPlaying;
 - (void)cancelPlaying;
 
 - (void)setDelegate: (id<CCVideoPlayerDelegate>) aDelegate;
+
+/** reattaches MyMovieView to the Cocos Window.
+ Call it after changing to/from fullscreen. */
+- (void) reAttachView;
 
 @end
 

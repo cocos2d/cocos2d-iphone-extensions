@@ -35,8 +35,43 @@
 
 SYNTHESIZE_EXTENSION_TEST(CCScrollLayerTestLayer)
 
+@interface CCMenu (UnselectSelectedItem)
+- (void) unselectSelectedItem;
+@end
+
+@implementation CCMenu (UnselectSelectedItem)
+
+- (void) unselectSelectedItem
+{
+	if(state_ == kCCMenuStateTrackingTouch)
+	{
+		[selectedItem_ unselected];		
+		state_ = kCCMenuStateWaiting;
+		selectedItem_ = nil;
+	}
+}
+
+@end
+
+#pragma mark -
+
+@interface CCScrollLayerTestLayer (ScrollLayerCreation)
+
+- (NSArray *) scrollLayerPages;
+- (CCScrollLayer *) scrollLayer;
+- (void) updateFastPageChangeMenu;
+
+@end
+
 
 @implementation CCScrollLayerTestLayer
+
+enum nodeTags
+{
+	kScrollLayer = 256,
+	kAdviceLabel = 257,
+	kFastPageChangeMenu = 258,
+};
 
 // on "init" you need to initialize your instance
 -(id) init
@@ -45,58 +80,203 @@ SYNTHESIZE_EXTENSION_TEST(CCScrollLayerTestLayer)
 	// Apple recommends to re-assign "self" with the "super" return value
 	if( (self=[super init])) {
 		
-		// get screen size
-		CGSize screenSize = [CCDirector sharedDirector].winSize;
+		// Add fast page change menu.
+		[self updateFastPageChangeMenu];
 		
-		/////////////////////////////////////////////////
-		// PAGE 1
-		////////////////////////////////////////////////
-		// create a blank layer for page 1
-		CCLayer *pageOne = [CCLayer node];
+		// Add advice about how to use the test
+		CCLabelTTF *adviceLabel = [CCLabelTTF labelWithString:@"Press numbers at the bottom, or swipe to change screen." fontName:@"Marker Felt" fontSize:20];
+		[self addChild: adviceLabel z: 0 tag: kAdviceLabel];
 		
-		// create a label for page 1
-		CCLabelTTF *label = [CCLabelTTF labelWithString:@"Page 1" fontName:@"Arial Rounded MT Bold" fontSize:44];
-		label.position =  ccp( screenSize.width /2 , screenSize.height/2 );
-		
-		// add label to page 1 layer
-		[pageOne addChild:label];
-		
-		/////////////////////////////////////////////////
-		// PAGE 2
-		////////////////////////////////////////////////
-		// create a blank layer for page 2
-		CCLayer *pageTwo = [CCLayer node];;
-		
-		// create a custom font menu for page 2
-		CCLabelTTF *labelTwo = [CCLabelTTF labelWithString:@"Press Me!" fontName:@"Marker Felt" fontSize:44];		
-		CCMenuItemLabel *titem = [CCMenuItemLabel itemWithLabel:labelTwo target:self selector:@selector(testCallback:)];
-		CCMenu *menu = [CCMenu menuWithItems: titem, nil];
-		menu.position = ccp(screenSize.width/2, screenSize.height/2);
-		
-		// add menu to page 2
-		[pageTwo addChild:menu];
-		
-		
-		/////////////////////////////////////////////////
-		// PAGE 3
-		////////////////////////////////////////////////
-		CCLayer *pageThree = [CCLayerColor layerWithColor:ccc4(255, 0, 0, 128)];
-		
-		////////////////////////////////////////////////
-		
-		// now create the scroller and pass-in the pages (set widthOffset to 0 for fullscreen pages)
-		CCScrollLayer *scroller = [[CCScrollLayer alloc] initWithLayers:[NSMutableArray arrayWithObjects: pageOne,pageTwo,pageThree,nil] widthOffset: 230];
-		
-		// finally add the scroller to your scene
-		[self addChild:scroller];
-	
+		// Do initial positioning & create scrollLayer.
+		[self updateForScreenReshape];
 	}
 	return self;
 }
 
-- (void) testCallback: (CCNode *) sender
+// Removes old "0 1 2" menu and creates new for actual pages count.
+- (void) updateFastPageChangeMenu
 {
-	NSLog(@"test callback called!");
+	// Remove fast page change menu if it exists.
+	[self removeChildByTag:kFastPageChangeMenu cleanup:YES];
+	
+	// Get total current pages count.
+	int pagesCount = [[self scrollLayerPages]count];
+	CCScrollLayer *scroller = (CCScrollLayer *)[self getChildByTag:kScrollLayer];
+	if (scroller)
+	{
+		pagesCount = [[scroller pages] count];
+	}
+	
+	// Create & add fast-page-change menu.
+	CCMenu *fastPageChangeMenu = [CCMenu menuWithItems: nil];
+	for (int i = 0; i < pagesCount ; ++i)
+	{
+		NSString *numberString = [NSString stringWithFormat:@"%d", i];
+		CCLabelTTF *labelWithNumber = [CCLabelTTF labelWithString:numberString fontName:@"Marker Felt" fontSize:22];		
+		CCMenuItemLabel *item = [CCMenuItemLabel itemWithLabel:labelWithNumber target:self selector:@selector(fastMenuItemPressed:)];
+		[fastPageChangeMenu addChild: item z: 0 tag: i];
+	}
+	[fastPageChangeMenu alignItemsHorizontally];
+	[self addChild: fastPageChangeMenu z: 0 tag: kFastPageChangeMenu];
+	
+	// Position fast page change menu without calling updateForScreenReshape.
+	CGSize screenSize = [CCDirector sharedDirector].winSize;
+	fastPageChangeMenu.position = ccp( 0.5f * screenSize.width, 15.0f);
+}
+
+// Positions children of CCScrollLayerTestLayer.
+// ScrollLayer is updated via deleting old and creating new one. 
+// (Cause it's created with pages - normal CCLayer, which contentSize = winSize)
+- (void) updateForScreenReshape
+{
+	CGSize screenSize = [CCDirector sharedDirector].winSize;
+	
+	CCNode *fastPageChangeMenu = [self getChildByTag:kFastPageChangeMenu];
+	CCNode *adviceLabel = [self getChildByTag:kAdviceLabel];
+	
+	fastPageChangeMenu.position = ccp( 0.5f * screenSize.width, 15.0f); 
+	adviceLabel.anchorPoint = ccp(0.5f, 1.0f);
+	adviceLabel.position = ccp(0.5f * screenSize.width, screenSize.height);
+	
+	// ReCreate Scroll Layer for each Screen Reshape (slow, but easy).
+	CCScrollLayer *scrollLayer = (CCScrollLayer *)[self getChildByTag:kScrollLayer];
+	if (scrollLayer)
+	{
+		[self removeChild:scrollLayer cleanup:YES];
+	}
+	
+	scrollLayer = [self scrollLayer];
+	[self addChild: scrollLayer z: 0 tag: kScrollLayer];
+	[scrollLayer selectPage: 1];
+	scrollLayer.delegate = self;
+}
+
+#pragma mark ScrollLayer Creation
+
+// Returns array of CCLayers - pages for ScrollLayer.
+- (NSArray *) scrollLayerPages
+{
+	CGSize screenSize = [CCDirector sharedDirector].winSize;
+	
+	// PAGE 1 - Simple Label in the center.
+	CCLayer *pageOne = [CCLayer node];
+	CCLabelTTF *label = [CCLabelTTF labelWithString:@"Page 1" fontName:@"Arial Rounded MT Bold" fontSize:44];
+	label.position =  ccp( screenSize.width /2 , screenSize.height/2 );
+	[pageOne addChild:label];
+	
+	// PAGE 2 - Custom Font Menu in the center.
+	CCLayer *pageTwo = [CCLayer node];
+	CCLabelTTF *labelTwo = [CCLabelTTF labelWithString:@"Add Page!" fontName:@"Marker Felt" fontSize:44];		
+	CCMenuItemLabel *titem = [CCMenuItemLabel itemWithLabel:labelTwo target:self selector:@selector(addPagePressed:)];
+	CCLabelTTF *labelTwo2 = [CCLabelTTF labelWithString:@"Remove Page!" fontName:@"Marker Felt" fontSize:44];		
+	CCMenuItemLabel *titem2 = [CCMenuItemLabel itemWithLabel:labelTwo2 target:self selector:@selector(removePagePressed:)];
+	CCMenu *menu = [CCMenu menuWithItems: titem, titem2,nil];
+	[menu alignItemsVertically];
+	menu.position = ccp(screenSize.width/2, screenSize.height/2);
+	[pageTwo addChild:menu];	
+	
+	return [NSArray arrayWithObjects: pageOne,pageTwo,nil];
+}
+
+// Creates new Scroll Layer with pages returned from scrollLayerPages.
+- (CCScrollLayer *) scrollLayer
+{
+	CGSize screenSize = [CCDirector sharedDirector].winSize;
+	
+	// Create the scroller and pass-in the pages (set widthOffset to 0 for fullscreen pages).
+	CCScrollLayer *scroller = [CCScrollLayer nodeWithLayers: [self scrollLayerPages] widthOffset: 0.48f * screenSize.width ];
+	scroller.pagesIndicatorPosition = ccp(screenSize.width * 0.5f, screenSize.height - 30.0f);
+	
+	return scroller;
+}
+
+#pragma mark Callbacks
+
+// "Add Page" Button Callback - adds new page & updates fast page change menu.
+- (void) addPagePressed: (CCNode *) sender
+{
+	NSLog(@"CCScrollLayerTestLayer#addPagePressed: called!");
+	
+	// Add page with label with number.
+	CGSize screenSize = [CCDirector sharedDirector].winSize;
+	
+	CCScrollLayer *scroller = (CCScrollLayer *)[self getChildByTag:kScrollLayer];
+	
+	int x = [scroller.pages count] + 1;
+	CCLayer *pageX = [CCLayer node];
+	CCLabelTTF *label = [CCLabelTTF labelWithString: [NSString stringWithFormat:@"Page %d", x] 
+										   fontName: @"Arial Rounded MT Bold" 
+										   fontSize:44];
+	label.position =  ccp( screenSize.width /2 , screenSize.height/2 );
+	[pageX addChild:label];
+	
+	[scroller addPage: pageX];
+	
+	//Update fast page change menu.
+	[self updateFastPageChangeMenu];
+}
+
+// "Remove page" menu callback - removes pages through running new action with delay.
+- (void) removePagePressed: (CCNode *) sender
+{
+	// Run action with page removal on cocos2d thread.
+	[self runAction:[CCSequence actions:
+					 [CCDelayTime actionWithDuration:0.2f],
+					 [CCCallFunc actionWithTarget:self selector:@selector(removePage)],
+					 nil]
+	 ];
+}
+
+- (void) removePage
+{
+	// Actually remove page.
+	CCScrollLayer *scroller = (CCScrollLayer *)[self getChildByTag:kScrollLayer];
+	[scroller removePageWithNumber: [scroller.pages count] - 1];
+	
+	// Update fast page change menu.
+	[self updateFastPageChangeMenu];
+}
+
+// "0 1 2" menu callback - used for fast page change.
+- (void) fastMenuItemPressed: (CCNode *) sender
+{
+	CCScrollLayer *scroller = (CCScrollLayer *)[self getChildByTag:kScrollLayer];
+	
+	[scroller moveToPage: sender.tag];
+}
+
+#pragma mark Scroll Layer Callbacks
+
+// Unselects all selected menu items in node - used in scroll layer callbacks to 
+// cancel menu items when scrolling started.
+-(void)unselectAllMenusInNode:(CCNode *)node
+{
+	for (CCNode *child in node.children) 
+	{
+		if ([child isKindOfClass:[CCMenu class]]) 
+		{
+			// Child here is CCMenu subclass - unselect.
+			[(CCMenu *)child unselectSelectedItem];
+		}
+		else
+		{
+			// Child here is some other CCNode subclass.
+			[self unselectAllMenusInNode: child];
+		}
+	}
+}
+
+- (void) scrollLayerScrollingStarted:(CCScrollLayer *) sender
+{
+	NSLog(@"CCScrollLayerTestLayer#scrollLayerScrollingStarted: %@", sender);
+	
+	// No buttons can be touched after scroll started.
+	[self unselectAllMenusInNode: self];
+}
+
+- (void) scrollLayer: (CCScrollLayer *) sender scrolledToPageNumber: (int) page
+{
+	NSLog(@"CCScrollLayerTestLayer#scrollLayer:scrolledToPageNumber: %@ %d", sender, page);
 }
 
 @end

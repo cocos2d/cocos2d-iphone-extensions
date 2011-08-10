@@ -32,6 +32,10 @@
 #import "CCVideoPlayer.h"
 #import "ExtensionTest.h"
 
+#ifdef __MAC_OS_X_VERSION_MAX_ALLOWED
+#import "cocos2d_extensions_macAppDelegate.h"
+#endif
+
 SYNTHESIZE_EXTENSION_TEST(CCVideoTestLayer)
 
 // HelloWorldLayer implementation
@@ -50,20 +54,45 @@ SYNTHESIZE_EXTENSION_TEST(CCVideoTestLayer)
 															 target: self 
 														   selector: @selector(testCCVideoPlayer)];
 		
-		CCMenu *menu = [CCMenu menuWithItems: labelItem, nil];
-		[menu alignItemsHorizontally];
+		// Add button 2 - playback without skip.
+		CCLabelTTF *labelNoSkip = [CCLabelTTF labelWithString:@"Play video(No skip)" fontName:@"Marker Felt" fontSize:64];
+		CCMenuItemLabel *labelItemNoSkip = [CCMenuItemLabel itemWithLabel:labelNoSkip 
+															 target: self 
+														   selector: @selector(testCCVideoPlayerNoSkip)];
+		
+		CCMenu *menu = [CCMenu menuWithItems: labelItem, labelItemNoSkip, nil];
+		[menu alignItemsVertically];
 		[self addChild: menu];
 	
 		
 		// Init Video Player
 		[CCVideoPlayer setDelegate: self];
+		
+		// Listen for toggleFullscreen notifications on Mac.
+#ifdef __MAC_OS_X_VERSION_MAX_ALLOWED
+		[[NSNotificationCenter defaultCenter] addObserverForName: appDelegateToggleFullscreenNotification 
+														  object: nil 
+														   queue: nil 
+													  usingBlock: ^(NSNotification *notification)
+		 {
+			 [CCVideoPlayer reAttachView];
+		 }
+		 ];
+#endif
 	}
 	return self;
 }
 
 - (void) testCCVideoPlayer
 {
-	[CCVideoPlayer playMovieWithFile: @"bait.mp4"];
+	[CCVideoPlayer setNoSkip: NO];
+	[CCVideoPlayer playMovieWithFile: @"bait.m4v"];
+}
+
+- (void) testCCVideoPlayerNoSkip
+{
+	[CCVideoPlayer setNoSkip: YES];
+	[CCVideoPlayer playMovieWithFile: @"bait.m4v"];
 }
 
 - (void) moviePlaybackFinished
@@ -87,11 +116,8 @@ SYNTHESIZE_EXTENSION_TEST(CCVideoTestLayer)
 // on "dealloc" you need to release all your retained objects
 - (void) dealloc
 {
-	// in case you have something to dealloc, do it in this method
-	// in this particular example nothing needs to be released.
-	// cocos2d will automatically release all the children (Label)
+	[[NSNotificationCenter defaultCenter] removeObserver:self];
 	
-	// don't forget to call "super dealloc"
 	[super dealloc];
 }
 @end

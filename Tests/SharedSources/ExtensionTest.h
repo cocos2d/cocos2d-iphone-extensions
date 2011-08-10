@@ -57,7 +57,7 @@
 																\
 +(BOOL) isRetinaDisplaySupported								\
 {																\
-	return YES;													\
+	return NO;													\
 }																\
 																\
 @end															\

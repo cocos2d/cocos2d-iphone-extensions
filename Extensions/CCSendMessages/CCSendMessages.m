@@ -40,6 +40,14 @@
     
     self = [super init];
     if ( self ) {
+		
+		if (!t)
+		{
+			CCLOGERROR(@"CCSendMessages#initWithTarget: target must not be nil!");
+			
+			[self release];
+			return nil;
+		}
         
         messagesTarget_ = [t retain];
         messages_ = [[CCStoredMessages alloc] init];
