@@ -44,7 +44,7 @@
  *		3) align left->right, right->left, bottom->top, top->bottom with autosetting self contentSize
  *		4) externalBoundsRect - if it is set then menu items will be scrollable inside these bounds
  *		5) priority property - must be set before onEnter to make it register with that priority
- * @todo add columns and rows alignment methods
+ * @todo [v0.2] add columns and rows alignment methods
 */
 @interface CCMenuAdvanced : CCMenu  
 {
