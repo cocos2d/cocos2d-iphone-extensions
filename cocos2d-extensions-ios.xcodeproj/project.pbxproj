@@ -13,14 +13,15 @@
 			buildPhases = (
 			);
 			dependencies = (
-				6DA580EE139E3C05004D8D0B /* PBXTargetDependency */,
-				6DA580F0139E3C05004D8D0B /* PBXTargetDependency */,
-				6DA580F2139E3C05004D8D0B /* PBXTargetDependency */,
-				6DA580F4139E3C05004D8D0B /* PBXTargetDependency */,
-				6DA580F6139E3C05004D8D0B /* PBXTargetDependency */,
-				6DA580F8139E3C05004D8D0B /* PBXTargetDependency */,
 				6DA580FA139E3C05004D8D0B /* PBXTargetDependency */,
+				6DA580F2139E3C05004D8D0B /* PBXTargetDependency */,
+				6DA580EE139E3C05004D8D0B /* PBXTargetDependency */,
+				6DA580F6139E3C05004D8D0B /* PBXTargetDependency */,
+				6DA580F4139E3C05004D8D0B /* PBXTargetDependency */,
 				6D7F520B13A2E29C0022601B /* PBXTargetDependency */,
+				6DA580F8139E3C05004D8D0B /* PBXTargetDependency */,
+				6DA580F0139E3C05004D8D0B /* PBXTargetDependency */,
+				3F77658713FA078E00346697 /* PBXTargetDependency */,
 			);
 			name = BuildAllTests;
 			productName = BuildAllTests;
@@ -28,6 +29,35 @@
 /* End PBXAggregateTarget section */
 
 /* Begin PBXBuildFile section */
+		3F77656113FA059A00346697 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 6DA5775F139C9837004D8D0B /* Default.png */; };
+		3F77656213FA059A00346697 /* fps_images.png in Resources */ = {isa = PBXBuildFile; fileRef = 6DA57764139C9837004D8D0B /* fps_images.png */; };
+		3F77656313FA059A00346697 /* Icon-72.png in Resources */ = {isa = PBXBuildFile; fileRef = 6DA57765139C9837004D8D0B /* Icon-72.png */; };
+		3F77656413FA059A00346697 /* Icon-Small-50.png in Resources */ = {isa = PBXBuildFile; fileRef = 6DA57766139C9837004D8D0B /* Icon-Small-50.png */; };
+		3F77656513FA059A00346697 /* Icon-Small.png in Resources */ = {isa = PBXBuildFile; fileRef = 6DA57767139C9837004D8D0B /* Icon-Small.png */; };
+		3F77656613FA059A00346697 /* Icon-Small@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6DA57768139C9837004D8D0B /* Icon-Small@2x.png */; };
+		3F77656713FA059A00346697 /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 6DA5776A139C9837004D8D0B /* Icon.png */; };
+		3F77656813FA059A00346697 /* Icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6DA5776B139C9837004D8D0B /* Icon@2x.png */; };
+		3F77656913FA059A00346697 /* iTunesArtwork in Resources */ = {isa = PBXBuildFile; fileRef = 6DA5776E139C9837004D8D0B /* iTunesArtwork */; };
+		3F77656B13FA059A00346697 /* cocos2d_extensions_iosAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DA57772139C9837004D8D0B /* cocos2d_extensions_iosAppDelegate.m */; };
+		3F77656C13FA059A00346697 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DA57779139C9837004D8D0B /* main.m */; };
+		3F77656D13FA059A00346697 /* RootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DA5777B139C9837004D8D0B /* RootViewController.m */; };
+		3F77656F13FA059A00346697 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DCCBF1B60F6022AE0040855A /* CoreGraphics.framework */; };
+		3F77657013FA059A00346697 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DCCBF1B80F6022AE0040855A /* Foundation.framework */; };
+		3F77657113FA059A00346697 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DCCBF1BA0F6022AE0040855A /* OpenGLES.framework */; };
+		3F77657213FA059A00346697 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DCCBF1BC0F6022AE0040855A /* QuartzCore.framework */; };
+		3F77657313FA059A00346697 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DCCBF1BE0F6022AE0040855A /* UIKit.framework */; };
+		3F77657413FA059A00346697 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DC6640020F83B3EA000B3E49 /* AudioToolbox.framework */; };
+		3F77657513FA059A00346697 /* OpenAL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DC6640040F83B3EA000B3E49 /* OpenAL.framework */; };
+		3F77657613FA059A00346697 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 506EDB87102F4C4000A389B3 /* libz.dylib */; };
+		3F77657713FA059A00346697 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 506EDBA4102F4C9F00A389B3 /* AVFoundation.framework */; };
+		3F77657813FA059A00346697 /* libcocos2d libraries.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 506EE05E10304ED200A389B3 /* libcocos2d libraries.a */; };
+		3F77657F13FA074900346697 /* cencode.c in Sources */ = {isa = PBXBuildFile; fileRef = 3F77654F13FA058200346697 /* cencode.c */; };
+		3F77658013FA075300346697 /* LFCGzipUtility.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F77655213FA058200346697 /* LFCGzipUtility.m */; };
+		3F77658113FA075A00346697 /* TMXGenerator.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F77655413FA058200346697 /* TMXGenerator.m */; };
+		3F77658213FA076500346697 /* CCPanZoomController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F77655713FA059200346697 /* CCPanZoomController.m */; };
+		3F77658313FA076900346697 /* TMXGenerator_WorldMap.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F77655C13FA059200346697 /* TMXGenerator_WorldMap.m */; };
+		3F77658413FA076E00346697 /* testMap.tmx in Resources */ = {isa = PBXBuildFile; fileRef = 3F77655913FA059200346697 /* testMap.tmx */; };
+		3F77658513FA077300346697 /* testTiles.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F77655A13FA059200346697 /* testTiles.png */; };
 		505574581045D68500A31725 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 506EDBA4102F4C9F00A389B3 /* AVFoundation.framework */; };
 		505574591045D68500A31725 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DC6640020F83B3EA000B3E49 /* AudioToolbox.framework */; };
 		5055745A1045D68500A31725 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DCCBF1B60F6022AE0040855A /* CoreGraphics.framework */; };
@@ -639,6 +669,20 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		3F77655F13FA059A00346697 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 29B97313FDCFA39411CA2CEA /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 506EE05D10304ED200A389B3;
+			remoteInfo = "cocos2d libraries";
+		};
+		3F77658613FA078E00346697 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 29B97313FDCFA39411CA2CEA /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 3F77655D13FA059A00346697;
+			remoteInfo = "TMXGenerator Test";
+		};
 		506EE1A71030507B00A389B3 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 29B97313FDCFA39411CA2CEA /* Project object */;
@@ -761,7 +805,20 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		1D6058910D05DD3D006BFB54 /* ExtensionTestTemplate.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ExtensionTestTemplate.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		1D6058910D05DD3D006BFB54 /* Extension Test Template.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Extension Test Template.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		3F77654F13FA058200346697 /* cencode.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = cencode.c; sourceTree = "<group>"; };
+		3F77655013FA058200346697 /* cencode.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = cencode.h; sourceTree = "<group>"; };
+		3F77655113FA058200346697 /* LFCGzipUtility.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LFCGzipUtility.h; sourceTree = "<group>"; };
+		3F77655213FA058200346697 /* LFCGzipUtility.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LFCGzipUtility.m; sourceTree = "<group>"; };
+		3F77655313FA058200346697 /* TMXGenerator.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TMXGenerator.h; sourceTree = "<group>"; };
+		3F77655413FA058200346697 /* TMXGenerator.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TMXGenerator.m; sourceTree = "<group>"; };
+		3F77655613FA059200346697 /* CCPanZoomController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CCPanZoomController.h; sourceTree = "<group>"; };
+		3F77655713FA059200346697 /* CCPanZoomController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CCPanZoomController.m; sourceTree = "<group>"; };
+		3F77655913FA059200346697 /* testMap.tmx */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = testMap.tmx; sourceTree = "<group>"; };
+		3F77655A13FA059200346697 /* testTiles.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = testTiles.png; sourceTree = "<group>"; };
+		3F77655B13FA059200346697 /* TMXGenerator_WorldMap.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TMXGenerator_WorldMap.h; sourceTree = "<group>"; };
+		3F77655C13FA059200346697 /* TMXGenerator_WorldMap.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TMXGenerator_WorldMap.m; sourceTree = "<group>"; };
+		3F77657C13FA059A00346697 /* TMXGenerator Test.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "TMXGenerator Test.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		504DFC6810AF1739006D82FE /* LICENSE.cocos2d */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE.cocos2d; sourceTree = "<group>"; };
 		506EDB87102F4C4000A389B3 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
 		506EDBA4102F4C9F00A389B3 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
@@ -1181,7 +1238,7 @@
 		6DA58081139E39C4004D8D0B /* CCScrollLayerTest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CCScrollLayerTest.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6DA580A3139E39C7004D8D0B /* CCMenuItemSpriteIndependentTest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CCMenuItemSpriteIndependentTest.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6DA580C5139E39CB004D8D0B /* CCSliderTest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CCSliderTest.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		6DA580E7139E39D0004D8D0B /* FilesDownloaderTest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FilesDownloaderTest.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		6DA580E7139E39D0004D8D0B /* TMXGeneratorTest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TMXGeneratorTest.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6DA58360139E510B004D8D0B /* CCVideoPlayerTest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CCVideoPlayerTest.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6DA58366139E513A004D8D0B /* CCBigImageTestLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCBigImageTestLayer.h; sourceTree = "<group>"; };
 		6DA58367139E513A004D8D0B /* CCBigImageTestLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCBigImageTestLayer.m; sourceTree = "<group>"; };
@@ -1262,6 +1319,23 @@
 				506EDB88102F4C4000A389B3 /* libz.dylib in Frameworks */,
 				506EDBA5102F4C9F00A389B3 /* AVFoundation.framework in Frameworks */,
 				506EE1A91030508200A389B3 /* libcocos2d libraries.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		3F77656E13FA059A00346697 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3F77656F13FA059A00346697 /* CoreGraphics.framework in Frameworks */,
+				3F77657013FA059A00346697 /* Foundation.framework in Frameworks */,
+				3F77657113FA059A00346697 /* OpenGLES.framework in Frameworks */,
+				3F77657213FA059A00346697 /* QuartzCore.framework in Frameworks */,
+				3F77657313FA059A00346697 /* UIKit.framework in Frameworks */,
+				3F77657413FA059A00346697 /* AudioToolbox.framework in Frameworks */,
+				3F77657513FA059A00346697 /* OpenAL.framework in Frameworks */,
+				3F77657613FA059A00346697 /* libz.dylib in Frameworks */,
+				3F77657713FA059A00346697 /* AVFoundation.framework in Frameworks */,
+				3F77657813FA059A00346697 /* libcocos2d libraries.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1422,16 +1496,17 @@
 		19C28FACFE9D520D11CA2CBB /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				1D6058910D05DD3D006BFB54 /* ExtensionTestTemplate.app */,
+				1D6058910D05DD3D006BFB54 /* Extension Test Template.app */,
 				506EE05E10304ED200A389B3 /* libcocos2d libraries.a */,
 				6DA57DD0139CBD74004D8D0B /* CCMenuAdvancedTest.app */,
 				6DA5805F139E39BF004D8D0B /* CCBigImageTest.app */,
 				6DA58081139E39C4004D8D0B /* CCScrollLayerTest.app */,
 				6DA580A3139E39C7004D8D0B /* CCMenuItemSpriteIndependentTest.app */,
 				6DA580C5139E39CB004D8D0B /* CCSliderTest.app */,
-				6DA580E7139E39D0004D8D0B /* FilesDownloaderTest.app */,
+				6DA580E7139E39D0004D8D0B /* TMXGeneratorTest.app */,
 				6DA58360139E510B004D8D0B /* CCVideoPlayerTest.app */,
 				6DA5863013A022E8004D8D0B /* CCSendMessagesTest.app */,
+				3F77657C13FA059A00346697 /* TMXGenerator Test.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -1460,6 +1535,40 @@
 				6DA57646139C980E004D8D0B /* Cocos2D Template Frameworks */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		3F77654E13FA058200346697 /* TMXGenerator */ = {
+			isa = PBXGroup;
+			children = (
+				3F77654F13FA058200346697 /* cencode.c */,
+				3F77655013FA058200346697 /* cencode.h */,
+				3F77655113FA058200346697 /* LFCGzipUtility.h */,
+				3F77655213FA058200346697 /* LFCGzipUtility.m */,
+				3F77655313FA058200346697 /* TMXGenerator.h */,
+				3F77655413FA058200346697 /* TMXGenerator.m */,
+			);
+			path = TMXGenerator;
+			sourceTree = "<group>";
+		};
+		3F77655513FA059200346697 /* TMXGeneratorTest */ = {
+			isa = PBXGroup;
+			children = (
+				3F77655613FA059200346697 /* CCPanZoomController.h */,
+				3F77655713FA059200346697 /* CCPanZoomController.m */,
+				3F77655813FA059200346697 /* Resources */,
+				3F77655B13FA059200346697 /* TMXGenerator_WorldMap.h */,
+				3F77655C13FA059200346697 /* TMXGenerator_WorldMap.m */,
+			);
+			path = TMXGeneratorTest;
+			sourceTree = "<group>";
+		};
+		3F77655813FA059200346697 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				3F77655913FA059200346697 /* testMap.tmx */,
+				3F77655A13FA059200346697 /* testTiles.png */,
+			);
+			path = Resources;
 			sourceTree = "<group>";
 		};
 		6D7F522413A2E4CC0022601B /* tiles */ = {
@@ -1659,6 +1768,7 @@
 				6DA57DA6139CBD66004D8D0B /* CCMenuAdvancedTest */,
 				6DA5775E139C9837004D8D0B /* SharedResources */,
 				6DA5776F139C9837004D8D0B /* SharedSources */,
+				3F77655513FA059200346697 /* TMXGeneratorTest */,
 			);
 			path = Tests;
 			sourceTree = "<group>";
@@ -1937,6 +2047,7 @@
 				6DA57F9A139D6361004D8D0B /* CCVideoPlayer */,
 				6DA57D99139CBD3C004D8D0B /* CCMenuAdvanced */,
 				6DA57D9C139CBD3C004D8D0B /* CCMenuItemSpriteIndependent */,
+				3F77654E13FA058200346697 /* TMXGenerator */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -2330,7 +2441,25 @@
 			);
 			name = "Extension Test Template";
 			productName = "cocos2d-extensions-ios";
-			productReference = 1D6058910D05DD3D006BFB54 /* ExtensionTestTemplate.app */;
+			productReference = 1D6058910D05DD3D006BFB54 /* Extension Test Template.app */;
+			productType = "com.apple.product-type.application";
+		};
+		3F77655D13FA059A00346697 /* TMXGenerator Test */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 3F77657913FA059A00346697 /* Build configuration list for PBXNativeTarget "TMXGenerator Test" */;
+			buildPhases = (
+				3F77656013FA059A00346697 /* Resources */,
+				3F77656A13FA059A00346697 /* Sources */,
+				3F77656E13FA059A00346697 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				3F77655E13FA059A00346697 /* PBXTargetDependency */,
+			);
+			name = "TMXGenerator Test";
+			productName = "cocos2d-extensions-ios";
+			productReference = 3F77657C13FA059A00346697 /* TMXGenerator Test.app */;
 			productType = "com.apple.product-type.application";
 		};
 		506EE05D10304ED200A389B3 /* cocos2d libraries */ = {
@@ -2473,7 +2602,7 @@
 			);
 			name = FilesDownloaderTest;
 			productName = "cocos2d-extensions-ios";
-			productReference = 6DA580E7139E39D0004D8D0B /* FilesDownloaderTest.app */;
+			productReference = 6DA580E7139E39D0004D8D0B /* TMXGeneratorTest.app */;
 			productType = "com.apple.product-type.application";
 		};
 		6DA5861113A022E8004D8D0B /* CCSendMessagesTest */ = {
@@ -2524,6 +2653,7 @@
 				6DA580C8139E39D0004D8D0B /* FilesDownloaderTest */,
 				6DA5861113A022E8004D8D0B /* CCSendMessagesTest */,
 				1D6058900D05DD3D006BFB54 /* Extension Test Template */,
+				3F77655D13FA059A00346697 /* TMXGenerator Test */,
 			);
 		};
 /* End PBXProject section */
@@ -2542,6 +2672,24 @@
 				6DA57785139C9837004D8D0B /* Icon.png in Resources */,
 				6DA57786139C9837004D8D0B /* Icon@2x.png in Resources */,
 				6DA57789139C9837004D8D0B /* iTunesArtwork in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		3F77656013FA059A00346697 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3F77656113FA059A00346697 /* Default.png in Resources */,
+				3F77656213FA059A00346697 /* fps_images.png in Resources */,
+				3F77656313FA059A00346697 /* Icon-72.png in Resources */,
+				3F77656413FA059A00346697 /* Icon-Small-50.png in Resources */,
+				3F77656513FA059A00346697 /* Icon-Small.png in Resources */,
+				3F77656613FA059A00346697 /* Icon-Small@2x.png in Resources */,
+				3F77656713FA059A00346697 /* Icon.png in Resources */,
+				3F77656813FA059A00346697 /* Icon@2x.png in Resources */,
+				3F77656913FA059A00346697 /* iTunesArtwork in Resources */,
+				3F77658413FA076E00346697 /* testMap.tmx in Resources */,
+				3F77658513FA077300346697 /* testTiles.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2890,6 +3038,21 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		3F77656A13FA059A00346697 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3F77656B13FA059A00346697 /* cocos2d_extensions_iosAppDelegate.m in Sources */,
+				3F77656C13FA059A00346697 /* main.m in Sources */,
+				3F77656D13FA059A00346697 /* RootViewController.m in Sources */,
+				3F77657F13FA074900346697 /* cencode.c in Sources */,
+				3F77658013FA075300346697 /* LFCGzipUtility.m in Sources */,
+				3F77658113FA075A00346697 /* TMXGenerator.m in Sources */,
+				3F77658213FA076500346697 /* CCPanZoomController.m in Sources */,
+				3F77658313FA076900346697 /* TMXGenerator_WorldMap.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		506EE05B10304ED200A389B3 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -3084,6 +3247,16 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		3F77655E13FA059A00346697 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 506EE05D10304ED200A389B3 /* cocos2d libraries */;
+			targetProxy = 3F77655F13FA059A00346697 /* PBXContainerItemProxy */;
+		};
+		3F77658713FA078E00346697 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 3F77655D13FA059A00346697 /* TMXGenerator Test */;
+			targetProxy = 3F77658613FA078E00346697 /* PBXContainerItemProxy */;
+		};
 		506EE1A81030507B00A389B3 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 506EE05D10304ED200A389B3 /* cocos2d libraries */;
@@ -3210,7 +3383,7 @@
 					"-ObjC",
 				);
 				PREBINDING = NO;
-				PRODUCT_NAME = ExtensionTestTemplate;
+				PRODUCT_NAME = "Extension Test Template";
 				WARNING_CFLAGS = "-Wall";
 			};
 			name = Debug;
@@ -3232,7 +3405,53 @@
 					"-ObjC",
 				);
 				PREBINDING = NO;
-				PRODUCT_NAME = ExtensionTestTemplate;
+				PRODUCT_NAME = "Extension Test Template";
+				WARNING_CFLAGS = "-Wall";
+			};
+			name = Release;
+		};
+		3F77657A13FA059A00346697 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_FIX_AND_CONTINUE = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = Tests/SharedSources/cocos2d_extensions_ios_Prefix.pch;
+				GCC_TREAT_WARNINGS_AS_ERRORS = NO;
+				INFOPLIST_FILE = Tests/SharedResources/Info.plist;
+				ONLY_ACTIVE_ARCH = YES;
+				OTHER_LDFLAGS = (
+					"-all_load",
+					"-ObjC",
+				);
+				PREBINDING = NO;
+				PRODUCT_NAME = "TMXGenerator Test";
+				WARNING_CFLAGS = "-Wall";
+			};
+			name = Debug;
+		};
+		3F77657B13FA059A00346697 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_ENABLE_FIX_AND_CONTINUE = NO;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = Tests/SharedSources/cocos2d_extensions_ios_Prefix.pch;
+				GCC_TREAT_WARNINGS_AS_ERRORS = NO;
+				INFOPLIST_FILE = Tests/SharedResources/Info.plist;
+				ONLY_ACTIVE_ARCH = NO;
+				OTHER_LDFLAGS = (
+					"-all_load",
+					"-ObjC",
+				);
+				PREBINDING = NO;
+				PRODUCT_NAME = "TMXGenerator Test";
 				WARNING_CFLAGS = "-Wall";
 			};
 			name = Release;
@@ -3559,7 +3778,7 @@
 					"-ObjC",
 				);
 				PREBINDING = NO;
-				PRODUCT_NAME = FilesDownloaderTest;
+				PRODUCT_NAME = TMXGeneratorTest;
 				WARNING_CFLAGS = "-Wall";
 			};
 			name = Debug;
@@ -3581,7 +3800,7 @@
 					"-ObjC",
 				);
 				PREBINDING = NO;
-				PRODUCT_NAME = FilesDownloaderTest;
+				PRODUCT_NAME = TMXGeneratorTest;
 				WARNING_CFLAGS = "-Wall";
 			};
 			name = Release;
@@ -3710,6 +3929,15 @@
 			buildConfigurations = (
 				1D6058940D05DD3E006BFB54 /* Debug */,
 				1D6058950D05DD3E006BFB54 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		3F77657913FA059A00346697 /* Build configuration list for PBXNativeTarget "TMXGenerator Test" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				3F77657A13FA059A00346697 /* Debug */,
+				3F77657B13FA059A00346697 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
