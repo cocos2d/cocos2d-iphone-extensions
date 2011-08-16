@@ -191,7 +191,11 @@ static  CCVideoPlayerImpl *_impl = nil;
 
 + (void)userCancelPlaying
 {
-	[_impl userCancelPlaying];
+	// If the current thread is the main thread,than
+	// this message will be processed immediately.
+	[ _impl performSelectorOnMainThread: @selector(userCancelPlaying) 
+							 withObject: nil
+						  waitUntilDone: [NSThread isMainThread]  ];
 }
 
 + (void) cancelPlaying
