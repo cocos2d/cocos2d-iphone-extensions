@@ -71,7 +71,7 @@ enum
 		
 		if (![gen generateAndSaveTMXMap:&error])
 		{
-			NSLog(@"Error generating TMX Map!  Error: %@, %d", [error localizedDescription], [error code]);
+			NSLog(@"Error generating TMX Map!  Error: %@, %d", [error localizedDescription], (int)[error code]);
 			map = [[[CCTMXTiledMap alloc] initWithTMXFile:@"testMap.tmx"] autorelease];
 		}
 		else

@@ -21,6 +21,7 @@
 				6D7BFFBF13C9D7A100FBAC1A /* PBXTargetDependency */,
 				6D7BFFC113C9D7A100FBAC1A /* PBXTargetDependency */,
 				6D7BFFC313C9D7A100FBAC1A /* PBXTargetDependency */,
+				6DCEA8C013FD576700285740 /* PBXTargetDependency */,
 			);
 			name = BuildAllTests;
 			productName = BuildAllTests;
@@ -537,6 +538,26 @@
 		6DA588B613A05EA1004D8D0B /* iTraceurProgressBar.png in Resources */ = {isa = PBXBuildFile; fileRef = 6DA588B013A05EA1004D8D0B /* iTraceurProgressBar.png */; };
 		6DA588B713A05EA1004D8D0B /* iTraceurProgressBarBackground.png in Resources */ = {isa = PBXBuildFile; fileRef = 6DA588B113A05EA1004D8D0B /* iTraceurProgressBarBackground.png */; };
 		6DA588B813A05EA1004D8D0B /* iTraceurProgressBarCover.png in Resources */ = {isa = PBXBuildFile; fileRef = 6DA588B213A05EA1004D8D0B /* iTraceurProgressBarCover.png */; };
+		6DCEA89A13FD567D00285740 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6DA575D0139C96AE004D8D0B /* InfoPlist.strings */; };
+		6DCEA89B13FD567D00285740 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6DA575D2139C96AE004D8D0B /* MainMenu.xib */; };
+		6DCEA89C13FD567D00285740 /* fps_images.png in Resources */ = {isa = PBXBuildFile; fileRef = 6DA575D4139C96AE004D8D0B /* fps_images.png */; };
+		6DCEA89D13FD567D00285740 /* icon.icns in Resources */ = {isa = PBXBuildFile; fileRef = 6DA575D9139C96AE004D8D0B /* icon.icns */; };
+		6DCEA89F13FD567D00285740 /* cocos2d_extensions_macAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DA575E5139C96AE004D8D0B /* cocos2d_extensions_macAppDelegate.m */; };
+		6DCEA8A013FD567D00285740 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DA575E9139C96AE004D8D0B /* main.m */; };
+		6DCEA8A213FD567D00285740 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */; };
+		6DCEA8A313FD567D00285740 /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E036A79C121B5C720037C5C6 /* OpenGL.framework */; };
+		6DCEA8A413FD567D00285740 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E036A79E121B5C870037C5C6 /* QuartzCore.framework */; };
+		6DCEA8A513FD567D00285740 /* libcocos2d.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E01E663D121CA00A001A484F /* libcocos2d.a */; };
+		6DCEA8A613FD567D00285740 /* ApplicationServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E01E6A3D121EDCD3001A484F /* ApplicationServices.framework */; };
+		6DCEA8A713FD567D00285740 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = E0F9256D1224207200EF2362 /* libz.dylib */; };
+		6DCEA8A813FD567D00285740 /* OpenAL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E08AA04A12C0EDC8000341BD /* OpenAL.framework */; };
+		6DCEA8A913FD567D00285740 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E08AA04C12C0EEC0000341BD /* AudioToolbox.framework */; };
+		6DCEA8B413FD570200285740 /* cencode.c in Sources */ = {isa = PBXBuildFile; fileRef = 6DCEA87A13FD55FB00285740 /* cencode.c */; };
+		6DCEA8B513FD570200285740 /* LFCGzipUtility.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DCEA87D13FD55FB00285740 /* LFCGzipUtility.m */; };
+		6DCEA8B613FD570200285740 /* TMXGenerator.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DCEA87F13FD55FB00285740 /* TMXGenerator.m */; };
+		6DCEA8B713FD570B00285740 /* testMap.tmx in Resources */ = {isa = PBXBuildFile; fileRef = 6DCEA88313FD561100285740 /* testMap.tmx */; };
+		6DCEA8B813FD570B00285740 /* testTiles.png in Resources */ = {isa = PBXBuildFile; fileRef = 6DCEA88413FD561100285740 /* testTiles.png */; };
+		6DCEA8B913FD570B00285740 /* TMXGeneratorTestLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DCEA88613FD561100285740 /* TMXGeneratorTestLayer.m */; };
 		E01E6A3E121EDCD3001A484F /* ApplicationServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E01E6A3D121EDCD3001A484F /* ApplicationServices.framework */; };
 		E01E6B36121EDCED001A484F /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E036A79E121B5C870037C5C6 /* QuartzCore.framework */; };
 		E01E6B49121EDCF4001A484F /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E036A79C121B5C720037C5C6 /* OpenGL.framework */; };
@@ -669,6 +690,27 @@
 			proxyType = 1;
 			remoteGlobalIDString = E01E663C121CA00A001A484F;
 			remoteInfo = cocos2d;
+		};
+		6DCEA89813FD567D00285740 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 29B97313FDCFA39411CA2CEA /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = E01E663C121CA00A001A484F;
+			remoteInfo = cocos2d;
+		};
+		6DCEA8B213FD569800285740 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 29B97313FDCFA39411CA2CEA /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 6DCEA89613FD567D00285740 /* Extension Test Template copy */;
+			remoteInfo = "Extension Test Template copy";
+		};
+		6DCEA8BF13FD576700285740 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 29B97313FDCFA39411CA2CEA /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 6DCEA89613FD567D00285740 /* TMXGeneratorTest */;
+			remoteInfo = TMXGeneratorTest;
 		};
 		E076E4F21225E97900DE0DA2 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -1143,6 +1185,17 @@
 		6DA588B013A05EA1004D8D0B /* iTraceurProgressBar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = iTraceurProgressBar.png; sourceTree = "<group>"; };
 		6DA588B113A05EA1004D8D0B /* iTraceurProgressBarBackground.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = iTraceurProgressBarBackground.png; sourceTree = "<group>"; };
 		6DA588B213A05EA1004D8D0B /* iTraceurProgressBarCover.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = iTraceurProgressBarCover.png; sourceTree = "<group>"; };
+		6DCEA87A13FD55FB00285740 /* cencode.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = cencode.c; sourceTree = "<group>"; };
+		6DCEA87B13FD55FB00285740 /* cencode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = cencode.h; sourceTree = "<group>"; };
+		6DCEA87C13FD55FB00285740 /* LFCGzipUtility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LFCGzipUtility.h; sourceTree = "<group>"; };
+		6DCEA87D13FD55FB00285740 /* LFCGzipUtility.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LFCGzipUtility.m; sourceTree = "<group>"; };
+		6DCEA87E13FD55FB00285740 /* TMXGenerator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TMXGenerator.h; sourceTree = "<group>"; };
+		6DCEA87F13FD55FB00285740 /* TMXGenerator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TMXGenerator.m; sourceTree = "<group>"; };
+		6DCEA88313FD561100285740 /* testMap.tmx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = testMap.tmx; sourceTree = "<group>"; };
+		6DCEA88413FD561100285740 /* testTiles.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = testTiles.png; sourceTree = "<group>"; };
+		6DCEA88513FD561100285740 /* TMXGeneratorTestLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TMXGeneratorTestLayer.h; sourceTree = "<group>"; };
+		6DCEA88613FD561100285740 /* TMXGeneratorTestLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TMXGeneratorTestLayer.m; sourceTree = "<group>"; };
+		6DCEA8AD13FD567D00285740 /* TMXGeneratorTest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TMXGeneratorTest.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E01E663D121CA00A001A484F /* libcocos2d.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libcocos2d.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		E01E6A3D121EDCD3001A484F /* ApplicationServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ApplicationServices.framework; path = System/Library/Frameworks/ApplicationServices.framework; sourceTree = SDKROOT; };
 		E036A79C121B5C720037C5C6 /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = System/Library/Frameworks/OpenGL.framework; sourceTree = SDKROOT; };
@@ -1276,6 +1329,21 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		6DCEA8A113FD567D00285740 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6DCEA8A213FD567D00285740 /* Cocoa.framework in Frameworks */,
+				6DCEA8A313FD567D00285740 /* OpenGL.framework in Frameworks */,
+				6DCEA8A413FD567D00285740 /* QuartzCore.framework in Frameworks */,
+				6DCEA8A513FD567D00285740 /* libcocos2d.a in Frameworks */,
+				6DCEA8A613FD567D00285740 /* ApplicationServices.framework in Frameworks */,
+				6DCEA8A713FD567D00285740 /* libz.dylib in Frameworks */,
+				6DCEA8A813FD567D00285740 /* OpenAL.framework in Frameworks */,
+				6DCEA8A913FD567D00285740 /* AudioToolbox.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		E01E663B121CA00A001A484F /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -1334,6 +1402,7 @@
 				6DA5865013A0232C004D8D0B /* CCSendMessagesTest.app */,
 				6D7BFF5F13C9D4F800FBAC1A /* CCScrollLayerTest.app */,
 				E076E5C01225E97900DE0DA2 /* ExtensionTestTemplate.app */,
+				6DCEA8AD13FD567D00285740 /* TMXGeneratorTest.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -1562,6 +1631,7 @@
 				6DA581BA139E474E004D8D0B /* CCBigImageTest */,
 				6DA57EC8139D55EF004D8D0B /* CCVideoPlayerTest */,
 				6DA57C8B139CAAD9004D8D0B /* CCMenuAdvancedTest */,
+				6DCEA88113FD561100285740 /* TMXGeneratorTest */,
 				6DA575CE139C96AE004D8D0B /* SharedResources */,
 				6DA575DF139C96AE004D8D0B /* SharedSources */,
 			);
@@ -1822,6 +1892,7 @@
 				6DA57EB8139D558E004D8D0B /* CCVideoPlayer */,
 				6DA57C7E139CAAB6004D8D0B /* CCMenuAdvanced */,
 				6DA57C81139CAAB6004D8D0B /* CCMenuItemSpriteIndependent */,
+				6DCEA87913FD55FB00285740 /* TMXGenerator */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -2072,6 +2143,38 @@
 			path = Resources;
 			sourceTree = "<group>";
 		};
+		6DCEA87913FD55FB00285740 /* TMXGenerator */ = {
+			isa = PBXGroup;
+			children = (
+				6DCEA87A13FD55FB00285740 /* cencode.c */,
+				6DCEA87B13FD55FB00285740 /* cencode.h */,
+				6DCEA87C13FD55FB00285740 /* LFCGzipUtility.h */,
+				6DCEA87D13FD55FB00285740 /* LFCGzipUtility.m */,
+				6DCEA87E13FD55FB00285740 /* TMXGenerator.h */,
+				6DCEA87F13FD55FB00285740 /* TMXGenerator.m */,
+			);
+			path = TMXGenerator;
+			sourceTree = "<group>";
+		};
+		6DCEA88113FD561100285740 /* TMXGeneratorTest */ = {
+			isa = PBXGroup;
+			children = (
+				6DCEA88213FD561100285740 /* Resources */,
+				6DCEA88513FD561100285740 /* TMXGeneratorTestLayer.h */,
+				6DCEA88613FD561100285740 /* TMXGeneratorTestLayer.m */,
+			);
+			path = TMXGeneratorTest;
+			sourceTree = "<group>";
+		};
+		6DCEA88213FD561100285740 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				6DCEA88313FD561100285740 /* testMap.tmx */,
+				6DCEA88413FD561100285740 /* testTiles.png */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -2185,6 +2288,7 @@
 			);
 			comments = "Use this target as a template for test targets.\nDon't build this target itself - it will give you compiler error: \n\tUndefined symbols:\n  \t\"_OBJC_CLASS_$_ExtensionTest\", referenced from:\n      \tobjc-class-ref-to-ExtensionTest in cocos2d_extensions_macAppDelegate.o\n\tld: symbol(s) not found\n\tclang: error: linker command failed with exit code 1 (use -v to see invocation)\n\nIf you get this error in your extension test target - you forgot to:\n#import \"ExtensionTest.h\"\n\nSYNTHESIZE_EXTENSION_TEST(DemoMenu)\n\n";
 			dependencies = (
+				6DCEA8B313FD569800285740 /* PBXTargetDependency */,
 				6D7BFF4913C9D4F800FBAC1A /* PBXTargetDependency */,
 			);
 			name = CCScrollLayerTest;
@@ -2332,6 +2436,26 @@
 			productReference = 6DA5865013A0232C004D8D0B /* CCSendMessagesTest.app */;
 			productType = "com.apple.product-type.application";
 		};
+		6DCEA89613FD567D00285740 /* TMXGeneratorTest */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 6DCEA8AA13FD567D00285740 /* Build configuration list for PBXNativeTarget "TMXGeneratorTest" */;
+			buildPhases = (
+				6DCEA89913FD567D00285740 /* Resources */,
+				6DCEA89E13FD567D00285740 /* Sources */,
+				6DCEA8A113FD567D00285740 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			comments = "Use this target as a template for test targets.\nDon't build this target itself - it will give you compiler error: \n\tUndefined symbols:\n  \t\"_OBJC_CLASS_$_ExtensionTest\", referenced from:\n      \tobjc-class-ref-to-ExtensionTest in cocos2d_extensions_macAppDelegate.o\n\tld: symbol(s) not found\n\tclang: error: linker command failed with exit code 1 (use -v to see invocation)\n\nIf you get this error in your extension test target - you forgot to:\n#import \"ExtensionTest.h\"\n\nSYNTHESIZE_EXTENSION_TEST(DemoMenu)\n\n";
+			dependencies = (
+				6DCEA89713FD567D00285740 /* PBXTargetDependency */,
+			);
+			name = TMXGeneratorTest;
+			productInstallPath = "$(HOME)/Applications";
+			productName = "cocos2d-mac";
+			productReference = 6DCEA8AD13FD567D00285740 /* TMXGeneratorTest.app */;
+			productType = "com.apple.product-type.application";
+		};
 		E01E663C121CA00A001A484F /* cocos2d */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = E01E6791121CA045001A484F /* Build configuration list for PBXNativeTarget "cocos2d" */;
@@ -2398,6 +2522,7 @@
 				6DA58168139E3D04004D8D0B /* FilesDownloaderTest */,
 				6DA5863913A0232C004D8D0B /* CCSendMessagesTest */,
 				6D7BFF4813C9D4F800FBAC1A /* CCScrollLayerTest */,
+				6DCEA89613FD567D00285740 /* TMXGeneratorTest */,
 				E076E4F01225E97900DE0DA2 /* Extension Test Template */,
 			);
 		};
@@ -2695,6 +2820,19 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		6DCEA89913FD567D00285740 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6DCEA89A13FD567D00285740 /* InfoPlist.strings in Resources */,
+				6DCEA89B13FD567D00285740 /* MainMenu.xib in Resources */,
+				6DCEA89C13FD567D00285740 /* fps_images.png in Resources */,
+				6DCEA89D13FD567D00285740 /* icon.icns in Resources */,
+				6DCEA8B713FD570B00285740 /* testMap.tmx in Resources */,
+				6DCEA8B813FD570B00285740 /* testTiles.png in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		E076E4F31225E97900DE0DA2 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -2801,6 +2939,19 @@
 				6DA5864313A0232C004D8D0B /* main.m in Sources */,
 				6DA5865813A0237E004D8D0B /* CCSendMessages.m in Sources */,
 				6DA5866513A0295D004D8D0B /* CCSendMessagesTestLayer.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6DCEA89E13FD567D00285740 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6DCEA89F13FD567D00285740 /* cocos2d_extensions_macAppDelegate.m in Sources */,
+				6DCEA8A013FD567D00285740 /* main.m in Sources */,
+				6DCEA8B413FD570200285740 /* cencode.c in Sources */,
+				6DCEA8B513FD570200285740 /* LFCGzipUtility.m in Sources */,
+				6DCEA8B613FD570200285740 /* TMXGenerator.m in Sources */,
+				6DCEA8B913FD570B00285740 /* TMXGeneratorTestLayer.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2983,6 +3134,21 @@
 			isa = PBXTargetDependency;
 			target = E01E663C121CA00A001A484F /* cocos2d */;
 			targetProxy = 6DA5863B13A0232C004D8D0B /* PBXContainerItemProxy */;
+		};
+		6DCEA89713FD567D00285740 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = E01E663C121CA00A001A484F /* cocos2d */;
+			targetProxy = 6DCEA89813FD567D00285740 /* PBXContainerItemProxy */;
+		};
+		6DCEA8B313FD569800285740 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 6DCEA89613FD567D00285740 /* TMXGeneratorTest */;
+			targetProxy = 6DCEA8B213FD569800285740 /* PBXContainerItemProxy */;
+		};
+		6DCEA8C013FD576700285740 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 6DCEA89613FD567D00285740 /* TMXGeneratorTest */;
+			targetProxy = 6DCEA8BF13FD576700285740 /* PBXContainerItemProxy */;
 		};
 		E076E4F11225E97900DE0DA2 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
@@ -3296,6 +3462,39 @@
 			};
 			name = Release;
 		};
+		6DCEA8AB13FD567D00285740 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = NO;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_FIX_AND_CONTINUE = YES;
+				GCC_MODEL_TUNING = G5;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = Tests/SharedSources/cocos2d_extensions_mac_Prefix.pch;
+				INFOPLIST_FILE = "Tests/SharedResources/Info-Mac.plist";
+				INSTALL_PATH = "$(HOME)/Applications";
+				LIBRARY_SEARCH_PATHS = "$(inherited)";
+				PRODUCT_NAME = TMXGeneratorTest;
+			};
+			name = Debug;
+		};
+		6DCEA8AC13FD567D00285740 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_MODEL_TUNING = G5;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = Tests/SharedSources/cocos2d_extensions_mac_Prefix.pch;
+				INFOPLIST_FILE = "Tests/SharedResources/Info-Mac.plist";
+				INSTALL_PATH = "$(HOME)/Applications";
+				LIBRARY_SEARCH_PATHS = "$(inherited)";
+				PRODUCT_NAME = TMXGeneratorTest;
+			};
+			name = Release;
+		};
 		C01FCF4F08A954540054247B /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -3474,6 +3673,15 @@
 			buildConfigurations = (
 				6DA5864E13A0232C004D8D0B /* Debug */,
 				6DA5864F13A0232C004D8D0B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		6DCEA8AA13FD567D00285740 /* Build configuration list for PBXNativeTarget "TMXGeneratorTest" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6DCEA8AB13FD567D00285740 /* Debug */,
+				6DCEA8AC13FD567D00285740 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

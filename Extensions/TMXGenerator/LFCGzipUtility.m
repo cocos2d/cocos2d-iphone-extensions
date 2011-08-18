@@ -162,7 +162,7 @@
 	// Free data structures that were dynamically created for the stream.
 	deflateEnd(&zlibStreamStruct);
 	[compressedData setLength: zlibStreamStruct.total_out];
-	NSLog(@"%s: Compressed file from %d KB to %d KB", __func__, [pUncompressedData length]/1024, [compressedData length]/1024);
+	NSLog(@"%s: Compressed file from %d KB to %d KB", __func__, (int)[pUncompressedData length]/1024, (int)[compressedData length]/1024);
 	
 	return compressedData;
 }

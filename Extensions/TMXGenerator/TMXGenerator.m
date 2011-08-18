@@ -27,6 +27,7 @@
 #import "TMXGenerator.h"
 #import "LFCGzipUtility.h"
 #import "cencode.h"
+#import "cocos2d.h"
 
 
 @interface TMXGenerator ()
@@ -133,15 +134,15 @@
 	}
 	
 	// figure out the highest GID possible and set our max GIDs used for the next possible texture map
-	UIImage* img = [UIImage imageNamed:[dict objectForKey:kTileSetImageAtlasFilename]];
+	CCTexture2D* img = [[CCTextureCache sharedTextureCache] addImage: [dict objectForKey:kTileSetImageAtlasFilename]];
 	if (img)
 	{
 		int width = [[dict objectForKey:kImageAtlasTileWidth] intValue];
 		int height = [[dict objectForKey:kImageAtlasTileHeight] intValue];
 		int spacing = [[dict objectForKey:kImageAtlasTileSpacing] intValue];
 		
-		int across = img.size.width / (width + spacing);
-		int down = img.size.height / (height + spacing);
+		int across = img.contentSize.width / (width + spacing);
+		int down = img.contentSize.height / (height + spacing);
 		highestGID += across * down + 10;
 
 		// add the dictionary to our tileset list.
