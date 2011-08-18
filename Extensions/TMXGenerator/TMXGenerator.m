@@ -476,7 +476,7 @@
  </properties>
  </object>
  */
-+ (NSDictionary*) makeGroupObjectWithName:(NSString*)name type:(NSString*)type x:(int)x y:(int)y width:(int)width height:(int)height properties:(NSDictionary*)properties
++ (NSDictionary*) makeObjectWithName:(NSString*)name type:(NSString*)type x:(int)x y:(int)y width:(int)width height:(int)height properties:(NSDictionary*)properties
 {
 	NSMutableDictionary* dict = [NSMutableDictionary dictionaryWithCapacity:10];
 	
@@ -499,7 +499,7 @@
 #pragma mark -
 
 
-- (BOOL) generateTMXMap:(NSError**)error;
+- (BOOL) generateAndSaveTMXMap:(NSError**)error;
 {
 	if (!delegate_)
 		return NO;
@@ -632,21 +632,21 @@
 		for (key in groups)
 		{
 			NSMutableArray* results = [NSMutableArray arrayWithCapacity:10];
-			NSArray* objects = [delegate_ objectInfoForName:key];
+			NSArray* objects = [delegate_ objectsGroupInfoForName:key];
 			for (NSDictionary* dict in objects)
 			{
 				if (!dict)
 				{
 					if (error)
-						*error = [[NSError alloc] initWithDomain:[NSString stringWithFormat:@"Unable to get object group from name %@ when calling delegate method objectInfoForName:", key] code:0 userInfo:nil];
+						*error = [[NSError alloc] initWithDomain:[NSString stringWithFormat:@"Unable to get object group from name %@ when calling delegate method objectsGroupInfoForName:", key] code:0 userInfo:nil];
 					return NO;
 				}
 				
 				// add the properties if they are defined
 				NSArray* properties = nil;
-				if ([delegate_ respondsToSelector:@selector(propertiesForObjectGroupNamed:objectName:)])
+				if ([delegate_ respondsToSelector:@selector(propertiesForObjectWithName:inGroupWithName:)])
 				{
-					properties = [delegate_ propertiesForObjectGroupNamed:key objectName:[dict objectForKey:kGroupObjectName]];
+					properties = [delegate_ propertiesForObjectWithName:[dict objectForKey:kGroupObjectName] inGroupWithName: key];
 					if (properties)
 					{
 						NSMutableDictionary* tempDict = [NSMutableDictionary dictionaryWithCapacity:[dict count] + 1];
@@ -729,7 +729,7 @@
 	[self addLayerNamed:@"Background" width:width height:height data:data visible:YES];
 	
 	// add a spawn point object and an object layer
-	NSDictionary* dict = [TMXGenerator makeGroupObjectWithName:@"SpawnPoint" type:nil x:50 y:50 width:0 height:0 properties:[NSDictionary dictionaryWithObject:@"This is a property string" forKey:@"somePropertyKey"]];
+	NSDictionary* dict = [TMXGenerator makeObjectWithName:@"SpawnPoint" type:nil x:50 y:50 width:0 height:0 properties:[NSDictionary dictionaryWithObject:@"This is a property string" forKey:@"somePropertyKey"]];
 	[self addObjectGroupNamed:@"Object Layer" width:width height:height objectList:[NSArray arrayWithObject:dict]];
 	
 	// convert to XML

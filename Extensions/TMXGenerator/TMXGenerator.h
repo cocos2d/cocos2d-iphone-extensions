@@ -96,9 +96,8 @@
 
 /** Returns object group information based on the name passed.  Keys listed in 
  * "Objects Group Setup Info Keys" section above.
- * @todo Refactor to objectsGroupInfoForName: 
  */
-- (NSArray*) objectInfoForName:(NSString*)name;								
+- (NSArray*) objectsGroupInfoForName:(NSString*)name;								
 
 /** Returns all layer names as an array of NSStrings.
  * Order of array items returned here determine the heirarchy.
@@ -132,8 +131,8 @@
 
 /** Returns the optional properties for a given object in a given group. Keys are listed in 
  * "Single Object Setup Info Keys" section above.
- * @todo  Refactor to propertiesForObjectWithName:inGroupWithName: */
-- (NSArray*) propertiesForObjectGroupNamed:(NSString*)name objectName:(NSString*)objName; 
+ */
+- (NSArray*) propertiesForObjectWithName: (NSString *) name inGroupWithName: (NSString *) groupName;
 
 /** Returns a rotation value (no rotation if this method doesn't exist) 
  * for the specified tile name and tile. */
@@ -188,9 +187,8 @@
 
 /** Prepare single object with given name, type, position, size & properties dictionary.
  * (See TMXGeneratorTestLayer for how-to.
- * @todo refactor to makeObjectWithName:type:x:y:width:height:properties:
  */
-+ (NSDictionary*) makeGroupObjectWithName:(NSString*)name type:(NSString*)type x:(int)x y:(int)y width:(int)width height:(int)height properties:(NSDictionary*)properties;
++ (NSDictionary*) makeObjectWithName:(NSString*)name type:(NSString*)type x:(int)x y:(int)y width:(int)width height:(int)height properties:(NSDictionary*)properties;
 
 
 @end

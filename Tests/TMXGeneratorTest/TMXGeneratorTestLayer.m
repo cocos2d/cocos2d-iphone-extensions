@@ -69,7 +69,7 @@ enum
 		TMXGenerator* gen = [[TMXGenerator alloc] init];
 		gen.delegate = self;
 		
-		if (![gen generateTMXMap:&error])
+		if (![gen generateAndSaveTMXMap:&error])
 		{
 			NSLog(@"Error generating TMX Map!  Error: %@, %d", [error localizedDescription], [error code]);
 			map = [[[CCTMXTiledMap alloc] initWithTMXFile:@"testMap.tmx"] autorelease];
@@ -199,7 +199,7 @@ enum
 }
 
 
-- (NSArray*) objectInfoForName:(NSString*)name
+- (NSArray*) objectsGroupInfoForName:(NSString*)name
 {
 	NSMutableArray* objects = [NSMutableArray arrayWithCapacity:10];
 	NSDictionary* dict = nil;
@@ -211,7 +211,7 @@ enum
 		int y = (kNumPixelsPerTileSquare * (kNumTilesPerChunk-3)) - (kNumPixelsPerTileSquare / 2);
 		
 		// the properties are gathered below, not passed here.
-		dict = [TMXGenerator makeGroupObjectWithName:kObjectSpawnPointKey type:nil x:x y:y width:kNumPixelsPerTileSquare*2 height:kNumPixelsPerTileSquare*2 properties:nil];
+		dict = [TMXGenerator makeObjectWithName:kObjectSpawnPointKey type:nil x:x y:y width:kNumPixelsPerTileSquare*2 height:kNumPixelsPerTileSquare*2 properties:nil];
 		if (dict)
 			[objects addObject:dict];
 		
@@ -277,7 +277,7 @@ enum
 }
 
 
-- (NSArray*) propertiesForObjectGroupNamed:(NSString*)groupName objectName:(NSString*)objName
+- (NSArray*) propertiesForObjectWithName:(NSString *) name inGroupWithName: (NSString *) groupName
 {
 	// no object properties currently for any objects.
 	return nil;
