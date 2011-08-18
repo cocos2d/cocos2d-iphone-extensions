@@ -21,6 +21,11 @@ SYNTHESIZE_EXTENSION_TEST(TMXGenerator_WorldMap)
 
 @implementation TMXGenerator_WorldMap
 
+enum
+{
+    kMap,
+} nodeTags;
+
 +(CCScene *) scene
 {
 	// 'scene' is an autorelease object.
@@ -64,31 +69,39 @@ SYNTHESIZE_EXTENSION_TEST(TMXGenerator_WorldMap)
 		}
 		[gen release], gen = nil;
 		
-		// set up the zoom/scroll for the map.
-		_controller = [[CCPanZoomController controllerWithNode:self] retain];
-        _controller.boundingRect = CGRectMake(0, 0, map.contentSize.width, map.contentSize.height);
-        [_controller enableWithTouchPriority:0 swallowsTouches:YES];
-
-		// zoom limit, currently to 4 tiles or screen size.
-		float minSize = MAX([[CCDirector sharedDirector] winSizeInPixels].width, [[CCDirector sharedDirector] winSizeInPixels].height) / 2.0;
-//		minSize = MAX(minSize, map.tileSize.width * 4);
-		_controller.zoomOutLimit = minSize / MAX(map.contentSize.width/2.0, map.contentSize.height/2.0);
-		
-		// zoom out a bit at the beginning
-		[_controller centerOnPoint:CGPointMake(map.contentSize.width/2.0, map.contentSize.height/2.0)];
-		
 		// add it as a child.
-		[self addChild:map];
+		[self addChild:map z: 0 tag: kMap];
+        [self updateForScreenReshape];
 	}
 	return self;
+}
+
+- (void) updateForScreenReshape
+{
+    CGSize s = [CCDirector sharedDirector].winSize;
+    
+    CCNode *map = [self getChildByTag: kMap];
+    
+    // Scale to fit the screen.
+    CGSize mapSize = map.contentSize;
+    
+    CGFloat scaleFactor = 1.0f;
+    if (s.height < s.width)
+        scaleFactor = s.height / mapSize.height;
+    else
+        scaleFactor = s.width / mapSize.width;
+    
+    scaleFactor = MIN (1.0f, scaleFactor);
+    map.scale = scaleFactor;
+    
+    // Position on the center of screen.
+    map.anchorPoint = ccp(0.5f, 0.5f);
+    map.position = ccp(0.5f * s.width, 0.5f * s.height);
 }
 
 // on "dealloc" you need to release all your retained objects
 - (void) dealloc
 {
-	[_controller disable];
-	[_controller release];
-
 	[objectListByGroupName release];
 
 	// don't forget to call "super dealloc"

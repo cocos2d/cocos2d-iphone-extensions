@@ -15,12 +15,10 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 
 #import <Foundation/Foundation.h>
 #import "cocos2d.h"
-#import "CCPanZoomController.h"
 
 #import "TMXGenerator.h"
 
 @interface TMXGenerator_WorldMap : CCLayer <TMXGeneratorDelegate> {
-	CCPanZoomController *_controller;
 	
 	// tile map creation
 	NSMutableDictionary* objectListByGroupName;
@@ -28,6 +26,8 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 
 // returns a CCScene that contains the TMXGenerator_WorldMap as the only child
 +(CCScene *) scene;
+
+- (void) updateForScreenReshape;
 
 @end
 

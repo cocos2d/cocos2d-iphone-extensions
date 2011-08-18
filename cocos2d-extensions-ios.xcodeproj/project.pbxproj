@@ -54,7 +54,6 @@
 		3F77657F13FA074900346697 /* cencode.c in Sources */ = {isa = PBXBuildFile; fileRef = 3F77654F13FA058200346697 /* cencode.c */; };
 		3F77658013FA075300346697 /* LFCGzipUtility.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F77655213FA058200346697 /* LFCGzipUtility.m */; };
 		3F77658113FA075A00346697 /* TMXGenerator.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F77655413FA058200346697 /* TMXGenerator.m */; };
-		3F77658213FA076500346697 /* CCPanZoomController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F77655713FA059200346697 /* CCPanZoomController.m */; };
 		3F77658313FA076900346697 /* TMXGenerator_WorldMap.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F77655C13FA059200346697 /* TMXGenerator_WorldMap.m */; };
 		3F77658413FA076E00346697 /* testMap.tmx in Resources */ = {isa = PBXBuildFile; fileRef = 3F77655913FA059200346697 /* testMap.tmx */; };
 		3F77658513FA077300346697 /* testTiles.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F77655A13FA059200346697 /* testTiles.png */; };
@@ -812,8 +811,6 @@
 		3F77655213FA058200346697 /* LFCGzipUtility.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LFCGzipUtility.m; sourceTree = "<group>"; };
 		3F77655313FA058200346697 /* TMXGenerator.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TMXGenerator.h; sourceTree = "<group>"; };
 		3F77655413FA058200346697 /* TMXGenerator.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TMXGenerator.m; sourceTree = "<group>"; };
-		3F77655613FA059200346697 /* CCPanZoomController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CCPanZoomController.h; sourceTree = "<group>"; };
-		3F77655713FA059200346697 /* CCPanZoomController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CCPanZoomController.m; sourceTree = "<group>"; };
 		3F77655913FA059200346697 /* testMap.tmx */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = testMap.tmx; sourceTree = "<group>"; };
 		3F77655A13FA059200346697 /* testTiles.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = testTiles.png; sourceTree = "<group>"; };
 		3F77655B13FA059200346697 /* TMXGenerator_WorldMap.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TMXGenerator_WorldMap.h; sourceTree = "<group>"; };
@@ -1553,8 +1550,6 @@
 		3F77655513FA059200346697 /* TMXGeneratorTest */ = {
 			isa = PBXGroup;
 			children = (
-				3F77655613FA059200346697 /* CCPanZoomController.h */,
-				3F77655713FA059200346697 /* CCPanZoomController.m */,
 				3F77655813FA059200346697 /* Resources */,
 				3F77655B13FA059200346697 /* TMXGenerator_WorldMap.h */,
 				3F77655C13FA059200346697 /* TMXGenerator_WorldMap.m */,
@@ -1766,9 +1761,9 @@
 				6DA58365139E513A004D8D0B /* CCBigImageTest */,
 				6DA57F93139D632F004D8D0B /* CCVideoPlayerTest */,
 				6DA57DA6139CBD66004D8D0B /* CCMenuAdvancedTest */,
+				3F77655513FA059200346697 /* TMXGeneratorTest */,
 				6DA5775E139C9837004D8D0B /* SharedResources */,
 				6DA5776F139C9837004D8D0B /* SharedSources */,
-				3F77655513FA059200346697 /* TMXGeneratorTest */,
 			);
 			path = Tests;
 			sourceTree = "<group>";
@@ -3048,7 +3043,6 @@
 				3F77657F13FA074900346697 /* cencode.c in Sources */,
 				3F77658013FA075300346697 /* LFCGzipUtility.m in Sources */,
 				3F77658113FA075A00346697 /* TMXGenerator.m in Sources */,
-				3F77658213FA076500346697 /* CCPanZoomController.m in Sources */,
 				3F77658313FA076900346697 /* TMXGenerator_WorldMap.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
