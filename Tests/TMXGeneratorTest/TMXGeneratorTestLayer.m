@@ -24,13 +24,13 @@
  *
  */
 
-#import "TMXGenerator_WorldMap.h"
+#import "TMXGeneratorTestLayer.h"
 
 #import "ExtensionTest.h"
 
-SYNTHESIZE_EXTENSION_TEST(TMXGenerator_WorldMap)
+SYNTHESIZE_EXTENSION_TEST(TMXGeneratorTestLayer)
 
-@implementation TMXGenerator_WorldMap
+@implementation TMXGeneratorTestLayer
 
 enum
 {
@@ -43,7 +43,7 @@ enum
 	CCScene *scene = [CCScene node];
 	
 	// 'layer' is an autorelease object.
-	TMXGenerator_WorldMap *layer = [TMXGenerator_WorldMap node];
+	TMXGeneratorTestLayer *layer = [TMXGeneratorTestLayer node];
 	
 	// add layer as a child to scene
 	[scene addChild: layer];

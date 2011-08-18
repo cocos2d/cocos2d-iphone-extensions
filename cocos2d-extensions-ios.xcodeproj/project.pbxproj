@@ -54,7 +54,7 @@
 		3F77657F13FA074900346697 /* cencode.c in Sources */ = {isa = PBXBuildFile; fileRef = 3F77654F13FA058200346697 /* cencode.c */; };
 		3F77658013FA075300346697 /* LFCGzipUtility.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F77655213FA058200346697 /* LFCGzipUtility.m */; };
 		3F77658113FA075A00346697 /* TMXGenerator.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F77655413FA058200346697 /* TMXGenerator.m */; };
-		3F77658313FA076900346697 /* TMXGenerator_WorldMap.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F77655C13FA059200346697 /* TMXGenerator_WorldMap.m */; };
+		3F77658313FA076900346697 /* TMXGeneratorTestLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F77655C13FA059200346697 /* TMXGeneratorTestLayer.m */; };
 		3F77658413FA076E00346697 /* testMap.tmx in Resources */ = {isa = PBXBuildFile; fileRef = 3F77655913FA059200346697 /* testMap.tmx */; };
 		3F77658513FA077300346697 /* testTiles.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F77655A13FA059200346697 /* testTiles.png */; };
 		505574581045D68500A31725 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 506EDBA4102F4C9F00A389B3 /* AVFoundation.framework */; };
@@ -813,8 +813,8 @@
 		3F77655413FA058200346697 /* TMXGenerator.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TMXGenerator.m; sourceTree = "<group>"; };
 		3F77655913FA059200346697 /* testMap.tmx */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = testMap.tmx; sourceTree = "<group>"; };
 		3F77655A13FA059200346697 /* testTiles.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = testTiles.png; sourceTree = "<group>"; };
-		3F77655B13FA059200346697 /* TMXGenerator_WorldMap.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TMXGenerator_WorldMap.h; sourceTree = "<group>"; };
-		3F77655C13FA059200346697 /* TMXGenerator_WorldMap.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TMXGenerator_WorldMap.m; sourceTree = "<group>"; };
+		3F77655B13FA059200346697 /* TMXGeneratorTestLayer.h */ = {isa = PBXFileReference; path = TMXGeneratorTestLayer.h; sourceTree = "<group>"; };
+		3F77655C13FA059200346697 /* TMXGeneratorTestLayer.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TMXGeneratorTestLayer.m; sourceTree = "<group>"; };
 		3F77657C13FA059A00346697 /* TMXGenerator Test.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "TMXGenerator Test.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		504DFC6810AF1739006D82FE /* LICENSE.cocos2d */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE.cocos2d; sourceTree = "<group>"; };
 		506EDB87102F4C4000A389B3 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
@@ -1551,8 +1551,8 @@
 			isa = PBXGroup;
 			children = (
 				3F77655813FA059200346697 /* Resources */,
-				3F77655B13FA059200346697 /* TMXGenerator_WorldMap.h */,
-				3F77655C13FA059200346697 /* TMXGenerator_WorldMap.m */,
+				3F77655B13FA059200346697 /* TMXGeneratorTestLayer.h */,
+				3F77655C13FA059200346697 /* TMXGeneratorTestLayer.m */,
 			);
 			path = TMXGeneratorTest;
 			sourceTree = "<group>";
@@ -3043,7 +3043,7 @@
 				3F77657F13FA074900346697 /* cencode.c in Sources */,
 				3F77658013FA075300346697 /* LFCGzipUtility.m in Sources */,
 				3F77658113FA075A00346697 /* TMXGenerator.m in Sources */,
-				3F77658313FA076900346697 /* TMXGenerator_WorldMap.m in Sources */,
+				3F77658313FA076900346697 /* TMXGeneratorTestLayer.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

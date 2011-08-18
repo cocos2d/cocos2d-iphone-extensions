@@ -29,7 +29,7 @@
 
 #import "TMXGenerator.h"
 
-@interface TMXGenerator_WorldMap : CCLayer <TMXGeneratorDelegate> {
+@interface TMXGeneratorTestLayer : CCLayer <TMXGeneratorDelegate> {
 	
 	// tile map creation
 	NSMutableDictionary* objectListByGroupName;
