@@ -110,7 +110,7 @@
 	//
 	// return YES for the supported orientations
 	
-	return ( UIInterfaceOrientationIsLandscape( interfaceOrientation ) );
+	return YES; //( UIInterfaceOrientationIsLandscape( interfaceOrientation ) );
 	
 #else
 #error Unknown value in GAME_AUTOROTATION
@@ -162,6 +162,14 @@
 	}
 }
 #endif // GAME_AUTOROTATION == kGameAutorotationUIViewController
+
+- (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation
+{
+    id<UIApplicationDelegate> delegate = [UIApplication sharedApplication].delegate;
+    
+    if ([delegate respondsToSelector: @selector(updateForScreenReshape)])
+        [delegate performSelector: @selector(updateForScreenReshape)];
+}
 
 
 - (void)didReceiveMemoryWarning {
