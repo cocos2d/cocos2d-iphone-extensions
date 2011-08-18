@@ -51,6 +51,7 @@ Extensions
  * [iOS/Mac] **CCSendMessages** - CCActionInstant subclass, that is more flexible than other CCActions that run functions. Can be used in many cases as blocks replacement. 
  * [iOS] **CCScrollLayer** - CCLayer subclass that lets you pass-in an array of layers and it will then create a smooth scroller. Complete with the "snapping" effect.
  * [iOS/Mac] **FilesDownloader** - Downloader for a group of files with shared source path.
+ * [iOS/Mac] **TMXGenerator** - Class that generates a single TMX map with multiple layers.
  
  Video Overview and more Info can be found on the [Wiki](https://github.com/cocos2d/cocos2d-iphone-extensions/wiki "Wiki")   
  Detailed README for each extension is available in it's folder (i.e. Extensions/CCSlider/README.md).   
