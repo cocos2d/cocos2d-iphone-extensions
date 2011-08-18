@@ -6,6 +6,10 @@ Repo Maintainer:
 
 People/companies who were/are contributing code to cocos2d-iphone-extensions (alphabetically ordered):
 
+	* Alexey Lang (http://pixonic.ru)
+		All orientations support for all tests on iOS.
+		Issue #56 (comments & refactoring for TMXGenerator) pair programming.
+
 	* Brian Feller (http://infinitesimplicity.com/)
 		CCScrollLayer#moveToPage: bounds checking
 
