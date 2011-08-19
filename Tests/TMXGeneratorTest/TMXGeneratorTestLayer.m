@@ -94,16 +94,10 @@ enum
     CCNode *map = [self getChildByTag: kMap];
     
     // Scale to fit the screen.
-    CGSize mapSize = map.contentSize;
-    
-    CGFloat scaleFactor = 1.0f;
-    if (s.height < s.width)
-        scaleFactor = s.height / mapSize.height;
-    else
-        scaleFactor = s.width / mapSize.width;
-    
-    scaleFactor = MIN (1.0f, scaleFactor);
-    map.scale = scaleFactor;
+    CGSize mapSize = map.contentSize;    
+    CGFloat scaleFactorX = s.height / mapSize.height;
+    CGFloat scaleFactorY = s.width / mapSize.width;    
+    map.scale = MIN ( 1.0f, MIN(scaleFactorX, scaleFactorY) );
     
     // Position on the center of screen.
     map.anchorPoint = ccp(0.5f, 0.5f);
