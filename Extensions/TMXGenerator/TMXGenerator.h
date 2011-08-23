@@ -26,51 +26,51 @@
 
 #import <Foundation/Foundation.h>
 
-#define kTilesetGIDStart			@"tileGIDStart"
+#define kTMXGeneratorTilesetGIDStart			@"tileGIDStart"
 
 #pragma mark Map Setup Info Keys
 
-#define kHeaderInfoMapWidth			@"mapWidth"
-#define kHeaderInfoMapHeight		@"mapHeight"
-#define kHeaderInfoMapTileWidth		@"mapTileWidth"
-#define kHeaderInfoMapTileHeight	@"mapTileHeight"
-#define kHeaderInfoMapOrientation	@"mapOrientation"
-#define kHeaderInfoMapPath			@"mapPath"
+#define kTMXGeneratorHeaderInfoMapWidth			@"mapWidth"
+#define kTMXGeneratorHeaderInfoMapHeight		@"mapHeight"
+#define kTMXGeneratorHeaderInfoMapTileWidth		@"mapTileWidth"
+#define kTMXGeneratorHeaderInfoMapTileHeight	@"mapTileHeight"
+#define kTMXGeneratorHeaderInfoMapOrientation	@"mapOrientation"
+#define kTMXGeneratorHeaderInfoMapPath			@"mapPath"
 
 #pragma mark Tileset Setup Info Keys
 
-#define kImageAtlasTileWidth		@"imageAtlasTileWidth"
-#define kImageAtlasTileHeight		@"imageAtlasTileHeight"
-#define kImageAtlasTileSpacing		@"imageAtlasTileSpacing"
-#define kTileProperties				@"tileProperties"
-#define kTileSetName				@"tileSetName"
-#define kTileSetImageAtlasFilename	@"imageAtlasFilename"
+#define kTMXGeneratorImageAtlasTileWidth		@"imageAtlasTileWidth"
+#define kTMXGeneratorImageAtlasTileHeight		@"imageAtlasTileHeight"
+#define kTMXGeneratorImageAtlasTileSpacing		@"imageAtlasTileSpacing"
+#define kTMXGeneratorTileProperties				@"tileProperties"
+#define kTMXGeneratorTileSetName				@"tileSetName"
+#define kTMXGeneratorTileSetImageAtlasFilename	@"imageAtlasFilename"
 
 #pragma mark Layer Setup Info Keys
 
-#define kLayerName					@"layerName"
-#define kLayerWidth					@"layerWidth"
-#define kLayerHeight				@"layerHeight"
-#define kLayerData					@"layerData"
-#define kLayerRotationData			@"rotationData"
-#define kLayerIsVisible				@"visible"
+#define kTMXGeneratorLayerName					@"layerName"
+#define kTMXGeneratorLayerWidth					@"layerWidth"
+#define kTMXGeneratorLayerHeight				@"layerHeight"
+#define kTMXGeneratorLayerData					@"layerData"
+#define kTMXGeneratorLayerRotationData			@"rotationData"
+#define kTMXGeneratorLayerIsVisible				@"visible"
 
 #pragma mark Objects Group Setup Info Keys
 
-#define kObjectGroupName			@"objectGroupName"
-#define kObjectGroupWidth			@"objectGroupWidth"
-#define kObjectGroupHeight			@"objectGroupHeight"
-#define kObjectGroupProperties		@"objectGroupProperties"
+#define kTMXGeneratorObjectGroupName			@"objectGroupName"
+#define kTMXGeneratorObjectGroupWidth			@"objectGroupWidth"
+#define kTMXGeneratorObjectGroupHeight			@"objectGroupHeight"
+#define kTMXGeneratorObjectGroupProperties		@"objectGroupProperties"
 
 #pragma mark Single Object Setup Info Keys
 
-#define kGroupObjectName			@"groupObjectName"
-#define kGroupObjectType			@"groupObjectType"
-#define kGroupObjectX				@"groupObjectX"
-#define kGroupObjectY				@"groupObjectY"
-#define kGroupObjectWidth			@"groupObjectWidth"
-#define kGroupObjectHeigth			@"groupObjectHeight"
-#define kGroupObjectProperties		@"groupObjectProperties"
+#define kTMXGeneratorGroupObjectName			@"groupObjectName"
+#define kTMXGeneratorGroupObjectType			@"groupObjectType"
+#define kTMXGeneratorGroupObjectX				@"groupObjectX"
+#define kTMXGeneratorGroupObjectY				@"groupObjectY"
+#define kTMXGeneratorGroupObjectWidth			@"groupObjectWidth"
+#define kTMXGeneratorGroupObjectHeigth			@"groupObjectHeight"
+#define kTMXGeneratorGroupObjectProperties		@"groupObjectProperties"
 
 
 @protocol TMXGeneratorDelegate <NSObject>

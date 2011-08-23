@@ -81,12 +81,12 @@
 	if (mapAttributes)
 		[mapAttributes release];
 	mapAttributes = [[NSMutableDictionary alloc] initWithCapacity:5];
-	[mapAttributes setObject:[NSString stringWithFormat:@"%i", width] forKey:kHeaderInfoMapWidth];
-	[mapAttributes setObject:[NSString stringWithFormat:@"%i", height] forKey:kHeaderInfoMapHeight];
-	[mapAttributes setObject:[NSString stringWithFormat:@"%i", widthInPixels] forKey:kHeaderInfoMapTileWidth];
-	[mapAttributes setObject:[NSString stringWithFormat:@"%i", heightInPixels] forKey:kHeaderInfoMapTileHeight];
+	[mapAttributes setObject:[NSString stringWithFormat:@"%i", width] forKey:kTMXGeneratorHeaderInfoMapWidth];
+	[mapAttributes setObject:[NSString stringWithFormat:@"%i", height] forKey:kTMXGeneratorHeaderInfoMapHeight];
+	[mapAttributes setObject:[NSString stringWithFormat:@"%i", widthInPixels] forKey:kTMXGeneratorHeaderInfoMapTileWidth];
+	[mapAttributes setObject:[NSString stringWithFormat:@"%i", heightInPixels] forKey:kTMXGeneratorHeaderInfoMapTileHeight];
 	if (orientation)
-		[mapAttributes setObject:orientation forKey:kHeaderInfoMapOrientation];
+		[mapAttributes setObject:orientation forKey:kTMXGeneratorHeaderInfoMapOrientation];
 
 	if (path)
 		[path release];
@@ -124,27 +124,27 @@
 	highestGID++;
 	
 	NSMutableDictionary* dict = [NSMutableDictionary dictionaryWithDictionary:tileAttributes];
-	[dict setObject:[NSString stringWithFormat:@"%i", highestGID] forKey:kTilesetGIDStart];
+	[dict setObject:[NSString stringWithFormat:@"%i", highestGID] forKey:kTMXGeneratorTilesetGIDStart];
 	
 	// add properties
 	if (properties)
 	{
-		[dict setObject:properties forKey:kTileProperties];
+		[dict setObject:properties forKey:kTMXGeneratorTileProperties];
 	}
 	
 	// figure out the highest GID possible and set our max GIDs used for the next possible texture map
 #ifdef __IPHONE_OS_VERSION_MAX_ALLOWED
-	UIImage* img = [UIImage imageNamed:[dict objectForKey:kTileSetImageAtlasFilename]];
+	UIImage* img = [UIImage imageNamed:[dict objectForKey:kTMXGeneratorTileSetImageAtlasFilename]];
 	CGSize imgSize = img.size;
 #else if defined(__MAC_OS_X_VERSION_MAX_ALLOWED)
-	NSImage* img = [NSImage imageNamed:[dict objectForKey:kTileSetImageAtlasFilename]];
+	NSImage* img = [NSImage imageNamed:[dict objectForKey:kTMXGeneratorTileSetImageAtlasFilename]];
 	CGSize imgSize = NSSizeToCGSize( img.size );
 #endif
 	if (img)
 	{
-		int width = [[dict objectForKey:kImageAtlasTileWidth] intValue];
-		int height = [[dict objectForKey:kImageAtlasTileHeight] intValue];
-		int spacing = [[dict objectForKey:kImageAtlasTileSpacing] intValue];
+		int width = [[dict objectForKey:kTMXGeneratorImageAtlasTileWidth] intValue];
+		int height = [[dict objectForKey:kTMXGeneratorImageAtlasTileHeight] intValue];
+		int spacing = [[dict objectForKey:kTMXGeneratorImageAtlasTileSpacing] intValue];
 		
 		int across = imgSize.width / (width + spacing);
 		int down = imgSize.height / (height + spacing);
@@ -154,7 +154,7 @@
 		if (!tileSets)
 			tileSets = [[NSMutableDictionary alloc] initWithCapacity:20];
 		
-		NSString* name = [dict objectForKey:kTileSetName];
+		NSString* name = [dict objectForKey:kTMXGeneratorTileSetName];
 		if (name)
 			[tileSets setObject:dict forKey:name];
 		else 
@@ -190,10 +190,10 @@
 	if (!objectGroups)
 		objectGroups = [[NSMutableArray alloc] initWithCapacity:10];
 	
-	[dict setObject:name forKey:kObjectGroupName];
-	[dict setObject:[NSString stringWithFormat:@"%i", width] forKey:kObjectGroupWidth];
-	[dict setObject:[NSString stringWithFormat:@"%i", width] forKey:kObjectGroupHeight];
-	[dict setObject:objects forKey:kObjectGroupProperties];
+	[dict setObject:name forKey:kTMXGeneratorObjectGroupName];
+	[dict setObject:[NSString stringWithFormat:@"%i", width] forKey:kTMXGeneratorObjectGroupWidth];
+	[dict setObject:[NSString stringWithFormat:@"%i", width] forKey:kTMXGeneratorObjectGroupHeight];
+	[dict setObject:objects forKey:kTMXGeneratorObjectGroupProperties];
 	
 	[objectGroups addObject:dict];
 }
@@ -201,7 +201,7 @@
 
 - (NSString*) tileIDFromTileSet:(NSDictionary*)tileset thatMatchesKey:(NSString*)tileKeyVal property:(NSString*)tilePropertyVal
 {
-	NSDictionary* properties = [tileset objectForKey:kTileProperties];
+	NSDictionary* properties = [tileset objectForKey:kTMXGeneratorTileProperties];
 	if (properties)
 	{
 		for (id propertyKey in [properties allKeys])
@@ -247,25 +247,25 @@
 	// convert the passed in array to an array of objects XML.
 	for (NSDictionary* group in groups)
 	{
-		[retVal appendFormat:@"<objectgroup name=\"%@\" width=\"%@\" height=\"%@\">\r", [group objectForKey:kObjectGroupName], [group objectForKey:kObjectGroupWidth], [group objectForKey:kObjectGroupHeight]];
-		NSArray* objects = [group objectForKey:kObjectGroupProperties];
+		[retVal appendFormat:@"<objectgroup name=\"%@\" width=\"%@\" height=\"%@\">\r", [group objectForKey:kTMXGeneratorObjectGroupName], [group objectForKey:kTMXGeneratorObjectGroupWidth], [group objectForKey:kTMXGeneratorObjectGroupHeight]];
+		NSArray* objects = [group objectForKey:kTMXGeneratorObjectGroupProperties];
 		for (NSDictionary* dict in objects)
 		{
-			[retVal appendFormat:@"<object name=\"%@\"", [dict objectForKey:kGroupObjectName]];
-			if ([dict objectForKey:kGroupObjectType])
-				[retVal appendFormat:@" type=\"%@\"", [dict objectForKey:kGroupObjectType]]; 
-			if ([dict objectForKey:kGroupObjectX])
-				[retVal appendFormat:@" x=\"%@\"", [dict objectForKey:kGroupObjectX]];
-			if ([dict objectForKey:kGroupObjectY])
-				[retVal appendFormat:@" y=\"%@\"", [dict objectForKey:kGroupObjectY]];
-			if ([dict objectForKey:kGroupObjectWidth])
-				[retVal appendFormat:@" width=\"%@\"", [dict objectForKey:kGroupObjectWidth]];
-			if ([dict objectForKey:kGroupObjectHeigth])
-				[retVal appendFormat:@" height=\"%@\"", [dict objectForKey:kGroupObjectHeigth]];
+			[retVal appendFormat:@"<object name=\"%@\"", [dict objectForKey:kTMXGeneratorGroupObjectName]];
+			if ([dict objectForKey:kTMXGeneratorGroupObjectType])
+				[retVal appendFormat:@" type=\"%@\"", [dict objectForKey:kTMXGeneratorGroupObjectType]]; 
+			if ([dict objectForKey:kTMXGeneratorGroupObjectX])
+				[retVal appendFormat:@" x=\"%@\"", [dict objectForKey:kTMXGeneratorGroupObjectX]];
+			if ([dict objectForKey:kTMXGeneratorGroupObjectY])
+				[retVal appendFormat:@" y=\"%@\"", [dict objectForKey:kTMXGeneratorGroupObjectY]];
+			if ([dict objectForKey:kTMXGeneratorGroupObjectWidth])
+				[retVal appendFormat:@" width=\"%@\"", [dict objectForKey:kTMXGeneratorGroupObjectWidth]];
+			if ([dict objectForKey:kTMXGeneratorGroupObjectHeigth])
+				[retVal appendFormat:@" height=\"%@\"", [dict objectForKey:kTMXGeneratorGroupObjectHeigth]];
 			[retVal appendString:@">\r"];
 			
-			if ([dict objectForKey:kGroupObjectProperties])
-				[retVal appendString:[TMXGenerator propertiesToXML:[dict objectForKey:kGroupObjectProperties]]];
+			if ([dict objectForKey:kTMXGeneratorGroupObjectProperties])
+				[retVal appendString:[TMXGenerator propertiesToXML:[dict objectForKey:kTMXGeneratorGroupObjectProperties]]];
 
 			[retVal appendString:@"</object>"];
 		}
@@ -286,13 +286,13 @@
 	{
 		// this will be where we zip and encode layers.
 		// layers should be dictionaries.
-//		if ([dict objectForKey:kLayerIsVisible])		// making the layer invisible causes the TMX map to not load it!  :/
-//			[retVal appendFormat:@"<layer name=\"%@\" width=\"%@\" height=\"%@\" visible=\"%@\">\r", [dict objectForKey:kLayerName], [dict objectForKey:kLayerWidth], [dict objectForKey:kLayerHeight], [dict objectForKey:kLayerIsVisible]];
+//		if ([dict objectForKey:kTMXGeneratorLayerIsVisible])		// making the layer invisible causes the TMX map to not load it!  :/
+//			[retVal appendFormat:@"<layer name=\"%@\" width=\"%@\" height=\"%@\" visible=\"%@\">\r", [dict objectForKey:kTMXGeneratorLayerName], [dict objectForKey:kTMXGeneratorLayerWidth], [dict objectForKey:kTMXGeneratorLayerHeight], [dict objectForKey:kTMXGeneratorLayerIsVisible]];
 //		else 
-			[retVal appendFormat:@"<layer name=\"%@\" width=\"%@\" height=\"%@\">\r", [dict objectForKey:kLayerName], [dict objectForKey:kLayerWidth], [dict objectForKey:kLayerHeight]];
+			[retVal appendFormat:@"<layer name=\"%@\" width=\"%@\" height=\"%@\">\r", [dict objectForKey:kTMXGeneratorLayerName], [dict objectForKey:kTMXGeneratorLayerWidth], [dict objectForKey:kTMXGeneratorLayerHeight]];
 		[retVal appendString:@"<data encoding=\"base64\" compression=\"gzip\">\r"];
 		
-		NSData *bufferData = [dict objectForKey:kLayerData];
+		NSData *bufferData = [dict objectForKey:kTMXGeneratorLayerData];
 		NSData *data = [LFCGzipUtility gzipData:bufferData];
 		NSUInteger len = [data length];
 		char* byteData = (char*)malloc(len);
@@ -304,7 +304,7 @@
 		// rotation XML.  See http://www.cocos2d-iphone.org/forum/topic/16552
 		[retVal appendString:@"<rotation_data encoding=\"base64\" compression=\"gzip\">\r"];
 		
-		bufferData = [dict objectForKey:kLayerRotationData];
+		bufferData = [dict objectForKey:kTMXGeneratorLayerRotationData];
 		data = [LFCGzipUtility gzipData:bufferData];
 		len = [data length];
 		byteData = (char*)malloc(len);
@@ -323,12 +323,12 @@
 
 /*
 	 Attributes include:
-		 kImageAtlasTileWidth		(width)
-		 kImageAtlasTileHeight		(height)
-		 kImageAtlasTileSpacing		(tiles are spaced apart this amount of pixels in the atlas image)
-		 kTilesetGIDStart			(first GID used in the tileset)
-		 kTileSetName				(tileset name)
-		 kTileSetImageAtlasFilename (filename of image atlas)
+		 kTMXGeneratorImageAtlasTileWidth		(width)
+		 kTMXGeneratorImageAtlasTileHeight		(height)
+		 kTMXGeneratorImageAtlasTileSpacing		(tiles are spaced apart this amount of pixels in the atlas image)
+		 kTMXGeneratorTilesetGIDStart			(first GID used in the tileset)
+		 kTMXGeneratorTilesetName				(tileset name)
+		 kTMXGeneratorTileSetImageAtlasFilename (filename of image atlas)
  
  example tileset XML:
  
@@ -360,16 +360,16 @@
 		NSDictionary* dict = [inTileSets objectForKey:key];
 		if (dict)
 		{
-			[retVal appendFormat:@"<tileset firstgid=\"%i\"", [[dict objectForKey:kTilesetGIDStart] intValue]];
-			[retVal appendFormat:@" name=\"%@\"", [dict objectForKey:kTileSetName]];
-			[retVal appendFormat:@" tilewidth=\"%i\"", [[dict objectForKey:kImageAtlasTileWidth] intValue]];
-			[retVal appendFormat:@" tileheight=\"%i\"", [[dict objectForKey:kImageAtlasTileHeight] intValue]];
-			[retVal appendFormat:@" spacing=\"%i\"", [[dict objectForKey:kImageAtlasTileSpacing] intValue]];
+			[retVal appendFormat:@"<tileset firstgid=\"%i\"", [[dict objectForKey:kTMXGeneratorTilesetGIDStart] intValue]];
+			[retVal appendFormat:@" name=\"%@\"", [dict objectForKey:kTMXGeneratorTileSetName]];
+			[retVal appendFormat:@" tilewidth=\"%i\"", [[dict objectForKey:kTMXGeneratorImageAtlasTileWidth] intValue]];
+			[retVal appendFormat:@" tileheight=\"%i\"", [[dict objectForKey:kTMXGeneratorImageAtlasTileHeight] intValue]];
+			[retVal appendFormat:@" spacing=\"%i\"", [[dict objectForKey:kTMXGeneratorImageAtlasTileSpacing] intValue]];
 			[retVal appendString:@">\r"];
-			[retVal appendFormat:@"<image source=\"%@\"/>\r", [dict objectForKey:kTileSetImageAtlasFilename]];
+			[retVal appendFormat:@"<image source=\"%@\"/>\r", [dict objectForKey:kTMXGeneratorTileSetImageAtlasFilename]];
 			
 			// properties
-			NSDictionary* properties = [dict objectForKey:kTileProperties];
+			NSDictionary* properties = [dict objectForKey:kTMXGeneratorTileProperties];
 			if (properties)
 			{
 				for (id propertyKey in [properties allKeys])
@@ -391,13 +391,13 @@
 //////// writeTMXFile ///////
 /*
 	mapAttributes is a dictionary with the following attributes:
-		kHeaderInfoMapWidth			- how many tiles wide
-		kHeaderInfoMapHeight		- how many tiles high
-		kHeaderInfoMapTileWidth		- tile width in pixels
-		kHeaderInfoMapTileHeight	- tile height in pixels
+		kTMXGeneratorHeaderInfoMapWidth			- how many tiles wide
+		kTMXGeneratorHeaderInfoMapHeight		- how many tiles high
+		kTMXGeneratorHeaderInfoMapTileWidth		- tile width in pixels
+		kTMXGeneratorHeaderInfoMapTileHeight	- tile height in pixels
  
 	optional:
-		kHeaderInfoMapOrientation	- tile orientation, default is @"orthogonal", @"isometric" also supported by cocos2d
+		kTMXGeneratorHeaderInfoMapOrientation	- tile orientation, default is @"orthogonal", @"isometric" also supported by cocos2d
  
 	tileSets is a dictionary of named tilesets (dictionaries of tileset attributes, including properties)
  
@@ -409,18 +409,18 @@
 
 	// map header details
 	NSString* orientation = @"orthogonal";
-	if ([mapAttributes objectForKey:kHeaderInfoMapOrientation])
-		orientation = [mapAttributes objectForKey:kHeaderInfoMapOrientation];
+	if ([mapAttributes objectForKey:kTMXGeneratorHeaderInfoMapOrientation])
+		orientation = [mapAttributes objectForKey:kTMXGeneratorHeaderInfoMapOrientation];
 	[outStr appendFormat:@"<map version=\"1.0\" orientation=\"%@\" ", orientation];
 	
 	// width and height (for now always square)
-	int width = [[mapAttributes objectForKey:kHeaderInfoMapWidth] intValue];
-	int height = [[mapAttributes objectForKey:kHeaderInfoMapHeight] intValue];
+	int width = [[mapAttributes objectForKey:kTMXGeneratorHeaderInfoMapWidth] intValue];
+	int height = [[mapAttributes objectForKey:kTMXGeneratorHeaderInfoMapHeight] intValue];
 	[outStr appendFormat:@"width=\"%i\" height=\"%i\" ", width, height];
 	
 	// tile width and height for map
-	int tileWidth = [[mapAttributes objectForKey:kHeaderInfoMapTileWidth] intValue];
-	int tileHeight = [[mapAttributes objectForKey:kHeaderInfoMapTileHeight] intValue];
+	int tileWidth = [[mapAttributes objectForKey:kTMXGeneratorHeaderInfoMapTileWidth] intValue];
+	int tileHeight = [[mapAttributes objectForKey:kTMXGeneratorHeaderInfoMapTileHeight] intValue];
 	[outStr appendFormat:@"tilewidth=\"%i\" tileheight=\"%i\">\r", tileWidth, tileHeight];
 	
 	// append the tilesets
@@ -447,13 +447,13 @@
 + (NSDictionary*) layerNamed:(NSString*)layerName width:(int)width height:(int)height data:(NSData*)binaryLayerData visible:(BOOL)isVisible
 {
 	NSMutableDictionary* dict = [NSMutableDictionary dictionaryWithCapacity:4];
-	[dict setObject:layerName forKey:kLayerName];
-	[dict setObject:[NSString stringWithFormat:@"%i", width] forKey:kLayerWidth];
-	[dict setObject:[NSString stringWithFormat:@"%i", height] forKey:kLayerHeight];
+	[dict setObject:layerName forKey:kTMXGeneratorLayerName];
+	[dict setObject:[NSString stringWithFormat:@"%i", width] forKey:kTMXGeneratorLayerWidth];
+	[dict setObject:[NSString stringWithFormat:@"%i", height] forKey:kTMXGeneratorLayerHeight];
 	if (isVisible == NO)
-		[dict setObject:@"0" forKey:kLayerIsVisible];
+		[dict setObject:@"0" forKey:kTMXGeneratorLayerIsVisible];
 	if (binaryLayerData)
-		[dict setObject:binaryLayerData forKey:kLayerData];
+		[dict setObject:binaryLayerData forKey:kTMXGeneratorLayerData];
 	return dict;
 }
 
@@ -462,11 +462,11 @@
 {
 	NSMutableDictionary* dict = [NSMutableDictionary dictionaryWithCapacity:20];
 	
-	[dict setObject:imgName forKey:kTileSetImageAtlasFilename];
-	[dict setObject:name forKey:kTileSetName];
-	[dict setObject:[NSString stringWithFormat:@"%i", width] forKey:kImageAtlasTileWidth];
-	[dict setObject:[NSString stringWithFormat:@"%i", width] forKey:kImageAtlasTileHeight];
-	[dict setObject:[NSString stringWithFormat:@"%i", spacing] forKey:kImageAtlasTileSpacing];
+	[dict setObject:imgName forKey:kTMXGeneratorTileSetImageAtlasFilename];
+	[dict setObject:name forKey:kTMXGeneratorTileSetName];
+	[dict setObject:[NSString stringWithFormat:@"%i", width] forKey:kTMXGeneratorImageAtlasTileWidth];
+	[dict setObject:[NSString stringWithFormat:@"%i", width] forKey:kTMXGeneratorImageAtlasTileHeight];
+	[dict setObject:[NSString stringWithFormat:@"%i", spacing] forKey:kTMXGeneratorImageAtlasTileSpacing];
 	
 	return dict;
 }
@@ -486,17 +486,17 @@
 {
 	NSMutableDictionary* dict = [NSMutableDictionary dictionaryWithCapacity:10];
 	
-	[dict setObject:name forKey:kGroupObjectName];
-	[dict setObject:[NSString stringWithFormat:@"%i", x] forKey:kGroupObjectX];
-	[dict setObject:[NSString stringWithFormat:@"%i", y] forKey:kGroupObjectY];
+	[dict setObject:name forKey:kTMXGeneratorGroupObjectName];
+	[dict setObject:[NSString stringWithFormat:@"%i", x] forKey:kTMXGeneratorGroupObjectX];
+	[dict setObject:[NSString stringWithFormat:@"%i", y] forKey:kTMXGeneratorGroupObjectY];
 	if (type)
-		[dict setObject:type forKey:kGroupObjectType];
+		[dict setObject:type forKey:kTMXGeneratorGroupObjectType];
 	if (width)
-		[dict setObject:[NSString stringWithFormat:@"%i", width] forKey:kGroupObjectWidth];
+		[dict setObject:[NSString stringWithFormat:@"%i", width] forKey:kTMXGeneratorGroupObjectWidth];
 	if (height)
-		[dict setObject:[NSString stringWithFormat:@"%i", height] forKey:kGroupObjectHeigth];
+		[dict setObject:[NSString stringWithFormat:@"%i", height] forKey:kTMXGeneratorGroupObjectHeigth];
 	if (properties)
-		[dict setObject:properties forKey:kGroupObjectProperties];
+		[dict setObject:properties forKey:kTMXGeneratorGroupObjectProperties];
 	
 	return dict;
 }
@@ -518,8 +518,8 @@
 		return NO;
 	}
 
-	int mapWidth = [[mapInfo objectForKey:kHeaderInfoMapWidth] intValue];
-	int mapHeight = [[mapInfo objectForKey:kHeaderInfoMapHeight] intValue];
+	int mapWidth = [[mapInfo objectForKey:kTMXGeneratorHeaderInfoMapWidth] intValue];
+	int mapHeight = [[mapInfo objectForKey:kTMXGeneratorHeaderInfoMapHeight] intValue];
 		
 	NSArray* tileSetNames = [delegate_ tileSetNames];
 	if (!tileSetNames || ![tileSetNames count])
@@ -590,7 +590,7 @@
 				
 				// find the tileset and then look through it to find the property key/value pair we are after.
 				NSDictionary* tileSetForLayer = [tileSets objectForKey:tileSetName];
-				int GID = [[tileSetForLayer objectForKey:kTilesetGIDStart] intValue];
+				int GID = [[tileSetForLayer objectForKey:kTMXGeneratorTilesetGIDStart] intValue];
 				NSString* tempStr = [self tileIDFromTileSet:tileSetForLayer thatMatchesKey:tileKeyVal property:tilePropertyVal];
 				if (tempStr)
 					GID += [tempStr intValue];
@@ -607,7 +607,7 @@
 		{
 			NSData* data = [NSData dataWithBytes:mapData length:sizeof(unsigned int) * mapWidth * mapHeight];
 			NSMutableDictionary* dictToAdd = [NSMutableDictionary dictionaryWithDictionary:dict];
-			[dictToAdd setObject:data forKey:kLayerData];
+			[dictToAdd setObject:data forKey:kTMXGeneratorLayerData];
 			
 			// rotation data in addition to map data.
 			if ([delegate_ respondsToSelector:@selector(tileRotationForLayer:X:Y:)])
@@ -623,7 +623,7 @@
 				}
 				
 				NSData* data = [NSData dataWithBytes:rotationData length:sizeof(unsigned int) * mapWidth * mapHeight];
-				[dictToAdd setObject:data forKey:kLayerRotationData];
+				[dictToAdd setObject:data forKey:kTMXGeneratorLayerRotationData];
 			}
 			
 			if (!layers)
@@ -652,12 +652,12 @@
 				NSArray* properties = nil;
 				if ([delegate_ respondsToSelector:@selector(propertiesForObjectWithName:inGroupWithName:)])
 				{
-					properties = [delegate_ propertiesForObjectWithName:[dict objectForKey:kGroupObjectName] inGroupWithName: key];
+					properties = [delegate_ propertiesForObjectWithName:[dict objectForKey:kTMXGeneratorGroupObjectName] inGroupWithName: key];
 					if (properties)
 					{
 						NSMutableDictionary* tempDict = [NSMutableDictionary dictionaryWithCapacity:[dict count] + 1];
 						[tempDict addEntriesFromDictionary:dict];
-						[tempDict setObject:properties forKey:kGroupObjectProperties];
+						[tempDict setObject:properties forKey:kTMXGeneratorGroupObjectProperties];
 						dict = [NSDictionary dictionaryWithDictionary:tempDict];
 					}
 				}
@@ -686,7 +686,7 @@
 	for (NSString* tileKey in tileSets)
 	{
 		NSDictionary* dict = [tileSets objectForKey:tileKey];
-		NSString* fileName = [dict objectForKey:kTileSetImageAtlasFilename];
+		NSString* fileName = [dict objectForKey:kTMXGeneratorTileSetImageAtlasFilename];
 		NSString* destPath = [pathForDest stringByAppendingPathComponent:fileName];
 		if (![copiedAtlasNames containsObject:fileName])
 		{
