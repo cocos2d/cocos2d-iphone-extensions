@@ -58,7 +58,8 @@ SYNTHESIZE_EXTENSION_TEST(CCLayerPanZoomTest)
         // our bounding rect
         CGRect boundingRect = CGRectMake(0, 0, 964, 700);
 		[self setContentSize: boundingRect.size];
-        
+        self.scale = 2.0;
+		
         // background
         CCSprite *background = [CCSprite spriteWithFile: @"background.png"];
         background.anchorPoint = ccp(0,0);

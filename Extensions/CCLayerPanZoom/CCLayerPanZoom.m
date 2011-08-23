@@ -97,7 +97,13 @@
 		
 		self.anchorPoint = newAnchor;
 		self.position = curPosition;		
+		
+		CGFloat lastScale = self.scale;
 		self.scale = MIN(MAX(newScale, _minScale), _maxScale);		
+		CGRect boundBox = [self boundingBox];
+		CGSize winSize = [[CCDirector sharedDirector] winSize];
+		if ((boundBox.size.width < winSize.width) || (boundBox.size.height < winSize.height))
+			self.scale = lastScale;
 	}
 	else
 	{		
@@ -112,12 +118,28 @@
 		self.position = curPoint;		
 	}
 	
-	/*
-	CGSize winSixe = [[CCDirector sharedDirector] winSize];
-	if (self.position.x > 0 || self.postion.y > 0 || 
-		(self.position.x + self.contentSize.width) < winSize.width || 
-		ccp
-	*/
+	CGSize winSize = [[CCDirector sharedDirector] winSize];
+	CGRect boundBox = [self boundingBox];
+	if (self.position.x - boundBox.size.width * self.anchorPoint.x > 0)
+	{
+		[self setPosition: ccp(boundBox.size.width * self.anchorPoint.x, self.position.y)];
+	}
+	
+	if (self.position.y - boundBox.size.height * self.anchorPoint.y > 0)
+	{
+		[self setPosition: ccp(self.position.x, boundBox.size.height * self.anchorPoint.y)];
+	}
+	
+	if (self.position.x + boundBox.size.width * (1 - self.anchorPoint.x) < winSize.width)
+	{
+		[self setPosition: ccp(winSize.width - boundBox.size.width * (1 - self.anchorPoint.x), self.position.y)];
+	}
+	
+	if (self.position.y + boundBox.size.height * (1 - self.anchorPoint.y) < winSize.height)
+	{
+		[self setPosition: ccp(self.position.x, winSize.height - boundBox.size.height * (1 - self.anchorPoint.y))];
+	}
+	
 }
 
 - (void) ccTouchesEnded: (NSSet *) touches 
