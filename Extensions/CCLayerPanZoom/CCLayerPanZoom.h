@@ -35,6 +35,8 @@
     float _maxScale;
     float _minScale;
 	NSMutableArray *_touches;
+	BOOL _enablePanBounds;
+	CGRect _panBoundsRect;
 }
 
 /** The maximum scale level */
@@ -42,6 +44,12 @@
 
 /** The minimum scale level */
 @property (readwrite, assign) float minScale;   
+
+/** Enable pan bounds for the restriction of scrolling */
+@property (readwrite, assign) BOOL enablePanBounds;   
+
+/** The rectangle that use to determine the restriction of scrolling */
+@property (readwrite, assign) CGRect panBoundsRect;   
 
 
 @end

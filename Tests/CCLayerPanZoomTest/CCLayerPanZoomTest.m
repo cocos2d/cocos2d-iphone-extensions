@@ -59,6 +59,9 @@ SYNTHESIZE_EXTENSION_TEST(CCLayerPanZoomTest)
         CGRect boundingRect = CGRectMake(0, 0, 964, 700);
 		[self setContentSize: boundingRect.size];
         self.scale = 2.0;
+		CGSize winSize = [[CCDirector sharedDirector] winSize];
+		self.panBoundsRect = CGRectMake(0, 0, winSize.width, winSize.height); 
+		self.enablePanBounds = YES;
 		
         // background
         CCSprite *background = [CCSprite spriteWithFile: @"background.png"];
