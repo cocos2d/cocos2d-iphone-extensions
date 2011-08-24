@@ -58,10 +58,9 @@ SYNTHESIZE_EXTENSION_TEST(CCLayerPanZoomTest)
         // our bounding rect
         CGRect boundingRect = CGRectMake(0, 0, 964, 700);
 		[self setContentSize: boundingRect.size];
-        self.scale = 2.0;
 		CGSize winSize = [[CCDirector sharedDirector] winSize];
-		self.panBoundsRect = CGRectMake(0, 0, winSize.width, winSize.height); 
-		self.enablePanBounds = YES;
+		self.panBoundsRect = CGRectMake(0, 0, winSize.width, winSize.height);
+		self.delegate = self;
 		
         // background
         CCSprite *background = [CCSprite spriteWithFile: @"background.png"];
@@ -82,6 +81,12 @@ SYNTHESIZE_EXTENSION_TEST(CCLayerPanZoomTest)
 		[self addChild: label];
 	}	
 	return self;
+}
+
+- (void) layerPanZoom: (id) layer 
+	   clickedAtPoint: (CGPoint) point
+{
+	NSLog(@"x - %f y - %f", point.x, point.y);
 }
 
 - (void) dealloc

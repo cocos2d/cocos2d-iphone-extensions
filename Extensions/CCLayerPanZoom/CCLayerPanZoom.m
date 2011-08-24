@@ -35,7 +35,7 @@
 /* Fix position for the layer considering _panBoundsRect and _enablePanBounds */
 - (void) fixLayerPosition;
 
-/* Fix position for the layer considering _panBoundsRect and _enablePanBounds */
+/* Fix scale for the layer considering _panBoundsRect and _enablePanBounds */
 - (void) fixLayerScale;
 
 /* Get minimum possible scale for the layer 
@@ -49,8 +49,9 @@
 
 @synthesize maxScale = _maxScale;
 @synthesize minScale = _minScale;
-@synthesize enablePanBounds = _enablePanBounds;
 @synthesize panBoundsRect = _panBoundsRect;
+@synthesize maxTouchDistanceToClick = _maxTouchDistanceToClick;
+@synthesize delegate = _delegate;
 
 #pragma mark Init
 
@@ -64,7 +65,9 @@
 		_maxScale = 2.0f;
 		_minScale = 0.1f;
 		_touches = [[NSMutableArray arrayWithCapacity: 10] retain];
-		_enablePanBounds = NO;
+		_panBoundsRect = CGRectNull;
+		_touchDistance = 0.0F;
+		_maxTouchDistanceToClick = 15.0f;
 	}	
 	return self;
 }
@@ -113,6 +116,8 @@
 		// Set new position of the layer
 		self.position = curPosLayer;
 		[self fixLayerPosition];
+		// Don't click with multitouch
+		_touchDistance = INFINITY;
 	}
 	else
 	{	
@@ -127,16 +132,30 @@
 		// Set new position of the layer
 		self.position = curPosTch;		
 		[self fixLayerPosition];
+		// Accumulate touche distance
+		_touchDistance += ccpDistance(curPosTch, prevPosTch);
 	}	
 }
 
 - (void) ccTouchesEnded: (NSSet *) touches 
 			  withEvent: (UIEvent *) event
 {
+	// Obtain click event
+	if ((_touchDistance < _maxTouchDistanceToClick) && (_delegate))
+	{
+		UITouch *touch = [_touches objectAtIndex: 0];        
+		CGPoint curPos = [[CCDirector sharedDirector] convertToGL: [touch locationInView: [touch view]]];
+		[_delegate layerPanZoom: self 
+				 clickedAtPoint: [self convertToNodeSpace: curPos]];
+	}
 	for (UITouch *touch in [touches allObjects]) 
 	{
 		// Remove touche from the array with current touches
 		[_touches removeObject: touch];
+	}
+	if ([_touches count] == 0)
+	{
+		_touchDistance = 0.0f;
 	}
 }
 
@@ -148,16 +167,13 @@
 		// Remove touche from the array with current touches
 		[_touches removeObject: touch];
 	}
+	if ([_touches count] == 0)
+	{
+		_touchDistance = 0.0f;
+	}
 }
 
 #pragma mark Scale and Position related
-
-- (void) setEnablePanBounds: (BOOL) enable
-{
-	_enablePanBounds = enable;
-	[self fixLayerScale];
-	[self fixLayerPosition];
-}
 
 - (void) setPanBoundsRect: (CGRect) rect
 {
@@ -168,7 +184,7 @@
 
 - (void) fixLayerPosition
 {
-	if (_enablePanBounds)
+	if (!CGRectIsNull(_panBoundsRect))
 	{
 		// Check the pan bounds and fix (if it's need) position
 		CGRect boundBox = [self boundingBox];
@@ -199,7 +215,7 @@
 
 - (void) fixLayerScale
 {
-	if (_enablePanBounds)
+	if (!CGRectIsNull(_panBoundsRect))
 	{
 		// Check the pan bounds and fix (if it's need) scale
 		CGRect boundBox = [self boundingBox];
@@ -210,7 +226,7 @@
 
 - (CGFloat) GetMinPossibleScale
 {
-	if (_enablePanBounds)
+	if (!CGRectIsNull(_panBoundsRect))
 	{
 		return MAX(_panBoundsRect.size.width / self.contentSize.width,
 				   _panBoundsRect.size.height / self.contentSize.height);
@@ -226,6 +242,7 @@
 - (void) dealloc
 {
 	[_touches release];
+	[_delegate release];
 	[super dealloc];
 }
 
