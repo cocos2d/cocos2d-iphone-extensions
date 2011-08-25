@@ -29,12 +29,12 @@
 
 #import "cocos2d.h"
 
-
+@class CCLayerPanZoom;
 @protocol CCLayerPanZoomClickDelegate <NSObject>
 
 /** Send to delegate each time, when click event was obtained. */
-- (void) layerPanZoom: (id) layer 
-	   clickedAtPoint: (CGPoint) point;
+- (void) layerPanZoom: (CCLayerPanZoom *) sender 
+	   clickedAtPoint: (CGPoint) aPoint;
 
 @end
 
@@ -59,11 +59,12 @@
 @property (readwrite, assign) float minScale;   
 
 /** The rectangle that use to determine the restriction of scrolling
- Set value CGRectNull to disable restriction */
+ * Set value CGRectNull to disable restriction */
 @property (readwrite, assign) CGRect panBoundsRect;   
 
 /** The max distance that touch can be drag before click
- If distance is greater then click will not be sent to delegate */
+ * If distance is greater then click will not be sent to delegate 
+ * Default is 15.0f */
 @property (readwrite, assign) CGFloat maxTouchDistanceToClick;   
 
 /** Delegate for layerPanZoom:clickedAtPoint: callbacks. */

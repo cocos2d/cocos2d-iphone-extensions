@@ -690,7 +690,7 @@
 		FA98ECC41403BAE2001CD6CE /* libcocos2d libraries.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 506EE05E10304ED200A389B3 /* libcocos2d libraries.a */; };
 		FA98ECD11403BB44001CD6CE /* CCLayerPanZoom.m in Sources */ = {isa = PBXBuildFile; fileRef = FA98ECD01403BB44001CD6CE /* CCLayerPanZoom.m */; };
 		FA98ECD61403BCBC001CD6CE /* background.png in Resources */ = {isa = PBXBuildFile; fileRef = FA98ECD31403BCBC001CD6CE /* background.png */; };
-		FA98ECD71403BCBC001CD6CE /* CCLayerPanZoomTest.m in Sources */ = {isa = PBXBuildFile; fileRef = FA98ECD51403BCBC001CD6CE /* CCLayerPanZoomTest.m */; };
+		FA98ECD71403BCBC001CD6CE /* CCLayerPanZoomTestLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = FA98ECD51403BCBC001CD6CE /* CCLayerPanZoomTestLayer.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -1343,8 +1343,8 @@
 		FA98ECCF1403BB44001CD6CE /* CCLayerPanZoom.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCLayerPanZoom.h; sourceTree = "<group>"; };
 		FA98ECD01403BB44001CD6CE /* CCLayerPanZoom.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCLayerPanZoom.m; sourceTree = "<group>"; };
 		FA98ECD31403BCBC001CD6CE /* background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = background.png; sourceTree = "<group>"; };
-		FA98ECD41403BCBC001CD6CE /* CCLayerPanZoomTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCLayerPanZoomTest.h; sourceTree = "<group>"; };
-		FA98ECD51403BCBC001CD6CE /* CCLayerPanZoomTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCLayerPanZoomTest.m; sourceTree = "<group>"; };
+		FA98ECD41403BCBC001CD6CE /* CCLayerPanZoomTestLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCLayerPanZoomTestLayer.h; sourceTree = "<group>"; };
+		FA98ECD51403BCBC001CD6CE /* CCLayerPanZoomTestLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCLayerPanZoomTestLayer.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1826,9 +1826,9 @@
 				6DA57F93139D632F004D8D0B /* CCVideoPlayerTest */,
 				6DA57DA6139CBD66004D8D0B /* CCMenuAdvancedTest */,
 				3F77655513FA059200346697 /* TMXGeneratorTest */,
+				FA98ECD21403BCBC001CD6CE /* CCLayerPanZoomTest */,
 				6DA5775E139C9837004D8D0B /* SharedResources */,
 				6DA5776F139C9837004D8D0B /* SharedSources */,
-				FA98ECD21403BCBC001CD6CE /* CCLayerPanZoomTest */,
 			);
 			path = Tests;
 			sourceTree = "<group>";
@@ -2393,8 +2393,8 @@
 			isa = PBXGroup;
 			children = (
 				FA98ECD31403BCBC001CD6CE /* background.png */,
-				FA98ECD41403BCBC001CD6CE /* CCLayerPanZoomTest.h */,
-				FA98ECD51403BCBC001CD6CE /* CCLayerPanZoomTest.m */,
+				FA98ECD41403BCBC001CD6CE /* CCLayerPanZoomTestLayer.h */,
+				FA98ECD51403BCBC001CD6CE /* CCLayerPanZoomTestLayer.m */,
 			);
 			path = CCLayerPanZoomTest;
 			sourceTree = "<group>";
@@ -3367,7 +3367,7 @@
 				FA98ECB81403BAE2001CD6CE /* main.m in Sources */,
 				FA98ECB91403BAE2001CD6CE /* RootViewController.m in Sources */,
 				FA98ECD11403BB44001CD6CE /* CCLayerPanZoom.m in Sources */,
-				FA98ECD71403BCBC001CD6CE /* CCLayerPanZoomTest.m in Sources */,
+				FA98ECD71403BCBC001CD6CE /* CCLayerPanZoomTestLayer.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

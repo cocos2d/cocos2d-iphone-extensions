@@ -29,7 +29,7 @@
 #import "cocos2d.h"
 #import "CCLayerPanZoom.h"
 
-@interface CCLayerPanZoomTest : CCLayerPanZoom <CCLayerPanZoomClickDelegate>
+@interface CCLayerPanZoomTestLayer : CCLayerPanZoom <CCLayerPanZoomClickDelegate>
 {
 }
 

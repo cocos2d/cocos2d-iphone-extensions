@@ -27,12 +27,12 @@
  */
 
 // Import the interfaces
-#import "CCLayerPanZoomTest.h"
+#import "CCLayerPanZoomTestLayer.h"
 #import "ExtensionTest.h"
 
-SYNTHESIZE_EXTENSION_TEST(CCLayerPanZoomTest)
+SYNTHESIZE_EXTENSION_TEST(CCLayerPanZoomTestLayer)
 
-@implementation CCLayerPanZoomTest
+@implementation CCLayerPanZoomTestLayer
 
 + (CCScene *) scene
 {
@@ -40,7 +40,7 @@ SYNTHESIZE_EXTENSION_TEST(CCLayerPanZoomTest)
 	CCScene *scene = [CCScene node];
 	
 	// 'layer' is an autorelease object.
-	CCLayerPanZoomTest *layer = [CCLayerPanZoomTest node];
+	CCLayerPanZoomTestLayer *layer = [CCLayerPanZoomTestLayer node];
 	
 	// add layer as a child to scene
 	[scene addChild: layer];
@@ -83,18 +83,10 @@ SYNTHESIZE_EXTENSION_TEST(CCLayerPanZoomTest)
 	return self;
 }
 
-- (void) layerPanZoom: (id) layer 
+- (void) layerPanZoom: (CCLayerPanZoom *) sender 
 	   clickedAtPoint: (CGPoint) point
 {
-	NSLog(@"x - %f y - %f", point.x, point.y);
+	NSLog(@"CCLayerPanZoomTestLayer#layerPanZoom: %@ clickedAtPoint: { %f, %f }",sender, point.x, point.y);
 }
 
-- (void) dealloc
-{
-	// in case you have something to dealloc, do it in this method
-	// in this particular example nothing needs to be released.
-	// cocos2d will automatically release all the children (Label)
-	// don't forget to call "super dealloc"
-	[super dealloc];
-}
 @end
