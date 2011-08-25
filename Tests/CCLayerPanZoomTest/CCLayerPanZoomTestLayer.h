@@ -29,10 +29,11 @@
 #import "cocos2d.h"
 #import "CCLayerPanZoom.h"
 
+/** TODO: refactor - incapsulate CCLayerPanZoom */
 @interface CCLayerPanZoomTestLayer : CCLayerPanZoom <CCLayerPanZoomClickDelegate>
 {
 }
 
 + (CCScene *) scene;
-
+- (void) updateForScreenReshape;
 @end

@@ -32,6 +32,13 @@
 
 SYNTHESIZE_EXTENSION_TEST(CCLayerPanZoomTestLayer)
 
+
+enum nodeTags
+{
+	kBackgroundTag,
+	kLabelTag,
+};
+
 @implementation CCLayerPanZoomTestLayer
 
 + (CCScene *) scene
@@ -55,32 +62,54 @@ SYNTHESIZE_EXTENSION_TEST(CCLayerPanZoomTestLayer)
 	// Apple recommends to re-assign "self" with the "super" return value
 	if((self = [super init])) 
     {
-        // our bounding rect
-        CGRect boundingRect = CGRectMake(0, 0, 964, 700);
-		[self setContentSize: boundingRect.size];
-		CGSize winSize = [[CCDirector sharedDirector] winSize];
-		self.panBoundsRect = CGRectMake(0, 0, winSize.width, winSize.height);
-		self.delegate = self;
 		
         // background
         CCSprite *background = [CCSprite spriteWithFile: @"background.png"];
         background.anchorPoint = ccp(0,0);
-        [self addChild: background];
+        [self addChild: background z:0 tag: kBackgroundTag];
+		
 		
 		// create and initialize a Label
 		CCLabelTTF *label = [CCLabelTTF labelWithString: @"Try panning and zooming using drag and pinch" 
                                                fontName: @"Marker Felt" 
                                                fontSize: 32];
+		label.color = ccWHITE;
 		
 		
-		// position the label on the center of the bounds
-		label.position =  ccp(boundingRect.size.width * 0.5f, boundingRect.size.height * 0.5f);
-        label.color = ccWHITE;
+        
 		
 		// add the label as a child to this Layer
-		[self addChild: label];
+		[self addChild: label z: 1 tag: kLabelTag];
+		
+		[self updateForScreenReshape];
 	}	
 	return self;
+}
+
+- (void) updateForScreenReshape
+{
+	CGSize winSize = [[CCDirector sharedDirector] winSize];
+	
+	
+	CCNode *background = [self getChildByTag: kBackgroundTag];
+	// our bounding rect
+	CGRect boundingRect = CGRectMake(0, 0, background.contentSize.width, background.contentSize.height);
+	[self setContentSize: boundingRect.size];
+	
+	self.panBoundsRect = CGRectMake(0, 0, winSize.width, winSize.height);
+	self.delegate = self; //< TODO: very bad, i know, but it's just for testing click.
+	
+	// position the label on the center of the bounds
+	CCNode *label = [self getChildByTag: kLabelTag];
+	label.position =  ccp(boundingRect.size.width * 0.5f, boundingRect.size.height * 0.5f);
+}
+
+- (void) onExit
+{
+	[[self retain] autorelease]; //< Absolutely hackish and stupid =)))
+	self.delegate = nil;
+	
+	[super onExit];
 }
 
 - (void) layerPanZoom: (CCLayerPanZoom *) sender 
