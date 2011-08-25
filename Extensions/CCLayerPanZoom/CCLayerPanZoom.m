@@ -40,7 +40,7 @@
 
 /* Get minimum possible scale for the layer 
  considering _panBoundsRect and _enablePanBounds */
-- (CGFloat) GetMinPossibleScale;
+- (CGFloat) getMinPossibleScale;
 
 @end
 
@@ -220,11 +220,11 @@
 		// Check the pan bounds and fix (if it's need) scale
 		CGRect boundBox = [self boundingBox];
 		if ((boundBox.size.width < _panBoundsRect.size.width) || (boundBox.size.height < _panBoundsRect.size.height))
-			self.scale = [self GetMinPossibleScale];	
+			self.scale = [self getMinPossibleScale];	
 	}
 }
 
-- (CGFloat) GetMinPossibleScale
+- (CGFloat) getMinPossibleScale
 {
 	if (!CGRectIsNull(_panBoundsRect))
 	{
