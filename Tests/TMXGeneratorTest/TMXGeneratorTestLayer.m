@@ -140,11 +140,11 @@ enum
 - (NSDictionary*) mapSetupInfo
 {
 	NSMutableDictionary* dict = [NSMutableDictionary dictionaryWithCapacity:5];
-	[dict setObject:[NSString stringWithFormat:@"%i", kNumTilesPerChunk] forKey:kHeaderInfoMapWidth];
-	[dict setObject:[NSString stringWithFormat:@"%i", kNumTilesPerChunk] forKey:kHeaderInfoMapHeight];
-	[dict setObject:[NSString stringWithFormat:@"%i", kNumPixelsPerTileSquare] forKey:kHeaderInfoMapTileWidth];
-	[dict setObject:[NSString stringWithFormat:@"%i", kNumPixelsPerTileSquare] forKey:kHeaderInfoMapTileHeight];
-	[dict setObject:[self mapFilePath] forKey:kHeaderInfoMapPath];
+	[dict setObject:[NSString stringWithFormat:@"%i", kNumTilesPerChunk] forKey:kTMXGeneratorHeaderInfoMapWidth];
+	[dict setObject:[NSString stringWithFormat:@"%i", kNumTilesPerChunk] forKey:kTMXGeneratorHeaderInfoMapHeight];
+	[dict setObject:[NSString stringWithFormat:@"%i", kNumPixelsPerTileSquare] forKey:kTMXGeneratorHeaderInfoMapTileWidth];
+	[dict setObject:[NSString stringWithFormat:@"%i", kNumPixelsPerTileSquare] forKey:kTMXGeneratorHeaderInfoMapTileHeight];
+	[dict setObject:[self mapFilePath] forKey:kTMXGeneratorHeaderInfoMapPath];
 	
 	return dict;
 }
