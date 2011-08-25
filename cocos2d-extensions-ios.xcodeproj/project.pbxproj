@@ -22,6 +22,7 @@
 				6DA580F8139E3C05004D8D0B /* PBXTargetDependency */,
 				6DA580F0139E3C05004D8D0B /* PBXTargetDependency */,
 				3F77658713FA078E00346697 /* PBXTargetDependency */,
+				FA98ED0D1403C0F3001CD6CE /* PBXTargetDependency */,
 			);
 			name = BuildAllTests;
 			productName = BuildAllTests;
@@ -665,6 +666,31 @@
 		DCCBF1BB0F6022AE0040855A /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DCCBF1BA0F6022AE0040855A /* OpenGLES.framework */; };
 		DCCBF1BD0F6022AE0040855A /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DCCBF1BC0F6022AE0040855A /* QuartzCore.framework */; };
 		DCCBF1BF0F6022AE0040855A /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DCCBF1BE0F6022AE0040855A /* UIKit.framework */; };
+		FA98ECAD1403BAE2001CD6CE /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 6DA5775F139C9837004D8D0B /* Default.png */; };
+		FA98ECAE1403BAE2001CD6CE /* fps_images.png in Resources */ = {isa = PBXBuildFile; fileRef = 6DA57764139C9837004D8D0B /* fps_images.png */; };
+		FA98ECAF1403BAE2001CD6CE /* Icon-72.png in Resources */ = {isa = PBXBuildFile; fileRef = 6DA57765139C9837004D8D0B /* Icon-72.png */; };
+		FA98ECB01403BAE2001CD6CE /* Icon-Small-50.png in Resources */ = {isa = PBXBuildFile; fileRef = 6DA57766139C9837004D8D0B /* Icon-Small-50.png */; };
+		FA98ECB11403BAE2001CD6CE /* Icon-Small.png in Resources */ = {isa = PBXBuildFile; fileRef = 6DA57767139C9837004D8D0B /* Icon-Small.png */; };
+		FA98ECB21403BAE2001CD6CE /* Icon-Small@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6DA57768139C9837004D8D0B /* Icon-Small@2x.png */; };
+		FA98ECB31403BAE2001CD6CE /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 6DA5776A139C9837004D8D0B /* Icon.png */; };
+		FA98ECB41403BAE2001CD6CE /* Icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6DA5776B139C9837004D8D0B /* Icon@2x.png */; };
+		FA98ECB51403BAE2001CD6CE /* iTunesArtwork in Resources */ = {isa = PBXBuildFile; fileRef = 6DA5776E139C9837004D8D0B /* iTunesArtwork */; };
+		FA98ECB71403BAE2001CD6CE /* cocos2d_extensions_iosAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DA57772139C9837004D8D0B /* cocos2d_extensions_iosAppDelegate.m */; };
+		FA98ECB81403BAE2001CD6CE /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DA57779139C9837004D8D0B /* main.m */; };
+		FA98ECB91403BAE2001CD6CE /* RootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DA5777B139C9837004D8D0B /* RootViewController.m */; };
+		FA98ECBB1403BAE2001CD6CE /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DCCBF1B60F6022AE0040855A /* CoreGraphics.framework */; };
+		FA98ECBC1403BAE2001CD6CE /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DCCBF1B80F6022AE0040855A /* Foundation.framework */; };
+		FA98ECBD1403BAE2001CD6CE /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DCCBF1BA0F6022AE0040855A /* OpenGLES.framework */; };
+		FA98ECBE1403BAE2001CD6CE /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DCCBF1BC0F6022AE0040855A /* QuartzCore.framework */; };
+		FA98ECBF1403BAE2001CD6CE /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DCCBF1BE0F6022AE0040855A /* UIKit.framework */; };
+		FA98ECC01403BAE2001CD6CE /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DC6640020F83B3EA000B3E49 /* AudioToolbox.framework */; };
+		FA98ECC11403BAE2001CD6CE /* OpenAL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DC6640040F83B3EA000B3E49 /* OpenAL.framework */; };
+		FA98ECC21403BAE2001CD6CE /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 506EDB87102F4C4000A389B3 /* libz.dylib */; };
+		FA98ECC31403BAE2001CD6CE /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 506EDBA4102F4C9F00A389B3 /* AVFoundation.framework */; };
+		FA98ECC41403BAE2001CD6CE /* libcocos2d libraries.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 506EE05E10304ED200A389B3 /* libcocos2d libraries.a */; };
+		FA98ECD11403BB44001CD6CE /* CCLayerPanZoom.m in Sources */ = {isa = PBXBuildFile; fileRef = FA98ECD01403BB44001CD6CE /* CCLayerPanZoom.m */; };
+		FA98ECD61403BCBC001CD6CE /* background.png in Resources */ = {isa = PBXBuildFile; fileRef = FA98ECD31403BCBC001CD6CE /* background.png */; };
+		FA98ECD71403BCBC001CD6CE /* CCLayerPanZoomTest.m in Sources */ = {isa = PBXBuildFile; fileRef = FA98ECD51403BCBC001CD6CE /* CCLayerPanZoomTest.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -801,6 +827,20 @@
 			remoteGlobalIDString = 506EE05D10304ED200A389B3;
 			remoteInfo = "cocos2d libraries";
 		};
+		FA98ECAB1403BAE2001CD6CE /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 29B97313FDCFA39411CA2CEA /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 506EE05D10304ED200A389B3;
+			remoteInfo = "cocos2d libraries";
+		};
+		FA98ED0C1403C0F3001CD6CE /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 29B97313FDCFA39411CA2CEA /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = FA98ECA91403BAE2001CD6CE;
+			remoteInfo = CCLayerPanZoomTest;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
@@ -813,7 +853,7 @@
 		3F77655413FA058200346697 /* TMXGenerator.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TMXGenerator.m; sourceTree = "<group>"; };
 		3F77655913FA059200346697 /* testMap.tmx */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = testMap.tmx; sourceTree = "<group>"; };
 		3F77655A13FA059200346697 /* testTiles.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = testTiles.png; sourceTree = "<group>"; };
-		3F77655B13FA059200346697 /* TMXGeneratorTestLayer.h */ = {isa = PBXFileReference; path = TMXGeneratorTestLayer.h; sourceTree = "<group>"; };
+		3F77655B13FA059200346697 /* TMXGeneratorTestLayer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TMXGeneratorTestLayer.h; sourceTree = "<group>"; };
 		3F77655C13FA059200346697 /* TMXGeneratorTestLayer.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TMXGeneratorTestLayer.m; sourceTree = "<group>"; };
 		3F77657C13FA059A00346697 /* TMXGenerator Test.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "TMXGenerator Test.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		504DFC6810AF1739006D82FE /* LICENSE.cocos2d */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE.cocos2d; sourceTree = "<group>"; };
@@ -1299,6 +1339,12 @@
 		DCCBF1BA0F6022AE0040855A /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
 		DCCBF1BC0F6022AE0040855A /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		DCCBF1BE0F6022AE0040855A /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		FA98ECC81403BAE2001CD6CE /* CCLayerPanZoomTest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CCLayerPanZoomTest.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		FA98ECCF1403BB44001CD6CE /* CCLayerPanZoom.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCLayerPanZoom.h; sourceTree = "<group>"; };
+		FA98ECD01403BB44001CD6CE /* CCLayerPanZoom.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCLayerPanZoom.m; sourceTree = "<group>"; };
+		FA98ECD31403BCBC001CD6CE /* background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = background.png; sourceTree = "<group>"; };
+		FA98ECD41403BCBC001CD6CE /* CCLayerPanZoomTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCLayerPanZoomTest.h; sourceTree = "<group>"; };
+		FA98ECD51403BCBC001CD6CE /* CCLayerPanZoomTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCLayerPanZoomTest.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1487,6 +1533,23 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		FA98ECBA1403BAE2001CD6CE /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FA98ECBB1403BAE2001CD6CE /* CoreGraphics.framework in Frameworks */,
+				FA98ECBC1403BAE2001CD6CE /* Foundation.framework in Frameworks */,
+				FA98ECBD1403BAE2001CD6CE /* OpenGLES.framework in Frameworks */,
+				FA98ECBE1403BAE2001CD6CE /* QuartzCore.framework in Frameworks */,
+				FA98ECBF1403BAE2001CD6CE /* UIKit.framework in Frameworks */,
+				FA98ECC01403BAE2001CD6CE /* AudioToolbox.framework in Frameworks */,
+				FA98ECC11403BAE2001CD6CE /* OpenAL.framework in Frameworks */,
+				FA98ECC21403BAE2001CD6CE /* libz.dylib in Frameworks */,
+				FA98ECC31403BAE2001CD6CE /* AVFoundation.framework in Frameworks */,
+				FA98ECC41403BAE2001CD6CE /* libcocos2d libraries.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -1504,6 +1567,7 @@
 				6DA58360139E510B004D8D0B /* CCVideoPlayerTest.app */,
 				6DA5863013A022E8004D8D0B /* CCSendMessagesTest.app */,
 				3F77657C13FA059A00346697 /* TMXGenerator Test.app */,
+				FA98ECC81403BAE2001CD6CE /* CCLayerPanZoomTest.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -1764,6 +1828,7 @@
 				3F77655513FA059200346697 /* TMXGeneratorTest */,
 				6DA5775E139C9837004D8D0B /* SharedResources */,
 				6DA5776F139C9837004D8D0B /* SharedSources */,
+				FA98ECD21403BCBC001CD6CE /* CCLayerPanZoomTest */,
 			);
 			path = Tests;
 			sourceTree = "<group>";
@@ -2043,6 +2108,7 @@
 				6DA57D99139CBD3C004D8D0B /* CCMenuAdvanced */,
 				6DA57D9C139CBD3C004D8D0B /* CCMenuItemSpriteIndependent */,
 				3F77654E13FA058200346697 /* TMXGenerator */,
+				FA98ECCE1403BB44001CD6CE /* CCLayerPanZoom */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -2312,6 +2378,25 @@
 				6DA5891513A06E33004D8D0B /* README.md */,
 			);
 			path = FilesDownloader;
+			sourceTree = "<group>";
+		};
+		FA98ECCE1403BB44001CD6CE /* CCLayerPanZoom */ = {
+			isa = PBXGroup;
+			children = (
+				FA98ECCF1403BB44001CD6CE /* CCLayerPanZoom.h */,
+				FA98ECD01403BB44001CD6CE /* CCLayerPanZoom.m */,
+			);
+			path = CCLayerPanZoom;
+			sourceTree = "<group>";
+		};
+		FA98ECD21403BCBC001CD6CE /* CCLayerPanZoomTest */ = {
+			isa = PBXGroup;
+			children = (
+				FA98ECD31403BCBC001CD6CE /* background.png */,
+				FA98ECD41403BCBC001CD6CE /* CCLayerPanZoomTest.h */,
+				FA98ECD51403BCBC001CD6CE /* CCLayerPanZoomTest.m */,
+			);
+			path = CCLayerPanZoomTest;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -2618,6 +2703,24 @@
 			productReference = 6DA5863013A022E8004D8D0B /* CCSendMessagesTest.app */;
 			productType = "com.apple.product-type.application";
 		};
+		FA98ECA91403BAE2001CD6CE /* CCLayerPanZoomTest */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = FA98ECC51403BAE2001CD6CE /* Build configuration list for PBXNativeTarget "CCLayerPanZoomTest" */;
+			buildPhases = (
+				FA98ECAC1403BAE2001CD6CE /* Resources */,
+				FA98ECB61403BAE2001CD6CE /* Sources */,
+				FA98ECBA1403BAE2001CD6CE /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				FA98ECAA1403BAE2001CD6CE /* PBXTargetDependency */,
+			);
+			name = CCLayerPanZoomTest;
+			productName = "cocos2d-extensions-ios";
+			productReference = FA98ECC81403BAE2001CD6CE /* CCLayerPanZoomTest.app */;
+			productType = "com.apple.product-type.application";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -2647,8 +2750,9 @@
 				6DA580A6139E39CB004D8D0B /* CCSliderTest */,
 				6DA580C8139E39D0004D8D0B /* FilesDownloaderTest */,
 				6DA5861113A022E8004D8D0B /* CCSendMessagesTest */,
-				1D6058900D05DD3D006BFB54 /* Extension Test Template */,
 				3F77655D13FA059A00346697 /* TMXGenerator Test */,
+				FA98ECA91403BAE2001CD6CE /* CCLayerPanZoomTest */,
+				1D6058900D05DD3D006BFB54 /* Extension Test Template */,
 			);
 		};
 /* End PBXProject section */
@@ -3020,6 +3124,23 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		FA98ECAC1403BAE2001CD6CE /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FA98ECAD1403BAE2001CD6CE /* Default.png in Resources */,
+				FA98ECAE1403BAE2001CD6CE /* fps_images.png in Resources */,
+				FA98ECAF1403BAE2001CD6CE /* Icon-72.png in Resources */,
+				FA98ECB01403BAE2001CD6CE /* Icon-Small-50.png in Resources */,
+				FA98ECB11403BAE2001CD6CE /* Icon-Small.png in Resources */,
+				FA98ECB21403BAE2001CD6CE /* Icon-Small@2x.png in Resources */,
+				FA98ECB31403BAE2001CD6CE /* Icon.png in Resources */,
+				FA98ECB41403BAE2001CD6CE /* Icon@2x.png in Resources */,
+				FA98ECB51403BAE2001CD6CE /* iTunesArtwork in Resources */,
+				FA98ECD61403BCBC001CD6CE /* background.png in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -3238,6 +3359,18 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		FA98ECB61403BAE2001CD6CE /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FA98ECB71403BAE2001CD6CE /* cocos2d_extensions_iosAppDelegate.m in Sources */,
+				FA98ECB81403BAE2001CD6CE /* main.m in Sources */,
+				FA98ECB91403BAE2001CD6CE /* RootViewController.m in Sources */,
+				FA98ECD11403BB44001CD6CE /* CCLayerPanZoom.m in Sources */,
+				FA98ECD71403BCBC001CD6CE /* CCLayerPanZoomTest.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -3335,6 +3468,16 @@
 			isa = PBXTargetDependency;
 			target = 506EE05D10304ED200A389B3 /* cocos2d libraries */;
 			targetProxy = 6DA5861313A022E8004D8D0B /* PBXContainerItemProxy */;
+		};
+		FA98ECAA1403BAE2001CD6CE /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 506EE05D10304ED200A389B3 /* cocos2d libraries */;
+			targetProxy = FA98ECAB1403BAE2001CD6CE /* PBXContainerItemProxy */;
+		};
+		FA98ED0D1403C0F3001CD6CE /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = FA98ECA91403BAE2001CD6CE /* CCLayerPanZoomTest */;
+			targetProxy = FA98ED0C1403C0F3001CD6CE /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -3915,6 +4058,52 @@
 			};
 			name = Release;
 		};
+		FA98ECC61403BAE2001CD6CE /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_FIX_AND_CONTINUE = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = Tests/SharedSources/cocos2d_extensions_ios_Prefix.pch;
+				GCC_TREAT_WARNINGS_AS_ERRORS = NO;
+				INFOPLIST_FILE = Tests/SharedResources/Info.plist;
+				ONLY_ACTIVE_ARCH = YES;
+				OTHER_LDFLAGS = (
+					"-all_load",
+					"-ObjC",
+				);
+				PREBINDING = NO;
+				PRODUCT_NAME = CCLayerPanZoomTest;
+				WARNING_CFLAGS = "-Wall";
+			};
+			name = Debug;
+		};
+		FA98ECC71403BAE2001CD6CE /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_ENABLE_FIX_AND_CONTINUE = NO;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = Tests/SharedSources/cocos2d_extensions_ios_Prefix.pch;
+				GCC_TREAT_WARNINGS_AS_ERRORS = NO;
+				INFOPLIST_FILE = "Info copy.plist";
+				ONLY_ACTIVE_ARCH = NO;
+				OTHER_LDFLAGS = (
+					"-all_load",
+					"-ObjC",
+				);
+				PREBINDING = NO;
+				PRODUCT_NAME = CCLayerPanZoomTest;
+				WARNING_CFLAGS = "-Wall";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -4031,6 +4220,15 @@
 			buildConfigurations = (
 				C01FCF4F08A954540054247B /* Debug */,
 				C01FCF5008A954540054247B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		FA98ECC51403BAE2001CD6CE /* Build configuration list for PBXNativeTarget "CCLayerPanZoomTest" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				FA98ECC61403BAE2001CD6CE /* Debug */,
+				FA98ECC71403BAE2001CD6CE /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
