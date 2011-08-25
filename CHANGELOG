@@ -1,5 +1,6 @@
 
 0.2 - XX-XXXXX-2011
+   * New Extension: CCLayerPanZoom
    * New Extension: TMXGenerator.
    * Added support for all orientations for all tests.
 
