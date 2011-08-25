@@ -62,10 +62,12 @@ enum nodeTags
 	// Apple recommends to re-assign "self" with the "super" return value
 	if((self = [super init])) 
     {
+		self.delegate = self; //< TODO: very bad, i know, but it's just for testing click.
 		
         // background
         CCSprite *background = [CCSprite spriteWithFile: @"background.png"];
         background.anchorPoint = ccp(0,0);
+		background.scale = CC_CONTENT_SCALE_FACTOR();
         [self addChild: background z:0 tag: kBackgroundTag];
 		
 		
@@ -73,6 +75,7 @@ enum nodeTags
 		CCLabelTTF *label = [CCLabelTTF labelWithString: @"Try panning and zooming using drag and pinch" 
                                                fontName: @"Marker Felt" 
                                                fontSize: 32];
+		label.scale = 0.7f; //< to be visible on iPod Touch screen.
 		label.color = ccWHITE;
 		
 		
@@ -93,11 +96,14 @@ enum nodeTags
 	
 	CCNode *background = [self getChildByTag: kBackgroundTag];
 	// our bounding rect
-	CGRect boundingRect = CGRectMake(0, 0, background.contentSize.width, background.contentSize.height);
+	CGRect boundingRect = CGRectMake(0, 0, 0, 0);
+	boundingRect.size = [background boundingBox].size;
 	[self setContentSize: boundingRect.size];
 	
 	self.panBoundsRect = CGRectMake(0, 0, winSize.width, winSize.height);
-	self.delegate = self; //< TODO: very bad, i know, but it's just for testing click.
+	
+	self.anchorPoint = ccp(0.5f, 0.5f);
+	self.position = ccp(0.5f * winSize.width, 0.5f * winSize.height);
 	
 	// position the label on the center of the bounds
 	CCNode *label = [self getChildByTag: kLabelTag];
