@@ -194,7 +194,7 @@
 	
 	[dict setObject:name forKey:kTMXGeneratorObjectGroupName];
 	[dict setObject:[NSString stringWithFormat:@"%i", width] forKey:kTMXGeneratorObjectGroupWidth];
-	[dict setObject:[NSString stringWithFormat:@"%i", width] forKey:kTMXGeneratorObjectGroupHeight];
+	[dict setObject:[NSString stringWithFormat:@"%i", height] forKey:kTMXGeneratorObjectGroupHeight];
 	[dict setObject:objects forKey:kTMXGeneratorObjectGroupProperties];
 	
 	[objectGroups addObject:dict];
