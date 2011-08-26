@@ -110,7 +110,7 @@
 	//
 	// return YES for the supported orientations
 	
-	return YES; //( UIInterfaceOrientationIsLandscape( interfaceOrientation ) );
+	return ( UIInterfaceOrientationIsLandscape( interfaceOrientation ) );
 	
 #else
 #error Unknown value in GAME_AUTOROTATION
@@ -149,6 +149,7 @@
 		rect.size.width *= contentScaleFactor;
 		rect.size.height *= contentScaleFactor;
 	}
+
 	glView.frame = rect;
 	
 
