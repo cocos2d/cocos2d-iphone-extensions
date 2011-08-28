@@ -33,18 +33,26 @@
 	
 	// tile map creation
 	NSMutableDictionary* objectListByGroupName;
+	CCTMXTiledMap* map;
+
+	// player
+	CCSprite* playerSprite;
+	
+	// convenience
+	CGFloat currentScale;
 }
 
 // returns a CCScene that contains the TMXGenerator_WorldMap as the only child
 +(CCScene *) scene;
 
-- (void) updateForScreenReshape;
 
 @end
 
 
 // tile map creation delegate #defines
-#define kOutdoorTileSetName				@"OutdoorTiles"
+#define kOutdoorTileSetName				@"OutdoorTileset"
+#define kMetaLayerTileSetName			@"MetaTileset"
+#define kMetaTileSetAtlasName			@"metaTiles.png"
 #define kOutdoorTileSetAtlasName		@"testTiles.png"
 
 #define kBackgroundLayerName			@"Background"
@@ -60,10 +68,28 @@
 
 #define kGeneratedMapName				@"generatedTMXMap.tmx"
 
+
+// Tile types (if used as types) all need to be unique across all enums or things can get confused.
 typedef enum {
-	kTileGrass = 0,
-	kTileDirt,
-	kTileRock,
-	kTileWater
-} tileNames;
+	kOutdoorTileGrass = 0,
+	kOutdoorTileDirt,
+	kOutdoorTileRock,
+	kOutdoorTileWater,
+	kOutdoorTileEnd
+} outdoorTileNames;
+
+typedef enum {
+	kMetaTileWater = kOutdoorTileEnd,
+	kMetaTileRock,
+	kMetaTileEnd
+} metaTileNames;
+
+typedef enum
+{
+	tileBase_NoCollision = kMetaTileEnd,
+	tileBaseRock,
+	tileBaseWater,
+	tileBaseEnd
+} BaseTileTypes;
+
 

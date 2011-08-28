@@ -56,8 +56,6 @@
 		3F77658013FA075300346697 /* LFCGzipUtility.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F77655213FA058200346697 /* LFCGzipUtility.m */; };
 		3F77658113FA075A00346697 /* TMXGenerator.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F77655413FA058200346697 /* TMXGenerator.m */; };
 		3F77658313FA076900346697 /* TMXGeneratorTestLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F77655C13FA059200346697 /* TMXGeneratorTestLayer.m */; };
-		3F77658413FA076E00346697 /* testMap.tmx in Resources */ = {isa = PBXBuildFile; fileRef = 3F77655913FA059200346697 /* testMap.tmx */; };
-		3F77658513FA077300346697 /* testTiles.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F77655A13FA059200346697 /* testTiles.png */; };
 		505574581045D68500A31725 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 506EDBA4102F4C9F00A389B3 /* AVFoundation.framework */; };
 		505574591045D68500A31725 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DC6640020F83B3EA000B3E49 /* AudioToolbox.framework */; };
 		5055745A1045D68500A31725 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DCCBF1B60F6022AE0040855A /* CoreGraphics.framework */; };
@@ -68,6 +66,17 @@
 		506EDB88102F4C4000A389B3 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 506EDB87102F4C4000A389B3 /* libz.dylib */; };
 		506EDBA5102F4C9F00A389B3 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 506EDBA4102F4C9F00A389B3 /* AVFoundation.framework */; };
 		506EE1A91030508200A389B3 /* libcocos2d libraries.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 506EE05E10304ED200A389B3 /* libcocos2d libraries.a */; };
+		6D2CF06E1426A1E700F15FFA /* CDAudioManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D2CF0661426A1E700F15FFA /* CDAudioManager.m */; };
+		6D2CF06F1426A1E700F15FFA /* CDOpenALSupport.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D2CF0691426A1E700F15FFA /* CDOpenALSupport.m */; };
+		6D2CF0701426A1E700F15FFA /* CocosDenshion.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D2CF06B1426A1E700F15FFA /* CocosDenshion.m */; };
+		6D2CF0711426A1E700F15FFA /* SimpleAudioEngine.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D2CF06D1426A1E700F15FFA /* SimpleAudioEngine.m */; };
+		6D2CF07A1426A23000F15FFA /* hero.png in Resources */ = {isa = PBXBuildFile; fileRef = 6D2CF0731426A23000F15FFA /* hero.png */; };
+		6D2CF07B1426A23000F15FFA /* hit.wav in Resources */ = {isa = PBXBuildFile; fileRef = 6D2CF0741426A23000F15FFA /* hit.wav */; };
+		6D2CF07C1426A23000F15FFA /* metaTiles.png in Resources */ = {isa = PBXBuildFile; fileRef = 6D2CF0751426A23000F15FFA /* metaTiles.png */; };
+		6D2CF07D1426A23000F15FFA /* move.wav in Resources */ = {isa = PBXBuildFile; fileRef = 6D2CF0761426A23000F15FFA /* move.wav */; };
+		6D2CF07E1426A23000F15FFA /* testMap.tmx in Resources */ = {isa = PBXBuildFile; fileRef = 6D2CF0771426A23000F15FFA /* testMap.tmx */; };
+		6D2CF07F1426A23000F15FFA /* testTiles.png in Resources */ = {isa = PBXBuildFile; fileRef = 6D2CF0781426A23000F15FFA /* testTiles.png */; };
+		6D2CF0801426A23000F15FFA /* water.wav in Resources */ = {isa = PBXBuildFile; fileRef = 6D2CF0791426A23000F15FFA /* water.wav */; };
 		6D77EF7613D6D55500B82EF1 /* bait.m4v in Resources */ = {isa = PBXBuildFile; fileRef = 6D77EF7513D6D55500B82EF1 /* bait.m4v */; };
 		6D7F4FB513A284670022601B /* horizontalTestButton-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = 6D7F4FA713A284670022601B /* horizontalTestButton-hd.png */; };
 		6D7F4FB613A284670022601B /* horizontalTestButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 6D7F4FA813A284670022601B /* horizontalTestButton.png */; };
@@ -851,8 +860,6 @@
 		3F77655213FA058200346697 /* LFCGzipUtility.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LFCGzipUtility.m; sourceTree = "<group>"; };
 		3F77655313FA058200346697 /* TMXGenerator.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TMXGenerator.h; sourceTree = "<group>"; };
 		3F77655413FA058200346697 /* TMXGenerator.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TMXGenerator.m; sourceTree = "<group>"; };
-		3F77655913FA059200346697 /* testMap.tmx */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = testMap.tmx; sourceTree = "<group>"; };
-		3F77655A13FA059200346697 /* testTiles.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = testTiles.png; sourceTree = "<group>"; };
 		3F77655B13FA059200346697 /* TMXGeneratorTestLayer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TMXGeneratorTestLayer.h; sourceTree = "<group>"; };
 		3F77655C13FA059200346697 /* TMXGeneratorTestLayer.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TMXGeneratorTestLayer.m; sourceTree = "<group>"; };
 		3F77657C13FA059A00346697 /* TMXGenerator Test.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "TMXGenerator Test.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -860,6 +867,22 @@
 		506EDB87102F4C4000A389B3 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
 		506EDBA4102F4C9F00A389B3 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		506EE05E10304ED200A389B3 /* libcocos2d libraries.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libcocos2d libraries.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		6D2CF0651426A1E700F15FFA /* CDAudioManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CDAudioManager.h; path = "../tmp/cocos2d-iphone-extensions/cocos2d/CocosDenshion/CocosDenshion/CDAudioManager.h"; sourceTree = "<group>"; };
+		6D2CF0661426A1E700F15FFA /* CDAudioManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CDAudioManager.m; path = "../tmp/cocos2d-iphone-extensions/cocos2d/CocosDenshion/CocosDenshion/CDAudioManager.m"; sourceTree = "<group>"; };
+		6D2CF0671426A1E700F15FFA /* CDConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CDConfig.h; path = "../tmp/cocos2d-iphone-extensions/cocos2d/CocosDenshion/CocosDenshion/CDConfig.h"; sourceTree = "<group>"; };
+		6D2CF0681426A1E700F15FFA /* CDOpenALSupport.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CDOpenALSupport.h; path = "../tmp/cocos2d-iphone-extensions/cocos2d/CocosDenshion/CocosDenshion/CDOpenALSupport.h"; sourceTree = "<group>"; };
+		6D2CF0691426A1E700F15FFA /* CDOpenALSupport.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CDOpenALSupport.m; path = "../tmp/cocos2d-iphone-extensions/cocos2d/CocosDenshion/CocosDenshion/CDOpenALSupport.m"; sourceTree = "<group>"; };
+		6D2CF06A1426A1E700F15FFA /* CocosDenshion.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CocosDenshion.h; path = "../tmp/cocos2d-iphone-extensions/cocos2d/CocosDenshion/CocosDenshion/CocosDenshion.h"; sourceTree = "<group>"; };
+		6D2CF06B1426A1E700F15FFA /* CocosDenshion.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CocosDenshion.m; path = "../tmp/cocos2d-iphone-extensions/cocos2d/CocosDenshion/CocosDenshion/CocosDenshion.m"; sourceTree = "<group>"; };
+		6D2CF06C1426A1E700F15FFA /* SimpleAudioEngine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SimpleAudioEngine.h; path = "../tmp/cocos2d-iphone-extensions/cocos2d/CocosDenshion/CocosDenshion/SimpleAudioEngine.h"; sourceTree = "<group>"; };
+		6D2CF06D1426A1E700F15FFA /* SimpleAudioEngine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SimpleAudioEngine.m; path = "../tmp/cocos2d-iphone-extensions/cocos2d/CocosDenshion/CocosDenshion/SimpleAudioEngine.m"; sourceTree = "<group>"; };
+		6D2CF0731426A23000F15FFA /* hero.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = hero.png; sourceTree = "<group>"; };
+		6D2CF0741426A23000F15FFA /* hit.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = hit.wav; sourceTree = "<group>"; };
+		6D2CF0751426A23000F15FFA /* metaTiles.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = metaTiles.png; sourceTree = "<group>"; };
+		6D2CF0761426A23000F15FFA /* move.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = move.wav; sourceTree = "<group>"; };
+		6D2CF0771426A23000F15FFA /* testMap.tmx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = testMap.tmx; sourceTree = "<group>"; };
+		6D2CF0781426A23000F15FFA /* testTiles.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = testTiles.png; sourceTree = "<group>"; };
+		6D2CF0791426A23000F15FFA /* water.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = water.wav; sourceTree = "<group>"; };
 		6D77EF7513D6D55500B82EF1 /* bait.m4v */ = {isa = PBXFileReference; lastKnownFileType = file; path = bait.m4v; sourceTree = "<group>"; };
 		6D7F4FA713A284670022601B /* horizontalTestButton-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "horizontalTestButton-hd.png"; sourceTree = "<group>"; };
 		6D7F4FA813A284670022601B /* horizontalTestButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = horizontalTestButton.png; sourceTree = "<group>"; };
@@ -1592,6 +1615,7 @@
 		29B97323FDCFA39411CA2CEA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				6D2CF0641426A1CC00F15FFA /* CocosDenshion */,
 				6DA57FBB139D63C8004D8D0B /* CCVideoPlayer Frameworks */,
 				6DA57646139C980E004D8D0B /* Cocos2D Template Frameworks */,
 			);
@@ -1614,18 +1638,39 @@
 		3F77655513FA059200346697 /* TMXGeneratorTest */ = {
 			isa = PBXGroup;
 			children = (
-				3F77655813FA059200346697 /* Resources */,
+				6D2CF0721426A23000F15FFA /* Resources */,
 				3F77655B13FA059200346697 /* TMXGeneratorTestLayer.h */,
 				3F77655C13FA059200346697 /* TMXGeneratorTestLayer.m */,
 			);
 			path = TMXGeneratorTest;
 			sourceTree = "<group>";
 		};
-		3F77655813FA059200346697 /* Resources */ = {
+		6D2CF0641426A1CC00F15FFA /* CocosDenshion */ = {
 			isa = PBXGroup;
 			children = (
-				3F77655913FA059200346697 /* testMap.tmx */,
-				3F77655A13FA059200346697 /* testTiles.png */,
+				6D2CF0651426A1E700F15FFA /* CDAudioManager.h */,
+				6D2CF0661426A1E700F15FFA /* CDAudioManager.m */,
+				6D2CF0671426A1E700F15FFA /* CDConfig.h */,
+				6D2CF0681426A1E700F15FFA /* CDOpenALSupport.h */,
+				6D2CF0691426A1E700F15FFA /* CDOpenALSupport.m */,
+				6D2CF06A1426A1E700F15FFA /* CocosDenshion.h */,
+				6D2CF06B1426A1E700F15FFA /* CocosDenshion.m */,
+				6D2CF06C1426A1E700F15FFA /* SimpleAudioEngine.h */,
+				6D2CF06D1426A1E700F15FFA /* SimpleAudioEngine.m */,
+			);
+			name = CocosDenshion;
+			sourceTree = "<group>";
+		};
+		6D2CF0721426A23000F15FFA /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				6D2CF0731426A23000F15FFA /* hero.png */,
+				6D2CF0741426A23000F15FFA /* hit.wav */,
+				6D2CF0751426A23000F15FFA /* metaTiles.png */,
+				6D2CF0761426A23000F15FFA /* move.wav */,
+				6D2CF0771426A23000F15FFA /* testMap.tmx */,
+				6D2CF0781426A23000F15FFA /* testTiles.png */,
+				6D2CF0791426A23000F15FFA /* water.wav */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -2787,8 +2832,13 @@
 				3F77656713FA059A00346697 /* Icon.png in Resources */,
 				3F77656813FA059A00346697 /* Icon@2x.png in Resources */,
 				3F77656913FA059A00346697 /* iTunesArtwork in Resources */,
-				3F77658413FA076E00346697 /* testMap.tmx in Resources */,
-				3F77658513FA077300346697 /* testTiles.png in Resources */,
+				6D2CF07A1426A23000F15FFA /* hero.png in Resources */,
+				6D2CF07B1426A23000F15FFA /* hit.wav in Resources */,
+				6D2CF07C1426A23000F15FFA /* metaTiles.png in Resources */,
+				6D2CF07D1426A23000F15FFA /* move.wav in Resources */,
+				6D2CF07E1426A23000F15FFA /* testMap.tmx in Resources */,
+				6D2CF07F1426A23000F15FFA /* testTiles.png in Resources */,
+				6D2CF0801426A23000F15FFA /* water.wav in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3165,6 +3215,10 @@
 				3F77658013FA075300346697 /* LFCGzipUtility.m in Sources */,
 				3F77658113FA075A00346697 /* TMXGenerator.m in Sources */,
 				3F77658313FA076900346697 /* TMXGeneratorTestLayer.m in Sources */,
+				6D2CF06E1426A1E700F15FFA /* CDAudioManager.m in Sources */,
+				6D2CF06F1426A1E700F15FFA /* CDOpenALSupport.m in Sources */,
+				6D2CF0701426A1E700F15FFA /* CocosDenshion.m in Sources */,
+				6D2CF0711426A1E700F15FFA /* SimpleAudioEngine.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

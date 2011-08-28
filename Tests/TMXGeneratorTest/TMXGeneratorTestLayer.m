@@ -25,10 +25,46 @@
  */
 
 #import "TMXGeneratorTestLayer.h"
-
+#import "SimpleAudioEngine.h"
 #import "ExtensionTest.h"
 
 SYNTHESIZE_EXTENSION_TEST(TMXGeneratorTestLayer)
+
+
+#pragma mark -
+#pragma mark Retina Utils
+// Use these functions for retina display compatibility.  Retina displays do many things in points (instead of pixels) and it's handy to have conversion functions.
+
+CGPoint PixelsToPoints(CGPoint inPoint)
+{
+	return ccpMult( inPoint, 1/CC_CONTENT_SCALE_FACTOR() );
+}
+
+CGPoint PointsToPixels(CGPoint inPoint)
+{
+	return ccpMult( inPoint, CC_CONTENT_SCALE_FACTOR() );
+}
+
+CGFloat PixelsToPointsF(CGFloat inPoint)
+{
+	return inPoint / CC_CONTENT_SCALE_FACTOR();
+}
+
+CGFloat PointsToPixelsF(CGFloat inPoint)
+{
+	return inPoint * CC_CONTENT_SCALE_FACTOR();
+}
+
+
+#pragma mark -
+
+@interface TMXGeneratorTestLayer ()		// these methods shouldn't be called anywhere but internally.
+- (void) setupSounds;
+- (void) setupMap;
+- (void) setupPlayer;
+- (void) updateForScreenReshape;
+@end
+
 
 @implementation TMXGeneratorTestLayer
 
@@ -59,49 +95,19 @@ enum
 	// Apple recommends to re-assign "self" with the "super" return value
 	if( (self=[super init]))
 	{
-		// init variables
+		// init and register touches
+		self.isTouchEnabled = YES;
+		[[CCTouchDispatcher sharedDispatcher] addTargetedDelegate:self priority:0 swallowsTouches:YES];
+
+		// init class variables
 		objectListByGroupName = [[NSMutableDictionary alloc] initWithCapacity:10];
-		
-		// generate a map.
-		NSString* newMapPath = [self mapFilePath];
-		NSError* error = nil;
-		CCTMXTiledMap* map = nil;
-		TMXGenerator* gen = [[TMXGenerator alloc] init];
-		gen.delegate = self;
-		
-		if (![gen generateAndSaveTMXMap:&error])
-		{
-			NSLog(@"Error generating TMX Map!  Error: %@, %d", [error localizedDescription], (int)[error code]);
-			map = [[[CCTMXTiledMap alloc] initWithTMXFile:@"testMap.tmx"] autorelease];
-		}
-		else
-		{
-			map = [[[CCTMXTiledMap alloc] initWithTMXFile:newMapPath] autorelease];			
-		}
-		[gen release], gen = nil;
-		
-		// add it as a child.
-		[self addChild:map z: 0 tag: kMap];
-        [self updateForScreenReshape];
+
+		// set up the map and related items.
+		[self setupSounds];
+		[self setupMap];
+		[self setupPlayer];
 	}
 	return self;
-}
-
-- (void) updateForScreenReshape
-{
-    CGSize s = [CCDirector sharedDirector].winSize;
-    
-    CCNode *map = [self getChildByTag: kMap];
-    
-    // Scale to fit the screen.
-    CGSize mapSize = map.contentSize;    
-    CGFloat scaleFactorX = s.height / mapSize.height;
-    CGFloat scaleFactorY = s.width / mapSize.width;    
-    map.scale = MIN ( 1.0f, MIN(scaleFactorX, scaleFactorY) );
-    
-    // Position on the center of screen.
-    map.anchorPoint = ccp(0.5f, 0.5f);
-    map.position = ccp(0.5f * s.width, 0.5f * s.height);
 }
 
 // on "dealloc" you need to release all your retained objects
@@ -113,6 +119,216 @@ enum
 	[super dealloc];
 }
 
+- (void) setupSounds
+{
+	[[SimpleAudioEngine sharedEngine] preloadEffect:@"hit.wav"];
+	[[SimpleAudioEngine sharedEngine] preloadEffect:@"water.wav"];
+	[[SimpleAudioEngine sharedEngine] preloadEffect:@"move.wav"];
+}
+
+- (void) setupMap
+{
+	NSString* newMapPath = [self mapFilePath];
+	NSError* error = nil;
+	TMXGenerator* gen = [[TMXGenerator alloc] init];
+	gen.delegate = self;
+	
+	if (![gen generateAndSaveTMXMap:&error])
+	{
+		NSLog(@"Error generating TMX Map!  Error: %@, %d", [error localizedDescription], (int)[error code]);
+		map = [[[CCTMXTiledMap alloc] initWithTMXFile:@"testMap.tmx"] autorelease];
+	}
+	else
+	{
+		map = [[[CCTMXTiledMap alloc] initWithTMXFile:newMapPath] autorelease];			
+	}
+	[gen release], gen = nil;
+	
+	// add it as a child.
+	[self addChild:map z: -1 tag: kMap];
+	
+	// calculate scale
+	CGSize s = [CCDirector sharedDirector].winSize;
+	
+	// Scale to fit the screen.
+	CGSize mapSize = map.contentSize;    
+	CGFloat scaleFactorX = s.height / mapSize.height;
+	CGFloat scaleFactorY = s.width / mapSize.width;    
+	currentScale = MIN ( 1.0f, MIN(scaleFactorX, scaleFactorY) );
+
+	[self updateForScreenReshape];
+}
+
+- (void) updateForScreenReshape
+{
+	CGSize s = [CCDirector sharedDirector].winSize;
+	
+    map.scale = currentScale;
+    
+    // Position on the center of screen.
+    map.anchorPoint = ccp(0.5f, 0.5f);
+    map.position = ccp(0.5f * s.width, 0.5f * s.height);
+}
+
+- (void) setupPlayer
+{
+	// Find SpawnPoint
+	CCTMXObjectGroup* objList = [map objectGroupNamed:kObjectsLayerName];
+	NSAssert(objList != nil, @"'Objects' group not found in TMX!");
+	NSMutableDictionary* spawnPointDict = [objList objectNamed:kObjectSpawnPointKey];
+	NSAssert(spawnPointDict != nil, @"SpawnPoint not found in objects layer of TMX!");
+	
+	int x = [[spawnPointDict valueForKey:@"x"] intValue];
+	int y = [[spawnPointDict valueForKey:@"y"] intValue];
+	
+	playerSprite = [[CCSprite spriteWithFile:@"hero.png"] retain];
+	playerSprite.scale = currentScale;
+	playerSprite.position = ccpAdd(PixelsToPoints(ccp(x*playerSprite.scale, y*playerSprite.scale)), map.position);
+	
+	[self addChild:playerSprite];
+}
+
+#pragma mark -
+#pragma mark movement
+
+
+- (CGPoint) tileCoordForPosition:(CGPoint)inPosition
+{
+	// since the map isn't currently flush with the top, we need to compensate for that space.
+	CGSize sz = [CCDirector sharedDirector].winSize;
+	double mapHeight = (map.mapSize.height * (PixelsToPointsF(map.tileSize.height) * currentScale));
+	double mapWidth = (map.mapSize.width * (PixelsToPointsF(map.tileSize.width) * currentScale));
+	double heightOffset = (sz.height - mapHeight) / 2;
+	double widthOffset = (sz.width - mapWidth) / 2;
+	
+	// need to invert Y because cocos2d is bottom-left not top-left.
+	int invertedY = (map.mapSize.height * (PixelsToPointsF(map.tileSize.height) * currentScale)) - inPosition.y;
+	int x = (inPosition.x + widthOffset) / (PixelsToPointsF(map.tileSize.width) * currentScale);
+	int y = (invertedY + heightOffset) / (PixelsToPointsF(map.tileSize.height) * currentScale);
+    return ccp(x, y);
+}
+
+
+- (BaseTileTypes) collisionTypeForTile:(CGPoint)inPosition forLayerNamed:(NSString*)layerName
+{
+	CCTMXTiledMap* curMap = (CCTMXTiledMap*)[self getChildByTag: kMap];		// there are better ways to do it than this!  This is a hack!
+	CCTMXLayer* layer = [curMap layerNamed:layerName];
+	
+	CGPoint tileCoord = [self tileCoordForPosition:inPosition];
+	int tileGid = [layer tileGIDAt:tileCoord];
+	
+	//	// if there's a tile here, check to see what kind it is.
+	if (tileGid)
+	{
+		NSDictionary* dict = [curMap propertiesForGID:tileGid];
+		if (dict)
+		{
+			NSString* val = [dict valueForKey:kTileSetTypeKey];
+			if (val)
+				return [val intValue];
+		}
+	}
+	
+	return tileBase_NoCollision;
+}
+
+
+// example of possible collision detection and movement.
+-(void)movePlayerPosition:(CGPoint)inPosition
+{
+	// with collision
+	int type = [self collisionTypeForTile:inPosition forLayerNamed:kMetaLayerTileSetName];
+	if (type != tileBase_NoCollision)
+	{
+		if (type == tileBaseRock)
+		{
+			[[SimpleAudioEngine sharedEngine] playEffect:@"hit.wav"];
+			return;	// we've hit something!  Don't move!
+		}
+		else if (type == tileBaseWater)
+		{
+			[[SimpleAudioEngine sharedEngine] playEffect:@"water.wav"];
+			return;	// we've hit something!  Don't move!
+		}
+	}
+	
+	type = [self collisionTypeForTile:inPosition forLayerNamed:kBackgroundLayerName];
+	if (type != tileBase_NoCollision)
+	{
+		// do some action based on a specific kind of collision here, such as a monster encounter
+//		if (type == tileForegroundMonster)
+//			[self encounter];
+	}		
+	
+	
+	[[SimpleAudioEngine sharedEngine] playEffect:@"move.wav"];
+	
+	// animate player movement.
+	[playerSprite runAction:[CCMoveTo actionWithDuration:0.125 position:inPosition]];
+}
+
+#ifdef __IPHONE_OS_VERSION_MAX_ALLOWED
+
+#pragma mark -
+#pragma mark touches
+
+
+-(BOOL) ccTouchBegan:(UITouch *)touch withEvent:(UIEvent *)event
+{
+	return YES;
+}
+
+-(void) ccTouchEnded:(UITouch *)touch withEvent:(UIEvent *)event
+{
+    CGPoint touchLocation = [touch locationInView: [touch view]];		
+    touchLocation = [[CCDirector sharedDirector] convertToGL: touchLocation];
+    touchLocation = [self convertToNodeSpace:touchLocation];
+	
+	// offset our movement based on where we have the background scrolled
+    CGPoint playerPos = playerSprite.position;
+    CGPoint diff = ccpSub(touchLocation, playerPos);
+    if (abs(diff.x) > abs(diff.y))
+	{
+        if (diff.x > 0)
+            playerPos.x += PixelsToPointsF(map.tileSize.width) * currentScale;
+        else
+            playerPos.x -= PixelsToPointsF(map.tileSize.width) * currentScale; 
+    }
+	else
+	{
+        if (diff.y > 0)
+            playerPos.y += PixelsToPointsF(map.tileSize.height) * currentScale;
+        else
+            playerPos.y -= PixelsToPointsF(map.tileSize.height) * currentScale;
+    }
+	
+	// since the map isn't currently flush with the top, we need to compensate for that space.
+	CGSize sz = [CCDirector sharedDirector].winSize;
+	double mapHeight = (map.mapSize.height * (PixelsToPointsF(map.tileSize.height) * currentScale));
+	double mapWidth = (map.mapSize.width * (PixelsToPointsF(map.tileSize.width) * currentScale));
+	double heightOffset = (sz.height - mapHeight) / 2;
+	double widthOffset = (sz.width - mapWidth) / 2;
+	
+	
+	// map bounds check
+    if (playerPos.x <= (map.mapSize.width * (PixelsToPointsF(map.tileSize.width) * currentScale)) &&
+        playerPos.y <= (map.mapSize.height * (PixelsToPointsF(map.tileSize.height) * currentScale) + heightOffset) &&
+        playerPos.y >= (0 + heightOffset) &&
+        playerPos.x >= (0 + widthOffset) &&
+		![playerSprite numberOfRunningActions])		// check the running actions to see if we are already moving a tile or not.  Keeps us from re-starting a move when we are already moving.
+    {
+		[self movePlayerPosition:playerPos];
+//		[self setViewpointCenter:_player.position withDuration:kPlayerMoveAnimationSpeed];
+    }
+	
+}
+
+#elif defined(__MAC_OS_X_VERSION_MAX_ALLOWED)
+
+#error touches equivalent not yet complete for mac version.
+
+#endif
+
 
 #pragma mark -
 #pragma mark map generator delegate
@@ -121,13 +337,13 @@ enum
 - (NSArray*) layerNames
 {
 	// warning!  The order these are in determines the layer heirarchy, leftmost is lowest, rightmost is highest!
-	return [NSArray arrayWithObjects:kBackgroundLayerName, kObjectsLayerName, nil];
+	return [NSArray arrayWithObjects:kMetaLayerTileSetName, kBackgroundLayerName, kObjectsLayerName, nil];
 }
 
 
 - (NSArray*) tileSetNames
 {
-	return [NSArray arrayWithObjects:kOutdoorTileSetName, nil];
+	return [NSArray arrayWithObjects:kOutdoorTileSetName, kMetaLayerTileSetName, nil];
 }
 
 
@@ -166,10 +382,18 @@ enum
 									   height:kNumPixelsPerTileSquare
 								  tileSpacing:kNumPixelsBetweenTiles];
 	}
-//	else if ([name isEqualToString:@"another tileset"])
-//	{
-//		// you would add additional tilesets here.
-//	}
+	else if ([name isEqualToString:kMetaLayerTileSetName])
+	{
+		// you would add additional tilesets here.
+		NSString* fileName = kMetaTileSetAtlasName;
+		
+		// setup other info
+		dict = [TMXGenerator tileSetWithImage:fileName
+										named:name 
+										width:kNumPixelsPerTileSquare
+									   height:kNumPixelsPerTileSquare
+								  tileSpacing:kNumPixelsBetweenTiles];
+	}
 	else
 	{
 		NSLog(@"tileSetInfoForName: called with name %@, name was not handled!", name);
@@ -181,14 +405,16 @@ enum
 
 - (NSDictionary*) layerInfoForName:(NSString*)name
 {	
-	// currently all layers are created equal.  Doesn't always have to be so.
-	BOOL isVisible = YES;
-//	if ([name isEqualToString:kMetaLayerName])		// if you have an invisible layer you can set that up here.
-//		isVisible = NO;
+	NSDictionary* dict = nil;
 	
-	// generate the layer info
-	// data will be filled in by tilePropertyForLayer:tileSetName:X:Y:
-	NSDictionary* dict = [TMXGenerator layerNamed:name width:kNumTilesPerChunk height:kNumTilesPerChunk data:nil visible:isVisible];
+	// default to visible
+	BOOL isVisible = YES;
+
+	if ([name isEqualToString:kMetaLayerTileSetName])		// if you have an invisible layer you can set that up here.
+		isVisible = NO;								// meta layer isn't visible.
+
+	// data will be filled in by tilePropertyForLayer:tileSetName:X:Y:	
+	dict = [TMXGenerator layerNamed:name width:kNumTilesPerChunk height:kNumTilesPerChunk data:nil visible:isVisible];
 	return dict;
 }
 
@@ -201,7 +427,7 @@ enum
 	if ([name isEqualToString:kObjectsLayerName])
 	{
 		// generate the spawn point.
-		int x = (kNumPixelsPerTileSquare * 3) + (kNumPixelsPerTileSquare / 2);
+		int x = (kNumPixelsPerTileSquare * 5) + (kNumPixelsPerTileSquare / 2);
 		int y = (kNumPixelsPerTileSquare * (kNumTilesPerChunk-3)) - (kNumPixelsPerTileSquare / 2);
 		
 		// the properties are gathered below, not passed here.
@@ -231,41 +457,44 @@ enum
 	// These propertie map to the given atlas tile.
 	if ([name isEqualToString:kOutdoorTileSetName])
 	{
-		// atlas setup
+		// outdoor atlas setup
 		
 		// tile 0
 		dict = [NSMutableDictionary dictionaryWithCapacity:10];
-		typeName = [NSString stringWithFormat:@"%i", kTileGrass];
-		[dict setObject:typeName forKey:kTileSetTypeKey];
-		[dict setObject:typeName forKey:kTileSetTypeNameKey];
+		[dict setObject:[NSString stringWithFormat:@"%i", kOutdoorTileGrass] forKey:kTileSetTypeNameKey];
 		[retVal setObject:dict forKey:@"0"];
 		
 		// tile 1
 		dict = [NSMutableDictionary dictionaryWithCapacity:10];
-		typeName = [NSString stringWithFormat:@"%i", kTileDirt];
-		[dict setObject:typeName forKey:kTileSetTypeKey];
-		[dict setObject:typeName forKey:kTileSetTypeNameKey];
+		[dict setObject:[NSString stringWithFormat:@"%i", kOutdoorTileDirt] forKey:kTileSetTypeNameKey];
 		[retVal setObject:dict forKey:@"1"];
 		
 		// tile 2
 		dict = [NSMutableDictionary dictionaryWithCapacity:10];
-		typeName = [NSString stringWithFormat:@"%i", kTileRock];
-		[dict setObject:typeName forKey:kTileSetTypeKey];
-		[dict setObject:typeName forKey:kTileSetTypeNameKey];
+		[dict setObject:typeName = [NSString stringWithFormat:@"%i", kOutdoorTileRock] forKey:kTileSetTypeNameKey];
 		[retVal setObject:dict forKey:@"2"];
 		
 		// tile 3
 		dict = [NSMutableDictionary dictionaryWithCapacity:10];
-		typeName = [NSString stringWithFormat:@"%i", kTileWater];
-		[dict setObject:typeName forKey:kTileSetTypeKey];
-		[dict setObject:typeName forKey:kTileSetTypeNameKey];
+		[dict setObject:[NSString stringWithFormat:@"%i", kOutdoorTileWater] forKey:kTileSetTypeNameKey];
 		[retVal setObject:dict forKey:@"3"];
 		
 	}
-//	else if ([name isEqualToString:@"other tileset here"])
-//	{
-//		// add other defined tilesets here
-//	}
+	else if ([name isEqualToString:kMetaLayerTileSetName])
+	{
+		// meta tileset ID's
+		// tile 0 in the atlas
+		dict = [NSMutableDictionary dictionaryWithCapacity:10];
+		[dict setObject:[NSString stringWithFormat:@"%i", tileBaseWater] forKey:kTileSetTypeKey];
+		[dict setObject:[NSString stringWithFormat:@"%i", kMetaTileWater] forKey:kTileSetTypeNameKey];
+		[retVal setObject:dict forKey:@"0"];
+		
+		// tile 1
+		dict = [NSMutableDictionary dictionaryWithCapacity:10];
+		[dict setObject:[NSString stringWithFormat:@"%i", tileBaseRock] forKey:kTileSetTypeKey];
+		[dict setObject:[NSString stringWithFormat:@"%i", kMetaTileRock] forKey:kTileSetTypeNameKey];
+		[retVal setObject:dict forKey:@"1"];
+	}
 	
 	return retVal;
 }
@@ -290,7 +519,7 @@ enum
 
 - (NSString*) tileIdentificationKeyForLayer:(NSString*)layerName
 {
-	// once we start using multiple tiles for multiple layers and need a different key value, change the name for those keys here.
+	// once we start using multiple tiles for multiple layers and need a different key value, change the name for those keys here.  Multiple names are optional and only useful for your own grouping purposes.
 	return kTileSetTypeNameKey;
 }
 
@@ -298,7 +527,15 @@ enum
 - (NSString*) tileSetNameForLayer:(NSString*)layerName
 {
 	// if you were using multiple tilesets then you'd want to determine which tileset you needed based on the layer name here.
-	return kOutdoorTileSetName;
+	if ([layerName isEqualToString:kMetaLayerTileSetName])
+	{
+		return kMetaLayerTileSetName;
+	}
+	else if ([layerName isEqualToString:kBackgroundLayerName])
+	{
+		return kOutdoorTileSetName;
+	}
+	return nil;
 }
 
 
@@ -327,10 +564,10 @@ enum
 		{0, 0, 0, 0, 0, 0, 0, 1, 1, 3, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
 		{0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
 		{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-		{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-		{3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-		{3, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2},
-		{3, 3, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 2, 2},
+		{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+		{3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+		{3, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 3, 3, 0, 0, 0, 0, 0, 0, 0, 2},
+		{3, 3, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 0, 0, 0, 0, 0, 0, 2, 2, 2},
 		{3, 3, 3, 3, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 2, 2, 2, 2, 2},
 		{3, 3, 3, 3, 3, 3, 3, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 2, 2, 2, 2, 2, 2},
 		{3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 2, 2, 2, 2, 2, 2},
@@ -344,24 +581,34 @@ enum
 	// should return the string value of the tile type here for the appropriate layer.
 	if ([layerName isEqualToString:kBackgroundLayerName])
 	{
-		// I use numbers 0-3 for tile names to make this code more automated.
+		// I use numbers 0-3 for tile property names (in propertiesForTileSetNamed:) to make this code more automated.
 		// also, I use y,x so that the above reflects what gets sent out to the screen.
 		return [NSString stringWithFormat:@"%d", tileGenerationData[y][x]];
 	}
-//	else if ([layerName isEqualToString:kMetaLayerName])
-//	{
-//		// if you had multiple layers you would return the appropriate type name here, as defined in propertiesForTileSetNamed:
-//	}
+	else if ([layerName isEqualToString:kMetaLayerTileSetName])
+	{
+		// check the background layer's map data.  If it's not passable then we return the meta tile type that corresponds to the background type.
+		// generally I would use the same values for both the meta layer and the general layer (it's less code) but for illustration
+		// purposes I've split them into two separate enumerations.  You could also create methods to convert more complex types for this as well.
+		
+		// Note that we use @"0" and @"1" for the names of the atlas tiles when defining the meta tile properties (in propertiesForTileSetNamed:).
+		// This is so we can use an enumeration elsewhere in the code to identify tiles (which is generally more descriptive and easier)
+		// and then send the value of the enumeration (0 for water, 1 for rock) back here and get the appropriate tile.
+		if (tileGenerationData[y][x] == kOutdoorTileWater)
+			return [NSString stringWithFormat:@"%d", kMetaTileWater];
+		else if (tileGenerationData[y][x] == kOutdoorTileRock)
+			return [NSString stringWithFormat:@"%d", kMetaTileRock];
+	}
 	
 	return @"No Property";
 }
 
 
-- (int) tileRotationForLayer:(NSString*)layerName X:(int)x Y:(int)y
-{
-	// If you had implemented rotated tiles then you would return degree rotation for the passed in tile coords on the passed layer.  We are not using (meaningful) rotation in this example.
-	return 0;
-}
+// If you had implemented rotated tiles then you would return degree rotation for the passed in tile coords on the passed layer.  We are not using (meaningful) rotation in this example.
+//- (int) tileRotationForLayer:(NSString*)layerName X:(int)x Y:(int)y
+//{
+//	return 0;	// 0-360 degree rotation value for tile at x,y
+//}
 
 
 @end
