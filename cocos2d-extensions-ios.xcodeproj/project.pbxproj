@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 45;
+	objectVersion = 46;
 	objects = {
 
 /* Begin PBXAggregateTarget section */
@@ -57,6 +57,15 @@
 		3F77658313FA076900346697 /* TMXGeneratorTestLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F77655C13FA059200346697 /* TMXGeneratorTestLayer.m */; };
 		3F77658413FA076E00346697 /* testMap.tmx in Resources */ = {isa = PBXBuildFile; fileRef = 3F77655913FA059200346697 /* testMap.tmx */; };
 		3F77658513FA077300346697 /* testTiles.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F77655A13FA059200346697 /* testTiles.png */; };
+		3F8395A41408D0A4000009E0 /* hero.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F8395A31408CFBD000009E0 /* hero.png */; };
+		3F8395A51408D0A4000009E0 /* metaTiles.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F8395A21408A9B6000009E0 /* metaTiles.png */; };
+		3F8395AB1409EB54000009E0 /* hit.wav in Resources */ = {isa = PBXBuildFile; fileRef = 3F8395A91409EB54000009E0 /* hit.wav */; };
+		3F8395AC1409EB54000009E0 /* water.wav in Resources */ = {isa = PBXBuildFile; fileRef = 3F8395AA1409EB54000009E0 /* water.wav */; };
+		3F8395B71409EC3B000009E0 /* CDAudioManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F8395AF1409EC3B000009E0 /* CDAudioManager.m */; };
+		3F8395B81409EC3B000009E0 /* CDOpenALSupport.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F8395B21409EC3B000009E0 /* CDOpenALSupport.m */; };
+		3F8395B91409EC3B000009E0 /* CocosDenshion.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F8395B41409EC3B000009E0 /* CocosDenshion.m */; };
+		3F8395BA1409EC3B000009E0 /* SimpleAudioEngine.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F8395B61409EC3B000009E0 /* SimpleAudioEngine.m */; };
+		3F8395BC1409F032000009E0 /* move.wav in Resources */ = {isa = PBXBuildFile; fileRef = 3F8395BB1409F032000009E0 /* move.wav */; };
 		505574581045D68500A31725 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 506EDBA4102F4C9F00A389B3 /* AVFoundation.framework */; };
 		505574591045D68500A31725 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DC6640020F83B3EA000B3E49 /* AudioToolbox.framework */; };
 		5055745A1045D68500A31725 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DCCBF1B60F6022AE0040855A /* CoreGraphics.framework */; };
@@ -813,9 +822,23 @@
 		3F77655413FA058200346697 /* TMXGenerator.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TMXGenerator.m; sourceTree = "<group>"; };
 		3F77655913FA059200346697 /* testMap.tmx */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = testMap.tmx; sourceTree = "<group>"; };
 		3F77655A13FA059200346697 /* testTiles.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = testTiles.png; sourceTree = "<group>"; };
-		3F77655B13FA059200346697 /* TMXGeneratorTestLayer.h */ = {isa = PBXFileReference; path = TMXGeneratorTestLayer.h; sourceTree = "<group>"; };
+		3F77655B13FA059200346697 /* TMXGeneratorTestLayer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TMXGeneratorTestLayer.h; sourceTree = "<group>"; };
 		3F77655C13FA059200346697 /* TMXGeneratorTestLayer.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TMXGeneratorTestLayer.m; sourceTree = "<group>"; };
 		3F77657C13FA059A00346697 /* TMXGenerator Test.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "TMXGenerator Test.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		3F8395A21408A9B6000009E0 /* metaTiles.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = metaTiles.png; sourceTree = "<group>"; };
+		3F8395A31408CFBD000009E0 /* hero.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = hero.png; sourceTree = "<group>"; };
+		3F8395A91409EB54000009E0 /* hit.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = hit.wav; sourceTree = "<group>"; };
+		3F8395AA1409EB54000009E0 /* water.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = water.wav; sourceTree = "<group>"; };
+		3F8395AE1409EC3B000009E0 /* CDAudioManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDAudioManager.h; sourceTree = "<group>"; };
+		3F8395AF1409EC3B000009E0 /* CDAudioManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CDAudioManager.m; sourceTree = "<group>"; };
+		3F8395B01409EC3B000009E0 /* CDConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDConfig.h; sourceTree = "<group>"; };
+		3F8395B11409EC3B000009E0 /* CDOpenALSupport.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDOpenALSupport.h; sourceTree = "<group>"; };
+		3F8395B21409EC3B000009E0 /* CDOpenALSupport.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CDOpenALSupport.m; sourceTree = "<group>"; };
+		3F8395B31409EC3B000009E0 /* CocosDenshion.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CocosDenshion.h; sourceTree = "<group>"; };
+		3F8395B41409EC3B000009E0 /* CocosDenshion.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CocosDenshion.m; sourceTree = "<group>"; };
+		3F8395B51409EC3B000009E0 /* SimpleAudioEngine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SimpleAudioEngine.h; sourceTree = "<group>"; };
+		3F8395B61409EC3B000009E0 /* SimpleAudioEngine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SimpleAudioEngine.m; sourceTree = "<group>"; };
+		3F8395BB1409F032000009E0 /* move.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = move.wav; sourceTree = "<group>"; };
 		504DFC6810AF1739006D82FE /* LICENSE.cocos2d */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE.cocos2d; sourceTree = "<group>"; };
 		506EDB87102F4C4000A389B3 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
 		506EDBA4102F4C9F00A389B3 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
@@ -1528,6 +1551,7 @@
 		29B97323FDCFA39411CA2CEA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				3F8395AD1409EC3B000009E0 /* CocosDenshion */,
 				6DA57FBB139D63C8004D8D0B /* CCVideoPlayer Frameworks */,
 				6DA57646139C980E004D8D0B /* Cocos2D Template Frameworks */,
 			);
@@ -1560,10 +1584,32 @@
 		3F77655813FA059200346697 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				3F8395BB1409F032000009E0 /* move.wav */,
+				3F8395A91409EB54000009E0 /* hit.wav */,
+				3F8395AA1409EB54000009E0 /* water.wav */,
+				3F8395A31408CFBD000009E0 /* hero.png */,
 				3F77655913FA059200346697 /* testMap.tmx */,
 				3F77655A13FA059200346697 /* testTiles.png */,
+				3F8395A21408A9B6000009E0 /* metaTiles.png */,
 			);
 			path = Resources;
+			sourceTree = "<group>";
+		};
+		3F8395AD1409EC3B000009E0 /* CocosDenshion */ = {
+			isa = PBXGroup;
+			children = (
+				3F8395AE1409EC3B000009E0 /* CDAudioManager.h */,
+				3F8395AF1409EC3B000009E0 /* CDAudioManager.m */,
+				3F8395B01409EC3B000009E0 /* CDConfig.h */,
+				3F8395B11409EC3B000009E0 /* CDOpenALSupport.h */,
+				3F8395B21409EC3B000009E0 /* CDOpenALSupport.m */,
+				3F8395B31409EC3B000009E0 /* CocosDenshion.h */,
+				3F8395B41409EC3B000009E0 /* CocosDenshion.m */,
+				3F8395B51409EC3B000009E0 /* SimpleAudioEngine.h */,
+				3F8395B61409EC3B000009E0 /* SimpleAudioEngine.m */,
+			);
+			name = CocosDenshion;
+			path = cocos2d/CocosDenshion/CocosDenshion;
 			sourceTree = "<group>";
 		};
 		6D7F522413A2E4CC0022601B /* tiles */ = {
@@ -2623,8 +2669,11 @@
 /* Begin PBXProject section */
 		29B97313FDCFA39411CA2CEA /* Project object */ = {
 			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0420;
+			};
 			buildConfigurationList = C01FCF4E08A954540054247B /* Build configuration list for PBXProject "cocos2d-extensions-ios" */;
-			compatibilityVersion = "Xcode 3.1";
+			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 1;
 			knownRegions = (
@@ -2674,6 +2723,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3F8395A41408D0A4000009E0 /* hero.png in Resources */,
+				3F8395A51408D0A4000009E0 /* metaTiles.png in Resources */,
 				3F77656113FA059A00346697 /* Default.png in Resources */,
 				3F77656213FA059A00346697 /* fps_images.png in Resources */,
 				3F77656313FA059A00346697 /* Icon-72.png in Resources */,
@@ -2685,6 +2736,9 @@
 				3F77656913FA059A00346697 /* iTunesArtwork in Resources */,
 				3F77658413FA076E00346697 /* testMap.tmx in Resources */,
 				3F77658513FA077300346697 /* testTiles.png in Resources */,
+				3F8395AB1409EB54000009E0 /* hit.wav in Resources */,
+				3F8395AC1409EB54000009E0 /* water.wav in Resources */,
+				3F8395BC1409F032000009E0 /* move.wav in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3044,6 +3098,10 @@
 				3F77658013FA075300346697 /* LFCGzipUtility.m in Sources */,
 				3F77658113FA075A00346697 /* TMXGenerator.m in Sources */,
 				3F77658313FA076900346697 /* TMXGeneratorTestLayer.m in Sources */,
+				3F8395B71409EC3B000009E0 /* CDAudioManager.m in Sources */,
+				3F8395B81409EC3B000009E0 /* CDOpenALSupport.m in Sources */,
+				3F8395B91409EC3B000009E0 /* CocosDenshion.m in Sources */,
+				3F8395BA1409EC3B000009E0 /* SimpleAudioEngine.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3365,7 +3423,6 @@
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				GCC_DYNAMIC_NO_PIC = NO;
-				GCC_ENABLE_FIX_AND_CONTINUE = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = Tests/SharedSources/cocos2d_extensions_ios_Prefix.pch;
@@ -3376,7 +3433,6 @@
 					"-all_load",
 					"-ObjC",
 				);
-				PREBINDING = NO;
 				PRODUCT_NAME = "Extension Test Template";
 				WARNING_CFLAGS = "-Wall";
 			};
@@ -3388,7 +3444,6 @@
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				COPY_PHASE_STRIP = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				GCC_ENABLE_FIX_AND_CONTINUE = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = Tests/SharedSources/cocos2d_extensions_ios_Prefix.pch;
 				GCC_TREAT_WARNINGS_AS_ERRORS = NO;
@@ -3398,7 +3453,6 @@
 					"-all_load",
 					"-ObjC",
 				);
-				PREBINDING = NO;
 				PRODUCT_NAME = "Extension Test Template";
 				WARNING_CFLAGS = "-Wall";
 			};
@@ -3411,7 +3465,6 @@
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				GCC_DYNAMIC_NO_PIC = NO;
-				GCC_ENABLE_FIX_AND_CONTINUE = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = Tests/SharedSources/cocos2d_extensions_ios_Prefix.pch;
@@ -3422,7 +3475,6 @@
 					"-all_load",
 					"-ObjC",
 				);
-				PREBINDING = NO;
 				PRODUCT_NAME = "TMXGenerator Test";
 				WARNING_CFLAGS = "-Wall";
 			};
@@ -3434,7 +3486,6 @@
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				COPY_PHASE_STRIP = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				GCC_ENABLE_FIX_AND_CONTINUE = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = Tests/SharedSources/cocos2d_extensions_ios_Prefix.pch;
 				GCC_TREAT_WARNINGS_AS_ERRORS = NO;
@@ -3444,7 +3495,6 @@
 					"-all_load",
 					"-ObjC",
 				);
-				PREBINDING = NO;
 				PRODUCT_NAME = "TMXGenerator Test";
 				WARNING_CFLAGS = "-Wall";
 			};
@@ -3458,7 +3508,6 @@
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_TREAT_WARNINGS_AS_ERRORS = NO;
-				PREBINDING = NO;
 				PRODUCT_NAME = "cocos2d libraries";
 			};
 			name = Debug;
@@ -3469,9 +3518,7 @@
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				COPY_PHASE_STRIP = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				GCC_ENABLE_FIX_AND_CONTINUE = NO;
 				GCC_TREAT_WARNINGS_AS_ERRORS = NO;
-				PREBINDING = NO;
 				PRODUCT_NAME = "cocos2d libraries";
 				ZERO_LINK = NO;
 			};
@@ -3484,7 +3531,6 @@
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				GCC_DYNAMIC_NO_PIC = NO;
-				GCC_ENABLE_FIX_AND_CONTINUE = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = Tests/SharedSources/cocos2d_extensions_ios_Prefix.pch;
@@ -3495,7 +3541,6 @@
 					"-all_load",
 					"-ObjC",
 				);
-				PREBINDING = NO;
 				PRODUCT_NAME = CCMenuAdvancedTest;
 				WARNING_CFLAGS = "-Wall";
 			};
@@ -3507,7 +3552,6 @@
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				COPY_PHASE_STRIP = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				GCC_ENABLE_FIX_AND_CONTINUE = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = Tests/SharedSources/cocos2d_extensions_ios_Prefix.pch;
 				GCC_TREAT_WARNINGS_AS_ERRORS = NO;
@@ -3517,7 +3561,6 @@
 					"-all_load",
 					"-ObjC",
 				);
-				PREBINDING = NO;
 				PRODUCT_NAME = CCMenuAdvancedTest;
 				WARNING_CFLAGS = "-Wall";
 			};
@@ -3530,7 +3573,6 @@
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				GCC_DYNAMIC_NO_PIC = NO;
-				GCC_ENABLE_FIX_AND_CONTINUE = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = Tests/SharedSources/cocos2d_extensions_ios_Prefix.pch;
@@ -3541,7 +3583,6 @@
 					"-all_load",
 					"-ObjC",
 				);
-				PREBINDING = NO;
 				PRODUCT_NAME = CCVideoPlayerTest;
 				WARNING_CFLAGS = "-Wall";
 			};
@@ -3553,7 +3594,6 @@
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				COPY_PHASE_STRIP = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				GCC_ENABLE_FIX_AND_CONTINUE = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = Tests/SharedSources/cocos2d_extensions_ios_Prefix.pch;
 				GCC_TREAT_WARNINGS_AS_ERRORS = NO;
@@ -3563,7 +3603,6 @@
 					"-all_load",
 					"-ObjC",
 				);
-				PREBINDING = NO;
 				PRODUCT_NAME = CCVideoPlayerTest;
 				WARNING_CFLAGS = "-Wall";
 			};
@@ -3576,7 +3615,6 @@
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				GCC_DYNAMIC_NO_PIC = NO;
-				GCC_ENABLE_FIX_AND_CONTINUE = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = Tests/SharedSources/cocos2d_extensions_ios_Prefix.pch;
@@ -3587,7 +3625,6 @@
 					"-all_load",
 					"-ObjC",
 				);
-				PREBINDING = NO;
 				PRODUCT_NAME = CCBigImageTest;
 				WARNING_CFLAGS = "-Wall";
 			};
@@ -3599,7 +3636,6 @@
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				COPY_PHASE_STRIP = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				GCC_ENABLE_FIX_AND_CONTINUE = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = Tests/SharedSources/cocos2d_extensions_ios_Prefix.pch;
 				GCC_TREAT_WARNINGS_AS_ERRORS = NO;
@@ -3609,7 +3645,6 @@
 					"-all_load",
 					"-ObjC",
 				);
-				PREBINDING = NO;
 				PRODUCT_NAME = CCBigImageTest;
 				WARNING_CFLAGS = "-Wall";
 			};
@@ -3622,7 +3657,6 @@
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				GCC_DYNAMIC_NO_PIC = NO;
-				GCC_ENABLE_FIX_AND_CONTINUE = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = Tests/SharedSources/cocos2d_extensions_ios_Prefix.pch;
@@ -3633,7 +3667,6 @@
 					"-all_load",
 					"-ObjC",
 				);
-				PREBINDING = NO;
 				PRODUCT_NAME = CCScrollLayerTest;
 				WARNING_CFLAGS = "-Wall";
 			};
@@ -3645,7 +3678,6 @@
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				COPY_PHASE_STRIP = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				GCC_ENABLE_FIX_AND_CONTINUE = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = Tests/SharedSources/cocos2d_extensions_ios_Prefix.pch;
 				GCC_TREAT_WARNINGS_AS_ERRORS = NO;
@@ -3655,7 +3687,6 @@
 					"-all_load",
 					"-ObjC",
 				);
-				PREBINDING = NO;
 				PRODUCT_NAME = CCScrollLayerTest;
 				WARNING_CFLAGS = "-Wall";
 			};
@@ -3668,7 +3699,6 @@
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				GCC_DYNAMIC_NO_PIC = NO;
-				GCC_ENABLE_FIX_AND_CONTINUE = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = Tests/SharedSources/cocos2d_extensions_ios_Prefix.pch;
@@ -3679,7 +3709,6 @@
 					"-all_load",
 					"-ObjC",
 				);
-				PREBINDING = NO;
 				PRODUCT_NAME = CCMenuItemSpriteIndependentTest;
 				WARNING_CFLAGS = "-Wall";
 			};
@@ -3691,7 +3720,6 @@
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				COPY_PHASE_STRIP = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				GCC_ENABLE_FIX_AND_CONTINUE = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = Tests/SharedSources/cocos2d_extensions_ios_Prefix.pch;
 				GCC_TREAT_WARNINGS_AS_ERRORS = NO;
@@ -3701,7 +3729,6 @@
 					"-all_load",
 					"-ObjC",
 				);
-				PREBINDING = NO;
 				PRODUCT_NAME = CCMenuItemSpriteIndependentTest;
 				WARNING_CFLAGS = "-Wall";
 			};
@@ -3714,7 +3741,6 @@
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				GCC_DYNAMIC_NO_PIC = NO;
-				GCC_ENABLE_FIX_AND_CONTINUE = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = Tests/SharedSources/cocos2d_extensions_ios_Prefix.pch;
@@ -3725,7 +3751,6 @@
 					"-all_load",
 					"-ObjC",
 				);
-				PREBINDING = NO;
 				PRODUCT_NAME = CCSliderTest;
 				WARNING_CFLAGS = "-Wall";
 			};
@@ -3737,7 +3762,6 @@
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				COPY_PHASE_STRIP = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				GCC_ENABLE_FIX_AND_CONTINUE = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = Tests/SharedSources/cocos2d_extensions_ios_Prefix.pch;
 				GCC_TREAT_WARNINGS_AS_ERRORS = NO;
@@ -3747,7 +3771,6 @@
 					"-all_load",
 					"-ObjC",
 				);
-				PREBINDING = NO;
 				PRODUCT_NAME = CCSliderTest;
 				WARNING_CFLAGS = "-Wall";
 			};
@@ -3760,7 +3783,6 @@
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				GCC_DYNAMIC_NO_PIC = NO;
-				GCC_ENABLE_FIX_AND_CONTINUE = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = Tests/SharedSources/cocos2d_extensions_ios_Prefix.pch;
@@ -3771,7 +3793,6 @@
 					"-all_load",
 					"-ObjC",
 				);
-				PREBINDING = NO;
 				PRODUCT_NAME = TMXGeneratorTest;
 				WARNING_CFLAGS = "-Wall";
 			};
@@ -3783,7 +3804,6 @@
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				COPY_PHASE_STRIP = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				GCC_ENABLE_FIX_AND_CONTINUE = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = Tests/SharedSources/cocos2d_extensions_ios_Prefix.pch;
 				GCC_TREAT_WARNINGS_AS_ERRORS = NO;
@@ -3793,7 +3813,6 @@
 					"-all_load",
 					"-ObjC",
 				);
-				PREBINDING = NO;
 				PRODUCT_NAME = TMXGeneratorTest;
 				WARNING_CFLAGS = "-Wall";
 			};
@@ -3814,7 +3833,6 @@
 			buildSettings = {
 				COPY_PHASE_STRIP = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				GCC_ENABLE_FIX_AND_CONTINUE = NO;
 				PRODUCT_NAME = BuildAllTests;
 				ZERO_LINK = NO;
 			};
@@ -3827,7 +3845,6 @@
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				GCC_DYNAMIC_NO_PIC = NO;
-				GCC_ENABLE_FIX_AND_CONTINUE = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = Tests/SharedSources/cocos2d_extensions_ios_Prefix.pch;
@@ -3838,7 +3855,6 @@
 					"-all_load",
 					"-ObjC",
 				);
-				PREBINDING = NO;
 				PRODUCT_NAME = CCSendMessagesTest;
 				WARNING_CFLAGS = "-Wall";
 			};
@@ -3850,7 +3866,6 @@
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				COPY_PHASE_STRIP = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				GCC_ENABLE_FIX_AND_CONTINUE = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = Tests/SharedSources/cocos2d_extensions_ios_Prefix.pch;
 				GCC_TREAT_WARNINGS_AS_ERRORS = NO;
@@ -3860,7 +3875,6 @@
 					"-all_load",
 					"-ObjC",
 				);
-				PREBINDING = NO;
 				PRODUCT_NAME = CCSendMessagesTest;
 				WARNING_CFLAGS = "-Wall";
 			};
@@ -3885,7 +3899,6 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 3.0;
 				ONLY_ACTIVE_ARCH = YES;
-				PREBINDING = NO;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -3909,7 +3922,6 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 3.0;
-				PREBINDING = NO;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
