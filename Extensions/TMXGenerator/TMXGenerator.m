@@ -302,13 +302,13 @@
 			char* encodedStr = base64_encode(byteData, len);
 			
 			[retVal appendFormat:@"%s\r</data>\r", encodedStr];
-			
+						
 			// rotation XML.  See http://www.cocos2d-iphone.org/forum/topic/16552
-			[retVal appendString:@"<rotation_data encoding=\"base64\" compression=\"gzip\">\r"];
-			
 			bufferData = [dict objectForKey:kTMXGeneratorLayerRotationData];
 			if (bufferData)
 			{
+				[retVal appendString:@"<rotation_data encoding=\"base64\" compression=\"gzip\">\r"];
+
 				data = [LFCGzipUtility gzipData:bufferData];
 				len = [data length];
 				char* byteData2 = (char*)malloc(len);
