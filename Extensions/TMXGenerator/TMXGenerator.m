@@ -136,7 +136,7 @@
 #ifdef __IPHONE_OS_VERSION_MAX_ALLOWED
 	UIImage* img = [UIImage imageNamed:[dict objectForKey:kTMXGeneratorTileSetImageAtlasFilename]];
 	CGSize imgSize = img.size;
-#else if defined(__MAC_OS_X_VERSION_MAX_ALLOWED)
+#elif defined(__MAC_OS_X_VERSION_MAX_ALLOWED)
 	NSImage* img = [NSImage imageNamed:[dict objectForKey:kTMXGeneratorTileSetImageAtlasFilename]];
 	CGSize imgSize = NSSizeToCGSize( img.size );
 #endif
@@ -293,29 +293,35 @@
 		[retVal appendString:@"<data encoding=\"base64\" compression=\"gzip\">\r"];
 		
 		NSData *bufferData = [dict objectForKey:kTMXGeneratorLayerData];
-		NSData *data = [LFCGzipUtility gzipData:bufferData];
-		NSUInteger len = [data length];
-		char* byteData = (char*)malloc(len);
-		memcpy(byteData, [data bytes], len);
-		char* encodedStr = base64_encode(byteData, len);
-		
-		[retVal appendFormat:@"%s\r</data>\r", encodedStr];
-		
-		// rotation XML.  See http://www.cocos2d-iphone.org/forum/topic/16552
-		[retVal appendString:@"<rotation_data encoding=\"base64\" compression=\"gzip\">\r"];
-		
-		bufferData = [dict objectForKey:kTMXGeneratorLayerRotationData];
-		data = [LFCGzipUtility gzipData:bufferData];
-		len = [data length];
-		byteData = (char*)malloc(len);
-		memcpy(byteData, [data bytes], len);
-		encodedStr = base64_encode(byteData, len);
-		[retVal appendFormat:@"%s\r</rotation_data>\r", encodedStr];
-		
-		
-		[retVal appendString:@"</layer>\r"];
-		free(encodedStr);
-		free(byteData);
+		if (bufferData)
+		{
+			NSData *data = [LFCGzipUtility gzipData:bufferData];
+			NSUInteger len = [data length];
+			char* byteData = (char*)malloc(len);
+			memcpy(byteData, [data bytes], len);
+			char* encodedStr = base64_encode(byteData, len);
+			
+			[retVal appendFormat:@"%s\r</data>\r", encodedStr];
+			
+			// rotation XML.  See http://www.cocos2d-iphone.org/forum/topic/16552
+			[retVal appendString:@"<rotation_data encoding=\"base64\" compression=\"gzip\">\r"];
+			
+			bufferData = [dict objectForKey:kTMXGeneratorLayerRotationData];
+			if (bufferData)
+			{
+				data = [LFCGzipUtility gzipData:bufferData];
+				len = [data length];
+				char* byteData2 = (char*)malloc(len);
+				memcpy(byteData2, [data bytes], len);
+				encodedStr = base64_encode(byteData2, len);
+				[retVal appendFormat:@"%s\r</rotation_data>\r", encodedStr];
+				free(byteData2);
+			}			
+			
+			[retVal appendString:@"</layer>\r"];
+			free(encodedStr);
+			free(byteData);
+		}
 	}
 	
 	return retVal;
