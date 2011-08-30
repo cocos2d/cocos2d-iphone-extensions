@@ -30,7 +30,7 @@
 
 
 @interface TMXGenerator ()
-- (void) addMapAttributesWithPath:(NSString*)inPath width:(int)width height:(int)height tileWidth:(int)widthInPixels tileHeight:(int)heightInPixels orientation:(NSString*)orientation;
+- (void) addMapAttributesWithPath:(NSString*)inPath width:(int)width height:(int)height tileWidth:(int)widthInPixels tileHeight:(int)heightInPixels orientation:(NSString*)orientation properties:(NSDictionary*)properties;
 - (void) addLayerNamed:(NSString*)layerName width:(int)width height:(int)height data:(NSData*)binaryLayerData visible:(BOOL)isVisible;
 - (BOOL) addTilesetWithImage:(NSString*)imgName named:(NSString*)name width:(int)width height:(int)height tileSpacing:(int)spacing tileProperties:(NSDictionary*)properties;
 - (void) addObjectGroupNamed:(NSString*)name width:(int)width height:(int)height objectList:(NSArray*)objects;
@@ -76,7 +76,7 @@
 #pragma mark -
 
 
-- (void) addMapAttributesWithPath:(NSString*)inPath width:(int)width height:(int)height tileWidth:(int)widthInPixels tileHeight:(int)heightInPixels orientation:(NSString*)orientation
+- (void) addMapAttributesWithPath:(NSString*)inPath width:(int)width height:(int)height tileWidth:(int)widthInPixels tileHeight:(int)heightInPixels orientation:(NSString*)orientation properties:(NSDictionary*)properties
 {
 	if (mapAttributes)
 		[mapAttributes release];
@@ -87,7 +87,9 @@
 	[mapAttributes setObject:[NSString stringWithFormat:@"%i", heightInPixels] forKey:kTMXGeneratorHeaderInfoMapTileHeight];
 	if (orientation)
 		[mapAttributes setObject:orientation forKey:kTMXGeneratorHeaderInfoMapOrientation];
-
+	if (properties)
+		[mapAttributes setObject:properties forKey:kTMXGeneratorHeaderInfoMapProperties];
+	
 	if (path)
 		[path release];
 	path = [[NSString alloc] initWithString:inPath];
@@ -429,6 +431,11 @@
 	int tileHeight = [[mapAttributes objectForKey:kTMXGeneratorHeaderInfoMapTileHeight] intValue];
 	[outStr appendFormat:@"tilewidth=\"%i\" tileheight=\"%i\">\r", tileWidth, tileHeight];
 	
+	// map properties
+	NSDictionary* properties = [mapAttributes objectForKey:kTMXGeneratorHeaderInfoMapProperties];
+	if (properties)
+		[outStr appendString:[TMXGenerator propertiesToXML:properties]];
+	
 	// append the tilesets
 	[outStr appendString:[TMXGenerator tileSetsToXML:inTileSets]];
 	
@@ -516,11 +523,11 @@
 	if (!delegate_)
 		return NO;
 	
-	NSDictionary* mapInfo = [delegate_ mapSetupInfo];
+	NSDictionary* mapInfo = [delegate_ mapAttributeSetup];
 	if (!mapInfo)
 	{
 		if (error)
-			*error = [[NSError alloc] initWithDomain:@"Unable to get basic map info when calling delegate method mapSetupInfo" code:0 userInfo:nil];
+			*error = [[NSError alloc] initWithDomain:@"Unable to get basic map info when calling delegate method mapAttributeSetup" code:0 userInfo:nil];
 		return NO;
 	}
 
@@ -718,7 +725,7 @@
 	int height = 16;
 
 	// add map attributes
-	[self addMapAttributesWithPath:inPath width:width height:height tileWidth:32 tileHeight:32 orientation:nil];
+	[self addMapAttributesWithPath:inPath width:width height:height tileWidth:32 tileHeight:32 orientation:nil properties:nil];
 
 	// add a tileset
 	[self addTilesetWithImage:@"regularTiles_default.png" named:@"Default Tileset" width:32 height:32 tileSpacing:2 tileProperties:nil];

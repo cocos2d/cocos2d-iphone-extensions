@@ -36,6 +36,7 @@
 #define kTMXGeneratorHeaderInfoMapTileHeight	@"mapTileHeight"
 #define kTMXGeneratorHeaderInfoMapOrientation	@"mapOrientation"
 #define kTMXGeneratorHeaderInfoMapPath			@"mapPath"
+#define kTMXGeneratorHeaderInfoMapProperties	@"mapProperties"
 
 #pragma mark Tileset Setup Info Keys
 
@@ -78,9 +79,9 @@
 /** Returns the map's filePath to be saved to. */
 - (NSString*) mapFilePath;													
  
-/** Returns map setup parameters. Keys listed in the "Map Setup Info Keys" section above.  
+/** Returns map setup parameters and properties. Keys listed in the "Map Setup Info Keys" section above.  
  * Number values can be strings or NSNumbers. */
-- (NSDictionary*) mapSetupInfo;				
+- (NSDictionary*) mapAttributeSetup;				
 
 /** Returns tileset setup information based on the name. Keys listed in 
  * "Tileset Setup Info Keys" section above. */
@@ -124,10 +125,10 @@
  */
 - (NSString*) tileIdentificationKeyForLayer:(NSString*)layerName;			
 
-@optional
-
-/** Returns the optional properties for a given tileset. */
+/** Returns the properties for a given tileset. */
 - (NSDictionary*) propertiesForTileSetNamed:(NSString*)name;
+
+@optional
 
 /** Returns the optional properties for a given object in a given group. Keys are listed in 
  * "Single Object Setup Info Keys" section above.

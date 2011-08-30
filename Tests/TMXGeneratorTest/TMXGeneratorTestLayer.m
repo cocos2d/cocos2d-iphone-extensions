@@ -353,7 +353,7 @@ enum
 }
 
 
-- (NSDictionary*) mapSetupInfo
+- (NSDictionary*) mapAttributeSetup
 {
 	NSMutableDictionary* dict = [NSMutableDictionary dictionaryWithCapacity:5];
 	[dict setObject:[NSString stringWithFormat:@"%i", kNumTilesPerChunk] forKey:kTMXGeneratorHeaderInfoMapWidth];
@@ -361,6 +361,7 @@ enum
 	[dict setObject:[NSString stringWithFormat:@"%i", kNumPixelsPerTileSquare] forKey:kTMXGeneratorHeaderInfoMapTileWidth];
 	[dict setObject:[NSString stringWithFormat:@"%i", kNumPixelsPerTileSquare] forKey:kTMXGeneratorHeaderInfoMapTileHeight];
 	[dict setObject:[self mapFilePath] forKey:kTMXGeneratorHeaderInfoMapPath];
+	[dict setObject:[NSDictionary dictionaryWithObject:@"Test property" forKey:@"property"] forKey:kTMXGeneratorHeaderInfoMapProperties];
 	
 	return dict;
 }
