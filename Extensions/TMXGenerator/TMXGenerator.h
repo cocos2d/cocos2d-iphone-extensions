@@ -130,6 +130,14 @@
 
 @optional
 
+/* Return YES here to copy the map atlas files to the map save location.  If a map
+ * is not being written, this does nothing.
+ * returning NO here skips copying tile atlases.  If you skip this you need to
+ * make sure your atlas name is a partial path for the map to find the atlas!
+ * default is YES if this is not defined.
+ */
+- (BOOL) copyAtlasFileForName:(NSString*)tilesetName;
+
 /** Returns the optional properties for a given object in a given group. Keys are listed in 
  * "Single Object Setup Info Keys" section above.
  */
@@ -166,9 +174,13 @@
  * Returns NO and an error if the map isn't generated, otherwise returns YES.
  *
  * @param error Pass NULL if you don't want error description. 
- * If you will pass pointer to NSError - you must release the returned value.
  */
-- (BOOL) generateAndSaveTMXMap:(NSError**)error;						
+- (BOOL) generateAndSaveTMXMap:(NSError**)error;
+
+/* Alternatively, you can create the TMXMap as an XML string.
+ */
+- (NSString*) generateMapXML:(NSError**)error;
+
 
 #pragma mark Delegate Helper Methods
 

@@ -395,26 +395,10 @@
 	return retVal;
 }
 
-
-//////// writeTMXFile ///////
-/*
-	mapAttributes is a dictionary with the following attributes:
-		kTMXGeneratorHeaderInfoMapWidth			- how many tiles wide
-		kTMXGeneratorHeaderInfoMapHeight		- how many tiles high
-		kTMXGeneratorHeaderInfoMapTileWidth		- tile width in pixels
-		kTMXGeneratorHeaderInfoMapTileHeight	- tile height in pixels
- 
-	optional:
-		kTMXGeneratorHeaderInfoMapOrientation	- tile orientation, default is @"orthogonal", @"isometric" also supported by cocos2d
- 
-	tileSets is a dictionary of named tilesets (dictionaries of tileset attributes, including properties)
- 
-	layers is an NSArray of layer information dictionaries.
-*/
-+ (void) writeTMXFileWithName:(NSString*)filePath mapAttributes:(NSDictionary*)mapAttributes tilesets:(NSDictionary*)inTileSets layers:(NSArray*)inLayers objectGroups:(NSArray*)inObjectGroups
++ (NSString*) XMLWithAttributes:(NSDictionary*)mapAttributes tilesets:(NSDictionary*)inTileSets layers:(NSArray*)inLayers objectGroups:(NSArray*)inObjectGroups
 {
 	NSMutableString* outStr = [NSMutableString stringWithString:@"<?xml version=\"1.0\" encoding=\"UTF-8\"?>\r<!DOCTYPE map SYSTEM \"http://mapeditor.org/dtd/1.0/map.dtd\">\r"];
-
+	
 	// map header details
 	NSString* orientation = @"orthogonal";
 	if ([mapAttributes objectForKey:kTMXGeneratorHeaderInfoMapOrientation])
@@ -448,7 +432,27 @@
 	// close map tag
 	[outStr appendString:@"\r</map>"];
 	
-	[outStr writeToFile:filePath atomically:YES encoding:NSUTF8StringEncoding error:nil];
+	return [NSString stringWithString:outStr];
+}
+
+/*
+	mapAttributes is a dictionary with the following attributes:
+		kTMXGeneratorHeaderInfoMapWidth			- how many tiles wide
+		kTMXGeneratorHeaderInfoMapHeight		- how many tiles high
+		kTMXGeneratorHeaderInfoMapTileWidth		- tile width in pixels
+		kTMXGeneratorHeaderInfoMapTileHeight	- tile height in pixels
+ 
+	optional:
+		kTMXGeneratorHeaderInfoMapOrientation	- tile orientation, default is @"orthogonal", @"isometric" also supported by cocos2d
+ 
+	tileSets is a dictionary of named tilesets (dictionaries of tileset attributes, including properties)
+ 
+	layers is an NSArray of layer information dictionaries.
+*/
++ (void) writeTMXFileWithXML:(NSString*)xml fileName:(NSString*)filePath
+{
+	if (xml)
+		[xml writeToFile:filePath atomically:YES encoding:NSUTF8StringEncoding error:nil];
 }
 
 
@@ -518,27 +522,32 @@
 #pragma mark -
 
 
-- (BOOL) generateAndSaveTMXMap:(NSError**)error;
+- (NSString*) generateMapXML:(NSError**)error
 {
 	if (!delegate_)
-		return NO;
+	{
+		if (error)
+			*error = [NSError errorWithDomain:@"Unable to get delegate when calling generateMapXML:" code:0 userInfo:nil];
+		return nil;
+	}
+	
 	
 	NSDictionary* mapInfo = [delegate_ mapAttributeSetup];
 	if (!mapInfo)
 	{
 		if (error)
-			*error = [[NSError alloc] initWithDomain:@"Unable to get basic map info when calling delegate method mapAttributeSetup" code:0 userInfo:nil];
+			*error = [NSError errorWithDomain:@"Unable to get basic map info when calling delegate method mapAttributeSetup" code:0 userInfo:nil];
 		return NO;
 	}
-
+	
 	int mapWidth = [[mapInfo objectForKey:kTMXGeneratorHeaderInfoMapWidth] intValue];
 	int mapHeight = [[mapInfo objectForKey:kTMXGeneratorHeaderInfoMapHeight] intValue];
-		
+	
 	NSArray* tileSetNames = [delegate_ tileSetNames];
 	if (!tileSetNames || ![tileSetNames count])
 	{
 		if (error)
-			*error = [[NSError alloc] initWithDomain:@"Unable to get any tileset names when calling delegate method tileSetNames" code:0 userInfo:nil];
+			*error = [NSError errorWithDomain:@"Unable to get any tileset names when calling delegate method tileSetNames" code:0 userInfo:nil];
 		return NO;
 	}
 	
@@ -550,28 +559,28 @@
 		if (!dict)
 		{
 			if (error)
-				*error = [[NSError alloc] initWithDomain:[NSString stringWithFormat:@"Unable to get tileset from name %@ when calling delegate method tileSetInfoForName:", key] code:0 userInfo:nil];
+				*error = [NSError errorWithDomain:[NSString stringWithFormat:@"Unable to get tileset from name %@ when calling delegate method tileSetInfoForName:", key] code:0 userInfo:nil];
 			return NO;
 		}
-
+		
 		NSDictionary* properties = nil;
 		if ([delegate_ respondsToSelector:@selector(propertiesForTileSetNamed:)])
 			properties = [delegate_ propertiesForTileSetNamed:key];
 		if (!properties)
 		{
 			if (error)
-				*error = [[NSError alloc] initWithDomain:[NSString stringWithFormat:@"Unable to get properties from tileset name %@ when calling delegate method propertiesForTileSetNamed:", key] code:0 userInfo:nil];
+				*error = [NSError errorWithDomain:[NSString stringWithFormat:@"Unable to get properties from tileset name %@ when calling delegate method propertiesForTileSetNamed:", key] code:0 userInfo:nil];
 			return NO;
 		}
 		
 		[self addTilesetWithDictionary:dict tileProperties:properties];
 	}
-
+	
 	NSArray* layerNames = [delegate_ layerNames];
 	if (!layerNames || ![layerNames count])
 	{
 		if (error)
-			*error = [[NSError alloc] initWithDomain:@"Unable to get any layer names when calling delegate method layerNames" code:0 userInfo:nil];
+			*error = [NSError errorWithDomain:@"Unable to get any layer names when calling delegate method layerNames" code:0 userInfo:nil];
 		return NO;
 	}
 	
@@ -584,12 +593,12 @@
 		if (!dict)
 		{
 			if (error)
-				*error = [[NSError alloc] initWithDomain:[NSString stringWithFormat:@"Unable to get layer from name %@ when calling delegate method layerInfoForName:", key] code:0 userInfo:nil];
+				*error = [NSError errorWithDomain:[NSString stringWithFormat:@"Unable to get layer from name %@ when calling delegate method layerInfoForName:", key] code:0 userInfo:nil];
 			return NO;
 		}
 		
 		tileKeyVal = [delegate_ tileIdentificationKeyForLayer:key];
-
+		
 		unsigned int mapData[mapHeight][mapWidth];
 		BOOL hasData = NO;
 		
@@ -615,7 +624,7 @@
 					hasData = YES;
 			}
 		}
-
+		
 		if (hasData)	// skip this if it's a blank layer.
 		{
 			NSData* data = [NSData dataWithBytes:mapData length:sizeof(unsigned int) * mapWidth * mapHeight];
@@ -657,7 +666,7 @@
 				if (!dict)
 				{
 					if (error)
-						*error = [[NSError alloc] initWithDomain:[NSString stringWithFormat:@"Unable to get object group from name %@ when calling delegate method objectsGroupInfoForName:", key] code:0 userInfo:nil];
+						*error = [NSError errorWithDomain:[NSString stringWithFormat:@"Unable to get object group from name %@ when calling delegate method objectsGroupInfoForName:", key] code:0 userInfo:nil];
 					return NO;
 				}
 				
@@ -682,35 +691,55 @@
 			[self addObjectGroupNamed:key width:mapWidth height:mapHeight objectList:results];
 		}
 	}
-
+	
 	// create the TMX file on disk.
+	NSString* xml = [TMXGenerator XMLWithAttributes:mapInfo
+										   tilesets:tileSets 
+											 layers:layers 
+									   objectGroups:objectGroups];
+	
+	return xml;
+}
+
+
+- (BOOL) generateAndSaveTMXMap:(NSError**)error
+{
+	if (!delegate_)
+		return NO;
+	
+	NSString* xml = [self generateMapXML:error];
 	NSString* mapPath = [delegate_ mapFilePath];
-	[TMXGenerator writeTMXFileWithName:mapPath
-						 mapAttributes:mapInfo
-							  tilesets:tileSets 
-								layers:layers 
-						  objectGroups:objectGroups];
+
+	[TMXGenerator writeTMXFileWithXML:xml fileName:mapPath];
 	
 	// copy the image atlas to the written path from the main bundle.  We can change this later as needed to copy/move from a different source.
 	if (!copiedAtlasNames)
 		copiedAtlasNames = [[NSMutableSet alloc] initWithCapacity:10];
 
+	// we can skip this step with the delegate as desired.
 	NSString* pathForDest = [mapPath stringByDeletingLastPathComponent];
 	for (NSString* tileKey in tileSets)
 	{
-		NSDictionary* dict = [tileSets objectForKey:tileKey];
-		NSString* fileName = [dict objectForKey:kTMXGeneratorTileSetImageAtlasFilename];
-		NSString* destPath = [pathForDest stringByAppendingPathComponent:fileName];
-		if (![copiedAtlasNames containsObject:fileName])
+		BOOL copyAtlases = YES;
+		if ([delegate_ respondsToSelector:@selector(copyAtlasFileForName:)])
+			copyAtlases = [delegate_ copyAtlasFileForName:tileKey];
+		
+		if (copyAtlases)
 		{
-			[[NSFileManager defaultManager] removeItemAtPath:destPath error:nil];
-			if (![[NSFileManager defaultManager] copyItemAtPath:[[NSBundle mainBundle] pathForResource:[fileName stringByDeletingPathExtension] ofType:[fileName pathExtension]] toPath:destPath error:error])
-			{	
-				if (error)
-					*error = [[NSError alloc] initWithDomain:[NSString stringWithFormat:@"Unable to copy atlas to %@ with name %@ after creating the map", pathForDest, fileName] code:0 userInfo:nil];
-				return NO;
+			NSDictionary* dict = [tileSets objectForKey:tileKey];
+			NSString* fileName = [dict objectForKey:kTMXGeneratorTileSetImageAtlasFilename];
+			NSString* destPath = [pathForDest stringByAppendingPathComponent:fileName];
+			if (![copiedAtlasNames containsObject:fileName])
+			{
+				[[NSFileManager defaultManager] removeItemAtPath:destPath error:nil];
+				if (![[NSFileManager defaultManager] copyItemAtPath:[[NSBundle mainBundle] pathForResource:[fileName stringByDeletingPathExtension] ofType:[fileName pathExtension]] toPath:destPath error:error])
+				{	
+					if (error)
+						*error = [NSError errorWithDomain:[NSString stringWithFormat:@"Unable to copy atlas to %@ with name %@ after creating the map", pathForDest, fileName] code:0 userInfo:nil];
+					return NO;
+				}
+				[copiedAtlasNames addObject:fileName];
 			}
-			[copiedAtlasNames addObject:fileName];
 		}
 	}
 	
@@ -752,8 +781,13 @@
 	[self addObjectGroupNamed:@"Object Layer" width:width height:height objectList:[NSArray arrayWithObject:dict]];
 	
 	// convert to XML
+	NSString* xml = [TMXGenerator XMLWithAttributes:mapAttributes
+										   tilesets:tileSets 
+											 layers:layers 
+									   objectGroups:objectGroups];
+	
 	// save as file
-	[TMXGenerator writeTMXFileWithName:path mapAttributes:mapAttributes tilesets:tileSets layers:layers objectGroups:objectGroups];
+	[TMXGenerator writeTMXFileWithXML:xml fileName:path];
 }
 
 
