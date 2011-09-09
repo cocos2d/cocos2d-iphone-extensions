@@ -482,7 +482,7 @@
 	[dict setObject:imgName forKey:kTMXGeneratorTileSetImageAtlasFilename];
 	[dict setObject:name forKey:kTMXGeneratorTileSetName];
 	[dict setObject:[NSString stringWithFormat:@"%i", width] forKey:kTMXGeneratorImageAtlasTileWidth];
-	[dict setObject:[NSString stringWithFormat:@"%i", width] forKey:kTMXGeneratorImageAtlasTileHeight];
+	[dict setObject:[NSString stringWithFormat:@"%i", height] forKey:kTMXGeneratorImageAtlasTileHeight];
 	[dict setObject:[NSString stringWithFormat:@"%i", spacing] forKey:kTMXGeneratorImageAtlasTileSpacing];
 	
 	return dict;
