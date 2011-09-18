@@ -167,6 +167,13 @@ enum
 		glEnable(GL_POINT_SMOOTH);
 		GLboolean blendWasEnabled = glIsEnabled( GL_BLEND );
 		glEnable(GL_BLEND);
+		
+		// save the old blending functions
+                int blend_src = 0;
+                int blend_dst = 0;
+                glGetIntegerv( GL_BLEND_SRC, &blend_src );
+                glGetIntegerv( GL_BLEND_DST, &blend_dst );
+		
 		glBlendFunc( GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA );
 		glPointSize( 6.0 * CC_CONTENT_SCALE_FACTOR() );
 		
@@ -183,6 +190,9 @@ enum
 		glDisable(GL_POINT_SMOOTH);
 		if (! blendWasEnabled)
 			glDisable(GL_BLEND);
+			
+		// always restore the blending functions too
+                glBlendFunc( blend_src, blend_dst );
 	}
 }
 
