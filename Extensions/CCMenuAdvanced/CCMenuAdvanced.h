@@ -55,6 +55,12 @@
 	CGFloat minimumTouchLengthToSlide_; //< how long user must slide finger to start scrolling menu
 	CGFloat curTouchLength_;
 	
+    
+    tCCMenuState prevState_;
+    CGPoint prevPosition_;
+    CGFloat velocity_;
+    int direction_;
+    
 	BOOL isDisabled_;
 
 #ifdef __MAC_OS_X_VERSION_MAX_ALLOWED
