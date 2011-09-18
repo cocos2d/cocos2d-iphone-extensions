@@ -283,6 +283,10 @@ enum
     CGPoint touchLocation = [touch locationInView: [touch view]];		
     touchLocation = [[CCDirector sharedDirector] convertToGL: touchLocation];
     touchLocation = [self convertToNodeSpace:touchLocation];
+    
+    CGRect mapRect = [map boundingBox];
+    if (!CGRectContainsPoint(mapRect, touchLocation))
+        return;
 	
 	// offset our movement based on where we have the background scrolled
     CGPoint playerPos = playerSprite.position;
