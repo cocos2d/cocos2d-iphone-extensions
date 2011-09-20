@@ -72,8 +72,10 @@ enum nodeTags
 		 thumbMenuItem: thumbMenuItem  ];		 
 		 */
 		
-		slider.delegate = self;
+        [slider addObserver:self forKeyPath:@"value" options: NSKeyValueObservingOptionNew context: nil];
+        
 		[self addChild:slider z: 0 tag: kSliderTag];
+        
 		
 		[self updateForScreenReshape];
 	
@@ -95,13 +97,19 @@ enum nodeTags
 	
 }
   
-- (void) valueChanged: (float) value tag: (int) tag
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
 {
-	// Get label.
-	CCLabelTTF *label = (CCLabelTTF *)[self getChildByTag: kLabelTag];
-	
-	// Change value of label.
-	label.string = [NSString stringWithFormat:@"Value = %f", value];	
+    if ([object isKindOfClass: [CCSlider class] ] && [keyPath isEqualToString: @"value"])
+    {
+        NSNumber *valueObject = [change objectForKey: NSKeyValueChangeNewKey];
+        float value = [valueObject floatValue];
+    
+        // Get label.
+        CCLabelTTF *label = (CCLabelTTF *)[self getChildByTag: kLabelTag];
+        
+        // Change value of label.
+        label.string = [NSString stringWithFormat:@"Value = %f", value];	
+    }
 }
 
 @end

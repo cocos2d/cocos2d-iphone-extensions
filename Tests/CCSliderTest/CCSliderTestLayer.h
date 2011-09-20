@@ -31,7 +31,7 @@
 #import "CCSlider.h"
 
 
-@interface CCSliderTestLayer : CCLayer <CCSliderControlDelegate>
+@interface CCSliderTestLayer : CCLayer
 {
 }
 
