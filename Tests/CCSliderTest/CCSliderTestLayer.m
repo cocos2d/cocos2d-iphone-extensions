@@ -72,7 +72,7 @@ enum nodeTags
 		 thumbMenuItem: thumbMenuItem  ];		 
 		 */
 		
-        [slider addObserver:self forKeyPath:@"value" options: NSKeyValueObservingOptionNew context: nil];
+        [slider addObserver:self forKeyPath:@"value" options: NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld  context: nil];
         
 		[self addChild:slider z: 0 tag: kSliderTag];
         
@@ -103,12 +103,15 @@ enum nodeTags
     {
         NSNumber *valueObject = [change objectForKey: NSKeyValueChangeNewKey];
         float value = [valueObject floatValue];
+        
+        NSNumber *prevValueObject = [change objectForKey: NSKeyValueChangeOldKey];
+        float prevValue = [prevValueObject floatValue];
     
         // Get label.
         CCLabelTTF *label = (CCLabelTTF *)[self getChildByTag: kLabelTag];
         
         // Change value of label.
-        label.string = [NSString stringWithFormat:@"Value = %f", value];	
+        label.string = [NSString stringWithFormat:@"Value = %f Prev = %f", value, prevValue];	
     }
 }
 
