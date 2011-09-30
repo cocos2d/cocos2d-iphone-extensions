@@ -241,10 +241,13 @@
 	
 	CCARRAY_FOREACH(children_, item) {
 		CGSize itemSize = item.contentSize;
+		// need to start y higher, otherwise the first element will be hidden from view
+		if (bottomToTop)
+			y += itemSize.height * item.scaleY;
 	    [item setPosition:ccp(width / 2.0f, y - itemSize.height * item.scaleY / 2.0f)];
 		
 		if (bottomToTop)
-			y += itemSize.height * item.scaleY + padding;
+			y += padding;
 		else 
 			y -= itemSize.height * item.scaleY + padding;
 	}
