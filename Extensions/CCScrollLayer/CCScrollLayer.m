@@ -99,7 +99,7 @@ enum
 		self.minimumTouchLengthToSlide = 30.0f;
 		self.minimumTouchLengthToChangePage = 100.0f;
 		
-		self.marginOffset = 50.0f;
+		self.marginOffset = [[CCDirector sharedDirector] winSize].width;
 		
 		// Show indicator by default.
 		self.showPagesIndicator = YES;
@@ -383,10 +383,14 @@ enum
 	
 	if (state_ == kCCScrollLayerStateSliding)
 	{
-		CGFloat offset = touchPoint.x - startSwipe_;
-		if ((currentScreen_ == 0 && offset > 0) || (currentScreen_ == [layers_ count] - 1 && offset < 0))
-			offset = marginOffset_ * offset / [[CCDirector sharedDirector] winSize].width;
-		self.position = ccp( (- currentScreen_ * (self.contentSize.width - self.pagesWidthOffset)) + offset, 0);
+		CGFloat desiredX = (- currentScreen_ * (self.contentSize.width - self.pagesWidthOffset)) + offset;
+		int page = [self pageNumberForPosition:ccp(desiredX, 0)];
+		CGFloat offset = desiredX - [self positionForPageWithNumber:page].x; 
+		if ((page == 0 && offset > 0) || (page == [layers_ count] - 1 && offset < 0))
+			offset -= marginOffset_ * offset / [[CCDirector sharedDirector] winSize].width;
+		else
+			offset = 0;
+		self.position = ccp(desiredX - offset, 0);
 	}
 }
 
@@ -401,7 +405,7 @@ enum
 	
 	int selectedPage = currentScreen_;
 	CGFloat delta = touchPoint.x - startSwipe_;
-	if (fabs(delta) >= m_fMinimumTouchLengthToChangePage)
+	if (fabsf(delta) >= self.minimumTouchLengthToChangePage)
 	{
 		selectedPage = [self pageNumberForPosition:self.position];
 		if (selectedPage == currentScreen_)
