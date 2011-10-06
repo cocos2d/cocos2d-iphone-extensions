@@ -52,9 +52,10 @@ typedef enum
 - (void) fixLayerPosition;
 // Fix scale for the layer considering panBoundsRect and enablePanBounds
 - (void) fixLayerScale;
-/* Get minimum possible scale for the layer 
- considering panBoundsRect and enablePanBounds */
-- (CGFloat) getMinPossibleScale;
+// Return minimum possible scale for the layer considering panBoundsRect and enablePanBounds
+- (CGFloat) minPossibleScale;
+// Return edge in which current point located
+- (CCLayerPanZoomFrameEdge) frameEdgeWithPoint: (CGPoint) point;
 
 @end
 
@@ -81,7 +82,12 @@ typedef enum
 		self.panBoundsRect = CGRectNull;
 		self.touchDistance = 0.0F;
 		self.maxTouchDistanceToClick = 15.0f;
-        self.mode = kCCLayerPanZoomModeScrollScale;
+        self.mode = kCCLayerPanZoomModeFrame;
+        self.speed = 200.0f;
+        self.topFrameMargin = 50.0f;
+        self.bottomFrameMargin = 50.0f;
+        self.leftFrameMargin = 50.0f;
+        self.rightFrameMargin = 50.0f;
 	}	
 	return self;
 }
@@ -108,20 +114,20 @@ typedef enum
         UITouch *touch1 = [self.touches objectAtIndex: 0];
 		UITouch *touch2 = [self.touches objectAtIndex: 1];
 		// Get current and previous positions of the touches
-		CGPoint curPosTch1 = [[CCDirector sharedDirector] convertToGL: [touch1 locationInView: [touch1 view]]];
-		CGPoint curPosTch2 = [[CCDirector sharedDirector] convertToGL: [touch2 locationInView: [touch2 view]]];
-		CGPoint prevPosTch1 = [[CCDirector sharedDirector] convertToGL: [touch1 previousLocationInView: [touch1 view]]];
-		CGPoint prevPosTch2 = [[CCDirector sharedDirector] convertToGL: [touch2 previousLocationInView: [touch2 view]]];
+		CGPoint curPosTouch1 = [[CCDirector sharedDirector] convertToGL: [touch1 locationInView: [touch1 view]]];
+		CGPoint curPosTouch2 = [[CCDirector sharedDirector] convertToGL: [touch2 locationInView: [touch2 view]]];
+		CGPoint prevPosTouch1 = [[CCDirector sharedDirector] convertToGL: [touch1 previousLocationInView: [touch1 view]]];
+		CGPoint prevPosTouch2 = [[CCDirector sharedDirector] convertToGL: [touch2 previousLocationInView: [touch2 view]]];
 		// Calculate current and previous positions of the layer relative the anchor point
-		CGPoint curPosLayer = ccpMidpoint(curPosTch1, curPosTch2);
-		CGPoint prevPosLayer = ccpMidpoint(prevPosTch1, prevPosTch2);
+		CGPoint curPosLayer = ccpMidpoint(curPosTouch1, curPosTouch2);
+		CGPoint prevPosLayer = ccpMidpoint(prevPosTouch1, prevPosTouch2);
 		// If current and previous positions of the layer were fuzzy equal then they are equal
 		if (ccpFuzzyEqual(prevPosLayer, curPosLayer, 2))
 		{
 			prevPosLayer = curPosLayer;
 		}
 		// Calculate new scale
-		CGFloat newScale = self.scale * (ccpDistance(curPosTch1, curPosTch2) / ccpDistance(prevPosTch1, prevPosTch2));		
+		CGFloat newScale = self.scale * (ccpDistance(curPosTouch1, curPosTouch2) / ccpDistance(prevPosTouch1, prevPosTouch2));		
 		self.scale = MIN(MAX(newScale, self.minScale), self.maxScale);
 		[self fixLayerScale];
 		// Calculate new anchor point
@@ -135,20 +141,32 @@ typedef enum
 	}
 	else
 	{	
-		// Get the one touch
+        // Get the one touch
         UITouch *touch = [self.touches objectAtIndex: 0];        
-		// Get current and previous positions of the touche
-		CGPoint curPosTch = [[CCDirector sharedDirector] convertToGL: [touch locationInView: [touch view]]];
-		CGPoint prevPosTch = [[CCDirector sharedDirector] convertToGL: [touch previousLocationInView: [touch view]]];
-		// Calculate new anchor point
-		CGPoint newAnchorInPixels = [self convertToNodeSpace: prevPosTch];
-		self.anchorPoint = ccp(newAnchorInPixels.x / self.contentSize.width, newAnchorInPixels.y / self.contentSize.height);
-		// Set new position of the layer
-		self.position = curPosTch;		
-		[self fixLayerPosition];
-		// Accumulate touche distance
-		self.touchDistance += ccpDistance(curPosTch, prevPosTch);
-	}	
+        // Get current positions of the touche
+        CGPoint curPosTouch = [[CCDirector sharedDirector] convertToGL: [touch locationInView: [touch view]]];
+        
+        // in order with current mode
+        switch (self.mode)
+        {
+            case kCCLayerPanZoomModeSheet:
+                {
+                    // Get previous positions of the touche
+                    CGPoint prevPosTch = [[CCDirector sharedDirector] convertToGL: [touch previousLocationInView: [touch view]]];
+                    // Calculate new anchor point
+                    CGPoint newAnchorInPixels = [self convertToNodeSpace: prevPosTch];
+                    self.anchorPoint = ccp(newAnchorInPixels.x / self.contentSize.width, newAnchorInPixels.y / self.contentSize.height);
+                    // Set new position of the layer
+                    self.position = curPosTouch;		
+                    [self fixLayerPosition];
+                    // Accumulate touche distance
+                    self.touchDistance += ccpDistance(curPosTouch, prevPosTch);
+                }
+                break;
+            default:
+                break;
+        }
+    }	
 }
 
 - (void) ccTouchesEnded: (NSSet *) touches 
@@ -185,6 +203,61 @@ typedef enum
 	{
 		self.touchDistance = 0.0f;
 	}
+}
+
+#pragma mark Update
+
+- (void) update: (ccTime) dt
+{
+    // for single touch and frame mode
+	if ([self.touches count] == 1 && self.mode == kCCLayerPanZoomModeFrame)
+    {
+        // Get the one touch
+        UITouch *touch = [self.touches objectAtIndex: 0];        
+        // Get current positions of the touche
+        CGPoint curPosTouch = [[CCDirector sharedDirector] convertToGL: [touch locationInView: [touch view]]];
+
+        switch ([self frameEdgeWithPoint: curPosTouch]) 
+        {
+            case kCCLayerPanZoomFrameEdgeLeft:
+                {
+                    self.position = ccp(self.position.x + dt * self.speed, self.position.y);
+                }
+                break;
+            case kCCLayerPanZoomFrameEdgeRight:
+                {
+                    self.position = ccp(self.position.x - dt * self.speed, self.position.y);
+                }
+                break;
+            case kCCLayerPanZoomFrameEdgeTop:
+                {
+                    self.position = ccp(self.position.x, self.position.y - dt * self.speed);
+                }
+                break;
+            case kCCLayerPanZoomFrameEdgeBottom:
+                {
+                    self.position = ccp(self.position.x, self.position.y + dt * self.speed);
+                }
+                break;                
+            default:
+                break;
+        }
+        [self fixLayerPosition];
+    }
+}
+
+- (void) onEnter
+{
+    [super onEnter];
+    [[CCScheduler sharedScheduler] scheduleUpdateForTarget: self 
+                                                  priority: 0 
+                                                    paused: NO];
+}
+
+- (void) onExit
+{
+    [[CCScheduler sharedScheduler] unscheduleAllSelectorsForTarget: self];
+    [super onExit];
 }
 
 #pragma mark Scale and Position related
@@ -241,11 +314,11 @@ typedef enum
 		// Check the pan bounds and fix (if it's need) scale
 		CGRect boundBox = [self boundingBox];
 		if ((boundBox.size.width < self.panBoundsRect.size.width) || (boundBox.size.height < self.panBoundsRect.size.height))
-			self.scale = [self getMinPossibleScale];	
+			self.scale = [self minPossibleScale];	
 	}
 }
 
-- (CGFloat) getMinPossibleScale
+- (CGFloat) minPossibleScale
 {
 	if (!CGRectIsNull(self.panBoundsRect))
 	{
@@ -256,6 +329,51 @@ typedef enum
 	{
 		return self.minScale;
 	}
+}
+
+- (CCLayerPanZoomFrameEdge) frameEdgeWithPoint: (CGPoint) point
+{
+    CGSize winSize = [CCDirector sharedDirector].winSize;
+    BOOL isLeft = point.x <= self.leftFrameMargin;
+    BOOL isRight = point.x >= winSize.width - self.rightFrameMargin;
+    BOOL isBottom = point.y <= self.bottomFrameMargin;
+    BOOL isTop = point.y >= winSize.height - self.topFrameMargin;
+    
+    if (isLeft && isBottom)
+    {
+        return kCCLayerPanZoomFrameEdgeBottomLeft;
+    }
+    if (isLeft && isTop)
+    {
+        return kCCLayerPanZoomFrameEdgeTopLeft;
+    }
+    if (isRight && isBottom)
+    {
+        return kCCLayerPanZoomFrameEdgeBottomRight;
+    }
+    if (isRight && isTop)
+    {
+        return kCCLayerPanZoomFrameEdgeTopRight;
+    }
+    
+    if (isLeft)
+    {
+        return kCCLayerPanZoomFrameEdgeLeft;
+    }
+    if (isTop)
+    {
+        return kCCLayerPanZoomFrameEdgeTop;
+    }
+    if (isRight)
+    {
+        return kCCLayerPanZoomFrameEdgeRight;
+    }
+    if (isBottom)
+    {
+        return kCCLayerPanZoomFrameEdgeBottom;
+    }
+    
+    return kCCLayerPanZoomFrameEdgeNone;
 }
 
 #pragma mark Dealloc
