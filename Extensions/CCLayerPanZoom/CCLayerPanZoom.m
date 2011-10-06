@@ -29,6 +29,19 @@
 
 #import "CCLayerPanZoom.h"
 
+typedef enum
+{
+    kCCLayerPanZoomFrameEdgeNone,
+    kCCLayerPanZoomFrameEdgeTop,
+    kCCLayerPanZoomFrameEdgeBottom,
+    kCCLayerPanZoomFrameEdgeLeft,
+    kCCLayerPanZoomFrameEdgeRight,
+    kCCLayerPanZoomFrameEdgeTopLeft,
+    kCCLayerPanZoomFrameEdgeBottomLeft,
+    kCCLayerPanZoomFrameEdgeTopRight,
+    kCCLayerPanZoomFrameEdgeBottomRight
+} CCLayerPanZoomFrameEdge;
+
 
 @interface CCLayerPanZoom ()
 
