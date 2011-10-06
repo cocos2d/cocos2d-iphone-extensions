@@ -31,8 +31,10 @@
 
 typedef enum
 {
-    kCCLayerPanZoomModeScrollScale,
-    kCCLayerPanZoomModeDragDrop    
+    /** Standard mode: swipe to scroll */
+    kCCLayerPanZoomModeSheet,
+    /** Frame mode (i.e. drag inside objects): hold finger at edge of the screen to the sroll in this direction */
+    kCCLayerPanZoomModeFrame  
 } CCLayerPanZoomMode;
 
 
