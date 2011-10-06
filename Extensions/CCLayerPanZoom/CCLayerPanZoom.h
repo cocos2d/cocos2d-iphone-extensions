@@ -29,6 +29,13 @@
 
 #import "cocos2d.h"
 
+typedef enum
+{
+    kCCLayerPanZoomModeScrollScale,
+    kCCLayerPanZoomModeDragDrop    
+} CCLayerPanZoomMode;
+
+
 @class CCLayerPanZoom;
 @protocol CCLayerPanZoomClickDelegate <NSObject>
 
@@ -50,6 +57,7 @@
 	CGFloat _touchDistance;
 	CGFloat _maxTouchDistanceToClick;
 	id<CCLayerPanZoomClickDelegate> _delegate;
+    CCLayerPanZoomMode _mode;
 }
 
 /** The maximum scale level */
@@ -69,5 +77,7 @@
 
 /** Delegate for layerPanZoom:clickedAtPoint: callbacks. */
 @property (readwrite, retain) id<CCLayerPanZoomClickDelegate> delegate;
+
+@property (readwrite, assign) CCLayerPanZoomMode mode;
 
 @end
