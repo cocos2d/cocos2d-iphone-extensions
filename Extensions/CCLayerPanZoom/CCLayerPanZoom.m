@@ -216,32 +216,45 @@ typedef enum
         UITouch *touch = [self.touches objectAtIndex: 0];        
         // Get current positions of the touche
         CGPoint curPosTouch = [[CCDirector sharedDirector] convertToGL: [touch locationInView: [touch view]]];
-
-        switch ([self frameEdgeWithPoint: curPosTouch]) 
+        // Get edge in which located current touch
+        CCLayerPanZoomFrameEdge edge = [self frameEdgeWithPoint: curPosTouch];
+        
+        CGFloat dx = 0.0f;
+        CGFloat dy = 0.0f;
+        
+        if (edge == kCCLayerPanZoomFrameEdgeLeft)
         {
-            case kCCLayerPanZoomFrameEdgeLeft:
-                {
-                    self.position = ccp(self.position.x + dt * self.speed, self.position.y);
-                }
-                break;
-            case kCCLayerPanZoomFrameEdgeRight:
-                {
-                    self.position = ccp(self.position.x - dt * self.speed, self.position.y);
-                }
-                break;
-            case kCCLayerPanZoomFrameEdgeTop:
-                {
-                    self.position = ccp(self.position.x, self.position.y - dt * self.speed);
-                }
-                break;
-            case kCCLayerPanZoomFrameEdgeBottom:
-                {
-                    self.position = ccp(self.position.x, self.position.y + dt * self.speed);
-                }
-                break;                
-            default:
-                break;
+            dx = dt * self.speed;
         }
+        if (edge == kCCLayerPanZoomFrameEdgeBottomLeft || edge == kCCLayerPanZoomFrameEdgeTopLeft)
+        {
+            dx = dt * self.speed / sqrt(2.0);
+        }
+        if (edge == kCCLayerPanZoomFrameEdgeRight)
+        {
+            dx = - dt * self.speed;
+        }
+        if (edge == kCCLayerPanZoomFrameEdgeBottomRight || edge == kCCLayerPanZoomFrameEdgeTopRight)
+        {
+            dx = - dt * self.speed / sqrt(2.0);
+        }
+        if (edge == kCCLayerPanZoomFrameEdgeBottom)
+        {
+            dy = dt * self.speed;
+        }
+        if (edge == kCCLayerPanZoomFrameEdgeBottomLeft || edge == kCCLayerPanZoomFrameEdgeBottomRight)
+        {
+            dy = dt * self.speed / sqrt(2.0);
+        }
+        if (edge == kCCLayerPanZoomFrameEdgeTop)
+        {
+            dy = - dt * self.speed;
+        }
+        if (edge == kCCLayerPanZoomFrameEdgeTopLeft || edge == kCCLayerPanZoomFrameEdgeTopRight)
+        {
+            dy = - dt * self.speed / sqrt(2.0);
+        }
+        self.position = ccp(self.position.x + dx, self.position.y + dy);
         [self fixLayerPosition];
     }
 }
