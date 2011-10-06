@@ -47,9 +47,10 @@ typedef enum
 
 @property (readwrite, retain) NSMutableArray *touches;
 @property (readwrite, assign) CGFloat touchDistance;
-/* Fix position for the layer considering panBoundsRect and enablePanBounds */
+@property (readwrite, retain) CCScheduler *scheduler;
+// Fix position for the layer considering panBoundsRect and enablePanBounds
 - (void) fixLayerPosition;
-/* Fix scale for the layer considering panBoundsRect and enablePanBounds */
+// Fix scale for the layer considering panBoundsRect and enablePanBounds
 - (void) fixLayerScale;
 /* Get minimum possible scale for the layer 
  considering panBoundsRect and enablePanBounds */
@@ -61,7 +62,9 @@ typedef enum
 @implementation CCLayerPanZoom
 
 @synthesize maxScale = _maxScale, minScale = _minScale, maxTouchDistanceToClick = _maxTouchDistanceToClick, 
-            delegate = _delegate, mode = _mode, touches = _touches, touchDistance = _touchDistance;
+            delegate = _delegate, mode = _mode, touches = _touches, touchDistance = _touchDistance, speed = _speed,
+            topFrameMargin = _topFrameMargin, bottomFrameMargin = _bottomFrameMargin, leftFrameMargin = _leftFrameMargin,
+            rightFrameMargin = _rightFrameMargin, scheduler = _scheduler;
 
 #pragma mark Init
 

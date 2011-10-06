@@ -60,6 +60,12 @@ typedef enum
 	CGFloat _maxTouchDistanceToClick;
 	id<CCLayerPanZoomClickDelegate> _delegate;
     CCLayerPanZoomMode _mode;
+    CGFloat _speed;
+    CGFloat _topFrameMargin;
+    CGFloat _bottomFrameMargin;
+    CGFloat _leftFrameMargin;
+    CGFloat _rightFrameMargin;
+    CCScheduler *_scheduler;
 }
 
 /** The maximum scale level */
@@ -81,5 +87,15 @@ typedef enum
 @property (readwrite, retain) id<CCLayerPanZoomClickDelegate> delegate;
 
 @property (readwrite, assign) CCLayerPanZoomMode mode;
+
+@property (readwrite, assign) CGFloat speed;
+
+@property (readwrite, assign) CGFloat topFrameMargin;
+
+@property (readwrite, assign) CGFloat bottomFrameMargin;
+
+@property (readwrite, assign) CGFloat leftFrameMargin;
+
+@property (readwrite, assign) CGFloat rightFrameMargin;
 
 @end
