@@ -83,11 +83,11 @@ typedef enum
 		self.touchDistance = 0.0F;
 		self.maxTouchDistanceToClick = 15.0f;
         self.mode = kCCLayerPanZoomModeFrame;
-        self.speed = 200.0f;
-        self.topFrameMargin = 50.0f;
-        self.bottomFrameMargin = 50.0f;
-        self.leftFrameMargin = 50.0f;
-        self.rightFrameMargin = 50.0f;
+        self.speed = 400.0f;
+        self.topFrameMargin = 100.0f;
+        self.bottomFrameMargin = 100.0f;
+        self.leftFrameMargin = 100.0f;
+        self.rightFrameMargin = 100.0f;
 	}	
 	return self;
 }
