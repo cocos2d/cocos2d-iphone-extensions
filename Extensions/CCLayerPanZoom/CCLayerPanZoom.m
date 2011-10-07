@@ -81,6 +81,8 @@ typedef enum
 - (CGFloat) minPossibleScale;
 // Return edge in which current point located
 - (CCLayerPanZoomFrameEdge) frameEdgeWithPoint: (CGPoint) point;
+- (CGFloat) horSpeedWithPosition: (CGPoint) pos;
+- (CGFloat) vertSpeedWithPosition: (CGPoint) pos;
 
 @end
 
@@ -244,45 +246,12 @@ typedef enum
         // Get current positions of the touche
         CGPoint curPos = [[CCDirector sharedDirector] convertToGL: [touch locationInView: [touch view]]];
         // Get edge in which located current touch
-        CCLayerPanZoomFrameEdge edge = [self frameEdgeWithPoint: curPos];
         
-        CGFloat dx = 0.0f;
-        CGFloat dy = 0.0f;
-        
-        if (edge == kCCLayerPanZoomFrameEdgeLeft)
-        {
-            dx = dt * self.maxSpeed;
-        }
-        if (edge == kCCLayerPanZoomFrameEdgeBottomLeft || edge == kCCLayerPanZoomFrameEdgeTopLeft)
-        {
-            dx = dt * self.maxSpeed / sqrt(2.0);
-        }
-        if (edge == kCCLayerPanZoomFrameEdgeRight)
-        {
-            dx = - dt * self.maxSpeed;
-        }
-        if (edge == kCCLayerPanZoomFrameEdgeBottomRight || edge == kCCLayerPanZoomFrameEdgeTopRight)
-        {
-            dx = - dt * self.maxSpeed / sqrt(2.0);
-        }
-        if (edge == kCCLayerPanZoomFrameEdgeBottom)
-        {
-            dy = dt * self.maxSpeed;
-        }
-        if (edge == kCCLayerPanZoomFrameEdgeBottomLeft || edge == kCCLayerPanZoomFrameEdgeBottomRight)
-        {
-            dy = dt * self.maxSpeed / sqrt(2.0);
-        }
-        if (edge == kCCLayerPanZoomFrameEdgeTop)
-        {
-            dy = - dt * self.maxSpeed;
-        }
-        if (edge == kCCLayerPanZoomFrameEdgeTopLeft || edge == kCCLayerPanZoomFrameEdgeTopRight)
-        {
-            dy = - dt * self.maxSpeed / sqrt(2.0);
-        }
-        self.position = ccp(self.position.x + dx, self.position.y + dy);
+        self.position = ccp(self.position.x + dt * [self horSpeedWithPosition: curPos], 
+                            self.position.y + dt * [self vertSpeedWithPosition: curPos]);
         [self fixLayerPosition];
+        
+        {
         
         [self.delegate layerPanZoom: self 
                touchPositionUpdated: [self convertToNodeSpace: curPos]];
@@ -426,6 +395,66 @@ typedef enum
     }
     
     return kCCLayerPanZoomFrameEdgeNone;
+}
+
+- (CGFloat) horSpeedWithPosition: (CGPoint) pos
+{
+    CCLayerPanZoomFrameEdge edge = [self frameEdgeWithPoint: pos];
+    CGFloat speed = 0.0f;
+    if (edge == kCCLayerPanZoomFrameEdgeLeft)
+    {
+        speed = self.minSpeed + (self.maxSpeed - self.minSpeed) * 
+        (self.panBoundsRect.origin.x + self.leftFrameMargin - pos.x) / self.leftFrameMargin;
+    }
+    if (edge == kCCLayerPanZoomFrameEdgeBottomLeft || edge == kCCLayerPanZoomFrameEdgeTopLeft)
+    {
+        speed = self.minSpeed + (self.maxSpeed - self.minSpeed) * 
+        (self.panBoundsRect.origin.x + self.leftFrameMargin - pos.x) / (self.leftFrameMargin * sqrt(2.0f));
+    }
+    if (edge == kCCLayerPanZoomFrameEdgeRight)
+    {
+        speed = - (self.minSpeed + (self.maxSpeed - self.minSpeed) * 
+            (pos.x - self.panBoundsRect.origin.x - self.panBoundsRect.size.width + 
+             self.rightFrameMargin) / self.rightFrameMargin);
+    }
+    if (edge == kCCLayerPanZoomFrameEdgeBottomRight || edge == kCCLayerPanZoomFrameEdgeTopRight)
+    {
+        speed = - (self.minSpeed + (self.maxSpeed - self.minSpeed) * 
+            (pos.x - self.panBoundsRect.origin.x - self.panBoundsRect.size.width + 
+             self.rightFrameMargin) / (self.rightFrameMargin * sqrt(2.0f)));
+    }
+    CCLOG(@"horizontal speed = %f", speed);
+    return speed;
+}
+
+- (CGFloat) vertSpeedWithPosition: (CGPoint) pos
+{
+    CCLayerPanZoomFrameEdge edge = [self frameEdgeWithPoint: pos];
+    CGFloat speed = 0.0f;
+    if (edge == kCCLayerPanZoomFrameEdgeBottom)
+    {
+        speed = self.minSpeed + (self.maxSpeed - self.minSpeed) * 
+            (self.panBoundsRect.origin.y + self.bottomFrameMargin - pos.y) / self.bottomFrameMargin;
+    }
+    if (edge == kCCLayerPanZoomFrameEdgeBottomLeft || edge == kCCLayerPanZoomFrameEdgeBottomRight)
+    {
+        speed = self.minSpeed + (self.maxSpeed - self.minSpeed) * 
+            (self.panBoundsRect.origin.y + self.bottomFrameMargin - pos.y) / (self.bottomFrameMargin * sqrt(2.0f));
+    }
+    if (edge == kCCLayerPanZoomFrameEdgeTop)
+    {
+        speed = - (self.minSpeed + (self.maxSpeed - self.minSpeed) * 
+            (pos.y - self.panBoundsRect.origin.y - self.panBoundsRect.size.height + 
+             self.topFrameMargin) / self.topFrameMargin);
+    }
+    if (edge == kCCLayerPanZoomFrameEdgeTopLeft || edge == kCCLayerPanZoomFrameEdgeTopRight)
+    {
+        speed = - (self.minSpeed + (self.maxSpeed - self.minSpeed) * 
+            (pos.y - self.panBoundsRect.origin.y - self.panBoundsRect.size.height + 
+             self.topFrameMargin) / (self.topFrameMargin * sqrt(2.0f)));
+    }
+    CCLOG(@"vertical speed = %f", speed);
+    return speed;
 }
 
 #pragma mark Dealloc
