@@ -29,8 +29,11 @@
 
 #import "cocos2d.h"
 
+
 #ifdef DEBUG
 
+/** @class CCLayerPanZoomDebugGrid Class that represents the grid over the CCLayerPanZoom 
+ * for debug frame mode */
 @interface CCLayerPanZoomDebugGrid: CCNode
 {
     CGFloat _topFrameMargin;
@@ -38,14 +41,19 @@
     CGFloat _leftFrameMargin;
     CGFloat _rightFrameMargin;
 }
+/** Distance from top edge of contenSize */
 @property (readwrite, assign) CGFloat topFrameMargin;
+/** Distance from bottom edge of contenSize */
 @property (readwrite, assign) CGFloat bottomFrameMargin;
+/** Distance from left edge of contenSize */
 @property (readwrite, assign) CGFloat leftFrameMargin;
+/** Distance from right edge of contenSize */
 @property (readwrite, assign) CGFloat rightFrameMargin;
 
 @end
 
 #endif
+
 
 typedef enum
 {
@@ -73,7 +81,7 @@ typedef enum
 
 
 /** @class CCLayerPanZoom Class that represents the layer that can be scroll and zoom 
- with one or two fingers */
+ * with one or two fingers */
 @interface CCLayerPanZoom : CCLayer 
 {
     float _maxScale;
@@ -97,21 +105,21 @@ typedef enum
 }
 
 /** The maximum scale level
- * Default is  */
+ * Default is 2.0f */
 @property (readwrite, assign) float maxScale;    
 
 /** The minimum scale level
- * Default is  */
+ * Default is 0.1f */
 @property (readwrite, assign) float minScale;   
 
 /** The rectangle that use to determine the restriction of scrolling
  * Set value CGRectNull to disable restriction
- * Default is  */
+ * Default is CGRectNull */
 @property (readwrite, assign) CGRect panBoundsRect;   
 
 /** The max distance that touch can be drag before click
  * If distance is greater then click will not be sent to delegate 
- * Default is  */
+ * Default is 15.0f */
 @property (readwrite, assign) CGFloat maxTouchDistanceToClick;   
 
 /** Delegate for layerPanZoom:clickedAtPoint: callbacks. */
@@ -122,31 +130,31 @@ typedef enum
 @property (readwrite, assign) CCLayerPanZoomMode mode;
 
 /** Maximum speed for autosrolling in frame mode
- * Default is  */
+ * Default is 1000.0f */
 @property (readwrite, assign) CGFloat maxSpeed;
 
 /** Minimum speed for autosrolling in frame mode
- * Default is  */
+ * Default is 100.0f */
 @property (readwrite, assign) CGFloat minSpeed;
 
 /** Distance from top edge of panBoundingRect
  * for define top autoscrolling zone in frame mode
- * Default is  */
+ * Default is 100.0f */
 @property (readwrite, assign) CGFloat topFrameMargin;
 
 /** Distance from bottom edge of panBoundingRect
  * for define bottom autoscrolling zone in frame mode
- * Default is  */
+ * Default is 100.0f */
 @property (readwrite, assign) CGFloat bottomFrameMargin;
 
 /** Distance from left edge of panBoundingRect
  * for define left autoscrolling zone in frame mode
- * Default is  */
+ * Default is 100.0f */
 @property (readwrite, assign) CGFloat leftFrameMargin;
 
 /** Distance from right edge of panBoundingRect
  * for define right autoscrolling zone in frame mode
- * Default is  */
+ * Default is 100.0f */
 @property (readwrite, assign) CGFloat rightFrameMargin;
 
 @end

@@ -29,6 +29,7 @@
 
 #import "CCLayerPanZoom.h"
 
+
 #ifdef DEBUG
 
 @implementation CCLayerPanZoomDebugGrid
@@ -53,6 +54,7 @@
 @end
 
 #endif
+
 
 typedef enum
 {
@@ -81,7 +83,9 @@ typedef enum
 - (CGFloat) minPossibleScale;
 // Return edge in which current point located
 - (CCLayerPanZoomFrameEdge) frameEdgeWithPoint: (CGPoint) point;
+// Return horizontal speed in order with current position
 - (CGFloat) horSpeedWithPosition: (CGPoint) pos;
+// Return vertical speed in order with current position
 - (CGFloat) vertSpeedWithPosition: (CGPoint) pos;
 
 @end
@@ -169,31 +173,24 @@ typedef enum
 		self.touchDistance = INFINITY;
 	}
 	else
-	{	
-        // Get the one touch
-        UITouch *touch = [self.touches objectAtIndex: 0];        
-        // Get current positions of the touche
-        CGPoint curPosTouch = [[CCDirector sharedDirector] convertToGL: [touch locationInView: [touch view]]];
-        
+	{	        
         // in order with current mode
-        switch (self.mode)
+        if (self.mode == kCCLayerPanZoomModeSheet)
         {
-            case kCCLayerPanZoomModeSheet:
-                {
-                    // Get previous positions of the touche
-                    CGPoint prevPosTch = [[CCDirector sharedDirector] convertToGL: [touch previousLocationInView: [touch view]]];
-                    // Calculate new anchor point
-                    CGPoint newAnchorInPixels = [self convertToNodeSpace: prevPosTch];
-                    self.anchorPoint = ccp(newAnchorInPixels.x / self.contentSize.width, newAnchorInPixels.y / self.contentSize.height);
-                    // Set new position of the layer
-                    self.position = curPosTouch;		
-                    [self fixLayerPosition];
-                    // Accumulate touche distance
-                    self.touchDistance += ccpDistance(curPosTouch, prevPosTch);
-                }
-                break;
-            default:
-                break;
+            // Get the one touch
+            UITouch *touch = [self.touches objectAtIndex: 0];        
+            // Get current positions of the touch
+            CGPoint curPosTouch = [[CCDirector sharedDirector] convertToGL: [touch locationInView: [touch view]]];
+            // Get previous positions of the touch
+            CGPoint prevPosTch = [[CCDirector sharedDirector] convertToGL: [touch previousLocationInView: [touch view]]];
+            // Calculate new anchor point
+            CGPoint newAnchorInPixels = [self convertToNodeSpace: prevPosTch];
+            self.anchorPoint = ccp(newAnchorInPixels.x / self.contentSize.width, newAnchorInPixels.y / self.contentSize.height);
+            // Set new position of the layer
+            self.position = curPosTouch;		
+            [self fixLayerPosition];
+            // Accumulate touche distance
+            self.touchDistance += ccpDistance(curPosTouch, prevPosTch);
         }
     }	
 }
@@ -201,14 +198,17 @@ typedef enum
 - (void) ccTouchesEnded: (NSSet *) touches 
 			  withEvent: (UIEvent *) event
 {
-	// Obtain click event
-	if ((self.touchDistance < self.maxTouchDistanceToClick) && (self.delegate))
-	{
-		UITouch *touch = [self.touches objectAtIndex: 0];        
-		CGPoint curPos = [[CCDirector sharedDirector] convertToGL: [touch locationInView: [touch view]]];
-		[self.delegate layerPanZoom: self 
-                     clickedAtPoint: [self convertToNodeSpace: curPos]];
-	}
+	if (self.mode == kCCLayerPanZoomModeSheet)
+    {
+        // Obtain click event
+        if ((self.touchDistance < self.maxTouchDistanceToClick) && (self.delegate))
+        {
+            UITouch *touch = [self.touches objectAtIndex: 0];        
+            CGPoint curPos = [[CCDirector sharedDirector] convertToGL: [touch locationInView: [touch view]]];
+            [self.delegate layerPanZoom: self 
+                         clickedAtPoint: [self convertToNodeSpace: curPos]];
+        }
+    }
 	for (UITouch *touch in [touches allObjects]) 
 	{
 		// Remove touche from the array with current touches
@@ -245,18 +245,20 @@ typedef enum
         UITouch *touch = [self.touches objectAtIndex: 0];        
         // Get current positions of the touche
         CGPoint curPos = [[CCDirector sharedDirector] convertToGL: [touch locationInView: [touch view]]];
-        // Get edge in which located current touch
         
-        self.position = ccp(self.position.x + dt * [self horSpeedWithPosition: curPos], 
-                            self.position.y + dt * [self vertSpeedWithPosition: curPos]);
-        [self fixLayerPosition];
+        if ([self frameEdgeWithPoint: curPos] != kCCLayerPanZoomFrameEdgeNone)
+        {
+            self.position = ccp(self.position.x + dt * [self horSpeedWithPosition: curPos], 
+                                self.position.y + dt * [self vertSpeedWithPosition: curPos]);
+            [self fixLayerPosition];
+        }
         
         CGPoint touchPositionInLayer = [self convertToNodeSpace: curPos];
-        if (CGPointEqualToPoint(_prevSingleTouchPositionInLayer, touchPositionInLayer))
+        if (!CGPointEqualToPoint(_prevSingleTouchPositionInLayer, touchPositionInLayer))
         {
             _prevSingleTouchPositionInLayer = touchPositionInLayer;
             [self.delegate layerPanZoom: self 
-                   touchPositionUpdated: touchPositionInLayer ];
+                   touchPositionUpdated: touchPositionInLayer];
         }
     }
 }
