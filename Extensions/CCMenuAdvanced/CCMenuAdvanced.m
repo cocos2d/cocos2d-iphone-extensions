@@ -499,7 +499,7 @@
 
 - (void) update:(ccTime)dt
 {
-    
+    // TODO: enable inertial scrolling in both directions. Test on device. 
     if (prevState_ == kCCMenuStateTrackingTouch && state_ == kCCMenuStateWaiting) {
         velocity_ = self.position.y - prevPosition_.y;
         direction_ = velocity_ > 0 ? 1 : -1;
