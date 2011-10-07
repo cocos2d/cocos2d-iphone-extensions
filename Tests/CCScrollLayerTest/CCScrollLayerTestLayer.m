@@ -186,6 +186,10 @@ enum nodeTags
 	// Create the scroller and pass-in the pages (set widthOffset to 0 for fullscreen pages).
 	CCScrollLayer *scroller = [CCScrollLayer nodeWithLayers: [self scrollLayerPages] widthOffset: 0.48f * screenSize.width ];
 	scroller.pagesIndicatorPosition = ccp(screenSize.width * 0.5f, screenSize.height - 30.0f);
+    
+    // New feature: margin offset - to slowdown scrollLayer when scrolling out of it contents.
+    // Comment this line or change marginOffset to screenSize.width to disable this effect.
+    scroller.marginOffset = 0.5f * screenSize.width;
 	
 	return scroller;
 }
