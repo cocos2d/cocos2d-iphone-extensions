@@ -383,7 +383,7 @@ enum
 	
 	if (state_ == kCCScrollLayerStateSliding)
 	{
-		CGFloat desiredX = (- currentScreen_ * (self.contentSize.width - self.pagesWidthOffset)) + offset;
+		CGFloat desiredX = (- currentScreen_ * (self.contentSize.width - self.pagesWidthOffset)) + touchPoint.x - startSwipe_;
 		int page = [self pageNumberForPosition:ccp(desiredX, 0)];
 		CGFloat offset = desiredX - [self positionForPageWithNumber:page].x; 
 		if ((page == 0 && offset > 0) || (page == [layers_ count] - 1 && offset < 0))
