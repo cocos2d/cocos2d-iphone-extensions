@@ -63,8 +63,9 @@ typedef enum
 @implementation CCLayerPanZoom
 
 @synthesize maxScale = _maxScale, minScale = _minScale, maxTouchDistanceToClick = _maxTouchDistanceToClick, 
-            delegate = _delegate, mode = _mode, touches = _touches, touchDistance = _touchDistance, speed = _speed,
-            topFrameMargin = _topFrameMargin, bottomFrameMargin = _bottomFrameMargin, leftFrameMargin = _leftFrameMargin,
+            delegate = _delegate, mode = _mode, touches = _touches, touchDistance = _touchDistance, 
+            minSpeed = _minSpeed, maxSpeed = _maxSpeed, topFrameMargin = _topFrameMargin, 
+            bottomFrameMargin = _bottomFrameMargin, leftFrameMargin = _leftFrameMargin,
             rightFrameMargin = _rightFrameMargin, scheduler = _scheduler;
 
 #pragma mark Init
@@ -83,7 +84,8 @@ typedef enum
 		self.touchDistance = 0.0F;
 		self.maxTouchDistanceToClick = 15.0f;
         self.mode = kCCLayerPanZoomModeFrame;
-        self.speed = 400.0f;
+        self.minSpeed = 100.0f;
+        self.maxSpeed = 1000.0f;
         self.topFrameMargin = 100.0f;
         self.bottomFrameMargin = 100.0f;
         self.leftFrameMargin = 100.0f;
@@ -224,35 +226,35 @@ typedef enum
         
         if (edge == kCCLayerPanZoomFrameEdgeLeft)
         {
-            dx = dt * self.speed;
+            dx = dt * self.maxSpeed;
         }
         if (edge == kCCLayerPanZoomFrameEdgeBottomLeft || edge == kCCLayerPanZoomFrameEdgeTopLeft)
         {
-            dx = dt * self.speed / sqrt(2.0);
+            dx = dt * self.maxSpeed / sqrt(2.0);
         }
         if (edge == kCCLayerPanZoomFrameEdgeRight)
         {
-            dx = - dt * self.speed;
+            dx = - dt * self.maxSpeed;
         }
         if (edge == kCCLayerPanZoomFrameEdgeBottomRight || edge == kCCLayerPanZoomFrameEdgeTopRight)
         {
-            dx = - dt * self.speed / sqrt(2.0);
+            dx = - dt * self.maxSpeed / sqrt(2.0);
         }
         if (edge == kCCLayerPanZoomFrameEdgeBottom)
         {
-            dy = dt * self.speed;
+            dy = dt * self.maxSpeed;
         }
         if (edge == kCCLayerPanZoomFrameEdgeBottomLeft || edge == kCCLayerPanZoomFrameEdgeBottomRight)
         {
-            dy = dt * self.speed / sqrt(2.0);
+            dy = dt * self.maxSpeed / sqrt(2.0);
         }
         if (edge == kCCLayerPanZoomFrameEdgeTop)
         {
-            dy = - dt * self.speed;
+            dy = - dt * self.maxSpeed;
         }
         if (edge == kCCLayerPanZoomFrameEdgeTopLeft || edge == kCCLayerPanZoomFrameEdgeTopRight)
         {
-            dy = - dt * self.speed / sqrt(2.0);
+            dy = - dt * self.maxSpeed / sqrt(2.0);
         }
         self.position = ccp(self.position.x + dx, self.position.y + dy);
         [self fixLayerPosition];
