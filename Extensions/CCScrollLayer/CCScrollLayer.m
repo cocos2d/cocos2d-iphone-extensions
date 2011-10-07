@@ -61,6 +61,7 @@ enum
 @synthesize delegate = delegate_;
 @synthesize minimumTouchLengthToSlide = minimumTouchLengthToSlide_;
 @synthesize minimumTouchLengthToChangePage = minimumTouchLengthToChangePage_;
+@synthesize marginOffset = marginOffset_;
 @synthesize currentScreen = currentScreen_;
 @synthesize showPagesIndicator = showPagesIndicator_;
 @synthesize pagesIndicatorPosition = pagesIndicatorPosition_;
@@ -97,6 +98,8 @@ enum
 		// Set default minimum touch length to scroll.
 		self.minimumTouchLengthToSlide = 30.0f;
 		self.minimumTouchLengthToChangePage = 100.0f;
+		
+		self.marginOffset = [[CCDirector sharedDirector] winSize].width;
 		
 		// Show indicator by default.
 		self.showPagesIndicator = YES;
@@ -379,33 +382,41 @@ enum
 	}
 	
 	if (state_ == kCCScrollLayerStateSliding)
-		self.position = ccp( (- currentScreen_ * (self.contentSize.width - self.pagesWidthOffset)) + (touchPoint.x-startSwipe_),0);	
-	
+	{
+		CGFloat desiredX = (- currentScreen_ * (self.contentSize.width - self.pagesWidthOffset)) + touchPoint.x - startSwipe_;
+		int page = [self pageNumberForPosition:ccp(desiredX, 0)];
+		CGFloat offset = desiredX - [self positionForPageWithNumber:page].x; 
+		if ((page == 0 && offset > 0) || (page == [layers_ count] - 1 && offset < 0))
+			offset -= marginOffset_ * offset / [[CCDirector sharedDirector] winSize].width;
+		else
+			offset = 0;
+		self.position = ccp(desiredX - offset, 0);
+	}
 }
 
 - (void)ccTouchEnded:(UITouch *)touch withEvent:(UIEvent *)event
 {
-	if( scrollTouch_ == touch ) {
-		scrollTouch_ = nil;
-	}
+	if( scrollTouch_ != touch )
+		return;
+	scrollTouch_ = nil;
 	
 	CGPoint touchPoint = [touch locationInView:[touch view]];
 	touchPoint = [[CCDirector sharedDirector] convertToGL:touchPoint];
 	
-	int newX = touchPoint.x;	
-	
-	if ( (newX - startSwipe_) < -self.minimumTouchLengthToChangePage && (currentScreen_+1) < [layers_ count] )
-	{		
-		[self moveToPage: [self pageNumberForPosition:self.position] ];		
+	int selectedPage = currentScreen_;
+	CGFloat delta = touchPoint.x - startSwipe_;
+	if (fabsf(delta) >= self.minimumTouchLengthToChangePage)
+	{
+		selectedPage = [self pageNumberForPosition:self.position];
+		if (selectedPage == currentScreen_)
+		{
+			if (delta < 0.f && selectedPage < [layers_ count] - 1)
+				selectedPage++;
+			else if (delta > 0.f && selectedPage > 0)
+				selectedPage--;
+		}
 	}
-	else if ( (newX - startSwipe_) > self.minimumTouchLengthToChangePage && currentScreen_ > 0 )
-	{		
-		[self moveToPage: [self pageNumberForPosition:self.position] ];		
-	}
-	else
-	{		
-		[self moveToPage:currentScreen_];		
-	}	
+	[self moveToPage:selectedPage];	
 }
 
 #endif

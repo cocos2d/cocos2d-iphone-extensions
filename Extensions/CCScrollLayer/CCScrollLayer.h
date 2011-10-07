@@ -90,6 +90,9 @@
 	
 	// Holds current pages width offset.
 	CGFloat pagesWidthOffset_;
+	
+	// Holds current margin offset
+	CGFloat marginOffset_;
 }
 
 @property (readwrite, retain) NSObject <CCScrollLayerDelegate> *delegate;
@@ -105,6 +108,9 @@
  * the page, without snapping back to the previous selected page.
  */
 @property(readwrite, assign) CGFloat minimumTouchLengthToChangePage;
+
+/** Offset that can be used to let user see empty space over first or last page. */
+@property(readwrite, assign) CGFloat  marginOffset;
 
 /** If YES - when starting scrolling CCScrollLayer will claim touches, that are 
  * already claimed by others targetedTouchDelegates by calling CCTouchDispatcher#touchesCancelled
