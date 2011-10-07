@@ -251,10 +251,13 @@ typedef enum
                             self.position.y + dt * [self vertSpeedWithPosition: curPos]);
         [self fixLayerPosition];
         
+        CGPoint touchPositionInLayer = [self convertToNodeSpace: curPos];
+        if (CGPointEqualToPoint(_prevSingleTouchPositionInLayer, touchPositionInLayer))
         {
-        
-        [self.delegate layerPanZoom: self 
-               touchPositionUpdated: [self convertToNodeSpace: curPos]];
+            _prevSingleTouchPositionInLayer = touchPositionInLayer;
+            [self.delegate layerPanZoom: self 
+                   touchPositionUpdated: touchPositionInLayer ];
+        }
     }
 }
 

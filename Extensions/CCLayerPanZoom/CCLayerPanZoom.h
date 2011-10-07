@@ -83,6 +83,7 @@ typedef enum
 	CGFloat _touchDistance;
 	CGFloat _maxTouchDistanceToClick;
 	id<CCLayerPanZoomClickDelegate> _delegate;
+    
     CCLayerPanZoomMode _mode;
     CGFloat _minSpeed;
     CGFloat _maxSpeed;
@@ -90,6 +91,9 @@ typedef enum
     CGFloat _bottomFrameMargin;
     CGFloat _leftFrameMargin;
     CGFloat _rightFrameMargin;
+    
+    CGPoint _prevSingleTouchPositionInLayer; 
+    //< previous position in layer if single touch was moved.
 }
 
 /** The maximum scale level
