@@ -121,7 +121,12 @@ enum nodeTags
 - (void) layerPanZoom: (CCLayerPanZoom *) sender 
 	   clickedAtPoint: (CGPoint) point
 {
-	NSLog(@"CCLayerPanZoomTestLayer#layerPanZoom: %@ clickedAtPoint: { %f, %f }",sender, point.x, point.y);
+	NSLog(@"CCLayerPanZoomTestLayer#layerPanZoom: %@ clickedAtPoint: { %f, %f }", sender, point.x, point.y);
+}
+- (void) layerPanZoom: (CCLayerPanZoom *) sender 
+ touchPositionUpdated: (CGPoint) newPos
+{
+    NSLog(@"CCLayerPanZoomTestLayer#layerPanZoom: %@ touchPositionUpdated: { %f, %f }", sender, newPos.x, newPos.y);
 }
 
 @end
