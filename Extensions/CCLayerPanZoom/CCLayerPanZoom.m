@@ -29,6 +29,31 @@
 
 #import "CCLayerPanZoom.h"
 
+#ifdef DEBUG
+
+@implementation CCLayerPanZoomDebugGrid
+
+@synthesize topFrameMargin = _topFrameMargin, bottomFrameMargin = _bottomFrameMargin, 
+            leftFrameMargin = _leftFrameMargin, rightFrameMargin = _rightFrameMargin;
+
+- (void) draw
+{
+    glColor4f(1.0f, 0.0f, 0.0f, 1.0);
+    glLineWidth(2.0f);    
+    ccDrawLine(ccp(self.leftFrameMargin, 0.0f), 
+               ccp(self.leftFrameMargin, self.contentSize.height));
+    ccDrawLine(ccp(self.contentSize.width - self.rightFrameMargin, 0.0f), 
+               ccp(self.contentSize.width - self.rightFrameMargin, self.contentSize.height));
+    ccDrawLine(ccp(0.0f, self.bottomFrameMargin), 
+               ccp(self.contentSize.width, self.bottomFrameMargin));
+    ccDrawLine(ccp(0.0f, self.contentSize.height - self.topFrameMargin), 
+               ccp(self.contentSize.width, self.contentSize.height - self.topFrameMargin));
+}
+
+@end
+
+#endif
+
 typedef enum
 {
     kCCLayerPanZoomFrameEdgeNone,
@@ -270,6 +295,16 @@ typedef enum
     [[CCScheduler sharedScheduler] scheduleUpdateForTarget: self 
                                                   priority: 0 
                                                     paused: NO];
+#ifdef DEBUG
+    CCLayerPanZoomDebugGrid *grid = [CCLayerPanZoomDebugGrid node];
+    [grid setContentSize: [CCDirector sharedDirector].winSize];
+    grid.topFrameMargin = self.topFrameMargin;
+    grid.bottomFrameMargin = self.bottomFrameMargin;
+    grid.leftFrameMargin = self.leftFrameMargin;
+    grid.rightFrameMargin = self.rightFrameMargin;
+    [[CCDirector sharedDirector].runningScene addChild: grid 
+                                                     z: NSIntegerMax];
+#endif
 }
 
 - (void) onExit

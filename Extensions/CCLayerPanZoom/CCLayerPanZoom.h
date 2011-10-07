@@ -29,6 +29,24 @@
 
 #import "cocos2d.h"
 
+#ifdef DEBUG
+
+@interface CCLayerPanZoomDebugGrid: CCNode
+{
+    CGFloat _topFrameMargin;
+    CGFloat _bottomFrameMargin;
+    CGFloat _leftFrameMargin;
+    CGFloat _rightFrameMargin;
+}
+@property (readwrite, assign) CGFloat topFrameMargin;
+@property (readwrite, assign) CGFloat bottomFrameMargin;
+@property (readwrite, assign) CGFloat leftFrameMargin;
+@property (readwrite, assign) CGFloat rightFrameMargin;
+
+@end
+
+#endif
+
 typedef enum
 {
     /** Standard mode: swipe to scroll */
