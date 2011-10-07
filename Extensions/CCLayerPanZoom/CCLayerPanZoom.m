@@ -349,11 +349,10 @@ typedef enum
 
 - (CCLayerPanZoomFrameEdge) frameEdgeWithPoint: (CGPoint) point
 {
-    CGSize winSize = [CCDirector sharedDirector].winSize;
-    BOOL isLeft = point.x <= self.leftFrameMargin;
-    BOOL isRight = point.x >= winSize.width - self.rightFrameMargin;
-    BOOL isBottom = point.y <= self.bottomFrameMargin;
-    BOOL isTop = point.y >= winSize.height - self.topFrameMargin;
+    BOOL isLeft = point.x <= self.panBoundsRect.origin.x + self.leftFrameMargin;
+    BOOL isRight = point.x >= self.panBoundsRect.origin.x + self.panBoundsRect.size.width - self.rightFrameMargin;
+    BOOL isBottom = point.y <= self.panBoundsRect.origin.y + self.bottomFrameMargin;
+    BOOL isTop = point.y >= self.panBoundsRect.origin.y + self.panBoundsRect.size.height - self.topFrameMargin;
     
     if (isLeft && isBottom)
     {
