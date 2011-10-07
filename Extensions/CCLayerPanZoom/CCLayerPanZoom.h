@@ -41,9 +41,17 @@ typedef enum
 @class CCLayerPanZoom;
 @protocol CCLayerPanZoomClickDelegate <NSObject>
 
-/** Send to delegate each time, when click event was obtained. */
+/** Send to delegate each time, when click event was obtained. 
+ * Only for mode = kCCLayerPanZoomModeSheet.
+ */
 - (void) layerPanZoom: (CCLayerPanZoom *) sender 
 	   clickedAtPoint: (CGPoint) aPoint;
+
+/** Send to delegate each time, when touch position was updated. 
+ * Only for one touch in mode = kCCLayerPanZoomModeFrame.
+ */
+- (void) layerPanZoom: (CCLayerPanZoom *) sender 
+ touchPositionUpdated: (CGPoint) newPos;
 
 @end
 

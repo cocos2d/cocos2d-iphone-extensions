@@ -178,7 +178,7 @@ typedef enum
 		UITouch *touch = [self.touches objectAtIndex: 0];        
 		CGPoint curPos = [[CCDirector sharedDirector] convertToGL: [touch locationInView: [touch view]]];
 		[self.delegate layerPanZoom: self 
-				 clickedAtPoint: [self convertToNodeSpace: curPos]];
+                     clickedAtPoint: [self convertToNodeSpace: curPos]];
 	}
 	for (UITouch *touch in [touches allObjects]) 
 	{
@@ -215,9 +215,9 @@ typedef enum
         // Get the one touch
         UITouch *touch = [self.touches objectAtIndex: 0];        
         // Get current positions of the touche
-        CGPoint curPosTouch = [[CCDirector sharedDirector] convertToGL: [touch locationInView: [touch view]]];
+        CGPoint curPos = [[CCDirector sharedDirector] convertToGL: [touch locationInView: [touch view]]];
         // Get edge in which located current touch
-        CCLayerPanZoomFrameEdge edge = [self frameEdgeWithPoint: curPosTouch];
+        CCLayerPanZoomFrameEdge edge = [self frameEdgeWithPoint: curPos];
         
         CGFloat dx = 0.0f;
         CGFloat dy = 0.0f;
@@ -256,6 +256,9 @@ typedef enum
         }
         self.position = ccp(self.position.x + dx, self.position.y + dy);
         [self fixLayerPosition];
+        
+        [self.delegate layerPanZoom: self 
+               touchPositionUpdated: [self convertToNodeSpace: curPos]];
     }
 }
 
