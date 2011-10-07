@@ -90,7 +90,6 @@ typedef enum
     CGFloat _bottomFrameMargin;
     CGFloat _leftFrameMargin;
     CGFloat _rightFrameMargin;
-    CCScheduler *_scheduler;
 }
 
 /** The maximum scale level
