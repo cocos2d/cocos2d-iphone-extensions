@@ -35,6 +35,9 @@ People/companies who were/are contributing code to cocos2d-iphone-extensions (al
 
     * Marat Yakupov (twitter: @_moadib) (http://ursinepaw.com)
         CCScrollLayer improvement: marginOffset property.
+
+    * Matthew Herz (twitter: @biminiroad) (http://blog.signal-blue.net)
+        Fix for CCMenuAdvanced (Issue #75 - wrong menu item positioning in bottom to top align). 
 		
 	* Patrick Wolowicz (twitter: @subzero_eu) (http://blog.subzero.eu/)
 		CCVideoPlayer patch: preload movie, prevent flickering & hide controls when compiled on older SDKs.
