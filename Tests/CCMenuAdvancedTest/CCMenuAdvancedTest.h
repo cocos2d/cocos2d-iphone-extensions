@@ -64,6 +64,9 @@
 // Creates widget (can be anything you want, in Vertical Test it is a vertical menu).
 - (CCNode *) widget;
 
+// Creates reversed vertical menu.
+- (CCNode *) widgetReversed;
+
 // Updates layout of the children.
 - (void) updateForScreenReshape;
 

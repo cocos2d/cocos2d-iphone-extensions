@@ -48,6 +48,7 @@ enum nodeTags
 	// Vertical Test Node Additional Tags
 	kBackButtonMenu,
 	kWidget,
+    kWidgetReversed,
 	
 	// Priority Test Node Additional Tags
 	kMenu2,
@@ -193,7 +194,11 @@ enum nodeTags
 		
 		// Create vertical scroll widget.
 		CCNode *widget = [self widget];
-		[self addChild: widget z: 0 tag: kWidget];		
+		[self addChild: widget z: 0 tag: kWidget];
+		
+        // Create vertical reversed scroll widget.
+		CCNode *widgetReversed = [self widgetReversed];
+		[self addChild: widgetReversed z: 0 tag: kWidgetReversed];
 		
 		// Do initial layout.
 		[self updateForScreenReshape];	
@@ -322,7 +327,7 @@ enum nodeTags
 - (CCLabelTTF *) adviceLabel
 {
 	CCLabelTTF *label = [CCLabelTTF labelWithString:@"Vertical Test." fontName:@"Marker Felt" fontSize:24];
-	CCLabelTTF *label2 = [CCLabelTTF labelWithString:@"Scrollable menu should be at the left." fontName:@"Marker Felt" fontSize:24];
+	CCLabelTTF *label2 = [CCLabelTTF labelWithString:@"Scrollable menu should be at left & right." fontName:@"Marker Felt" fontSize:24];
 	label2.anchorPoint = ccp(0.5f, 1);
 	label2.position = ccp(0.5f * label.contentSize.width, 0);
 	[label addChild: label2];
@@ -359,24 +364,67 @@ enum nodeTags
 	return menu;
 }
 
+- (CCNode *) widgetReversed
+{
+	// Get Menu Items
+	NSArray *menuItems = [self menuItemsArray];
+	
+	// Prepare Menu
+	CCMenuAdvanced *menu = [CCMenuAdvanced menuWithItems: nil];	
+	for (CCMenuItem *item in menuItems)
+		[menu addChild: item];	
+	
+	// Enable Debug Draw (available only when DEBUG is defined )
+#ifdef DEBUG
+	menu.debugDraw = YES;
+#endif
+	
+	// Setup Menu Alignment
+	[menu alignItemsVerticallyWithPadding: 5 bottomToTop: YES]; //< also sets contentSize and keyBindings on Mac
+	menu.isRelativeAnchorPoint = YES;	
+	
+	return menu;
+}
+
 - (void) updateWidget
 {
 	CGSize winSize = [[CCDirector sharedDirector] winSize];
 	
-	CCMenuAdvanced *menu = (CCMenuAdvanced *) [self getChildByTag:kWidget]; 
-	
-	//widget	
-	menu.anchorPoint = ccp(0.5f, 1);
-	menu.position = ccp(winSize.width / 4, winSize.height);
-	
-	menu.scale = MIN ((winSize.width / 2.0f) / menu.contentSize.width, 0.75f );
-	
-	menu.boundaryRect = CGRectMake(MAX(0, winSize.width / 4.0f - [menu boundingBox].size.width / 2.0f), 
-								   25.0f, 
-								   [menu boundingBox].size.width, 
-								   winSize.height - 50.0f );
-	
-	[menu fixPosition];	
+    // Menu at the Left.
+    {
+        CCMenuAdvanced *menu = (CCMenuAdvanced *) [self getChildByTag:kWidget]; 
+        
+        //widget	
+        menu.anchorPoint = ccp(0.5f, 1);
+        menu.position = ccp(winSize.width / 4, winSize.height);
+        
+        menu.scale = MIN ((winSize.width / 2.0f) / menu.contentSize.width, 0.75f );
+        
+        menu.boundaryRect = CGRectMake(MAX(0, winSize.width / 4.0f - [menu boundingBox].size.width / 2.0f), 
+                                       25.0f, 
+                                       [menu boundingBox].size.width, 
+                                       winSize.height - 50.0f );
+        
+        [menu fixPosition];	
+    }
+    
+    // Reversed Menu at the Rigth.
+    {
+        CCMenuAdvanced *menu2 = (CCMenuAdvanced *) [self getChildByTag:kWidgetReversed]; 
+        
+        //widget	
+        menu2.anchorPoint = ccp(0.5f, 1);
+        menu2.position = ccp( 0.75f * winSize.width / 4, winSize.height);
+        
+        menu2.scale = MIN ((winSize.width / 2.0f) / menu2.contentSize.width, 0.75f );
+        
+        menu2.boundaryRect = CGRectMake(MIN(winSize.width, 0.75 * winSize.width - [menu2 boundingBox].size.width / 2.0f), 
+                                       25.0f, 
+                                       [menu2 boundingBox].size.width, 
+                                       winSize.height - 50.0f );
+        
+        [menu2 fixPosition];	
+    }
 }
 
 - (void) itemPressed: (CCNode *) sender
