@@ -192,19 +192,14 @@ enum
 #pragma mark movement
 
 
-- (CGPoint) tileCoordForPosition:(CGPoint)inPosition
-{
-	// since the map isn't currently flush with the top, we need to compensate for that space.
-	CGSize sz = [CCDirector sharedDirector].winSize;
-	double mapHeight = (map.mapSize.height * (PixelsToPointsF(map.tileSize.height) * currentScale));
-	double mapWidth = (map.mapSize.width * (PixelsToPointsF(map.tileSize.width) * currentScale));
-	double heightOffset = (sz.height - mapHeight) / 2;
-	double widthOffset = (sz.width - mapWidth) / 2;
-	
-	// need to invert Y because cocos2d is bottom-left not top-left.
-	int invertedY = (map.mapSize.height * (PixelsToPointsF(map.tileSize.height) * currentScale)) - inPosition.y;
-	int x = (inPosition.x + widthOffset) / (PixelsToPointsF(map.tileSize.width) * currentScale);
-	int y = (invertedY + heightOffset) / (PixelsToPointsF(map.tileSize.height) * currentScale);
+- (CGPoint) tileCoordForPosition:(CGPoint)pos
+{	
+    CGPoint screenPosition = [self convertToWorldSpace:pos];
+    pos = [map convertToNodeSpace: screenPosition];
+    
+    int x = pos.x / map.tileSize.width;
+    int y = (map.contentSize.height - pos.y - 1) / map.tileSize.height;
+    
     return ccp(x, y);
 }
 
@@ -288,7 +283,7 @@ enum
     if (!CGRectContainsPoint(mapRect, touchLocation))
         return;
 	
-	// offset our movement based on where we have the background scrolled
+	// Increment playerPosition in desired direction.
     CGPoint playerPos = playerSprite.position;
     CGPoint diff = ccpSub(touchLocation, playerPos);
     if (abs(diff.x) > abs(diff.y))
@@ -304,25 +299,13 @@ enum
             playerPos.y += PixelsToPointsF(map.tileSize.height) * currentScale;
         else
             playerPos.y -= PixelsToPointsF(map.tileSize.height) * currentScale;
-    }
+    }	
 	
-	// since the map isn't currently flush with the top, we need to compensate for that space.
-	CGSize sz = [CCDirector sharedDirector].winSize;
-	double mapHeight = (map.mapSize.height * (PixelsToPointsF(map.tileSize.height) * currentScale));
-	double mapWidth = (map.mapSize.width * (PixelsToPointsF(map.tileSize.width) * currentScale));
-	double heightOffset = (sz.height - mapHeight) / 2;
-	double widthOffset = (sz.width - mapWidth) / 2;
-	
-	
-	// map bounds check
-    if (playerPos.x <= (map.mapSize.width * (PixelsToPointsF(map.tileSize.width) * currentScale)) &&
-        playerPos.y <= (map.mapSize.height * (PixelsToPointsF(map.tileSize.height) * currentScale) + heightOffset) &&
-        playerPos.y >= (0 + heightOffset) &&
-        playerPos.x >= (0 + widthOffset) &&
-		![playerSprite numberOfRunningActions])		// check the running actions to see if we are already moving a tile or not.  Keeps us from re-starting a move when we are already moving.
+	// Check the running actions to see if we are already moving a tile or not.  
+    // Keeps us from re-starting a move when we are already moving.
+    if ( ![playerSprite numberOfRunningActions] )		
     {
 		[self movePlayerPosition:playerPos];
-//		[self setViewpointCenter:_player.position withDuration:kPlayerMoveAnimationSpeed];
     }
 	
 }
