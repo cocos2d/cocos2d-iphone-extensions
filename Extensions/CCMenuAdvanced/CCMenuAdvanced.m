@@ -49,7 +49,6 @@
 @interface CCMenu (Private) 
 
 #ifdef __IPHONE_OS_VERSION_MAX_ALLOWED
--(void) update:(ccTime)dt;
 -(CCMenuItem *) itemForTouch: (UITouch *) touch;
 #elif __MAC_OS_X_VERSION_MAX_ALLOWED
 -(CCMenuItem *) itemForMouseEvent: (NSEvent *) event;
@@ -86,13 +85,6 @@
 		
 		if (item)
 			[self alignItemsVertically];
-#ifdef __IPHONE_OS_VERSION_MAX_ALLOWED
-        prevState_ = kCCMenuStateWaiting;
-        prevPosition_ = self.position;
-        velocity_ = 0;
-        
-        [self schedule:@selector(update:) interval:1.0/25.0];
-#endif
 	}
 	return self;
 }
@@ -495,39 +487,6 @@
 	
 #undef CLAMP
 	
-}
-
-- (void) update:(ccTime)dt
-{
-    
-    if (prevState_ == kCCMenuStateTrackingTouch && state_ == kCCMenuStateWaiting) {
-        velocity_ = self.position.y - prevPosition_.y;
-        direction_ = velocity_ > 0 ? 1 : -1;
-    }
-    
-    if (direction_ > 0) {
-        if (velocity_ > 0 && state_ != kCCMenuStateTrackingTouch) {
-            self.position = ccp(self.position.x, self.position.y + velocity_);
-            velocity_ -= 2.0;
-        }
-        else {
-            velocity_ = 0;
-        }
-    }
-    else {
-        if (velocity_ < 0 && state_ != kCCMenuStateTrackingTouch) {
-            self.position = ccp(self.position.x, self.position.y + velocity_);
-            velocity_ += 2.0;
-        }
-        else {
-            velocity_ = 0;
-        }
-    }
-    
-    prevPosition_ = self.position;
-    prevState_ = state_;
-    
-    [self fixPosition];
 }
 
 
