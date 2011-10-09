@@ -439,8 +439,8 @@ enum
 	if ([name isEqualToString:kObjectsLayerName])
 	{
 		// generate the spawn point.
-		int x = (kNumPixelsPerTileSquare * 5) + (kNumPixelsPerTileSquare / 2);
-		int y = (kNumPixelsPerTileSquare * (kNumTilesPerChunk-3)) - (kNumPixelsPerTileSquare / 2);
+		int x = (kNumPixelsPerTileSquare * kObjectSpawnPointTileCoordX) + (kNumPixelsPerTileSquare / 2);
+		int y = (kNumPixelsPerTileSquare * (kNumTilesPerChunk-kObjectSpawnPointTileCoordY)) - (kNumPixelsPerTileSquare / 2);
 		
 		// the properties are gathered below, not passed here.
 		dict = [TMXGenerator makeObjectWithName:kObjectSpawnPointKey type:nil x:x y:y width:kNumPixelsPerTileSquare*2 height:kNumPixelsPerTileSquare*2 properties:nil];

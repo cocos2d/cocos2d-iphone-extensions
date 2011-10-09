@@ -63,6 +63,8 @@
 #define kNumPixelsBetweenTiles			2
 
 #define kObjectSpawnPointKey			@"SpawnPoint"
+#define kObjectSpawnPointTileCoordX     20
+#define kObjectSpawnPointTileCoordY     20
 #define kTileSetTypeKey					@"type"
 #define kTileSetTypeNameKey				@"typeName"
 
