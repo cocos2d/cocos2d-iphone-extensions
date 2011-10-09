@@ -185,7 +185,7 @@ enum
 	playerSprite = [[CCSprite spriteWithFile:@"hero.png"] retain];
 	//playerSprite.scale = currentScale;
 	//playerSprite.position = ccpAdd(PixelsToPoints(ccp(x*playerSprite.scale, y*playerSprite.scale)), map.position);
-	playerSprite.position = ccp(x,y);
+	playerSprite.position = PixelsToPoints(ccp(x,y));
 
     
 	[map addChild:playerSprite z: NSIntegerMax];
@@ -200,8 +200,8 @@ enum
     //CGPoint screenPosition = [self convertToWorldSpace:pos];
     //pos = [map convertToNodeSpace: screenPosition];
     
-    int x = pos.x / map.tileSize.width;
-    int y = (map.contentSize.height - pos.y - 1) / map.tileSize.height;
+    int x = pos.x / PixelsToPointsF(map.tileSize.width);
+    int y = (map.contentSize.height - pos.y - 1) / PixelsToPointsF(map.tileSize.height);
     
     return ccp(x, y);
 }
@@ -213,7 +213,7 @@ enum
 	CCTMXLayer* layer = [curMap layerNamed:layerName];
 	
 	CGPoint tileCoord = [self tileCoordForPosition:inPosition];
-	int tileGid = [layer tileGIDAt:tileCoord];
+	int tileGid = [layer tileGIDAt: tileCoord];
 	
 	//	// if there's a tile here, check to see what kind it is.
 	if (tileGid)
