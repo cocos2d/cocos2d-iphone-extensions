@@ -149,14 +149,7 @@ enum
 	// add it as a child.
 	[self addChild:map z: -1 tag: kMap];
 	
-	// calculate scale
-	CGSize s = [CCDirector sharedDirector].winSize;
 	
-	// Scale to fit the screen.
-	CGSize mapSize = map.contentSize;    
-	CGFloat scaleFactorX = s.height / mapSize.height;
-	CGFloat scaleFactorY = s.width / mapSize.width;    
-	currentScale = MIN ( 1.0f, MIN(scaleFactorX, scaleFactorY) );
 
 	[self updateForScreenReshape];
 }
@@ -165,6 +158,12 @@ enum
 {
 	CGSize s = [CCDirector sharedDirector].winSize;
 	
+	// Scale to fit the screen.
+	CGSize mapSize = map.contentSize;    
+	CGFloat scaleFactorX = s.height / mapSize.height;
+	CGFloat scaleFactorY = s.width / mapSize.width;    
+	currentScale = MIN ( 1.0f, MIN(scaleFactorX, scaleFactorY) );
+    
     map.scale = currentScale;
     
     // Position on the center of screen.
@@ -184,10 +183,12 @@ enum
 	int y = [[spawnPointDict valueForKey:@"y"] intValue];
 	
 	playerSprite = [[CCSprite spriteWithFile:@"hero.png"] retain];
-	playerSprite.scale = currentScale;
-	playerSprite.position = ccpAdd(PixelsToPoints(ccp(x*playerSprite.scale, y*playerSprite.scale)), map.position);
-	
-	[self addChild:playerSprite];
+	//playerSprite.scale = currentScale;
+	//playerSprite.position = ccpAdd(PixelsToPoints(ccp(x*playerSprite.scale, y*playerSprite.scale)), map.position);
+	playerSprite.position = ccp(x,y);
+
+    
+	[map addChild:playerSprite z: NSIntegerMax];
 }
 
 #pragma mark -
@@ -196,8 +197,8 @@ enum
 
 - (CGPoint) tileCoordForPosition:(CGPoint)pos
 {	
-    CGPoint screenPosition = [self convertToWorldSpace:pos];
-    pos = [map convertToNodeSpace: screenPosition];
+    //CGPoint screenPosition = [self convertToWorldSpace:pos];
+    //pos = [map convertToNodeSpace: screenPosition];
     
     int x = pos.x / map.tileSize.width;
     int y = (map.contentSize.height - pos.y - 1) / map.tileSize.height;
@@ -270,22 +271,26 @@ enum
     if (!CGRectContainsPoint(mapRect, aPoint))
         return;
 	
+    // Convert aPoint to mpa coordinates.
+    aPoint = [self convertToWorldSpace:aPoint];
+    aPoint = [map convertToNodeSpace:aPoint];
+    
 	// Increment playerPosition in desired direction.
     CGPoint playerPos = playerSprite.position;
     CGPoint diff = ccpSub(aPoint, playerPos);
     if (abs(diff.x) > abs(diff.y))
 	{
         if (diff.x > 0)
-            playerPos.x += PixelsToPointsF(map.tileSize.width) * currentScale;
+            playerPos.x += PixelsToPointsF(map.tileSize.width);
         else
-            playerPos.x -= PixelsToPointsF(map.tileSize.width) * currentScale; 
+            playerPos.x -= PixelsToPointsF(map.tileSize.width); 
     }
 	else
 	{
         if (diff.y > 0)
-            playerPos.y += PixelsToPointsF(map.tileSize.height) * currentScale;
+            playerPos.y += PixelsToPointsF(map.tileSize.height);
         else
-            playerPos.y -= PixelsToPointsF(map.tileSize.height) * currentScale;
+            playerPos.y -= PixelsToPointsF(map.tileSize.height);
     }	
 	
 	// Check the running actions to see if we are already moving a tile or not.  
