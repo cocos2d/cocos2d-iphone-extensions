@@ -58,15 +58,24 @@ CGFloat PointsToPixelsF(CGFloat inPoint)
 
 #pragma mark -
 
-@interface TMXGeneratorTestLayer ()		// these methods shouldn't be called anywhere but internally.
+// These methods shouldn't be called anywhere but internally.
+@interface TMXGeneratorTestLayer ()	
+
+@property(retain, readwrite) NSMutableDictionary* objectListByGroupName;
+@property(retain, readwrite) CCTMXTiledMap *map;
+@property(retain, readwrite) CCSprite *playerSprite;
+
 - (void) setupSounds;
 - (void) setupMap;
 - (void) setupPlayer;
 - (void) updateForScreenReshape;
+
 @end
 
 
 @implementation TMXGeneratorTestLayer
+
+@synthesize map = _map, playerSprite = _playerSprite, objectListByGroupName = _objectListByGroupName;
 
 enum
 {
@@ -102,7 +111,7 @@ enum
 #endif
 
 		// init class variables
-		objectListByGroupName = [[NSMutableDictionary alloc] initWithCapacity:10];
+		self.objectListByGroupName = [[NSMutableDictionary alloc] initWithCapacity:10];
 
 		// set up the map and related items.
 		[self setupSounds];
@@ -115,7 +124,9 @@ enum
 // on "dealloc" you need to release all your retained objects
 - (void) dealloc
 {
-	[objectListByGroupName release];
+    self.playerSprite = nil;
+    self.objectListByGroupName = nil;
+    self.map = nil;
 
 	// don't forget to call "super dealloc"
 	[super dealloc];
@@ -138,16 +149,16 @@ enum
 	if (![gen generateAndSaveTMXMap:&error])
 	{
 		NSLog(@"Error generating TMX Map!  Error: %@, %d", [error localizedDescription], (int)[error code]);
-		map = [[[CCTMXTiledMap alloc] initWithTMXFile:@"testMap.tmx"] autorelease];
+		self.map = [[[CCTMXTiledMap alloc] initWithTMXFile:@"testMap.tmx"] autorelease];
 	}
 	else
 	{
-		map = [[[CCTMXTiledMap alloc] initWithTMXFile:newMapPath] autorelease];			
+		self.map = [[[CCTMXTiledMap alloc] initWithTMXFile:newMapPath] autorelease];			
 	}
 	[gen release], gen = nil;
 	
 	// add it as a child.
-	[self addChild:map z: -1 tag: kMap];
+	[self addChild:self.map z: -1 tag: kMap];
 	
 	
 
@@ -159,22 +170,22 @@ enum
 	CGSize s = [CCDirector sharedDirector].winSize;
 	
 	// Scale to fit the screen.
-	CGSize mapSize = map.contentSize;    
+	CGSize mapSize = self.map.contentSize;    
 	CGFloat scaleFactorX = s.height / mapSize.height;
 	CGFloat scaleFactorY = s.width / mapSize.width;    
-	currentScale = MIN ( 1.0f, MIN(scaleFactorX, scaleFactorY) );
+	CGFloat currentScale = MIN ( 1.0f, MIN(scaleFactorX, scaleFactorY) );
     
-    map.scale = currentScale;
+    self.map.scale = currentScale;
     
     // Position on the center of screen.
-    map.anchorPoint = ccp(0.5f, 0.5f);
-    map.position = ccp(0.5f * s.width, 0.5f * s.height);
+    self.map.anchorPoint = ccp(0.5f, 0.5f);
+    self.map.position = ccp(0.5f * s.width, 0.5f * s.height);
 }
 
 - (void) setupPlayer
 {
-	// Find SpawnPoint
-	CCTMXObjectGroup* objList = [map objectGroupNamed:kObjectsLayerName];
+	// Find SpawnPoint.
+	CCTMXObjectGroup* objList = [self.map objectGroupNamed:kObjectsLayerName];
 	NSAssert(objList != nil, @"'Objects' group not found in TMX!");
 	NSMutableDictionary* spawnPointDict = [objList objectNamed:kObjectSpawnPointKey];
 	NSAssert(spawnPointDict != nil, @"SpawnPoint not found in objects layer of TMX!");
@@ -182,26 +193,20 @@ enum
 	int x = [[spawnPointDict valueForKey:@"x"] intValue];
 	int y = [[spawnPointDict valueForKey:@"y"] intValue];
 	
-	playerSprite = [[CCSprite spriteWithFile:@"hero.png"] retain];
-	//playerSprite.scale = currentScale;
-	//playerSprite.position = ccpAdd(PixelsToPoints(ccp(x*playerSprite.scale, y*playerSprite.scale)), map.position);
-	playerSprite.position = PixelsToPoints(ccp(x,y));
-
+	self.playerSprite = [CCSprite spriteWithFile:@"hero.png"];
+	self.playerSprite.position = PixelsToPoints(ccp(x,y));
     
-	[map addChild:playerSprite z: NSIntegerMax];
+	[self.map addChild:self.playerSprite z: NSIntegerMax];
 }
 
 #pragma mark -
 #pragma mark movement
 
-
+// Returns tile coordinate for given position in points on map. 
 - (CGPoint) tileCoordForPosition:(CGPoint)pos
-{	
-    //CGPoint screenPosition = [self convertToWorldSpace:pos];
-    //pos = [map convertToNodeSpace: screenPosition];
-    
-    int x = pos.x / PixelsToPointsF(map.tileSize.width);
-    int y = (map.contentSize.height - pos.y - 1) / PixelsToPointsF(map.tileSize.height);
+{    
+    int x = pos.x / PixelsToPointsF(self.map.tileSize.width);
+    int y = (self.map.contentSize.height - pos.y - 1) / PixelsToPointsF(self.map.tileSize.height);
     
     return ccp(x, y);
 }
@@ -209,13 +214,13 @@ enum
 
 - (BaseTileTypes) collisionTypeForTile:(CGPoint)inPosition forLayerNamed:(NSString*)layerName
 {
-	CCTMXTiledMap* curMap = (CCTMXTiledMap*)[self getChildByTag: kMap];		// there are better ways to do it than this!  This is a hack!
+	CCTMXTiledMap* curMap = (CCTMXTiledMap*)[self getChildByTag: kMap];
 	CCTMXLayer* layer = [curMap layerNamed:layerName];
 	
 	CGPoint tileCoord = [self tileCoordForPosition:inPosition];
 	int tileGid = [layer tileGIDAt: tileCoord];
 	
-	//	// if there's a tile here, check to see what kind it is.
+	// Get tile type from map properties & return it.
 	if (tileGid)
 	{
 		NSDictionary* dict = [curMap propertiesForGID:tileGid];
@@ -231,7 +236,7 @@ enum
 }
 
 
-// example of possible collision detection and movement.
+// Moves player into given in points position. Uses collision detection.
 -(void)movePlayerPosition:(CGPoint)inPosition
 {
 	// with collision
@@ -241,12 +246,12 @@ enum
 		if (type == tileBaseRock)
 		{
 			[[SimpleAudioEngine sharedEngine] playEffect:@"hit.wav"];
-			return;	// we've hit something!  Don't move!
+			return;	//< We've hit something!  Don't move!
 		}
 		else if (type == tileBaseWater)
 		{
 			[[SimpleAudioEngine sharedEngine] playEffect:@"water.wav"];
-			return;	// we've hit something!  Don't move!
+			return;	//< We've hit something!  Don't move!
 		}
 	}
 	
@@ -258,44 +263,42 @@ enum
 //			[self encounter];
 	}		
 	
-	
+	// Everything's ok - move!
 	[[SimpleAudioEngine sharedEngine] playEffect:@"move.wav"];
-	
-	// animate player movement.
-	[playerSprite runAction:[CCMoveTo actionWithDuration:0.125 position:inPosition]];
+	[self.playerSprite runAction:[CCMoveTo actionWithDuration:0.125 position:inPosition]];
 }
 
 - (void) userClickedAtPoint: (CGPoint) aPoint
 {
-    CGRect mapRect = [map boundingBox];
+    CGRect mapRect = [self.map boundingBox];
     if (!CGRectContainsPoint(mapRect, aPoint))
         return;
 	
     // Convert aPoint to mpa coordinates.
     aPoint = [self convertToWorldSpace:aPoint];
-    aPoint = [map convertToNodeSpace:aPoint];
+    aPoint = [self.map convertToNodeSpace:aPoint];
     
 	// Increment playerPosition in desired direction.
-    CGPoint playerPos = playerSprite.position;
+    CGPoint playerPos = self.playerSprite.position;
     CGPoint diff = ccpSub(aPoint, playerPos);
     if (abs(diff.x) > abs(diff.y))
 	{
         if (diff.x > 0)
-            playerPos.x += PixelsToPointsF(map.tileSize.width);
+            playerPos.x += PixelsToPointsF(self.map.tileSize.width);
         else
-            playerPos.x -= PixelsToPointsF(map.tileSize.width); 
+            playerPos.x -= PixelsToPointsF(self.map.tileSize.width); 
     }
 	else
 	{
         if (diff.y > 0)
-            playerPos.y += PixelsToPointsF(map.tileSize.height);
+            playerPos.y += PixelsToPointsF(self.map.tileSize.height);
         else
-            playerPos.y -= PixelsToPointsF(map.tileSize.height);
+            playerPos.y -= PixelsToPointsF(self.map.tileSize.height);
     }	
 	
 	// Check the running actions to see if we are already moving a tile or not.  
     // Keeps us from re-starting a move when we are already moving.
-    if ( ![playerSprite numberOfRunningActions] )		
+    if ( ![self.playerSprite numberOfRunningActions] )		
     {
 		[self movePlayerPosition:playerPos];
     }
@@ -347,7 +350,7 @@ enum
 
 - (NSArray*) layerNames
 {
-	// warning!  The order these are in determines the layer heirarchy, leftmost is lowest, rightmost is highest!
+	// Warning!  The order these are in determines the layer heirarchy, leftmost is lowest, rightmost is highest!
 	return [NSArray arrayWithObjects:kMetaLayerTileSetName, kBackgroundLayerName, kObjectsLayerName, nil];
 }
 
@@ -384,10 +387,8 @@ enum
 	
 	if ([name isEqualToString:kOutdoorTileSetName])
 	{
-		// filename
+		// Filename.
 		NSString* fileName = kOutdoorTileSetAtlasName;
-		
-		// setup other info
 		dict = [TMXGenerator tileSetWithImage:fileName
 										named:name 
 										width:kNumPixelsPerTileSquare
@@ -396,17 +397,14 @@ enum
 	}
 	else if ([name isEqualToString:kMetaLayerTileSetName])
 	{
-		// you would add additional tilesets here.
 		NSString* fileName = kMetaTileSetAtlasName;
-		
-		// setup other info
 		dict = [TMXGenerator tileSetWithImage:fileName
 										named:name 
 										width:kNumPixelsPerTileSquare
 									   height:kNumPixelsPerTileSquare
 								  tileSpacing:kNumPixelsBetweenTiles];
 	}
-	else
+	else // Add more tilesets here!
 	{
 		NSLog(@"tileSetInfoForName: called with name %@, name was not handled!", name);
 	}
@@ -419,13 +417,15 @@ enum
 {	
 	NSDictionary* dict = nil;
 	
-	// default to visible
+	// All tmxMap layers are visible by default.
 	BOOL isVisible = YES;
 
-	if ([name isEqualToString:kMetaLayerTileSetName])		// if you have an invisible layer you can set that up here.
-		isVisible = NO;								// meta layer isn't visible.
+    // If you have an invisible layer you can set that up here.
+    // Meta layer isn't visible.
+	if ([name isEqualToString:kMetaLayerTileSetName])		
+		isVisible = NO;								
 
-	// data will be filled in by tilePropertyForLayer:tileSetName:X:Y:	
+	// Data will be filled in by tilePropertyForLayer:tileSetName:X:Y:.	
 	dict = [TMXGenerator layerNamed:name width:kNumTilesPerChunk height:kNumTilesPerChunk data:nil visible:isVisible];
 	return dict;
 }
@@ -438,22 +438,22 @@ enum
 	
 	if ([name isEqualToString:kObjectsLayerName])
 	{
-		// generate the spawn point.
+		// Generate the spawn point.
 		int x = (kNumPixelsPerTileSquare * kObjectSpawnPointTileCoordX) + (kNumPixelsPerTileSquare / 2);
 		int y = (kNumPixelsPerTileSquare * (kNumTilesPerChunk-kObjectSpawnPointTileCoordY)) - (kNumPixelsPerTileSquare / 2);
 		
-		// the properties are gathered below, not passed here.
+		// The properties are gathered below, not passed here.
 		dict = [TMXGenerator makeObjectWithName:kObjectSpawnPointKey type:nil x:x y:y width:kNumPixelsPerTileSquare*2 height:kNumPixelsPerTileSquare*2 properties:nil];
 		if (dict)
 			[objects addObject:dict];
 		
-		// add a new array (if needed) representing our kObjectsLayerName group with the spawn point dictionary inside of that.  
+		// Add a new array (if needed) representing our kObjectsLayerName group with the spawn point dictionary inside of that.  
 		// Make it mutable so if we want to add to this elsewhere we can.
-		NSMutableArray* array = [objectListByGroupName objectForKey:name];
+		NSMutableArray* array = [self.objectListByGroupName objectForKey:name];
 		if (array)
 			[array addObject:dict];
 		else 
-			[objectListByGroupName setObject:[NSMutableArray arrayWithObject:dict] forKey:name];
+			[self.objectListByGroupName setObject:[NSMutableArray arrayWithObject:dict] forKey:name];
 	}
 	
 	return objects;

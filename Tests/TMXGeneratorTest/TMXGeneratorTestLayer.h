@@ -32,14 +32,11 @@
 @interface TMXGeneratorTestLayer : CCLayer <TMXGeneratorDelegate> {
 	
 	// tile map creation
-	NSMutableDictionary* objectListByGroupName;
-	CCTMXTiledMap* map;
+	NSMutableDictionary* _objectListByGroupName;
+	CCTMXTiledMap* _map;
 
 	// player
-	CCSprite* playerSprite;
-	
-	// convenience
-	CGFloat currentScale;
+	CCSprite* _playerSprite;
 }
 
 // returns a CCScene that contains the TMXGenerator_WorldMap as the only child
