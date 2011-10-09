@@ -95,9 +95,11 @@ enum
 	// Apple recommends to re-assign "self" with the "super" return value
 	if( (self=[super init]))
 	{
-		// init and register touches
+#ifdef __IPHONE_OS_VERSION_MAX_ALLOWED
 		self.isTouchEnabled = YES;
-		[[CCTouchDispatcher sharedDispatcher] addTargetedDelegate:self priority:0 swallowsTouches:YES];
+#elif defined(__MAC_OS_X_VERSION_MAX_ALLOWED)
+        self.isMouseEnabled = YES;
+#endif
 
 		// init class variables
 		objectListByGroupName = [[NSMutableDictionary alloc] initWithCapacity:10];
@@ -262,30 +264,15 @@ enum
 	[playerSprite runAction:[CCMoveTo actionWithDuration:0.125 position:inPosition]];
 }
 
-#ifdef __IPHONE_OS_VERSION_MAX_ALLOWED
-
-#pragma mark -
-#pragma mark touches
-
-
--(BOOL) ccTouchBegan:(UITouch *)touch withEvent:(UIEvent *)event
+- (void) userClickedAtPoint: (CGPoint) aPoint
 {
-	return YES;
-}
-
--(void) ccTouchEnded:(UITouch *)touch withEvent:(UIEvent *)event
-{
-    CGPoint touchLocation = [touch locationInView: [touch view]];		
-    touchLocation = [[CCDirector sharedDirector] convertToGL: touchLocation];
-    touchLocation = [self convertToNodeSpace:touchLocation];
-    
     CGRect mapRect = [map boundingBox];
-    if (!CGRectContainsPoint(mapRect, touchLocation))
+    if (!CGRectContainsPoint(mapRect, aPoint))
         return;
 	
 	// Increment playerPosition in desired direction.
     CGPoint playerPos = playerSprite.position;
-    CGPoint diff = ccpSub(touchLocation, playerPos);
+    CGPoint diff = ccpSub(aPoint, playerPos);
     if (abs(diff.x) > abs(diff.y))
 	{
         if (diff.x > 0)
@@ -307,12 +294,44 @@ enum
     {
 		[self movePlayerPosition:playerPos];
     }
+}
+
+#ifdef __IPHONE_OS_VERSION_MAX_ALLOWED
+
+#pragma mark -
+#pragma mark touches
+
+-(void) registerWithTouchDispatcher
+{
+	[[CCTouchDispatcher sharedDispatcher] addTargetedDelegate:self priority:0 swallowsTouches:YES];
+}
+
+
+-(BOOL) ccTouchBegan:(UITouch *)touch withEvent:(UIEvent *)event
+{
+	return YES;
+}
+
+-(void) ccTouchEnded:(UITouch *)touch withEvent:(UIEvent *)event
+{
+    CGPoint touchLocation = [touch locationInView: [touch view]];		
+    touchLocation = [[CCDirector sharedDirector] convertToGL: touchLocation];
+    touchLocation = [self convertToNodeSpace:touchLocation];
+    
+    [self userClickedAtPoint: touchLocation]; 
 	
 }
 
 #elif defined(__MAC_OS_X_VERSION_MAX_ALLOWED)
 
-#error touches equivalent not yet complete for mac version.
+- (BOOL) ccMouseUp:(NSEvent *)event
+{
+    CGPoint point = [[CCDirector sharedDirector] convertEventToGL:event];
+    point = [self convertToNodeSpace: point];
+    [self userClickedAtPoint:point];
+    
+    return YES;
+}
 
 #endif
 
