@@ -111,7 +111,7 @@ enum
 #endif
 
 		// init class variables
-		self.objectListByGroupName = [[NSMutableDictionary alloc] initWithCapacity:10];
+		self.objectListByGroupName = [NSMutableDictionary dictionaryWithCapacity:10];
 
 		// set up the map and related items.
 		[self setupSounds];
