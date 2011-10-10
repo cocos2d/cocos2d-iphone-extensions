@@ -210,8 +210,9 @@ typedef enum
         {
             UITouch *touch = [self.touches objectAtIndex: 0];        
             CGPoint curPos = [[CCDirector sharedDirector] convertToGL: [touch locationInView: [touch view]]];
-            [self.delegate layerPanZoom: self 
-                         clickedAtPoint: [self convertToNodeSpace: curPos]];
+            [self.delegate layerPanZoom: self
+                         clickedAtPoint: [self convertToNodeSpace: curPos]
+                               tapCount: [touch tapCount]];
         }
     }
 	for (UITouch *touch in [touches allObjects]) 
