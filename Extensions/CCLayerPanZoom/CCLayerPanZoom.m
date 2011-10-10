@@ -30,28 +30,99 @@
 #import "CCLayerPanZoom.h"
 
 
-@interface CCLayerPanZoom (Private)
+#ifdef DEBUG
 
-/* Fix position for the layer considering _panBoundsRect and _enablePanBounds */
+/** @class CCLayerPanZoomDebugLines Class that represents lines over the CCLayerPanZoom 
+ * for debug frame mode */
+@interface CCLayerPanZoomDebugLines: CCNode
+{
+    CGFloat _topFrameMargin;
+    CGFloat _bottomFrameMargin;
+    CGFloat _leftFrameMargin;
+    CGFloat _rightFrameMargin;
+}
+/** Distance from top edge of contenSize */
+@property (readwrite, assign) CGFloat topFrameMargin;
+/** Distance from bottom edge of contenSize */
+@property (readwrite, assign) CGFloat bottomFrameMargin;
+/** Distance from left edge of contenSize */
+@property (readwrite, assign) CGFloat leftFrameMargin;
+/** Distance from right edge of contenSize */
+@property (readwrite, assign) CGFloat rightFrameMargin;
+
+@end
+
+enum nodeTags
+{
+	kDebugLinesTag,
+};
+
+@implementation CCLayerPanZoomDebugLines
+
+@synthesize topFrameMargin = _topFrameMargin, bottomFrameMargin = _bottomFrameMargin, 
+            leftFrameMargin = _leftFrameMargin, rightFrameMargin = _rightFrameMargin;
+
+- (void) draw
+{
+    glColor4f(1.0f, 0.0f, 0.0f, 1.0);
+    glLineWidth(2.0f);    
+    ccDrawLine(ccp(self.leftFrameMargin, 0.0f), 
+               ccp(self.leftFrameMargin, self.contentSize.height));
+    ccDrawLine(ccp(self.contentSize.width - self.rightFrameMargin, 0.0f), 
+               ccp(self.contentSize.width - self.rightFrameMargin, self.contentSize.height));
+    ccDrawLine(ccp(0.0f, self.bottomFrameMargin), 
+               ccp(self.contentSize.width, self.bottomFrameMargin));
+    ccDrawLine(ccp(0.0f, self.contentSize.height - self.topFrameMargin), 
+               ccp(self.contentSize.width, self.contentSize.height - self.topFrameMargin));
+}
+
+@end
+
+#endif
+
+
+typedef enum
+{
+    kCCLayerPanZoomFrameEdgeNone,
+    kCCLayerPanZoomFrameEdgeTop,
+    kCCLayerPanZoomFrameEdgeBottom,
+    kCCLayerPanZoomFrameEdgeLeft,
+    kCCLayerPanZoomFrameEdgeRight,
+    kCCLayerPanZoomFrameEdgeTopLeft,
+    kCCLayerPanZoomFrameEdgeBottomLeft,
+    kCCLayerPanZoomFrameEdgeTopRight,
+    kCCLayerPanZoomFrameEdgeBottomRight
+} CCLayerPanZoomFrameEdge;
+
+
+@interface CCLayerPanZoom ()
+
+@property (readwrite, retain) NSMutableArray *touches;
+@property (readwrite, assign) CGFloat touchDistance;
+@property (readwrite, retain) CCScheduler *scheduler;
+// Fix position for the layer considering panBoundsRect and enablePanBounds
 - (void) fixLayerPosition;
-
-/* Fix scale for the layer considering _panBoundsRect and _enablePanBounds */
+// Fix scale for the layer considering panBoundsRect and enablePanBounds
 - (void) fixLayerScale;
-
-/* Get minimum possible scale for the layer 
- considering _panBoundsRect and _enablePanBounds */
-- (CGFloat) getMinPossibleScale;
+// Return minimum possible scale for the layer considering panBoundsRect and enablePanBounds
+- (CGFloat) minPossibleScale;
+// Return edge in which current point located
+- (CCLayerPanZoomFrameEdge) frameEdgeWithPoint: (CGPoint) point;
+// Return horizontal speed in order with current position
+- (CGFloat) horSpeedWithPosition: (CGPoint) pos;
+// Return vertical speed in order with current position
+- (CGFloat) vertSpeedWithPosition: (CGPoint) pos;
 
 @end
 
 
 @implementation CCLayerPanZoom
 
-@synthesize maxScale = _maxScale;
-@synthesize minScale = _minScale;
-@synthesize panBoundsRect = _panBoundsRect;
-@synthesize maxTouchDistanceToClick = _maxTouchDistanceToClick;
-@synthesize delegate = _delegate;
+@synthesize maxScale = _maxScale, minScale = _minScale, maxTouchDistanceToClick = _maxTouchDistanceToClick, 
+            delegate = _delegate, touches = _touches, touchDistance = _touchDistance, 
+            minSpeed = _minSpeed, maxSpeed = _maxSpeed, topFrameMargin = _topFrameMargin, 
+            bottomFrameMargin = _bottomFrameMargin, leftFrameMargin = _leftFrameMargin,
+            rightFrameMargin = _rightFrameMargin, scheduler = _scheduler;
 
 #pragma mark Init
 
@@ -60,14 +131,21 @@
 	if ((self = [super init])) 
 	{
 		self.isRelativeAnchorPoint = YES;
-		isTouchEnabled_ = YES;
+		self.isTouchEnabled = YES;
 		
-		_maxScale = 2.0f;
-		_minScale = 0.1f;
-		_touches = [[NSMutableArray arrayWithCapacity: 10] retain];
-		_panBoundsRect = CGRectNull;
-		_touchDistance = 0.0F;
-		_maxTouchDistanceToClick = 15.0f;
+		self.maxScale = 2.0f;
+		self.minScale = 0.1f;
+		self.touches = [NSMutableArray arrayWithCapacity: 10];
+		self.panBoundsRect = CGRectNull;
+		self.touchDistance = 0.0F;
+		self.maxTouchDistanceToClick = 15.0f;
+        self.mode = kCCLayerPanZoomModeSheet;
+        self.minSpeed = 100.0f;
+        self.maxSpeed = 1000.0f;
+        self.topFrameMargin = 100.0f;
+        self.bottomFrameMargin = 100.0f;
+        self.leftFrameMargin = 100.0f;
+        self.rightFrameMargin = 100.0f;
 	}	
 	return self;
 }
@@ -80,35 +158,40 @@
 	for (UITouch *touch in [touches allObjects]) 
 	{
 		// Add new touche to the array with current touches
-		[_touches addObject: touch];
+		[self.touches addObject: touch];
 	}
+    
+    if ([self.touches count] == 1)
+        _singleTouchTimestamp = [NSDate timeIntervalSinceReferenceDate];
+    else
+        _singleTouchTimestamp = INFINITY;
 }
 
 - (void) ccTouchesMoved: (NSSet *) touches 
 			  withEvent: (UIEvent *) event
 {
-	BOOL multitouch = [_touches count] > 1;
+	BOOL multitouch = [self.touches count] > 1;
 	if (multitouch)
 	{
 		// Get the two first touches
-        UITouch *touch1 = [_touches objectAtIndex: 0];
-		UITouch *touch2 = [_touches objectAtIndex: 1];
+        UITouch *touch1 = [self.touches objectAtIndex: 0];
+		UITouch *touch2 = [self.touches objectAtIndex: 1];
 		// Get current and previous positions of the touches
-		CGPoint curPosTch1 = [[CCDirector sharedDirector] convertToGL: [touch1 locationInView: [touch1 view]]];
-		CGPoint curPosTch2 = [[CCDirector sharedDirector] convertToGL: [touch2 locationInView: [touch2 view]]];
-		CGPoint prevPosTch1 = [[CCDirector sharedDirector] convertToGL: [touch1 previousLocationInView: [touch1 view]]];
-		CGPoint prevPosTch2 = [[CCDirector sharedDirector] convertToGL: [touch2 previousLocationInView: [touch2 view]]];
+		CGPoint curPosTouch1 = [[CCDirector sharedDirector] convertToGL: [touch1 locationInView: [touch1 view]]];
+		CGPoint curPosTouch2 = [[CCDirector sharedDirector] convertToGL: [touch2 locationInView: [touch2 view]]];
+		CGPoint prevPosTouch1 = [[CCDirector sharedDirector] convertToGL: [touch1 previousLocationInView: [touch1 view]]];
+		CGPoint prevPosTouch2 = [[CCDirector sharedDirector] convertToGL: [touch2 previousLocationInView: [touch2 view]]];
 		// Calculate current and previous positions of the layer relative the anchor point
-		CGPoint curPosLayer = ccpMidpoint(curPosTch1, curPosTch2);
-		CGPoint prevPosLayer = ccpMidpoint(prevPosTch1, prevPosTch2);
+		CGPoint curPosLayer = ccpMidpoint(curPosTouch1, curPosTouch2);
+		CGPoint prevPosLayer = ccpMidpoint(prevPosTouch1, prevPosTouch2);
 		// If current and previous positions of the layer were fuzzy equal then they are equal
 		if (ccpFuzzyEqual(prevPosLayer, curPosLayer, 2))
 		{
 			prevPosLayer = curPosLayer;
 		}
 		// Calculate new scale
-		CGFloat newScale = self.scale * (ccpDistance(curPosTch1, curPosTch2) / ccpDistance(prevPosTch1, prevPosTch2));		
-		self.scale = MIN(MAX(newScale, _minScale), _maxScale);
+		CGFloat newScale = self.scale * (ccpDistance(curPosTouch1, curPosTouch2) / ccpDistance(prevPosTouch1, prevPosTouch2));		
+		self.scale = MIN(MAX(newScale, self.minScale), self.maxScale);
 		[self fixLayerScale];
 		// Calculate new anchor point
 		CGPoint newAnchorInPixels = [self convertToNodeSpace: prevPosLayer];
@@ -117,45 +200,56 @@
 		self.position = curPosLayer;
 		[self fixLayerPosition];
 		// Don't click with multitouch
-		_touchDistance = INFINITY;
+		self.touchDistance = INFINITY;
 	}
 	else
-	{	
-		// Get the one touch
-        UITouch *touch = [_touches objectAtIndex: 0];        
-		// Get current and previous positions of the touche
-		CGPoint curPosTch = [[CCDirector sharedDirector] convertToGL: [touch locationInView: [touch view]]];
-		CGPoint prevPosTch = [[CCDirector sharedDirector] convertToGL: [touch previousLocationInView: [touch view]]];
-		// Calculate new anchor point
-		CGPoint newAnchorInPixels = [self convertToNodeSpace: prevPosTch];
-		self.anchorPoint = ccp(newAnchorInPixels.x / self.contentSize.width, newAnchorInPixels.y / self.contentSize.height);
-		// Set new position of the layer
-		self.position = curPosTch;		
-		[self fixLayerPosition];
-		// Accumulate touche distance
-		_touchDistance += ccpDistance(curPosTch, prevPosTch);
-	}	
+	{	        
+        // in order with current mode
+        if (self.mode == kCCLayerPanZoomModeSheet)
+        {
+            // Get the one touch
+            UITouch *touch = [self.touches objectAtIndex: 0];        
+            // Get current positions of the touch
+            CGPoint curPosTouch = [[CCDirector sharedDirector] convertToGL: [touch locationInView: [touch view]]];
+            // Get previous positions of the touch
+            CGPoint prevPosTch = [[CCDirector sharedDirector] convertToGL: [touch previousLocationInView: [touch view]]];
+            // Calculate new anchor point
+            CGPoint newAnchorInPixels = [self convertToNodeSpace: prevPosTch];
+            self.anchorPoint = ccp(newAnchorInPixels.x / self.contentSize.width, newAnchorInPixels.y / self.contentSize.height);
+            // Set new position of the layer
+            self.position = curPosTouch;		
+            [self fixLayerPosition];
+            // Accumulate touche distance
+            self.touchDistance += ccpDistance(curPosTouch, prevPosTch);
+        }
+    }	
 }
 
 - (void) ccTouchesEnded: (NSSet *) touches 
 			  withEvent: (UIEvent *) event
 {
-	// Obtain click event
-	if ((_touchDistance < _maxTouchDistanceToClick) && (_delegate))
-	{
-		UITouch *touch = [_touches objectAtIndex: 0];        
-		CGPoint curPos = [[CCDirector sharedDirector] convertToGL: [touch locationInView: [touch view]]];
-		[_delegate layerPanZoom: self 
-				 clickedAtPoint: [self convertToNodeSpace: curPos]];
-	}
+    _singleTouchTimestamp = INFINITY;
+    
+	if (self.mode == kCCLayerPanZoomModeSheet)
+    {
+        // Obtain click event
+        if ((self.touchDistance < self.maxTouchDistanceToClick) && (self.delegate))
+        {
+            UITouch *touch = [self.touches objectAtIndex: 0];        
+            CGPoint curPos = [[CCDirector sharedDirector] convertToGL: [touch locationInView: [touch view]]];
+            [self.delegate layerPanZoom: self
+                         clickedAtPoint: [self convertToNodeSpace: curPos]
+                               tapCount: [touch tapCount]];
+        }
+    }
 	for (UITouch *touch in [touches allObjects]) 
 	{
 		// Remove touche from the array with current touches
-		[_touches removeObject: touch];
+		[self.touches removeObject: touch];
 	}
-	if ([_touches count] == 0)
+	if ([self.touches count] == 0)
 	{
-		_touchDistance = 0.0f;
+		self.touchDistance = 0.0f;
 	}
 }
 
@@ -165,15 +259,91 @@
 	for (UITouch *touch in [touches allObjects]) 
 	{
 		// Remove touche from the array with current touches
-		[_touches removeObject: touch];
+		[self.touches removeObject: touch];
 	}
-	if ([_touches count] == 0)
+	if ([self.touches count] == 0)
 	{
-		_touchDistance = 0.0f;
+		self.touchDistance = 0.0f;
 	}
 }
 
+#pragma mark Update
+
+- (void) update: (ccTime) dt
+{
+    // for single touch and frame mode
+	if ([self.touches count] == 1 && self.mode == kCCLayerPanZoomModeFrame && [NSDate timeIntervalSinceReferenceDate] - _singleTouchTimestamp >= kCCLayerPanZoomMultitouchGesturesDetectionDelay )
+    {
+        // Get the one touch
+        UITouch *touch = [self.touches objectAtIndex: 0];        
+        // Get current positions of the touche
+        CGPoint curPos = [[CCDirector sharedDirector] convertToGL: [touch locationInView: [touch view]]];
+        
+        if ([self frameEdgeWithPoint: curPos] != kCCLayerPanZoomFrameEdgeNone)
+        {
+            self.position = ccp(self.position.x + dt * [self horSpeedWithPosition: curPos], 
+                                self.position.y + dt * [self vertSpeedWithPosition: curPos]);
+            [self fixLayerPosition];
+        }
+        
+        CGPoint touchPositionInLayer = [self convertToNodeSpace: curPos];
+        if (!CGPointEqualToPoint(_prevSingleTouchPositionInLayer, touchPositionInLayer))
+        {
+            _prevSingleTouchPositionInLayer = touchPositionInLayer;
+            [self.delegate layerPanZoom: self 
+                   touchPositionUpdated: touchPositionInLayer];
+        }
+    }
+}
+
+- (void) onEnter
+{
+    [super onEnter];
+    [[CCScheduler sharedScheduler] scheduleUpdateForTarget: self 
+                                                  priority: 0 
+                                                    paused: NO];
+}
+
+- (void) onExit
+{
+    [[CCScheduler sharedScheduler] unscheduleAllSelectorsForTarget: self];
+    [super onExit];
+}
+
+@dynamic mode;
+
+- (void) setMode: (CCLayerPanZoomMode) mode
+{
+#ifdef DEBUG
+    if (mode == kCCLayerPanZoomModeFrame)
+    {
+        CCLayerPanZoomDebugLines *lines = [CCLayerPanZoomDebugLines node];
+        [lines setContentSize: [CCDirector sharedDirector].winSize];
+        lines.topFrameMargin = self.topFrameMargin;
+        lines.bottomFrameMargin = self.bottomFrameMargin;
+        lines.leftFrameMargin = self.leftFrameMargin;
+        lines.rightFrameMargin = self.rightFrameMargin;
+        [[CCDirector sharedDirector].runningScene addChild: lines 
+                                                         z: NSIntegerMax 
+                                                       tag: kDebugLinesTag];
+    }
+    if (_mode == kCCLayerPanZoomModeFrame)
+    {
+        [[CCDirector sharedDirector].runningScene removeChildByTag: kDebugLinesTag 
+                                                           cleanup: YES];
+    }
+#endif
+    _mode = mode;
+}
+
+- (CCLayerPanZoomMode) mode
+{
+    return _mode;
+}
+
 #pragma mark Scale and Position related
+
+@dynamic panBoundsRect;
 
 - (void) setPanBoundsRect: (CGRect) rect
 {
@@ -182,32 +352,37 @@
 	[self fixLayerPosition];
 }
 
+- (CGRect) panBoundsRect
+{
+	return _panBoundsRect;
+}
+
 - (void) fixLayerPosition
 {
-	if (!CGRectIsNull(_panBoundsRect))
+	if (!CGRectIsNull(self.panBoundsRect))
 	{
 		// Check the pan bounds and fix (if it's need) position
 		CGRect boundBox = [self boundingBox];
-		if (self.position.x - boundBox.size.width * self.anchorPoint.x > _panBoundsRect.origin.x)
+		if (self.position.x - boundBox.size.width * self.anchorPoint.x > self.panBoundsRect.origin.x)
 		{
-			[self setPosition: ccp(boundBox.size.width * self.anchorPoint.x + _panBoundsRect.origin.x, 
+			[self setPosition: ccp(boundBox.size.width * self.anchorPoint.x + self.panBoundsRect.origin.x, 
 								   self.position.y)];
 		}	
-		if (self.position.y - boundBox.size.height * self.anchorPoint.y > _panBoundsRect.origin.y)
+		if (self.position.y - boundBox.size.height * self.anchorPoint.y > self.panBoundsRect.origin.y)
 		{
 			[self setPosition: ccp(self.position.x, boundBox.size.height * self.anchorPoint.y + 
-								   _panBoundsRect.origin.y)];
+								   self.panBoundsRect.origin.y)];
 		}
-		if (self.position.x + boundBox.size.width * (1 - self.anchorPoint.x) < _panBoundsRect.size.width +
-			_panBoundsRect.origin.x)
+		if (self.position.x + boundBox.size.width * (1 - self.anchorPoint.x) < self.panBoundsRect.size.width +
+			self.panBoundsRect.origin.x)
 		{
-			[self setPosition: ccp(_panBoundsRect.size.width + _panBoundsRect.origin.x - 
+			[self setPosition: ccp(self.panBoundsRect.size.width + self.panBoundsRect.origin.x - 
 								   boundBox.size.width * (1 - self.anchorPoint.x), self.position.y)];
 		}
-		if (self.position.y + boundBox.size.height * (1 - self.anchorPoint.y) < _panBoundsRect.size.height + 
-			_panBoundsRect.origin.y)
+		if (self.position.y + boundBox.size.height * (1 - self.anchorPoint.y) < self.panBoundsRect.size.height + 
+			self.panBoundsRect.origin.y)
 		{
-			[self setPosition: ccp(self.position.x, _panBoundsRect.size.height + _panBoundsRect.origin.y - 
+			[self setPosition: ccp(self.position.x, self.panBoundsRect.size.height + self.panBoundsRect.origin.y - 
 								   boundBox.size.height * (1 - self.anchorPoint.y))];
 		}	
 	}
@@ -215,34 +390,138 @@
 
 - (void) fixLayerScale
 {
-	if (!CGRectIsNull(_panBoundsRect))
+	if (!CGRectIsNull(self.panBoundsRect))
 	{
 		// Check the pan bounds and fix (if it's need) scale
 		CGRect boundBox = [self boundingBox];
-		if ((boundBox.size.width < _panBoundsRect.size.width) || (boundBox.size.height < _panBoundsRect.size.height))
-			self.scale = [self getMinPossibleScale];	
+		if ((boundBox.size.width < self.panBoundsRect.size.width) || (boundBox.size.height < self.panBoundsRect.size.height))
+			self.scale = [self minPossibleScale];	
 	}
 }
 
-- (CGFloat) getMinPossibleScale
+- (CGFloat) minPossibleScale
 {
-	if (!CGRectIsNull(_panBoundsRect))
+	if (!CGRectIsNull(self.panBoundsRect))
 	{
-		return MAX(_panBoundsRect.size.width / self.contentSize.width,
-				   _panBoundsRect.size.height / self.contentSize.height);
+		return MAX(self.panBoundsRect.size.width / self.contentSize.width,
+				   self.panBoundsRect.size.height / self.contentSize.height);
 	}
 	else 
 	{
-		return _minScale;
+		return self.minScale;
 	}
+}
+
+- (CCLayerPanZoomFrameEdge) frameEdgeWithPoint: (CGPoint) point
+{
+    BOOL isLeft = point.x <= self.panBoundsRect.origin.x + self.leftFrameMargin;
+    BOOL isRight = point.x >= self.panBoundsRect.origin.x + self.panBoundsRect.size.width - self.rightFrameMargin;
+    BOOL isBottom = point.y <= self.panBoundsRect.origin.y + self.bottomFrameMargin;
+    BOOL isTop = point.y >= self.panBoundsRect.origin.y + self.panBoundsRect.size.height - self.topFrameMargin;
+    
+    if (isLeft && isBottom)
+    {
+        return kCCLayerPanZoomFrameEdgeBottomLeft;
+    }
+    if (isLeft && isTop)
+    {
+        return kCCLayerPanZoomFrameEdgeTopLeft;
+    }
+    if (isRight && isBottom)
+    {
+        return kCCLayerPanZoomFrameEdgeBottomRight;
+    }
+    if (isRight && isTop)
+    {
+        return kCCLayerPanZoomFrameEdgeTopRight;
+    }
+    
+    if (isLeft)
+    {
+        return kCCLayerPanZoomFrameEdgeLeft;
+    }
+    if (isTop)
+    {
+        return kCCLayerPanZoomFrameEdgeTop;
+    }
+    if (isRight)
+    {
+        return kCCLayerPanZoomFrameEdgeRight;
+    }
+    if (isBottom)
+    {
+        return kCCLayerPanZoomFrameEdgeBottom;
+    }
+    
+    return kCCLayerPanZoomFrameEdgeNone;
+}
+
+- (CGFloat) horSpeedWithPosition: (CGPoint) pos
+{
+    CCLayerPanZoomFrameEdge edge = [self frameEdgeWithPoint: pos];
+    CGFloat speed = 0.0f;
+    if (edge == kCCLayerPanZoomFrameEdgeLeft)
+    {
+        speed = self.minSpeed + (self.maxSpeed - self.minSpeed) * 
+        (self.panBoundsRect.origin.x + self.leftFrameMargin - pos.x) / self.leftFrameMargin;
+    }
+    if (edge == kCCLayerPanZoomFrameEdgeBottomLeft || edge == kCCLayerPanZoomFrameEdgeTopLeft)
+    {
+        speed = self.minSpeed + (self.maxSpeed - self.minSpeed) * 
+        (self.panBoundsRect.origin.x + self.leftFrameMargin - pos.x) / (self.leftFrameMargin * sqrt(2.0f));
+    }
+    if (edge == kCCLayerPanZoomFrameEdgeRight)
+    {
+        speed = - (self.minSpeed + (self.maxSpeed - self.minSpeed) * 
+            (pos.x - self.panBoundsRect.origin.x - self.panBoundsRect.size.width + 
+             self.rightFrameMargin) / self.rightFrameMargin);
+    }
+    if (edge == kCCLayerPanZoomFrameEdgeBottomRight || edge == kCCLayerPanZoomFrameEdgeTopRight)
+    {
+        speed = - (self.minSpeed + (self.maxSpeed - self.minSpeed) * 
+            (pos.x - self.panBoundsRect.origin.x - self.panBoundsRect.size.width + 
+             self.rightFrameMargin) / (self.rightFrameMargin * sqrt(2.0f)));
+    }
+    CCLOG(@"horizontal speed = %f", speed);
+    return speed;
+}
+
+- (CGFloat) vertSpeedWithPosition: (CGPoint) pos
+{
+    CCLayerPanZoomFrameEdge edge = [self frameEdgeWithPoint: pos];
+    CGFloat speed = 0.0f;
+    if (edge == kCCLayerPanZoomFrameEdgeBottom)
+    {
+        speed = self.minSpeed + (self.maxSpeed - self.minSpeed) * 
+            (self.panBoundsRect.origin.y + self.bottomFrameMargin - pos.y) / self.bottomFrameMargin;
+    }
+    if (edge == kCCLayerPanZoomFrameEdgeBottomLeft || edge == kCCLayerPanZoomFrameEdgeBottomRight)
+    {
+        speed = self.minSpeed + (self.maxSpeed - self.minSpeed) * 
+            (self.panBoundsRect.origin.y + self.bottomFrameMargin - pos.y) / (self.bottomFrameMargin * sqrt(2.0f));
+    }
+    if (edge == kCCLayerPanZoomFrameEdgeTop)
+    {
+        speed = - (self.minSpeed + (self.maxSpeed - self.minSpeed) * 
+            (pos.y - self.panBoundsRect.origin.y - self.panBoundsRect.size.height + 
+             self.topFrameMargin) / self.topFrameMargin);
+    }
+    if (edge == kCCLayerPanZoomFrameEdgeTopLeft || edge == kCCLayerPanZoomFrameEdgeTopRight)
+    {
+        speed = - (self.minSpeed + (self.maxSpeed - self.minSpeed) * 
+            (pos.y - self.panBoundsRect.origin.y - self.panBoundsRect.size.height + 
+             self.topFrameMargin) / (self.topFrameMargin * sqrt(2.0f)));
+    }
+    CCLOG(@"vertical speed = %f", speed);
+    return speed;
 }
 
 #pragma mark Dealloc
 
 - (void) dealloc
 {
-	[_touches release];
-	[_delegate release];
+	self.touches = nil;
+	self.delegate = nil;
 	[super dealloc];
 }
 

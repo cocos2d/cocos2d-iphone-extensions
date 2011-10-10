@@ -32,96 +32,278 @@
 
 SYNTHESIZE_EXTENSION_TEST(CCLayerPanZoomTestLayer)
 
-
 enum nodeTags
 {
 	kBackgroundTag,
 	kLabelTag,
+    kTestObject,
 };
+
+Class nextTest(void);
+Class backTest(void);
+
+static int testId = -1;
+static NSString *tests[] = {
+    @"SheetTest",
+    @"FrameTest",
+};
+
+Class nextTest()
+{
+	testId++;
+	testId = testId % (sizeof(tests) / sizeof(tests[0]));
+	NSString *r = tests[testId];
+	Class c = NSClassFromString(r);
+	return c;
+}
+
+Class backTest()
+{
+	testId--;
+	int total = (sizeof(tests) / sizeof(tests[0]));
+	if (testId < 0)
+		testId += total;	
+	
+	NSString *r = tests[testId];
+	Class c = NSClassFromString(r);
+	return c;
+}
+
+#pragma mark CCLayerPanZoomTestLayer
 
 @implementation CCLayerPanZoomTestLayer
 
-+ (CCScene *) scene
+- (id) init
 {
-	// 'scene' is an autorelease object.
-	CCScene *scene = [CCScene node];
-	
-	// 'layer' is an autorelease object.
-	CCLayerPanZoomTestLayer *layer = [CCLayerPanZoomTestLayer node];
-	
-	// add layer as a child to scene
-	[scene addChild: layer];
-	
-	// return the scene
-	return scene;
+	if ((self = [super init])) 
+    {
+		CGSize s = [[CCDirector sharedDirector] winSize];
+		CCLabelTTF* label = [CCLabelTTF labelWithString: [self title] 
+                                               fontName: @"Arial"  
+                                               fontSize: 32];
+		[self addChild: label 
+                     z: 1];
+		[label setPosition: ccp(s.width / 2, s.height - 50.0f)];
+		
+        CCLabelTTF *labelLeft = [CCLabelTTF labelWithString: @"<<" 
+                                                   fontName: @"Arial" 
+                                                   fontSize: 48];
+        CCMenuItemLabel *itemLeft = [CCMenuItemLabel itemWithLabel: labelLeft 
+                                                            target: self 
+                                                          selector: @selector(backCallback:)];
+        itemLeft.position = ccp(s.width / 2 - 200.0f, s.height - 50.0f);
+        CCLabelTTF *labelRight = [CCLabelTTF labelWithString: @">>" 
+                                                    fontName: @"Arial" 
+                                                    fontSize: 48];
+        CCMenuItemLabel *itemRight = [CCMenuItemLabel itemWithLabel: labelRight 
+                                                             target: self 
+                                                           selector: @selector(nextCallback:)];
+        itemRight.position = ccp(s.width / 2 + 200.0f, s.height - 50.0f);		
+		CCMenu *menu = [CCMenu menuWithItems: itemLeft, itemRight, nil];
+		menu.position = CGPointZero;
+		[self addChild: menu 
+                     z: 1];
+	}
+    
+	return self;
 }
+
+- (void) dealloc
+{
+    [_panZoomLayer release];
+	[super dealloc];
+}
+
+- (void) nextCallback: (id) sender
+{
+	CCScene *s = [CCScene node];
+	[s addChild: [nextTest() node]];
+	[[CCDirector sharedDirector] replaceScene: s];
+}
+
+- (void) backCallback: (id) sender
+{
+	CCScene *s = [CCScene node];
+	[s addChild: [backTest() node]];
+	[[CCDirector sharedDirector] replaceScene: s];
+}
+
+- (void) onEnter
+{
+    [super onEnter];
+    if ([self class] == [CCLayerPanZoomTestLayer class])
+    {
+        [self nextCallback: self];
+    }
+}
+
+- (NSString *) title
+{
+	return @"No title";
+}
+
+- (void) updateForScreenReshape
+{
+}
+
+- (void) layerPanZoom: (CCLayerPanZoom *) sender 
+	   clickedAtPoint: (CGPoint) point
+             tapCount: (NSUInteger) tapCount
+{
+	NSLog(@"CCLayerPanZoomTestLayer#layerPanZoom: %@ clickedAtPoint: { %f, %f }", sender, point.x, point.y);
+}
+
+- (void) layerPanZoom: (CCLayerPanZoom *) sender 
+ touchPositionUpdated: (CGPoint) newPos
+{
+    NSLog(@"CCLayerPanZoomTestLayer#layerPanZoom: %@ touchPositionUpdated: { %f, %f }", sender, newPos.x, newPos.y);
+}
+
+@end
+
+#pragma mark -
+#pragma mark SheetTest
+
+@implementation SheetTest
 
 - (id) init
 {
-	// always call "super" init
-	// Apple recommends to re-assign "self" with the "super" return value
-	if((self = [super init])) 
+	if ((self = [super init])) 
     {
-		self.delegate = self; //< TODO: very bad, i know, but it's just for testing click.
-		
+        _panZoomLayer = [[CCLayerPanZoom node] retain];
+        [self addChild: _panZoomLayer];
+		_panZoomLayer.delegate = self; 
+        
         // background
         CCSprite *background = [CCSprite spriteWithFile: @"background.png"];
         background.anchorPoint = ccp(0,0);
 		background.scale = CC_CONTENT_SCALE_FACTOR();
-        [self addChild: background z:0 tag: kBackgroundTag];
-		
-		
+        [_panZoomLayer addChild: background 
+                              z :0 
+                            tag: kBackgroundTag];
 		// create and initialize a Label
 		CCLabelTTF *label = [CCLabelTTF labelWithString: @"Try panning and zooming using drag and pinch" 
                                                fontName: @"Marker Felt" 
                                                fontSize: 32];
 		label.scale = 0.7f; //< to be visible on iPod Touch screen.
 		label.color = ccWHITE;
-		
-		
-        
-		
 		// add the label as a child to this Layer
-		[self addChild: label z: 1 tag: kLabelTag];
-		
+		[_panZoomLayer addChild: label 
+                              z: 1 
+                            tag: kLabelTag];
+        _panZoomLayer.mode = kCCLayerPanZoomModeSheet;
 		[self updateForScreenReshape];
-	}	
+	}
+	
 	return self;
+	
+}
+
+- (NSString *) title
+{
+	return @"Test 1. Sheet test.";
 }
 
 - (void) updateForScreenReshape
 {
 	CGSize winSize = [[CCDirector sharedDirector] winSize];
-	
-	
-	CCNode *background = [self getChildByTag: kBackgroundTag];
+	CCNode *background = [_panZoomLayer getChildByTag: kBackgroundTag];
 	// our bounding rect
 	CGRect boundingRect = CGRectMake(0, 0, 0, 0);
 	boundingRect.size = [background boundingBox].size;
-	[self setContentSize: boundingRect.size];
+	[_panZoomLayer setContentSize: boundingRect.size];
 	
-	self.panBoundsRect = CGRectMake(0, 0, winSize.width, winSize.height);
+	_panZoomLayer.panBoundsRect = CGRectMake(0, 0, winSize.width, winSize.height);
 	
-	self.anchorPoint = ccp(0.5f, 0.5f);
-	self.position = ccp(0.5f * winSize.width, 0.5f * winSize.height);
+	_panZoomLayer.anchorPoint = ccp(0.5f, 0.5f);
+	_panZoomLayer.position = ccp(0.5f * winSize.width, 0.5f * winSize.height);
 	
 	// position the label on the center of the bounds
-	CCNode *label = [self getChildByTag: kLabelTag];
+	CCNode *label = [_panZoomLayer getChildByTag: kLabelTag];
 	label.position =  ccp(boundingRect.size.width * 0.5f, boundingRect.size.height * 0.5f);
 }
 
-- (void) onExit
+@end
+
+#pragma mark -
+#pragma mark FrameTest
+
+@implementation FrameTest
+
+- (id) init
 {
-	[[self retain] autorelease]; //< Absolutely hackish and stupid =)))
-	self.delegate = nil;
+	if ((self = [super init])) 
+    {
+        _panZoomLayer = [[CCLayerPanZoom node] retain];
+        [self addChild: _panZoomLayer];
+		_panZoomLayer.delegate = self;         
+        // background
+        CCSprite *background = [CCSprite spriteWithFile: @"background.png"];
+        background.anchorPoint = ccp(0,0);
+		background.scale = CC_CONTENT_SCALE_FACTOR();
+        [_panZoomLayer addChild: background 
+                             z :0 
+                            tag: kBackgroundTag];
+		// create and initialize a Label
+		CCLabelTTF *label = [CCLabelTTF labelWithString: @"Try zooming using pinch and drag test object to edges of screen" 
+                                               fontName: @"Marker Felt" 
+                                               fontSize: 32];
+		label.scale = 0.7f; //< to be visible on iPod Touch screen.
+		label.color = ccWHITE;
+		// add the label as a child to this Layer
+		[_panZoomLayer addChild: label 
+                              z: 1 
+                            tag: kLabelTag];
+        CCSprite *testObject = [CCSprite spriteWithFile: @"Icon-72.png"];
+		[_panZoomLayer addChild: testObject 
+                              z: 1 
+                            tag: kTestObject];
+		[self updateForScreenReshape];
+	}
 	
-	[super onExit];
+	return self;
+}
+
+- (NSString *) title
+{
+	return @"Test 2. Frame test.";
+}
+
+- (void) onEnter
+{
+    [super onEnter];
+    _panZoomLayer.mode = kCCLayerPanZoomModeFrame;
+}
+
+- (void) updateForScreenReshape
+{
+	CGSize winSize = [[CCDirector sharedDirector] winSize];
+	CCNode *background = [_panZoomLayer getChildByTag: kBackgroundTag];
+	// our bounding rect
+	CGRect boundingRect = CGRectMake(0, 0, 0, 0);
+	boundingRect.size = [background boundingBox].size;
+	[_panZoomLayer setContentSize: boundingRect.size];
+	
+	_panZoomLayer.panBoundsRect = CGRectMake(0, 0, winSize.width, winSize.height);
+	
+	_panZoomLayer.anchorPoint = ccp(0.5f, 0.5f);
+	_panZoomLayer.position = ccp(0.5f * winSize.width, 0.5f * winSize.height);
+	
+	// position the label on the center of the bounds
+	CCNode *label = [_panZoomLayer getChildByTag: kLabelTag];
+	label.position =  ccp(boundingRect.size.width * 0.5f, boundingRect.size.height * 0.5f);
+	// position the test object on the center of the bounds
+    CCNode *testObject = [_panZoomLayer getChildByTag: kTestObject];
+	testObject.position =  ccp(boundingRect.size.width * 0.5f, boundingRect.size.height * 0.5f);
 }
 
 - (void) layerPanZoom: (CCLayerPanZoom *) sender 
-	   clickedAtPoint: (CGPoint) point
+ touchPositionUpdated: (CGPoint) newPos
 {
-	NSLog(@"CCLayerPanZoomTestLayer#layerPanZoom: %@ clickedAtPoint: { %f, %f }",sender, point.x, point.y);
+    [super layerPanZoom: sender touchPositionUpdated: newPos];
+    CCNode *testObject = [_panZoomLayer getChildByTag: kTestObject];
+    testObject.position = newPos;
 }
 
 @end
+
