@@ -36,6 +36,7 @@ enum nodeTags
 {
 	kBackgroundTag,
 	kLabelTag,
+    kTestObject,
 };
 
 Class nextTest(void);
@@ -243,7 +244,7 @@ Class backTest()
                              z :0 
                             tag: kBackgroundTag];
 		// create and initialize a Label
-		CCLabelTTF *label = [CCLabelTTF labelWithString: @"Drag me" 
+		CCLabelTTF *label = [CCLabelTTF labelWithString: @"Try zooming using pinch and drag test object to edges of screen" 
                                                fontName: @"Marker Felt" 
                                                fontSize: 32];
 		label.scale = 0.7f; //< to be visible on iPod Touch screen.
@@ -252,6 +253,10 @@ Class backTest()
 		[_panZoomLayer addChild: label 
                               z: 1 
                             tag: kLabelTag];
+        CCSprite *testObject = [CCSprite spriteWithFile: @"Icon-72.png"];
+		[_panZoomLayer addChild: testObject 
+                              z: 1 
+                            tag: kTestObject];
 		[self updateForScreenReshape];
 	}
 	
@@ -286,14 +291,17 @@ Class backTest()
 	// position the label on the center of the bounds
 	CCNode *label = [_panZoomLayer getChildByTag: kLabelTag];
 	label.position =  ccp(boundingRect.size.width * 0.5f, boundingRect.size.height * 0.5f);
+	// position the test object on the center of the bounds
+    CCNode *testObject = [_panZoomLayer getChildByTag: kTestObject];
+	testObject.position =  ccp(boundingRect.size.width * 0.5f, boundingRect.size.height * 0.5f);
 }
 
 - (void) layerPanZoom: (CCLayerPanZoom *) sender 
  touchPositionUpdated: (CGPoint) newPos
 {
     [super layerPanZoom: sender touchPositionUpdated: newPos];
-    CCLabelTTF *label = (CCLabelTTF *)[_panZoomLayer getChildByTag: kLabelTag];
-    label.position = newPos;
+    CCNode *testObject = [_panZoomLayer getChildByTag: kTestObject];
+    testObject.position = newPos;
 }
 
 @end
