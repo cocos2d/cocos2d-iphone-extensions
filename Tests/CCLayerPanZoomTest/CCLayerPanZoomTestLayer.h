@@ -39,8 +39,8 @@
 
 @end
 
-@interface SheetTest: CCLayerPanZoomTestLayer 
+@interface CCLayerPanZoomSheetTestLayer: CCLayerPanZoomTestLayer 
 @end
 
-@interface FrameTest: CCLayerPanZoomTestLayer
+@interface CCLayerPanZoomFrameTestLayer: CCLayerPanZoomTestLayer
 @end

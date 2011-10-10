@@ -44,8 +44,8 @@ Class backTest(void);
 
 static int testId = -1;
 static NSString *tests[] = {
-    @"SheetTest",
-    @"FrameTest",
+    @"CCLayerPanZoomSheetTestLayer",
+    @"CCLayerPanZoomFrameTestLayer",
 };
 
 Class nextTest()
@@ -164,7 +164,7 @@ Class backTest()
 #pragma mark -
 #pragma mark SheetTest
 
-@implementation SheetTest
+@implementation CCLayerPanZoomSheetTestLayer
 
 - (id) init
 {
@@ -228,7 +228,7 @@ Class backTest()
 #pragma mark -
 #pragma mark FrameTest
 
-@implementation FrameTest
+@implementation CCLayerPanZoomFrameTestLayer
 
 - (id) init
 {
