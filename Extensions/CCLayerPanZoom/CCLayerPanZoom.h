@@ -44,16 +44,20 @@ typedef enum
 @class CCLayerPanZoom;
 @protocol CCLayerPanZoomClickDelegate <NSObject>
 
-/** Send to delegate each time, when click event was obtained. 
+/** Sent to delegate each time, when click event was obtained. 
  * Only for mode = kCCLayerPanZoomModeSheet. */
 - (void) layerPanZoom: (CCLayerPanZoom *) sender 
        clickedAtPoint: (CGPoint) aPoint
              tapCount: (NSUInteger) tapCount;
 
-/** Send to delegate each time, when touch position was updated. 
- * Only for one touch in mode = kCCLayerPanZoomModeFrame. */
+/** Sent to delegate each time, when touch position was updated. */
 - (void) layerPanZoom: (CCLayerPanZoom *) sender 
  touchPositionUpdated: (CGPoint) newPos;
+
+/** Sent to delegate each time, when users drags finger on the screen.
+ * This means that click event is not possible with that touch from now.
+ */
+- (void) layerPanZoom: (CCLayerPanZoom *) sender touchMoveBeganAtPosition: (CGPoint) aPoint;
 
 @end
 
@@ -81,7 +85,12 @@ typedef enum
     CGPoint _prevSingleTouchPositionInLayer; 
     //< previous position in layer if single touch was moved.
     
-    NSTimeInterval _singleTouchTimestamp;
+    // Time when single touch has began, used to wait for possible multitouch 
+    // gestures before reacting to single touch.
+    NSTimeInterval _singleTouchTimestamp; 
+    
+    // Flag used to call touchMoveBeganAtPosition: only once for each single touch event.
+    BOOL _touchMoveBegan;
 }
 
 /** The maximum scale level

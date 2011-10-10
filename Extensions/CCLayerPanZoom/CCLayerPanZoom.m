@@ -162,7 +162,10 @@ typedef enum
 	}
     
     if ([self.touches count] == 1)
+    {
+        _touchMoveBegan = NO;
         _singleTouchTimestamp = [NSDate timeIntervalSinceReferenceDate];
+    }
     else
         _singleTouchTimestamp = INFINITY;
 }
@@ -223,6 +226,16 @@ typedef enum
         
         // Accumulate touch distance for all modes.
         self.touchDistance += ccpDistance(curPosition, prevPosition);
+        
+        // Inform delegate about starting updating touch position, if click isn't possible.
+        if (self.mode == kCCLayerPanZoomModeFrame)
+        {
+            if (self.touchDistance > self.maxTouchDistanceToClick && !_touchMoveBegan )
+            {
+                [self.delegate layerPanZoom: self touchMoveBeganAtPosition: [self convertToNodeSpace: curPosition]];
+                _touchMoveBegan = YES;
+            }
+        }
     }	
 }
 
