@@ -266,16 +266,25 @@ typedef enum
 
 #pragma mark Update
 
+// Updates position in frame mode.
 - (void) update: (ccTime) dt
 {
-    // for single touch and frame mode
-	if ([self.touches count] == 1 && self.mode == kCCLayerPanZoomModeFrame && [NSDate timeIntervalSinceReferenceDate] - _singleTouchTimestamp >= kCCLayerPanZoomMultitouchGesturesDetectionDelay )
+    // Only for frame mode with one touch.
+	if ( self.mode == kCCLayerPanZoomModeFrame && [self.touches count] == 1 )
     {
-        // Get the one touch
-        UITouch *touch = [self.touches objectAtIndex: 0];        
-        // Get current positions of the touche
+        // Do not update position if click is still possible.
+        if (self.touchDistance <= self.maxTouchDistanceToClick )
+            return;
+        
+        // Do not update position if pinch is still possible.
+        if ( [NSDate timeIntervalSinceReferenceDate] - _singleTouchTimestamp < kCCLayerPanZoomMultitouchGesturesDetectionDelay )
+            return;
+        
+        // Otherwise - update touch position. Get current position of touch.
+        UITouch *touch = [self.touches objectAtIndex: 0];
         CGPoint curPos = [[CCDirector sharedDirector] convertToGL: [touch locationInView: [touch view]]];
         
+        // Scroll if finger in the scroll area near edge.
         if ([self frameEdgeWithPoint: curPos] != kCCLayerPanZoomFrameEdgeNone)
         {
             self.position = ccp(self.position.x + dt * [self horSpeedWithPosition: curPos], 
@@ -283,6 +292,7 @@ typedef enum
             [self fixLayerPosition];
         }
         
+        // Inform delegate if touch position in layer was changed due to finger or layer movement.
         CGPoint touchPositionInLayer = [self convertToNodeSpace: curPos];
         if (!CGPointEqualToPoint(_prevSingleTouchPositionInLayer, touchPositionInLayer))
         {
@@ -290,6 +300,7 @@ typedef enum
             [self.delegate layerPanZoom: self 
                    touchPositionUpdated: touchPositionInLayer];
         }
+
     }
 }
 
