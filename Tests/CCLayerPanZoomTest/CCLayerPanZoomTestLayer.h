@@ -43,4 +43,7 @@
 @end
 
 @interface CCLayerPanZoomFrameTestLayer: CCLayerPanZoomTestLayer
+{
+    CCSprite *_selectedTestObject; //< weak ref.
+}
 @end

@@ -36,7 +36,9 @@ enum nodeTags
 {
 	kBackgroundTag,
 	kLabelTag,
-    kTestObject,
+    kTestObject1,
+    kTestObject2,
+    kTestObject3,
 };
 
 Class nextTest(void);
@@ -245,10 +247,26 @@ Class backTest()
 		[_panZoomLayer addChild: label 
                               z: 1 
                             tag: kLabelTag];
-        CCSprite *testObject = [CCSprite spriteWithFile: @"Icon-72.png"];
-		[_panZoomLayer addChild: testObject 
+        
+        // Add test objects.
+        CCSprite *testObject1 = [CCSprite spriteWithFile: @"Icon-72.png"];
+		[_panZoomLayer addChild: testObject1 
                               z: 1 
-                            tag: kTestObject];
+                            tag: kTestObject1];
+        
+        CCSprite *testObject2 = [CCSprite spriteWithFile: @"Icon-72.png"];
+		[_panZoomLayer addChild: testObject2 
+                              z: 1 
+                            tag: kTestObject2];
+        
+        CCSprite *testObject3 = [CCSprite spriteWithFile: @"Icon-72.png"];
+		[_panZoomLayer addChild: testObject3 
+                              z: 1 
+                            tag: kTestObject3];
+        
+        _selectedTestObject = testObject1;
+        _selectedTestObject.color = ccRED;
+        
 		[self updateForScreenReshape];
 	}
 	
@@ -264,6 +282,13 @@ Class backTest()
 {
     [super onEnter];
     _panZoomLayer.mode = kCCLayerPanZoomModeFrame;
+}
+
+- (void) onExit
+{
+    _selectedTestObject = nil;
+    
+    [super onExit];
 }
 
 - (void) updateForScreenReshape
@@ -283,18 +308,61 @@ Class backTest()
 	// position the label on the center of the bounds
 	CCNode *label = [_panZoomLayer getChildByTag: kLabelTag];
 	label.position =  ccp(boundingRect.size.width * 0.5f, boundingRect.size.height * 0.5f);
-	// position the test object on the center of the bounds
-    CCNode *testObject = [_panZoomLayer getChildByTag: kTestObject];
-	testObject.position =  ccp(boundingRect.size.width * 0.5f, boundingRect.size.height * 0.5f);
+	
+    // Position test objects in the center.
+    CCNode *testObject = [_panZoomLayer getChildByTag: kTestObject1];
+	testObject.position =  ccp(boundingRect.size.width * 0.6f, boundingRect.size.height * 0.5f);
+    
+    CCNode *testObject2 = [_panZoomLayer getChildByTag: kTestObject2];
+	testObject2.position =  ccp(boundingRect.size.width * 0.5f, boundingRect.size.height * 0.5f);
+    
+    CCNode *testObject3 = [_panZoomLayer getChildByTag: kTestObject3];
+	testObject3.position =  ccp(boundingRect.size.width * 0.4f, boundingRect.size.height * 0.5f);
 }
 
 - (void) layerPanZoom: (CCLayerPanZoom *) sender 
  touchPositionUpdated: (CGPoint) newPos
 {
     [super layerPanZoom: sender touchPositionUpdated: newPos];
-    CCNode *testObject = [_panZoomLayer getChildByTag: kTestObject];
-    testObject.position = newPos;
+    
+    _selectedTestObject.position = newPos;
 }
+
+- (void) layerPanZoom: (CCLayerPanZoom *) sender 
+	   clickedAtPoint: (CGPoint) point
+             tapCount: (NSUInteger) tapCount
+{
+    _selectedTestObject = nil;
+    
+    CCSprite *testObject1 = (CCSprite *)[_panZoomLayer getChildByTag: kTestObject1];
+    CCSprite *testObject2 = (CCSprite *)[_panZoomLayer getChildByTag: kTestObject2];
+    CCSprite *testObject3 = (CCSprite *)[_panZoomLayer getChildByTag: kTestObject3];
+    
+    
+    // Select new test object.
+    if ( CGRectContainsPoint( [testObject1 boundingBox], point))
+    {
+        _selectedTestObject = testObject1;
+    }
+    
+    if ( CGRectContainsPoint( [testObject2 boundingBox], point))
+    {
+        _selectedTestObject = testObject2;
+    }
+    
+    if ( CGRectContainsPoint( [testObject3 boundingBox], point))
+    {
+        _selectedTestObject = testObject3;
+    }
+    
+    // Highlight only selected object with red.
+    testObject1.color = ccWHITE;
+    testObject2.color = ccWHITE;
+    testObject3.color = ccWHITE;
+    _selectedTestObject.color = ccRED;
+}
+
+
 
 @end
 
