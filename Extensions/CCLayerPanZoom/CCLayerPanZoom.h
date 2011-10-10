@@ -29,6 +29,7 @@
 
 #import "cocos2d.h"
 
+#define kCCLayerPanZoomMultitouchGesturesDetectionDelay 0.05
 
 #ifdef DEBUG
 
@@ -103,6 +104,8 @@ typedef enum
     
     CGPoint _prevSingleTouchPositionInLayer; 
     //< previous position in layer if single touch was moved.
+    
+    NSTimeInterval _singleTouchTimestamp;
 }
 
 /** The maximum scale level

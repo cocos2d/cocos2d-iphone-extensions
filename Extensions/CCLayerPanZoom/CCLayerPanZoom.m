@@ -140,6 +140,11 @@ typedef enum
 		// Add new touche to the array with current touches
 		[self.touches addObject: touch];
 	}
+    
+    if ([self.touches count] == 1)
+        _singleTouchTimestamp = [NSDate timeIntervalSinceReferenceDate];
+    else
+        _singleTouchTimestamp = INFINITY;
 }
 
 - (void) ccTouchesMoved: (NSSet *) touches 
@@ -203,6 +208,8 @@ typedef enum
 - (void) ccTouchesEnded: (NSSet *) touches 
 			  withEvent: (UIEvent *) event
 {
+    _singleTouchTimestamp = INFINITY;
+    
 	if (self.mode == kCCLayerPanZoomModeSheet)
     {
         // Obtain click event
@@ -245,7 +252,7 @@ typedef enum
 - (void) update: (ccTime) dt
 {
     // for single touch and frame mode
-	if ([self.touches count] == 1 && self.mode == kCCLayerPanZoomModeFrame)
+	if ([self.touches count] == 1 && self.mode == kCCLayerPanZoomModeFrame && [NSDate timeIntervalSinceReferenceDate] - _singleTouchTimestamp >= kCCLayerPanZoomMultitouchGesturesDetectionDelay )
     {
         // Get the one touch
         UITouch *touch = [self.touches objectAtIndex: 0];        
