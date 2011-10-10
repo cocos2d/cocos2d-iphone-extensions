@@ -212,7 +212,7 @@ typedef enum
         CGPoint curPosition = [[CCDirector sharedDirector] convertToGL: [touch locationInView: [touch view]]];
         CGPoint prevPosition = [[CCDirector sharedDirector] convertToGL: [touch previousLocationInView: [touch view]]];
         
-        // in order with current mode
+        // Always scroll in sheet mode.
         if (self.mode == kCCLayerPanZoomModeSheet)
         {
             // Calculate new anchor point.
@@ -503,7 +503,7 @@ typedef enum
             (pos.x - self.panBoundsRect.origin.x - self.panBoundsRect.size.width + 
              self.rightFrameMargin) / (self.rightFrameMargin * sqrt(2.0f)));
     }
-    CCLOG(@"horizontal speed = %f", speed);
+    //CCLOG(@"horizontal speed = %f", speed);
     return speed;
 }
 
@@ -533,7 +533,7 @@ typedef enum
             (pos.y - self.panBoundsRect.origin.y - self.panBoundsRect.size.height + 
              self.topFrameMargin) / (self.topFrameMargin * sqrt(2.0f)));
     }
-    CCLOG(@"vertical speed = %f", speed);
+    //CCLOG(@"vertical speed = %f", speed);
     return speed;
 }
 
