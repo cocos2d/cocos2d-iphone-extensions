@@ -232,7 +232,7 @@ typedef enum
         {
             if (self.touchDistance > self.maxTouchDistanceToClick && !_touchMoveBegan )
             {
-                [self.delegate layerPanZoom: self touchMoveBeganAtPosition: [self convertToNodeSpace: curPosition]];
+                [self.delegate layerPanZoom: self touchMoveBeganAtPosition: [self convertToNodeSpace: prevPosition]];
                 _touchMoveBegan = YES;
             }
         }
