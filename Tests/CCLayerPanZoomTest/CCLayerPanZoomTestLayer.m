@@ -376,9 +376,24 @@ Class backTest()
 
 - (void) layerPanZoom: (CCLayerPanZoom *) sender touchMoveBeganAtPosition: (CGPoint) aPoint
 {
-    [super layerPanZoom:sender touchMoveBeganAtPosition:aPoint];
+    [super layerPanZoom:sender touchMoveBeganAtPosition:aPoint];    
     
     [self selectTestObjectAtPoint: aPoint];
+    
+     // Change anchorPoint & position of selectedTestObject to avoid jerky movement.
+    if (_selectedTestObject)
+    {
+        CGFloat width = _selectedTestObject.contentSize.width;
+        CGFloat height = _selectedTestObject.contentSize.height;
+        
+        CGPoint aPointInTestObjectCoordinates = [ _selectedTestObject convertToNodeSpace: [_panZoomLayer convertToWorldSpace: aPoint] ];
+        CGPoint anchorPointInPoints = ccp( _selectedTestObject.anchorPoint.x * width, 
+                                          _selectedTestObject.anchorPoint.y * height );
+        CGPoint anchorShift = ccpSub(anchorPointInPoints, aPointInTestObjectCoordinates );
+        _selectedTestObject.anchorPoint = ccp( (anchorPointInPoints.x - anchorShift.x )/ width, 
+                                              (anchorPointInPoints.y - anchorShift.y) / height );
+        _selectedTestObject.position = aPoint;
+    }
 }
 
 
