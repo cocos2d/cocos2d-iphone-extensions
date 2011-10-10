@@ -32,9 +32,9 @@
 
 #ifdef DEBUG
 
-/** @class CCLayerPanZoomDebugGrid Class that represents the grid over the CCLayerPanZoom 
+/** @class CCLayerPanZoomDebugLines Class that represents lines over the CCLayerPanZoom 
  * for debug frame mode */
-@interface CCLayerPanZoomDebugGrid: CCNode
+@interface CCLayerPanZoomDebugLines: CCNode
 {
     CGFloat _topFrameMargin;
     CGFloat _bottomFrameMargin;

@@ -32,7 +32,12 @@
 
 #ifdef DEBUG
 
-@implementation CCLayerPanZoomDebugGrid
+enum nodeTags
+{
+	kDebugLinesTag,
+};
+
+@implementation CCLayerPanZoomDebugLines
 
 @synthesize topFrameMargin = _topFrameMargin, bottomFrameMargin = _bottomFrameMargin, 
             leftFrameMargin = _leftFrameMargin, rightFrameMargin = _rightFrameMargin;
@@ -94,7 +99,7 @@ typedef enum
 @implementation CCLayerPanZoom
 
 @synthesize maxScale = _maxScale, minScale = _minScale, maxTouchDistanceToClick = _maxTouchDistanceToClick, 
-            delegate = _delegate, mode = _mode, touches = _touches, touchDistance = _touchDistance, 
+            delegate = _delegate, touches = _touches, touchDistance = _touchDistance, 
             minSpeed = _minSpeed, maxSpeed = _maxSpeed, topFrameMargin = _topFrameMargin, 
             bottomFrameMargin = _bottomFrameMargin, leftFrameMargin = _leftFrameMargin,
             rightFrameMargin = _rightFrameMargin, scheduler = _scheduler;
@@ -114,7 +119,7 @@ typedef enum
 		self.panBoundsRect = CGRectNull;
 		self.touchDistance = 0.0F;
 		self.maxTouchDistanceToClick = 15.0f;
-        self.mode = kCCLayerPanZoomModeFrame;
+        self.mode = kCCLayerPanZoomModeSheet;
         self.minSpeed = 100.0f;
         self.maxSpeed = 1000.0f;
         self.topFrameMargin = 100.0f;
@@ -269,22 +274,43 @@ typedef enum
     [[CCScheduler sharedScheduler] scheduleUpdateForTarget: self 
                                                   priority: 0 
                                                     paused: NO];
-#ifdef DEBUG
-    CCLayerPanZoomDebugGrid *grid = [CCLayerPanZoomDebugGrid node];
-    [grid setContentSize: [CCDirector sharedDirector].winSize];
-    grid.topFrameMargin = self.topFrameMargin;
-    grid.bottomFrameMargin = self.bottomFrameMargin;
-    grid.leftFrameMargin = self.leftFrameMargin;
-    grid.rightFrameMargin = self.rightFrameMargin;
-    [[CCDirector sharedDirector].runningScene addChild: grid 
-                                                     z: NSIntegerMax];
-#endif
 }
 
 - (void) onExit
 {
     [[CCScheduler sharedScheduler] unscheduleAllSelectorsForTarget: self];
     [super onExit];
+}
+
+@dynamic mode;
+
+- (void) setMode: (CCLayerPanZoomMode) mode
+{
+#ifdef DEBUG
+    if (mode == kCCLayerPanZoomModeFrame)
+    {
+        CCLayerPanZoomDebugLines *lines = [CCLayerPanZoomDebugLines node];
+        [lines setContentSize: [CCDirector sharedDirector].winSize];
+        lines.topFrameMargin = self.topFrameMargin;
+        lines.bottomFrameMargin = self.bottomFrameMargin;
+        lines.leftFrameMargin = self.leftFrameMargin;
+        lines.rightFrameMargin = self.rightFrameMargin;
+        [[CCDirector sharedDirector].runningScene addChild: lines 
+                                                         z: NSIntegerMax 
+                                                       tag: kDebugLinesTag];
+    }
+    if (_mode == kCCLayerPanZoomModeFrame)
+    {
+        [[CCDirector sharedDirector].runningScene removeChildByTag: kDebugLinesTag 
+                                                           cleanup: YES];
+    }
+#endif
+    _mode = mode;
+}
+
+- (CCLayerPanZoomMode) mode
+{
+    return _mode;
 }
 
 #pragma mark Scale and Position related
