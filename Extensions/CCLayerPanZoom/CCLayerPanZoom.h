@@ -31,30 +31,6 @@
 
 #define kCCLayerPanZoomMultitouchGesturesDetectionDelay 0.05
 
-#ifdef DEBUG
-
-/** @class CCLayerPanZoomDebugLines Class that represents lines over the CCLayerPanZoom 
- * for debug frame mode */
-@interface CCLayerPanZoomDebugLines: CCNode
-{
-    CGFloat _topFrameMargin;
-    CGFloat _bottomFrameMargin;
-    CGFloat _leftFrameMargin;
-    CGFloat _rightFrameMargin;
-}
-/** Distance from top edge of contenSize */
-@property (readwrite, assign) CGFloat topFrameMargin;
-/** Distance from bottom edge of contenSize */
-@property (readwrite, assign) CGFloat bottomFrameMargin;
-/** Distance from left edge of contenSize */
-@property (readwrite, assign) CGFloat leftFrameMargin;
-/** Distance from right edge of contenSize */
-@property (readwrite, assign) CGFloat rightFrameMargin;
-
-@end
-
-#endif
-
 
 typedef enum
 {
