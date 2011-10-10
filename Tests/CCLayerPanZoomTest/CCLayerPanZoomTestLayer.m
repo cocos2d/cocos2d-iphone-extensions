@@ -148,6 +148,7 @@ Class backTest()
 
 - (void) layerPanZoom: (CCLayerPanZoom *) sender 
 	   clickedAtPoint: (CGPoint) point
+             tapCount: (NSUInteger) tapCount
 {
 	NSLog(@"CCLayerPanZoomTestLayer#layerPanZoom: %@ clickedAtPoint: { %f, %f }", sender, point.x, point.y);
 }
