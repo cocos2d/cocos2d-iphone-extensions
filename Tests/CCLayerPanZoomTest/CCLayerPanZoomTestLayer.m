@@ -325,17 +325,7 @@ Class backTest()
 	testObject3.position =  ccp(boundingRect.size.width * 0.4f, boundingRect.size.height * 0.5f);
 }
 
-- (void) layerPanZoom: (CCLayerPanZoom *) sender 
- touchPositionUpdated: (CGPoint) newPos
-{
-    [super layerPanZoom: sender touchPositionUpdated: newPos];
-    
-    _selectedTestObject.position = newPos;
-}
-
-- (void) layerPanZoom: (CCLayerPanZoom *) sender 
-	   clickedAtPoint: (CGPoint) point
-             tapCount: (NSUInteger) tapCount
+- (void) selectTestObjectAtPoint: (CGPoint) point
 {
     _selectedTestObject = nil;
     
@@ -365,6 +355,30 @@ Class backTest()
     testObject2.color = ccWHITE;
     testObject3.color = ccWHITE;
     _selectedTestObject.color = ccRED;
+}
+
+#pragma mark CCLayerPanZoom Delegate Methods
+
+- (void) layerPanZoom: (CCLayerPanZoom *) sender 
+ touchPositionUpdated: (CGPoint) newPos
+{
+    [super layerPanZoom: sender touchPositionUpdated: newPos];
+    
+    _selectedTestObject.position = newPos;
+}
+
+- (void) layerPanZoom: (CCLayerPanZoom *) sender 
+	   clickedAtPoint: (CGPoint) point
+             tapCount: (NSUInteger) tapCount
+{
+    [self selectTestObjectAtPoint: point];
+}
+
+- (void) layerPanZoom: (CCLayerPanZoom *) sender touchMoveBeganAtPosition: (CGPoint) aPoint
+{
+    [super layerPanZoom:sender touchMoveBeganAtPosition:aPoint];
+    
+    [self selectTestObjectAtPoint: aPoint];
 }
 
 
