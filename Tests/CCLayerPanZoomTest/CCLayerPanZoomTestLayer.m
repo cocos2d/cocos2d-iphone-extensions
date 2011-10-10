@@ -30,7 +30,7 @@
 #import "CCLayerPanZoomTestLayer.h"
 #import "ExtensionTest.h"
 
-SYNTHESIZE_EXTENSION_TEST(CCLayerPanZoomTestLayer)
+SYNTHESIZE_EXTENSION_TEST(CCLayerPanZoomSheetTestLayer)
 
 enum nodeTags
 {
@@ -42,7 +42,7 @@ enum nodeTags
 Class nextTest(void);
 Class backTest(void);
 
-static int testId = -1;
+static int testId = 0;
 static NSString *tests[] = {
     @"CCLayerPanZoomSheetTestLayer",
     @"CCLayerPanZoomFrameTestLayer",
@@ -126,15 +126,6 @@ Class backTest()
 	CCScene *s = [CCScene node];
 	[s addChild: [backTest() node]];
 	[[CCDirector sharedDirector] replaceScene: s];
-}
-
-- (void) onEnter
-{
-    [super onEnter];
-    if ([self class] == [CCLayerPanZoomTestLayer class])
-    {
-        [self nextCallback: self];
-    }
 }
 
 - (NSString *) title
