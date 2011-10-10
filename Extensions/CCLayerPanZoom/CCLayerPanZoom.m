@@ -204,24 +204,25 @@ typedef enum
 	}
 	else
 	{	        
+        // Get the single touch and it's previous & current position.
+        UITouch *touch = [self.touches objectAtIndex: 0];
+        CGPoint curPosition = [[CCDirector sharedDirector] convertToGL: [touch locationInView: [touch view]]];
+        CGPoint prevPosition = [[CCDirector sharedDirector] convertToGL: [touch previousLocationInView: [touch view]]];
+        
         // in order with current mode
         if (self.mode == kCCLayerPanZoomModeSheet)
         {
-            // Get the one touch
-            UITouch *touch = [self.touches objectAtIndex: 0];        
-            // Get current positions of the touch
-            CGPoint curPosTouch = [[CCDirector sharedDirector] convertToGL: [touch locationInView: [touch view]]];
-            // Get previous positions of the touch
-            CGPoint prevPosTch = [[CCDirector sharedDirector] convertToGL: [touch previousLocationInView: [touch view]]];
-            // Calculate new anchor point
-            CGPoint newAnchorInPixels = [self convertToNodeSpace: prevPosTch];
+            // Calculate new anchor point.
+            CGPoint newAnchorInPixels = [self convertToNodeSpace: prevPosition];
             self.anchorPoint = ccp(newAnchorInPixels.x / self.contentSize.width, newAnchorInPixels.y / self.contentSize.height);
-            // Set new position of the layer
-            self.position = curPosTouch;		
+            
+            // Set new position of the layer.
+            self.position = curPosition;		
             [self fixLayerPosition];
-            // Accumulate touche distance
-            self.touchDistance += ccpDistance(curPosTouch, prevPosTch);
         }
+        
+        // Accumulate touch distance for all modes.
+        self.touchDistance += ccpDistance(curPosition, prevPosition);
     }	
 }
 
@@ -230,27 +231,23 @@ typedef enum
 {
     _singleTouchTimestamp = INFINITY;
     
-	if (self.mode == kCCLayerPanZoomModeSheet)
+    
+    // Process click event in single touch.
+    if (  (self.touchDistance < self.maxTouchDistanceToClick) && (self.delegate) 
+        && ([self.touches count] == 1)  )
     {
-        // Obtain click event
-        if ((self.touchDistance < self.maxTouchDistanceToClick) && (self.delegate))
-        {
-            UITouch *touch = [self.touches objectAtIndex: 0];        
-            CGPoint curPos = [[CCDirector sharedDirector] convertToGL: [touch locationInView: [touch view]]];
-            [self.delegate layerPanZoom: self
-                         clickedAtPoint: [self convertToNodeSpace: curPos]
-                               tapCount: [touch tapCount]];
-        }
+        UITouch *touch = [self.touches objectAtIndex: 0];        
+        CGPoint curPos = [[CCDirector sharedDirector] convertToGL: [touch locationInView: [touch view]]];
+        [self.delegate layerPanZoom: self
+                     clickedAtPoint: [self convertToNodeSpace: curPos]
+                           tapCount: [touch tapCount]];
     }
-	for (UITouch *touch in [touches allObjects]) 
-	{
-		// Remove touche from the array with current touches
-		[self.touches removeObject: touch];
-	}
-	if ([self.touches count] == 0)
-	{
-		self.touchDistance = 0.0f;
-	}
+    
+    // No more touches needed - we support only pinch (2 fingers), click & swipe (1 finger) gestures.
+    [self.touches removeAllObjects];
+    
+    // Reset touch distance.
+    self.touchDistance = 0.0f;
 }
 
 - (void) ccTouchesCancelled: (NSSet *) touches 
