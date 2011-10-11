@@ -195,13 +195,13 @@ typedef enum
 		// Calculate new scale
 		CGFloat newScale = self.scale * (ccpDistance(curPosTouch1, curPosTouch2) / ccpDistance(prevPosTouch1, prevPosTouch2));		
 		self.scale = MIN(MAX(newScale, self.minScale), self.maxScale);
-		[self fixLayerScale];
+		//[self fixLayerScale];
 		// Calculate new anchor point
 		CGPoint newAnchorInPixels = [self convertToNodeSpace: prevPosLayer];
 		self.anchorPoint = ccp(newAnchorInPixels.x / self.contentSize.width, newAnchorInPixels.y / self.contentSize.height);
 		// Set new position of the layer
 		self.position = curPosLayer;
-		[self fixLayerPosition];
+		//[self fixLayerPosition];
 		// Don't click with multitouch
 		self.touchDistance = INFINITY;
 	}
@@ -218,7 +218,6 @@ typedef enum
             // Calculate new anchor point.
             CGPoint newAnchorInPixels = [self convertToNodeSpace: prevPosition];
             self.anchorPoint = ccp(newAnchorInPixels.x / self.contentSize.width, newAnchorInPixels.y / self.contentSize.height);
-            
             // Set new position of the layer.
             self.position = curPosition;		
             [self fixLayerPosition];
@@ -230,7 +229,7 @@ typedef enum
         // Inform delegate about starting updating touch position, if click isn't possible.
         if (self.mode == kCCLayerPanZoomModeFrame)
         {
-            if (self.touchDistance > self.maxTouchDistanceToClick && !_touchMoveBegan )
+            if (self.touchDistance > self.maxTouchDistanceToClick && !_touchMoveBegan)
             {
                 [self.delegate layerPanZoom: self touchMoveBeganAtPosition: [self convertToNodeSpace: prevPosition]];
                 _touchMoveBegan = YES;
@@ -244,10 +243,9 @@ typedef enum
 {
     _singleTouchTimestamp = INFINITY;
     
-    
     // Process click event in single touch.
     if (  (self.touchDistance < self.maxTouchDistanceToClick) && (self.delegate) 
-        && ([self.touches count] == 1)  )
+        && ([self.touches count] == 1))
     {
         UITouch *touch = [self.touches objectAtIndex: 0];        
         CGPoint curPos = [[CCDirector sharedDirector] convertToGL: [touch locationInView: [touch view]]];
@@ -315,6 +313,11 @@ typedef enum
         }
 
     }
+    if (![self.touches count])
+    {
+        [self fixLayerScale];
+        [self fixLayerPosition];
+    }
 }
 
 - (void) onEnter
@@ -369,8 +372,6 @@ typedef enum
 - (void) setPanBoundsRect: (CGRect) rect
 {
 	_panBoundsRect = rect;
-	[self fixLayerScale];
-	[self fixLayerPosition];
 }
 
 - (CGRect) panBoundsRect
@@ -382,30 +383,55 @@ typedef enum
 {
 	if (!CGRectIsNull(self.panBoundsRect))
 	{
+        CGFloat delta = 20.0f;
+        
 		// Check the pan bounds and fix (if it's need) position
 		CGRect boundBox = [self boundingBox];
-		if (self.position.x - boundBox.size.width * self.anchorPoint.x > self.panBoundsRect.origin.x)
-		{
-			[self setPosition: ccp(boundBox.size.width * self.anchorPoint.x + self.panBoundsRect.origin.x, 
-								   self.position.y)];
-		}	
-		if (self.position.y - boundBox.size.height * self.anchorPoint.y > self.panBoundsRect.origin.y)
-		{
-			[self setPosition: ccp(self.position.x, boundBox.size.height * self.anchorPoint.y + 
-								   self.panBoundsRect.origin.y)];
-		}
-		if (self.position.x + boundBox.size.width * (1 - self.anchorPoint.x) < self.panBoundsRect.size.width +
-			self.panBoundsRect.origin.x)
-		{
-			[self setPosition: ccp(self.panBoundsRect.size.width + self.panBoundsRect.origin.x - 
-								   boundBox.size.width * (1 - self.anchorPoint.x), self.position.y)];
-		}
-		if (self.position.y + boundBox.size.height * (1 - self.anchorPoint.y) < self.panBoundsRect.size.height + 
-			self.panBoundsRect.origin.y)
-		{
-			[self setPosition: ccp(self.position.x, self.panBoundsRect.size.height + self.panBoundsRect.origin.y - 
-								   boundBox.size.height * (1 - self.anchorPoint.y))];
-		}	
+        CGFloat distanceLeft = MAX(self.position.x - boundBox.size.width * self.anchorPoint.x - self.panBoundsRect.origin.x, 0);
+        CGFloat distanceBottom = MAX(self.position.y - boundBox.size.height * self.anchorPoint.y - self.panBoundsRect.origin.y, 0);
+        CGFloat distanceRight = MAX(self.panBoundsRect.size.width + self.panBoundsRect.origin.x - self.position.x - 
+            boundBox.size.width * (1 - self.anchorPoint.x), 0);
+        CGFloat distanceTop = MAX(self.panBoundsRect.size.height + self.panBoundsRect.origin.y - self.position.y - 
+            boundBox.size.height * (1 - self.anchorPoint.y), 0);        
+        
+        CGFloat distanceTopLeft = ccpLength(ccp(distanceLeft, distanceTop));
+        CGFloat distanceTopRight = ccpLength(ccp(distanceRight, distanceTop));
+        CGFloat distanceBottomLeft = ccpLength(ccp(distanceLeft, distanceBottom));
+        CGFloat distanceBottomRight = ccpLength(ccp(distanceRight, distanceBottom));
+ 
+        CGFloat max = MAX(distanceTopLeft, MAX(distanceTopRight, MAX(distanceBottomLeft, distanceBottomRight)));
+        
+        if (max == 0.0f)
+            return;
+        
+        if (distanceTopLeft == max)
+        {
+            double angle = acos(abs(distanceLeft) / distanceTopLeft);
+            CGFloat newX = self.position.x - signbit(distanceLeft) * delta * cos(angle);
+            CGFloat newY = self.position.y + signbit(distanceTop) * delta * sin(angle);
+            self.position = ccp(newX, newY);
+        }
+        if (distanceTopRight == max)
+        {
+            double angle = acos(abs(distanceRight) / distanceTopRight);
+            CGFloat newX = self.position.x + signbit(distanceRight) * delta * cos(angle);
+            CGFloat newY = self.position.y + signbit(distanceTop) * delta * sin(angle);
+            self.position = ccp(newX, newY);
+        }
+        if (distanceBottomLeft == max)
+        {
+            double angle = acos(abs(distanceLeft) / distanceBottomLeft);
+            CGFloat newX = self.position.x - signbit(distanceLeft) * delta * cos(angle);
+            CGFloat newY = self.position.y - signbit(distanceBottom) * delta * sin(angle);
+            self.position = ccp(newX, newY);
+        }
+        if (distanceBottomRight == max)
+        {
+            double angle = acos(abs(distanceRight) / distanceBottomRight);
+            CGFloat newX = self.position.x + signbit(distanceRight) * delta * cos(angle);
+            CGFloat newY = self.position.y - signbit(distanceBottom) * delta * sin(angle);
+            self.position = ccp(newX, newY);
+        }
 	}
 }
 
@@ -416,7 +442,8 @@ typedef enum
 		// Check the pan bounds and fix (if it's need) scale
 		CGRect boundBox = [self boundingBox];
 		if ((boundBox.size.width < self.panBoundsRect.size.width) || (boundBox.size.height < self.panBoundsRect.size.height))
-			self.scale = [self minPossibleScale];	
+			self.scale += 0.02f;	
+			//self.scale = [self minPossibleScale];	
 	}
 }
 
