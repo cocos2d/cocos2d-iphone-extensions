@@ -112,6 +112,10 @@ typedef enum
 - (CGFloat) horSpeedWithPosition: (CGPoint) pos;
 // Return vertical speed in order with current position
 - (CGFloat) vertSpeedWithPosition: (CGPoint) pos;
+// Return C array with distances to edges of screen
+- (CGFloat *) distancesToEdges;
+
+- (void) autoscrollPosition;
 
 @end
 
@@ -122,7 +126,7 @@ typedef enum
             delegate = _delegate, touches = _touches, touchDistance = _touchDistance, 
             minSpeed = _minSpeed, maxSpeed = _maxSpeed, topFrameMargin = _topFrameMargin, 
             bottomFrameMargin = _bottomFrameMargin, leftFrameMargin = _leftFrameMargin,
-            rightFrameMargin = _rightFrameMargin, scheduler = _scheduler;
+            rightFrameMargin = _rightFrameMargin, scheduler = _scheduler, autoscrollSpeed = _autoscrollSpeed;
 
 #pragma mark Init
 
@@ -146,6 +150,7 @@ typedef enum
         self.bottomFrameMargin = 100.0f;
         self.leftFrameMargin = 100.0f;
         self.rightFrameMargin = 100.0f;
+        self.autoscrollSpeed = 10.0f;
 	}	
 	return self;
 }
@@ -195,13 +200,13 @@ typedef enum
 		// Calculate new scale
 		CGFloat newScale = self.scale * (ccpDistance(curPosTouch1, curPosTouch2) / ccpDistance(prevPosTouch1, prevPosTouch2));		
 		self.scale = MIN(MAX(newScale, self.minScale), self.maxScale);
-		//[self fixLayerScale];
+		[self fixLayerScale];
 		// Calculate new anchor point
 		CGPoint newAnchorInPixels = [self convertToNodeSpace: prevPosLayer];
 		self.anchorPoint = ccp(newAnchorInPixels.x / self.contentSize.width, newAnchorInPixels.y / self.contentSize.height);
 		// Set new position of the layer
 		self.position = curPosLayer;
-		//[self fixLayerPosition];
+		[self fixLayerPosition];
 		// Don't click with multitouch
 		self.touchDistance = INFINITY;
 	}
@@ -317,10 +322,9 @@ typedef enum
         }
 
     }
-    if (![self.touches count])
+    if (![self.touches count] && self.autoscrollSpeed)
     {
-        [self fixLayerScale];
-        [self fixLayerPosition];
+        [self autoscrollPosition];
     }
 }
 
@@ -376,6 +380,8 @@ typedef enum
 - (void) setPanBoundsRect: (CGRect) rect
 {
 	_panBoundsRect = rect;
+    [self fixLayerScale];
+    [self fixLayerPosition];
 }
 
 - (CGRect) panBoundsRect
@@ -384,59 +390,36 @@ typedef enum
 }
 
 - (void) fixLayerPosition
-{
-	if (!CGRectIsNull(self.panBoundsRect))
-	{
-        CGFloat delta = 20.0f;
-        
-		// Check the pan bounds and fix (if it's need) position
-		CGRect boundBox = [self boundingBox];
-        CGFloat distanceLeft = MAX(self.position.x - boundBox.size.width * self.anchorPoint.x - self.panBoundsRect.origin.x, 0);
-        CGFloat distanceBottom = MAX(self.position.y - boundBox.size.height * self.anchorPoint.y - self.panBoundsRect.origin.y, 0);
-        CGFloat distanceRight = MAX(self.panBoundsRect.size.width + self.panBoundsRect.origin.x - self.position.x - 
-            boundBox.size.width * (1 - self.anchorPoint.x), 0);
-        CGFloat distanceTop = MAX(self.panBoundsRect.size.height + self.panBoundsRect.origin.y - self.position.y - 
-            boundBox.size.height * (1 - self.anchorPoint.y), 0);        
-        
-        CGFloat distanceTopLeft = ccpLength(ccp(distanceLeft, distanceTop));
-        CGFloat distanceTopRight = ccpLength(ccp(distanceRight, distanceTop));
-        CGFloat distanceBottomLeft = ccpLength(ccp(distanceLeft, distanceBottom));
-        CGFloat distanceBottomRight = ccpLength(ccp(distanceRight, distanceBottom));
- 
-        CGFloat max = MAX(distanceTopLeft, MAX(distanceTopRight, MAX(distanceBottomLeft, distanceBottomRight)));
-        
-        if (max == 0.0f)
-            return;
-        
-        if (distanceTopLeft == max)
+{	
+    if (!CGRectIsNull(_panBoundsRect))
+    {
+        if ( !(self.autoscrollSpeed && self.mode == kCCLayerPanZoomModeSheet) )
         {
-            double angle = acos(abs(distanceLeft) / distanceTopLeft);
-            CGFloat newX = self.position.x - signbit(distanceLeft) * delta * cos(angle);
-            CGFloat newY = self.position.y + signbit(distanceTop) * delta * sin(angle);
-            self.position = ccp(newX, newY);
+            CGRect boundBox = [self boundingBox];
+            if (self.position.x - boundBox.size.width * self.anchorPoint.x > _panBoundsRect.origin.x)
+            {
+                [self setPosition: ccp(boundBox.size.width * self.anchorPoint.x + _panBoundsRect.origin.x, 
+                                       self.position.y)];
+            }	
+            if (self.position.y - boundBox.size.height * self.anchorPoint.y > _panBoundsRect.origin.y)
+            {
+                [self setPosition: ccp(self.position.x, boundBox.size.height * self.anchorPoint.y + 
+                                       _panBoundsRect.origin.y)];
+            }
+            if (self.position.x + boundBox.size.width * (1 - self.anchorPoint.x) < _panBoundsRect.size.width +
+                _panBoundsRect.origin.x)
+            {
+                [self setPosition: ccp(_panBoundsRect.size.width + _panBoundsRect.origin.x - 
+                                       boundBox.size.width * (1 - self.anchorPoint.x), self.position.y)];
+            }
+            if (self.position.y + boundBox.size.height * (1 - self.anchorPoint.y) < _panBoundsRect.size.height + 
+                _panBoundsRect.origin.y)
+            {
+                [self setPosition: ccp(self.position.x, _panBoundsRect.size.height + _panBoundsRect.origin.y - 
+                                       boundBox.size.height * (1 - self.anchorPoint.y))];
+            }	
         }
-        if (distanceTopRight == max)
-        {
-            double angle = acos(abs(distanceRight) / distanceTopRight);
-            CGFloat newX = self.position.x + signbit(distanceRight) * delta * cos(angle);
-            CGFloat newY = self.position.y + signbit(distanceTop) * delta * sin(angle);
-            self.position = ccp(newX, newY);
-        }
-        if (distanceBottomLeft == max)
-        {
-            double angle = acos(abs(distanceLeft) / distanceBottomLeft);
-            CGFloat newX = self.position.x - signbit(distanceLeft) * delta * cos(angle);
-            CGFloat newY = self.position.y - signbit(distanceBottom) * delta * sin(angle);
-            self.position = ccp(newX, newY);
-        }
-        if (distanceBottomRight == max)
-        {
-            double angle = acos(abs(distanceRight) / distanceBottomRight);
-            CGFloat newX = self.position.x + signbit(distanceRight) * delta * cos(angle);
-            CGFloat newY = self.position.y - signbit(distanceBottom) * delta * sin(angle);
-            self.position = ccp(newX, newY);
-        }
-	}
+    }
 }
 
 - (void) fixLayerScale
@@ -446,9 +429,123 @@ typedef enum
 		// Check the pan bounds and fix (if it's need) scale
 		CGRect boundBox = [self boundingBox];
 		if ((boundBox.size.width < self.panBoundsRect.size.width) || (boundBox.size.height < self.panBoundsRect.size.height))
-			self.scale += 0.02f;	
-			//self.scale = [self minPossibleScale];	
+			self.scale = [self minPossibleScale];	
 	}
+}
+
+- (void) autoscrollPosition
+{
+    if (!CGRectIsNull(self.panBoundsRect))
+	{
+        CGFloat *distances = [self distancesToEdges];
+        CGFloat dx = 0.0f;
+        CGFloat dy = 0.0f;        
+        int mask = (distances[0] ? 1 : 0) | (distances[1] ? 2 : 0) | (distances[2] ? 4 : 0) | (distances[3] ? 8 : 0);
+        switch (mask)
+        {
+            case 0: // none
+                return;
+                
+            case 1:  // only top 
+            case 4:  // only bottom
+            {
+                dy = (mask == 1) ? self.autoscrollSpeed : - self.autoscrollSpeed;
+            }
+                break;
+            case 2:  // only left
+            case 8:  // only right
+            {
+                dx = (mask == 2) ? - self.autoscrollSpeed : self.autoscrollSpeed;
+            }
+                break;
+                
+            case 3: // top and left 
+            {
+                CGFloat distanceTopLeft = ccpLength(ccp(distances[1], distances[0]));
+                double angle = acos(distances[1] / distanceTopLeft);
+                dx = - self.autoscrollSpeed * cos(angle);
+                dy = self.autoscrollSpeed * sin(angle);
+            }
+                break;
+            case 9: // top and right 
+            {
+                CGFloat distanceTopRight = ccpLength(ccp(distances[3], distances[0]));
+                double angle = acos(distances[3] / distanceTopRight);
+                dx = self.autoscrollSpeed * cos(angle);
+                dy = self.autoscrollSpeed * sin(angle);
+            }
+                break;
+            case 6: // bottom and left 
+            {
+                CGFloat distanceBottomLeft = ccpLength(ccp(distances[1], distances[2]));
+                double angle = acos(distances[1] / distanceBottomLeft);
+                dx = - self.autoscrollSpeed * cos(angle);
+                dy = - self.autoscrollSpeed * sin(angle);
+            }
+                break;
+            case 12: // bottom and right 
+            {
+                CGFloat distanceBottomRight = ccpLength(ccp(distances[3], distances[2]));
+                double angle = acos(distances[3] / distanceBottomRight);
+                dx = self.autoscrollSpeed * cos(angle);
+                dy = - self.autoscrollSpeed * sin(angle);
+            }
+                break;
+        }
+        
+        self.position = ccp(self.position.x + dx, self.position.y + dy);
+        free(distances);          
+        
+       
+        CGRect boundBox = [self boundingBox];
+        distances = [self distancesToEdges];
+        
+        // top distance
+        if (distances[0] && distances[0] <= self.autoscrollSpeed)
+        {
+            [self setPosition: ccp(self.position.x, _panBoundsRect.size.height + _panBoundsRect.origin.y - 
+                                   boundBox.size.height * (1 - self.anchorPoint.y))];
+        }	
+        // left distance
+        if (distances[1] && distances[1] <= self.autoscrollSpeed)
+        {
+            [self setPosition: ccp(boundBox.size.width * self.anchorPoint.x + _panBoundsRect.origin.x, 
+                                   self.position.y)];
+        }	            
+        // bottom distance
+        if (distances[2] && distances[2] <= self.autoscrollSpeed)
+        {
+            [self setPosition: ccp(self.position.x, boundBox.size.height * self.anchorPoint.y + 
+                                   _panBoundsRect.origin.y)];
+        }
+        // right distance
+        if (distances[3] && distances[3] <= self.autoscrollSpeed)
+        {
+            [self setPosition: ccp(_panBoundsRect.size.width + _panBoundsRect.origin.x - 
+                                   boundBox.size.width * (1 - self.anchorPoint.x), self.position.y)];
+        }
+        free(distances);
+	}
+}
+
+#pragma mark Helpers
+
+- (CGFloat *) distancesToEdges
+{
+    CGFloat *distances = malloc(sizeof(CGFloat) * 4);
+    CGRect boundBox = [self boundingBox];
+    // top edge
+    distances[0] = MAX(self.panBoundsRect.size.height + self.panBoundsRect.origin.y - self.position.y - 
+                       boundBox.size.height * (1 - self.anchorPoint.y), 0);        
+    // left edge
+    distances[1] = MAX(self.position.x - boundBox.size.width * self.anchorPoint.x - self.panBoundsRect.origin.x, 0);
+    // bottom edge
+    distances[2] = MAX(self.position.y - boundBox.size.height * self.anchorPoint.y - self.panBoundsRect.origin.y, 0);
+    // right edge
+    distances[3] = MAX(self.panBoundsRect.size.width + self.panBoundsRect.origin.x - self.position.x - 
+                       boundBox.size.width * (1 - self.anchorPoint.x), 0);
+
+    return distances;
 }
 
 - (CGFloat) minPossibleScale

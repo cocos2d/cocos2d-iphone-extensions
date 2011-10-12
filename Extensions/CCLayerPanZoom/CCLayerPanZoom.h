@@ -91,6 +91,8 @@ typedef enum
     
     // Flag used to call touchMoveBeganAtPosition: only once for each single touch event.
     BOOL _touchMoveBegan;
+    
+    CGFloat _autoscrollSpeed;
 }
 
 /** The maximum scale level
@@ -145,5 +147,9 @@ typedef enum
  * for define right autoscrolling zone in frame mode
  * Default is 100.0f */
 @property (readwrite, assign) CGFloat rightFrameMargin;
+
+/** Speed (point per frame) for autoscrolling layer to correct position */
+@property (readwrite, assign) CGFloat autoscrollSpeed;
+
 
 @end
