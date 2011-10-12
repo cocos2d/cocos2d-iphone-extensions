@@ -254,11 +254,15 @@ typedef enum
                            tapCount: [touch tapCount]];
     }
     
-    // No more touches needed - we support only pinch (2 fingers), click & swipe (1 finger) gestures.
-    [self.touches removeAllObjects];
-    
-    // Reset touch distance.
-    self.touchDistance = 0.0f;
+	for (UITouch *touch in [touches allObjects]) 
+	{
+		// Remove touche from the array with current touches
+		[self.touches removeObject: touch];
+	}
+	if ([self.touches count] == 0)
+	{
+		self.touchDistance = 0.0f;
+	}
 }
 
 - (void) ccTouchesCancelled: (NSSet *) touches 
