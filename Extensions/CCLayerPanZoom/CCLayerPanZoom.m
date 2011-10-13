@@ -128,7 +128,7 @@ typedef enum
             delegate = _delegate, touches = _touches, touchDistance = _touchDistance, 
             minSpeed = _minSpeed, maxSpeed = _maxSpeed, topFrameMargin = _topFrameMargin, 
             bottomFrameMargin = _bottomFrameMargin, leftFrameMargin = _leftFrameMargin,
-            rightFrameMargin = _rightFrameMargin, scheduler = _scheduler, ruberEdgesTime = ruberEdgesTime,
+            rightFrameMargin = _rightFrameMargin, scheduler = _scheduler, ruberEdgesTime = _ruberEdgesTime,
             ruberEdgesMargin = _ruberEdgesMargin;
 
 #pragma mark Init
@@ -273,7 +273,7 @@ typedef enum
 		self.touchDistance = 0.0f;
 	}
     
-    if (![self.touches count] && self.ruberEdgesTime && !_ruberEdgeScrolling)
+    if (![self.touches count] && !_ruberEdgeScrolling)
     {
         [self scrollPosition];
     }
@@ -396,38 +396,64 @@ typedef enum
 }
 
 - (void) setPosition: (CGPoint) position
-{
+{            
     [super setPosition: position];
     if (!CGRectIsNull(_panBoundsRect))
     {
-        if ( !(self.ruberEdgesTime && self.mode == kCCLayerPanZoomModeSheet) )
+        if (self.ruberEdgesMargin && self.mode == kCCLayerPanZoomModeSheet)
+        {
+            if (!_ruberEdgeScrolling)
+            {
+                CGRect boundBox = [self boundingBox];
+                if (self.position.x - boundBox.size.width * self.anchorPoint.x > self.panBoundsRect.origin.x + self.ruberEdgesMargin)
+                {
+                    [super setPosition: ccp(boundBox.size.width * self.anchorPoint.x + self.panBoundsRect.origin.x + self.ruberEdgesMargin, 
+                                            self.position.y)];
+                }	
+                if (self.position.y - boundBox.size.height * self.anchorPoint.y > self.panBoundsRect.origin.y + self.ruberEdgesMargin)
+                {
+                    [super setPosition: ccp(self.position.x, boundBox.size.height * self.anchorPoint.y + 
+                                            self.panBoundsRect.origin.y + self.ruberEdgesMargin)];
+                }
+                if (self.position.x + boundBox.size.width * (1 - self.anchorPoint.x) < self.panBoundsRect.size.width +
+                    self.panBoundsRect.origin.x - self.ruberEdgesMargin)
+                {
+                    [super setPosition: ccp(self.panBoundsRect.size.width + _panBoundsRect.origin.x - 
+                                            boundBox.size.width * (1 - self.anchorPoint.x) - self.ruberEdgesMargin, self.position.y)];
+                }
+                if (self.position.y + boundBox.size.height * (1 - self.anchorPoint.y) < self.panBoundsRect.size.height + 
+                    self.panBoundsRect.origin.y - self.ruberEdgesMargin)
+                {
+                    [super setPosition: ccp(self.position.x, self.panBoundsRect.size.height + self.panBoundsRect.origin.y - 
+                                            boundBox.size.height * (1 - self.anchorPoint.y) - self.ruberEdgesMargin)];
+                }
+            }
+        }
+        else
         {
             CGRect boundBox = [self boundingBox];
             if (self.position.x - boundBox.size.width * self.anchorPoint.x > self.panBoundsRect.origin.x)
             {
-                [self setPosition: ccp(boundBox.size.width * self.anchorPoint.x + self.panBoundsRect.origin.x, 
+                [super setPosition: ccp(boundBox.size.width * self.anchorPoint.x + self.panBoundsRect.origin.x, 
                                        self.position.y)];
             }	
             if (self.position.y - boundBox.size.height * self.anchorPoint.y > self.panBoundsRect.origin.y)
             {
-                [self setPosition: ccp(self.position.x, boundBox.size.height * self.anchorPoint.y + 
+                [super setPosition: ccp(self.position.x, boundBox.size.height * self.anchorPoint.y + 
                                        self.panBoundsRect.origin.y)];
             }
             if (self.position.x + boundBox.size.width * (1 - self.anchorPoint.x) < self.panBoundsRect.size.width +
                 self.panBoundsRect.origin.x)
             {
-                [self setPosition: ccp(self.panBoundsRect.size.width + _panBoundsRect.origin.x - 
+                [super setPosition: ccp(self.panBoundsRect.size.width + _panBoundsRect.origin.x - 
                                        boundBox.size.width * (1 - self.anchorPoint.x), self.position.y)];
             }
             if (self.position.y + boundBox.size.height * (1 - self.anchorPoint.y) < self.panBoundsRect.size.height + 
                 self.panBoundsRect.origin.y)
             {
-                [self setPosition: ccp(self.position.x, self.panBoundsRect.size.height + self.panBoundsRect.origin.y - 
+                [super setPosition: ccp(self.position.x, self.panBoundsRect.size.height + self.panBoundsRect.origin.y - 
                                        boundBox.size.height * (1 - self.anchorPoint.y))];
             }	
-        }
-        else
-        {
         }
     }
 }
