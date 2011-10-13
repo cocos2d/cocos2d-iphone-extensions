@@ -210,12 +210,12 @@ Class backTest()
 	CGRect boundingRect = CGRectMake(0, 0, 0, 0);
 	boundingRect.size = [background boundingBox].size;
 	[_panZoomLayer setContentSize: boundingRect.size];
-	
-	_panZoomLayer.panBoundsRect = CGRectMake(0, 0, winSize.width, winSize.height);
-	
+		
 	_panZoomLayer.anchorPoint = ccp(0.5f, 0.5f);
 	_panZoomLayer.position = ccp(0.5f * winSize.width, 0.5f * winSize.height);
-	
+
+    _panZoomLayer.panBoundsRect = CGRectMake(0, 0, winSize.width, winSize.height);
+
 	// position the label on the center of the bounds
 	CCNode *label = [_panZoomLayer getChildByTag: kLabelTag];
 	label.position =  ccp(boundingRect.size.width * 0.5f, boundingRect.size.height * 0.5f);
@@ -304,12 +304,12 @@ Class backTest()
 	CGRect boundingRect = CGRectMake(0, 0, 0, 0);
 	boundingRect.size = [background boundingBox].size;
 	[_panZoomLayer setContentSize: boundingRect.size];
-	
-	_panZoomLayer.panBoundsRect = CGRectMake(0, 0, winSize.width, winSize.height);
-	
+		
 	_panZoomLayer.anchorPoint = ccp(0.5f, 0.5f);
 	_panZoomLayer.position = ccp(0.5f * winSize.width, 0.5f * winSize.height);
 	
+    _panZoomLayer.panBoundsRect = CGRectMake(0, 0, winSize.width, winSize.height);
+
 	// position the label on the center of the bounds
 	CCNode *label = [_panZoomLayer getChildByTag: kLabelTag];
 	label.position =  ccp(boundingRect.size.width * 0.5f, boundingRect.size.height * 0.5f);
