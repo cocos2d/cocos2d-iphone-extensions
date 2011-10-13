@@ -126,7 +126,8 @@ typedef enum
             delegate = _delegate, touches = _touches, touchDistance = _touchDistance, 
             minSpeed = _minSpeed, maxSpeed = _maxSpeed, topFrameMargin = _topFrameMargin, 
             bottomFrameMargin = _bottomFrameMargin, leftFrameMargin = _leftFrameMargin,
-            rightFrameMargin = _rightFrameMargin, scheduler = _scheduler, autoscrollSpeed = _autoscrollSpeed;
+            rightFrameMargin = _rightFrameMargin, scheduler = _scheduler, ruberEdgesTime = ruberEdgesTime,
+            ruberEdgesMargin = _ruberEdgesMargin;
 
 #pragma mark Init
 
@@ -137,12 +138,13 @@ typedef enum
 		self.isRelativeAnchorPoint = YES;
 		self.isTouchEnabled = YES;
 		
-		self.maxScale = 2.0f;
+		self.maxScale = 3.0f;
 		self.minScale = 0.1f;
 		self.touches = [NSMutableArray arrayWithCapacity: 10];
 		self.panBoundsRect = CGRectNull;
 		self.touchDistance = 0.0F;
 		self.maxTouchDistanceToClick = 15.0f;
+        
         self.mode = kCCLayerPanZoomModeSheet;
         self.minSpeed = 100.0f;
         self.maxSpeed = 1000.0f;
@@ -150,7 +152,10 @@ typedef enum
         self.bottomFrameMargin = 100.0f;
         self.leftFrameMargin = 100.0f;
         self.rightFrameMargin = 100.0f;
-        self.autoscrollSpeed = 10.0f;
+        
+        self.ruberEdgesMargin = 50.0f;
+        self.ruberEdgesTime = 0.1f;
+        _ruberEdgeScrolling = NO;
 	}	
 	return self;
 }

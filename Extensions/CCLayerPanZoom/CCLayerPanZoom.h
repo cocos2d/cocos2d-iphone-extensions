@@ -92,7 +92,9 @@ typedef enum
     // Flag used to call touchMoveBeganAtPosition: only once for each single touch event.
     BOOL _touchMoveBegan;
     
-    CGFloat _autoscrollSpeed;
+    ccTime _ruberEdgesTime;
+    CGFloat _ruberEdgesMargin;
+    BOOL _ruberEdgeScrolling;
 }
 
 /** The maximum scale level
@@ -148,8 +150,9 @@ typedef enum
  * Default is 100.0f */
 @property (readwrite, assign) CGFloat rightFrameMargin;
 
-/** Speed (point per frame) for autoscrolling layer to correct position */
-@property (readwrite, assign) CGFloat autoscrollSpeed;
 
+@property (readwrite, assign) ccTime ruberEdgesTime;
+
+@property (readwrite, assign) CGFloat ruberEdgesMargin;
 
 @end
