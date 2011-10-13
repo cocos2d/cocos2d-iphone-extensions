@@ -112,10 +112,16 @@ typedef enum
 - (CGFloat) horSpeedWithPosition: (CGPoint) pos;
 // Return vertical speed in order with current position
 - (CGFloat) vertSpeedWithPosition: (CGPoint) pos;
-// Return C array with distances to edges of screen
-- (CGFloat *) distancesToEdges;
+// Return distance to top edge of screen
+- (CGFloat) topEdgeDistance;
+// Return distance to left edge of screen
+- (CGFloat) leftEdgeDistance;
+// Return distance to bottom edge of screen
+- (CGFloat) bottomEdgeDistance;
+// Return distance to right edge of screen
+- (CGFloat) rightEdgeDistance;
 
-- (void) autoscrollPosition;
+- (void) scrollPosition;
 
 @end
 
@@ -438,119 +444,143 @@ typedef enum
 	}
 }
 
-- (void) autoscrollPosition
+#pragma mark Ruber Edges related
+
+- (void) scrollPosition
 {
     if (!CGRectIsNull(self.panBoundsRect))
 	{
-        CGFloat *distances = [self distancesToEdges];
-        CGFloat dx = 0.0f;
-        CGFloat dy = 0.0f;        
-        int mask = (distances[0] ? 1 : 0) | (distances[1] ? 2 : 0) | (distances[2] ? 4 : 0) | (distances[3] ? 8 : 0);
+        CGFloat topEdgeDistance = [self topEdgeDistance];
+        CGFloat leftEdgeDistance = [self leftEdgeDistance];
+        CGFloat bottomEdgeDistance = [self bottomEdgeDistance];
+        CGFloat rightEdgeDistance = [self rightEdgeDistance];
+        
+        // calculate bit mask
+        int mask = (topEdgeDistance ? 1 : 0) | (leftEdgeDistance ? 2 : 0) | 
+                    (bottomEdgeDistance ? 4 : 0) | (rightEdgeDistance ? 8 : 0);
         switch (mask)
         {
             case 0: // none
-                return;
+                break;
                 
             case 1:  // only top 
-            case 4:  // only bottom
-            {
-                dy = (mask == 1) ? self.autoscrollSpeed : - self.autoscrollSpeed;
-            }
+                {
+                    id moveToPosition = [CCMoveTo actionWithDuration: self.ruberEdgesTime * self.ruberEdgesMargin / topEdgeDistance
+                                                            position: ccp(self.position.x, self.position.y + topEdgeDistance)];
+                    moveToPosition = [CCSequence actions: moveToPosition, [CCCallFunc actionWithTarget: self selector: @selector(scrollEnded)], nil];
+                    _ruberEdgeScrolling = YES;
+                    [self runAction: moveToPosition];
+                }
                 break;
+                
+            case 4:  // only bottom
+                {
+                    id moveToPosition = [CCMoveTo actionWithDuration: self.ruberEdgesTime * self.ruberEdgesMargin / bottomEdgeDistance 
+                                                            position: ccp(self.position.x, self.position.y - bottomEdgeDistance)];
+                    moveToPosition = [CCSequence actions: moveToPosition, [CCCallFunc actionWithTarget: self selector: @selector(scrollEnded)], nil];
+                    _ruberEdgeScrolling = YES;
+                    [self runAction: moveToPosition];
+                }
+                break;
+                
             case 2:  // only left
+                {
+                    id moveToPosition = [CCMoveTo actionWithDuration: self.ruberEdgesTime * self.ruberEdgesMargin / leftEdgeDistance
+                                                            position: ccp(self.position.x - leftEdgeDistance, self.position.y)];
+                    moveToPosition = [CCSequence actions: moveToPosition, [CCCallFunc actionWithTarget: self selector: @selector(scrollEnded)], nil];
+                    _ruberEdgeScrolling = YES;
+                    [self runAction: moveToPosition];
+                }
+                break;
+                
             case 8:  // only right
-            {
-                dx = (mask == 2) ? - self.autoscrollSpeed : self.autoscrollSpeed;
-            }
+                {
+                    id moveToPosition = [CCMoveTo actionWithDuration: self.ruberEdgesTime * self.ruberEdgesMargin / rightEdgeDistance 
+                                                            position: ccp(self.position.x + rightEdgeDistance, self.position.y)];
+                    moveToPosition = [CCSequence actions: moveToPosition, [CCCallFunc actionWithTarget: self selector: @selector(scrollEnded)], nil];
+                    _ruberEdgeScrolling = YES;
+                    [self runAction: moveToPosition];
+                }
                 break;
                 
             case 3: // top and left 
-            {
-                CGFloat distanceTopLeft = ccpLength(ccp(distances[1], distances[0]));
-                double angle = acos(distances[1] / distanceTopLeft);
-                dx = - self.autoscrollSpeed * cos(angle);
-                dy = self.autoscrollSpeed * sin(angle);
-            }
+                {
+                    id moveToPosition = [CCMoveTo actionWithDuration: self.ruberEdgesTime * self.ruberEdgesMargin / ccpLength(ccp(topEdgeDistance, leftEdgeDistance)) 
+                                                            position: ccp(self.position.x - leftEdgeDistance, 
+                                                                          self.position.y + topEdgeDistance)];
+                    moveToPosition = [CCSequence actions: moveToPosition, [CCCallFunc actionWithTarget: self selector: @selector(scrollEnded)], nil];
+                    _ruberEdgeScrolling = YES;
+                    [self runAction: moveToPosition];
+                }
                 break;
+                
             case 9: // top and right 
-            {
-                CGFloat distanceTopRight = ccpLength(ccp(distances[3], distances[0]));
-                double angle = acos(distances[3] / distanceTopRight);
-                dx = self.autoscrollSpeed * cos(angle);
-                dy = self.autoscrollSpeed * sin(angle);
-            }
+                {
+                    id moveToPosition = [CCMoveTo actionWithDuration: self.ruberEdgesTime * self.ruberEdgesMargin / ccpLength(ccp(topEdgeDistance, rightEdgeDistance)) 
+                                                            position: ccp(self.position.x + rightEdgeDistance, 
+                                                                          self.position.y + topEdgeDistance)];
+                    moveToPosition = [CCSequence actions: moveToPosition, [CCCallFunc actionWithTarget: self selector: @selector(scrollEnded)], nil];
+                    _ruberEdgeScrolling = YES;
+                    [self runAction: moveToPosition];
+                }
                 break;
+                
             case 6: // bottom and left 
-            {
-                CGFloat distanceBottomLeft = ccpLength(ccp(distances[1], distances[2]));
-                double angle = acos(distances[1] / distanceBottomLeft);
-                dx = - self.autoscrollSpeed * cos(angle);
-                dy = - self.autoscrollSpeed * sin(angle);
-            }
+                {
+                    id moveToPosition = [CCMoveTo actionWithDuration: self.ruberEdgesTime * self.ruberEdgesMargin / ccpLength(ccp(bottomEdgeDistance, leftEdgeDistance)) 
+                                                            position: ccp(self.position.x - leftEdgeDistance, 
+                                                                          self.position.y - bottomEdgeDistance)];
+                    moveToPosition = [CCSequence actions: moveToPosition, [CCCallFunc actionWithTarget: self selector: @selector(scrollEnded)], nil];
+                    _ruberEdgeScrolling = YES;
+                    [self runAction: moveToPosition];
+                }
                 break;
+                
             case 12: // bottom and right 
-            {
-                CGFloat distanceBottomRight = ccpLength(ccp(distances[3], distances[2]));
-                double angle = acos(distances[3] / distanceBottomRight);
-                dx = self.autoscrollSpeed * cos(angle);
-                dy = - self.autoscrollSpeed * sin(angle);
-            }
+                {
+                    id moveToPosition = [CCMoveTo actionWithDuration: self.ruberEdgesTime * self.ruberEdgesMargin / ccpLength(ccp(bottomEdgeDistance, rightEdgeDistance)) 
+                                                            position: ccp(self.position.x + rightEdgeDistance, 
+                                                                          self.position.y - bottomEdgeDistance)];
+                    moveToPosition = [CCSequence actions: moveToPosition, [CCCallFunc actionWithTarget: self selector: @selector(scrollEnded)], nil];
+                    _ruberEdgeScrolling = YES;
+                    [self runAction: moveToPosition];
+                }
                 break;
         }
-        
-        self.position = ccp(self.position.x + dx, self.position.y + dy);
-        free(distances);          
-        
-       
-        CGRect boundBox = [self boundingBox];
-        distances = [self distancesToEdges];
-        
-        // top distance
-        if (distances[0] && distances[0] <= self.autoscrollSpeed)
-        {
-            [self setPosition: ccp(self.position.x, _panBoundsRect.size.height + _panBoundsRect.origin.y - 
-                                   boundBox.size.height * (1 - self.anchorPoint.y))];
-        }	
-        // left distance
-        if (distances[1] && distances[1] <= self.autoscrollSpeed)
-        {
-            [self setPosition: ccp(boundBox.size.width * self.anchorPoint.x + _panBoundsRect.origin.x, 
-                                   self.position.y)];
-        }	            
-        // bottom distance
-        if (distances[2] && distances[2] <= self.autoscrollSpeed)
-        {
-            [self setPosition: ccp(self.position.x, boundBox.size.height * self.anchorPoint.y + 
-                                   _panBoundsRect.origin.y)];
-        }
-        // right distance
-        if (distances[3] && distances[3] <= self.autoscrollSpeed)
-        {
-            [self setPosition: ccp(_panBoundsRect.size.width + _panBoundsRect.origin.x - 
-                                   boundBox.size.width * (1 - self.anchorPoint.x), self.position.y)];
-        }
-        free(distances);
 	}
+}
+
+- (void) scrollEnded
+{
+    _ruberEdgeScrolling = NO;
 }
 
 #pragma mark Helpers
 
-- (CGFloat *) distancesToEdges
+- (CGFloat) topEdgeDistance
 {
-    CGFloat *distances = malloc(sizeof(CGFloat) * 4);
     CGRect boundBox = [self boundingBox];
-    // top edge
-    distances[0] = MAX(self.panBoundsRect.size.height + self.panBoundsRect.origin.y - self.position.y - 
-                       boundBox.size.height * (1 - self.anchorPoint.y), 0);        
-    // left edge
-    distances[1] = MAX(self.position.x - boundBox.size.width * self.anchorPoint.x - self.panBoundsRect.origin.x, 0);
-    // bottom edge
-    distances[2] = MAX(self.position.y - boundBox.size.height * self.anchorPoint.y - self.panBoundsRect.origin.y, 0);
-    // right edge
-    distances[3] = MAX(self.panBoundsRect.size.width + self.panBoundsRect.origin.x - self.position.x - 
-                       boundBox.size.width * (1 - self.anchorPoint.x), 0);
+    return round(MAX(self.panBoundsRect.size.height + self.panBoundsRect.origin.y - self.position.y - 
+                     boundBox.size.height * (1 - self.anchorPoint.y), 0));
+}
 
-    return distances;
+- (CGFloat) leftEdgeDistance
+{
+    CGRect boundBox = [self boundingBox];
+    return round(MAX(self.position.x - boundBox.size.width * self.anchorPoint.x - self.panBoundsRect.origin.x, 0));
+}    
+
+- (CGFloat) bottomEdgeDistance
+{
+    CGRect boundBox = [self boundingBox];
+    return round(MAX(self.position.y - boundBox.size.height * self.anchorPoint.y - self.panBoundsRect.origin.y, 0));
+}
+
+- (CGFloat) rightEdgeDistance
+{
+    CGRect boundBox = [self boundingBox];
+    return round(MAX(self.panBoundsRect.size.width + self.panBoundsRect.origin.x - self.position.x - 
+               boundBox.size.width * (1 - self.anchorPoint.x), 0));
 }
 
 - (CGFloat) minPossibleScale
