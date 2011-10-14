@@ -119,6 +119,9 @@ typedef enum
 
 - (void) scrollPosition;
 
+- (void) fixCurPositionWithPrevPosition: (CGPoint) prevPosition 
+                         andAnchorPoint: (CGPoint) prevAnchorPoint;
+
 @end
 
 
@@ -155,7 +158,7 @@ typedef enum
         self.leftFrameMargin = 100.0f;
         self.rightFrameMargin = 100.0f;
         
-        self.ruberEdgesMargin = 50.0f;
+        self.ruberEdgesMargin = 100.0f;
         self.ruberEdgesTime = 0.1f;
         _ruberEdgeScrolling = NO;
 	}	
@@ -209,9 +212,14 @@ typedef enum
 		self.scale = MIN(MAX(newScale, self.minScale), self.maxScale);
 		// Calculate new anchor point
 		CGPoint newAnchorInPixels = [self convertToNodeSpace: prevPosLayer];
-		self.anchorPoint = ccp(newAnchorInPixels.x / self.contentSize.width, newAnchorInPixels.y / self.contentSize.height);
+		CGPoint prevAnchorPoint = self.anchorPoint;
+        self.anchorPoint = ccp(newAnchorInPixels.x / self.contentSize.width, newAnchorInPixels.y / self.contentSize.height);
 		// Set new position of the layer
+        CGPoint prevPosition = self.position;
 		self.position = curPosLayer;
+        [self fixCurPositionWithPrevPosition: prevPosition 
+                              andAnchorPoint: prevAnchorPoint];
+
 		// Don't click with multitouch
 		self.touchDistance = INFINITY;
 	}
@@ -219,28 +227,33 @@ typedef enum
 	{	        
         // Get the single touch and it's previous & current position.
         UITouch *touch = [self.touches objectAtIndex: 0];
-        CGPoint curPosition = [[CCDirector sharedDirector] convertToGL: [touch locationInView: [touch view]]];
-        CGPoint prevPosition = [[CCDirector sharedDirector] convertToGL: [touch previousLocationInView: [touch view]]];
+        CGPoint curTouchPosition = [[CCDirector sharedDirector] convertToGL: [touch locationInView: [touch view]]];
+        CGPoint prevTouchPosition = [[CCDirector sharedDirector] convertToGL: [touch previousLocationInView: [touch view]]];
         
         // Always scroll in sheet mode.
         if (self.mode == kCCLayerPanZoomModeSheet)
         {
             // Calculate new anchor point.
-            CGPoint newAnchorInPixels = [self convertToNodeSpace: prevPosition];
-            self.anchorPoint = ccp(newAnchorInPixels.x / self.contentSize.width, newAnchorInPixels.y / self.contentSize.height);
+            //CGPoint newAnchorInPixels = [self convertToNodeSpace: prevTouchPosition];
+            CGPoint prevAnchorPoint = self.anchorPoint;
+            //self.anchorPoint = ccp(newAnchorInPixels.x / self.contentSize.width, newAnchorInPixels.y / self.contentSize.height);
             // Set new position of the layer.
-            self.position = curPosition;
+            CGPoint prevPosition = self.position;
+            self.position = ccp(self.position.x + curTouchPosition.x - prevTouchPosition.x,
+                                self.position.y + curTouchPosition.y - prevTouchPosition.y);
+            [self fixCurPositionWithPrevPosition: prevPosition 
+                                  andAnchorPoint: prevAnchorPoint];
         }
         
         // Accumulate touch distance for all modes.
-        self.touchDistance += ccpDistance(curPosition, prevPosition);
+        self.touchDistance += ccpDistance(curTouchPosition, prevTouchPosition);
         
         // Inform delegate about starting updating touch position, if click isn't possible.
         if (self.mode == kCCLayerPanZoomModeFrame)
         {
             if (self.touchDistance > self.maxTouchDistanceToClick && !_touchMoveBegan)
             {
-                [self.delegate layerPanZoom: self touchMoveBeganAtPosition: [self convertToNodeSpace: prevPosition]];
+                [self.delegate layerPanZoom: self touchMoveBeganAtPosition: [self convertToNodeSpace: prevTouchPosition]];
                 _touchMoveBegan = YES;
             }
         }
@@ -316,8 +329,11 @@ typedef enum
         // Scroll if finger in the scroll area near edge.
         if ([self frameEdgeWithPoint: curPos] != kCCLayerPanZoomFrameEdgeNone)
         {
+            CGPoint prevPosition = self.position;
             self.position = ccp(self.position.x + dt * [self horSpeedWithPosition: curPos], 
                                 self.position.y + dt * [self vertSpeedWithPosition: curPos]);
+            [self fixCurPositionWithPrevPosition: prevPosition 
+                                  andAnchorPoint: self.anchorPoint];
         }
         
         // Inform delegate if touch position in layer was changed due to finger or layer movement.
@@ -387,7 +403,8 @@ typedef enum
 {
 	_panBoundsRect = rect;
     self.scale = self.scale;
-    self.position = self.position;
+    [self fixCurPositionWithPrevPosition: self.position 
+                          andAnchorPoint: self.anchorPoint];
 }
 
 - (CGRect) panBoundsRect
@@ -395,37 +412,40 @@ typedef enum
 	return _panBoundsRect;
 }
 
-- (void) setPosition: (CGPoint) position
-{            
-    [super setPosition: position];
+- (void) fixCurPositionWithPrevPosition: (CGPoint) prevPosition 
+                         andAnchorPoint: (CGPoint) prevAnchorPoint
+{   
     if (!CGRectIsNull(_panBoundsRect))
     {
         if (self.ruberEdgesMargin && self.mode == kCCLayerPanZoomModeSheet)
         {
             if (!_ruberEdgeScrolling)
             {
-                CGRect boundBox = [self boundingBox];
-                if (self.position.x - boundBox.size.width * self.anchorPoint.x > self.panBoundsRect.origin.x + self.ruberEdgesMargin)
+                CGFloat topDistance = [self topEdgeDistance];
+                CGFloat bottomDistance = [self bottomEdgeDistance];
+                CGFloat leftDistance = [self leftEdgeDistance];
+                CGFloat rightDistance = [self rightEdgeDistance];
+                CGFloat dx = self.position.x - prevPosition.x;
+                CGFloat dy = self.position.y - prevPosition.y;
+                if (topDistance)
                 {
-                    [super setPosition: ccp(boundBox.size.width * self.anchorPoint.x + self.panBoundsRect.origin.x + self.ruberEdgesMargin, 
-                                            self.position.y)];
-                }	
-                if (self.position.y - boundBox.size.height * self.anchorPoint.y > self.panBoundsRect.origin.y + self.ruberEdgesMargin)
-                {
-                    [super setPosition: ccp(self.position.x, boundBox.size.height * self.anchorPoint.y + 
-                                            self.panBoundsRect.origin.y + self.ruberEdgesMargin)];
+                    self.position = ccp(prevPosition.x, 
+                                        self.position.y + dy * self.ruberEdgesMargin / self.panBoundsRect.size.height);                    
                 }
-                if (self.position.x + boundBox.size.width * (1 - self.anchorPoint.x) < self.panBoundsRect.size.width +
-                    self.panBoundsRect.origin.x - self.ruberEdgesMargin)
+                if (leftDistance)
                 {
-                    [super setPosition: ccp(self.panBoundsRect.size.width + _panBoundsRect.origin.x - 
-                                            boundBox.size.width * (1 - self.anchorPoint.x) - self.ruberEdgesMargin, self.position.y)];
+                    self.position = ccp(prevPosition.x + dx * self.ruberEdgesMargin / self.panBoundsRect.size.width, 
+                                        self.position.y);                    
                 }
-                if (self.position.y + boundBox.size.height * (1 - self.anchorPoint.y) < self.panBoundsRect.size.height + 
-                    self.panBoundsRect.origin.y - self.ruberEdgesMargin)
+                if (bottomDistance)
                 {
-                    [super setPosition: ccp(self.position.x, self.panBoundsRect.size.height + self.panBoundsRect.origin.y - 
-                                            boundBox.size.height * (1 - self.anchorPoint.y) - self.ruberEdgesMargin)];
+                    self.position = ccp(prevPosition.x, 
+                                        self.position.y - dy * self.ruberEdgesMargin / self.panBoundsRect.size.height);                    
+                }
+                if (rightDistance)
+                {
+                    self.position = ccp(prevPosition.x - dx * self.ruberEdgesMargin / self.panBoundsRect.size.width, 
+                                        self.position.y);                    
                 }
             }
         }
@@ -434,25 +454,25 @@ typedef enum
             CGRect boundBox = [self boundingBox];
             if (self.position.x - boundBox.size.width * self.anchorPoint.x > self.panBoundsRect.origin.x)
             {
-                [super setPosition: ccp(boundBox.size.width * self.anchorPoint.x + self.panBoundsRect.origin.x, 
-                                       self.position.y)];
+                self.position = ccp(boundBox.size.width * self.anchorPoint.x + self.panBoundsRect.origin.x, 
+                                    self.position.y);
             }	
             if (self.position.y - boundBox.size.height * self.anchorPoint.y > self.panBoundsRect.origin.y)
             {
-                [super setPosition: ccp(self.position.x, boundBox.size.height * self.anchorPoint.y + 
-                                       self.panBoundsRect.origin.y)];
+                self.position = ccp(self.position.x, boundBox.size.height * self.anchorPoint.y + 
+                                    self.panBoundsRect.origin.y);
             }
             if (self.position.x + boundBox.size.width * (1 - self.anchorPoint.x) < self.panBoundsRect.size.width +
                 self.panBoundsRect.origin.x)
             {
-                [super setPosition: ccp(self.panBoundsRect.size.width + _panBoundsRect.origin.x - 
-                                       boundBox.size.width * (1 - self.anchorPoint.x), self.position.y)];
+                self.position = ccp(self.panBoundsRect.size.width + _panBoundsRect.origin.x - 
+                                    boundBox.size.width * (1 - self.anchorPoint.x), self.position.y);
             }
             if (self.position.y + boundBox.size.height * (1 - self.anchorPoint.y) < self.panBoundsRect.size.height + 
                 self.panBoundsRect.origin.y)
             {
-                [super setPosition: ccp(self.position.x, self.panBoundsRect.size.height + self.panBoundsRect.origin.y - 
-                                       boundBox.size.height * (1 - self.anchorPoint.y))];
+                self.position = ccp(self.position.x, self.panBoundsRect.size.height + self.panBoundsRect.origin.y - 
+                                    boundBox.size.height * (1 - self.anchorPoint.y));
             }	
         }
     }
