@@ -6,9 +6,8 @@ Repo Maintainer:
 
 People/companies who were/are contributing code to cocos2d-iphone-extensions (alphabetically ordered):
 
-	* Alexey Lang (http://pixonic.ru)
+	* Alexey Lang (twitter: @alexeylang)
 		CCLayerPanZoom author.
-		All orientations support for all tests on iOS.
 		Issue #56 (comments & refactoring for TMXGenerator) pair programming.
 
 	* Brian Feller (http://infinitesimplicity.com/)
@@ -22,6 +21,9 @@ People/companies who were/are contributing code to cocos2d-iphone-extensions (al
 
 	* Israel Roth (http://srooltheknife.blogspot.com/)
 		CCSliderControl author
+
+    * Jan Ekholm (http://github.com/jan-ekholm)
+        CCScrollLayer fix: restore blending functions (Pull Request #67).
 		
 	* Jeff Keeme (cjkeeme) (http://www.myblackdogbooks.com/)
 		Fix for issue #23 (CCScrollLayer page indicator artifacts)
