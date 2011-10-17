@@ -116,11 +116,8 @@ typedef enum
 - (CGFloat) bottomEdgeDistance;
 // Return distance to right edge of screen
 - (CGFloat) rightEdgeDistance;
-
+// Autoscroll postion if it's need for emulate rubber edges
 - (void) scrollPosition;
-
-- (void) fixCurPositionWithPrevPosition: (CGPoint) prevPosition 
-                         andAnchorPoint: (CGPoint) prevAnchorPoint;
 
 @end
 
@@ -158,9 +155,10 @@ typedef enum
         self.leftFrameMargin = 100.0f;
         self.rightFrameMargin = 100.0f;
         
-        self.ruberEdgesMargin = 100.0f;
+        self.ruberEdgesMargin = 300.0f;
         self.ruberEdgesTime = 0.1f;
         _ruberEdgeScrolling = NO;
+        _ruberEdgeScaling = NO;
 	}	
 	return self;
 }
@@ -202,25 +200,27 @@ typedef enum
 		// Calculate current and previous positions of the layer relative the anchor point
 		CGPoint curPosLayer = ccpMidpoint(curPosTouch1, curPosTouch2);
 		CGPoint prevPosLayer = ccpMidpoint(prevPosTouch1, prevPosTouch2);
-		// If current and previous positions of the layer were fuzzy equal then they are equal
-		if (ccpFuzzyEqual(prevPosLayer, curPosLayer, 2))
-		{
-			prevPosLayer = curPosLayer;
-		}
+        
 		// Calculate new scale
-		CGFloat newScale = self.scale * (ccpDistance(curPosTouch1, curPosTouch2) / ccpDistance(prevPosTouch1, prevPosTouch2));		
-		self.scale = MIN(MAX(newScale, self.minScale), self.maxScale);
-		// Calculate new anchor point
-		CGPoint newAnchorInPixels = [self convertToNodeSpace: prevPosLayer];
-		CGPoint prevAnchorPoint = self.anchorPoint;
-        self.anchorPoint = ccp(newAnchorInPixels.x / self.contentSize.width, newAnchorInPixels.y / self.contentSize.height);
-		// Set new position of the layer
-        CGPoint prevPosition = self.position;
-		self.position = curPosLayer;
-        [self fixCurPositionWithPrevPosition: prevPosition 
-                              andAnchorPoint: prevAnchorPoint];
-
-		// Don't click with multitouch
+        CGFloat prevScale = self.scale;
+        self.scale = self.scale * ccpDistance(curPosTouch1, curPosTouch2) / ccpDistance(prevPosTouch1, prevPosTouch2);
+        // If scale was changed -> set new scale and fix position with new scale
+        if (fabs(self.scale - prevScale) > 0.01f)
+        {
+            _ruberEdgeScaling = YES;
+            CGPoint realCurPosLayer = [self convertToNodeSpace: curPosLayer];
+            CGFloat deltaX = (realCurPosLayer.x - self.anchorPoint.x * self.contentSize.width) * (self.scale - prevScale);
+            CGFloat deltaY = (realCurPosLayer.y - self.anchorPoint.y * self.contentSize.height) * (self.scale - prevScale);
+            self.position = ccp(self.position.x - deltaX, self.position.y - deltaY);
+            _ruberEdgeScaling = NO;
+        }
+        // If current and previous position of the multitouch's center aren't fuzzy equal -> change position of the layer
+		if (!ccpFuzzyEqual(prevPosLayer, curPosLayer, 2.0f))
+		{            
+            self.position = ccp(self.position.x + curPosLayer.x - prevPosLayer.x,
+                                self.position.y + curPosLayer.y - prevPosLayer.y);
+        }
+        // Don't click with multitouch
 		self.touchDistance = INFINITY;
 	}
 	else
@@ -233,16 +233,9 @@ typedef enum
         // Always scroll in sheet mode.
         if (self.mode == kCCLayerPanZoomModeSheet)
         {
-            // Calculate new anchor point.
-            //CGPoint newAnchorInPixels = [self convertToNodeSpace: prevTouchPosition];
-            CGPoint prevAnchorPoint = self.anchorPoint;
-            //self.anchorPoint = ccp(newAnchorInPixels.x / self.contentSize.width, newAnchorInPixels.y / self.contentSize.height);
             // Set new position of the layer.
-            CGPoint prevPosition = self.position;
             self.position = ccp(self.position.x + curTouchPosition.x - prevTouchPosition.x,
                                 self.position.y + curTouchPosition.y - prevTouchPosition.y);
-            [self fixCurPositionWithPrevPosition: prevPosition 
-                                  andAnchorPoint: prevAnchorPoint];
         }
         
         // Accumulate touch distance for all modes.
@@ -329,11 +322,8 @@ typedef enum
         // Scroll if finger in the scroll area near edge.
         if ([self frameEdgeWithPoint: curPos] != kCCLayerPanZoomFrameEdgeNone)
         {
-            CGPoint prevPosition = self.position;
             self.position = ccp(self.position.x + dt * [self horSpeedWithPosition: curPos], 
                                 self.position.y + dt * [self vertSpeedWithPosition: curPos]);
-            [self fixCurPositionWithPrevPosition: prevPosition 
-                                  andAnchorPoint: self.anchorPoint];
         }
         
         // Inform delegate if touch position in layer was changed due to finger or layer movement.
@@ -403,8 +393,7 @@ typedef enum
 {
 	_panBoundsRect = rect;
     self.scale = self.scale;
-    [self fixCurPositionWithPrevPosition: self.position 
-                          andAnchorPoint: self.anchorPoint];
+    self.position = self.position;
 }
 
 - (CGRect) panBoundsRect
@@ -412,14 +401,15 @@ typedef enum
 	return _panBoundsRect;
 }
 
-- (void) fixCurPositionWithPrevPosition: (CGPoint) prevPosition 
-                         andAnchorPoint: (CGPoint) prevAnchorPoint
+- (void) setPosition: (CGPoint) position
 {   
+    CGPoint prevPosition = self.position;
+    [super setPosition: position];
     if (!CGRectIsNull(_panBoundsRect))
     {
         if (self.ruberEdgesMargin && self.mode == kCCLayerPanZoomModeSheet)
         {
-            if (!_ruberEdgeScrolling)
+            if (!_ruberEdgeScrolling && !_ruberEdgeScaling)
             {
                 CGFloat topDistance = [self topEdgeDistance];
                 CGFloat bottomDistance = [self bottomEdgeDistance];
@@ -427,25 +417,15 @@ typedef enum
                 CGFloat rightDistance = [self rightEdgeDistance];
                 CGFloat dx = self.position.x - prevPosition.x;
                 CGFloat dy = self.position.y - prevPosition.y;
-                if (topDistance)
+                if (bottomDistance || topDistance)
                 {
-                    self.position = ccp(prevPosition.x, 
-                                        self.position.y + dy * self.ruberEdgesMargin / self.panBoundsRect.size.height);                    
+                    [super setPosition: ccp(self.position.x, 
+                                            prevPosition.y + dy * self.ruberEdgesMargin / self.panBoundsRect.size.height)];                    
                 }
-                if (leftDistance)
+                if (leftDistance || rightDistance)
                 {
-                    self.position = ccp(prevPosition.x + dx * self.ruberEdgesMargin / self.panBoundsRect.size.width, 
-                                        self.position.y);                    
-                }
-                if (bottomDistance)
-                {
-                    self.position = ccp(prevPosition.x, 
-                                        self.position.y - dy * self.ruberEdgesMargin / self.panBoundsRect.size.height);                    
-                }
-                if (rightDistance)
-                {
-                    self.position = ccp(prevPosition.x - dx * self.ruberEdgesMargin / self.panBoundsRect.size.width, 
-                                        self.position.y);                    
+                    [super setPosition: ccp(prevPosition.x + dx * self.ruberEdgesMargin / self.panBoundsRect.size.width, 
+                                            self.position.y)];                    
                 }
             }
         }
@@ -454,25 +434,25 @@ typedef enum
             CGRect boundBox = [self boundingBox];
             if (self.position.x - boundBox.size.width * self.anchorPoint.x > self.panBoundsRect.origin.x)
             {
-                self.position = ccp(boundBox.size.width * self.anchorPoint.x + self.panBoundsRect.origin.x, 
-                                    self.position.y);
+                [super setPosition: ccp(boundBox.size.width * self.anchorPoint.x + self.panBoundsRect.origin.x, 
+                                        self.position.y)];
             }	
             if (self.position.y - boundBox.size.height * self.anchorPoint.y > self.panBoundsRect.origin.y)
             {
-                self.position = ccp(self.position.x, boundBox.size.height * self.anchorPoint.y + 
-                                    self.panBoundsRect.origin.y);
+                [super setPosition: ccp(self.position.x, boundBox.size.height * self.anchorPoint.y + 
+                                        self.panBoundsRect.origin.y)];
             }
             if (self.position.x + boundBox.size.width * (1 - self.anchorPoint.x) < self.panBoundsRect.size.width +
                 self.panBoundsRect.origin.x)
             {
-                self.position = ccp(self.panBoundsRect.size.width + _panBoundsRect.origin.x - 
-                                    boundBox.size.width * (1 - self.anchorPoint.x), self.position.y);
+                [super setPosition: ccp(self.panBoundsRect.size.width + _panBoundsRect.origin.x - 
+                                        boundBox.size.width * (1 - self.anchorPoint.x), self.position.y)];
             }
             if (self.position.y + boundBox.size.height * (1 - self.anchorPoint.y) < self.panBoundsRect.size.height + 
                 self.panBoundsRect.origin.y)
             {
-                self.position = ccp(self.position.x, self.panBoundsRect.size.height + self.panBoundsRect.origin.y - 
-                                    boundBox.size.height * (1 - self.anchorPoint.y));
+                [super setPosition: ccp(self.position.x, self.panBoundsRect.size.height + self.panBoundsRect.origin.y - 
+                                        boundBox.size.height * (1 - self.anchorPoint.y))];
             }	
         }
     }
@@ -480,7 +460,7 @@ typedef enum
 
 - (void) setScale: (float)scale
 {
-    [super setScale: scale];
+    [super setScale: MIN(MAX(scale, self.minScale), self.maxScale)];
 	if (!CGRectIsNull(self.panBoundsRect))
 	{
 		// Check the pan bounds and fix (if it's need) scale
@@ -511,7 +491,7 @@ typedef enum
                 
             case 1:  // only top 
                 {
-                    id moveToPosition = [CCMoveTo actionWithDuration: self.ruberEdgesTime * self.ruberEdgesMargin / topEdgeDistance
+                    id moveToPosition = [CCMoveTo actionWithDuration: self.ruberEdgesTime
                                                             position: ccp(self.position.x, self.position.y + topEdgeDistance)];
                     moveToPosition = [CCSequence actions: moveToPosition, [CCCallFunc actionWithTarget: self selector: @selector(scrollEnded)], nil];
                     _ruberEdgeScrolling = YES;
@@ -521,7 +501,7 @@ typedef enum
                 
             case 4:  // only bottom
                 {
-                    id moveToPosition = [CCMoveTo actionWithDuration: self.ruberEdgesTime * self.ruberEdgesMargin / bottomEdgeDistance 
+                    id moveToPosition = [CCMoveTo actionWithDuration: self.ruberEdgesTime
                                                             position: ccp(self.position.x, self.position.y - bottomEdgeDistance)];
                     moveToPosition = [CCSequence actions: moveToPosition, [CCCallFunc actionWithTarget: self selector: @selector(scrollEnded)], nil];
                     _ruberEdgeScrolling = YES;
@@ -531,7 +511,7 @@ typedef enum
                 
             case 2:  // only left
                 {
-                    id moveToPosition = [CCMoveTo actionWithDuration: self.ruberEdgesTime * self.ruberEdgesMargin / leftEdgeDistance
+                    id moveToPosition = [CCMoveTo actionWithDuration: self.ruberEdgesTime
                                                             position: ccp(self.position.x - leftEdgeDistance, self.position.y)];
                     moveToPosition = [CCSequence actions: moveToPosition, [CCCallFunc actionWithTarget: self selector: @selector(scrollEnded)], nil];
                     _ruberEdgeScrolling = YES;
@@ -541,7 +521,7 @@ typedef enum
                 
             case 8:  // only right
                 {
-                    id moveToPosition = [CCMoveTo actionWithDuration: self.ruberEdgesTime * self.ruberEdgesMargin / rightEdgeDistance 
+                    id moveToPosition = [CCMoveTo actionWithDuration: self.ruberEdgesTime
                                                             position: ccp(self.position.x + rightEdgeDistance, self.position.y)];
                     moveToPosition = [CCSequence actions: moveToPosition, [CCCallFunc actionWithTarget: self selector: @selector(scrollEnded)], nil];
                     _ruberEdgeScrolling = YES;
@@ -551,7 +531,7 @@ typedef enum
                 
             case 3: // top and left 
                 {
-                    id moveToPosition = [CCMoveTo actionWithDuration: self.ruberEdgesTime * self.ruberEdgesMargin / ccpLength(ccp(topEdgeDistance, leftEdgeDistance)) 
+                    id moveToPosition = [CCMoveTo actionWithDuration: self.ruberEdgesTime
                                                             position: ccp(self.position.x - leftEdgeDistance, 
                                                                           self.position.y + topEdgeDistance)];
                     moveToPosition = [CCSequence actions: moveToPosition, [CCCallFunc actionWithTarget: self selector: @selector(scrollEnded)], nil];
@@ -562,7 +542,7 @@ typedef enum
                 
             case 9: // top and right 
                 {
-                    id moveToPosition = [CCMoveTo actionWithDuration: self.ruberEdgesTime * self.ruberEdgesMargin / ccpLength(ccp(topEdgeDistance, rightEdgeDistance)) 
+                    id moveToPosition = [CCMoveTo actionWithDuration: self.ruberEdgesTime
                                                             position: ccp(self.position.x + rightEdgeDistance, 
                                                                           self.position.y + topEdgeDistance)];
                     moveToPosition = [CCSequence actions: moveToPosition, [CCCallFunc actionWithTarget: self selector: @selector(scrollEnded)], nil];
@@ -573,7 +553,7 @@ typedef enum
                 
             case 6: // bottom and left 
                 {
-                    id moveToPosition = [CCMoveTo actionWithDuration: self.ruberEdgesTime * self.ruberEdgesMargin / ccpLength(ccp(bottomEdgeDistance, leftEdgeDistance)) 
+                    id moveToPosition = [CCMoveTo actionWithDuration: self.ruberEdgesTime
                                                             position: ccp(self.position.x - leftEdgeDistance, 
                                                                           self.position.y - bottomEdgeDistance)];
                     moveToPosition = [CCSequence actions: moveToPosition, [CCCallFunc actionWithTarget: self selector: @selector(scrollEnded)], nil];
@@ -584,7 +564,7 @@ typedef enum
                 
             case 12: // bottom and right 
                 {
-                    id moveToPosition = [CCMoveTo actionWithDuration: self.ruberEdgesTime * self.ruberEdgesMargin / ccpLength(ccp(bottomEdgeDistance, rightEdgeDistance)) 
+                    id moveToPosition = [CCMoveTo actionWithDuration: self.ruberEdgesTime
                                                             position: ccp(self.position.x + rightEdgeDistance, 
                                                                           self.position.y - bottomEdgeDistance)];
                     moveToPosition = [CCSequence actions: moveToPosition, [CCCallFunc actionWithTarget: self selector: @selector(scrollEnded)], nil];

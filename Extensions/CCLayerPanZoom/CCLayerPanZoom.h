@@ -95,6 +95,7 @@ typedef enum
     ccTime _ruberEdgesTime;
     CGFloat _ruberEdgesMargin;
     BOOL _ruberEdgeScrolling;
+    BOOL _ruberEdgeScaling;
 }
 
 /** The maximum scale level
