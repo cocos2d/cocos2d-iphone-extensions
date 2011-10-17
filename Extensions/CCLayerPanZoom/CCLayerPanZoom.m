@@ -308,11 +308,11 @@ typedef enum
 	if ( self.mode == kCCLayerPanZoomModeFrame && [self.touches count] == 1 )
     {
         // Do not update position if click is still possible.
-        if (self.touchDistance <= self.maxTouchDistanceToClick )
+        if (self.touchDistance <= self.maxTouchDistanceToClick)
             return;
         
         // Do not update position if pinch is still possible.
-        if ( [NSDate timeIntervalSinceReferenceDate] - _singleTouchTimestamp < kCCLayerPanZoomMultitouchGesturesDetectionDelay )
+        if ([NSDate timeIntervalSinceReferenceDate] - _singleTouchTimestamp < kCCLayerPanZoomMultitouchGesturesDetectionDelay)
             return;
         
         // Otherwise - update touch position. Get current position of touch.
@@ -475,103 +475,16 @@ typedef enum
 - (void) scrollPosition
 {
     if (!CGRectIsNull(self.panBoundsRect))
-	{
-        CGFloat topEdgeDistance = [self topEdgeDistance];
-        CGFloat leftEdgeDistance = [self leftEdgeDistance];
-        CGFloat bottomEdgeDistance = [self bottomEdgeDistance];
-        CGFloat rightEdgeDistance = [self rightEdgeDistance];
-        
-        // calculate bit mask
-        int mask = (topEdgeDistance ? 1 : 0) | (leftEdgeDistance ? 2 : 0) | 
-                    (bottomEdgeDistance ? 4 : 0) | (rightEdgeDistance ? 8 : 0);
-        switch (mask)
+	{        
+        CGFloat dx = [self rightEdgeDistance] - [self leftEdgeDistance];
+        CGFloat dy = [self topEdgeDistance] - [self bottomEdgeDistance];
+        if (dx || dy)
         {
-            case 0: // none
-                break;
-                
-            case 1:  // only top 
-                {
-                    id moveToPosition = [CCMoveTo actionWithDuration: self.ruberEdgesTime
-                                                            position: ccp(self.position.x, self.position.y + topEdgeDistance)];
-                    moveToPosition = [CCSequence actions: moveToPosition, [CCCallFunc actionWithTarget: self selector: @selector(scrollEnded)], nil];
-                    _ruberEdgeScrolling = YES;
-                    [self runAction: moveToPosition];
-                }
-                break;
-                
-            case 4:  // only bottom
-                {
-                    id moveToPosition = [CCMoveTo actionWithDuration: self.ruberEdgesTime
-                                                            position: ccp(self.position.x, self.position.y - bottomEdgeDistance)];
-                    moveToPosition = [CCSequence actions: moveToPosition, [CCCallFunc actionWithTarget: self selector: @selector(scrollEnded)], nil];
-                    _ruberEdgeScrolling = YES;
-                    [self runAction: moveToPosition];
-                }
-                break;
-                
-            case 2:  // only left
-                {
-                    id moveToPosition = [CCMoveTo actionWithDuration: self.ruberEdgesTime
-                                                            position: ccp(self.position.x - leftEdgeDistance, self.position.y)];
-                    moveToPosition = [CCSequence actions: moveToPosition, [CCCallFunc actionWithTarget: self selector: @selector(scrollEnded)], nil];
-                    _ruberEdgeScrolling = YES;
-                    [self runAction: moveToPosition];
-                }
-                break;
-                
-            case 8:  // only right
-                {
-                    id moveToPosition = [CCMoveTo actionWithDuration: self.ruberEdgesTime
-                                                            position: ccp(self.position.x + rightEdgeDistance, self.position.y)];
-                    moveToPosition = [CCSequence actions: moveToPosition, [CCCallFunc actionWithTarget: self selector: @selector(scrollEnded)], nil];
-                    _ruberEdgeScrolling = YES;
-                    [self runAction: moveToPosition];
-                }
-                break;
-                
-            case 3: // top and left 
-                {
-                    id moveToPosition = [CCMoveTo actionWithDuration: self.ruberEdgesTime
-                                                            position: ccp(self.position.x - leftEdgeDistance, 
-                                                                          self.position.y + topEdgeDistance)];
-                    moveToPosition = [CCSequence actions: moveToPosition, [CCCallFunc actionWithTarget: self selector: @selector(scrollEnded)], nil];
-                    _ruberEdgeScrolling = YES;
-                    [self runAction: moveToPosition];
-                }
-                break;
-                
-            case 9: // top and right 
-                {
-                    id moveToPosition = [CCMoveTo actionWithDuration: self.ruberEdgesTime
-                                                            position: ccp(self.position.x + rightEdgeDistance, 
-                                                                          self.position.y + topEdgeDistance)];
-                    moveToPosition = [CCSequence actions: moveToPosition, [CCCallFunc actionWithTarget: self selector: @selector(scrollEnded)], nil];
-                    _ruberEdgeScrolling = YES;
-                    [self runAction: moveToPosition];
-                }
-                break;
-                
-            case 6: // bottom and left 
-                {
-                    id moveToPosition = [CCMoveTo actionWithDuration: self.ruberEdgesTime
-                                                            position: ccp(self.position.x - leftEdgeDistance, 
-                                                                          self.position.y - bottomEdgeDistance)];
-                    moveToPosition = [CCSequence actions: moveToPosition, [CCCallFunc actionWithTarget: self selector: @selector(scrollEnded)], nil];
-                    _ruberEdgeScrolling = YES;
-                    [self runAction: moveToPosition];
-                }
-                break;
-                
-            case 12: // bottom and right 
-                {
-                    id moveToPosition = [CCMoveTo actionWithDuration: self.ruberEdgesTime
-                                                            position: ccp(self.position.x + rightEdgeDistance, 
-                                                                          self.position.y - bottomEdgeDistance)];
-                    moveToPosition = [CCSequence actions: moveToPosition, [CCCallFunc actionWithTarget: self selector: @selector(scrollEnded)], nil];
-                    _ruberEdgeScrolling = YES;
-                    [self runAction: moveToPosition];
-                }
-                break;
+            id moveToPosition = [CCMoveTo actionWithDuration: self.ruberEdgesTime
+                                                    position: ccp(self.position.x + dx, self.position.y + dy)];
+            moveToPosition = [CCSequence actions: moveToPosition, [CCCallFunc actionWithTarget: self selector: @selector(scrollEnded)], nil];
+            _ruberEdgeScrolling = YES;
+            [self runAction: moveToPosition];
         }
 	}
 }
@@ -692,7 +605,6 @@ typedef enum
             (pos.x - self.panBoundsRect.origin.x - self.panBoundsRect.size.width + 
              self.rightFrameMargin) / (self.rightFrameMargin * sqrt(2.0f)));
     }
-    //CCLOG(@"horizontal speed = %f", speed);
     return speed;
 }
 
@@ -722,7 +634,6 @@ typedef enum
             (pos.y - self.panBoundsRect.origin.y - self.panBoundsRect.size.height + 
              self.topFrameMargin) / (self.topFrameMargin * sqrt(2.0f)));
     }
-    //CCLOG(@"vertical speed = %f", speed);
     return speed;
 }
 
