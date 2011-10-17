@@ -198,7 +198,8 @@ enum nodeTags
 		
         // Create vertical reversed scroll widget.
 		CCNode *widgetReversed = [self widgetReversed];
-		[self addChild: widgetReversed z: 0 tag: kWidgetReversed];
+        if (widgetReversed)
+            [self addChild: widgetReversed z: 0 tag: kWidgetReversed];
 		
 		// Do initial layout.
 		[self updateForScreenReshape];	
@@ -494,6 +495,11 @@ enum nodeTags
 	return menu;
 }
 
+- (CCNode *) widgetReversed
+{
+    return nil;
+}
+
 - (void) updateWidget
 {
 	CGSize winSize = [[CCDirector sharedDirector] winSize];
@@ -600,6 +606,11 @@ enum nodeTags
 	menu2.priority = 1;
 	
 	return widget;
+}
+
+- (CCNode *) widgetReversed
+{
+    return nil;
 }
 
 - (void) updateWidget
