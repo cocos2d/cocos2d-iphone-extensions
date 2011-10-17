@@ -1610,9 +1610,6 @@
 		29B97314FDCFA39411CA2CEA /* CustomTemplate */ = {
 			isa = PBXGroup;
 			children = (
-				6D9CC4FA144029DA00B0D72F /* AudioToolbox.framework */,
-				6D9CC4FB144029DA00B0D72F /* AVFoundation.framework */,
-				6D9CC4FC144029DA00B0D72F /* OpenAL.framework */,
 				6DA57EAA139CD86A004D8D0B /* README.md */,
 				6D8DA84213A4985E008F263B /* CHANGELOG */,
 				504DFC6810AF1739006D82FE /* LICENSE.cocos2d */,
@@ -1631,9 +1628,7 @@
 		29B97323FDCFA39411CA2CEA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				6D9CC4F3144027CF00B0D72F /* AudioToolbox.framework */,
-				6D9CC4E7144026D900B0D72F /* OpenAL.framework */,
-				6D9CC4E6144026CE00B0D72F /* AVFoundation.framework */,
+				6D9CC61D144C460F00B0D72F /* TMXGeneratorTest-Frameworks */,
 				6DA57FBB139D63C8004D8D0B /* CCVideoPlayer Frameworks */,
 				6DA57646139C980E004D8D0B /* Cocos2D Template Frameworks */,
 			);
@@ -1874,6 +1869,19 @@
 			name = CocosDenshionExtras;
 			path = cocos2d/CocosDenshion/CocosDenshionExtras;
 			sourceTree = SOURCE_ROOT;
+		};
+		6D9CC61D144C460F00B0D72F /* TMXGeneratorTest-Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				6D9CC4FA144029DA00B0D72F /* AudioToolbox.framework */,
+				6D9CC4FB144029DA00B0D72F /* AVFoundation.framework */,
+				6D9CC4FC144029DA00B0D72F /* OpenAL.framework */,
+				6D9CC4F3144027CF00B0D72F /* AudioToolbox.framework */,
+				6D9CC4E7144026D900B0D72F /* OpenAL.framework */,
+				6D9CC4E6144026CE00B0D72F /* AVFoundation.framework */,
+			);
+			name = "TMXGeneratorTest-Frameworks";
+			sourceTree = "<group>";
 		};
 		6DA57646139C980E004D8D0B /* Cocos2D Template Frameworks */ = {
 			isa = PBXGroup;
