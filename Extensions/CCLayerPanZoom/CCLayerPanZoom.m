@@ -141,7 +141,7 @@ typedef enum
 		self.isTouchEnabled = YES;
 		
 		self.maxScale = 3.0f;
-		self.minScale = 0.8f;
+		self.minScale = 0.5f;
 		self.touches = [NSMutableArray arrayWithCapacity: 10];
 		self.panBoundsRect = CGRectNull;
 		self.touchDistance = 0.0F;
@@ -155,8 +155,8 @@ typedef enum
         self.leftFrameMargin = 100.0f;
         self.rightFrameMargin = 100.0f;
         
-        self.ruberEdgesMargin = 300.0f;
-        self.ruberEdgesTime = 0.1f;
+        self.ruberEdgesMargin = 0.0f;
+        self.ruberEdgesTime = 0.0f;
         _ruberEdgeRecovering = NO;
         _ruberEdgeUserZooming = NO;
 	}	
@@ -214,7 +214,7 @@ typedef enum
             self.position = ccp(self.position.x - deltaX, self.position.y - deltaY);
             _ruberEdgeUserZooming = NO;
         }
-        // If current and previous position of the multitouch's center aren't fuzzy equal -> change position of the layer
+        // If current and previous position of the multitouch's center aren't equal -> change position of the layer
 		if (!CGPointEqualToPoint(prevPosLayer, curPosLayer))
 		{            
             self.position = ccp(self.position.x + curPosLayer.x - prevPosLayer.x,
@@ -246,7 +246,8 @@ typedef enum
         {
             if (self.touchDistance > self.maxTouchDistanceToClick && !_touchMoveBegan)
             {
-                [self.delegate layerPanZoom: self touchMoveBeganAtPosition: [self convertToNodeSpace: prevTouchPosition]];
+                [self.delegate layerPanZoom: self 
+                   touchMoveBeganAtPosition: [self convertToNodeSpace: prevTouchPosition]];
                 _touchMoveBegan = YES;
             }
         }
