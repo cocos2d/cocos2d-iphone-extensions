@@ -117,7 +117,7 @@ typedef enum
 // Return distance to right edge of screen
 - (CGFloat) rightEdgeDistance;
 // Autoscroll postion if it's need for emulate rubber edges
-- (void) scrollPosition;
+- (void) recoverPositionAndScale;
 
 @end
 
@@ -141,7 +141,7 @@ typedef enum
 		self.isTouchEnabled = YES;
 		
 		self.maxScale = 3.0f;
-		self.minScale = 0.1f;
+		self.minScale = 0.8f;
 		self.touches = [NSMutableArray arrayWithCapacity: 10];
 		self.panBoundsRect = CGRectNull;
 		self.touchDistance = 0.0F;
@@ -157,8 +157,8 @@ typedef enum
         
         self.ruberEdgesMargin = 300.0f;
         self.ruberEdgesTime = 0.1f;
-        _ruberEdgeScrolling = NO;
-        _ruberEdgeScaling = NO;
+        _ruberEdgeRecovering = NO;
+        _ruberEdgeUserZooming = NO;
 	}	
 	return self;
 }
@@ -205,17 +205,17 @@ typedef enum
         CGFloat prevScale = self.scale;
         self.scale = self.scale * ccpDistance(curPosTouch1, curPosTouch2) / ccpDistance(prevPosTouch1, prevPosTouch2);
         // If scale was changed -> set new scale and fix position with new scale
-        if (fabs(self.scale - prevScale) > 0.01f)
+        if (self.scale != prevScale)
         {
-            _ruberEdgeScaling = YES;
+            _ruberEdgeUserZooming = YES;
             CGPoint realCurPosLayer = [self convertToNodeSpace: curPosLayer];
             CGFloat deltaX = (realCurPosLayer.x - self.anchorPoint.x * self.contentSize.width) * (self.scale - prevScale);
             CGFloat deltaY = (realCurPosLayer.y - self.anchorPoint.y * self.contentSize.height) * (self.scale - prevScale);
             self.position = ccp(self.position.x - deltaX, self.position.y - deltaY);
-            _ruberEdgeScaling = NO;
+            _ruberEdgeUserZooming = NO;
         }
         // If current and previous position of the multitouch's center aren't fuzzy equal -> change position of the layer
-		if (!ccpFuzzyEqual(prevPosLayer, curPosLayer, 2.0f))
+		if (!CGPointEqualToPoint(prevPosLayer, curPosLayer))
 		{            
             self.position = ccp(self.position.x + curPosLayer.x - prevPosLayer.x,
                                 self.position.y + curPosLayer.y - prevPosLayer.y);
@@ -279,9 +279,9 @@ typedef enum
 		self.touchDistance = 0.0f;
 	}
     
-    if (![self.touches count] && !_ruberEdgeScrolling)
+    if (![self.touches count] && !_ruberEdgeRecovering)
     {
-        [self scrollPosition];
+        [self recoverPositionAndScale];
     }
 }
 
@@ -409,7 +409,7 @@ typedef enum
     {
         if (self.ruberEdgesMargin && self.mode == kCCLayerPanZoomModeSheet)
         {
-            if (!_ruberEdgeScrolling && !_ruberEdgeScaling)
+            if (!_ruberEdgeRecovering && !_ruberEdgeUserZooming)
             {
                 CGFloat topDistance = [self topEdgeDistance];
                 CGFloat bottomDistance = [self bottomEdgeDistance];
@@ -461,6 +461,7 @@ typedef enum
 - (void) setScale: (float)scale
 {
     [super setScale: MIN(MAX(scale, self.minScale), self.maxScale)];
+    /*
 	if (!CGRectIsNull(self.panBoundsRect))
 	{
 		// Check the pan bounds and fix (if it's need) scale
@@ -468,30 +469,43 @@ typedef enum
 		if ((boundBox.size.width < self.panBoundsRect.size.width) || (boundBox.size.height < self.panBoundsRect.size.height))
 			self.scale = [self minPossibleScale];	
 	}
+    */
 }
 
 #pragma mark Ruber Edges related
 
-- (void) scrollPosition
+- (void) recoverPositionAndScale
 {
     if (!CGRectIsNull(self.panBoundsRect))
-	{        
-        CGFloat dx = [self rightEdgeDistance] - [self leftEdgeDistance];
-        CGFloat dy = [self topEdgeDistance] - [self bottomEdgeDistance];
-        if (dx || dy)
+	{    
+        CGSize winSize = [CCDirector sharedDirector].winSize;
+        CGFloat rightEdgeDistance = [self rightEdgeDistance];
+        CGFloat leftEdgeDistance = [self leftEdgeDistance];
+        CGFloat topEdgeDistance = [self topEdgeDistance];
+        CGFloat bottomEdgeDistance = [self bottomEdgeDistance];
+        if (!rightEdgeDistance && !leftEdgeDistance && !topEdgeDistance && !bottomEdgeDistance)
         {
+            return;
+        }
+        else if (rightEdgeDistance && leftEdgeDistance && topEdgeDistance && bottomEdgeDistance)
+        {
+            _ruberEdgeRecovering = YES;
+            CGFloat scale = [self minPossibleScale];
+            CGFloat dx = scale * self.contentSize.width * (self.anchorPoint.x - 0.5f);
+            CGFloat dy = scale * self.contentSize.height * (self.anchorPoint.y - 0.5f);            
             id moveToPosition = [CCMoveTo actionWithDuration: self.ruberEdgesTime
-                                                    position: ccp(self.position.x + dx, self.position.y + dy)];
-            moveToPosition = [CCSequence actions: moveToPosition, [CCCallFunc actionWithTarget: self selector: @selector(scrollEnded)], nil];
-            _ruberEdgeScrolling = YES;
-            [self runAction: moveToPosition];
+                                                    position: ccp(winSize.width * 0.5f + dx, winSize.height * 0.5f + dy)];
+            id scaleToPosition = [CCScaleTo actionWithDuration: self.ruberEdgesTime
+                                                         scale: scale];
+            id sequence = [CCSpawn actions: moveToPosition, scaleToPosition, [CCCallFunc actionWithTarget: self selector: @selector(scrollEnded)], nil];
+            [self runAction: sequence];
         }
 	}
 }
 
 - (void) scrollEnded
 {
-    _ruberEdgeScrolling = NO;
+    _ruberEdgeRecovering = NO;
 }
 
 #pragma mark Helpers
