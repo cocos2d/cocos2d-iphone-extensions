@@ -406,11 +406,11 @@ typedef enum
 {   
     CGPoint prevPosition = self.position;
     [super setPosition: position];
-    if (!CGRectIsNull(_panBoundsRect))
+    if (!CGRectIsNull(_panBoundsRect) && !_ruberEdgeUserZooming)
     {
         if (self.ruberEdgesMargin && self.mode == kCCLayerPanZoomModeSheet)
         {
-            if (!_ruberEdgeRecovering && !_ruberEdgeUserZooming)
+            if (!_ruberEdgeRecovering)
             {
                 CGFloat topDistance = [self topEdgeDistance];
                 CGFloat bottomDistance = [self bottomEdgeDistance];
