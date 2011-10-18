@@ -116,7 +116,7 @@ typedef enum
 - (CGFloat) bottomEdgeDistance;
 // Return distance to right edge of screen
 - (CGFloat) rightEdgeDistance;
-// Autoscroll postion if it's need for emulate rubber edges
+// Recover position if it's need for emulate rubber edges
 - (void) recoverPositionAndScale;
 
 @end
@@ -392,7 +392,7 @@ typedef enum
 - (void) setPanBoundsRect: (CGRect) rect
 {
 	_panBoundsRect = rect;
-    self.scale = self.scale;
+    self.scale = [self minPossibleScale];
     self.position = self.position;
 }
 
@@ -461,15 +461,6 @@ typedef enum
 - (void) setScale: (float)scale
 {
     [super setScale: MIN(MAX(scale, self.minScale), self.maxScale)];
-    /*
-	if (!CGRectIsNull(self.panBoundsRect))
-	{
-		// Check the pan bounds and fix (if it's need) scale
-		CGRect boundBox = [self boundingBox];
-		if ((boundBox.size.width < self.panBoundsRect.size.width) || (boundBox.size.height < self.panBoundsRect.size.height))
-			self.scale = [self minPossibleScale];	
-	}
-    */
 }
 
 #pragma mark Ruber Edges related
@@ -483,27 +474,104 @@ typedef enum
         CGFloat leftEdgeDistance = [self leftEdgeDistance];
         CGFloat topEdgeDistance = [self topEdgeDistance];
         CGFloat bottomEdgeDistance = [self bottomEdgeDistance];
+        CGFloat scale = [self minPossibleScale];
+        
         if (!rightEdgeDistance && !leftEdgeDistance && !topEdgeDistance && !bottomEdgeDistance)
         {
             return;
         }
-        else if (rightEdgeDistance && leftEdgeDistance && topEdgeDistance && bottomEdgeDistance)
+        
+        if (self.scale < scale)
         {
             _ruberEdgeRecovering = YES;
-            CGFloat scale = [self minPossibleScale];
-            CGFloat dx = scale * self.contentSize.width * (self.anchorPoint.x - 0.5f);
-            CGFloat dy = scale * self.contentSize.height * (self.anchorPoint.y - 0.5f);            
+            CGPoint newPosition = CGPointZero;
+            if (rightEdgeDistance && leftEdgeDistance && topEdgeDistance && bottomEdgeDistance)
+            {
+                CGFloat dx = scale * self.contentSize.width * (self.anchorPoint.x - 0.5f);
+                CGFloat dy = scale * self.contentSize.height * (self.anchorPoint.y - 0.5f);
+                newPosition = ccp(winSize.width * 0.5f + dx, winSize.height * 0.5f + dy);
+            }
+            else if (rightEdgeDistance && leftEdgeDistance && topEdgeDistance)
+            {
+                CGFloat dx = scale * self.contentSize.width * (self.anchorPoint.x - 0.5f);
+                CGFloat dy = scale * self.contentSize.height * (1.0f - self.anchorPoint.y);            
+                newPosition = ccp(winSize.width * 0.5f + dx, winSize.height - dy);
+            }
+            else if (rightEdgeDistance && leftEdgeDistance && bottomEdgeDistance)
+            {
+                CGFloat dx = scale * self.contentSize.width * (self.anchorPoint.x - 0.5f);
+                CGFloat dy = scale * self.contentSize.height * self.anchorPoint.y;            
+                newPosition = ccp(winSize.width * 0.5f + dx, dy);
+            }
+            else if (rightEdgeDistance && topEdgeDistance && bottomEdgeDistance)
+            {
+                CGFloat dx = scale * self.contentSize.width * (1.0f - self.anchorPoint.x);
+                CGFloat dy = scale * self.contentSize.height * (self.anchorPoint.y - 0.5f);            
+                newPosition = ccp(winSize.width  - dx, winSize.height  * 0.5f + dy);
+            }
+            else if (leftEdgeDistance && topEdgeDistance && bottomEdgeDistance)
+            {
+                CGFloat dx = scale * self.contentSize.width * self.anchorPoint.x;
+                CGFloat dy = scale * self.contentSize.height * (self.anchorPoint.y - 0.5f);            
+                newPosition = ccp(dx, winSize.height * 0.5f + dy);
+            }
+            else if (leftEdgeDistance && topEdgeDistance)
+            {
+                CGFloat dx = scale * self.contentSize.width * self.anchorPoint.x;
+                CGFloat dy = scale * self.contentSize.height * (1.0f - self.anchorPoint.y);            
+                newPosition = ccp(dx, winSize.height - dy);
+            } 
+            else if (leftEdgeDistance && bottomEdgeDistance)
+            {
+                CGFloat dx = scale * self.contentSize.width * self.anchorPoint.x;
+                CGFloat dy = scale * self.contentSize.height * self.anchorPoint.y;            
+                newPosition = ccp(dx, dy);
+            } 
+            else if (rightEdgeDistance && topEdgeDistance)
+            {
+                CGFloat dx = scale * self.contentSize.width * (1.0f - self.anchorPoint.x);
+                CGFloat dy = scale * self.contentSize.height * (1.0f - self.anchorPoint.y);            
+                newPosition = ccp(winSize.width - dx, winSize.height - dy);
+            } 
+            else if (rightEdgeDistance && bottomEdgeDistance)
+            {
+                CGFloat dx = scale * self.contentSize.width * (1.0f - self.anchorPoint.x);
+                CGFloat dy = scale * self.contentSize.height * self.anchorPoint.y;            
+                newPosition = ccp(winSize.width - dx, dy);
+            } 
+            else if (topEdgeDistance || bottomEdgeDistance)
+            {
+                CGFloat dy = scale * self.contentSize.height * (self.anchorPoint.y - 0.5f);            
+                newPosition = ccp(self.position.x, winSize.height * 0.5f + dy);
+            }
+            else if (leftEdgeDistance || rightEdgeDistance)
+            {
+                CGFloat dx = scale * self.contentSize.width * (self.anchorPoint.x - 0.5f);
+                newPosition = ccp(winSize.width * 0.5f + dx, self.position.y);
+            } 
+            
             id moveToPosition = [CCMoveTo actionWithDuration: self.ruberEdgesTime
-                                                    position: ccp(winSize.width * 0.5f + dx, winSize.height * 0.5f + dy)];
+                                                    position: newPosition];
             id scaleToPosition = [CCScaleTo actionWithDuration: self.ruberEdgesTime
                                                          scale: scale];
-            id sequence = [CCSpawn actions: moveToPosition, scaleToPosition, [CCCallFunc actionWithTarget: self selector: @selector(scrollEnded)], nil];
+            id sequence = [CCSpawn actions: scaleToPosition, moveToPosition, [CCCallFunc actionWithTarget: self selector: @selector(recoverEnded)], nil];
             [self runAction: sequence];
+
+        }
+        else
+        {
+            _ruberEdgeRecovering = YES;
+            id moveToPosition = [CCMoveTo actionWithDuration: self.ruberEdgesTime
+                                                    position: ccp(self.position.x + rightEdgeDistance - leftEdgeDistance, 
+                                                                  self.position.y + topEdgeDistance - bottomEdgeDistance)];
+            id sequence = [CCSpawn actions: moveToPosition, [CCCallFunc actionWithTarget: self selector: @selector(recoverEnded)], nil];
+            [self runAction: sequence];
+            
         }
 	}
 }
 
-- (void) scrollEnded
+- (void) recoverEnded
 {
     _ruberEdgeRecovering = NO;
 }
