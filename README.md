@@ -52,7 +52,7 @@ Extensions
  * [iOS/Mac] **CCScrollLayer** - CCLayer subclass that lets you pass-in an array of layers and it will then create a smooth scroller. Complete with the "snapping" effect.
  * [iOS/Mac] **FilesDownloader** - Downloader for a group of files with shared source path.
  * [iOS/Mac] **TMXGenerator** - Class that generates a single TMX map with multiple layers.
- * [iOS/Mac] **CCLayerPanZoom** - CCLayer subclass that can be scrolled and zoomed with one or two fingers (complete with rubber effect, two modes & ability to click through delegate).
+ * [iOS] **CCLayerPanZoom** - CCLayer subclass that can be scrolled and zoomed with one or two fingers (complete with rubber effect, two modes & ability to click through delegate).
  
  Video Overview and more Info can be found on the [Wiki](https://github.com/cocos2d/cocos2d-iphone-extensions/wiki "Wiki")   
  Detailed README for each extension is available in it's folder (i.e. Extensions/CCSlider/README.md).   

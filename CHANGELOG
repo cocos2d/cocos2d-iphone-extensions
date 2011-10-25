@@ -1,6 +1,6 @@
 
 0.2 - XX-XXXXX-2011
-   * New Extension: CCLayerPanZoom
+   * New Extension: CCLayerPanZoom (iOS Only)
    * New Extension: TMXGenerator.
    * CCSlider: Uses KVO instead of delegate property.
    * ССScrollLayer: Added new property: marginOffset.
