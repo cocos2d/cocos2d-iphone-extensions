@@ -39,7 +39,10 @@
 
 @end
 
-@interface CCLayerPanZoomSheetTestLayer: CCLayerPanZoomTestLayer 
+@interface CCLayerPanZoomSimpleSheetTestLayer: CCLayerPanZoomTestLayer 
+@end
+
+@interface CCLayerPanZoomAdvancedSheetTestLayer: CCLayerPanZoomTestLayer 
 @end
 
 @interface CCLayerPanZoomFrameTestLayer: CCLayerPanZoomTestLayer

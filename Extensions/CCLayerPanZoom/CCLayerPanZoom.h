@@ -91,14 +91,19 @@ typedef enum
     
     // Flag used to call touchMoveBeganAtPosition: only once for each single touch event.
     BOOL _touchMoveBegan;
+    
+    ccTime _ruberEdgesTime;
+    CGFloat _ruberEdgesMargin;
+    BOOL _ruberEdgeRecovering;
+    BOOL _ruberEdgeUserZooming;
 }
 
 /** The maximum scale level
- * Default is 2.0f */
+ * Default is 3.0f */
 @property (readwrite, assign) float maxScale;    
 
 /** The minimum scale level
- * Default is 0.1f */
+ * Default is 0.5f */
 @property (readwrite, assign) float minScale;   
 
 /** The rectangle that use to determine the restriction of scrolling
@@ -145,5 +150,15 @@ typedef enum
  * for define right autoscrolling zone in frame mode
  * Default is 100.0f */
 @property (readwrite, assign) CGFloat rightFrameMargin;
+
+/** Delay for recover layer position and scale 
+ * for rubber edges
+ * Default is 0.0f */
+@property (readwrite, assign) ccTime ruberEdgesTime;
+
+/** Distance from panBoundRect on which possible stretch layer 
+ * for rubber edges
+ * Default is 0.0f */
+@property (readwrite, assign) CGFloat ruberEdgesMargin;
 
 @end
