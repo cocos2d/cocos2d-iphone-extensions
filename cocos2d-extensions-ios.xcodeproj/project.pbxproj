@@ -1380,6 +1380,7 @@
 		FA98ECD31403BCBC001CD6CE /* background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = background.png; sourceTree = "<group>"; };
 		FA98ECD41403BCBC001CD6CE /* CCLayerPanZoomTestLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCLayerPanZoomTestLayer.h; sourceTree = "<group>"; };
 		FA98ECD51403BCBC001CD6CE /* CCLayerPanZoomTestLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCLayerPanZoomTestLayer.m; sourceTree = "<group>"; };
+		FD9D37A014571578003EEB97 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = text; path = README.md; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -2470,6 +2471,7 @@
 			children = (
 				FA98ECCF1403BB44001CD6CE /* CCLayerPanZoom.h */,
 				FA98ECD01403BB44001CD6CE /* CCLayerPanZoom.m */,
+				FD9D37A014571578003EEB97 /* README.md */,
 			);
 			path = CCLayerPanZoom;
 			sourceTree = "<group>";
