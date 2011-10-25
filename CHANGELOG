@@ -5,6 +5,7 @@
    * CCSlider: Uses KVO instead of delegate property.
    * ССScrollLayer: Added new property: marginOffset.
    * CCScrollLayer: Restore blending functions properly.
+   * CCScrollLayer: Assign delegate instead of retain.
    * CCMenuAdvanced: bottom to top align fix.
    * Analyzer issues fixes in CCBigImage & CCMenuAdvanced.
 
