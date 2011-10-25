@@ -95,7 +95,7 @@
 	CGFloat marginOffset_;
 }
 
-@property (readwrite, retain) NSObject <CCScrollLayerDelegate> *delegate;
+@property (readwrite, assign) NSObject <CCScrollLayerDelegate> *delegate;
 
 #pragma mark Scroll Config Properties
 
