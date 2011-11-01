@@ -530,6 +530,15 @@ enum
 	self.position = newPos;
     prevScreen_ = currentScreen_;
 	currentScreen_ = [self pageNumberForPosition:self.position];
+    
+    // Inform delegate about new currentScreen.
+    if (prevScreen_ != currentScreen_)
+    {
+        if ([self.delegate respondsToSelector:@selector(scrollLayer:scrolledToPageNumber:)])
+            [self.delegate scrollLayer: self scrolledToPageNumber: currentScreen_];
+    }
+    
+    prevScreen_ = currentScreen_;
 	
 	return NO;
 	
