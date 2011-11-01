@@ -56,6 +56,12 @@ enum
 @end
 #endif
 
+@interface CCScrollLayer ()
+
+- (int) pageNumberForPosition: (CGPoint) position;
+
+@end
+
 @implementation CCScrollLayer
 
 @synthesize delegate = delegate_;
@@ -203,8 +209,13 @@ enum
 
 - (void) moveToPageEnded
 {
-	if ([self.delegate respondsToSelector:@selector(scrollLayer:scrolledToPageNumber:)])
-		[self.delegate scrollLayer: self scrolledToPageNumber: currentScreen_];
+    if (prevScreen_ != currentScreen_)
+    {
+        if ([self.delegate respondsToSelector:@selector(scrollLayer:scrolledToPageNumber:)])
+            [self.delegate scrollLayer: self scrolledToPageNumber: currentScreen_];
+    }
+    
+    prevScreen_ = currentScreen_ = [self pageNumberForPosition:self.position];
 }
 
 - (int) pageNumberForPosition: (CGPoint) position
@@ -249,6 +260,7 @@ enum
     }
 	
     self.position = [self positionForPageWithNumber: page];
+    prevScreen_ = currentScreen_;
     currentScreen_ = page;
 	
 }
@@ -279,6 +291,7 @@ enum
 	
 	[self updatePages];
 	
+    prevScreen_ = currentScreen_;
 	currentScreen_ = MIN(currentScreen_, [layers_ count] - 1);
 	[self moveToPage: currentScreen_];
 }
@@ -515,6 +528,7 @@ enum
 	newPos.x = MAX(newPos.x, [self positionForPageWithNumber: [layers_ count] - 1].x);
 	
 	self.position = newPos;
+    prevScreen_ = currentScreen_;
 	currentScreen_ = [self pageNumberForPosition:self.position];
 	
 	return NO;
