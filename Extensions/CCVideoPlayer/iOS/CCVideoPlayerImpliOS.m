@@ -61,7 +61,7 @@
 		[ [_theMovie view] setFrame: CGRectMake( 0, 0, keyWindow.frame.size.height, keyWindow.frame.size.width)];				
 		[ [_theMovie view] setCenter: keyWindow.center ];
         
-		[self updateOrientationWithOrientation: [[UIApplication sharedApplication] statusBarOrientation]];
+		[self updateOrientationWithOrientation: (UIDeviceOrientation)[[UIApplication sharedApplication] statusBarOrientation]];
 		
 		// Movie playback is asynchronous, so this method returns immediately.
 		[_theMovie play];
