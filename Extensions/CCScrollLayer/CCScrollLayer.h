@@ -73,6 +73,9 @@
 	// Whenever show or not gray/white dots under scrolling content.
 	BOOL showPagesIndicator_;
 	CGPoint pagesIndicatorPosition_;
+    ccColor4B pagesIndicatorSelectedColor;
+    ccColor4B pagesIndicatorNormalColor;
+
 	
 	// Internal state of scrollLayer (scrolling or idle).
 	int state_;
@@ -125,6 +128,10 @@
  * (Default value is screenWidth/2, screenHeight/4)
  */
 @property(readwrite, assign) CGPoint pagesIndicatorPosition;
+
+@property(readwrite, assign) ccColor4B pagesIndicatorSelectedColor;
+@property(readwrite, assign) ccColor4B pagesIndicatorNormalColor;
+
 
 #pragma mark Pages Control Properties
 

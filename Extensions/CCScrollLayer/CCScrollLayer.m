@@ -64,6 +64,8 @@ enum
 @synthesize currentScreen = currentScreen_;
 @synthesize showPagesIndicator = showPagesIndicator_;
 @synthesize pagesIndicatorPosition = pagesIndicatorPosition_;
+@synthesize pagesIndicatorNormalColor = pagesIndicatorNormalColor_;
+@synthesize pagesIndicatorSelectedColor = pagesIndicatorSelectedColor_;
 @synthesize pagesWidthOffset = pagesWidthOffset_;
 @synthesize pages = layers_;
 @synthesize stealTouches = stealTouches_;
@@ -101,7 +103,9 @@ enum
 		// Show indicator by default.
 		self.showPagesIndicator = YES;
 		self.pagesIndicatorPosition = ccp(0.5f * self.contentSize.width, ceilf ( self.contentSize.height / 8.0f ));
-		
+		self.pagesIndicatorNormalColor = ccc4(0x96,0x96,0x96,0xFF);
+        self.pagesIndicatorSelectedColor = ccc4(0xFF,0xFF,0xFF,0xFF);
+
 		// Set up the starting variables
 		currentScreen_ = 0;	
 		
@@ -110,7 +114,7 @@ enum
 		
 		// Save array of layers.
 		layers_ = [[NSMutableArray alloc] initWithArray:layers copyItems:NO];
-		
+
 		[self updatePages];			
 		
 	}
@@ -171,11 +175,17 @@ enum
 		glPointSize( 6.0 * CC_CONTENT_SCALE_FACTOR() );
 		
 		// Draw Gray Points
-		glColor4ub(0x96,0x96,0x96,0xFF);
+		glColor4ub(pagesIndicatorNormalColor_.r,
+                   pagesIndicatorNormalColor_.g,
+                   pagesIndicatorNormalColor_.b,
+                   pagesIndicatorNormalColor_.a);
 		ccDrawPoints( points, totalScreens );
 		
-		// Draw White Point for Selected Page
-		glColor4ub(0xFF,0xFF,0xFF,0xFF);
+		// Draw White Point for Selected Page	
+		glColor4ub(pagesIndicatorSelectedColor_.r,
+                   pagesIndicatorSelectedColor_.g,
+                   pagesIndicatorSelectedColor_.b,
+                   pagesIndicatorSelectedColor_.a);
 		ccDrawPoint(points[currentScreen_]);
 		
 		// Restore GL Values
