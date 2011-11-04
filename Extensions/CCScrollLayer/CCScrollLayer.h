@@ -93,7 +93,7 @@
 	
 	// Holds current pages width offset.
 	CGFloat pagesWidthOffset_;
-	
+    
 	// Holds current margin offset
 	CGFloat marginOffset_;
 }
@@ -134,6 +134,10 @@
  * (Default value is screenWidth/2, screenHeight/4)
  */
 @property(readwrite, assign) CGPoint pagesIndicatorPosition;
+
+@property(readwrite, assign) ccColor4B pagesIndicatorSelectedColor;
+@property(readwrite, assign) ccColor4B pagesIndicatorNormalColor;
+
 
 #pragma mark Pages Control Properties
 
