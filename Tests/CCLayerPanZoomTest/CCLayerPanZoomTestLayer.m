@@ -191,7 +191,8 @@ Class backTest()
                               z: 1 
                             tag: kLabelTag];
         _panZoomLayer.mode = kCCLayerPanZoomModeSheet;
-        _panZoomLayer.minScale = 1.5f;
+        _panZoomLayer.minScale = 1.0f;
+        _panZoomLayer.rubberEffectRatio = 0.0f;
 		[self updateForScreenReshape];
 	}
 	
@@ -201,7 +202,7 @@ Class backTest()
 
 - (NSString *) title
 {
-	return @"Test 1. Simple sheet test.";
+	return @"Test 1. Sheet (Rubber Effect OFF).";
 }
 
 - (void) updateForScreenReshape
@@ -256,8 +257,6 @@ Class backTest()
                               z: 1 
                             tag: kLabelTag];
         _panZoomLayer.mode = kCCLayerPanZoomModeSheet;
-        _panZoomLayer.rubberEdgesMargin = [CCDirector sharedDirector].winSize.width / 2.0;
-        _panZoomLayer.rubberEdgesRecoveryTime = 0.2f;
 		[self updateForScreenReshape];
 	}
 	
@@ -267,7 +266,7 @@ Class backTest()
 
 - (NSString *) title
 {
-	return @"Test 2. Advanced sheet test.";
+	return @"Test 2. Sheet (Rubber Effect ON).";
 }
 
 - (void) updateForScreenReshape
@@ -287,6 +286,9 @@ Class backTest()
 	// position the label on the center of the bounds
 	CCNode *label = [_panZoomLayer getChildByTag: kLabelTag];
 	label.position =  ccp(boundingRect.size.width * 0.5f, boundingRect.size.height * 0.5f);
+    
+    // Allow panZoomLayer's contents occupy half of the screen.
+    _panZoomLayer.minScale = 0.5f * _panZoomLayer.panBoundsRect.size.width  / boundingRect.size.width;
 }
 
 @end
