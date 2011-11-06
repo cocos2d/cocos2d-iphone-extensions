@@ -132,25 +132,25 @@ typedef enum
             ruberEdgesMargin = _ruberEdgesMargin;
 
 @dynamic maxScale; 
-- (void) setMaxScale:(float)maxScale
+- (void) setMaxScale:(CGFloat)maxScale
 {
     _maxScale = maxScale;
     self.scale = MIN(self.scale, _maxScale);
 }
 
-- (float) maxScale
+- (CGFloat) maxScale
 {
     return _maxScale;
 }
 
 @dynamic minScale;
-- (void) setMinScale:(float)minScale
+- (void) setMinScale:(CGFloat)minScale
 {
     _minScale = minScale;
     self.scale = MAX(self.scale, minScale);
 }
 
-- (float) minScale
+- (CGFloat) minScale
 {
     return _minScale;
 }

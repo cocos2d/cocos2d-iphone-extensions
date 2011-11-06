@@ -66,8 +66,8 @@ typedef enum
  * with one or two fingers */
 @interface CCLayerPanZoom : CCLayer 
 {
-    float _maxScale;
-    float _minScale;
+    CGFloat _maxScale;
+    CGFloat _minScale;
 	NSMutableArray *_touches;
 	CGRect _panBoundsRect;
 	CGFloat _touchDistance;
@@ -100,11 +100,11 @@ typedef enum
 
 /** The maximum scale level
  * Default is 3.0f */
-@property (readwrite, assign) float maxScale;    
+@property (readwrite, assign) CGFloat maxScale;    
 
 /** The minimum scale level
  * Default is 0.5f */
-@property (readwrite, assign) float minScale;   
+@property (readwrite, assign) CGFloat minScale;   
 
 /** The rectangle that use to determine the restriction of scrolling
  * Set value CGRectNull to disable restriction
