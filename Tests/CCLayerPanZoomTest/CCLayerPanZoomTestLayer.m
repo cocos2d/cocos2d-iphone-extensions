@@ -113,6 +113,7 @@ Class backTest()
 
 - (void) dealloc
 {
+    _panZoomLayer.delegate = nil;
     [_panZoomLayer release];
 	[super dealloc];
 }

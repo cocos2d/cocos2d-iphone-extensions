@@ -120,7 +120,7 @@ typedef enum
 @property (readwrite, assign) CGFloat maxTouchDistanceToClick;   
 
 /** Delegate for callbacks. */
-@property (readwrite, retain) id<CCLayerPanZoomClickDelegate> delegate;
+@property (readwrite, assign) id<CCLayerPanZoomClickDelegate> delegate;
 
 /** Describes layer's mode. Defult is kCCLayerPanZoomModeSheet */
 @property (readwrite, assign) CCLayerPanZoomMode mode;
