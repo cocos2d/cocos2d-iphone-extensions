@@ -5,10 +5,11 @@
    * CCSlider: Uses KVO instead of delegate property.
    * ССScrollLayer: Added new property: marginOffset.
    * CCScrollLayer: Restore blending functions properly.
-   * CCScrollLayer: minor fixes:
+   * CCScrollLayer: minor fixes & additions:
       1. Assign delegate instead of retain.
       2. Avoid double call of scrollLayer:scrolledToPageNumber: (Issue #82).
-      3. Call call scrollLayer:scrolledToPageNumber: on Mac, using wheel to scroll.
+      3. Call scrollLayer:scrolledToPageNumber: on Mac, using wheel to scroll.
+      4. Added ability to change colors of pages indicator (Issues #84, #87).
    * CCMenuAdvanced fixes:   
       1. Bottom to top align bug - menuItem outside of menu bounds (Issue #75).
       2. Inverted X scroll in Mac with wheel.
