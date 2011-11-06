@@ -92,7 +92,7 @@ typedef enum
     // Flag used to call touchMoveBeganAtPosition: only once for each single touch event.
     BOOL _touchMoveBegan;
     
-    ccTime _rubberEdgesTime;
+    ccTime _rubberEdgesRecoveryTime;
     CGFloat _rubberEdgesMargin;
     BOOL _rubberEdgeRecovering;
     BOOL _rubberEdgeUserZooming;
@@ -154,7 +154,7 @@ typedef enum
 /** Delay for recover layer position and scale 
  * for rubber edges
  * Default is 0.0f */
-@property (readwrite, assign) ccTime rubberEdgesTime;
+@property (readwrite, assign) ccTime rubberEdgesRecoveryTime;
 
 /** Distance from panBoundRect on which possible stretch layer 
  * for rubber edges

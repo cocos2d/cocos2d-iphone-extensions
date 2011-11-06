@@ -128,7 +128,7 @@ typedef enum
             delegate = _delegate, touches = _touches, touchDistance = _touchDistance, 
             minSpeed = _minSpeed, maxSpeed = _maxSpeed, topFrameMargin = _topFrameMargin, 
             bottomFrameMargin = _bottomFrameMargin, leftFrameMargin = _leftFrameMargin,
-            rightFrameMargin = _rightFrameMargin, scheduler = _scheduler, rubberEdgesTime = _rubberEdgesTime,
+            rightFrameMargin = _rightFrameMargin, scheduler = _scheduler, rubberEdgesRecoveryTime = _rubberEdgesRecoveryTime,
             rubberEdgesMargin = _rubberEdgesMargin;
 
 @dynamic maxScale; 
@@ -180,7 +180,7 @@ typedef enum
         self.rightFrameMargin = 100.0f;
         
         self.rubberEdgesMargin = 0.0f;
-        self.rubberEdgesTime = 0.0f;
+        self.rubberEdgesRecoveryTime = 0.0f;
         _rubberEdgeRecovering = NO;
         _rubberEdgeUserZooming = NO;
 	}	
@@ -578,9 +578,9 @@ typedef enum
                 newPosition = ccp(winSize.width * 0.5f + dx, self.position.y);
             } 
             
-            id moveToPosition = [CCMoveTo actionWithDuration: self.rubberEdgesTime
+            id moveToPosition = [CCMoveTo actionWithDuration: self.rubberEdgesRecoveryTime
                                                     position: newPosition];
-            id scaleToPosition = [CCScaleTo actionWithDuration: self.rubberEdgesTime
+            id scaleToPosition = [CCScaleTo actionWithDuration: self.rubberEdgesRecoveryTime
                                                          scale: scale];
             id sequence = [CCSpawn actions: scaleToPosition, moveToPosition, [CCCallFunc actionWithTarget: self selector: @selector(recoverEnded)], nil];
             [self runAction: sequence];
@@ -589,7 +589,7 @@ typedef enum
         else
         {
             _rubberEdgeRecovering = YES;
-            id moveToPosition = [CCMoveTo actionWithDuration: self.rubberEdgesTime
+            id moveToPosition = [CCMoveTo actionWithDuration: self.rubberEdgesRecoveryTime
                                                     position: ccp(self.position.x + rightEdgeDistance - leftEdgeDistance, 
                                                                   self.position.y + topEdgeDistance - bottomEdgeDistance)];
             id sequence = [CCSpawn actions: moveToPosition, [CCCallFunc actionWithTarget: self selector: @selector(recoverEnded)], nil];
