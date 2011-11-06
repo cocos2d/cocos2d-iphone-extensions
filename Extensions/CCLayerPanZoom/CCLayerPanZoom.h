@@ -91,10 +91,10 @@ typedef enum
     // Flag used to call touchMoveBeganAtPosition: only once for each single touch event.
     BOOL _touchMoveBegan;
     
-    ccTime _rubberEdgesRecoveryTime;
-    CGFloat _rubberEdgesMargin;
-    BOOL _rubberEdgeRecovering;
-    BOOL _rubberEdgeUserZooming;
+    ccTime _rubberEffectRecoveryTime;
+    CGFloat _rubberEffectRatio;
+    BOOL _rubberEffectRecovering;
+    BOOL _rubberEffectZooming;
 }
 
 #pragma mark Zoom Options
@@ -157,19 +157,20 @@ typedef enum
 
 #pragma mark Rubber Effect Options
 
-/** Time to recover layer position and scale after moving out from panBoundsRect
- * due to rubber effect.
- * Default is 0.0f (0.2 is good for rubber effect). 
- * @todo Set default to 0.2, rename while refactoring rubberEdgesMargin.
+/** Time (in seconds) to recover layer position and scale after moving out from 
+ * panBoundsRect due to rubber effect.
+ * Default is 0.2f.
  */
-@property (readwrite, assign) ccTime rubberEdgesRecoveryTime;
+@property (readwrite, assign) ccTime rubberEffectRecoveryTime;
 
-/** Outside distance from panBoundRect borders on which it's possibe to move layer
- * to achieve rubber effect.
- * Default is 0.0f (0.5f * panBoundsRect.size is good for rubber effect.)
- * @todo Refactor to rubberEffectRatio (to support right ratio for non-square CCLayerPanZoom layers &
- * set default values to something )
+/** Ratio for rubber effect. Describes the proportion of the panBoundsRect size,
+ * that layer can be moved outside from panBoundsRect border.
+ * So 0.0f means that layer can't be moved outside from bounds (rubber effect is Off)
+ * and 1.0f means that layer can be moved panBoundsRect.size.width far from 
+ * left/right borders & panBoundsRect.size.height from top/bottom borders.
+ * Default is 0.5f.
+ * Limitations: only sheet mode is supported.
  */
-@property (readwrite, assign) CGFloat rubberEdgesMargin;
+@property (readwrite, assign) CGFloat rubberEffectRatio;
 
 @end

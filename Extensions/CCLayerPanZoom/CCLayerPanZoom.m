@@ -128,8 +128,7 @@ typedef enum
             delegate = _delegate, touches = _touches, touchDistance = _touchDistance, 
             minSpeed = _minSpeed, maxSpeed = _maxSpeed, topFrameMargin = _topFrameMargin, 
             bottomFrameMargin = _bottomFrameMargin, leftFrameMargin = _leftFrameMargin,
-            rightFrameMargin = _rightFrameMargin, scheduler = _scheduler, rubberEdgesRecoveryTime = _rubberEdgesRecoveryTime,
-            rubberEdgesMargin = _rubberEdgesMargin;
+            rightFrameMargin = _rightFrameMargin, scheduler = _scheduler, rubberEffectRecoveryTime = _rubberEffectRecoveryTime;
 
 @dynamic maxScale; 
 - (void) setMaxScale:(CGFloat)maxScale
@@ -155,6 +154,26 @@ typedef enum
     return _minScale;
 }
 
+@dynamic rubberEffectRatio;
+- (void) setRubberEffectRatio:(CGFloat)rubberEffectRatio
+{
+    _rubberEffectRatio = rubberEffectRatio;
+    
+    // Avoid turning rubber effect On in frame mode.
+    if (self.mode == kCCLayerPanZoomModeFrame)
+    {
+        CCLOGERROR(@"CCLayerPanZoom#setRubberEffectRatio: rubber effect is not supported in frame mode.");
+        _rubberEffectRatio = 0.0f;
+    }
+        
+}
+
+- (CGFloat) rubberEffectRatio
+{
+    return _rubberEffectRatio;
+}
+
+
 #pragma mark Init
 
 - (id) init
@@ -179,10 +198,10 @@ typedef enum
         self.leftFrameMargin = 100.0f;
         self.rightFrameMargin = 100.0f;
         
-        self.rubberEdgesMargin = 0.0f;
-        self.rubberEdgesRecoveryTime = 0.0f;
-        _rubberEdgeRecovering = NO;
-        _rubberEdgeUserZooming = NO;
+        self.rubberEffectRatio = 0.5f;
+        self.rubberEffectRecoveryTime = 0.2f;
+        _rubberEffectRecovering = NO;
+        _rubberEffectZooming = NO;
 	}	
 	return self;
 }
@@ -231,15 +250,15 @@ typedef enum
         // If scale was changed -> set new scale and fix position with new scale
         if (self.scale != prevScale)
         {
-            if (_rubberEdgesMargin)
+            if (_rubberEffectRatio)
             {
-                _rubberEdgeUserZooming = YES;
+                _rubberEffectZooming = YES;
             }
             CGPoint realCurPosLayer = [self convertToNodeSpace: curPosLayer];
             CGFloat deltaX = (realCurPosLayer.x - self.anchorPoint.x * self.contentSize.width) * (self.scale - prevScale);
             CGFloat deltaY = (realCurPosLayer.y - self.anchorPoint.y * self.contentSize.height) * (self.scale - prevScale);
             self.position = ccp(self.position.x - deltaX, self.position.y - deltaY);
-            _rubberEdgeUserZooming = NO;
+            _rubberEffectZooming = NO;
         }
         // If current and previous position of the multitouch's center aren't equal -> change position of the layer
 		if (!CGPointEqualToPoint(prevPosLayer, curPosLayer))
@@ -307,7 +326,7 @@ typedef enum
 		self.touchDistance = 0.0f;
 	}
     
-    if (![self.touches count] && !_rubberEdgeRecovering)
+    if (![self.touches count] && !_rubberEffectRecovering)
     {
         [self recoverPositionAndScale];
     }
@@ -406,6 +425,12 @@ typedef enum
     }
 #endif
     _mode = mode;
+    
+    // Disable rubber effect in Frame mode.
+    if (_mode == kCCLayerPanZoomModeFrame)
+    {        
+        self.rubberEffectRatio = 0.0f;
+    }
 }
 
 - (CCLayerPanZoomMode) mode
@@ -433,11 +458,11 @@ typedef enum
 {   
     CGPoint prevPosition = self.position;
     [super setPosition: position];
-    if (!CGRectIsNull(_panBoundsRect) && !_rubberEdgeUserZooming)
+    if (!CGRectIsNull(_panBoundsRect) && !_rubberEffectZooming)
     {
-        if (self.rubberEdgesMargin && self.mode == kCCLayerPanZoomModeSheet)
+        if (self.rubberEffectRatio && self.mode == kCCLayerPanZoomModeSheet)
         {
-            if (!_rubberEdgeRecovering)
+            if (!_rubberEffectRecovering)
             {
                 CGFloat topDistance = [self topEdgeDistance];
                 CGFloat bottomDistance = [self bottomEdgeDistance];
@@ -448,11 +473,11 @@ typedef enum
                 if (bottomDistance || topDistance)
                 {
                     [super setPosition: ccp(self.position.x, 
-                                            prevPosition.y + dy * self.rubberEdgesMargin / self.panBoundsRect.size.height)];                    
+                                            prevPosition.y + dy * self.rubberEffectRatio)];                    
                 }
                 if (leftDistance || rightDistance)
                 {
-                    [super setPosition: ccp(prevPosition.x + dx * self.rubberEdgesMargin / self.panBoundsRect.size.width, 
+                    [super setPosition: ccp(prevPosition.x + dx * self.rubberEffectRatio, 
                                             self.position.y)];                    
                 }
             }
@@ -511,7 +536,7 @@ typedef enum
         
         if (self.scale < scale)
         {
-            _rubberEdgeRecovering = YES;
+            _rubberEffectRecovering = YES;
             CGPoint newPosition = CGPointZero;
             if (rightEdgeDistance && leftEdgeDistance && topEdgeDistance && bottomEdgeDistance)
             {
@@ -578,9 +603,9 @@ typedef enum
                 newPosition = ccp(winSize.width * 0.5f + dx, self.position.y);
             } 
             
-            id moveToPosition = [CCMoveTo actionWithDuration: self.rubberEdgesRecoveryTime
+            id moveToPosition = [CCMoveTo actionWithDuration: self.rubberEffectRecoveryTime
                                                     position: newPosition];
-            id scaleToPosition = [CCScaleTo actionWithDuration: self.rubberEdgesRecoveryTime
+            id scaleToPosition = [CCScaleTo actionWithDuration: self.rubberEffectRecoveryTime
                                                          scale: scale];
             id sequence = [CCSpawn actions: scaleToPosition, moveToPosition, [CCCallFunc actionWithTarget: self selector: @selector(recoverEnded)], nil];
             [self runAction: sequence];
@@ -588,8 +613,8 @@ typedef enum
         }
         else
         {
-            _rubberEdgeRecovering = YES;
-            id moveToPosition = [CCMoveTo actionWithDuration: self.rubberEdgesRecoveryTime
+            _rubberEffectRecovering = YES;
+            id moveToPosition = [CCMoveTo actionWithDuration: self.rubberEffectRecoveryTime
                                                     position: ccp(self.position.x + rightEdgeDistance - leftEdgeDistance, 
                                                                   self.position.y + topEdgeDistance - bottomEdgeDistance)];
             id sequence = [CCSpawn actions: moveToPosition, [CCCallFunc actionWithTarget: self selector: @selector(recoverEnded)], nil];
@@ -601,7 +626,7 @@ typedef enum
 
 - (void) recoverEnded
 {
-    _rubberEdgeRecovering = NO;
+    _rubberEffectRecovering = NO;
 }
 
 #pragma mark Helpers
@@ -745,7 +770,7 @@ typedef enum
              self.topFrameMargin) / (self.topFrameMargin * sqrt(2.0f)));
     }
     return speed;
-}
+} 
 
 #pragma mark Dealloc
 
