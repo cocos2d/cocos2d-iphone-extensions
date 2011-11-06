@@ -247,6 +247,11 @@ typedef enum
 		// Calculate new scale
         CGFloat prevScale = self.scale;
         self.scale = self.scale * ccpDistance(curPosTouch1, curPosTouch2) / ccpDistance(prevPosTouch1, prevPosTouch2);
+        // Avoid scaling out from panBoundsRect when Rubber Effect is OFF.
+        if (!self.rubberEffectRatio)
+        {
+            self.scale = MAX(self.scale, [self minPossibleScale]); 
+        }
         // If scale was changed -> set new scale and fix position with new scale
         if (self.scale != prevScale)
         {
