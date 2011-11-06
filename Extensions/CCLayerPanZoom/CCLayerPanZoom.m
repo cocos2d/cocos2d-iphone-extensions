@@ -124,12 +124,36 @@ typedef enum
 
 @implementation CCLayerPanZoom
 
-@synthesize maxScale = _maxScale, minScale = _minScale, maxTouchDistanceToClick = _maxTouchDistanceToClick, 
+@synthesize maxTouchDistanceToClick = _maxTouchDistanceToClick, 
             delegate = _delegate, touches = _touches, touchDistance = _touchDistance, 
             minSpeed = _minSpeed, maxSpeed = _maxSpeed, topFrameMargin = _topFrameMargin, 
             bottomFrameMargin = _bottomFrameMargin, leftFrameMargin = _leftFrameMargin,
             rightFrameMargin = _rightFrameMargin, scheduler = _scheduler, ruberEdgesTime = _ruberEdgesTime,
             ruberEdgesMargin = _ruberEdgesMargin;
+
+@dynamic maxScale; 
+- (void) setMaxScale:(float)maxScale
+{
+    _maxScale = maxScale;
+    self.scale = MIN(self.scale, _maxScale);
+}
+
+- (float) maxScale
+{
+    return _maxScale;
+}
+
+@dynamic minScale;
+- (void) setMinScale:(float)minScale
+{
+    _minScale = minScale;
+    self.scale = MAX(self.scale, minScale);
+}
+
+- (float) minScale
+{
+    return _minScale;
+}
 
 #pragma mark Init
 
