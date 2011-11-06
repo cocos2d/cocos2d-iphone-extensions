@@ -135,7 +135,10 @@
  */
 @property(readwrite, assign) CGPoint pagesIndicatorPosition;
 
+/** Color of dot, that represents current selected page(only one dot). */
 @property(readwrite, assign) ccColor4B pagesIndicatorSelectedColor;
+
+/** Color of dots, that represents other pages. */
 @property(readwrite, assign) ccColor4B pagesIndicatorNormalColor;
 
 
@@ -154,7 +157,16 @@
 @property(readonly) NSArray *pages;
 
 #pragma mark Init/Creation
+
+/** Creates new scrollLayer with given pages & width offset.
+ * @param layers NSArray of CCLayers, that will be used as pages.
+ * @param widthOffset Length in X-coord, that describes length of possible pages
+ * intersection. */
 +(id) nodeWithLayers:(NSArray *)layers widthOffset: (int) widthOffset; 
+/** Inits scrollLayer with given pages & width offset.
+ * @param layers NSArray of CCLayers, that will be used as pages.
+ * @param widthOffset Length in X-coord, that describes length of possible pages
+ * intersection. */
 -(id) initWithLayers:(NSArray *)layers widthOffset: (int) widthOffset;
 
 #pragma mark Updates 
