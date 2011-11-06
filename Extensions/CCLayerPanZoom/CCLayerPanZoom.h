@@ -55,15 +55,14 @@ typedef enum
  touchPositionUpdated: (CGPoint) newPos;
 
 /** Sent to delegate each time, when users drags finger on the screen.
- * This means that click event is not possible with that touch from now.
- */
+ * This means that click event is not possible with that touch from now. */
 - (void) layerPanZoom: (CCLayerPanZoom *) sender touchMoveBeganAtPosition: (CGPoint) aPoint;
 
 @end
 
 
-/** @class CCLayerPanZoom Class that represents the layer that can be scroll and zoom 
- * with one or two fingers */
+/** @class CCLayerPanZoom Class that represents the layer that can be scrolled 
+ * and zoomed with one or two fingers. */
 @interface CCLayerPanZoom : CCLayer 
 {
     CGFloat _maxScale;
@@ -100,31 +99,30 @@ typedef enum
 
 #pragma mark Zoom Options
 
-/** The maximum scale level
+/** The maximum scale level, will change scale if needed automatically.
  * Default is 3.0f */
 @property (readwrite, assign) CGFloat maxScale;    
 
-/** The minimum scale level
+/** The minimum scale level, will change scale if needed automatically.
  * Default is 0.5f */
 @property (readwrite, assign) CGFloat minScale;   
 
 #pragma mark Common Options
 
-/** The rectangle that use to determine the restriction of scrolling
- * Set value CGRectNull to disable restriction
+/** Rectangle that is used to determine bounds of scrolling area in parent coordinates.
+ * Set it to CGRectNull to enable infinite scrolling.
  * Default is CGRectNull */
 @property (readwrite, assign) CGRect panBoundsRect;   
 
-/** The max distance that touch can be drag before click
- * If distance is greater then click will not be sent to delegate 
+/** The max distance in points that touch can be dragged before click.
+ * If traveled distance is greater then click message will not be sent to the delegate. 
  * Default is 15.0f */
 @property (readwrite, assign) CGFloat maxTouchDistanceToClick;   
 
-/** Delegate for layerPanZoom:clickedAtPoint: callbacks. */
+/** Delegate for callbacks. */
 @property (readwrite, retain) id<CCLayerPanZoomClickDelegate> delegate;
 
-/** Switch mode for pan & zoom
- * Defult is kCCLayerPanZoomModeSheet */
+/** Describes layer's mode. Defult is kCCLayerPanZoomModeSheet */
 @property (readwrite, assign) CCLayerPanZoomMode mode;
 
 #pragma mark Frame Mode Options
@@ -137,36 +135,36 @@ typedef enum
  * Default is 100.0f */
 @property (readwrite, assign) CGFloat minSpeed;
 
-/** Distance from top edge of panBoundingRect
- * for define top autoscrolling zone in frame mode
+/** Distance from top edge of panBoundsRect that defines top autoscrolling zone 
+ * in frame mode. 
  * Default is 100.0f */
 @property (readwrite, assign) CGFloat topFrameMargin;
 
-/** Distance from bottom edge of panBoundingRect
- * for define bottom autoscrolling zone in frame mode
+/** Distance from bottom edge of panBoundsRect that defines bottom 
+ * autoscrolling zone in frame mode.
  * Default is 100.0f */
 @property (readwrite, assign) CGFloat bottomFrameMargin;
 
-/** Distance from left edge of panBoundingRect
- * for define left autoscrolling zone in frame mode
+/** Distance from left edge of panBoundsRect that defines left autoscrolling zone
+ * in frame mode.
  * Default is 100.0f */
 @property (readwrite, assign) CGFloat leftFrameMargin;
 
-/** Distance from right edge of panBoundingRect
- * for define right autoscrolling zone in frame mode
+/** Distance from right edge of panBoundsRect that defines right autoscrolling 
+ * zone in frame mode.
  * Default is 100.0f */
 @property (readwrite, assign) CGFloat rightFrameMargin;
 
 #pragma mark Rubber Effect Options
 
-/** Delay for recover layer position and scale 
- * for rubber edges
- * Default is 0.0f */
+/** Time to recover layer position and scale after moving out from panBoundsRect
+ * due to rubber effect.
+ * Default is 0.0f (0.2 is good for rubber effect). */
 @property (readwrite, assign) ccTime rubberEdgesRecoveryTime;
 
-/** Distance from panBoundRect on which possible stretch layer 
- * for rubber edges
- * Default is 0.0f */
+/** Outside distance from panBoundRect borders on which it's possibe to move layer
+ * to achieve rubber effect.
+ * Default is 0.0f (0.5f * panBoundsRect.size is good for rubber effect.) */
 @property (readwrite, assign) CGFloat rubberEdgesMargin;
 
 @end
