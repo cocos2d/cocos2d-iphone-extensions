@@ -231,7 +231,10 @@ typedef enum
         // If scale was changed -> set new scale and fix position with new scale
         if (self.scale != prevScale)
         {
-            _ruberEdgeUserZooming = YES;
+            if (_ruberEdgesMargin)
+            {
+                _ruberEdgeUserZooming = YES;
+            }
             CGPoint realCurPosLayer = [self convertToNodeSpace: curPosLayer];
             CGFloat deltaX = (realCurPosLayer.x - self.anchorPoint.x * self.contentSize.width) * (self.scale - prevScale);
             CGFloat deltaY = (realCurPosLayer.y - self.anchorPoint.y * self.contentSize.height) * (self.scale - prevScale);
