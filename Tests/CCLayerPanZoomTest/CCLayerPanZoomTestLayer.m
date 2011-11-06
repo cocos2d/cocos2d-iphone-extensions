@@ -83,25 +83,25 @@ Class backTest()
 		CGSize s = [[CCDirector sharedDirector] winSize];
 		CCLabelTTF* label = [CCLabelTTF labelWithString: [self title] 
                                                fontName: @"Arial"  
-                                               fontSize: 32];
+                                               fontSize: 24];
 		[self addChild: label 
                      z: 1];
 		[label setPosition: ccp(s.width / 2, s.height - 50.0f)];
 		
         CCLabelTTF *labelLeft = [CCLabelTTF labelWithString: @"<<" 
                                                    fontName: @"Arial" 
-                                                   fontSize: 48];
+                                                   fontSize: 32];
         CCMenuItemLabel *itemLeft = [CCMenuItemLabel itemWithLabel: labelLeft 
                                                             target: self 
                                                           selector: @selector(backCallback:)];
-        itemLeft.position = ccp(s.width / 2 - 250.0f, s.height - 50.0f);
+        itemLeft.position = ccp(s.width / 2 - 200.0f, s.height - 50.0f);
         CCLabelTTF *labelRight = [CCLabelTTF labelWithString: @">>" 
                                                     fontName: @"Arial" 
-                                                    fontSize: 48];
+                                                    fontSize: 32];
         CCMenuItemLabel *itemRight = [CCMenuItemLabel itemWithLabel: labelRight 
                                                              target: self 
                                                            selector: @selector(nextCallback:)];
-        itemRight.position = ccp(s.width / 2 + 250.0f, s.height - 50.0f);		
+        itemRight.position = ccp(s.width / 2 + 200.0f, s.height - 50.0f);		
 		CCMenu *menu = [CCMenu menuWithItems: itemLeft, itemRight, nil];
 		menu.position = CGPointZero;
 		[self addChild: menu 
@@ -183,7 +183,7 @@ Class backTest()
 		// create and initialize a Label
 		CCLabelTTF *label = [CCLabelTTF labelWithString: @"Try panning and zooming using drag and pinch" 
                                                fontName: @"Marker Felt" 
-                                               fontSize: 32];
+                                               fontSize: 24];
 		label.scale = 0.7f; //< to be visible on iPod Touch screen.
 		label.color = ccWHITE;
 		// add the label as a child to this Layer
@@ -248,7 +248,7 @@ Class backTest()
 		// create and initialize a Label
 		CCLabelTTF *label = [CCLabelTTF labelWithString: @"Try panning and zooming using drag and pinch" 
                                                fontName: @"Marker Felt" 
-                                               fontSize: 32];
+                                               fontSize: 24];
 		label.scale = 0.7f; //< to be visible on iPod Touch screen.
 		label.color = ccWHITE;
 		// add the label as a child to this Layer
@@ -311,11 +311,9 @@ Class backTest()
                              z :0 
                             tag: kBackgroundTag];
 		// create and initialize a Label
-		CCLabelTTF *label = [CCLabelTTF labelWithString: @"Try zooming using pinch and drag test object to edges of screen" 
+		CCLabelTTF *label = [CCLabelTTF labelWithString: @"Pinch to zoom, drag icon to edges to scroll." 
                                                fontName: @"Marker Felt" 
-                                               fontSize: 32];
-		label.scale = 0.7f; //< to be visible on iPod Touch screen.
-		label.color = ccWHITE;
+                                               fontSize: 24];
 		// add the label as a child to this Layer
 		[_panZoomLayer addChild: label 
                               z: 1 
@@ -339,7 +337,6 @@ Class backTest()
         
         _selectedTestObject = testObject1;
         _selectedTestObject.color = ccRED;
-        _panZoomLayer.minScale = 1.5f;
 
 		[self updateForScreenReshape];
 	}
@@ -385,13 +382,17 @@ Class backTest()
 	
     // Position test objects in the center.
     CCNode *testObject = [_panZoomLayer getChildByTag: kTestObject1];
-	testObject.position =  ccp(boundingRect.size.width * 0.6f, boundingRect.size.height * 0.5f);
+	testObject.position =  ccp(boundingRect.size.width * 0.6f, boundingRect.size.height * 0.5f - 56);
     
     CCNode *testObject2 = [_panZoomLayer getChildByTag: kTestObject2];
-	testObject2.position =  ccp(boundingRect.size.width * 0.5f, boundingRect.size.height * 0.5f);
+	testObject2.position =  ccp(boundingRect.size.width * 0.5f, boundingRect.size.height * 0.5f - 56);
     
     CCNode *testObject3 = [_panZoomLayer getChildByTag: kTestObject3];
-	testObject3.position =  ccp(boundingRect.size.width * 0.4f, boundingRect.size.height * 0.5f);
+	testObject3.position =  ccp(boundingRect.size.width * 0.4f, boundingRect.size.height * 0.5f - 56);
+    
+    // Stay in screen bounds (1 screen = minScale), allow to zoom 2x.
+    _panZoomLayer.minScale =  1.0f *  winSize.width / [background boundingBox].size.width;
+    _panZoomLayer.maxScale =  2.0f *  winSize.width / [background boundingBox].size.width;
 }
 
 - (void) selectTestObjectAtPoint: (CGPoint) point
