@@ -98,6 +98,8 @@ typedef enum
     BOOL _rubberEdgeUserZooming;
 }
 
+#pragma mark Zoom Options
+
 /** The maximum scale level
  * Default is 3.0f */
 @property (readwrite, assign) CGFloat maxScale;    
@@ -105,6 +107,8 @@ typedef enum
 /** The minimum scale level
  * Default is 0.5f */
 @property (readwrite, assign) CGFloat minScale;   
+
+#pragma mark Common Options
 
 /** The rectangle that use to determine the restriction of scrolling
  * Set value CGRectNull to disable restriction
@@ -122,6 +126,8 @@ typedef enum
 /** Switch mode for pan & zoom
  * Defult is kCCLayerPanZoomModeSheet */
 @property (readwrite, assign) CCLayerPanZoomMode mode;
+
+#pragma mark Frame Mode Options
 
 /** Maximum speed for autosrolling in frame mode
  * Default is 1000.0f */
@@ -150,6 +156,8 @@ typedef enum
  * for define right autoscrolling zone in frame mode
  * Default is 100.0f */
 @property (readwrite, assign) CGFloat rightFrameMargin;
+
+#pragma mark Rubber Effect Options
 
 /** Delay for recover layer position and scale 
  * for rubber edges
