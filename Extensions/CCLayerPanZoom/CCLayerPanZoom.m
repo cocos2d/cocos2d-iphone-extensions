@@ -128,8 +128,8 @@ typedef enum
             delegate = _delegate, touches = _touches, touchDistance = _touchDistance, 
             minSpeed = _minSpeed, maxSpeed = _maxSpeed, topFrameMargin = _topFrameMargin, 
             bottomFrameMargin = _bottomFrameMargin, leftFrameMargin = _leftFrameMargin,
-            rightFrameMargin = _rightFrameMargin, scheduler = _scheduler, ruberEdgesTime = _ruberEdgesTime,
-            ruberEdgesMargin = _ruberEdgesMargin;
+            rightFrameMargin = _rightFrameMargin, scheduler = _scheduler, rubberEdgesTime = _rubberEdgesTime,
+            rubberEdgesMargin = _rubberEdgesMargin;
 
 @dynamic maxScale; 
 - (void) setMaxScale:(CGFloat)maxScale
@@ -179,10 +179,10 @@ typedef enum
         self.leftFrameMargin = 100.0f;
         self.rightFrameMargin = 100.0f;
         
-        self.ruberEdgesMargin = 0.0f;
-        self.ruberEdgesTime = 0.0f;
-        _ruberEdgeRecovering = NO;
-        _ruberEdgeUserZooming = NO;
+        self.rubberEdgesMargin = 0.0f;
+        self.rubberEdgesTime = 0.0f;
+        _rubberEdgeRecovering = NO;
+        _rubberEdgeUserZooming = NO;
 	}	
 	return self;
 }
@@ -231,15 +231,15 @@ typedef enum
         // If scale was changed -> set new scale and fix position with new scale
         if (self.scale != prevScale)
         {
-            if (_ruberEdgesMargin)
+            if (_rubberEdgesMargin)
             {
-                _ruberEdgeUserZooming = YES;
+                _rubberEdgeUserZooming = YES;
             }
             CGPoint realCurPosLayer = [self convertToNodeSpace: curPosLayer];
             CGFloat deltaX = (realCurPosLayer.x - self.anchorPoint.x * self.contentSize.width) * (self.scale - prevScale);
             CGFloat deltaY = (realCurPosLayer.y - self.anchorPoint.y * self.contentSize.height) * (self.scale - prevScale);
             self.position = ccp(self.position.x - deltaX, self.position.y - deltaY);
-            _ruberEdgeUserZooming = NO;
+            _rubberEdgeUserZooming = NO;
         }
         // If current and previous position of the multitouch's center aren't equal -> change position of the layer
 		if (!CGPointEqualToPoint(prevPosLayer, curPosLayer))
@@ -307,7 +307,7 @@ typedef enum
 		self.touchDistance = 0.0f;
 	}
     
-    if (![self.touches count] && !_ruberEdgeRecovering)
+    if (![self.touches count] && !_rubberEdgeRecovering)
     {
         [self recoverPositionAndScale];
     }
@@ -433,11 +433,11 @@ typedef enum
 {   
     CGPoint prevPosition = self.position;
     [super setPosition: position];
-    if (!CGRectIsNull(_panBoundsRect) && !_ruberEdgeUserZooming)
+    if (!CGRectIsNull(_panBoundsRect) && !_rubberEdgeUserZooming)
     {
-        if (self.ruberEdgesMargin && self.mode == kCCLayerPanZoomModeSheet)
+        if (self.rubberEdgesMargin && self.mode == kCCLayerPanZoomModeSheet)
         {
-            if (!_ruberEdgeRecovering)
+            if (!_rubberEdgeRecovering)
             {
                 CGFloat topDistance = [self topEdgeDistance];
                 CGFloat bottomDistance = [self bottomEdgeDistance];
@@ -448,11 +448,11 @@ typedef enum
                 if (bottomDistance || topDistance)
                 {
                     [super setPosition: ccp(self.position.x, 
-                                            prevPosition.y + dy * self.ruberEdgesMargin / self.panBoundsRect.size.height)];                    
+                                            prevPosition.y + dy * self.rubberEdgesMargin / self.panBoundsRect.size.height)];                    
                 }
                 if (leftDistance || rightDistance)
                 {
-                    [super setPosition: ccp(prevPosition.x + dx * self.ruberEdgesMargin / self.panBoundsRect.size.width, 
+                    [super setPosition: ccp(prevPosition.x + dx * self.rubberEdgesMargin / self.panBoundsRect.size.width, 
                                             self.position.y)];                    
                 }
             }
@@ -511,7 +511,7 @@ typedef enum
         
         if (self.scale < scale)
         {
-            _ruberEdgeRecovering = YES;
+            _rubberEdgeRecovering = YES;
             CGPoint newPosition = CGPointZero;
             if (rightEdgeDistance && leftEdgeDistance && topEdgeDistance && bottomEdgeDistance)
             {
@@ -578,9 +578,9 @@ typedef enum
                 newPosition = ccp(winSize.width * 0.5f + dx, self.position.y);
             } 
             
-            id moveToPosition = [CCMoveTo actionWithDuration: self.ruberEdgesTime
+            id moveToPosition = [CCMoveTo actionWithDuration: self.rubberEdgesTime
                                                     position: newPosition];
-            id scaleToPosition = [CCScaleTo actionWithDuration: self.ruberEdgesTime
+            id scaleToPosition = [CCScaleTo actionWithDuration: self.rubberEdgesTime
                                                          scale: scale];
             id sequence = [CCSpawn actions: scaleToPosition, moveToPosition, [CCCallFunc actionWithTarget: self selector: @selector(recoverEnded)], nil];
             [self runAction: sequence];
@@ -588,8 +588,8 @@ typedef enum
         }
         else
         {
-            _ruberEdgeRecovering = YES;
-            id moveToPosition = [CCMoveTo actionWithDuration: self.ruberEdgesTime
+            _rubberEdgeRecovering = YES;
+            id moveToPosition = [CCMoveTo actionWithDuration: self.rubberEdgesTime
                                                     position: ccp(self.position.x + rightEdgeDistance - leftEdgeDistance, 
                                                                   self.position.y + topEdgeDistance - bottomEdgeDistance)];
             id sequence = [CCSpawn actions: moveToPosition, [CCCallFunc actionWithTarget: self selector: @selector(recoverEnded)], nil];
@@ -601,7 +601,7 @@ typedef enum
 
 - (void) recoverEnded
 {
-    _ruberEdgeRecovering = NO;
+    _rubberEdgeRecovering = NO;
 }
 
 #pragma mark Helpers

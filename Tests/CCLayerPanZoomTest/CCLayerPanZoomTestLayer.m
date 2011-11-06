@@ -256,8 +256,8 @@ Class backTest()
                               z: 1 
                             tag: kLabelTag];
         _panZoomLayer.mode = kCCLayerPanZoomModeSheet;
-        _panZoomLayer.ruberEdgesMargin = [CCDirector sharedDirector].winSize.width / 2.0;
-        _panZoomLayer.ruberEdgesTime = 0.2f;
+        _panZoomLayer.rubberEdgesMargin = [CCDirector sharedDirector].winSize.width / 2.0;
+        _panZoomLayer.rubberEdgesTime = 0.2f;
 		[self updateForScreenReshape];
 	}
 	
