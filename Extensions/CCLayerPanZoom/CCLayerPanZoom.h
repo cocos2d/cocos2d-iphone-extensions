@@ -159,12 +159,17 @@ typedef enum
 
 /** Time to recover layer position and scale after moving out from panBoundsRect
  * due to rubber effect.
- * Default is 0.0f (0.2 is good for rubber effect). */
+ * Default is 0.0f (0.2 is good for rubber effect). 
+ * @todo Set default to 0.2, rename while refactoring rubberEdgesMargin.
+ */
 @property (readwrite, assign) ccTime rubberEdgesRecoveryTime;
 
 /** Outside distance from panBoundRect borders on which it's possibe to move layer
  * to achieve rubber effect.
- * Default is 0.0f (0.5f * panBoundsRect.size is good for rubber effect.) */
+ * Default is 0.0f (0.5f * panBoundsRect.size is good for rubber effect.)
+ * @todo Refactor to rubberEffectRatio (to support right ratio for non-square CCLayerPanZoom layers &
+ * set default values to something )
+ */
 @property (readwrite, assign) CGFloat rubberEdgesMargin;
 
 @end
