@@ -1310,7 +1310,7 @@
 		6DA58081139E39C4004D8D0B /* CCScrollLayerTest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CCScrollLayerTest.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6DA580A3139E39C7004D8D0B /* CCMenuItemSpriteIndependentTest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CCMenuItemSpriteIndependentTest.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6DA580C5139E39CB004D8D0B /* CCSliderTest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CCSliderTest.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		6DA580E7139E39D0004D8D0B /* TMXGeneratorTest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TMXGeneratorTest.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		6DA580E7139E39D0004D8D0B /* FilesDownloaderTest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FilesDownloaderTest.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6DA58360139E510B004D8D0B /* CCVideoPlayerTest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CCVideoPlayerTest.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6DA58366139E513A004D8D0B /* CCBigImageTestLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCBigImageTestLayer.h; sourceTree = "<group>"; };
 		6DA58367139E513A004D8D0B /* CCBigImageTestLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCBigImageTestLayer.m; sourceTree = "<group>"; };
@@ -1599,7 +1599,7 @@
 				6DA58081139E39C4004D8D0B /* CCScrollLayerTest.app */,
 				6DA580A3139E39C7004D8D0B /* CCMenuItemSpriteIndependentTest.app */,
 				6DA580C5139E39CB004D8D0B /* CCSliderTest.app */,
-				6DA580E7139E39D0004D8D0B /* TMXGeneratorTest.app */,
+				6DA580E7139E39D0004D8D0B /* FilesDownloaderTest.app */,
 				6DA58360139E510B004D8D0B /* CCVideoPlayerTest.app */,
 				6DA5863013A022E8004D8D0B /* CCSendMessagesTest.app */,
 				3F77657C13FA059A00346697 /* TMXGenerator Test.app */,
@@ -2769,7 +2769,7 @@
 			);
 			name = FilesDownloaderTest;
 			productName = "cocos2d-extensions-ios";
-			productReference = 6DA580E7139E39D0004D8D0B /* TMXGeneratorTest.app */;
+			productReference = 6DA580E7139E39D0004D8D0B /* FilesDownloaderTest.app */;
 			productType = "com.apple.product-type.application";
 		};
 		6DA5861113A022E8004D8D0B /* CCSendMessagesTest */ = {
@@ -3998,7 +3998,7 @@
 					"-all_load",
 					"-ObjC",
 				);
-				PRODUCT_NAME = TMXGeneratorTest;
+				PRODUCT_NAME = FilesDownloaderTest;
 				WARNING_CFLAGS = "-Wall";
 			};
 			name = Debug;
@@ -4019,7 +4019,7 @@
 					"-all_load",
 					"-ObjC",
 				);
-				PRODUCT_NAME = TMXGeneratorTest;
+				PRODUCT_NAME = FilesDownloaderTest;
 				WARNING_CFLAGS = "-Wall";
 			};
 			name = Release;
