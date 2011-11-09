@@ -55,19 +55,18 @@ typedef enum
  touchPositionUpdated: (CGPoint) newPos;
 
 /** Sent to delegate each time, when users drags finger on the screen.
- * This means that click event is not possible with that touch from now.
- */
+ * This means that click event is not possible with that touch from now. */
 - (void) layerPanZoom: (CCLayerPanZoom *) sender touchMoveBeganAtPosition: (CGPoint) aPoint;
 
 @end
 
 
-/** @class CCLayerPanZoom Class that represents the layer that can be scroll and zoom 
- * with one or two fingers */
+/** @class CCLayerPanZoom Class that represents the layer that can be scrolled 
+ * and zoomed with one or two fingers. */
 @interface CCLayerPanZoom : CCLayer 
 {
-    float _maxScale;
-    float _minScale;
+    CGFloat _maxScale;
+    CGFloat _minScale;
 	NSMutableArray *_touches;
 	CGRect _panBoundsRect;
 	CGFloat _touchDistance;
@@ -92,36 +91,41 @@ typedef enum
     // Flag used to call touchMoveBeganAtPosition: only once for each single touch event.
     BOOL _touchMoveBegan;
     
-    ccTime _ruberEdgesTime;
-    CGFloat _ruberEdgesMargin;
-    BOOL _ruberEdgeRecovering;
-    BOOL _ruberEdgeUserZooming;
+    ccTime _rubberEffectRecoveryTime;
+    CGFloat _rubberEffectRatio;
+    BOOL _rubberEffectRecovering;
+    BOOL _rubberEffectZooming;
 }
 
-/** The maximum scale level
+#pragma mark Zoom Options
+
+/** The maximum scale level, will change scale if needed automatically.
  * Default is 3.0f */
-@property (readwrite, assign) float maxScale;    
+@property (readwrite, assign) CGFloat maxScale;    
 
-/** The minimum scale level
+/** The minimum scale level, will change scale if needed automatically.
  * Default is 0.5f */
-@property (readwrite, assign) float minScale;   
+@property (readwrite, assign) CGFloat minScale;   
 
-/** The rectangle that use to determine the restriction of scrolling
- * Set value CGRectNull to disable restriction
+#pragma mark Common Options
+
+/** Rectangle that is used to determine bounds of scrolling area in parent coordinates.
+ * Set it to CGRectNull to enable infinite scrolling.
  * Default is CGRectNull */
 @property (readwrite, assign) CGRect panBoundsRect;   
 
-/** The max distance that touch can be drag before click
- * If distance is greater then click will not be sent to delegate 
+/** The max distance in points that touch can be dragged before click.
+ * If traveled distance is greater then click message will not be sent to the delegate. 
  * Default is 15.0f */
 @property (readwrite, assign) CGFloat maxTouchDistanceToClick;   
 
-/** Delegate for layerPanZoom:clickedAtPoint: callbacks. */
-@property (readwrite, retain) id<CCLayerPanZoomClickDelegate> delegate;
+/** Delegate for callbacks. */
+@property (readwrite, assign) id<CCLayerPanZoomClickDelegate> delegate;
 
-/** Switch mode for pan & zoom
- * Defult is kCCLayerPanZoomModeSheet */
+/** Describes layer's mode. Defult is kCCLayerPanZoomModeSheet */
 @property (readwrite, assign) CCLayerPanZoomMode mode;
+
+#pragma mark Frame Mode Options
 
 /** Maximum speed for autosrolling in frame mode
  * Default is 1000.0f */
@@ -131,34 +135,42 @@ typedef enum
  * Default is 100.0f */
 @property (readwrite, assign) CGFloat minSpeed;
 
-/** Distance from top edge of panBoundingRect
- * for define top autoscrolling zone in frame mode
+/** Distance from top edge of panBoundsRect that defines top autoscrolling zone 
+ * in frame mode. 
  * Default is 100.0f */
 @property (readwrite, assign) CGFloat topFrameMargin;
 
-/** Distance from bottom edge of panBoundingRect
- * for define bottom autoscrolling zone in frame mode
+/** Distance from bottom edge of panBoundsRect that defines bottom 
+ * autoscrolling zone in frame mode.
  * Default is 100.0f */
 @property (readwrite, assign) CGFloat bottomFrameMargin;
 
-/** Distance from left edge of panBoundingRect
- * for define left autoscrolling zone in frame mode
+/** Distance from left edge of panBoundsRect that defines left autoscrolling zone
+ * in frame mode.
  * Default is 100.0f */
 @property (readwrite, assign) CGFloat leftFrameMargin;
 
-/** Distance from right edge of panBoundingRect
- * for define right autoscrolling zone in frame mode
+/** Distance from right edge of panBoundsRect that defines right autoscrolling 
+ * zone in frame mode.
  * Default is 100.0f */
 @property (readwrite, assign) CGFloat rightFrameMargin;
 
-/** Delay for recover layer position and scale 
- * for rubber edges
- * Default is 0.0f */
-@property (readwrite, assign) ccTime ruberEdgesTime;
+#pragma mark Rubber Effect Options
 
-/** Distance from panBoundRect on which possible stretch layer 
- * for rubber edges
- * Default is 0.0f */
-@property (readwrite, assign) CGFloat ruberEdgesMargin;
+/** Time (in seconds) to recover layer position and scale after moving out from 
+ * panBoundsRect due to rubber effect.
+ * Default is 0.2f.
+ */
+@property (readwrite, assign) ccTime rubberEffectRecoveryTime;
+
+/** Ratio for rubber effect. Describes the proportion of the panBoundsRect size,
+ * that layer can be moved outside from panBoundsRect border.
+ * So 0.0f means that layer can't be moved outside from bounds (rubber effect is Off)
+ * and 1.0f means that layer can be moved panBoundsRect.size.width far from 
+ * left/right borders & panBoundsRect.size.height from top/bottom borders.
+ * Default is 0.5f.
+ * Limitations: only sheet mode is supported.
+ */
+@property (readwrite, assign) CGFloat rubberEffectRatio;
 
 @end

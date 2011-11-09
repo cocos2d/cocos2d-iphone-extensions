@@ -60,6 +60,9 @@
 	
 	// Holds the current page being displayed.
 	int currentScreen_;
+    
+    // Number of previous page being displayed.
+    int prevScreen_;
 	
 	// The x coord of initial point the user starts their swipe.
 	CGFloat startSwipe_;
@@ -90,7 +93,7 @@
 	
 	// Holds current pages width offset.
 	CGFloat pagesWidthOffset_;
-	
+    
 	// Holds current margin offset
 	CGFloat marginOffset_;
 }
@@ -132,6 +135,13 @@
  */
 @property(readwrite, assign) CGPoint pagesIndicatorPosition;
 
+/** Color of dot, that represents current selected page(only one dot). */
+@property(readwrite, assign) ccColor4B pagesIndicatorSelectedColor;
+
+/** Color of dots, that represents other pages. */
+@property(readwrite, assign) ccColor4B pagesIndicatorNormalColor;
+
+
 #pragma mark Pages Control Properties
 
 /** Total pages available in scrollLayer. */
@@ -147,7 +157,16 @@
 @property(readonly) NSArray *pages;
 
 #pragma mark Init/Creation
+
+/** Creates new scrollLayer with given pages & width offset.
+ * @param layers NSArray of CCLayers, that will be used as pages.
+ * @param widthOffset Length in X-coord, that describes length of possible pages
+ * intersection. */
 +(id) nodeWithLayers:(NSArray *)layers widthOffset: (int) widthOffset; 
+/** Inits scrollLayer with given pages & width offset.
+ * @param layers NSArray of CCLayers, that will be used as pages.
+ * @param widthOffset Length in X-coord, that describes length of possible pages
+ * intersection. */
 -(id) initWithLayers:(NSArray *)layers widthOffset: (int) widthOffset;
 
 #pragma mark Updates 

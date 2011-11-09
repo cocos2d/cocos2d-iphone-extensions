@@ -56,6 +56,12 @@ enum
 @end
 #endif
 
+@interface CCScrollLayer ()
+
+- (int) pageNumberForPosition: (CGPoint) position;
+
+@end
+
 @implementation CCScrollLayer
 
 @synthesize delegate = delegate_;
@@ -65,6 +71,8 @@ enum
 @synthesize currentScreen = currentScreen_;
 @synthesize showPagesIndicator = showPagesIndicator_;
 @synthesize pagesIndicatorPosition = pagesIndicatorPosition_;
+@synthesize pagesIndicatorNormalColor = pagesIndicatorNormalColor_;
+@synthesize pagesIndicatorSelectedColor = pagesIndicatorSelectedColor_;
 @synthesize pagesWidthOffset = pagesWidthOffset_;
 @synthesize pages = layers_;
 @synthesize stealTouches = stealTouches_;
@@ -104,7 +112,9 @@ enum
 		// Show indicator by default.
 		self.showPagesIndicator = YES;
 		self.pagesIndicatorPosition = ccp(0.5f * self.contentSize.width, ceilf ( self.contentSize.height / 8.0f ));
-		
+		self.pagesIndicatorNormalColor = ccc4(0x96,0x96,0x96,0xFF);
+        self.pagesIndicatorSelectedColor = ccc4(0xFF,0xFF,0xFF,0xFF);
+
 		// Set up the starting variables
 		currentScreen_ = 0;	
 		
@@ -113,7 +123,7 @@ enum
 		
 		// Save array of layers.
 		layers_ = [[NSMutableArray alloc] initWithArray:layers copyItems:NO];
-		
+        
 		[self updatePages];			
 		
 	}
@@ -176,16 +186,22 @@ enum
                 int blend_dst = 0;
                 glGetIntegerv( GL_BLEND_SRC, &blend_src );
                 glGetIntegerv( GL_BLEND_DST, &blend_dst );
-		
+        
 		glBlendFunc( GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA );
 		glPointSize( 6.0 * CC_CONTENT_SCALE_FACTOR() );
 		
 		// Draw Gray Points
-		glColor4ub(0x96,0x96,0x96,0xFF);
+		glColor4ub(pagesIndicatorNormalColor_.r,
+                   pagesIndicatorNormalColor_.g,
+                   pagesIndicatorNormalColor_.b,
+                   pagesIndicatorNormalColor_.a);
 		ccDrawPoints( points, totalScreens );
 		
-		// Draw White Point for Selected Page
-		glColor4ub(0xFF,0xFF,0xFF,0xFF);
+		// Draw White Point for Selected Page	
+		glColor4ub(pagesIndicatorSelectedColor_.r,
+                   pagesIndicatorSelectedColor_.g,
+                   pagesIndicatorSelectedColor_.b,
+                   pagesIndicatorSelectedColor_.a);
 		ccDrawPoint(points[currentScreen_]);
 		
 		// Restore GL Values
@@ -193,7 +209,7 @@ enum
 		glDisable(GL_POINT_SMOOTH);
 		if (! blendWasEnabled)
 			glDisable(GL_BLEND);
-			
+            
 		// always restore the blending functions too
                 glBlendFunc( blend_src, blend_dst );
 	}
@@ -203,8 +219,13 @@ enum
 
 - (void) moveToPageEnded
 {
-	if ([self.delegate respondsToSelector:@selector(scrollLayer:scrolledToPageNumber:)])
-		[self.delegate scrollLayer: self scrolledToPageNumber: currentScreen_];
+    if (prevScreen_ != currentScreen_)
+    {
+        if ([self.delegate respondsToSelector:@selector(scrollLayer:scrolledToPageNumber:)])
+            [self.delegate scrollLayer: self scrolledToPageNumber: currentScreen_];
+    }
+    
+    prevScreen_ = currentScreen_ = [self pageNumberForPosition:self.position];
 }
 
 - (int) pageNumberForPosition: (CGPoint) position
@@ -249,6 +270,7 @@ enum
     }
 	
     self.position = [self positionForPageWithNumber: page];
+    prevScreen_ = currentScreen_;
     currentScreen_ = page;
 	
 }
@@ -279,6 +301,7 @@ enum
 	
 	[self updatePages];
 	
+    prevScreen_ = currentScreen_;
 	currentScreen_ = MIN(currentScreen_, [layers_ count] - 1);
 	[self moveToPage: currentScreen_];
 }
@@ -515,7 +538,17 @@ enum
 	newPos.x = MAX(newPos.x, [self positionForPageWithNumber: [layers_ count] - 1].x);
 	
 	self.position = newPos;
+    prevScreen_ = currentScreen_;
 	currentScreen_ = [self pageNumberForPosition:self.position];
+    
+    // Inform delegate about new currentScreen.
+    if (prevScreen_ != currentScreen_)
+    {
+        if ([self.delegate respondsToSelector:@selector(scrollLayer:scrolledToPageNumber:)])
+            [self.delegate scrollLayer: self scrolledToPageNumber: currentScreen_];
+    }
+    
+    prevScreen_ = currentScreen_;
 	
 	return NO;
 	

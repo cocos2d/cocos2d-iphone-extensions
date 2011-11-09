@@ -43,9 +43,9 @@
 + (id) newImpl
 {
 #ifdef __IPHONE_OS_VERSION_MAX_ALLOWED
-	return [ [CCVideoPlayerImpliOS alloc] init ];
+	return (id)[ [CCVideoPlayerImpliOS alloc] init ];
 #elif defined(__MAC_OS_X_VERSION_MAX_ALLOWED)
-	return [ [CCVideoPlayerImplMac alloc] init ];
+	return (id)[ [CCVideoPlayerImplMac alloc] init ];
 #endif
 }
 

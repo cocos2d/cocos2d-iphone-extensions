@@ -31,9 +31,8 @@ Usage
 5. Assign the delegate if you need it.
 6. Set mode for the layer.
 7. If you want to use kCCLayerPanZoomModeSheet:
-   * Set ruberEdgesMargin if you want to use "ruber edges". That property describes a distance from panBoundRect on which it's possible to stretch layer. 
-   To disable "rubber edges" effect you can set this property to 0.0f (default value).
-   * For "rubber edges" you can set ruberEdgesTime. This is delay to recover layer position and scale.
+   * Set ruberEffectRatio if you want to use "ruber effect" (scrolling/zooming outside of panBoundsRect).
+   * Also you can change rubberEffectRecoveryTime - in that time layer will recover to normal zoom/position.
 8. If you want to use kCCLayerPanZoomModeFrame:
    * Set topFrameMargin, leftFrameMargin, bottomFrameMargin and rightFrameMargin to define distances from edges of panBoundingRect.
    * Set maxSpeed and minSpeed for autoscrolling when touch is in zone near edge of panBoundingRect.

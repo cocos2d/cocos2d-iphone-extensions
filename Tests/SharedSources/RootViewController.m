@@ -159,7 +159,7 @@
 	{
 		for (id <UpdateOrientation> child in curScene.children)
 			if ([child respondsToSelector:@selector(updateOrientationWithOrientation:)])
-				[child updateOrientationWithOrientation:toInterfaceOrientation ];
+				[child updateOrientationWithOrientation: (UIDeviceOrientation)toInterfaceOrientation ];
 	}
 }
 #endif // GAME_AUTOROTATION == kGameAutorotationUIViewController

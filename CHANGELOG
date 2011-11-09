@@ -1,12 +1,20 @@
 
-0.2 - XX-XXXXX-2011
+0.2 - 09-November-2011
    * New Extension: CCLayerPanZoom (iOS Only)
    * New Extension: TMXGenerator.
    * CCSlider: Uses KVO instead of delegate property.
    * ССScrollLayer: Added new property: marginOffset.
    * CCScrollLayer: Restore blending functions properly.
-   * CCMenuAdvanced: bottom to top align fix.
+   * CCScrollLayer: minor fixes & additions:
+      1. Assign delegate instead of retain.
+      2. Avoid double call of scrollLayer:scrolledToPageNumber: (Issue #82).
+      3. Call scrollLayer:scrolledToPageNumber: on Mac, using wheel to scroll.
+      4. Added ability to change colors of pages indicator (Issues #84, #87).
+   * CCMenuAdvanced fixes:   
+      1. Bottom to top align bug - menuItem outside of menu bounds (Issue #75).
+      2. Inverted X scroll in Mac with wheel.
    * Analyzer issues fixes in CCBigImage & CCMenuAdvanced.
+   * Warnings fixes & project modernization.
 
 0.1.3 - 15-August-2011
    * Hotfix: CCVideoPlayer on Mac hangups, when changing fullscreen to/from windowed & skip video after this with any key (not mouse).
