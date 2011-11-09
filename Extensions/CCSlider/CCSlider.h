@@ -32,29 +32,12 @@
 
 #import "cocos2d.h"
 
-static const NSInteger kCCSliderPriority = kCCMenuTouchPriority - 2;
-
-
-@protocol CCSliderControlDelegate  
-
-/** Send to delegate each time, when CCSlider's value changed via property.
- *
- * @param value new value, that's set. 
- * Old value is still accessable via CCSlider.value property during this callback.
- *
- * @param tag Tag of CCSlider with changed value.
- *
- * @todo [v0.2] Remove, KVO is better for such things and should be used instead. 
- */
-- (void) valueChanged: (float) value tag: (int) tag;
-
-@end  
+static const NSInteger kCCSliderPriority = kCCMenuTouchPriority - 2; 
 
 /** @class CCSlider Slider control for Cocos2D. Designed with SFX/Music level options in mind. */
 @interface CCSlider : CCLayer 
 {  
 	float value;  
-	id<CCSliderControlDelegate> delegate;  
 	float minX;  
 	float maxX;  
 	
@@ -64,10 +47,7 @@ static const NSInteger kCCSliderPriority = kCCMenuTouchPriority - 2;
 }  
 
 /** Current chosen value, min is 0.0f, max is 1.0f. */
-@property (nonatomic, assign) float value;  
-
-/** Delegate for valueChanged callbacks. */
-@property (nonatomic, retain) id<CCSliderControlDelegate> delegate; 
+@property (nonatomic, assign) float value; 
 
 /** Creates slider with backround image filename & thumb image filename. 
  *

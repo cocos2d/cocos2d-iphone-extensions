@@ -79,7 +79,7 @@
 	{   
 #ifdef __IPHONE_OS_VERSION_MAX_ALLOWED
 		self.isTouchEnabled = YES;  
-#else if (__MAC_OS_X_VERSION_MAX_ALLOWED)
+#elif defined(__MAC_OS_X_VERSION_MAX_ALLOWED)
 		self.isMouseEnabled = YES;
 #endif
 		value = 0;  
@@ -105,7 +105,6 @@
 	return self;  
 }  
 
-@synthesize delegate;
 @dynamic value;
 
 - (float) value
@@ -128,10 +127,7 @@
     CCMenuItem *thumb = _thumb;
     CGPoint pos = thumb.position;
     pos.x = minX + newValue * (maxX - minX);
-    thumb.position = pos;
-	
-	[delegate valueChanged:value tag:self.tag];
-    
+    thumb.position = pos;    
 }
 
 - (NSInteger) mouseDelegatePriority

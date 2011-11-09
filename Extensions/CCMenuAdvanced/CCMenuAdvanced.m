@@ -226,11 +226,14 @@
 	float width = 0;
 	
 	// calculate and set contentSize,
-	CCMenuItem *item;
+	CCMenuItem *item = nil;
 	CCARRAY_FOREACH(children_, item)
 	{
-		height += item.contentSize.height * item.scaleY + padding;
-		width = MAX(item.contentSize.width * item.scaleX, width);
+        if (item)
+        {
+            height += item.contentSize.height * item.scaleY + padding;
+            width = MAX(item.contentSize.width * item.scaleX, width);
+        }
 	}
 	[self setContentSize: CGSizeMake(width, height)];
 	
@@ -239,14 +242,21 @@
 	if (! bottomToTop)
 		y = height;
 	
-	CCARRAY_FOREACH(children_, item) {
-		CGSize itemSize = item.contentSize;
-	    [item setPosition:ccp(width / 2.0f, y - itemSize.height * item.scaleY / 2.0f)];
-		
-		if (bottomToTop)
-			y += itemSize.height * item.scaleY + padding;
-		else 
-			y -= itemSize.height * item.scaleY + padding;
+	CCARRAY_FOREACH(children_, item) 
+    {
+        if (item)
+        {
+            CGSize itemSize = item.contentSize;
+            // need to start y higher, otherwise the first element will be hidden from view
+            if (bottomToTop)
+                y += itemSize.height * item.scaleY;
+            [item setPosition:ccp(width / 2.0f, y - itemSize.height * item.scaleY / 2.0f)];
+            
+            if (bottomToTop)
+                y += padding;
+            else 
+                y -= itemSize.height * item.scaleY + padding;
+        }
 	}
 	
 	// Fix position of menuItem if it's the only one.
@@ -282,8 +292,11 @@
 	CCMenuItem *item;
 	CCARRAY_FOREACH(children_, item)
 	{
-		width += item.contentSize.width * item.scaleX + padding;
-		height = MAX(item.contentSize.height * item.scaleY, height);
+        if (item)
+        {
+            width += item.contentSize.width * item.scaleX + padding;
+            height = MAX(item.contentSize.height * item.scaleY, height);
+        }
 	}
 	[self setContentSize: CGSizeMake(width, height)];
 	
@@ -294,19 +307,22 @@
 	// align items
 	CCARRAY_FOREACH(children_, item)
 	{
-		CGSize itemSize = item.contentSize;
-		
-		CGPoint curPos = ccp(x + itemSize.width * item.scaleX / 2.0f, height / 2.0f);
-		if (!leftToRight) {
-			curPos.x = x - itemSize.width * item.scaleX / 2.0f;
-		}
-		
-		[item setPosition:curPos];
-		
-		if (leftToRight)
-			x += itemSize.width * item.scaleX + padding;
-		else
-			x -= itemSize.width * item.scaleX + padding;
+        if (item)
+        {
+            CGSize itemSize = item.contentSize;
+            
+            CGPoint curPos = ccp(x + itemSize.width * item.scaleX / 2.0f, height / 2.0f);
+            if (!leftToRight) {
+                curPos.x = x - itemSize.width * item.scaleX / 2.0f;
+            }
+            
+            [item setPosition:curPos];
+            
+            if (leftToRight)
+                x += itemSize.width * item.scaleX + padding;
+            else
+                x -= itemSize.width * item.scaleX + padding;
+        }
 	}
 	
 #ifdef __MAC_OS_X_VERSION_MAX_ALLOWED
@@ -596,7 +612,7 @@
 	// scrolling is allowed only with non-zero boundaryRect
 	if (!CGRectIsNull(boundaryRect_))
 	{	
-		CGPoint delta = ccp( - [theEvent deltaX], - [theEvent deltaY] );
+		CGPoint delta = ccp( [theEvent deltaX], - [theEvent deltaY] );
 		
 		// fix scrolling speed if we are scaled
 		delta = ccp(delta.x / self.scaleX, delta.y / self.scaleY);

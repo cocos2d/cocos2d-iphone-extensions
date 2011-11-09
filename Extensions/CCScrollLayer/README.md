@@ -34,6 +34,7 @@ Additions since Giv Parvaneh version
 8. iOS: scroll with only one touch.
 9. Mac Support, more flexible.
 10. Dynamic Pages Control - Add / Remove pages after CCScrollLayer init & onEnter.
+11. marginOffset property - to slowdown scrolling pages out of bounds.
  
 Limitations
 =============

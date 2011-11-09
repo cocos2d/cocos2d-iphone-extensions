@@ -170,7 +170,9 @@ enum nodeTags
 	CCMenuItemLabel *titem = [CCMenuItemLabel itemWithLabel:labelTwo target:self selector:@selector(addPagePressed:)];
 	CCLabelTTF *labelTwo2 = [CCLabelTTF labelWithString:@"Remove Page!" fontName:@"Marker Felt" fontSize:44];		
 	CCMenuItemLabel *titem2 = [CCMenuItemLabel itemWithLabel:labelTwo2 target:self selector:@selector(removePagePressed:)];
-	CCMenu *menu = [CCMenu menuWithItems: titem, titem2,nil];
+    CCLabelTTF *labelTwo3 = [CCLabelTTF labelWithString:@"Change dots color!" fontName:@"Marker Felt" fontSize:40];		
+	CCMenuItemLabel *titem3 = [CCMenuItemLabel itemWithLabel:labelTwo3 target:self selector:@selector(changeColorPressed:)];
+	CCMenu *menu = [CCMenu menuWithItems: titem, titem2, titem3, nil];
 	[menu alignItemsVertically];
 	menu.position = ccp(screenSize.width/2, screenSize.height/2);
 	[pageTwo addChild:menu];	
@@ -186,11 +188,34 @@ enum nodeTags
 	// Create the scroller and pass-in the pages (set widthOffset to 0 for fullscreen pages).
 	CCScrollLayer *scroller = [CCScrollLayer nodeWithLayers: [self scrollLayerPages] widthOffset: 0.48f * screenSize.width ];
 	scroller.pagesIndicatorPosition = ccp(screenSize.width * 0.5f, screenSize.height - 30.0f);
+    
+    // New feature: margin offset - to slowdown scrollLayer when scrolling out of it contents.
+    // Comment this line or change marginOffset to screenSize.width to disable this effect.
+    scroller.marginOffset = 0.5f * screenSize.width;
 	
 	return scroller;
 }
 
 #pragma mark Callbacks
+
+- (void) changeColorPressed: (CCNode *) sender
+{
+    CCScrollLayer *scroller = (CCScrollLayer *)[self getChildByTag:kScrollLayer];
+    
+    GLubyte opacity = arc4random() % 127 + 128;
+    GLubyte red = arc4random() % 255;
+    GLubyte green = arc4random() % 255;
+    GLubyte blue = arc4random() % 255;
+    
+    GLubyte opacitySelected = arc4random() % 127 + 128;
+    GLubyte redSelected = arc4random() % 255;
+    GLubyte greenSelected = arc4random() % 255;
+    GLubyte blueSelected = arc4random() % 255;
+    
+    scroller.pagesIndicatorNormalColor = ccc4(red, green, blue, opacity);
+    scroller.pagesIndicatorSelectedColor = ccc4(redSelected, greenSelected, blueSelected, opacitySelected);
+    
+}
 
 // "Add Page" Button Callback - adds new page & updates fast page change menu.
 - (void) addPagePressed: (CCNode *) sender

@@ -6,6 +6,10 @@ Repo Maintainer:
 
 People/companies who were/are contributing code to cocos2d-iphone-extensions (alphabetically ordered):
 
+	* Alexey Lang (twitter: @alexeylang)
+		CCLayerPanZoom author.
+		Issue #56 (comments & refactoring for TMXGenerator) pair programming.
+
 	* Brian Feller (http://infinitesimplicity.com/)
 		CCScrollLayer#moveToPage: bounds checking
 
@@ -17,17 +21,32 @@ People/companies who were/are contributing code to cocos2d-iphone-extensions (al
 
 	* Israel Roth (http://srooltheknife.blogspot.com/)
 		CCSliderControl author
+
+    * Jan Ekholm (http://github.com/jan-ekholm)
+        CCScrollLayer fix: restore blending functions (Pull Request #67).
 		
 	* Jeff Keeme (cjkeeme) (http://www.myblackdogbooks.com/)
 		Fix for issue #23 (CCScrollLayer page indicator artifacts)
+
+    * Jeremy Stone (twitter: @slycrel) (http://becauseiamthedadguy.blogspot.com/)
+        TMXGenerator author.
 		
 	* Jonathan Dixon (http://www.cocos2d-iphone.org/forum/profile/4062)
 		Solution for issue #31 (CCVideoPlayer toggleFullscreen support).
 		CCVideoPlayer#setNoSkip implementation.
+
+    * Marat Yakupov (twitter: @_moadib) (http://ursinepaw.com)
+        CCScrollLayer improvement: marginOffset property.
+
+    * Matthew Herz (twitter: @biminiroad) (http://blog.signal-blue.net)
+        Fix for CCMenuAdvanced (Issue #75 - wrong menu item positioning in bottom to top align). 
 		
 	* Patrick Wolowicz (twitter: @subzero_eu) (http://blog.subzero.eu/)
 		CCVideoPlayer patch: preload movie, prevent flickering & hide controls when compiled on older SDKs.
-
+        
+    * Sapsaldog (github: @sapsaldog) (http://sapsaldog.tistory.com/)
+        CCScrollLayer: ability to change pages indicator color (Issue #84, Pull Request #87).
+    
 	* Sergey Tikhonov (twitter: @sthaqu) (http://www.haqu.net)
 		Solution for Issue #53 fix (FilesDownloader compatibility with Mac OS X File System Guide).
 

@@ -462,13 +462,12 @@
 		return;
 	
 	// create new thread if it doesn't exist
-	self.tilesLoadThread = [[NSThread alloc] initWithTarget: self
+	self.tilesLoadThread = [[[NSThread alloc] initWithTarget: self
 												   selector: @selector(updateTiles:)
-													 object: nil];
-	[_tilesLoadThread release];
+													 object: nil] autorelease];
 
 	_tilesLoadThreadIsSleeping = NO;
-	[_tilesLoadThread start];
+	[self.tilesLoadThread start];
 }
 
 - (void) stopTilesLoadingThread

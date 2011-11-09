@@ -1,10 +1,10 @@
 /*
- * CCVideoPlayer Tests
+ * CCLayerPanZoom Tests
  *
  * cocos2d-extensions
  * https://github.com/cocos2d/cocos2d-iphone-extensions
  *
- * Copyright (c) 2011 Stepan Generalov
+ * Copyright (c) 2011 Alexey Lang
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -26,15 +26,27 @@
  *
  */
 
-
 #import "cocos2d.h"
-#import "CCSlider.h"
+#import "CCLayerPanZoom.h"
 
-
-@interface CCSliderTestLayer : CCLayer
+@interface CCLayerPanZoomTestLayer: CCLayer <CCLayerPanZoomClickDelegate>
 {
+    CCLayerPanZoom *_panZoomLayer;
 }
 
+- (NSString *) title;
 - (void) updateForScreenReshape;
 
+@end
+
+@interface CCLayerPanZoomSimpleSheetTestLayer: CCLayerPanZoomTestLayer 
+@end
+
+@interface CCLayerPanZoomAdvancedSheetTestLayer: CCLayerPanZoomTestLayer 
+@end
+
+@interface CCLayerPanZoomFrameTestLayer: CCLayerPanZoomTestLayer
+{
+    CCSprite *_selectedTestObject; //< weak ref.
+}
 @end

@@ -171,6 +171,18 @@
 	[[CCDirector sharedDirector] setNextDeltaTimeZero:YES];
 }
 
+- (void) updateForScreenReshape
+{
+	CCScene *curScene = [[CCDirector sharedDirector] runningScene];
+	
+	if (curScene)
+	{
+		for (CCNode *child in curScene.children)
+			if ([child respondsToSelector:@selector(updateForScreenReshape)])
+				[child performSelector:@selector(updateForScreenReshape)];
+	}
+}
+
 - (void)dealloc {
 	[[CCDirector sharedDirector] release];
 	[window release];

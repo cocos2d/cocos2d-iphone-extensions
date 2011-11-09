@@ -149,6 +149,7 @@
 		rect.size.width *= contentScaleFactor;
 		rect.size.height *= contentScaleFactor;
 	}
+
 	glView.frame = rect;
 	
 
@@ -158,10 +159,18 @@
 	{
 		for (id <UpdateOrientation> child in curScene.children)
 			if ([child respondsToSelector:@selector(updateOrientationWithOrientation:)])
-				[child updateOrientationWithOrientation:toInterfaceOrientation ];
+				[child updateOrientationWithOrientation: (UIDeviceOrientation)toInterfaceOrientation ];
 	}
 }
 #endif // GAME_AUTOROTATION == kGameAutorotationUIViewController
+
+- (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation
+{
+    id<UIApplicationDelegate> delegate = [UIApplication sharedApplication].delegate;
+    
+    if ([delegate respondsToSelector: @selector(updateForScreenReshape)])
+        [delegate performSelector: @selector(updateForScreenReshape)];
+}
 
 
 - (void)didReceiveMemoryWarning {
