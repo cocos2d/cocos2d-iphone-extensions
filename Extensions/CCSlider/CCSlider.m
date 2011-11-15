@@ -18,7 +18,7 @@
  * furnished to do so, subject to the following conditions:
  *
  * The above copyright notice and this permission notice shall be included in
- * all copies or substantial portions of the Software.
+ * all copi*es or substantial portions of the Software.
  *
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
  * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
@@ -32,6 +32,12 @@
 
 #import "CCSlider.h"
 
+#define kThumbTag 1
+
+@interface CCSlider(Private)
+- (void) scaleProgressIndicator;
+- (CCSprite *)spriteWithColor:(ccColor4F)bgColor textureSize:(CGSize)textureSize;
+@end
 
 @implementation CCSlider
 
@@ -46,6 +52,28 @@
 {
 	return [  [ [self alloc]  initWithBackgroundSprite: bgSprite 
 										 thumbMenuItem: aThumb ]  autorelease  ];
+}
+
++ (id) sliderWithBackgroundFile:(NSString *)bgFile sliderProgressColor:(ccColor4F) progressColor sliderPadding:(CGSize) padding  thumbFile:(NSString *)thumbFile
+{
+    return [[self alloc] initWithBackgroundFile:bgFile sliderProgressColor:progressColor sliderPadding:padding thumbFile:thumbFile];
+}
+
++(id) sliderWithBackgroundSprite: (CCSprite *) bgSprite sliderProgressColor:(ccColor4F) progressColor sliderPadding:(CGSize) padding thumbMenuItem: (CCMenuItem *) aThumb
+{
+    return [[[self alloc] initWithBackgroundSprite:bgSprite sliderProgressColor:progressColor sliderPadding:padding thumbMenuItem:aThumb] autorelease];
+}
+
+- (id) initWithBackgroundFile:(NSString *)bgFile sliderProgressColor:(ccColor4F) progressColor sliderPadding:(CGSize) padding  thumbFile:(NSString *)thumbFile
+{
+    self = [self initWithBackgroundFile:bgFile thumbFile:thumbFile];
+    if(self) {
+        _progressPadding = padding;
+        _progress = [self spriteWithColor:progressColor textureSize:CGSizeMake(_thumb.position.x, _bg.contentSize.height - padding.height)];
+        _progress.position = CGPointMake(_thumb.position.x/2 + padding.width/2, _bg.position.y);
+        [self addChild:_progress z:1];
+    }
+    return self;
 }
 
 // Easy init
@@ -70,6 +98,27 @@
 	// Don't leak & return nil on fail.
 	[self release];
 	return nil;
+}
+
+- (CCSprite *)spriteWithColor:(ccColor4F)bgColor textureSize:(CGSize)textureSize {
+    
+    CCRenderTexture *rt = [CCRenderTexture renderTextureWithWidth:textureSize.width height:textureSize.height];
+    [rt beginWithClear:bgColor.r g:bgColor.g b:bgColor.b a:bgColor.a];
+    [rt end];
+    return [CCSprite spriteWithTexture:rt.sprite.texture];
+}
+
+- (id) initWithBackgroundSprite: (CCSprite *) bgSprite sliderProgressColor:(ccColor4F) progressColor sliderPadding:(CGSize) padding  thumbMenuItem: (CCMenuItem *) aThumb   
+{
+    self = [self initWithBackgroundSprite:bgSprite thumbMenuItem:aThumb];
+    
+    if (self) {
+        _progressPadding = padding;
+        _progress = [self spriteWithColor:progressColor textureSize:CGSizeMake(_thumb.position.x, _bg.contentSize.height - padding.height)];
+        _progress.position = CGPointMake(_thumb.position.x/2 + padding.width/2, _bg.position.y);
+        [self addChild:_progress z:1];
+    }
+    return self;
 }
 
 // Designated init
@@ -99,8 +148,9 @@
 		thumbSize = [_thumb contentSize];  
 		minX = thumbSize.width / 2;  
 		maxX = [self contentSize].width - thumbSize.width / 2;  
-		_thumb.position = CGPointMake(minX, [self contentSize].height / 2);  
-		[self addChild:_thumb];  
+		_thumb.position = CGPointMake(minX, [self contentSize].height / 2);
+        [_thumb setTag:kThumbTag];
+		[self addChild:_thumb z:2];  
 	}  
 	return self;  
 }  
@@ -127,7 +177,21 @@
     CCMenuItem *thumb = _thumb;
     CGPoint pos = thumb.position;
     pos.x = minX + newValue * (maxX - minX);
-    thumb.position = pos;    
+    thumb.position = pos;
+    [self scaleProgressIndicator];
+}
+
+- (void) scaleProgressIndicator
+{
+    if (_progress) {
+        if (_progress) {
+            CCSprite *progress = _progress;
+            CGSize size = progress.contentSize;
+            size.width = _thumb.position.x;
+            progress.scaleX = size.width/progress.contentSize.width;
+            progress.position = CGPointMake(_thumb.position.x/2 + _progressPadding.width/2, _bg.position.y);
+        }
+    }
 }
 
 - (NSInteger) mouseDelegatePriority
@@ -182,15 +246,16 @@
     if ((location.x < minX) || (location.x > maxX))
         return;
 	
-    CCSprite *thumb = (CCSprite *)[[self children] objectAtIndex:1];
+    CCSprite *thumb = (CCSprite *)[self getChildByTag:kThumbTag];
     CGPoint pos = thumb.position;
     pos.x = location.x;
     thumb.position = pos;
+    [self scaleProgressIndicator];
 }
 
 -(void) ccTouchEnded:(UITouch *)touch withEvent:(UIEvent *)event
 {
-    CCSprite *thumb = (CCSprite *)[[self children] objectAtIndex:1];
+    CCSprite *thumb = (CCSprite *)[self getChildByTag:kThumbTag];
     [_thumb unselected];
     self.value = (thumb.position.x - minX) / (maxX - minX);
 }
@@ -220,7 +285,6 @@
     }
     return isTouchHandled; // YES for events I handle
 }
-
 
 -(BOOL) ccMouseDragged:(NSEvent*)event
 {

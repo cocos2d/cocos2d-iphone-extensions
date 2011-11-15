@@ -44,6 +44,9 @@ static const NSInteger kCCSliderPriority = kCCMenuTouchPriority - 2;
 	// weak links to children
 	CCMenuItem *_thumb;
 	CCSprite *_bg;
+    CCSprite *_progress;
+    
+    CGSize _progressPadding;
 }  
 
 /** Current chosen value, min is 0.0f, max is 1.0f. */
@@ -60,6 +63,18 @@ static const NSInteger kCCSliderPriority = kCCMenuTouchPriority - 2;
  * @see initWithBackgroundSprite: thumbMenuItem:
  */
 +(id) sliderWithBackgroundSprite: (CCSprite *) bgSprite thumbMenuItem: (CCMenuItem *) aThumb;
+
+/** Creates slider with given bg sprite, progress color and thumb.
+ * 
+ * @see initWithBackgroundSprite: sliderProgressColor sliderPadding thumbMenuItem
+ */
++(id) sliderWithBackgroundSprite: (CCSprite *) bgSprite sliderProgressColor:(ccColor4F) progressColor sliderPadding:(CGSize) padding thumbMenuItem: (CCMenuItem *) aThumb;
+
+/* Creates a slider with background image filename, progress color & thumb image filename.
+ *
+ * @see initWithBackgroundFile: sliderProgressColor: sliderPadding: thumbFile:
+ */
++ (id) sliderWithBackgroundFile:(NSString *)bgFile sliderProgressColor:(ccColor4F) progressColor sliderPadding:(CGSize) padding  thumbFile:(NSString *)thumbFile;
 
 /** Easy init - filenames instead of CCSprite & CCMenuItem. Uses designated init inside.
  *
@@ -80,4 +95,32 @@ static const NSInteger kCCSliderPriority = kCCMenuTouchPriority - 2;
  */
 -(id) initWithBackgroundSprite: (CCSprite *) bgSprite thumbMenuItem: (CCMenuItem *) aThumb;
 
+/**
+ * @param bgSprite CCSprite, that is used as a background. It's bounding box is used
+ * to determine max & min x position for a thumb menu item.
+ *
+ * @param progressColor ccColor4F, this is used to create a sprite of a color. This will represent
+ * the progress.
+ *
+ * @param padding CGSize, this represents the total internal padding to give for the progress. The padding
+ * will be relative to the bgSprite
+ *
+ * @param aThumb MenuItem that is used as a thumb. Used without CCMenu, so CCMenuItem#activate
+ * doesn't get called.
+ */
+- (id) initWithBackgroundSprite: (CCSprite *) bgSprite sliderProgressColor:(ccColor4F) progressColor sliderPadding:(CGSize) padding  thumbMenuItem: (CCMenuItem *) aThumb;
+
+/**
+ * @param bgFile Filename for background CCSprite.
+ *
+ * @param progressColor ccColor4F, this is used to create a sprite of a color. This will represent
+ * the progress.
+ *
+ * @param padding CGSize, this represents the total internal padding to give for the progress. The padding
+ * will be relative to the bgSprite
+ *
+ * @param thumbFile Filename, that is used to create normal & selected images for
+ * thumbMenuItem. Selected sprite is darker than normal sprite.
+ */
+- (id) initWithBackgroundFile:(NSString *)bgFile sliderProgressColor:(ccColor4F) progressColor sliderPadding:(CGSize) padding  thumbFile:(NSString *)thumbFile;
 @end  
