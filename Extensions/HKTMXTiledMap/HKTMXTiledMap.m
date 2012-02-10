@@ -146,10 +146,14 @@
 				
 				// XXX: gid == 0 --> empty tile
 				if( gid != 0 ) {
+                    
+                    // JEB - Mask out flip bits to allow individual layers to have 
+                    // different tileset.
+                    gid &= kFlippedMask;
 					
 					// Optimization: quick return
 					// if the layer is invalid (more than 1 tileset per layer) an assert will be thrown later
-					if( gid >= tileset.firstGid )
+					  if( (gid & kFlippedMask) >= tileset.firstGid )
 						return tileset;
 				}
 			}

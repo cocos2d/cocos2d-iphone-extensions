@@ -38,6 +38,8 @@
 #import "CCTextureCache.h"
 #import "CCDirector.h"
 #import "CGPointExtension.h"
+#import "ccMacros.h"
+#import "CCSprite.h"
 
 #pragma mark -
 #pragma mark HKTMXLayer
@@ -58,6 +60,9 @@
 @synthesize layerOrientation=layerOrientation_;
 @synthesize mapTileSize=mapTileSize_;
 @synthesize properties=properties_;
+@synthesize opacity=opacity_;
+@synthesize color=color_;
+@synthesize blendFunc = blendFunc_;
 
 #pragma mark CCTMXLayer - init & alloc & dealloc
 
@@ -70,6 +75,16 @@
 {	
 	if((self=[super init]))
 	{
+        // JEB - default blend function
+		blendFunc_ = (ccBlendFunc) { CC_BLEND_SRC, CC_BLEND_DST };
+        
+        // JEB - default colour
+        color_.r = 255;
+        color_.g = 255;
+        color_.b = 255;
+        
+        
+        
 		texture_ = [[CCTextureCache sharedTextureCache] addImage:tilesetInfo.sourceImage];
 		tilesetInfo.imageSize = texture_.contentSizeInPixels;
 		
@@ -109,13 +124,16 @@
 #ifdef __BIG_ENDIAN__
 			tiles_[i] = CFSwapInt32(tiles_[i]);
 #endif
-			NSAssert(tiles_[i] == 0 || (tiles_[i] >= minGID_ && tiles_[i] <= maxGID_),
+            
+            // JEB flip bits masked to compare true GID
+			NSAssert((tiles_[i] & kFlippedMask) == 0 || 
+                     (((tiles_[i] & kFlippedMask) >= minGID_) && ((tiles_[i] & kFlippedMask) <= maxGID_)),
 				@"TMX: Only one tileset per layer is supported");
 		}
 		
 		CGSize screenSize = [CCDirector sharedDirector].winSizeInPixels;
-		screenGridSize_.width = ceil(screenSize.width / mapTileSize_.width) + 1;
-		screenGridSize_.height = ceil(screenSize.height / mapTileSize_.height) + 1;
+		screenGridSize_.width = (ceil(screenSize.width / mapTileSize_.width)*2) + 1;
+		screenGridSize_.height = (ceil(screenSize.height / mapTileSize_.height)*2) + 1;
 		int screenTileCount = screenGridSize_.width * screenGridSize_.height;
 		// create buffer objects
 		glGenBuffers(3, buffers_);
@@ -279,12 +297,39 @@
 
 #pragma mark CCTMXLayer - obtaining tiles/gids
 
--(unsigned int) tileGIDAt:(CGPoint)pos
+
+// JEB - Returns the texture of gid at position as a CCSprite.
+-(CCSprite*) tileAt:(CGPoint)pos
 {
 	NSAssert( pos.x < layerSize_.width && pos.y < layerSize_.height && pos.x >=0 && pos.y >=0, @"TMXLayer: invalid position");
+	//NSAssert( tiles_ && atlasIndexArray_, @"TMXLayer: the tiles map has been released");
 	
-	int idx = pos.x + (int)pos.y * (int)layerSize_.width;
-	return tiles_[idx];
+	CCSprite *tile = nil;
+	uint32_t gid = [self tileGIDAt:pos];
+	
+	// if GID == 0, then no tile is present
+	if( gid ) 
+    {
+        
+        CGRect rect = [tileset_ rectForGID:gid];
+        tile = [CCSprite spriteWithTexture:texture_ rect:rect];
+		[tile setPositionInPixels: [self positionAt:pos]];
+        tile.anchorPoint = CGPointZero;
+        [tile setOpacity:opacity_];
+	}
+	return tile;
+}
+
+
+-(uint32_t) tileGIDAt:(CGPoint)pos
+{
+	NSAssert( pos.x < layerSize_.width && pos.y < layerSize_.height && pos.x >=0 && pos.y >=0, @"TMXLayer: invalid position");
+//	NSAssert( tiles_ && atlasIndexArray_, @"TMXLayer: the tiles map has been released");
+	
+	NSInteger idx = pos.x + pos.y * layerSize_.width;
+	
+	// JEB - Return true GID
+	return (tiles_[ idx ] & kFlippedMask);
 }
 
 #pragma mark CCTMXLayer - adding / remove tiles
@@ -350,6 +395,19 @@
 
 -(void) draw
 {
+    // JEB Set Blend mode
+    BOOL newBlend = ((blendFunc_.src != CC_BLEND_SRC) || (blendFunc_.dst != CC_BLEND_DST));
+	if( newBlend )
+    {
+		glBlendFunc( blendFunc_.src, blendFunc_.dst );
+	}
+	else if( opacity_ != 255 ) 
+    {
+		newBlend = YES;
+		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+	}
+
+    
 	glBindTexture(GL_TEXTURE_2D, texture_.name);
     // TODO: Do we EVER want a tiled map to be anti-aliased?
     ccTexParams texParams = { GL_NEAREST, GL_NEAREST, GL_CLAMP_TO_EDGE, GL_CLAMP_TO_EDGE };
@@ -381,6 +439,10 @@
     GLfloat *texcoords = glMapBuffer(GL_ARRAY_BUFFER, GL_WRITE_ONLY);
 	GLushort *indices = glMapBuffer(GL_ELEMENT_ARRAY_BUFFER, GL_WRITE_ONLY);
 #endif
+    
+
+    
+    
 	CGSize texSize = tileset_.imageSize;
 	for (int y=0; y < screenGridSize_.height; y++)
 	{
@@ -395,32 +457,36 @@
 			unsigned int tile = tiles_[tileidx];
 			if (!tile) continue;
 			unsigned int showtile;
-			if (AC[tile].validUntil <= animClock_)
+            
+            // *** JEB index does not included flip bits *** 
+            unsigned int tile_noflags = (tile & kFlippedMask);
+			if (AC[tile_noflags].validUntil <= animClock_)
 			{
-				if (AR[tile].last && animClock_ >= AR[tile].cycleTime)
+				if (AR[tile_noflags].last && animClock_ >= AR[tile].cycleTime)
 				{
-					showtile = AR[tile].last;
-					AC[tile].state = showtile;
-					AC[tile].validUntil = INFINITY;
+					showtile = AR[tile_noflags].last;
+					AC[tile_noflags].state = showtile;
+					AC[tile_noflags].validUntil = INFINITY;
 				}
 				else
 				{
-					double phase = AR[tile].last ? animClock_ : fmod(animClock_, AR[tile].cycleTime);
+					double phase = AR[tile_noflags].last ? animClock_ : fmod(animClock_, AR[tile_noflags].cycleTime);
 					showtile = tile;
 					while (phase > AR[showtile].delay)
 					{
 						phase -= AR[showtile].delay;
 						showtile = AR[showtile].next;
 					}
-					AC[tile].state = showtile;
-					AC[tile].validUntil = animClock_ + AR[showtile].delay - phase;
+					AC[tile_noflags].state = showtile;
+					AC[tile_noflags].validUntil = animClock_ + AR[showtile].delay - phase;
 				}
 			}
 			else
-				showtile = AC[tile].state;
-			dirtyAt_ = MIN(dirtyAt_, AC[tile].validUntil);
+				showtile = AC[tile_noflags].state;
+            
+			dirtyAt_ = MIN(dirtyAt_, AC[tile_noflags].validUntil);
 			int screenidx = y * screenGridSize_.width + x;
-			CGRect tileTexture = [tileset_ rectForGID:showtile];
+			CGRect tileTexture = [tileset_ rectForGID:(showtile & kFlippedMask)];
 			tileTexture.origin.x /= texSize.width;
 			tileTexture.origin.y /= texSize.height;
 			tileTexture.size.width /= texSize.width;
@@ -429,14 +495,46 @@
 			GLushort *idxbase = indices + vertexCount;
 			int vertexbase = screenidx * 4;
 			
-			texbase[0] = tileTexture.origin.x;
-			texbase[1] = tileTexture.origin.y + tileTexture.size.height;
-			texbase[2] = tileTexture.origin.x + tileTexture.size.width;
-			texbase[3] = tileTexture.origin.y + tileTexture.size.height;
-			texbase[4] = tileTexture.origin.x;
-			texbase[5] = tileTexture.origin.y;
-			texbase[6] = tileTexture.origin.x + tileTexture.size.width;
-			texbase[7] = tileTexture.origin.y;
+            // ****************************************
+            // * JEB Handle flipped and rotated tiles *
+            // ****************************************
+            float left, right, top, bottom;
+            left   = tileTexture.origin.x;
+            right  = left + tileTexture.size.width;
+            bottom = tileTexture.origin.y;
+            top    = bottom + tileTexture.size.height;
+            
+            
+            if (tile & kFlippedVerticallyFlag)
+                CC_SWAP(top,bottom);
+            
+            if (tile & kFlippedHorizontallyFlag)
+                CC_SWAP(left,right);
+
+            
+            if (tile & kFlippedDiagonallyFlag)
+            {
+                texbase[0] = left;
+                texbase[1] = top;
+                texbase[2] = left;
+                texbase[3] = bottom;
+                texbase[4] = right;
+                texbase[5] = top;
+                texbase[6] = right;
+                texbase[7] = bottom; 
+            }
+            else
+            {
+                texbase[0] = left;
+                texbase[1] = top;
+                texbase[2] = right;
+                texbase[3] = top;
+                texbase[4] = left;
+                texbase[5] = bottom;
+                texbase[6] = right;
+                texbase[7] = bottom; 
+            }
+            // *****************************
 			
 			idxbase[0] = vertexbase;
 			idxbase[1] = vertexbase + 1;
@@ -458,10 +556,14 @@
 	lastVertexCount_ = vertexCount;
 	
 texdone:
+
 	glPushMatrix();
 	glTranslatef(baseTile.x * mapTileSize_.width, baseTile.y * mapTileSize_.height, 0);
 	glDisableClientState(GL_COLOR_ARRAY);
-	glColor4f(1, 1, 1, 1);
+    
+	// JEB set layer tint and opacity
+    glColor4f(color_.r/255.0f, color_.g/255.0f, color_.b/255.0f, opacity_/255.0f);
+    
 	glTexCoordPointer(2, GL_FLOAT, 0, NULL);
 	glDrawElements(GL_TRIANGLES, vertexCount, GL_UNSIGNED_SHORT, NULL);
 	glEnableClientState(GL_COLOR_ARRAY);
@@ -469,7 +571,15 @@ texdone:
 	
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
+    
+    // JEB - Restore default blend
+    if( newBlend )
+		glBlendFunc(CC_BLEND_SRC, CC_BLEND_DST);
+
+   
+    
 }
+
 
 @end
 

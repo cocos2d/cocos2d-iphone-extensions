@@ -33,6 +33,14 @@
  */
 #import "CCNode.h"
 
+// JEB Bits on the far end of the 32-bit global tile ID (GID's) are used for tile flags
+#define kFlippedHorizontallyFlag	0x80000000
+#define kFlippedVerticallyFlag		0x40000000
+#define kFlippedDiagonallyFlag      0x20000000
+#define kFlippedMask				~(kFlippedHorizontallyFlag|kFlippedVerticallyFlag|kFlippedDiagonallyFlag)
+
+
+
 @class CCTMXMapInfo;
 @class CCTMXLayerInfo;
 @class CCTMXTilesetInfo;
@@ -60,7 +68,7 @@ struct HKTMXAnimCacheEntry {
 	double validUntil;
 };
 
-@interface HKTMXLayer : CCNode
+@interface HKTMXLayer : CCNode <CCRGBAProtocol, CCBlendProtocol>
 {
 	CCTMXTilesetInfo	*tileset_;
 	CCTexture2D			*texture_;
@@ -70,7 +78,7 @@ struct HKTMXAnimCacheEntry {
 	CGSize				screenGridSize_;
 	unsigned int		*tiles_;
 	NSMutableArray		*properties_;
-	unsigned char		opacity_;
+	
 	unsigned int		minGID_;
 	unsigned int		maxGID_;
 	GLuint				buffers_[3];
@@ -82,7 +90,14 @@ struct HKTMXAnimCacheEntry {
 	struct HKTMXAnimRule *animRules_;
 	struct HKTMXAnimCacheEntry *animCache_;
 	double				animClock_;
+    
+    GLubyte		opacity_;
+	ccColor3B	color_;
+    ccBlendFunc	blendFunc_;
 }
+
+
+
 /** name of the layer */
 @property (nonatomic,readwrite,retain) NSString *layerName;
 /** size of the layer in tiles */
@@ -125,5 +140,12 @@ struct HKTMXAnimCacheEntry {
 
 /** Creates the tiles */
 -(void) setupTiles;
+
+/** CCRGBAProtocol protocol */
+@property (nonatomic,readwrite) GLubyte opacity;
+@property (nonatomic,readwrite) ccColor3B color;
+
+/** CCBlendProtocol protocol */
+@property (nonatomic,readwrite) ccBlendFunc blendFunc;
 
 @end
