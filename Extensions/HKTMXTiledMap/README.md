@@ -20,5 +20,8 @@ Created just like a CCTMXTiledMap.
 
 Known issues
 ------------------------
-* Doesn't currently work with retina display enabled and running on an iPhone 4 (asserts / crashes about multiple tilesets per layer)
-* Mac Version can sometimes create line gaps between tiles when resizing the viewport (No easy-to-reproduce case)
+* Can sometimes create line gaps between tiles when resizing the viewport (No easy-to-reproduce case)
+
+Thanks
+------------------------
+Special thanks to Jonathan Barnes for adding support for flipped tiles
