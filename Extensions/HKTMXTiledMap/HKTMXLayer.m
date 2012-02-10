@@ -462,7 +462,7 @@
             unsigned int tile_noflags = (tile & kFlippedMask);
 			if (AC[tile_noflags].validUntil <= animClock_)
 			{
-				if (AR[tile_noflags].last && animClock_ >= AR[tile].cycleTime)
+				if (AR[tile_noflags].last && animClock_ >= AR[tile_noflags].cycleTime)
 				{
 					showtile = AR[tile_noflags].last;
 					AC[tile_noflags].state = showtile;
@@ -471,7 +471,7 @@
 				else
 				{
 					double phase = AR[tile_noflags].last ? animClock_ : fmod(animClock_, AR[tile_noflags].cycleTime);
-					showtile = tile;
+					showtile = tile_noflags;
 					while (phase > AR[showtile].delay)
 					{
 						phase -= AR[showtile].delay;
