@@ -88,7 +88,12 @@
 				[self addChild:child z:idx tag:idx];
 				
 				// update content size with the max size
-				CGSize childSize = [child contentSize];
+#if __IPHONE_OS_VERSION_MAX_ALLOWED
+                CGSize childSize = [child contentSize];
+#elif __MAC_OS_X_VERSION_MAX_ALLOWED
+                NSSize childSize = [child contentSize];
+#endif 
+				
 				CGSize currentSize = [self contentSize];
 				currentSize.width = MAX( currentSize.width, childSize.width );
 				currentSize.height = MAX( currentSize.height, childSize.height );

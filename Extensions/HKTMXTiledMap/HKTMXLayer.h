@@ -31,7 +31,7 @@
  * http://www.mapeditor.org
  *
  */
-#import "CCNode.h"
+#import "cocos2d.h"
 
 // JEB Bits on the far end of the 32-bit global tile ID (GID's) are used for tile flags
 #define kFlippedHorizontallyFlag	0x80000000
@@ -78,6 +78,7 @@ struct HKTMXAnimCacheEntry {
 	CGSize				screenGridSize_;
 	unsigned int		*tiles_;
 	NSMutableArray		*properties_;
+    int layerOrientation_;
 	
 	unsigned int		minGID_;
 	unsigned int		maxGID_;
@@ -122,6 +123,10 @@ struct HKTMXAnimCacheEntry {
  if it returns 0, it means that the tile is empty.
  */
 -(unsigned int) tileGIDAt:(CGPoint)tileCoordinate;
+
+/** returns a sprite that mimics what is at pos. It is up to the user to turn it off or do whatever
+*/
+-(CCSprite*) tileAt:(CGPoint)pos;
 
 /** sets the tile gid (gid = tile global id) at a given tile coordinate.
  The Tile GID can be obtained by using the method "tileGIDAt" or by using the TMX editor -> Tileset Mgr +1.
