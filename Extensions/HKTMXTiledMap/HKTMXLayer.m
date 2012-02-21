@@ -73,6 +73,10 @@
 
 -(id) initWithTilesetInfo:(CCTMXTilesetInfo*)tilesetInfo layerInfo:(CCTMXLayerInfo*)layerInfo mapInfo:(CCTMXMapInfo*)mapInfo
 {	
+    // JEB - A layer must have at least one tile to be able to associated a tileset spritesheet with it.
+    //       This tile can be always be cleared with removeTileAt: after initialisation.
+    NSAssert1((tilesetInfo != nil), @"TMX Layer '%@' has no associated tileset", layerInfo.name);
+    
 	if((self=[super init]))
 	{
         // JEB - default blend function
@@ -132,8 +136,10 @@
 		}
 		
 		CGSize screenSize = [CCDirector sharedDirector].winSizeInPixels;
-		screenGridSize_.width = (ceil(screenSize.width / mapTileSize_.width)*2) + 1;
-		screenGridSize_.height = (ceil(screenSize.height / mapTileSize_.height)*2) + 1;
+        // JEB - Added support for tilemap scaling
+		screenGridSize_.width = (ceil(screenSize.width / (mapTileSize_.width * HKTMX_LAYER_SCALE_LIMIT)) + 1);
+		screenGridSize_.height = (ceil(screenSize.height / (mapTileSize_.height * HKTMX_LAYER_SCALE_LIMIT)) + 1);
+        zoomGridSize_ = screenGridSize_;
 		int screenTileCount = screenGridSize_.width * screenGridSize_.height;
 		// create buffer objects
 		glGenBuffers(3, buffers_);
@@ -298,29 +304,6 @@
 #pragma mark CCTMXLayer - obtaining tiles/gids
 
 
-// JEB - Returns the texture of gid at position as a CCSprite.
--(CCSprite*) tileAt:(CGPoint)pos
-{
-	NSAssert( pos.x < layerSize_.width && pos.y < layerSize_.height && pos.x >=0 && pos.y >=0, @"TMXLayer: invalid position");
-	//NSAssert( tiles_ && atlasIndexArray_, @"TMXLayer: the tiles map has been released");
-	
-	CCSprite *tile = nil;
-	uint32_t gid = [self tileGIDAt:pos];
-	
-	// if GID == 0, then no tile is present
-	if( gid ) 
-    {
-        
-        CGRect rect = [tileset_ rectForGID:gid];
-        tile = [CCSprite spriteWithTexture:texture_ rect:rect];
-		[tile setPositionInPixels: [self positionAt:pos]];
-        tile.anchorPoint = CGPointZero;
-        [tile setOpacity:opacity_];
-	}
-	return tile;
-}
-
-
 -(uint32_t) tileGIDAt:(CGPoint)pos
 {
 	NSAssert( pos.x < layerSize_.width && pos.y < layerSize_.height && pos.x >=0 && pos.y >=0, @"TMXLayer: invalid position");
@@ -332,25 +315,62 @@
 	return (tiles_[ idx ] & kFlippedMask);
 }
 
+
+
+// JEB - Returns flipbits of tile at coords
+-(unsigned int) tileFlipBitsAt:(CGPoint)pos
+{
+    NSAssert( pos.x < layerSize_.width && pos.y < layerSize_.height && pos.x >=0 && pos.y >=0, @"TMXLayer: invalid position");
+	NSInteger idx = pos.x + pos.y * layerSize_.width;
+	
+	return (tiles_[ idx ] & kGIDMask);
+}
+
 #pragma mark CCTMXLayer - adding / remove tiles
 
+
+
+
+
+// JEB - Change GID at location. Flip bits preserved
 -(void) setTileGID:(unsigned int)gid at:(CGPoint)pos
 {
 	NSAssert( pos.x < layerSize_.width && pos.y < layerSize_.height && pos.x >=0 && pos.y >=0, @"TMXLayer: invalid position");
 	NSAssert1(gid == 0 || (gid >= minGID_ && gid <= maxGID_), @"invalid gid (%u) for tileset", gid);
 	int idx = (int)pos.y * (int)layerSize_.width + pos.x;
-	tiles_[idx] = gid;
+    unsigned int flipbits = tiles_[idx] & kGIDMask;
+	tiles_[idx] = flipbits | gid;
 	dirtyAt_ = -INFINITY;
 }
 
+
+
+// JEB - Change the flip bits at location
+-(void) setTileFlipBits:(unsigned int)flipbits at:(CGPoint)pos
+{
+	NSAssert( pos.x < layerSize_.width && pos.y < layerSize_.height && pos.x >=0 && pos.y >=0, @"TMXLayer: invalid position");
+	NSAssert(!((flipbits & kFlippedMask) || ((flipbits & ~kFlippedMask)==~kFlippedMask) ), @"invalid flipbits");
+    
+    
+	int idx = (int)pos.y * (int)layerSize_.width + pos.x;
+    unsigned int gid = tiles_[idx] & kFlippedMask;
+	tiles_[idx] = flipbits | gid;
+	dirtyAt_ = -INFINITY;
+}
+
+
+// JEB - Although sprite tiles can be added though setTile:at: I have left this
+//       to prevent abuse.
 -(void) addChild: (CCNode*)node z:(NSInteger)z tag:(NSInteger)tag
 {
 	NSAssert(NO, @"addChild: is not supported on CCTMXLayer. Instead use setTileGID:at:/tileGIDAt:");
 }
 
+// JEB - Ensured both flip bits and GID are cleared.
 -(void) removeTileAt:(CGPoint)pos
 {
 	[self setTileGID:0 at:pos];
+    [self setTileFlipBits:0 at:pos];
 }
 
 #pragma mark CCTMXLayer - obtaining positions, offset
@@ -393,6 +413,22 @@
 
 #pragma mark CCTMXLayer - draw
 
+// updates grid based on a certain scale. This way you can optimize how much you want to draw.
+// this is strictly for performance tuning based on your individual needs
+-(void)updateScale:(float)s
+{
+    if(s >= HKTMX_LAYER_SCALE_LIMIT)
+    {
+        CGSize screenSize = [CCDirector sharedDirector].winSizeInPixels;
+        zoomGridSize_.width = (ceil(screenSize.width / (mapTileSize_.width * s)) + 1);
+        zoomGridSize_.height = (ceil(screenSize.height / (mapTileSize_.height * s)) + 1);
+    }
+    else
+    {
+        CCLOG(@"HKTMX: Warning layer scale passed HKTMX_LAYER_SCALE_LIMIT");
+    }
+}
+
 -(void) draw
 {
     // JEB Set Blend mode
@@ -421,8 +457,8 @@
 	glBindBuffer(GL_ARRAY_BUFFER, buffers_[1]);
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, buffers_[2]);
 	CGAffineTransform trans = [self worldToNodeTransform];
-	CGPoint baseTile = CGPointMake(floor(trans.tx / mapTileSize_.width),
-								   floor(trans.ty / mapTileSize_.height));
+	CGPoint baseTile = CGPointMake(floor(trans.tx / (mapTileSize_.width)),
+								   floor(trans.ty / (mapTileSize_.height)));
 	unsigned int vertexCount = 0;
 	if (dirtyAt_ > animClock_ && baseTile.x == lastBaseTile_.x && baseTile.y == lastBaseTile_.y)
 	{
@@ -444,11 +480,11 @@
     
     
 	CGSize texSize = tileset_.imageSize;
-	for (int y=0; y < screenGridSize_.height; y++)
+	for (int y=0; y < zoomGridSize_.height; y++)
 	{
 		if (baseTile.y + y < 0 || baseTile.y + y >= layerSize_.height)
 			continue;
-		for (int x=0; x < screenGridSize_.width; x++)
+		for (int x=0; x < zoomGridSize_.width; x++)
 		{
 			if (baseTile.x + x < 0 || baseTile.x + x >= layerSize_.width)
 				continue;
@@ -485,7 +521,7 @@
 				showtile = AC[tile_noflags].state;
             
 			dirtyAt_ = MIN(dirtyAt_, AC[tile_noflags].validUntil);
-			int screenidx = y * screenGridSize_.width + x;
+			int screenidx = (y * (screenGridSize_.width)) + x;
 			CGRect tileTexture = [tileset_ rectForGID:(showtile & kFlippedMask)];
 			tileTexture.origin.x /= texSize.width;
 			tileTexture.origin.y /= texSize.height;

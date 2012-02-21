@@ -31,19 +31,34 @@
  * http://www.mapeditor.org
  *
  */
-#import "cocos2d.h"
+#import "CCNode.h"
+
+
+// JEB - The following define can me used to support scaling out of the tilemap.
+// E.g A value of 0.5f will allow the map to be zoomed out upto 2x
+// WARNING: Changing this value will impact performance.
+#ifndef HKTMX_LAYER_SCALE_LIMIT
+#define HKTMX_LAYER_SCALE_LIMIT 1.0f
+#endif
+
 
 // JEB Bits on the far end of the 32-bit global tile ID (GID's) are used for tile flags
 #define kFlippedHorizontallyFlag	0x80000000
 #define kFlippedVerticallyFlag		0x40000000
 #define kFlippedDiagonallyFlag      0x20000000
 #define kFlippedMask				~(kFlippedHorizontallyFlag|kFlippedVerticallyFlag|kFlippedDiagonallyFlag)
+#define kGIDMask                    (kFlippedHorizontallyFlag|kFlippedVerticallyFlag|kFlippedDiagonallyFlag)
 
+#define kTileRotated0          0x00000000
+#define kTileRotated90        (kFlippedDiagonallyFlag|kFlippedHorizontallyFlag)  
+#define kTileRotated180       (kFlippedHorizontallyFlag|kFlippedVerticallyFlag)
+#define kTileRotated270       (kFlippedDiagonallyFlag|kFlippedVerticallyFlag)
 
 
 @class CCTMXMapInfo;
 @class CCTMXLayerInfo;
 @class CCTMXTilesetInfo;
+
 
 /**
  Represents a tile animation state.  When animClock == 0.0, each tile is in a state
@@ -76,6 +91,7 @@ struct HKTMXAnimCacheEntry {
 	CGSize				layerSize_;
 	CGSize				mapTileSize_;
 	CGSize				screenGridSize_;
+    CGSize              zoomGridSize_;
 	unsigned int		*tiles_;
 	NSMutableArray		*properties_;
     int layerOrientation_;
@@ -124,10 +140,6 @@ struct HKTMXAnimCacheEntry {
  */
 -(unsigned int) tileGIDAt:(CGPoint)tileCoordinate;
 
-/** returns a sprite that mimics what is at pos. It is up to the user to turn it off or do whatever
-*/
--(CCSprite*) tileAt:(CGPoint)pos;
-
 /** sets the tile gid (gid = tile global id) at a given tile coordinate.
  The Tile GID can be obtained by using the method "tileGIDAt" or by using the TMX editor -> Tileset Mgr +1.
  If a tile is already placed at that position, then it will be replaced.
@@ -152,5 +164,17 @@ struct HKTMXAnimCacheEntry {
 
 /** CCBlendProtocol protocol */
 @property (nonatomic,readwrite) ccBlendFunc blendFunc;
+
+// performance tuning if your map uses a number of scales
+// May not be a value < HKTMX_LAYER_SCALE_LIMIT
+-(void)updateScale:(float)s;
+
+// returns of flipbits for tile at tileCoordinate
+-(unsigned int) tileFlipBitsAt:(CGPoint) tileCoordinate;
+
+// sets the flipbits for a tile at given coordinates
+-(void) setTileFlipBits:(unsigned int)flipbits at:(CGPoint) tileCoordinate;
+
+
 
 @end
