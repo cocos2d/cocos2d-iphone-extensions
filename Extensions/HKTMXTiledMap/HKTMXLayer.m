@@ -523,10 +523,7 @@
 			dirtyAt_ = MIN(dirtyAt_, AC[tile_noflags].validUntil);
 			int screenidx = (y * (screenGridSize_.width)) + x;
 			CGRect tileTexture = [tileset_ rectForGID:(showtile & kFlippedMask)];
-			tileTexture.origin.x /= texSize.width;
-			tileTexture.origin.y /= texSize.height;
-			tileTexture.size.width /= texSize.width;
-			tileTexture.size.height /= texSize.height;
+
 			GLfloat *texbase = texcoords + screenidx * 4 * 2;
 			GLushort *idxbase = indices + vertexCount;
 			int vertexbase = screenidx * 4;
@@ -535,11 +532,19 @@
             // * JEB Handle flipped and rotated tiles *
             // ****************************************
             float left, right, top, bottom;
-            left   = tileTexture.origin.x;
-            right  = left + tileTexture.size.width;
-            bottom = tileTexture.origin.y;
-            top    = bottom + tileTexture.size.height;
+#if CC_FIX_ARTIFACTS_BY_STRECHING_TEXEL
+            left   = (2*tileTexture.origin.x + 1) / (2* texSize.width);
+            right  = left + (2*tileTexture.size.width-2)/(2*texSize.width);
+            bottom = (2*tileTexture.origin.y+1) / (2*texSize.height);
+            top    = bottom + (2*tileTexture.size.height-2)/(2*texSize.height);
+#else
+            left   = (tileTexture.origin.x / texSize.width);
+            right  = left + (tileTexture.size.width / texSize.width);
+            bottom = (tileTexture.origin.y / texSize.width);
+            top    = bottom + (tileTexture.size.height / texSize.width);
             
+            
+#endif
             
             if (tile & kFlippedVerticallyFlag)
                 CC_SWAP(top,bottom);
