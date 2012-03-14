@@ -351,25 +351,8 @@ enum
 	}
 }
 
-- (void) cancelAndStoleTouch:(UITouch *)touch withEvent:(UIEvent *)event
-{
-    // Throw Cancel message for everybody in TouchDispatcher and do not react on this.
-	stealingTouchInProgress_ = YES;
-    //[[CCTouchDispatcher sharedDispatcher] touchesCancelled: [NSSet setWithObject: touch] withEvent:event];
-	stealingTouchInProgress_ = NO;
-	
-    //< after doing this touch is already removed from all targeted handlers
-	
-    // Squirrel away the touch
-    [self claimTouch: touch];
-}
-
 -(void)ccTouchCancelled:(UITouch *)touch withEvent:(UIEvent *)event 
 {
-    // Do not cancel touch, if this method is called from cancelAndStoleTouch:
-    if (stealingTouchInProgress_)
-		return;
-	
     if( scrollTouch_ == touch ) {
         scrollTouch_ = nil;
         [self selectPage: currentScreen_];
@@ -413,7 +396,9 @@ enum
 		startSwipe_ = touchPoint.x;
 		
 		if (self.stealTouches)
-			[self cancelAndStoleTouch: touch withEvent: event];
+        {
+			[self claimTouch: touch];
+        }
 		
 		if ([self.delegate respondsToSelector:@selector(scrollLayerScrollingStarted:)])
 		{
