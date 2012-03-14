@@ -42,13 +42,13 @@ enum
 #ifdef __IPHONE_OS_VERSION_MAX_ALLOWED
 @interface CCTouchDispatcher (targetedHandlersGetter)
 
-- (NSMutableArray *) targetedHandlers;
+- (id<NSFastEnumeration>) targetedHandlers;
 
 @end
 
 @implementation CCTouchDispatcher (targetedHandlersGetter)
 
-- (NSMutableArray *) targetedHandlers
+- (id<NSFastEnumeration>) targetedHandlers
 {
 	return targetedHandlers;
 }
