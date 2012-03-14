@@ -335,12 +335,19 @@ enum
 			{
 				[handler.claimedTouches addObject: aTouch];
 			}
-			else 
-			{
-				CCLOGERROR(@"CCScrollLayer#claimTouch: %@ is already claimed!", aTouch);
-			}
-			return;
 		}
+        else 
+        {
+            // Steal touch from other targeted delegates, if they claimed it.
+            if ([handler.claimedTouches containsObject: aTouch])
+            {
+                if ([handler.delegate respondsToSelector:@selector(ccTouchCancelled:withEvent:)])
+                {
+                    [handler.delegate ccTouchCancelled: aTouch withEvent: nil];
+                }
+                [handler.claimedTouches removeObject: aTouch];
+            }
+        }
 	}
 }
 
@@ -348,7 +355,7 @@ enum
 {
     // Throw Cancel message for everybody in TouchDispatcher and do not react on this.
 	stealingTouchInProgress_ = YES;
-    [[CCTouchDispatcher sharedDispatcher] touchesCancelled: [NSSet setWithObject: touch] withEvent:event];
+    //[[CCTouchDispatcher sharedDispatcher] touchesCancelled: [NSSet setWithObject: touch] withEvent:event];
 	stealingTouchInProgress_ = NO;
 	
     //< after doing this touch is already removed from all targeted handlers
