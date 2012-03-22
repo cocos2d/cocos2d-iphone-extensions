@@ -355,6 +355,7 @@
     struct HKTMXAnimCacheEntry *AC = animCache_ - minGID_;
     if(AR[gid].delay && AR[gid].next)
     {
+        AC[gid].starttime = animClock_;
         AC[gid].state = gid;
         AC[gid].validUntil = animClock_ + AR[gid].delay;
     }
@@ -515,9 +516,10 @@
             unsigned int tile_noflags = (tile & kFlippedMask);
 			if (AC[tile_noflags].validUntil <= animClock_)
 			{
-				if (AR[tile_noflags].last && animClock_ >= AR[tile_noflags].cycleTime)
+                CGFloat time = animClock_ - AC[tile_noflags].starttime;
+				if (AR[tile_noflags].last && time >= AR[tile_noflags].cycleTime)
 				{
-					showtile = AR[tile_noflags].last;
+                    showtile = AR[tile_noflags].last;
 					AC[tile_noflags].state = showtile;
                     if(AR[showtile].delay > 0)
                     {
@@ -534,7 +536,7 @@
 				}
 				else
 				{
-					double phase = AR[tile_noflags].last ? animClock_ : fmod(animClock_, AR[tile_noflags].cycleTime);
+					double phase = AR[tile_noflags].last ? animClock_- AC[tile_noflags].starttime : fmod(animClock_, AR[tile_noflags].cycleTime);
 					showtile = tile_noflags;
 					while (phase > AR[showtile].delay)
 					{

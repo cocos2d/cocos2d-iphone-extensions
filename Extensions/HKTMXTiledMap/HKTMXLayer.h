@@ -79,6 +79,7 @@ struct HKTMXAnimRule {
 };
 
 struct HKTMXAnimCacheEntry {
+    double starttime;
 	unsigned int state;
 	double validUntil;
 };
