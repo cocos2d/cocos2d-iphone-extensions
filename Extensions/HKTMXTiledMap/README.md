@@ -8,7 +8,14 @@ Also added to it is animation functionality. This allows you to have data-driven
 Animation
 ------------------------
 
-  To animate tiles, you edit tile properties (via Tiled or whatever editor) to have "Next" which lists the next GID in the animation, and Delay (the delay between frames). It supports looped and one shot animations, but all animations have to be deterministic (no random)
+To animate tiles, you edit tile properties (via Tiled or whatever editor) to have "Next" which lists the next GID in the animation, and Delay (the delay between frames).
+It supports looped and one shot animations, but all animations have to be deterministic (no random)
+
+For one shot animations:
+* If you add a delay, but no Next on the last frame of the animation, then after that delay, it will remove the tile (eg. for an explosion)
+* if you do not add a delay, then the last frame will continue on forever without being updated
+
+It should be noted that if you setatilegid to the start of a one shot animation before the same oneshotanimation finishes (no matter where it is on the map), it will reset the loop for all of them
 
 How to create
 ------------------------
@@ -16,11 +23,10 @@ How to create
 Maps should be made in Tiled http://www.mapeditor.org
 
 Created just like a CCTMXTiledMap. 
- HKTMXTiledMap* node = [HKTMXTiledMap tiledMapWithTMXFile:@"testmap.tmx"];
+HKTMXTiledMap* node = [HKTMXTiledMap tiledMapWithTMXFile:@"testmap.tmx"];
 
 Known issues
 ------------------------
-* Can sometimes create line gaps between tiles when resizing the viewport (No easy-to-reproduce case)
 
 Thanks
 ------------------------

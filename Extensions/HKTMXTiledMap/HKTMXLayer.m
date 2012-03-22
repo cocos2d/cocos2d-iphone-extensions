@@ -205,6 +205,11 @@
 				 animRules_[idx].next = next;
 				 animCount++;
 			 }
+             else if(delay > 0)
+             {
+                 animRules_[idx].delay = delay;
+             }
+                 
 		 }];
 #else
 		
@@ -219,6 +224,10 @@
                 animRules_[idx].delay = delay;
                 animRules_[idx].next = next;
                 animCount++;
+            }
+            else if(delay > 0)
+            {
+                animRules_[idx].delay = delay;
             }
         }
 #endif
@@ -341,6 +350,14 @@
     unsigned int flipbits = tiles_[idx] & kGIDMask;
 	tiles_[idx] = flipbits | gid;
 	dirtyAt_ = -INFINITY;
+    
+    struct HKTMXAnimRule       *AR = animRules_ - minGID_;
+    struct HKTMXAnimCacheEntry *AC = animCache_ - minGID_;
+    if(AR[gid].delay && AR[gid].next)
+    {
+        AC[gid].state = gid;
+        AC[gid].validUntil = animClock_ + AR[gid].delay;
+    }
 }
 
 
@@ -502,7 +519,18 @@
 				{
 					showtile = AR[tile_noflags].last;
 					AC[tile_noflags].state = showtile;
-					AC[tile_noflags].validUntil = INFINITY;
+                    if(AR[showtile].delay > 0)
+                    {
+                        if(AR[showtile].delay + AC[tile_noflags].validUntil < animClock_)
+                        {
+                            showtile = 0;
+                            [self removeTileAt:ccp(baseTile.x + x, layerSize_.height - (baseTile.y + y + 1))];
+                        }
+                    }
+                    else
+                    {
+                        AC[tile_noflags].validUntil = INFINITY;
+                    }
 				}
 				else
 				{
