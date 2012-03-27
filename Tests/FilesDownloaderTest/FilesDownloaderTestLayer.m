@@ -168,10 +168,17 @@ enum nodeTags
 		CCSprite *closeSelected = [CCSprite spriteWithFile:@"closeButton.png"];
 		closeSelected.color = ccGRAY;
 		
+#if COCOS2D_VERSION >= 0x00020000
+        _closeMenuItem = [CCMenuItemSprite itemWithNormalSprite: close 
+												 selectedSprite: closeSelected 
+														 target: self 
+													   selector: @selector(closePressed) ];
+#else
 		_closeMenuItem = [CCMenuItemSprite itemFromNormalSprite: close 
 												 selectedSprite: closeSelected 
 														 target: self 
 													   selector: @selector(closePressed) ];
+#endif
 		CCMenu *menu = [CCMenu menuWithItems: _closeMenuItem, nil];
 		menu.anchorPoint = ccp(0,0);
 		menu.position = ccp(0,0);
