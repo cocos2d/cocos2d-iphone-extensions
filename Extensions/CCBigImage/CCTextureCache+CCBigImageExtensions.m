@@ -29,25 +29,6 @@
 #import "CCTextureCache+CCBigImageExtensions.h"
 
 
-@interface CCAsyncObject : NSObject
-{
-	SEL			selector_;
-	id			target_;
-	id			data_;
-}
-@property	(readwrite,assign)	SEL			selector;
-@property	(readwrite,retain)	id			target;
-@property	(readwrite,retain)	id			data;
-@end
-
-@interface CCTextureCache (CCAsyncObject)
-
--(void) addImageWithAsyncObject:(CCAsyncObject*)async;
-
-@end
-
-
-
 @implementation CCTextureCache (iTraceurDynamicTiles)
 
 -(void) addImageFromAnotherThreadWithName: (NSString*) filename target:(id)target selector:(SEL)selector
@@ -56,14 +37,7 @@
 	
 	// load here async 
 	
-	CCAsyncObject *asyncObject = [[ CCAsyncObject alloc] init];
-	asyncObject.selector = selector;
-	asyncObject.target = target;
-	asyncObject.data = filename;
-	
-	
-	[self addImageWithAsyncObject: asyncObject];
-	[asyncObject release];
+	[self addImageAsync:filename target:target selector:selector];
 }
 
 @end

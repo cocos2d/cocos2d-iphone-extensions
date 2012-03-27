@@ -75,19 +75,19 @@ enum nodeTags
 		
 		// Prepare Menu Items.
 		CCMenuItemSprite *verticalTestItem = 
-			[CCMenuItemSprite itemFromNormalSprite: [CCSprite spriteWithFile: @"verticalTestButton.png"]
+			[CCMenuItemSprite itemWithNormalSprite: [CCSprite spriteWithFile: @"verticalTestButton.png"]
 									selectedSprite: [CCSprite spriteWithFile: @"verticalTestButton.png"]
 											target: self
 										  selector: @selector(itemPressed:)];
 		
 		CCMenuItemSprite *horizontalTestItem = 
-		[CCMenuItemSprite itemFromNormalSprite: [CCSprite spriteWithFile: @"horizontalTestButton.png"]
+		[CCMenuItemSprite itemWithNormalSprite: [CCSprite spriteWithFile: @"horizontalTestButton.png"]
 								selectedSprite: [CCSprite spriteWithFile: @"horizontalTestButton.png"]
 										target: self
 									  selector: @selector(itemPressed:)];
 		
 		CCMenuItemSprite *priorityTestItem = 
-		[CCMenuItemSprite itemFromNormalSprite: [CCSprite spriteWithFile: @"priorityTestButton.png"]
+		[CCMenuItemSprite itemWithNormalSprite: [CCSprite spriteWithFile: @"priorityTestButton.png"]
 								selectedSprite: [CCSprite spriteWithFile: @"priorityTestButton.png"]
 										target: self
 									  selector: @selector(itemPressed:)];
@@ -172,14 +172,14 @@ enum nodeTags
 		
 		// Create back button menu item.
 		CCMenuItemSprite *backMenuItem = 
-				[CCMenuItemSprite itemFromNormalSprite: [CCSprite spriteWithFile:@"b1.png"]
+				[CCMenuItemSprite itemWithNormalSprite: [CCSprite spriteWithFile:@"b1.png"]
 										selectedSprite: [CCSprite spriteWithFile:@"b1.png"]
 												target: self
 											  selector: @selector(backPressed)
 						 ];
 		[backMenuItem.selectedImage setColor: ccGRAY];
 		CCMenuAdvanced *menu = [CCMenuAdvanced menuWithItems:backMenuItem, nil];
-        menu.priority = kCCMenuTouchPriority - 1;
+        menu.priority = kCCMenuHandlerPriority - 1;
 		[self addChild:menu z:0 tag: kBackButtonMenu];
 		
 		// Enable Debug Draw (available only when DEBUG is defined )
@@ -466,7 +466,7 @@ enum nodeTags
 	{
 		// Create menu item.
 		CCMenuItemSprite *item = 
-		[CCMenuItemSprite itemFromNormalSprite: [CCSprite spriteWithFile: @"blankTestButton.png"]
+		[CCMenuItemSprite itemWithNormalSprite: [CCSprite spriteWithFile: @"blankTestButton.png"]
 								selectedSprite: [CCSprite spriteWithFile: @"blankTestButton.png"]
 										target: self
 									  selector: @selector(itemPressed:)];
@@ -556,22 +556,22 @@ enum nodeTags
 	
 	// Prepare menuItems
 	CCMenuItemSprite *itemOne = 
-	[CCMenuItemSprite itemFromNormalSprite: [CCSprite spriteWithFile: @"priorityOne.png"]
+	[CCMenuItemSprite itemWithNormalSprite: [CCSprite spriteWithFile: @"priorityOne.png"]
 							selectedSprite: [CCSprite spriteWithFile: @"priorityOne.png"]
 									target: self
 								  selector: @selector(itemPressed:)];
 	CCMenuItemSprite *itemTwo = 
-	[CCMenuItemSprite itemFromNormalSprite: [CCSprite spriteWithFile: @"priorityTwo.png"]
+	[CCMenuItemSprite itemWithNormalSprite: [CCSprite spriteWithFile: @"priorityTwo.png"]
 							selectedSprite: [CCSprite spriteWithFile: @"priorityTwo.png"]
 									target: self
 								  selector: @selector(itemPressed:)];
 	CCMenuItemSprite *itemThree = 
-	[CCMenuItemSprite itemFromNormalSprite: [CCSprite spriteWithFile: @"priorityThree.png"]
+	[CCMenuItemSprite itemWithNormalSprite: [CCSprite spriteWithFile: @"priorityThree.png"]
 							selectedSprite: [CCSprite spriteWithFile: @"priorityThree.png"]
 									target: self
 								  selector: @selector(itemPressed:)];
 	CCMenuItemSprite *itemFour = 
-	[CCMenuItemSprite itemFromNormalSprite: [CCSprite spriteWithFile: @"priorityFour.png"]
+	[CCMenuItemSprite itemWithNormalSprite: [CCSprite spriteWithFile: @"priorityFour.png"]
 							selectedSprite: [CCSprite spriteWithFile: @"priorityFour.png"]
 									target: self
 								  selector: @selector(itemPressed:)];

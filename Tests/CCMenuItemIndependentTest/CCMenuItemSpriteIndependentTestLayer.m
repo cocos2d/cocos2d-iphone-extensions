@@ -49,7 +49,7 @@ enum nodeTags
 	{
 		// Prepare & AddChild batchNode Sprites
 		[[CCSpriteFrameCache sharedSpriteFrameCache] addSpriteFramesWithFile:@"btn-about-spritesheet.plist" 
-																 textureFile:@"btn-about-spritesheet.png"];
+																 textureFilename:@"btn-about-spritesheet.png"];
 		CCSprite *aboutNormal = [CCSprite spriteWithSpriteFrameName:@"btn-about-normal.png"];
 		CCSprite *aboutSelected = [CCSprite spriteWithSpriteFrameName:@"btn-about-selected.png"];
 		CCSpriteBatchNode *bNode = [CCSpriteBatchNode batchNodeWithFile:@"btn-about-spritesheet.png"];
@@ -81,17 +81,17 @@ enum nodeTags
 		
 		// Prepare Menu Items
 		CCMenuItemSpriteIndependent *item1 = 
-			[CCMenuItemSpriteIndependent itemFromNormalSprite: aboutNormal
+			[CCMenuItemSpriteIndependent itemWithNormalSprite: aboutNormal
 											   selectedSprite: aboutSelected
 													   target: self
 													 selector: @selector(aboutPressed:)];
 		CCMenuItemSpriteIndependent *item2 = 
-		[CCMenuItemSpriteIndependent itemFromNormalSprite: highscoresNormal
+		[CCMenuItemSpriteIndependent itemWithNormalSprite: highscoresNormal
 										   selectedSprite: highscoresSelected
 												   target: self
 												 selector: @selector(highscoresPressed:)];
 		CCMenuItemSpriteIndependent *item3 = 
-		[CCMenuItemSpriteIndependent itemFromNormalSprite: playNormal
+		[CCMenuItemSpriteIndependent itemWithNormalSprite: playNormal
 										   selectedSprite: playSelected
 												   target: self
 												 selector: @selector(playPressed:)];

@@ -177,41 +177,29 @@ enum
 		}
 		
 		// Set GL Values
-		glEnable(GL_POINT_SMOOTH);
-		GLboolean blendWasEnabled = glIsEnabled( GL_BLEND );
-		glEnable(GL_BLEND);
-		
-		// save the old blending functions
-                int blend_src = 0;
-                int blend_dst = 0;
-                glGetIntegerv( GL_BLEND_SRC, &blend_src );
-                glGetIntegerv( GL_BLEND_DST, &blend_dst );
-        
+//		glEnable(GL_POINT_SMOOTH);
+		ccGLEnable(CC_GL_BLEND);
+		        
 		glBlendFunc( GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA );
-		glPointSize( 6.0 * CC_CONTENT_SCALE_FACTOR() );
+		ccPointSize( 6.0 * CC_CONTENT_SCALE_FACTOR() );
 		
 		// Draw Gray Points
-		glColor4ub(pagesIndicatorNormalColor_.r,
+		ccDrawColor4B(pagesIndicatorNormalColor_.r,
                    pagesIndicatorNormalColor_.g,
                    pagesIndicatorNormalColor_.b,
                    pagesIndicatorNormalColor_.a);
 		ccDrawPoints( points, totalScreens );
 		
 		// Draw White Point for Selected Page	
-		glColor4ub(pagesIndicatorSelectedColor_.r,
+		ccDrawColor4B(pagesIndicatorSelectedColor_.r,
                    pagesIndicatorSelectedColor_.g,
                    pagesIndicatorSelectedColor_.b,
                    pagesIndicatorSelectedColor_.a);
 		ccDrawPoint(points[currentScreen_]);
 		
 		// Restore GL Values
-		glPointSize(1.0f);
-		glDisable(GL_POINT_SMOOTH);
-		if (! blendWasEnabled)
-			glDisable(GL_BLEND);
-            
-		// always restore the blending functions too
-                glBlendFunc( blend_src, blend_dst );
+		ccPointSize(1.0f);
+//		glDisable(GL_POINT_SMOOTH);
 	}
 }
 
@@ -318,15 +306,18 @@ enum
 /** Register with more priority than CCMenu's but don't swallow touches. */
 -(void) registerWithTouchDispatcher
 {	
-	[[CCTouchDispatcher sharedDispatcher] addTargetedDelegate:self priority:kCCMenuTouchPriority - 1 swallowsTouches:NO];
+	CCTouchDispatcher *dispatcher = [[CCDirector sharedDirector] touchDispatcher];
+	[dispatcher addTargetedDelegate:self priority:kCCMenuHandlerPriority - 1 swallowsTouches:NO];
 }
 
 /** Hackish stuff - stole touches from other CCTouchDispatcher targeted delegates. 
  Used to claim touch without receiving ccTouchBegan. */
 - (void) claimTouch: (UITouch *) aTouch
 {
+	CCTouchDispatcher *dispatcher = [[CCDirector sharedDirector] touchDispatcher];
+
 	// Enumerate through all targeted handlers.
-	for ( CCTargetedTouchHandler *handler in [[CCTouchDispatcher sharedDispatcher] targetedHandlers] )
+	for ( CCTargetedTouchHandler *handler in [dispatcher targetedHandlers] )
 	{
 		// Only our handler should claim the touch.
 		if (handler.delegate == self)

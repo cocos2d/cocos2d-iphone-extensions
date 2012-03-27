@@ -38,9 +38,11 @@
 
 - (id) init
 {
-	if ( (self = [super initWithFile:@"iTraceurProgressBar.png"]) )
+	CCSprite *sprite = [CCSprite spriteWithFile:@"iTraceurProgressBar.png"];
+
+	if ( (self = [super initWithSprite:sprite]) )
 	{
-		self.type = kCCProgressTimerTypeHorizontalBarLR;
+		self.type = kCCProgressTimerTypeBar;
 		
 		
 		CCSprite *background = [CCSprite spriteWithFile:@"iTraceurProgressBarBackground.png"];

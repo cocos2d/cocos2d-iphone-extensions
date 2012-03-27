@@ -311,7 +311,8 @@ enum
 
 -(void) registerWithTouchDispatcher
 {
-	[[CCTouchDispatcher sharedDispatcher] addTargetedDelegate:self priority:0 swallowsTouches:YES];
+	CCTouchDispatcher *dispatcher = [[CCDirector sharedDirector] touchDispatcher];
+	[dispatcher addTargetedDelegate:self priority:0 swallowsTouches:YES];
 }
 
 
