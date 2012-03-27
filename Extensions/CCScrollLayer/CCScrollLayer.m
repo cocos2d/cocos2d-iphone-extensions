@@ -442,7 +442,7 @@ enum
 
 - (NSInteger) mouseDelegatePriority
 {
-	return kCCMenuMousePriority - 1;
+	return kCCMenuHandlerPriority - 1;
 }
 
 -(BOOL) ccMouseDown:(NSEvent*)event

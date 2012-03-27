@@ -258,7 +258,7 @@
 		self.dynamicMode = YES;
 #endif
 		
-		NSString *path = [CCFileUtils fullPathFromRelativePath: filename];
+		NSString *path = [[CCFileUtils sharedFileUtils] fullPathFromRelativePath: filename];
 		[self prepareTilesWithFile: path extension: extension z: tilesZ ];
 		
 		if (!self.dynamicMode)

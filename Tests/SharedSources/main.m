@@ -43,7 +43,7 @@ int main(int argc, char *argv[]) {
 
 int main(int argc, char *argv[])
 {
-	[MacGLView load_];
+	[CCGLView load_];
     return NSApplicationMain(argc,  (const char **) argv);
 }
 

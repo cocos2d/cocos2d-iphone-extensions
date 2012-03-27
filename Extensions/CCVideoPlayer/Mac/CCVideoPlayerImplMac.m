@@ -52,7 +52,7 @@ NSString *const kVideoTitle		= @"CustomVideoView";
 
 - (void)playMovieAtURL:(NSURL*)theURL
 {
-	NSView *targetView = [[CCDirector sharedDirector] openGLView];
+	NSView *targetView = [[CCDirector sharedDirector] view];
 	[self playMovieAtURL: theURL attachedInView: targetView];
 }
 
@@ -90,7 +90,8 @@ NSString *const kVideoTitle		= @"CustomVideoView";
 	[[self.videoViewController view] setFrame: [windowContentView bounds]];
 	
 	// Start handling events on movie view
-	[[CCEventDispatcher sharedDispatcher] addKeyboardDelegate: (MyMovieView *)[self.videoViewController view] 
+	CCEventDispatcher *eventDispatcher = [[CCDirector sharedDirector] eventDispatcher];
+	[eventDispatcher addKeyboardDelegate: (MyMovieView *)[self.videoViewController view] 
 													 priority: NSIntegerMin ];
 		
 	// Register for end notification
@@ -157,7 +158,8 @@ NSString *const kVideoTitle		= @"CustomVideoView";
 	[(MyMovieView*)[self.videoViewController view] setMovie:nil];
 	
 	// Disable keyboard for MyMoviewView.
-	[[CCEventDispatcher sharedDispatcher] removeKeyboardDelegate: (MyMovieView*)[self.videoViewController view] ];
+	CCEventDispatcher *eventDispatcher = [[CCDirector sharedDirector] eventDispatcher];
+	[eventDispatcher removeKeyboardDelegate: (MyMovieView*)[self.videoViewController view] ];
     
 	// switch from movie to retained view
 	NSView *windowContentView = [[self.videoViewController view] superview];
@@ -166,7 +168,7 @@ NSString *const kVideoTitle		= @"CustomVideoView";
 	[[self retainedView] setFrame:[windowContentView bounds]];
 	
 	// Stop handling events on movie view
-	[[CCEventDispatcher sharedDispatcher] removeKeyboardDelegate: self];
+	[eventDispatcher removeKeyboardDelegate: self];
 	[[windowContentView window] makeFirstResponder: self.retainedView ];
 	
 	
