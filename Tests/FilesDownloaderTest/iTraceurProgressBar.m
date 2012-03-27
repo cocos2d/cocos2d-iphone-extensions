@@ -43,6 +43,9 @@
 	if ( (self = [super initWithSprite:sprite]) )
 	{
 		self.type = kCCProgressTimerTypeBar;
+		self.midpoint = ccp(0, 0);
+		//	Setup for a horizontal bar since the bar change rate is 0 for y meaning no vertical change
+		self.barChangeRate = ccp(1,0);
 		
 		
 		CCSprite *background = [CCSprite spriteWithFile:@"iTraceurProgressBarBackground.png"];
