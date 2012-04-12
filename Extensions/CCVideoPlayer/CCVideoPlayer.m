@@ -84,6 +84,22 @@ static  CCVideoPlayerImpl *_impl = nil;
    }
 }
 
+//----- playMovieAtPath: -----
+// Added by Axel Roest, 20120412
++ (void) playMovieAtPath: (NSString *) path
+{
+    if (path)
+    {
+        NSURL *movieURL = [NSURL fileURLWithPath:path];
+        
+        // If the current thread is the main thread,than
+        // this message will be processed immediately.
+        [ _impl performSelectorOnMainThread: @selector(playMovieAtURL:) 
+                                 withObject: movieURL
+                              waitUntilDone: [NSThread isMainThread]  ];
+    }
+}
+
 //----- playMovieWithName:Type: -----
 + (void) playMovieWithName: (NSString *) name Type: (NSString *) type
 {
