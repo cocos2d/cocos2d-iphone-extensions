@@ -31,6 +31,8 @@
 
 #import "cocos2d.h"
 
+#if COCOS2D_VERSION < 0x00020000
+
 #import "RootViewController.h"
 #import "GameConfig.h"
 
@@ -193,4 +195,6 @@
 
 
 @end
+
+#endif //< COCOS2D_VERSION < 0x00020000
 

@@ -25,10 +25,15 @@
  */
 
 #import <UIKit/UIKit.h>
+#import "cocos2d.h"
 
+// RootViewController not used in Cocos2D 2.x
+#if COCOS2D_VERSION < 0x00020000
 
 @interface RootViewController : UIViewController {
 
 }
 
 @end
+
+#endif
