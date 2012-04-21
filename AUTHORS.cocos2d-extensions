@@ -47,6 +47,9 @@ People/companies who were/are contributing code to cocos2d-iphone-extensions (al
 	* Patrick Wolowicz (twitter: @subzero_eu) (http://blog.subzero.eu/)
 		CCVideoPlayer patch: preload movie, prevent flickering & hide controls when compiled on older SDKs.
         
+    * Ricardo Quesada (twitter: ricardoquesada) (http://cocos2d-iphone.org)
+		Pull Request #99: Initial Cocos2D-iPhone 2.x support       
+        
     * Sapsaldog (github: @sapsaldog) (http://sapsaldog.tistory.com/)
         CCScrollLayer: ability to change pages indicator color (Issue #84, Pull Request #87).
     

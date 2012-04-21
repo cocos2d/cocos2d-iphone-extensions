@@ -40,10 +40,14 @@ int main(int argc, char *argv[]) {
 
 #import <Cocoa/Cocoa.h>
 #import "cocos2d.h"
+#import "cocos2d_extensions_macAppDelegate.h"
 
 int main(int argc, char *argv[])
 {
+    // Call empty method to register CCGLView in the runtime for stupid nib.
+    // Without that call - there will be NSMacGLView instead of CCGLView/MacGLView.
 	[MacGLView load_];
+    
     return NSApplicationMain(argc,  (const char **) argv);
 }
 

@@ -9,6 +9,19 @@
 #import "cocos2d_extensions_macAppDelegate.h"
 #import "ExtensionTest.h"
 
+#if COCOS2D_VERSION >= 0x00020000
+
+@implementation MacGLView : CCGLView
+
+- (NSString *) description
+{
+    return [NSString stringWithFormat:@"<%@:%@ = %08X>", [self class], [self superclass], self];
+}
+
+@end
+
+#endif
+
 @implementation cocos2d_extensions_macAppDelegate
 @synthesize window=window_, glView=glView_;
 
@@ -17,9 +30,14 @@
 {
 	CCDirectorMac *director = (CCDirectorMac*) [CCDirector sharedDirector];
 	
-	[director setDisplayFPS:YES];
-	
+    // Enable FPS and set OpenGL view in CCDirector.
+#if COCOS2D_VERSION >= 0x00020000
+    [director setDisplayStats:YES];
+    [director setView:glView_];
+#else
+	[director setDisplayFPS:YES];	
 	[director setOpenGLView:glView_];
+#endif
 
 	// EXPERIMENTAL stuff.
 	// 'Effects' don't work correctly when autoscale is turned on.
@@ -30,11 +48,11 @@
 	[window_ setAcceptsMouseMovedEvents:NO];
 	
 	// Start listening to resizeWindow notification
-	[director.openGLView setPostsFrameChangedNotifications: YES];
+	[glView_ setPostsFrameChangedNotifications: YES];
 	[[NSNotificationCenter defaultCenter] addObserver: self
 											 selector: @selector(updateForScreenReshape:) 
 												 name: NSViewFrameDidChangeNotification 
-											   object: director.openGLView];
+											   object: glView_];
 	
 	
 	[director runWithScene:[ExtensionTest scene]];

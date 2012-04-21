@@ -311,7 +311,13 @@ enum
 
 -(void) registerWithTouchDispatcher
 {
-	[[CCTouchDispatcher sharedDispatcher] addTargetedDelegate:self priority:0 swallowsTouches:YES];
+#if COCOS2D_VERSION >= 0x00020000
+    CCTouchDispatcher *dispatcher = [[CCDirector sharedDirector] touchDispatcher];
+#else
+    CCTouchDispatcher *dispatcher = [CCTouchDispatcher sharedDispatcher];
+#endif
+    
+	[dispatcher addTargetedDelegate:self priority:0 swallowsTouches:YES];
 }
 
 

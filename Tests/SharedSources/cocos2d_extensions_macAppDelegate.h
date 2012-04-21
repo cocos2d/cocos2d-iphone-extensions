@@ -8,6 +8,13 @@
 
 #import "cocos2d.h"
 
+#if COCOS2D_VERSION >= 0x00020000
+
+@interface MacGLView : CCGLView
+@end
+
+#endif
+
 static NSString *appDelegateToggleFullscreenNotification = @"fullscreenToggled";
 
 @interface cocos2d_extensions_macAppDelegate : NSObject <NSApplicationDelegate>

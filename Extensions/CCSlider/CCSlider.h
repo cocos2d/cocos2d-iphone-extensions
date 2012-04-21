@@ -32,7 +32,11 @@
 
 #import "cocos2d.h"
 
+#if COCOS2D_VERSION >= 0x00020000
+static const NSInteger kCCSliderPriority = kCCMenuHandlerPriority - 2; 
+#else
 static const NSInteger kCCSliderPriority = kCCMenuTouchPriority - 2; 
+#endif
 
 /** @class CCSlider Slider control for Cocos2D. Designed with SFX/Music level options in mind. */
 @interface CCSlider : CCLayer 

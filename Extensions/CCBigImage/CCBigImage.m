@@ -95,14 +95,22 @@
 	if (!visible_)
 		return;
 	
+#if COCOS2D_VERSION >= 0x00020000
+    kmGLPushMatrix();
+#else
 	glPushMatrix();
+#endif
 	
 	[self transform];
 	
-	[self.sprite visit];
+	[self.sprite visit];	
 	
-	
+#if COCOS2D_VERSION >= 0x00020000
+    kmGLPopMatrix();
+#else
 	glPopMatrix();
+#endif
+    
 }
 
 - (CGRect) boundingBox
@@ -122,10 +130,7 @@
 
 - (void) loadedTexture: (CCTexture2D *) aTex
 {
-	
 	[aTex setAntiAliasTexParameters];
-	//[aTex setMipMapTexParameters];
-	
 	
 	//create sprite, position it and at to self
 	self.sprite = [[ [CCSprite alloc] initWithTexture: aTex] autorelease];
@@ -142,14 +147,10 @@
 	self.sprite = nil;
 }
 
-
 - (void) load
 {
 	if (self.sprite)
 		return; //< already loaded
-	
-	[CCTexture2D setDefaultAlphaPixelFormat:kTexture2DPixelFormat_RGBA4444];
-	
 	
 	if ([NSThread currentThread] != [[CCDirector sharedDirector] runningThread] )
 	{
@@ -163,7 +164,6 @@
 		// _cmd called in cocos thread - load now
 		[self loadedTexture: [[CCTextureCache sharedTextureCache] addImage: _imageName ] ];
 	}
-	
 }
 
 @end
@@ -259,7 +259,12 @@
 		self.dynamicMode = YES;
 #endif
 		
-		NSString *path = [CCFileUtils fullPathFromRelativePath: filename];
+#if COCOS2D_VERSION >= 0x00020000
+        NSString *path = [[CCFileUtils sharedFileUtils] fullPathFromRelativePath: filename];
+#else
+        NSString *path = [CCFileUtils fullPathFromRelativePath: filename];
+#endif
+		
 		[self prepareTilesWithFile: path extension: extension z: tilesZ ];
 		
 		if (!self.dynamicMode)
@@ -479,15 +484,19 @@
 - (void) updateLoadRect
 {	
 	// get screen rect
-	CGRect screenRect = CGRectZero;;
+	CGRect screenRect = CGRectZero;
 	screenRect.size = [[CCDirector sharedDirector] winSize];
 	
+#if COCOS2D_VERSION < 0x00020000
 	screenRect.size.width *= CC_CONTENT_SCALE_FACTOR();
 	screenRect.size.height *= CC_CONTENT_SCALE_FACTOR();
+#endif
 	screenRect = CGRectApplyAffineTransform(screenRect, [self worldToNodeTransform] );
+#if COCOS2D_VERSION < 0x00020000
 	screenRect.origin = ccpMult(screenRect.origin, 1/CC_CONTENT_SCALE_FACTOR() );
 	screenRect.size.width /= CC_CONTENT_SCALE_FACTOR();
 	screenRect.size.height /= CC_CONTENT_SCALE_FACTOR();
+#endif
 	 
 	// get level's must-be-loaded-part rect
 	_loadedRect = CGRectMake(screenRect.origin.x - _screenLoadRectExtension.width,

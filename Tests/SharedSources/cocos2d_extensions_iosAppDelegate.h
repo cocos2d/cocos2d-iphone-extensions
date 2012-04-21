@@ -25,9 +25,27 @@
  */
 
 #import <UIKit/UIKit.h>
+#import "cocos2d.h"
+
+#if COCOS2D_VERSION >= 0x00020000
+
+@interface cocos2d_extensions_iosAppDelegate : NSObject <UIApplicationDelegate, CCDirectorDelegate>
+{
+    UIWindow *window_;
+    UINavigationController *navController_;
+    
+    CCDirectorIOS	*director_;							// weak ref
+}
+
+@property (nonatomic, retain) UIWindow *window;
+@property (readonly) UINavigationController *navController;
+@property (readonly) CCDirectorIOS *director;
+
+@end
+
+#else
 
 @class RootViewController;
-
 @interface cocos2d_extensions_iosAppDelegate : NSObject <UIApplicationDelegate> {
 	UIWindow			*window;
 	RootViewController	*viewController;
@@ -36,3 +54,10 @@
 @property (nonatomic, retain) UIWindow *window;
 
 @end
+
+#endif
+
+
+
+
+    

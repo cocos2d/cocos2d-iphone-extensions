@@ -121,11 +121,21 @@ SYNTHESIZE_EXTENSION_TEST(CCVideoTestLayer)
 
 - (void) moviePlaybackFinished
 {
+    // Avoid crashes on 2.x cocos2d-iphone Mac (workaround for Issue #104).
+#if COCOS2D_VERSION >= 0x00020000 && defined (__MAC_OS_X_VERSION_MAX_ALLOWED)
+    return;
+#endif
+    
 	[[CCDirector sharedDirector] startAnimation];
 }
 
 - (void) movieStartsPlaying
 {
+    // Avoid crashes on 2.x cocos2d-iphone Mac (workaround for Issue #104).
+#if COCOS2D_VERSION >= 0x00020000 && defined (__MAC_OS_X_VERSION_MAX_ALLOWED)
+    return;
+#endif
+    
 	[[CCDirector sharedDirector] stopAnimation];
 }
 

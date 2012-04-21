@@ -32,6 +32,25 @@
 
 SYNTHESIZE_EXTENSION_TEST(CCMenuAdvancedTestLayer)
 
+#if COCOS2D_VERSION >= 0x00020000
+
+@interface CCMenuItemSprite (backwardCompatabilaty)
+
++(id) itemFromNormalSprite:(CCNode<CCRGBAProtocol>*)normalSprite selectedSprite:(CCNode<CCRGBAProtocol>*)selectedSprite target:(id)target selector:(SEL)selector;
+
+@end
+
+@implementation CCMenuItemSprite (backwardCompatabilaty)
+
++(id) itemFromNormalSprite:(CCNode<CCRGBAProtocol>*)normalSprite selectedSprite:(CCNode<CCRGBAProtocol>*)selectedSprite target:(id)target selector:(SEL)selector
+{
+    return [self itemWithNormalSprite: normalSprite selectedSprite: selectedSprite target: target selector: selector];
+}
+
+@end
+
+#endif
+
 @implementation CCMenuAdvancedTestLayer
 
 enum nodeTags
@@ -179,7 +198,11 @@ enum nodeTags
 						 ];
 		[backMenuItem.selectedImage setColor: ccGRAY];
 		CCMenuAdvanced *menu = [CCMenuAdvanced menuWithItems:backMenuItem, nil];
+#if COCOS2D_VERSION >= 0x00020000
+        menu.priority = kCCMenuHandlerPriority - 1;
+#else
         menu.priority = kCCMenuTouchPriority - 1;
+#endif
 		[self addChild:menu z:0 tag: kBackButtonMenu];
 		
 		// Enable Debug Draw (available only when DEBUG is defined )
@@ -360,7 +383,11 @@ enum nodeTags
 	
 	// Setup Menu Alignment
 	[menu alignItemsVerticallyWithPadding: 5 bottomToTop: NO]; //< also sets contentSize and keyBindings on Mac
-	menu.isRelativeAnchorPoint = YES;	
+#if COCOS2D_VERSION >= 0x00020000
+    menu.ignoreAnchorPointForPosition = NO;
+#else
+    menu.isRelativeAnchorPoint = YES;
+#endif	
 	
 	return menu;
 }
@@ -382,7 +409,11 @@ enum nodeTags
 	
 	// Setup Menu Alignment
 	[menu alignItemsVerticallyWithPadding: 5 bottomToTop: YES]; //< also sets contentSize and keyBindings on Mac
-	menu.isRelativeAnchorPoint = YES;	
+#if COCOS2D_VERSION >= 0x00020000
+    menu.ignoreAnchorPointForPosition = NO;
+#else
+    menu.isRelativeAnchorPoint = YES;
+#endif	
 	
 	return menu;
 }
@@ -552,7 +583,11 @@ enum nodeTags
 - (CCNode *) widget
 {
 	CCNode *widget = [CCNode node];
-	widget.isRelativeAnchorPoint = YES;
+#if COCOS2D_VERSION >= 0x00020000
+    widget.ignoreAnchorPointForPosition = NO;
+#else
+    widget.isRelativeAnchorPoint = YES;
+#endif
 	
 	// Prepare menuItems
 	CCMenuItemSprite *itemOne = 

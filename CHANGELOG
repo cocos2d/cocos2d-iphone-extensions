@@ -1,5 +1,6 @@
 
 0.2.1 - XXX-2012
+   * Compatibility with both Cocos2D-iPhone 1.x & 2.x (Issue #100, Pull Request #99)
    * CCScrollLayer: compatibility with cocos2d-iphone 1.1-beta2a (Issue #97)
    * CCScrollLayer: automatic menuItems unselection when stealTouches=YES (Sideeffect of fix for #97)
    * CCVideoPlayer: +playMovieWithPath ( Pull Requests #101 & #102 )

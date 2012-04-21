@@ -177,41 +177,55 @@ enum
 		}
 		
 		// Set GL Values
-		glEnable(GL_POINT_SMOOTH);
-		GLboolean blendWasEnabled = glIsEnabled( GL_BLEND );
-		glEnable(GL_BLEND);
-		
-		// save the old blending functions
-                int blend_src = 0;
-                int blend_dst = 0;
-                glGetIntegerv( GL_BLEND_SRC, &blend_src );
-                glGetIntegerv( GL_BLEND_DST, &blend_dst );
+#if COCOS2D_VERSION >= 0x00020000
+        ccGLEnable(CC_GL_BLEND);
+        ccPointSize( 6.0 * CC_CONTENT_SCALE_FACTOR() );
+#define DRAW_4B_FUNC ccDrawColor4B
         
-		glBlendFunc( GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA );
-		glPointSize( 6.0 * CC_CONTENT_SCALE_FACTOR() );
-		
-		// Draw Gray Points
-		glColor4ub(pagesIndicatorNormalColor_.r,
-                   pagesIndicatorNormalColor_.g,
-                   pagesIndicatorNormalColor_.b,
-                   pagesIndicatorNormalColor_.a);
-		ccDrawPoints( points, totalScreens );
-		
-		// Draw White Point for Selected Page	
-		glColor4ub(pagesIndicatorSelectedColor_.r,
-                   pagesIndicatorSelectedColor_.g,
-                   pagesIndicatorSelectedColor_.b,
-                   pagesIndicatorSelectedColor_.a);
-		ccDrawPoint(points[currentScreen_]);
-		
-		// Restore GL Values
-		glPointSize(1.0f);
-		glDisable(GL_POINT_SMOOTH);
-		if (! blendWasEnabled)
-			glDisable(GL_BLEND);
-            
-		// always restore the blending functions too
-                glBlendFunc( blend_src, blend_dst );
+#else
+        glEnable(GL_POINT_SMOOTH);
+        GLboolean blendWasEnabled = glIsEnabled( GL_BLEND );
+        glEnable(GL_BLEND);
+        
+        // save the old blending functions
+        int blend_src = 0;
+        int blend_dst = 0;
+        glGetIntegerv( GL_BLEND_SRC, &blend_src );
+        glGetIntegerv( GL_BLEND_DST, &blend_dst );
+        glPointSize( 6.0 * CC_CONTENT_SCALE_FACTOR() );
+        
+#define DRAW_4B_FUNC glColor4ub        
+
+#endif
+        glBlendFunc( GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA );
+ 		
+ 		// Draw Gray Points
+        DRAW_4B_FUNC(pagesIndicatorNormalColor_.r,
+                     pagesIndicatorNormalColor_.g,
+                     pagesIndicatorNormalColor_.b,
+                     pagesIndicatorNormalColor_.a);
+        
+        ccDrawPoints( points, totalScreens );
+                           
+        // Draw White Point for Selected Page	
+        DRAW_4B_FUNC(pagesIndicatorSelectedColor_.r,
+                     pagesIndicatorSelectedColor_.g,
+                     pagesIndicatorSelectedColor_.b,
+                     pagesIndicatorSelectedColor_.a);
+        ccDrawPoint(points[currentScreen_]);
+                                               
+        // Restore GL Values
+#if COCOS2D_VERSION >= 0x00020000
+        ccPointSize(1.0f);
+#else
+        glPointSize(1.0f);
+        glDisable(GL_POINT_SMOOTH);
+        if (! blendWasEnabled)
+            glDisable(GL_BLEND);
+        
+        // always restore the blending functions too
+        glBlendFunc( blend_src, blend_dst );
+#endif		
 	}
 }
 
@@ -318,15 +332,29 @@ enum
 /** Register with more priority than CCMenu's but don't swallow touches. */
 -(void) registerWithTouchDispatcher
 {	
-	[[CCTouchDispatcher sharedDispatcher] addTargetedDelegate:self priority:kCCMenuTouchPriority - 1 swallowsTouches:NO];
+#if COCOS2D_VERSION >= 0x00020000
+    CCTouchDispatcher *dispatcher = [[CCDirector sharedDirector] touchDispatcher];
+    int priority = kCCMenuHandlerPriority - 1;
+#else
+    CCTouchDispatcher *dispatcher = [CCTouchDispatcher sharedDispatcher];
+    int priority = kCCMenuTouchPriority - 1;
+#endif
+    
+	[dispatcher addTargetedDelegate:self priority: priority swallowsTouches:NO];    
 }
 
 /** Hackish stuff - stole touches from other CCTouchDispatcher targeted delegates. 
  Used to claim touch without receiving ccTouchBegan. */
 - (void) claimTouch: (UITouch *) aTouch
 {
+#if COCOS2D_VERSION >= 0x00020000
+    CCTouchDispatcher *dispatcher = [[CCDirector sharedDirector] touchDispatcher];
+#else
+    CCTouchDispatcher *dispatcher = [CCTouchDispatcher sharedDispatcher];
+#endif
+    
 	// Enumerate through all targeted handlers.
-	for ( CCTargetedTouchHandler *handler in [[CCTouchDispatcher sharedDispatcher] targetedHandlers] )
+	for ( CCTargetedTouchHandler *handler in [dispatcher targetedHandlers] )
 	{
 		// Only our handler should claim the touch.
 		if (handler.delegate == self)
@@ -451,7 +479,11 @@ enum
 
 - (NSInteger) mouseDelegatePriority
 {
+#if COCOS2D_VERSION >= 0x00020000
+    return kCCMenuHandlerPriority - 1;
+#else
 	return kCCMenuMousePriority - 1;
+#endif
 }
 
 -(BOOL) ccMouseDown:(NSEvent*)event
