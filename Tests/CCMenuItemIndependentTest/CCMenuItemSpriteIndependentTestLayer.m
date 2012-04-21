@@ -32,7 +32,7 @@
 
 SYNTHESIZE_EXTENSION_TEST(CCMenuItemSpriteIndependentTestLayer)
 
-#if COCOS2D_VERSION > 0x00020000
+#if COCOS2D_VERSION >= 0x00020000
 
 @interface CCMenuItemSprite (backwardCompatabilaty)
 

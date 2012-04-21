@@ -27,7 +27,7 @@
 #import <UIKit/UIKit.h>
 #import "cocos2d.h"
 
-#if COCOS2D_VERSION > 0x00020000
+#if COCOS2D_VERSION >= 0x00020000
 
 @interface cocos2d_extensions_iosAppDelegate : NSObject <UIApplicationDelegate, CCDirectorDelegate>
 {

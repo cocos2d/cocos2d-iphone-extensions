@@ -111,7 +111,7 @@
 #ifdef __IPHONE_OS_VERSION_MAX_ALLOWED
 -(void) registerWithTouchDispatcher
 {
-#if COCOS2D_VERSION > 0x00020000
+#if COCOS2D_VERSION >= 0x00020000
     CCTouchDispatcher *dispatcher = [[CCDirector sharedDirector] touchDispatcher];
 #else
     CCTouchDispatcher *dispatcher = [CCTouchDispatcher sharedDispatcher];

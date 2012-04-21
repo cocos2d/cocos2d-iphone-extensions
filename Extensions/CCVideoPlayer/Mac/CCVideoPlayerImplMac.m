@@ -52,7 +52,7 @@ NSString *const kVideoTitle		= @"CustomVideoView";
 
 - (void)playMovieAtURL:(NSURL*)theURL
 {
-#if COCOS2D_VERSION > 0x00020000
+#if COCOS2D_VERSION >= 0x00020000
     NSView *targetView = [[CCDirector sharedDirector] view];
 #else
 	NSView *targetView = [[CCDirector sharedDirector] openGLView];
@@ -94,7 +94,7 @@ NSString *const kVideoTitle		= @"CustomVideoView";
 	[[self.videoViewController view] setFrame: [windowContentView bounds]];
 	
 	// Start handling events on movie view
-#if COCOS2D_VERSION > 0x00020000
+#if COCOS2D_VERSION >= 0x00020000
     CCEventDispatcher *eventDispatcher = [[CCDirector sharedDirector] eventDispatcher];
 #else
     CCEventDispatcher *eventDispatcher = [CCEventDispatcher sharedDispatcher];
@@ -166,7 +166,7 @@ NSString *const kVideoTitle		= @"CustomVideoView";
 	[(MyMovieView*)[self.videoViewController view] setMovie:nil];
 	
 	// Disable keyboard for MyMoviewView.
-#if COCOS2D_VERSION > 0x00020000
+#if COCOS2D_VERSION >= 0x00020000
     CCEventDispatcher *eventDispatcher = [[CCDirector sharedDirector] eventDispatcher];
 #else
     CCEventDispatcher *eventDispatcher = [CCEventDispatcher sharedDispatcher];

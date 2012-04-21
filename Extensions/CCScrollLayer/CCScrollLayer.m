@@ -177,7 +177,7 @@ enum
 		}
 		
 		// Set GL Values
-#if COCOS2D_VERSION > 0x00020000
+#if COCOS2D_VERSION >= 0x00020000
         ccGLEnable(CC_GL_BLEND);
         ccPointSize( 6.0 * CC_CONTENT_SCALE_FACTOR() );
 #define DRAW_4B_FUNC ccDrawColor4B
@@ -215,7 +215,7 @@ enum
         ccDrawPoint(points[currentScreen_]);
                                                
         // Restore GL Values
-#if COCOS2D_VERSION > 0x00020000
+#if COCOS2D_VERSION >= 0x00020000
         ccPointSize(1.0f);
 #else
         glPointSize(1.0f);
