@@ -150,7 +150,13 @@
 #ifdef __IPHONE_OS_VERSION_MAX_ALLOWED
 -(void) registerWithTouchDispatcher
 {
-    [[CCTouchDispatcher sharedDispatcher] addTargetedDelegate:self priority:kCCSliderPriority swallowsTouches:YES];
+#if COCOS2D_VERSION > 0x0020000
+    CCTouchDispatcher *dispatcher = [[CCDirector sharedDirector] touchDispatcher];
+#else
+    CCTouchDispatcher *dispatcher = [CCTouchDispatcher sharedDispatcher];
+#endif
+    
+    [dispatcher addTargetedDelegate:self priority:kCCSliderPriority swallowsTouches:YES];
 }
 
 -(CGPoint) locationFromTouch:(UITouch *)touch
