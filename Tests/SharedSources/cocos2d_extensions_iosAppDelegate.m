@@ -63,6 +63,7 @@
 	[director_ setAnimationInterval:1.0/60];
 	
 	// attach the openglView to the director
+    [glView setMultipleTouchEnabled:YES];
 	[director_ setView:glView];
 	
 	// for rotation and other messages
