@@ -32,6 +32,40 @@
 
 SYNTHESIZE_EXTENSION_TEST(CCMenuItemSpriteIndependentTestLayer)
 
+#if COCOS2D_VERSION > 0x00020000
+
+@interface CCMenuItemSprite (backwardCompatabilaty)
+
++(id) itemFromNormalSprite:(CCNode<CCRGBAProtocol>*)normalSprite selectedSprite:(CCNode<CCRGBAProtocol>*)selectedSprite target:(id)target selector:(SEL)selector;
+
+@end
+
+@implementation CCMenuItemSprite (backwardCompatabilaty)
+
++(id) itemFromNormalSprite:(CCNode<CCRGBAProtocol>*)normalSprite selectedSprite:(CCNode<CCRGBAProtocol>*)selectedSprite target:(id)target selector:(SEL)selector
+{
+    return [self itemWithNormalSprite: normalSprite selectedSprite: selectedSprite target: target selector: selector];
+}
+
+@end
+
+@interface CCSpriteFrameCache (backwardCompatabilaty)
+
+-(void) addSpriteFramesWithFile:(NSString*)plist textureFile:(NSString*)textureFileName;
+
+@end
+
+@implementation CCSpriteFrameCache (backwardCompatabilaty)
+
+-(void) addSpriteFramesWithFile:(NSString*)plist textureFile:(NSString*)textureFileName;
+{
+    [self addSpriteFramesWithFile: plist textureFilename: textureFileName];
+}
+
+@end
+
+#endif
+
 // HelloWorldLayer implementation
 @implementation CCMenuItemSpriteIndependentTestLayer
 
