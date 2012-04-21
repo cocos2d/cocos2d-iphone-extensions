@@ -484,7 +484,7 @@
 - (void) updateLoadRect
 {	
 	// get screen rect
-	CGRect screenRect = CGRectZero;;
+	CGRect screenRect = CGRectZero;
 	screenRect.size = [[CCDirector sharedDirector] winSize];
 	
 #if COCOS2D_VERSION < 0x00020000
