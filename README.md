@@ -24,7 +24,7 @@ How to get the source
     git clone git@github.com:cocos2d/cocos2d-iphone-extensions.git
     cd cocos2d-iphone-extensions
 	
-	# init cocos2d-iphone submodule in order to build & run the tests.
+	# init cocos2d-iphone submodules in order to build & run the tests.
     git submodule update --init
 	
 	# to get latest source from develop branch, use this command:
@@ -33,13 +33,16 @@ How to get the source
 
 Files & Folders
 =================
-* **cocos2d** - cocos2d-iphone submodule.
+* **cocos2d** - cocos2d-iphone 1.x submodule.
+* **cocos2d_2.x** - cocos2d-iphone 2.x submodule.
 * **Extensions** - folders with extensions sources, that can be inlcuded in your project.
 * **Tests** - sources & resources of Extensions demos.
    * **SharedResources** - resources shared between all tests (icons, fps images, etc...)
    * **SharedSources** - sources shared between all tests (appDelegates, pch's, etc...)
 * **cocos2d-extensions-ios.xcodeproj** - XCode Project containing all extensions and their demos/tests for iOS Platform.
 * **cocos2d-extensions-mac.xcodeproj** - XCode Project containing all extensions and their demos/tests for Mac OS X Platform.
+* **cocos2d_2.x-extensions-ios.xcodeproj** - same as **cocos2d-extensions-ios.xcodeproj**, but uses Cocos2D-iPhone 2.x ( stable tag in "gles20" branch )
+* **cocos2d_2.x-extensions-mac.xcodeproj** - same as **cocos2d-extensions-mac.xcodeproj**, but uses Cocos2D-iPhone 2.x ( stable tag in "gles20" branch )
 
 Extensions
 =================
