@@ -72,7 +72,6 @@
 
 static  CCVideoPlayerImpl *_impl = nil;
 
-//----- initialize -----
 + (void) initialize
 {
    if (self == [CCVideoPlayer class])
@@ -84,8 +83,6 @@ static  CCVideoPlayerImpl *_impl = nil;
    }
 }
 
-//----- playMovieAtPath: -----
-// Added by Axel Roest, 20120412
 + (void) playMovieAtPath: (NSString *) path
 {
     if (path)
@@ -100,7 +97,6 @@ static  CCVideoPlayerImpl *_impl = nil;
     }
 }
 
-//----- playMovieWithName:Type: -----
 + (void) playMovieWithName: (NSString *) name Type: (NSString *) type
 {
 	NSURL *movieURL;

@@ -48,25 +48,31 @@
  * ATTENTION: You need to call this method before invoking playMovieWithFile:
  * or you will not receive movieStartsPlaying callback.
  */
-+ (void) setDelegate: (id<CCVideoPlayerDelegate>) aDelegate;
++ (void)setDelegate: (id<CCVideoPlayerDelegate>) aDelegate;
 
 /** If YES - user can't skip video by mouse/key/touch event. Default is NO. 
  */
-+ (void) setNoSkip:(BOOL)value;
++ (void)setNoSkip:(BOOL)value;
 
 #pragma mark Playback
 
 /** Start playing movie at given exact path, including extension
  */
-+ (void) playMovieAtPath: (NSString *) path;
++ (void)playMovieAtPath: (NSString *) path;
 
-/** Start playing movie with given filename
+/** Start playing movie with given filename.
+ *
+ * @param file Filename, including extension, firstly file will be searched in
+ * the Caches folder (compatible with Mac & iOS Caches folders path).
+ * If not found in Caches - file will be used from Resources (app bundle).
+ * If not found - nothing happens (use delegate methods to pause performance critical
+ * tasks).
  */
-+ (void) playMovieWithFile: (NSString *) file;
++ (void)playMovieWithFile: (NSString *) file;
 
 /** Stop playing video if it's playing.
  */
-+ (void) cancelPlaying;
++ (void)cancelPlaying;
 
 /** Stop playing video if it's playing and noSkip is NO.
  */
@@ -74,7 +80,7 @@
 
 /** Returns YES if video is currently playing. Otherwise returns NO.
  */
-+ (BOOL) isPlaying;
++ (BOOL)isPlaying;
 
 #pragma mark Updates - Platform Specific
 
@@ -84,7 +90,7 @@
  *
  * Supports only landscape left or landscape right, for other orientations does nothing.
  */
-+ (void) updateOrientationWithOrientation: (UIDeviceOrientation) newOrientation;
++ (void)updateOrientationWithOrientation: (UIDeviceOrientation) newOrientation;
 
 #elif defined(__MAC_OS_X_VERSION_MAX_ALLOWED)
 
@@ -92,7 +98,7 @@
  *
  * Call it after changing to/from fullscreen.  
  */
-+ (void) reAttachView;
++ (void)reAttachView;
 
 #endif
 
