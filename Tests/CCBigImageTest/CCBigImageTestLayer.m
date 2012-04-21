@@ -106,6 +106,7 @@ enum nodeTags {
 #pragma mark Scrolling
 
 #ifdef __IPHONE_OS_VERSION_MAX_ALLOWED
+
 -(void) registerWithTouchDispatcher
 {
 #if COCOS2D_VERSION >= 0x00020000

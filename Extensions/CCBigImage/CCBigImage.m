@@ -103,8 +103,7 @@
 	
 	[self transform];
 	
-	[self.sprite visit];
-	
+	[self.sprite visit];	
 	
 #if COCOS2D_VERSION >= 0x00020000
     kmGLPopMatrix();
@@ -131,10 +130,7 @@
 
 - (void) loadedTexture: (CCTexture2D *) aTex
 {
-	
 	[aTex setAntiAliasTexParameters];
-	//[aTex setMipMapTexParameters];
-	
 	
 	//create sprite, position it and at to self
 	self.sprite = [[ [CCSprite alloc] initWithTexture: aTex] autorelease];
@@ -151,13 +147,10 @@
 	self.sprite = nil;
 }
 
-
 - (void) load
 {
 	if (self.sprite)
 		return; //< already loaded
-	
-	
 	
 	if ([NSThread currentThread] != [[CCDirector sharedDirector] runningThread] )
 	{
@@ -171,7 +164,6 @@
 		// _cmd called in cocos thread - load now
 		[self loadedTexture: [[CCTextureCache sharedTextureCache] addImage: _imageName ] ];
 	}
-	
 }
 
 @end

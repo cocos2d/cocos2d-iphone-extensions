@@ -47,7 +47,6 @@
 
 @end
 
-
 #endif
 
 @implementation CCTextureCache (iTraceurDynamicTiles)
@@ -56,8 +55,7 @@
 {
 	NSAssert(filename != nil, @"TextureCache: fileimage MUST not be nill");
 	
-	// load here async 
-	
+	// load here async 	
 #if COCOS2D_VERSION >= 0x00020000
     [self addImageAsync:filename target:target selector:selector];
 #else
@@ -66,10 +64,10 @@
 	asyncObject.target = target;
 	asyncObject.data = filename;
 	
-	
 	[self addImageWithAsyncObject: asyncObject];
 	[asyncObject release];
 #endif
+    
 }
 
 @end
