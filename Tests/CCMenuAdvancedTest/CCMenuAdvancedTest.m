@@ -32,6 +32,25 @@
 
 SYNTHESIZE_EXTENSION_TEST(CCMenuAdvancedTestLayer)
 
+#if COCOS2D_VERSION > 0x00020000
+
+@interface CCMenuItemSprite (backwardCompatabilaty)
+
++(id) itemFromNormalSprite:(CCNode<CCRGBAProtocol>*)normalSprite selectedSprite:(CCNode<CCRGBAProtocol>*)selectedSprite target:(id)target selector:(SEL)selector;
+
+@end
+
+@implementation CCMenuItemSprite (backwardCompatabilaty)
+
++(id) itemFromNormalSprite:(CCNode<CCRGBAProtocol>*)normalSprite selectedSprite:(CCNode<CCRGBAProtocol>*)selectedSprite target:(id)target selector:(SEL)selector
+{
+    return [self itemWithNormalSprite: normalSprite selectedSprite: selectedSprite target: target selector: selector];
+}
+
+@end
+
+#endif
+
 @implementation CCMenuAdvancedTestLayer
 
 enum nodeTags
