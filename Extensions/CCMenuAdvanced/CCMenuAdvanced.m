@@ -75,7 +75,11 @@
 {
 	if ( (self = [super initWithItems:item vaList:args]) )
 	{
+#if COCOS2D_VERSION >= 0x00020000
+        self.ignoreAnchorPointForPosition = NO;
+#else
 		self.isRelativeAnchorPoint = YES;
+#endif
 		selectedItemNumber_ = -1;
 		self.boundaryRect = CGRectNull;
 		self.minimumTouchLengthToSlide = 30.0f;

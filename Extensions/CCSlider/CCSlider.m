@@ -58,7 +58,12 @@
 	CCSprite *thumbNormal = [CCSprite spriteWithFile: thumbFile];
 	CCSprite *thumbSelected = [CCSprite spriteWithFile: thumbFile];
 	thumbSelected.color = ccGRAY;		
-	CCMenuItemSprite *thumbMenuItem = [CCMenuItemSprite itemFromNormalSprite:thumbNormal selectedSprite: thumbSelected];
+    
+#if COCOS2D_VERSION >= 0x00020000
+    CCMenuItemSprite *thumbMenuItem = [CCMenuItemSprite itemWithNormalSprite:thumbNormal selectedSprite: thumbSelected];
+#else
+    CCMenuItemSprite *thumbMenuItem = [CCMenuItemSprite itemFromNormalSprite:thumbNormal selectedSprite: thumbSelected];
+#endif	
 	
 	// Continue with designated init on successfull prepare.
 	if (thumbNormal && thumbSelected && thumbMenuItem && bg)
@@ -87,7 +92,11 @@
 		// add the slider background  
 		_bg = bgSprite; 
 		[self setContentSize:[_bg contentSize]];  
+#if COCOS2D_VERSION >= 0x00020000
+        self.ignoreAnchorPointForPosition = NO;
+#else
 		self.isRelativeAnchorPoint = YES;
+#endif
 		self.anchorPoint = ccp(0.5f,0.5f);
 		
 		_bg.position = CGPointMake([_bg contentSize].width / 2, [_bg contentSize].height / 2);  

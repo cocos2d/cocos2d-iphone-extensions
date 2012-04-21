@@ -184,7 +184,11 @@ typedef enum
 {
 	if ((self = [super init])) 
 	{
+#if COCOS2D_VERSION >= 0x00020000
+        self.ignoreAnchorPointForPosition = NO;
+#else
 		self.isRelativeAnchorPoint = YES;
+#endif
 		self.isTouchEnabled = YES;
 		
 		self.maxScale = 3.0f;
