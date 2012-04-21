@@ -42,13 +42,13 @@ enum
 #ifdef __IPHONE_OS_VERSION_MAX_ALLOWED
 @interface CCTouchDispatcher (targetedHandlersGetter)
 
-- (NSMutableArray *) targetedHandlers;
+- (id<NSFastEnumeration>) targetedHandlers;
 
 @end
 
 @implementation CCTouchDispatcher (targetedHandlersGetter)
 
-- (NSMutableArray *) targetedHandlers
+- (id<NSFastEnumeration>) targetedHandlers
 {
 	return targetedHandlers;
 }
@@ -177,41 +177,29 @@ enum
 		}
 		
 		// Set GL Values
-		glEnable(GL_POINT_SMOOTH);
-		GLboolean blendWasEnabled = glIsEnabled( GL_BLEND );
-		glEnable(GL_BLEND);
-		
-		// save the old blending functions
-                int blend_src = 0;
-                int blend_dst = 0;
-                glGetIntegerv( GL_BLEND_SRC, &blend_src );
-                glGetIntegerv( GL_BLEND_DST, &blend_dst );
-        
+//		glEnable(GL_POINT_SMOOTH);
+		ccGLEnable(CC_GL_BLEND);
+		        
 		glBlendFunc( GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA );
-		glPointSize( 6.0 * CC_CONTENT_SCALE_FACTOR() );
+		ccPointSize( 6.0 * CC_CONTENT_SCALE_FACTOR() );
 		
 		// Draw Gray Points
-		glColor4ub(pagesIndicatorNormalColor_.r,
+		ccDrawColor4B(pagesIndicatorNormalColor_.r,
                    pagesIndicatorNormalColor_.g,
                    pagesIndicatorNormalColor_.b,
                    pagesIndicatorNormalColor_.a);
 		ccDrawPoints( points, totalScreens );
 		
 		// Draw White Point for Selected Page	
-		glColor4ub(pagesIndicatorSelectedColor_.r,
+		ccDrawColor4B(pagesIndicatorSelectedColor_.r,
                    pagesIndicatorSelectedColor_.g,
                    pagesIndicatorSelectedColor_.b,
                    pagesIndicatorSelectedColor_.a);
 		ccDrawPoint(points[currentScreen_]);
 		
 		// Restore GL Values
-		glPointSize(1.0f);
-		glDisable(GL_POINT_SMOOTH);
-		if (! blendWasEnabled)
-			glDisable(GL_BLEND);
-            
-		// always restore the blending functions too
-                glBlendFunc( blend_src, blend_dst );
+		ccPointSize(1.0f);
+//		glDisable(GL_POINT_SMOOTH);
 	}
 }
 
@@ -318,15 +306,18 @@ enum
 /** Register with more priority than CCMenu's but don't swallow touches. */
 -(void) registerWithTouchDispatcher
 {	
-	[[CCTouchDispatcher sharedDispatcher] addTargetedDelegate:self priority:kCCMenuTouchPriority - 1 swallowsTouches:NO];
+	CCTouchDispatcher *dispatcher = [[CCDirector sharedDirector] touchDispatcher];
+	[dispatcher addTargetedDelegate:self priority:kCCMenuHandlerPriority - 1 swallowsTouches:NO];
 }
 
 /** Hackish stuff - stole touches from other CCTouchDispatcher targeted delegates. 
  Used to claim touch without receiving ccTouchBegan. */
 - (void) claimTouch: (UITouch *) aTouch
 {
+	CCTouchDispatcher *dispatcher = [[CCDirector sharedDirector] touchDispatcher];
+
 	// Enumerate through all targeted handlers.
-	for ( CCTargetedTouchHandler *handler in [[CCTouchDispatcher sharedDispatcher] targetedHandlers] )
+	for ( CCTargetedTouchHandler *handler in [dispatcher targetedHandlers] )
 	{
 		// Only our handler should claim the touch.
 		if (handler.delegate == self)
@@ -335,34 +326,24 @@ enum
 			{
 				[handler.claimedTouches addObject: aTouch];
 			}
-			else 
-			{
-				CCLOGERROR(@"CCScrollLayer#claimTouch: %@ is already claimed!", aTouch);
-			}
-			return;
 		}
+        else 
+        {
+            // Steal touch from other targeted delegates, if they claimed it.
+            if ([handler.claimedTouches containsObject: aTouch])
+            {
+                if ([handler.delegate respondsToSelector:@selector(ccTouchCancelled:withEvent:)])
+                {
+                    [handler.delegate ccTouchCancelled: aTouch withEvent: nil];
+                }
+                [handler.claimedTouches removeObject: aTouch];
+            }
+        }
 	}
-}
-
-- (void) cancelAndStoleTouch:(UITouch *)touch withEvent:(UIEvent *)event
-{
-    // Throw Cancel message for everybody in TouchDispatcher and do not react on this.
-	stealingTouchInProgress_ = YES;
-    [[CCTouchDispatcher sharedDispatcher] touchesCancelled: [NSSet setWithObject: touch] withEvent:event];
-	stealingTouchInProgress_ = NO;
-	
-    //< after doing this touch is already removed from all targeted handlers
-	
-    // Squirrel away the touch
-    [self claimTouch: touch];
 }
 
 -(void)ccTouchCancelled:(UITouch *)touch withEvent:(UIEvent *)event 
 {
-    // Do not cancel touch, if this method is called from cancelAndStoleTouch:
-    if (stealingTouchInProgress_)
-		return;
-	
     if( scrollTouch_ == touch ) {
         scrollTouch_ = nil;
         [self selectPage: currentScreen_];
@@ -406,7 +387,9 @@ enum
 		startSwipe_ = touchPoint.x;
 		
 		if (self.stealTouches)
-			[self cancelAndStoleTouch: touch withEvent: event];
+        {
+			[self claimTouch: touch];
+        }
 		
 		if ([self.delegate respondsToSelector:@selector(scrollLayerScrollingStarted:)])
 		{
@@ -459,7 +442,7 @@ enum
 
 - (NSInteger) mouseDelegatePriority
 {
-	return kCCMenuMousePriority - 1;
+	return kCCMenuHandlerPriority - 1;
 }
 
 -(BOOL) ccMouseDown:(NSEvent*)event

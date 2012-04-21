@@ -58,7 +58,7 @@
 	CCSprite *thumbNormal = [CCSprite spriteWithFile: thumbFile];
 	CCSprite *thumbSelected = [CCSprite spriteWithFile: thumbFile];
 	thumbSelected.color = ccGRAY;		
-	CCMenuItemSprite *thumbMenuItem = [CCMenuItemSprite itemFromNormalSprite:thumbNormal selectedSprite: thumbSelected];
+	CCMenuItemSprite *thumbMenuItem = [CCMenuItemSprite itemWithNormalSprite:thumbNormal selectedSprite: thumbSelected];
 	
 	// Continue with designated init on successfull prepare.
 	if (thumbNormal && thumbSelected && thumbMenuItem && bg)
@@ -150,7 +150,8 @@
 #ifdef __IPHONE_OS_VERSION_MAX_ALLOWED
 -(void) registerWithTouchDispatcher
 {
-    [[CCTouchDispatcher sharedDispatcher] addTargetedDelegate:self priority:kCCSliderPriority swallowsTouches:YES];
+	CCTouchDispatcher *dispatcher = [[CCDirector sharedDirector] touchDispatcher];
+    [dispatcher addTargetedDelegate:self priority:kCCSliderPriority swallowsTouches:YES];
 }
 
 -(CGPoint) locationFromTouch:(UITouch *)touch

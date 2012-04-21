@@ -95,14 +95,13 @@
 	if (!visible_)
 		return;
 	
-	glPushMatrix();
+	kmGLPushMatrix();
 	
 	[self transform];
 	
 	[self.sprite visit];
-	
-	
-	glPopMatrix();
+
+	kmGLPopMatrix();
 }
 
 - (CGRect) boundingBox
@@ -148,7 +147,7 @@
 	if (self.sprite)
 		return; //< already loaded
 	
-	[CCTexture2D setDefaultAlphaPixelFormat:kTexture2DPixelFormat_RGBA4444];
+	[CCTexture2D setDefaultAlphaPixelFormat:kCCTexture2DPixelFormat_RGBA4444];
 	
 	
 	if ([NSThread currentThread] != [[CCDirector sharedDirector] runningThread] )
@@ -259,7 +258,7 @@
 		self.dynamicMode = YES;
 #endif
 		
-		NSString *path = [CCFileUtils fullPathFromRelativePath: filename];
+		NSString *path = [[CCFileUtils sharedFileUtils] fullPathFromRelativePath: filename];
 		[self prepareTilesWithFile: path extension: extension z: tilesZ ];
 		
 		if (!self.dynamicMode)

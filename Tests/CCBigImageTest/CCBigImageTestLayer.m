@@ -108,7 +108,8 @@ enum nodeTags {
 #ifdef __IPHONE_OS_VERSION_MAX_ALLOWED
 -(void) registerWithTouchDispatcher
 {
-	[[CCTouchDispatcher sharedDispatcher] addTargetedDelegate:self priority:kCCMenuTouchPriority swallowsTouches:YES];
+	CCTouchDispatcher *dispatcher = [[CCDirector sharedDirector] touchDispatcher];
+	[dispatcher addTargetedDelegate:self priority:kCCMenuHandlerPriority swallowsTouches:YES];
 }
 
 -(BOOL) ccTouchBegan:(UITouch *)touch withEvent:(UIEvent *)event

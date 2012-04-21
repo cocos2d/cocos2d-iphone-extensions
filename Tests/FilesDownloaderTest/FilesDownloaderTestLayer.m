@@ -168,7 +168,7 @@ enum nodeTags
 		CCSprite *closeSelected = [CCSprite spriteWithFile:@"closeButton.png"];
 		closeSelected.color = ccGRAY;
 		
-		_closeMenuItem = [CCMenuItemSprite itemFromNormalSprite: close 
+		_closeMenuItem = [CCMenuItemSprite itemWithNormalSprite: close 
 												 selectedSprite: closeSelected 
 														 target: self 
 													   selector: @selector(closePressed) ];

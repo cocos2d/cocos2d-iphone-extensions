@@ -1,4 +1,8 @@
 
+0.2.1 - XXX-2012
+   * CCScrollLayer: compatibility with cocos2d-iphone 1.1-beta2a (Issue #97)
+   * CCScrollLayer: automatic menuItems unselection when stealTouches=YES (Sideeffect of fix for #97)
+
 0.2 - 09-November-2011
    * New Extension: CCLayerPanZoom (iOS Only)
    * New Extension: TMXGenerator.

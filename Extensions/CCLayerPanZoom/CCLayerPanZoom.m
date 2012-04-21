@@ -64,7 +64,7 @@ enum nodeTags
 
 - (void) draw
 {
-    glColor4f(1.0f, 0.0f, 0.0f, 1.0);
+    ccDrawColor4F(1.0f, 0.0f, 0.0f, 1.0);
     glLineWidth(2.0f);    
     ccDrawLine(ccp(self.leftFrameMargin, 0.0f), 
                ccp(self.leftFrameMargin, self.contentSize.height));
@@ -393,14 +393,16 @@ typedef enum
 - (void) onEnter
 {
     [super onEnter];
-    [[CCScheduler sharedScheduler] scheduleUpdateForTarget: self 
+	CCScheduler *scheduler = [[CCDirector sharedDirector] scheduler];
+    [scheduler scheduleUpdateForTarget: self 
                                                   priority: 0 
                                                     paused: NO];
 }
 
 - (void) onExit
 {
-    [[CCScheduler sharedScheduler] unscheduleAllSelectorsForTarget: self];
+	CCScheduler *scheduler = [[CCDirector sharedDirector] scheduler];
+    [scheduler unscheduleAllSelectorsForTarget: self];
     [super onExit];
 }
 

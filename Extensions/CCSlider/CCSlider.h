@@ -32,7 +32,7 @@
 
 #import "cocos2d.h"
 
-static const NSInteger kCCSliderPriority = kCCMenuTouchPriority - 2; 
+static const NSInteger kCCSliderPriority = kCCMenuHandlerPriority - 2; 
 
 /** @class CCSlider Slider control for Cocos2D. Designed with SFX/Music level options in mind. */
 @interface CCSlider : CCLayer 
