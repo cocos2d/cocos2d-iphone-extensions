@@ -95,14 +95,23 @@
 	if (!visible_)
 		return;
 	
+#if COCOS2D_VERSION >= 0x00020000
+    kmGLPushMatrix();
+#else
 	glPushMatrix();
+#endif
 	
 	[self transform];
 	
 	[self.sprite visit];
 	
 	
+#if COCOS2D_VERSION >= 0x00020000
+    kmGLPopMatrix();
+#else
 	glPopMatrix();
+#endif
+    
 }
 
 - (CGRect) boundingBox
@@ -148,7 +157,6 @@
 	if (self.sprite)
 		return; //< already loaded
 	
-	[CCTexture2D setDefaultAlphaPixelFormat:kTexture2DPixelFormat_RGBA4444];
 	
 	
 	if ([NSThread currentThread] != [[CCDirector sharedDirector] runningThread] )
@@ -259,7 +267,12 @@
 		self.dynamicMode = YES;
 #endif
 		
-		NSString *path = [CCFileUtils fullPathFromRelativePath: filename];
+#if COCOS2D_VERSION >= 0x00020000
+        NSString *path = [[CCFileUtils sharedFileUtils] fullPathFromRelativePath: filename];
+#else
+        NSString *path = [CCFileUtils fullPathFromRelativePath: filename];
+#endif
+		
 		[self prepareTilesWithFile: path extension: extension z: tilesZ ];
 		
 		if (!self.dynamicMode)

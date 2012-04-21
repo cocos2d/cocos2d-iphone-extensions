@@ -28,6 +28,7 @@
 
 #import "CCTextureCache+CCBigImageExtensions.h"
 
+#if COCOS2D_VERSION < 0x00020000
 
 @interface CCAsyncObject : NSObject
 {
@@ -47,6 +48,7 @@
 @end
 
 
+#endif
 
 @implementation CCTextureCache (iTraceurDynamicTiles)
 
@@ -56,6 +58,9 @@
 	
 	// load here async 
 	
+#if COCOS2D_VERSION >= 0x00020000
+    [self addImageAsync:filename target:target selector:selector];
+#else
 	CCAsyncObject *asyncObject = [[ CCAsyncObject alloc] init];
 	asyncObject.selector = selector;
 	asyncObject.target = target;
@@ -64,6 +69,7 @@
 	
 	[self addImageWithAsyncObject: asyncObject];
 	[asyncObject release];
+#endif
 }
 
 @end
