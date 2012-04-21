@@ -8,7 +8,7 @@
  * http://srooltheknife.blogspot.com/
  * https://bitbucket.org/iroth_net/ccslider
  *
- * Copyright (c) 2011 Stepan Generalov 
+ * Copyright (c) 2011-2012 Stepan Generalov 
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal

@@ -4,7 +4,7 @@
  * cocos2d-extensions
  * https://github.com/cocos2d/cocos2d-iphone-extensions
  *
- * Copyright (c) 2010-2011 Stepan Generalov
+ * Copyright (c) 2010-2012 Stepan Generalov
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal

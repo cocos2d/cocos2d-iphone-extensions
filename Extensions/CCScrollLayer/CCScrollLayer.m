@@ -7,7 +7,7 @@
 //  Copyright 2010 Giv Parvaneh.
 //  http://www.givp.org/blog/2010/12/30/scrolling-menus-in-cocos2d/
 //
-//  Copyright 2011 Stepan Generalov
+//  Copyright 2011-2012 Stepan Generalov
 //  Copyright 2011 Jeff Keeme
 //  Copyright 2011 Brian Feller
 //
