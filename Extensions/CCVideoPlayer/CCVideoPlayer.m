@@ -85,8 +85,8 @@ static  CCVideoPlayerImpl *_impl = nil;
 
 + (void) playMovieWithPath: (NSString *) path
 {
-    if (path)
-    {
+    if (path && [[NSFileManager defaultManager] fileExistsAtPath: path])
+    {        
         NSURL *movieURL = [NSURL fileURLWithPath:path];
         
         // If the current thread is the main thread,than
