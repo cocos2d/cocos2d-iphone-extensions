@@ -103,7 +103,11 @@ enum nodeTags
 		CCSprite *playNormal = [CCSprite spriteWithFile:@"btn-play-normal.png"];
 		CCSprite *playSelected = [CCSprite spriteWithFile:@"btn-play-selected.png"];
 		CCNode *node = [CCNode node];
-		node.isRelativeAnchorPoint = YES;
+#if COCOS2D_VERSION >= 0x00020000
+        node.ignoreAnchorPointForPosition = NO;
+#else
+        node.isRelativeAnchorPoint = YES;
+#endif
 		node.contentSize = playNormal.contentSize;
 		node.anchorPoint = ccp(0.5f, 0.5f);
 		[node addChild: playNormal];
