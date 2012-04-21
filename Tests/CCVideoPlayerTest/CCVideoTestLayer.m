@@ -48,24 +48,34 @@ SYNTHESIZE_EXTENSION_TEST(CCVideoTestLayer)
 	// Apple recommends to re-assign "self" with the "super" return value
 	if( (self=[super init])) {
 		
-		// Add button
-		CCLabelTTF *label = [CCLabelTTF labelWithString:@"Play video" fontName:@"Marker Felt" fontSize:64];
-		CCMenuItemLabel *labelItem = [CCMenuItemLabel itemWithLabel:label 
+		// Add button "Play video(File)".
+		CCLabelTTF *labelFile = [CCLabelTTF labelWithString:@"Play video(File)" fontName:@"Marker Felt" fontSize:52];
+		CCMenuItemLabel *labelItemFile = [CCMenuItemLabel itemWithLabel:labelFile 
 															 target: self 
-														   selector: @selector(testCCVideoPlayer)];
+														   selector: @selector(testCCVideoPlayerFile)];
 		
-		// Add button 2 - playback without skip.
-		CCLabelTTF *labelNoSkip = [CCLabelTTF labelWithString:@"Play video(No skip)" fontName:@"Marker Felt" fontSize:64];
-		CCMenuItemLabel *labelItemNoSkip = [CCMenuItemLabel itemWithLabel:labelNoSkip 
+		// Add button "Play video(Path)".
+		CCLabelTTF *labelPath = [CCLabelTTF labelWithString:@"Play video(Path)" fontName:@"Marker Felt" fontSize:52];
+		CCMenuItemLabel *labelItemPath = [CCMenuItemLabel itemWithLabel:labelPath 
 															 target: self 
-														   selector: @selector(testCCVideoPlayerNoSkip)];
+														   selector: @selector(testCCVideoPlayerPath)];
+        
+        // Add toggle "NoSkip = NO|YES".
+        CCLabelTTF *labelNoSkipNo = [CCLabelTTF labelWithString:@"NoSkip:NO" fontName:@"Marker Felt" fontSize:34];
+        CCLabelTTF *labelNoSkipYes = [CCLabelTTF labelWithString:@"NoSkip:YES" fontName:@"Marker Felt" fontSize:34];
+		CCMenuItemToggle *labelItemSkipToggle = [CCMenuItemToggle itemWithTarget: self
+                                                                       selector: @selector(toggleNoSkip:)
+                                                                          items: [CCMenuItemLabel itemWithLabel:labelNoSkipNo],
+                                                                                 [CCMenuItemLabel itemWithLabel:labelNoSkipYes],
+                                                nil];
 		
-		CCMenu *menu = [CCMenu menuWithItems: labelItem, labelItemNoSkip, nil];
+		CCMenu *menu = [CCMenu menuWithItems: labelItemFile, labelItemPath, labelItemSkipToggle, nil];
 		[menu alignItemsVertically];
 		[self addChild: menu];
 	
 		
 		// Init Video Player
+        [CCVideoPlayer setNoSkip: NO];
 		[CCVideoPlayer setDelegate: self];
 		
 		// Listen for toggleFullscreen notifications on Mac.
@@ -83,15 +93,29 @@ SYNTHESIZE_EXTENSION_TEST(CCVideoTestLayer)
 	return self;
 }
 
-- (void) testCCVideoPlayer
+- (void) toggleNoSkip: (CCMenuItemToggle *) toggle
 {
-	[CCVideoPlayer setNoSkip: NO];
-	[CCVideoPlayer playMovieWithFile: @"bait.m4v"];
+    switch (toggle.selectedIndex) {
+        case 0:
+            [CCVideoPlayer setNoSkip: NO];
+            break;
+        case 1:
+            [CCVideoPlayer setNoSkip: YES];
+            break;
+            
+        default:
+            break;
+    }    
 }
 
-- (void) testCCVideoPlayerNoSkip
+- (void) testCCVideoPlayerFile
 {
-	[CCVideoPlayer setNoSkip: YES];
+    NSString *path = [[NSBundle mainBundle] pathForResource:@"bait" ofType:@"m4v" ];
+	[CCVideoPlayer playMovieWithPath: path];
+}
+
+- (void) testCCVideoPlayerPath
+{
 	[CCVideoPlayer playMovieWithFile: @"bait.m4v"];
 }
 
