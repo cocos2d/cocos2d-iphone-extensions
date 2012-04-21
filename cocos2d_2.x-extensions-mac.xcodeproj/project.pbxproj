@@ -32,7 +32,6 @@
 		6D77EF8613D6D61F00B82EF1 /* bait.m4v in Resources */ = {isa = PBXBuildFile; fileRef = 6D77EF8513D6D61F00B82EF1 /* bait.m4v */; };
 		6D7BFF4C13C9D4F800FBAC1A /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6DA575D0139C96AE004D8D0B /* InfoPlist.strings */; };
 		6D7BFF4D13C9D4F800FBAC1A /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6DA575D2139C96AE004D8D0B /* MainMenu.xib */; };
-		6D7BFF4E13C9D4F800FBAC1A /* fps_images.png in Resources */ = {isa = PBXBuildFile; fileRef = 6DA575D4139C96AE004D8D0B /* fps_images.png */; };
 		6D7BFF4F13C9D4F800FBAC1A /* icon.icns in Resources */ = {isa = PBXBuildFile; fileRef = 6DA575D9139C96AE004D8D0B /* icon.icns */; };
 		6D7BFF5113C9D4F800FBAC1A /* cocos2d_extensions_macAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DA575E5139C96AE004D8D0B /* cocos2d_extensions_macAppDelegate.m */; };
 		6D7BFF5213C9D4F800FBAC1A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DA575E9139C96AE004D8D0B /* main.m */; };
@@ -248,13 +247,11 @@
 		6D9CC52D14420ACC00B0D72F /* water.wav in Resources */ = {isa = PBXBuildFile; fileRef = 6D9CC52614420ACC00B0D72F /* water.wav */; };
 		6DA575ED139C96AE004D8D0B /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6DA575D0139C96AE004D8D0B /* InfoPlist.strings */; };
 		6DA575EE139C96AE004D8D0B /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6DA575D2139C96AE004D8D0B /* MainMenu.xib */; };
-		6DA575EF139C96AE004D8D0B /* fps_images.png in Resources */ = {isa = PBXBuildFile; fileRef = 6DA575D4139C96AE004D8D0B /* fps_images.png */; };
 		6DA575F4139C96AE004D8D0B /* icon.icns in Resources */ = {isa = PBXBuildFile; fileRef = 6DA575D9139C96AE004D8D0B /* icon.icns */; };
 		6DA575FB139C96AE004D8D0B /* cocos2d_extensions_macAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DA575E5139C96AE004D8D0B /* cocos2d_extensions_macAppDelegate.m */; };
 		6DA575FD139C96AE004D8D0B /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DA575E9139C96AE004D8D0B /* main.m */; };
 		6DA57C9A139CAE19004D8D0B /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6DA575D0139C96AE004D8D0B /* InfoPlist.strings */; };
 		6DA57C9B139CAE19004D8D0B /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6DA575D2139C96AE004D8D0B /* MainMenu.xib */; };
-		6DA57C9C139CAE19004D8D0B /* fps_images.png in Resources */ = {isa = PBXBuildFile; fileRef = 6DA575D4139C96AE004D8D0B /* fps_images.png */; };
 		6DA57C9D139CAE19004D8D0B /* icon.icns in Resources */ = {isa = PBXBuildFile; fileRef = 6DA575D9139C96AE004D8D0B /* icon.icns */; };
 		6DA57C9F139CAE19004D8D0B /* cocos2d_extensions_macAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DA575E5139C96AE004D8D0B /* cocos2d_extensions_macAppDelegate.m */; };
 		6DA57CA1139CAE19004D8D0B /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DA575E9139C96AE004D8D0B /* main.m */; };
@@ -274,7 +271,6 @@
 		6DA57D7C139CBB01004D8D0B /* crackedGradient42.png in Resources */ = {isa = PBXBuildFile; fileRef = 6DA57C94139CAAD9004D8D0B /* crackedGradient42.png */; };
 		6DA57ED1139D561E004D8D0B /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6DA575D0139C96AE004D8D0B /* InfoPlist.strings */; };
 		6DA57ED2139D561E004D8D0B /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6DA575D2139C96AE004D8D0B /* MainMenu.xib */; };
-		6DA57ED3139D561E004D8D0B /* fps_images.png in Resources */ = {isa = PBXBuildFile; fileRef = 6DA575D4139C96AE004D8D0B /* fps_images.png */; };
 		6DA57ED4139D561E004D8D0B /* icon.icns in Resources */ = {isa = PBXBuildFile; fileRef = 6DA575D9139C96AE004D8D0B /* icon.icns */; };
 		6DA57EDC139D561E004D8D0B /* cocos2d_extensions_macAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DA575E5139C96AE004D8D0B /* cocos2d_extensions_macAppDelegate.m */; };
 		6DA57EDD139D561E004D8D0B /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DA575E9139C96AE004D8D0B /* main.m */; };
@@ -296,7 +292,6 @@
 		6DA57F59139D6258004D8D0B /* CustomVideoView.nib in Resources */ = {isa = PBXBuildFile; fileRef = 6DA57EBF139D558E004D8D0B /* CustomVideoView.nib */; };
 		6DA58104139E3CF9004D8D0B /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6DA575D0139C96AE004D8D0B /* InfoPlist.strings */; };
 		6DA58105139E3CF9004D8D0B /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6DA575D2139C96AE004D8D0B /* MainMenu.xib */; };
-		6DA58106139E3CF9004D8D0B /* fps_images.png in Resources */ = {isa = PBXBuildFile; fileRef = 6DA575D4139C96AE004D8D0B /* fps_images.png */; };
 		6DA58107139E3CF9004D8D0B /* icon.icns in Resources */ = {isa = PBXBuildFile; fileRef = 6DA575D9139C96AE004D8D0B /* icon.icns */; };
 		6DA58109139E3CF9004D8D0B /* cocos2d_extensions_macAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DA575E5139C96AE004D8D0B /* cocos2d_extensions_macAppDelegate.m */; };
 		6DA5810A139E3CF9004D8D0B /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DA575E9139C96AE004D8D0B /* main.m */; };
@@ -310,7 +305,6 @@
 		6DA58113139E3CF9004D8D0B /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E08AA04C12C0EEC0000341BD /* AudioToolbox.framework */; };
 		6DA58138139E3CFF004D8D0B /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6DA575D0139C96AE004D8D0B /* InfoPlist.strings */; };
 		6DA58139139E3CFF004D8D0B /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6DA575D2139C96AE004D8D0B /* MainMenu.xib */; };
-		6DA5813A139E3CFF004D8D0B /* fps_images.png in Resources */ = {isa = PBXBuildFile; fileRef = 6DA575D4139C96AE004D8D0B /* fps_images.png */; };
 		6DA5813B139E3CFF004D8D0B /* icon.icns in Resources */ = {isa = PBXBuildFile; fileRef = 6DA575D9139C96AE004D8D0B /* icon.icns */; };
 		6DA5813D139E3CFF004D8D0B /* cocos2d_extensions_macAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DA575E5139C96AE004D8D0B /* cocos2d_extensions_macAppDelegate.m */; };
 		6DA5813E139E3CFF004D8D0B /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DA575E9139C96AE004D8D0B /* main.m */; };
@@ -324,7 +318,6 @@
 		6DA58147139E3CFF004D8D0B /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E08AA04C12C0EEC0000341BD /* AudioToolbox.framework */; };
 		6DA58152139E3D01004D8D0B /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6DA575D0139C96AE004D8D0B /* InfoPlist.strings */; };
 		6DA58153139E3D01004D8D0B /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6DA575D2139C96AE004D8D0B /* MainMenu.xib */; };
-		6DA58154139E3D01004D8D0B /* fps_images.png in Resources */ = {isa = PBXBuildFile; fileRef = 6DA575D4139C96AE004D8D0B /* fps_images.png */; };
 		6DA58155139E3D01004D8D0B /* icon.icns in Resources */ = {isa = PBXBuildFile; fileRef = 6DA575D9139C96AE004D8D0B /* icon.icns */; };
 		6DA58157139E3D01004D8D0B /* cocos2d_extensions_macAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DA575E5139C96AE004D8D0B /* cocos2d_extensions_macAppDelegate.m */; };
 		6DA58158139E3D01004D8D0B /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DA575E9139C96AE004D8D0B /* main.m */; };
@@ -338,7 +331,6 @@
 		6DA58161139E3D01004D8D0B /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E08AA04C12C0EEC0000341BD /* AudioToolbox.framework */; };
 		6DA5816C139E3D04004D8D0B /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6DA575D0139C96AE004D8D0B /* InfoPlist.strings */; };
 		6DA5816D139E3D04004D8D0B /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6DA575D2139C96AE004D8D0B /* MainMenu.xib */; };
-		6DA5816E139E3D04004D8D0B /* fps_images.png in Resources */ = {isa = PBXBuildFile; fileRef = 6DA575D4139C96AE004D8D0B /* fps_images.png */; };
 		6DA5816F139E3D04004D8D0B /* icon.icns in Resources */ = {isa = PBXBuildFile; fileRef = 6DA575D9139C96AE004D8D0B /* icon.icns */; };
 		6DA58171139E3D04004D8D0B /* cocos2d_extensions_macAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DA575E5139C96AE004D8D0B /* cocos2d_extensions_macAppDelegate.m */; };
 		6DA58172139E3D04004D8D0B /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DA575E9139C96AE004D8D0B /* main.m */; };
@@ -370,7 +362,6 @@
 		6DA5858B139E8027004D8D0B /* sliderThumb.png in Resources */ = {isa = PBXBuildFile; fileRef = 6DA58588139E8027004D8D0B /* sliderThumb.png */; };
 		6DA5863D13A0232C004D8D0B /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6DA575D0139C96AE004D8D0B /* InfoPlist.strings */; };
 		6DA5863E13A0232C004D8D0B /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6DA575D2139C96AE004D8D0B /* MainMenu.xib */; };
-		6DA5863F13A0232C004D8D0B /* fps_images.png in Resources */ = {isa = PBXBuildFile; fileRef = 6DA575D4139C96AE004D8D0B /* fps_images.png */; };
 		6DA5864013A0232C004D8D0B /* icon.icns in Resources */ = {isa = PBXBuildFile; fileRef = 6DA575D9139C96AE004D8D0B /* icon.icns */; };
 		6DA5864213A0232C004D8D0B /* cocos2d_extensions_macAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DA575E5139C96AE004D8D0B /* cocos2d_extensions_macAppDelegate.m */; };
 		6DA5864313A0232C004D8D0B /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DA575E9139C96AE004D8D0B /* main.m */; };
@@ -396,7 +387,6 @@
 		6DA588B813A05EA1004D8D0B /* iTraceurProgressBarCover.png in Resources */ = {isa = PBXBuildFile; fileRef = 6DA588B213A05EA1004D8D0B /* iTraceurProgressBarCover.png */; };
 		6DCEA89A13FD567D00285740 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6DA575D0139C96AE004D8D0B /* InfoPlist.strings */; };
 		6DCEA89B13FD567D00285740 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6DA575D2139C96AE004D8D0B /* MainMenu.xib */; };
-		6DCEA89C13FD567D00285740 /* fps_images.png in Resources */ = {isa = PBXBuildFile; fileRef = 6DA575D4139C96AE004D8D0B /* fps_images.png */; };
 		6DCEA89D13FD567D00285740 /* icon.icns in Resources */ = {isa = PBXBuildFile; fileRef = 6DA575D9139C96AE004D8D0B /* icon.icns */; };
 		6DCEA89F13FD567D00285740 /* cocos2d_extensions_macAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DA575E5139C96AE004D8D0B /* cocos2d_extensions_macAppDelegate.m */; };
 		6DCEA8A013FD567D00285740 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DA575E9139C96AE004D8D0B /* main.m */; };
@@ -637,6 +627,36 @@
 		E076E5BC1225E97900DE0DA2 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = E0F9256D1224207200EF2362 /* libz.dylib */; };
 		E08AA04B12C0EDC8000341BD /* OpenAL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E08AA04A12C0EDC8000341BD /* OpenAL.framework */; };
 		E08AA04D12C0EEC0000341BD /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E08AA04C12C0EEC0000341BD /* AudioToolbox.framework */; };
+		FDFD840915434E7500E1DB2A /* fps_images-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = FDFD840615434E7500E1DB2A /* fps_images-hd.png */; };
+		FDFD840A15434E7500E1DB2A /* fps_images-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = FDFD840615434E7500E1DB2A /* fps_images-hd.png */; };
+		FDFD840B15434E7500E1DB2A /* fps_images-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = FDFD840615434E7500E1DB2A /* fps_images-hd.png */; };
+		FDFD840C15434E7500E1DB2A /* fps_images-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = FDFD840615434E7500E1DB2A /* fps_images-hd.png */; };
+		FDFD840D15434E7500E1DB2A /* fps_images-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = FDFD840615434E7500E1DB2A /* fps_images-hd.png */; };
+		FDFD840E15434E7500E1DB2A /* fps_images-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = FDFD840615434E7500E1DB2A /* fps_images-hd.png */; };
+		FDFD840F15434E7500E1DB2A /* fps_images-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = FDFD840615434E7500E1DB2A /* fps_images-hd.png */; };
+		FDFD841015434E7500E1DB2A /* fps_images-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = FDFD840615434E7500E1DB2A /* fps_images-hd.png */; };
+		FDFD841115434E7500E1DB2A /* fps_images-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = FDFD840615434E7500E1DB2A /* fps_images-hd.png */; };
+		FDFD841215434E7500E1DB2A /* fps_images-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = FDFD840615434E7500E1DB2A /* fps_images-hd.png */; };
+		FDFD841315434E7500E1DB2A /* fps_images-ipadhd.png in Resources */ = {isa = PBXBuildFile; fileRef = FDFD840715434E7500E1DB2A /* fps_images-ipadhd.png */; };
+		FDFD841415434E7500E1DB2A /* fps_images-ipadhd.png in Resources */ = {isa = PBXBuildFile; fileRef = FDFD840715434E7500E1DB2A /* fps_images-ipadhd.png */; };
+		FDFD841515434E7500E1DB2A /* fps_images-ipadhd.png in Resources */ = {isa = PBXBuildFile; fileRef = FDFD840715434E7500E1DB2A /* fps_images-ipadhd.png */; };
+		FDFD841615434E7500E1DB2A /* fps_images-ipadhd.png in Resources */ = {isa = PBXBuildFile; fileRef = FDFD840715434E7500E1DB2A /* fps_images-ipadhd.png */; };
+		FDFD841715434E7500E1DB2A /* fps_images-ipadhd.png in Resources */ = {isa = PBXBuildFile; fileRef = FDFD840715434E7500E1DB2A /* fps_images-ipadhd.png */; };
+		FDFD841815434E7500E1DB2A /* fps_images-ipadhd.png in Resources */ = {isa = PBXBuildFile; fileRef = FDFD840715434E7500E1DB2A /* fps_images-ipadhd.png */; };
+		FDFD841915434E7500E1DB2A /* fps_images-ipadhd.png in Resources */ = {isa = PBXBuildFile; fileRef = FDFD840715434E7500E1DB2A /* fps_images-ipadhd.png */; };
+		FDFD841A15434E7500E1DB2A /* fps_images-ipadhd.png in Resources */ = {isa = PBXBuildFile; fileRef = FDFD840715434E7500E1DB2A /* fps_images-ipadhd.png */; };
+		FDFD841B15434E7500E1DB2A /* fps_images-ipadhd.png in Resources */ = {isa = PBXBuildFile; fileRef = FDFD840715434E7500E1DB2A /* fps_images-ipadhd.png */; };
+		FDFD841C15434E7500E1DB2A /* fps_images-ipadhd.png in Resources */ = {isa = PBXBuildFile; fileRef = FDFD840715434E7500E1DB2A /* fps_images-ipadhd.png */; };
+		FDFD841D15434E7500E1DB2A /* fps_images.png in Resources */ = {isa = PBXBuildFile; fileRef = FDFD840815434E7500E1DB2A /* fps_images.png */; };
+		FDFD841E15434E7500E1DB2A /* fps_images.png in Resources */ = {isa = PBXBuildFile; fileRef = FDFD840815434E7500E1DB2A /* fps_images.png */; };
+		FDFD841F15434E7500E1DB2A /* fps_images.png in Resources */ = {isa = PBXBuildFile; fileRef = FDFD840815434E7500E1DB2A /* fps_images.png */; };
+		FDFD842015434E7500E1DB2A /* fps_images.png in Resources */ = {isa = PBXBuildFile; fileRef = FDFD840815434E7500E1DB2A /* fps_images.png */; };
+		FDFD842115434E7500E1DB2A /* fps_images.png in Resources */ = {isa = PBXBuildFile; fileRef = FDFD840815434E7500E1DB2A /* fps_images.png */; };
+		FDFD842215434E7500E1DB2A /* fps_images.png in Resources */ = {isa = PBXBuildFile; fileRef = FDFD840815434E7500E1DB2A /* fps_images.png */; };
+		FDFD842315434E7500E1DB2A /* fps_images.png in Resources */ = {isa = PBXBuildFile; fileRef = FDFD840815434E7500E1DB2A /* fps_images.png */; };
+		FDFD842415434E7500E1DB2A /* fps_images.png in Resources */ = {isa = PBXBuildFile; fileRef = FDFD840815434E7500E1DB2A /* fps_images.png */; };
+		FDFD842515434E7500E1DB2A /* fps_images.png in Resources */ = {isa = PBXBuildFile; fileRef = FDFD840815434E7500E1DB2A /* fps_images.png */; };
+		FDFD842615434E7500E1DB2A /* fps_images.png in Resources */ = {isa = PBXBuildFile; fileRef = FDFD840815434E7500E1DB2A /* fps_images.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -1006,7 +1026,6 @@
 		6DA575CF139C96AE004D8D0B /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
 		6DA575D1139C96AE004D8D0B /* English */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		6DA575D3139C96AE004D8D0B /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/MainMenu.xib; sourceTree = "<group>"; };
-		6DA575D4139C96AE004D8D0B /* fps_images.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = fps_images.png; sourceTree = "<group>"; };
 		6DA575D5139C96AE004D8D0B /* Icon-72.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-72.png"; sourceTree = "<group>"; };
 		6DA575D6139C96AE004D8D0B /* Icon-Small-50.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-Small-50.png"; sourceTree = "<group>"; };
 		6DA575D7139C96AE004D8D0B /* Icon-Small.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-Small.png"; sourceTree = "<group>"; };
@@ -1341,6 +1360,9 @@
 		E08AA04A12C0EDC8000341BD /* OpenAL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenAL.framework; path = System/Library/Frameworks/OpenAL.framework; sourceTree = SDKROOT; };
 		E08AA04C12C0EEC0000341BD /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		E0F9256D1224207200EF2362 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
+		FDFD840615434E7500E1DB2A /* fps_images-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "fps_images-hd.png"; path = "cocos2d_2.x/Resources/Fonts/fps_images-hd.png"; sourceTree = SOURCE_ROOT; };
+		FDFD840715434E7500E1DB2A /* fps_images-ipadhd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "fps_images-ipadhd.png"; path = "cocos2d_2.x/Resources/Fonts/fps_images-ipadhd.png"; sourceTree = SOURCE_ROOT; };
+		FDFD840815434E7500E1DB2A /* fps_images.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = fps_images.png; path = cocos2d_2.x/Resources/Fonts/fps_images.png; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1771,7 +1793,7 @@
 				6D9CC50C1441CCF600B0D72F /* SimpleAudioEngine.m */,
 			);
 			name = CocosDenshion;
-			path = cocos2d/CocosDenshion/CocosDenshion;
+			path = cocos2d_2.x/CocosDenshion/CocosDenshion;
 			sourceTree = "<group>";
 		};
 		6D9CC5161441CD0000B0D72F /* CocosDenshionExtras */ = {
@@ -1783,7 +1805,7 @@
 				6D9CC51A1441CD0000B0D72F /* CDXPropertyModifierAction.m */,
 			);
 			name = CocosDenshionExtras;
-			path = cocos2d/CocosDenshion/CocosDenshionExtras;
+			path = cocos2d_2.x/CocosDenshion/CocosDenshionExtras;
 			sourceTree = SOURCE_ROOT;
 		};
 		6D9CC51F14420ACB00B0D72F /* Resources */ = {
@@ -1824,7 +1846,9 @@
 				6DA575CF139C96AE004D8D0B /* Default.png */,
 				6DA575D0139C96AE004D8D0B /* InfoPlist.strings */,
 				6DA575D2139C96AE004D8D0B /* MainMenu.xib */,
-				6DA575D4139C96AE004D8D0B /* fps_images.png */,
+				FDFD840615434E7500E1DB2A /* fps_images-hd.png */,
+				FDFD840715434E7500E1DB2A /* fps_images-ipadhd.png */,
+				FDFD840815434E7500E1DB2A /* fps_images.png */,
 				6DA575D5139C96AE004D8D0B /* Icon-72.png */,
 				6DA575D6139C96AE004D8D0B /* Icon-Small-50.png */,
 				6DA575D7139C96AE004D8D0B /* Icon-Small.png */,
@@ -2286,7 +2310,7 @@
 				A0AE85001521608F00D7A1E5 /* Support */,
 			);
 			name = cocos2d;
-			path = cocos2d/cocos2d;
+			path = cocos2d_2.x/cocos2d;
 			sourceTree = "<group>";
 		};
 		A0AE84E71521608F00D7A1E5 /* Platforms */ = {
@@ -2374,7 +2398,7 @@
 				A0AE85E81521609C00D7A1E5 /* src */,
 			);
 			name = kazmath;
-			path = cocos2d/external/kazmath;
+			path = cocos2d_2.x/external/kazmath;
 			sourceTree = "<group>";
 		};
 		A0AE85D71521609C00D7A1E5 /* include */ = {
@@ -2819,7 +2843,7 @@
 			attributes = {
 				LastUpgradeCheck = 0420;
 			};
-			buildConfigurationList = C01FCF4E08A954540054247B /* Build configuration list for PBXProject "cocos2d-extensions-mac" */;
+			buildConfigurationList = C01FCF4E08A954540054247B /* Build configuration list for PBXProject "cocos2d_2.x-extensions-mac" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 1;
@@ -2856,9 +2880,11 @@
 			files = (
 				6D7BFF4C13C9D4F800FBAC1A /* InfoPlist.strings in Resources */,
 				6D7BFF4D13C9D4F800FBAC1A /* MainMenu.xib in Resources */,
-				6D7BFF4E13C9D4F800FBAC1A /* fps_images.png in Resources */,
 				6D7BFF4F13C9D4F800FBAC1A /* icon.icns in Resources */,
 				6D7BFF6F13C9D5B300FBAC1A /* README.md in Resources */,
+				FDFD841015434E7500E1DB2A /* fps_images-hd.png in Resources */,
+				FDFD841A15434E7500E1DB2A /* fps_images-ipadhd.png in Resources */,
+				FDFD842415434E7500E1DB2A /* fps_images.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2868,7 +2894,6 @@
 			files = (
 				6DA57C9A139CAE19004D8D0B /* InfoPlist.strings in Resources */,
 				6DA57C9B139CAE19004D8D0B /* MainMenu.xib in Resources */,
-				6DA57C9C139CAE19004D8D0B /* fps_images.png in Resources */,
 				6DA57C9D139CAE19004D8D0B /* icon.icns in Resources */,
 				6DA57D79139CBB01004D8D0B /* crackedGradient42-hd.fnt in Resources */,
 				6DA57D7A139CBB01004D8D0B /* crackedGradient42-hd.png in Resources */,
@@ -2892,6 +2917,9 @@
 				6D7F4FF713A28D6C0022601B /* b1.png in Resources */,
 				6D7F50AB13A2C1320022601B /* blankTestButton-hd.png in Resources */,
 				6D7F50AC13A2C1320022601B /* blankTestButton.png in Resources */,
+				FDFD840915434E7500E1DB2A /* fps_images-hd.png in Resources */,
+				FDFD841315434E7500E1DB2A /* fps_images-ipadhd.png in Resources */,
+				FDFD841D15434E7500E1DB2A /* fps_images.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2901,10 +2929,12 @@
 			files = (
 				6DA57ED1139D561E004D8D0B /* InfoPlist.strings in Resources */,
 				6DA57ED2139D561E004D8D0B /* MainMenu.xib in Resources */,
-				6DA57ED3139D561E004D8D0B /* fps_images.png in Resources */,
 				6DA57ED4139D561E004D8D0B /* icon.icns in Resources */,
 				6DA57F59139D6258004D8D0B /* CustomVideoView.nib in Resources */,
 				6D77EF8613D6D61F00B82EF1 /* bait.m4v in Resources */,
+				FDFD840A15434E7500E1DB2A /* fps_images-hd.png in Resources */,
+				FDFD841415434E7500E1DB2A /* fps_images-ipadhd.png in Resources */,
+				FDFD841E15434E7500E1DB2A /* fps_images.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2914,7 +2944,6 @@
 			files = (
 				6DA58104139E3CF9004D8D0B /* InfoPlist.strings in Resources */,
 				6DA58105139E3CF9004D8D0B /* MainMenu.xib in Resources */,
-				6DA58106139E3CF9004D8D0B /* fps_images.png in Resources */,
 				6DA58107139E3CF9004D8D0B /* icon.icns in Resources */,
 				6DA581B9139E4713004D8D0B /* README.md in Resources */,
 				6D7F540E13A2E51E0022601B /* bigImage.plist in Resources */,
@@ -3078,6 +3107,9 @@
 				6D7F54AC13A2E51E0022601B /* bigImage_3_8.pvr.ccz in Resources */,
 				6D7F54AD13A2E51E0022601B /* bigImage_3_9-hd.pvr.ccz in Resources */,
 				6D7F54AE13A2E51E0022601B /* bigImage_3_9.pvr.ccz in Resources */,
+				FDFD840B15434E7500E1DB2A /* fps_images-hd.png in Resources */,
+				FDFD841515434E7500E1DB2A /* fps_images-ipadhd.png in Resources */,
+				FDFD841F15434E7500E1DB2A /* fps_images.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3087,7 +3119,6 @@
 			files = (
 				6DA58138139E3CFF004D8D0B /* InfoPlist.strings in Resources */,
 				6DA58139139E3CFF004D8D0B /* MainMenu.xib in Resources */,
-				6DA5813A139E3CFF004D8D0B /* fps_images.png in Resources */,
 				6DA5813B139E3CFF004D8D0B /* icon.icns in Resources */,
 				6DA58522139E6285004D8D0B /* btn-about-spritesheet.plist in Resources */,
 				6DA58523139E6285004D8D0B /* btn-about-spritesheet.png in Resources */,
@@ -3096,6 +3127,9 @@
 				6DA58526139E6285004D8D0B /* btn-highscores-selected.png in Resources */,
 				6DA58527139E6285004D8D0B /* btn-play-normal.png in Resources */,
 				6DA58528139E6285004D8D0B /* btn-play-selected.png in Resources */,
+				FDFD840C15434E7500E1DB2A /* fps_images-hd.png in Resources */,
+				FDFD841615434E7500E1DB2A /* fps_images-ipadhd.png in Resources */,
+				FDFD842015434E7500E1DB2A /* fps_images.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3105,11 +3139,13 @@
 			files = (
 				6DA58152139E3D01004D8D0B /* InfoPlist.strings in Resources */,
 				6DA58153139E3D01004D8D0B /* MainMenu.xib in Resources */,
-				6DA58154139E3D01004D8D0B /* fps_images.png in Resources */,
 				6DA58155139E3D01004D8D0B /* icon.icns in Resources */,
 				6DA58583139E8016004D8D0B /* README.md in Resources */,
 				6DA5858A139E8027004D8D0B /* sliderBG.png in Resources */,
 				6DA5858B139E8027004D8D0B /* sliderThumb.png in Resources */,
+				FDFD840D15434E7500E1DB2A /* fps_images-hd.png in Resources */,
+				FDFD841715434E7500E1DB2A /* fps_images-ipadhd.png in Resources */,
+				FDFD842115434E7500E1DB2A /* fps_images.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3119,13 +3155,15 @@
 			files = (
 				6DA5816C139E3D04004D8D0B /* InfoPlist.strings in Resources */,
 				6DA5816D139E3D04004D8D0B /* MainMenu.xib in Resources */,
-				6DA5816E139E3D04004D8D0B /* fps_images.png in Resources */,
 				6DA5816F139E3D04004D8D0B /* icon.icns in Resources */,
 				6DA5888E13A05D20004D8D0B /* README.md in Resources */,
 				6DA588B513A05EA1004D8D0B /* closeButton.png in Resources */,
 				6DA588B613A05EA1004D8D0B /* iTraceurProgressBar.png in Resources */,
 				6DA588B713A05EA1004D8D0B /* iTraceurProgressBarBackground.png in Resources */,
 				6DA588B813A05EA1004D8D0B /* iTraceurProgressBarCover.png in Resources */,
+				FDFD840E15434E7500E1DB2A /* fps_images-hd.png in Resources */,
+				FDFD841815434E7500E1DB2A /* fps_images-ipadhd.png in Resources */,
+				FDFD842215434E7500E1DB2A /* fps_images.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3135,9 +3173,11 @@
 			files = (
 				6DA5863D13A0232C004D8D0B /* InfoPlist.strings in Resources */,
 				6DA5863E13A0232C004D8D0B /* MainMenu.xib in Resources */,
-				6DA5863F13A0232C004D8D0B /* fps_images.png in Resources */,
 				6DA5864013A0232C004D8D0B /* icon.icns in Resources */,
 				6DA5865913A0237E004D8D0B /* README.md in Resources */,
+				FDFD840F15434E7500E1DB2A /* fps_images-hd.png in Resources */,
+				FDFD841915434E7500E1DB2A /* fps_images-ipadhd.png in Resources */,
+				FDFD842315434E7500E1DB2A /* fps_images.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3147,7 +3187,6 @@
 			files = (
 				6DCEA89A13FD567D00285740 /* InfoPlist.strings in Resources */,
 				6DCEA89B13FD567D00285740 /* MainMenu.xib in Resources */,
-				6DCEA89C13FD567D00285740 /* fps_images.png in Resources */,
 				6DCEA89D13FD567D00285740 /* icon.icns in Resources */,
 				6D9CC52714420ACC00B0D72F /* hero.png in Resources */,
 				6D9CC52814420ACC00B0D72F /* hit.wav in Resources */,
@@ -3156,6 +3195,9 @@
 				6D9CC52B14420ACC00B0D72F /* testMap.tmx in Resources */,
 				6D9CC52C14420ACC00B0D72F /* testTiles.png in Resources */,
 				6D9CC52D14420ACC00B0D72F /* water.wav in Resources */,
+				FDFD841115434E7500E1DB2A /* fps_images-hd.png in Resources */,
+				FDFD841B15434E7500E1DB2A /* fps_images-ipadhd.png in Resources */,
+				FDFD842515434E7500E1DB2A /* fps_images.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3165,8 +3207,10 @@
 			files = (
 				6DA575ED139C96AE004D8D0B /* InfoPlist.strings in Resources */,
 				6DA575EE139C96AE004D8D0B /* MainMenu.xib in Resources */,
-				6DA575EF139C96AE004D8D0B /* fps_images.png in Resources */,
 				6DA575F4139C96AE004D8D0B /* icon.icns in Resources */,
+				FDFD841215434E7500E1DB2A /* fps_images-hd.png in Resources */,
+				FDFD841C15434E7500E1DB2A /* fps_images-ipadhd.png in Resources */,
+				FDFD842615434E7500E1DB2A /* fps_images.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3850,7 +3894,7 @@
 				GCC_WARN_64_TO_32_BIT_CONVERSION = NO;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				HEADER_SEARCH_PATHS = cocos2d/external/kazmath/include;
+				HEADER_SEARCH_PATHS = cocos2d_2.x/external/kazmath/include;
 				MACOSX_DEPLOYMENT_TARGET = 10.6;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = macosx;
@@ -3868,7 +3912,7 @@
 				GCC_WARN_64_TO_32_BIT_CONVERSION = NO;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				HEADER_SEARCH_PATHS = cocos2d/external/kazmath/include;
+				HEADER_SEARCH_PATHS = cocos2d_2.x/external/kazmath/include;
 				MACOSX_DEPLOYMENT_TARGET = 10.6;
 				SDKROOT = macosx;
 				VALID_ARCHS = "i386 x86_64";
@@ -4022,7 +4066,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		C01FCF4E08A954540054247B /* Build configuration list for PBXProject "cocos2d-extensions-mac" */ = {
+		C01FCF4E08A954540054247B /* Build configuration list for PBXProject "cocos2d_2.x-extensions-mac" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				C01FCF4F08A954540054247B /* Debug */,
