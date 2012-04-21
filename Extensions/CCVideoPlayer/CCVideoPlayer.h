@@ -56,9 +56,10 @@
 
 #pragma mark Playback
 
-/** Start playing movie at given exact path, including extension
+/** Start playing movie at given exact path, including extension.
+ * Does nothing if file not exists.
  */
-+ (void)playMovieAtPath: (NSString *) path;
++ (void)playMovieWithPath: (NSString *) path;
 
 /** Start playing movie with given filename.
  *

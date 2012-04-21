@@ -83,7 +83,7 @@ static  CCVideoPlayerImpl *_impl = nil;
    }
 }
 
-+ (void) playMovieAtPath: (NSString *) path
++ (void) playMovieWithPath: (NSString *) path
 {
     if (path)
     {
