@@ -487,12 +487,16 @@
 	CGRect screenRect = CGRectZero;;
 	screenRect.size = [[CCDirector sharedDirector] winSize];
 	
+#if COCOS2D_VERSION < 0x00020000
 	screenRect.size.width *= CC_CONTENT_SCALE_FACTOR();
 	screenRect.size.height *= CC_CONTENT_SCALE_FACTOR();
+#endif
 	screenRect = CGRectApplyAffineTransform(screenRect, [self worldToNodeTransform] );
+#if COCOS2D_VERSION < 0x00020000
 	screenRect.origin = ccpMult(screenRect.origin, 1/CC_CONTENT_SCALE_FACTOR() );
 	screenRect.size.width /= CC_CONTENT_SCALE_FACTOR();
 	screenRect.size.height /= CC_CONTENT_SCALE_FACTOR();
+#endif
 	 
 	// get level's must-be-loaded-part rect
 	_loadedRect = CGRectMake(screenRect.origin.x - _screenLoadRectExtension.width,
