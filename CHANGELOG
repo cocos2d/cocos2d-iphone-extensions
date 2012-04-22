@@ -4,6 +4,7 @@
    * CCScrollLayer: compatibility with cocos2d-iphone 1.1-beta2a (Issue #97)
    * CCScrollLayer: automatic menuItems unselection when stealTouches=YES (Sideeffect of fix for #97)
    * CCVideoPlayer: +playMovieWithPath ( Pull Requests #101 & #102 )
+   * CCBigImage doesn't change default pixel format anymore
 
 0.2 - 09-November-2011
    * New Extension: CCLayerPanZoom (iOS Only)
