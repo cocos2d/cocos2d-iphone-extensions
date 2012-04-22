@@ -1,10 +1,14 @@
 
-0.2.1 - XXX-2012
-   * Compatibility with both Cocos2D-iPhone 1.x & 2.x (Issue #100, Pull Request #99)
+0.2.1 - 22-April-2012
+   * Both 1.x/2.x Cocos2D-iPhone Support (Issue #100, Pull Request #99)
+      * Added 2.x Xcode projects for Mac/iOS that uses 2.x Engine branch
+      * New submodule: Cocos2D-iPhone 2.0-rc1 ( cocos2d_2.x/ folder )
+	  * Tested with Cocos2D-iPhone 1.0, 1.1-beta2b, 2.0-rc1
    * CCScrollLayer: compatibility with cocos2d-iphone 1.1-beta2a (Issue #97)
    * CCScrollLayer: automatic menuItems unselection when stealTouches=YES (Sideeffect of fix for #97)
    * CCVideoPlayer: +playMovieWithPath ( Pull Requests #101 & #102 )
    * CCBigImage doesn't change default pixel format anymore
+   * Versions of extensions in Copyrights and Javadoc
 
 0.2 - 09-November-2011
    * New Extension: CCLayerPanZoom (iOS Only)
