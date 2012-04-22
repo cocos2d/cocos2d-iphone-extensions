@@ -35,15 +35,3 @@ Just execute it in folder with png's and it will compress them all to RGBA4444 p
 CCMenuAdvancedTest uses pvr.ccz now. Cause with png it was too long to build.
 Compressed tiles in 8e67e772174ba57536380fc7bebf19cb88194f9a
 Replaced all 'png' with 'pvr.ccz' in 072fdd4d621902c22f13254e81bb850f90405450
-
-Quality
---------------------------------------------------
-As mentioned above, it is recommended to use pvr.ccz instead of png.   
-However, if you use png - you may notice some quality issues, due to RGBA4444   
-set as default texture format in UnloadableSpriteNode#load:
-
-    [CCTexture2D setDefaultAlphaPixelFormat:kTexture2DPixelFormat_RGBA4444];
-	
-You may comment this line, but it's recommended to keep it, to save memory.   
-But the best will be to use pvr.ccz (you can use RGBA4444 format with dithering -   
-that will give you best quality while saving memory).
