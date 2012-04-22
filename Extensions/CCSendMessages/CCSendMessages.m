@@ -1,7 +1,7 @@
 /*
  * CCSendMessages
  *
- * cocos2d-extensions
+ * Cocos2D-iPhone-Extensions v0.2.1
  * https://github.com/cocos2d/cocos2d-iphone-extensions
  *
  * Copyright (c) 2011 by Darren Clark

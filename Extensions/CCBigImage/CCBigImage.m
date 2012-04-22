@@ -1,7 +1,7 @@
 /*
- * CCBigImage - Dynamic Tiled Node for holding Large Images
+ * CCBigImage
  *
- * cocos2d-extensions
+ * Cocos2D-iPhone-Extensions v0.2.1
  * https://github.com/cocos2d/cocos2d-iphone-extensions
  *
  * Copyright (c) 2010-2012 Stepan Generalov

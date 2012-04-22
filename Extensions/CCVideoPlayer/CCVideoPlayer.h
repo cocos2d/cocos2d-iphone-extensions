@@ -1,7 +1,7 @@
 /*
  * CCVideoPlayer
  *
- * cocos2d-extensions
+ * Cocos2D-iPhone-Extensions v0.2.1
  * https://github.com/cocos2d/cocos2d-iphone-extensions
  *
  * Copyright (c) 2010-2012 Stepan Generalov
@@ -35,7 +35,9 @@
 
 @end
 
-/** @class CCVideoPlayer - Simple Video Player for Cocos2D apps.
+/** @class CCVideoPlayer - Simple Video Player for Cocos2D-iPhone apps.
+ *
+ * @version 0.2.1
  */
 @interface CCVideoPlayer : NSObject
 {

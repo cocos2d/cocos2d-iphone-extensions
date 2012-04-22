@@ -1,7 +1,7 @@
 /*
  * CCSlider
  *
- * cocos2d-extensions
+ * Cocos2D-iPhone-Extensions v0.2.1
  * https://github.com/cocos2d/cocos2d-iphone-extensions
  *
  * Copyright (c) 2011 Israel Roth 
@@ -38,7 +38,11 @@ static const NSInteger kCCSliderPriority = kCCMenuHandlerPriority - 2;
 static const NSInteger kCCSliderPriority = kCCMenuTouchPriority - 2; 
 #endif
 
-/** @class CCSlider Slider control for Cocos2D. Designed with SFX/Music level options in mind. */
+/** @class CCSlider Slider control for Cocos2D. 
+ * Designed with SFX/Music level options in mind. 
+ *
+ * @version 0.2.1
+ */
 @interface CCSlider : CCLayer 
 {  
 	float value;  
