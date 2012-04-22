@@ -1,5 +1,8 @@
 /*
- * TMXGenerator.h
+ * TMXGenerator
+ *
+ * Cocos2D-iPhone-Extensions v0.2.1
+ * https://github.com/cocos2d/cocos2d-iphone-extensions
  * 
  * Created by Jeremy Stone on 3/19/11.
  * Copyright (c) 2011 Stone Software. 
@@ -153,6 +156,8 @@
 
 /** @class TMXGenerator Class that generates a single TMX map with multiple layers.
  * Keep in mind this won't build a world for you, it will just create a TMX file based on data it's fed.
+ *
+ * @version 0.2.1
  */
 @interface TMXGenerator : NSObject
 {

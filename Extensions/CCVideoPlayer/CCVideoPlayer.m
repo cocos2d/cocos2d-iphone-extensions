@@ -1,10 +1,10 @@
 /*
  * CCVideoPlayer
  *
- * cocos2d-extensions
+ * Cocos2D-iPhone-Extensions v0.2.1
  * https://github.com/cocos2d/cocos2d-iphone-extensions
  *
- * Copyright (c) 2010-2011 Stepan Generalov
+ * Copyright (c) 2010-2012 Stepan Generalov
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -72,7 +72,6 @@
 
 static  CCVideoPlayerImpl *_impl = nil;
 
-//----- initialize -----
 + (void) initialize
 {
    if (self == [CCVideoPlayer class])
@@ -84,7 +83,20 @@ static  CCVideoPlayerImpl *_impl = nil;
    }
 }
 
-//----- playMovieWithName:Type: -----
++ (void) playMovieWithPath: (NSString *) path
+{
+    if (path && [[NSFileManager defaultManager] fileExistsAtPath: path])
+    {        
+        NSURL *movieURL = [NSURL fileURLWithPath:path];
+        
+        // If the current thread is the main thread,than
+        // this message will be processed immediately.
+        [ _impl performSelectorOnMainThread: @selector(playMovieAtURL:) 
+                                 withObject: movieURL
+                              waitUntilDone: [NSThread isMainThread]  ];
+    }
+}
+
 + (void) playMovieWithName: (NSString *) name Type: (NSString *) type
 {
 	NSURL *movieURL;

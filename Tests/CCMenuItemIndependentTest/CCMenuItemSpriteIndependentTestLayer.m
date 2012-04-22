@@ -4,7 +4,7 @@
  * cocos2d-extensions
  * https://github.com/cocos2d/cocos2d-iphone-extensions
  *
- * Copyright (c) 2011 Stepan Generalov
+ * Copyright (c) 2011-2012 Stepan Generalov
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -31,6 +31,40 @@
 #import "ExtensionTest.h"
 
 SYNTHESIZE_EXTENSION_TEST(CCMenuItemSpriteIndependentTestLayer)
+
+#if COCOS2D_VERSION >= 0x00020000
+
+@interface CCMenuItemSprite (backwardCompatabilaty)
+
++(id) itemFromNormalSprite:(CCNode<CCRGBAProtocol>*)normalSprite selectedSprite:(CCNode<CCRGBAProtocol>*)selectedSprite target:(id)target selector:(SEL)selector;
+
+@end
+
+@implementation CCMenuItemSprite (backwardCompatabilaty)
+
++(id) itemFromNormalSprite:(CCNode<CCRGBAProtocol>*)normalSprite selectedSprite:(CCNode<CCRGBAProtocol>*)selectedSprite target:(id)target selector:(SEL)selector
+{
+    return [self itemWithNormalSprite: normalSprite selectedSprite: selectedSprite target: target selector: selector];
+}
+
+@end
+
+@interface CCSpriteFrameCache (backwardCompatabilaty)
+
+-(void) addSpriteFramesWithFile:(NSString*)plist textureFile:(NSString*)textureFileName;
+
+@end
+
+@implementation CCSpriteFrameCache (backwardCompatabilaty)
+
+-(void) addSpriteFramesWithFile:(NSString*)plist textureFile:(NSString*)textureFileName;
+{
+    [self addSpriteFramesWithFile: plist textureFilename: textureFileName];
+}
+
+@end
+
+#endif
 
 // HelloWorldLayer implementation
 @implementation CCMenuItemSpriteIndependentTestLayer
@@ -69,7 +103,11 @@ enum nodeTags
 		CCSprite *playNormal = [CCSprite spriteWithFile:@"btn-play-normal.png"];
 		CCSprite *playSelected = [CCSprite spriteWithFile:@"btn-play-selected.png"];
 		CCNode *node = [CCNode node];
-		node.isRelativeAnchorPoint = YES;
+#if COCOS2D_VERSION >= 0x00020000
+        node.ignoreAnchorPointForPosition = NO;
+#else
+        node.isRelativeAnchorPoint = YES;
+#endif
 		node.contentSize = playNormal.contentSize;
 		node.anchorPoint = ccp(0.5f, 0.5f);
 		[node addChild: playNormal];

@@ -1,10 +1,10 @@
 /*
- * CCBigImage - Dynamic Tiled Node for holding Large Images
+ * CCBigImage
  *
- * cocos2d-extensions
+ * Cocos2D-iPhone-Extensions v0.2.1
  * https://github.com/cocos2d/cocos2d-iphone-extensions
  *
- * Copyright (c) 2010-2011 Stepan Generalov
+ * Copyright (c) 2010-2012 Stepan Generalov
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -28,6 +28,7 @@
 
 #import "CCTextureCache+CCBigImageExtensions.h"
 
+#if COCOS2D_VERSION < 0x00020000
 
 @interface CCAsyncObject : NSObject
 {
@@ -46,7 +47,7 @@
 
 @end
 
-
+#endif
 
 @implementation CCTextureCache (iTraceurDynamicTiles)
 
@@ -54,16 +55,19 @@
 {
 	NSAssert(filename != nil, @"TextureCache: fileimage MUST not be nill");
 	
-	// load here async 
-	
+	// load here async 	
+#if COCOS2D_VERSION >= 0x00020000
+    [self addImageAsync:filename target:target selector:selector];
+#else
 	CCAsyncObject *asyncObject = [[ CCAsyncObject alloc] init];
 	asyncObject.selector = selector;
 	asyncObject.target = target;
 	asyncObject.data = filename;
 	
-	
 	[self addImageWithAsyncObject: asyncObject];
 	[asyncObject release];
+#endif
+    
 }
 
 @end

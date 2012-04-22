@@ -4,7 +4,7 @@
  * cocos2d-extensions
  * https://github.com/cocos2d/cocos2d-iphone-extensions
  *
- * Copyright (c) 2011 Stepan Generalov
+ * Copyright (c) 2011-2012 Stepan Generalov
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -168,10 +168,17 @@ enum nodeTags
 		CCSprite *closeSelected = [CCSprite spriteWithFile:@"closeButton.png"];
 		closeSelected.color = ccGRAY;
 		
+#if COCOS2D_VERSION >= 0x00020000
+        _closeMenuItem = [CCMenuItemSprite itemWithNormalSprite: close 
+												 selectedSprite: closeSelected 
+														 target: self 
+													   selector: @selector(closePressed) ];
+#else
 		_closeMenuItem = [CCMenuItemSprite itemFromNormalSprite: close 
 												 selectedSprite: closeSelected 
 														 target: self 
 													   selector: @selector(closePressed) ];
+#endif
 		CCMenu *menu = [CCMenu menuWithItems: _closeMenuItem, nil];
 		menu.anchorPoint = ccp(0,0);
 		menu.position = ccp(0,0);

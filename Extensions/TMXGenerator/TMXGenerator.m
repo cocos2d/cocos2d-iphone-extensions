@@ -1,6 +1,9 @@
 /*
- * TMXGenerator.m
+ * TMXGenerator
  * 
+ * Cocos2D-iPhone-Extensions v0.2.1
+ * https://github.com/cocos2d/cocos2d-iphone-extensions
+ *
  * Created by Jeremy Stone on 3/19/11.
  * Copyright (c) 2011 Stone Software. 
  *

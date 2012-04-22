@@ -4,7 +4,7 @@
  * cocos2d-extensions
  * https://github.com/cocos2d/cocos2d-iphone-extensions
  *
- * Copyright (c) 2011 Stepan Generalov
+ * Copyright (c) 2011-2012 Stepan Generalov
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -36,6 +36,31 @@
 	return [  [ [self alloc] init] autorelease  ];
 }
 
+#if COCOS2D_VERSION >= 0x00020000
+- (id) init
+{
+	CCSprite *sprite = [CCSprite spriteWithFile:@"iTraceurProgressBar.png"];
+    
+    if ( (self = [super initWithSprite:sprite]) )
+ 	{
+        self.type = kCCProgressTimerTypeBar;
+        self.midpoint = ccp(0, 0);
+        //	Setup for a horizontal bar since the bar change rate is 0 for y meaning no vertical change
+        self.barChangeRate = ccp(1,0);
+		
+		CCSprite *background = [CCSprite spriteWithFile:@"iTraceurProgressBarBackground.png"];
+		CCSprite *cover = [CCSprite spriteWithFile:@"iTraceurProgressBarCover.png"];
+		
+		background.anchorPoint = ccp(0,0);
+		cover.anchorPoint = ccp(0,0);
+		
+		[self addChild: background z: -1];
+		[self addChild: cover z: 2];
+	}
+	
+	return self;
+}
+#else
 - (id) init
 {
 	if ( (self = [super initWithFile:@"iTraceurProgressBar.png"]) )
@@ -56,5 +81,6 @@
 	
 	return self;
 }
+#endif
 
 @end

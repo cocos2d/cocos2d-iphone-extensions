@@ -10,6 +10,7 @@ Features
    * Universal support (iPhone + iPad + Mac)
    * Play / Cancel (by tap or key pressed on mac)
    * Plays file from Caches or Resources directory (if found) - compatible with FilesDownloader
+   * Plays file from path
    * Easy to use
 
 

@@ -1,10 +1,10 @@
 /*
  * CCMenuAdvanced
  *
- * cocos2d-extensions
+ * Cocos2D-iPhone-Extensions v0.2.1
  * https://github.com/cocos2d/cocos2d-iphone-extensions
  *
- * Copyright (c) 2011 Stepan Generalov
+ * Copyright (c) 2011-2012 Stepan Generalov
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -36,16 +36,18 @@
 @end
 
 
-/** @class CCMenuAdvanced CCMenu with some aditional features.
+/** @class CCMenuAdvanced CCMenu with some aditional features:
+ *   1) Selecting and activating CCMenuItems with Keyboard 
+ *     (by default next/prev bindings aren't set - set them manually or use one of align methods to bind arrows for this).
+ *   2) One of CCMenuItems can be set as escapeDelegate - so it will be activated by pressing escape
+ *   3) align left->right, right->left, bottom->top, top->bottom with autosetting self contentSize
+ *   4) externalBoundsRect - if it is set then menu items will be scrollable inside these bounds
+ *   5) priority property - must be set before onEnter to make it register with that priority
  *
- *		1) Selecting and activating CCMenuItems with Keyboard 
- * (by default next/prev bindings aren't set - set them manually or use one of align methods to bind arrows for this).
- *		2) One of CCMenuItems can be set as escapeDelegate - so it will be activated by pressing escape
- *		3) align left->right, right->left, bottom->top, top->bottom with autosetting self contentSize
- *		4) externalBoundsRect - if it is set then menu items will be scrollable inside these bounds
- *		5) priority property - must be set before onEnter to make it register with that priority
- * @todo [v0.2] add columns and rows alignment methods
-*/
+ * @todo Add columns and rows alignment methods
+ *
+ * @version 0.2.1
+ */
 @interface CCMenuAdvanced : CCMenu  
 {
 	NSInteger priority_;

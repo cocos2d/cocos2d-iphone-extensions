@@ -1,4 +1,4 @@
-cocos2d for iPhone extensions authors
+Cocos2D for iPhone Extensions authors
 --------------------------------------
 
 Repo Maintainer:
@@ -9,6 +9,9 @@ People/companies who were/are contributing code to cocos2d-iphone-extensions (al
 	* Alexey Lang (twitter: @alexeylang)
 		CCLayerPanZoom author.
 		Issue #56 (comments & refactoring for TMXGenerator) pair programming.
+        
+	* Axel Roest (twitter: @axello)
+    	CCVideoPlayer patch: new method +playMovieWithPath: 
 
 	* Brian Feller (http://infinitesimplicity.com/)
 		CCScrollLayer#moveToPage: bounds checking
@@ -43,6 +46,9 @@ People/companies who were/are contributing code to cocos2d-iphone-extensions (al
 		
 	* Patrick Wolowicz (twitter: @subzero_eu) (http://blog.subzero.eu/)
 		CCVideoPlayer patch: preload movie, prevent flickering & hide controls when compiled on older SDKs.
+        
+    * Ricardo Quesada (twitter: ricardoquesada) (http://cocos2d-iphone.org)
+		Pull Request #99: Initial Cocos2D-iPhone 2.x support       
         
     * Sapsaldog (github: @sapsaldog) (http://sapsaldog.tistory.com/)
         CCScrollLayer: ability to change pages indicator color (Issue #84, Pull Request #87).

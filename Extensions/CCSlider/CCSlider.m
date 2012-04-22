@@ -1,14 +1,14 @@
 /*
  * CCSlider
  *
- * cocos2d-extensions
+ * Cocos2D-iPhone-Extensions v0.2.1
  * https://github.com/cocos2d/cocos2d-iphone-extensions
  *
  * Copyright (c) 2011 Israel Roth 
  * http://srooltheknife.blogspot.com/
  * https://bitbucket.org/iroth_net/ccslider
  *
- * Copyright (c) 2011 Stepan Generalov 
+ * Copyright (c) 2011-2012 Stepan Generalov 
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -58,7 +58,12 @@
 	CCSprite *thumbNormal = [CCSprite spriteWithFile: thumbFile];
 	CCSprite *thumbSelected = [CCSprite spriteWithFile: thumbFile];
 	thumbSelected.color = ccGRAY;		
-	CCMenuItemSprite *thumbMenuItem = [CCMenuItemSprite itemFromNormalSprite:thumbNormal selectedSprite: thumbSelected];
+    
+#if COCOS2D_VERSION >= 0x00020000
+    CCMenuItemSprite *thumbMenuItem = [CCMenuItemSprite itemWithNormalSprite:thumbNormal selectedSprite: thumbSelected];
+#else
+    CCMenuItemSprite *thumbMenuItem = [CCMenuItemSprite itemFromNormalSprite:thumbNormal selectedSprite: thumbSelected];
+#endif	
 	
 	// Continue with designated init on successfull prepare.
 	if (thumbNormal && thumbSelected && thumbMenuItem && bg)
@@ -87,7 +92,11 @@
 		// add the slider background  
 		_bg = bgSprite; 
 		[self setContentSize:[_bg contentSize]];  
+#if COCOS2D_VERSION >= 0x00020000
+        self.ignoreAnchorPointForPosition = NO;
+#else
 		self.isRelativeAnchorPoint = YES;
+#endif
 		self.anchorPoint = ccp(0.5f,0.5f);
 		
 		_bg.position = CGPointMake([_bg contentSize].width / 2, [_bg contentSize].height / 2);  
@@ -150,7 +159,13 @@
 #ifdef __IPHONE_OS_VERSION_MAX_ALLOWED
 -(void) registerWithTouchDispatcher
 {
-    [[CCTouchDispatcher sharedDispatcher] addTargetedDelegate:self priority:kCCSliderPriority swallowsTouches:YES];
+#if COCOS2D_VERSION >= 0x00020000
+    CCTouchDispatcher *dispatcher = [[CCDirector sharedDirector] touchDispatcher];
+#else
+    CCTouchDispatcher *dispatcher = [CCTouchDispatcher sharedDispatcher];
+#endif
+    
+    [dispatcher addTargetedDelegate:self priority:kCCSliderPriority swallowsTouches:YES];
 }
 
 -(CGPoint) locationFromTouch:(UITouch *)touch

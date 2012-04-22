@@ -3,6 +3,8 @@
  *
  * Created by Jeremy Stone on 8/6/11.
  * Copyright (c) 2011 Stone Software. 
+ * Copyright (c) 2011 Alexey Lang.
+ * Copyright (c) 2011-2012 Stepan Generalov.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -311,7 +313,13 @@ enum
 
 -(void) registerWithTouchDispatcher
 {
-	[[CCTouchDispatcher sharedDispatcher] addTargetedDelegate:self priority:0 swallowsTouches:YES];
+#if COCOS2D_VERSION >= 0x00020000
+    CCTouchDispatcher *dispatcher = [[CCDirector sharedDirector] touchDispatcher];
+#else
+    CCTouchDispatcher *dispatcher = [CCTouchDispatcher sharedDispatcher];
+#endif
+    
+	[dispatcher addTargetedDelegate:self priority:0 swallowsTouches:YES];
 }
 
 

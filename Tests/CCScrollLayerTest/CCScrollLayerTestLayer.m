@@ -5,7 +5,7 @@
  * https://github.com/cocos2d/cocos2d-iphone-extensions
  *
  * Copyright (c) 2010 Giv Parvaneh
- * Copyright (c) 2011 Stepan Generalov
+ * Copyright (c) 2011-2012 Stepan Generalov
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -272,31 +272,9 @@ enum nodeTags
 
 #pragma mark Scroll Layer Callbacks
 
-// Unselects all selected menu items in node - used in scroll layer callbacks to 
-// cancel menu items when scrolling started.
--(void)unselectAllMenusInNode:(CCNode *)node
-{
-	for (CCNode *child in node.children) 
-	{
-		if ([child isKindOfClass:[CCMenu class]]) 
-		{
-			// Child here is CCMenu subclass - unselect.
-			[(CCMenu *)child unselectSelectedItem];
-		}
-		else
-		{
-			// Child here is some other CCNode subclass.
-			[self unselectAllMenusInNode: child];
-		}
-	}
-}
-
 - (void) scrollLayerScrollingStarted:(CCScrollLayer *) sender
 {
 	NSLog(@"CCScrollLayerTestLayer#scrollLayerScrollingStarted: %@", sender);
-	
-	// No buttons can be touched after scroll started.
-	[self unselectAllMenusInNode: self];
 }
 
 - (void) scrollLayer: (CCScrollLayer *) sender scrolledToPageNumber: (int) page

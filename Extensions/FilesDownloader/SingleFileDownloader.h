@@ -1,10 +1,10 @@
 /*
  * FilesDownloader
  *
- * cocos2d-extensions
+ * Cocos2D-iPhone-Extensions v0.2.1
  * https://github.com/cocos2d/cocos2d-iphone-extensions
  *
- * Copyright (c) 2010-2011 Stepan Generalov
+ * Copyright (c) 2010-2012 Stepan Generalov
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -50,6 +50,8 @@ static const NSTimeInterval fileDownloaderDefaultTimeout = 15.0;
  *
  * SingleFileDownloader is used internally in FilesDownloader class, if you're downloading many 
  * files at time from one place - you don't need to use SingleFileDownloader - use FilesDownloader instead.
+ *
+ * @version 0.2.1
  */
 @interface SingleFileDownloader : NSObject 
 {

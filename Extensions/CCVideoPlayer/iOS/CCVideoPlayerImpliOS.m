@@ -1,10 +1,10 @@
 /*
  * CCVideoPlayer
  *
- * cocos2d-extensions
+ * Cocos2D-iPhone-Extensions v0.2.1
  * https://github.com/cocos2d/cocos2d-iphone-extensions
  *
- * Copyright (c) 2010-2011 Stepan Generalov
+ * Copyright (c) 2010-2012 Stepan Generalov
  * Copyright (c) 2011 Patrick Wolowicz
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -98,7 +98,7 @@
 {
 	_playing = YES;
 	
-    [ _delegate movieStartsPlaying]; //< was pause here
+    [ _delegate movieStartsPlaying];
 	
     MPMoviePlayerController* theMovie = [[MPMoviePlayerController alloc] initWithContentURL:theURL];
     if (! theMovie)
@@ -110,16 +110,10 @@
 	{
 		[ theMovie setControlStyle: MPMovieControlStyleNone ];
 	}
-//#ifdef __IPHONE_OS_VERSION_MIN_ALLOWED
-//#if __IPHONE_OS_VERSION_MAX_ALLOWED < 30200
 	else if ( [theMovie respondsToSelector:@selector(setMovieControlMode:)] )
 	{
-		
 		[theMovie setMovieControlMode: MPMovieControlModeHidden]; 
-	}
-//#endif
-//#endif
-	
+	}	
 	
     // Register for the playback finished notification.
     [[NSNotificationCenter defaultCenter] addObserver:self
@@ -127,7 +121,8 @@
                                                  name:MPMoviePlayerPlaybackDidFinishNotification
                                                object:theMovie];
     
-    if ([theMovie respondsToSelector:@selector(prepareToPlay)]) {
+    if ([theMovie respondsToSelector:@selector(prepareToPlay)]) 
+    {
         [[NSNotificationCenter defaultCenter] addObserver:self
                                                  selector:@selector(preparedToPlayerCallback:)
                                                      name:MPMediaPlaybackIsPreparedToPlayDidChangeNotification
@@ -135,14 +130,14 @@
         
         
         [theMovie prepareToPlay];
-    } else {
-        //old iOS does not know how to prepareToPlay, so the flicker cannot be avoided
+    } 
+    else 
+    {
+        // Old iOS does not know how to prepareToPlay, so the flicker cannot be avoided
         [self setupViewAndPlay];
         
     }
-
-
-	}
+}
 
 
 //----- movieFinishedCallback -----

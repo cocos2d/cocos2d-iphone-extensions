@@ -2,7 +2,7 @@
  * cocos2d-extensions
  * https://github.com/cocos2d/cocos2d-iphone-extensions
  *
- * Copyright (c) 2011 Stepan Generalov
+ * Copyright (c) 2011-2012 Stepan Generalov
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -25,9 +25,27 @@
  */
 
 #import <UIKit/UIKit.h>
+#import "cocos2d.h"
+
+#if COCOS2D_VERSION >= 0x00020000
+
+@interface cocos2d_extensions_iosAppDelegate : NSObject <UIApplicationDelegate, CCDirectorDelegate>
+{
+    UIWindow *window_;
+    UINavigationController *navController_;
+    
+    CCDirectorIOS	*director_;							// weak ref
+}
+
+@property (nonatomic, retain) UIWindow *window;
+@property (readonly) UINavigationController *navController;
+@property (readonly) CCDirectorIOS *director;
+
+@end
+
+#else
 
 @class RootViewController;
-
 @interface cocos2d_extensions_iosAppDelegate : NSObject <UIApplicationDelegate> {
 	UIWindow			*window;
 	RootViewController	*viewController;
@@ -36,3 +54,10 @@
 @property (nonatomic, retain) UIWindow *window;
 
 @end
+
+#endif
+
+
+
+
+    

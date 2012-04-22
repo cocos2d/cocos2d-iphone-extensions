@@ -1,10 +1,10 @@
 /*
  * CCMenuItemSpriteIndependent
  *
- * cocos2d-extensions
+ * Cocos2D-iPhone-Extensions v0.2.1
  * https://github.com/cocos2d/cocos2d-iphone-extensions
  *
- * Copyright (c) 2011 Stepan Generalov
+ * Copyright (c) 2011-2012 Stepan Generalov
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -37,6 +37,8 @@
  * delegating them to normalSprite.
  * This allows you to position/scale/rotate only normal sprite and forget about
  * positioning menuItem.
+ *
+ * @version 0.2.1
  */
 @interface CCMenuItemSpriteIndependent : CCMenuItemSprite
 {}

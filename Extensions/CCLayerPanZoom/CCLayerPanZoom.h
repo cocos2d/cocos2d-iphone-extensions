@@ -1,10 +1,11 @@
 /*
- * CCLayerPanZoom Tests
+ * CCLayerPanZoom
  *
- * cocos2d-extensions
+ * Cocos2D-iPhone-Extensions v0.2.1
  * https://github.com/cocos2d/cocos2d-iphone-extensions
  *
  * Copyright (c) 2011 Alexey Lang
+ * Copyright (c) 2011-2012 Stepan Generalov
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -61,8 +62,11 @@ typedef enum
 @end
 
 
-/** @class CCLayerPanZoom Class that represents the layer that can be scrolled 
- * and zoomed with one or two fingers. */
+/** @class CCLayerPanZoom Represents the layer that can be scrolled 
+ * and zoomed with one or two fingers. 
+ *
+ * @version 0.2.1
+ */
 @interface CCLayerPanZoom : CCLayer 
 {
     CGFloat _maxScale;

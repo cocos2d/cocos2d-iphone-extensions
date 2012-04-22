@@ -1,7 +1,7 @@
 /*
  * FilesDownloader
  *
- * cocos2d-extensions
+ * Cocos2D-iPhone-Extensions v0.2.1
  * https://github.com/cocos2d/cocos2d-iphone-extensions
  *
  * Copyright (c) 2011 Stepan Generalov
@@ -48,7 +48,9 @@ typedef enum
 
 
 /** @class FilesDownloader Simple files downloader. Uses multiple SingleFileDownloader's
- for size checking before & downloading.
+ * for size checking before & downloading.
+ *
+ * @version 0.2.1
  */
 @interface FilesDownloader : NSObject <SingleFileDownloaderDelegate>
 {    

@@ -2,12 +2,13 @@ CCMenuAdvanced
 ==================
 
 CCMenuAdvanced is CCMenu with keyboard support for Mac (esc/arrows/enter), a little bit different alignment options,
-and possibility to slide. Unlike original CCMenu it uses natural positioning system:isRelativeAnchorPoint is YES by
- default & contentSize depends on the children of the CCMenuAdvanced (set automatically at init & each align).
+and possibility to slide. 
 
-Short video demo: [CCMenuAdvanced.MOV](http://dl.getdropbox.com/u/1765875/CCMenuAdvanced.MOV "CCMenuAdvanced video demo")
-Screenshots: [Wiki/Sreenshots](https://github.com/psineur/CCMenuAdvanced/wiki/Screenshots "Screenshots" )
-
+Unlike original CCMenu it uses natural positioning system:    
+1. ContentSize depends on the children of the CCMenuAdvanced (set automatically at init & each align)
+2. AnchorPoint is used similiar was as in CCSprite:
+   * isRelativeAnchorPoint is YES for Cocos2D-iPhone 1.x
+   * ignoreAnchorPointForPosition is NO for Cocos2D-iPhone 2.x
 
 Main features
 -------------

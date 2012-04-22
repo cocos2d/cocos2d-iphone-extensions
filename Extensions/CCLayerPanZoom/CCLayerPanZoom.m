@@ -1,10 +1,11 @@
 /*
- * CCLayerPanZoom Tests
+ * CCLayerPanZoom
  *
- * cocos2d-extensions
+ * Cocos2D-iPhone-Extensions v0.2.1
  * https://github.com/cocos2d/cocos2d-iphone-extensions
  *
  * Copyright (c) 2011 Alexey Lang
+ * Copyright (c) 2011-2012 Stepan Generalov
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -64,7 +65,11 @@ enum nodeTags
 
 - (void) draw
 {
+#if COCOS2D_VERSION >= 0x00020000
+    ccDrawColor4F(1.0f, 0.0f, 0.0f, 1.0);
+#else
     glColor4f(1.0f, 0.0f, 0.0f, 1.0);
+#endif
     glLineWidth(2.0f);    
     ccDrawLine(ccp(self.leftFrameMargin, 0.0f), 
                ccp(self.leftFrameMargin, self.contentSize.height));
@@ -180,7 +185,11 @@ typedef enum
 {
 	if ((self = [super init])) 
 	{
+#if COCOS2D_VERSION >= 0x00020000
+        self.ignoreAnchorPointForPosition = NO;
+#else
 		self.isRelativeAnchorPoint = YES;
+#endif
 		self.isTouchEnabled = YES;
 		
 		self.maxScale = 3.0f;
@@ -393,14 +402,25 @@ typedef enum
 - (void) onEnter
 {
     [super onEnter];
-    [[CCScheduler sharedScheduler] scheduleUpdateForTarget: self 
-                                                  priority: 0 
-                                                    paused: NO];
+    
+#if COCOS2D_VERSION >= 0x00020000
+    CCScheduler *scheduler = [[CCDirector sharedDirector] scheduler];
+#else
+    CCScheduler *scheduler = [CCScheduler sharedScheduler];
+#endif               
+                
+    [scheduler scheduleUpdateForTarget: self priority: 0 paused: NO];
 }
 
 - (void) onExit
 {
-    [[CCScheduler sharedScheduler] unscheduleAllSelectorsForTarget: self];
+#if COCOS2D_VERSION >= 0x00020000
+    CCScheduler *scheduler = [[CCDirector sharedDirector] scheduler];
+#else
+    CCScheduler *scheduler = [CCScheduler sharedScheduler];
+#endif 
+    
+    [scheduler unscheduleAllSelectorsForTarget: self];
     [super onExit];
 }
 

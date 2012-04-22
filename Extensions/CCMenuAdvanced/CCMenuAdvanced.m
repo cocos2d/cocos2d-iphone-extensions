@@ -1,10 +1,10 @@
 /*
  * CCMenuAdvanced
  *
- * cocos2d-extensions
+ * Cocos2D-iPhone-Extensions v0.2.1
  * https://github.com/cocos2d/cocos2d-iphone-extensions
  *
- * Copyright (c) 2011 Stepan Generalov
+ * Copyright (c) 2011-2012 Stepan Generalov
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -75,7 +75,11 @@
 {
 	if ( (self = [super initWithItems:item vaList:args]) )
 	{
+#if COCOS2D_VERSION >= 0x00020000
+        self.ignoreAnchorPointForPosition = NO;
+#else
 		self.isRelativeAnchorPoint = YES;
+#endif
 		selectedItemNumber_ = -1;
 		self.boundaryRect = CGRectNull;
 		self.minimumTouchLengthToSlide = 30.0f;
@@ -111,9 +115,15 @@
 #ifdef __IPHONE_OS_VERSION_MAX_ALLOWED
 -(void) registerWithTouchDispatcher
 {
-	[[CCTouchDispatcher sharedDispatcher] addTargetedDelegate: self 
-													 priority:[self mouseDelegatePriority] 
-											  swallowsTouches: YES ];
+#if COCOS2D_VERSION >= 0x00020000
+    CCTouchDispatcher *dispatcher = [[CCDirector sharedDirector] touchDispatcher];
+#else
+    CCTouchDispatcher *dispatcher = [CCTouchDispatcher sharedDispatcher];
+#endif
+    
+	[dispatcher addTargetedDelegate: self 
+                           priority: [self mouseDelegatePriority] 
+                    swallowsTouches: YES ];
 }
 #endif
 

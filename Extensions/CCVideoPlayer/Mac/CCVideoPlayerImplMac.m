@@ -1,10 +1,10 @@
 /*
  * CCVideoPlayer
  *
- * cocos2d-extensions
+ * Cocos2D-iPhone-Extensions v0.2.1
  * https://github.com/cocos2d/cocos2d-iphone-extensions
  *
- * Copyright (c) 2010-2011 Stepan Generalov
+ * Copyright (c) 2010-2012 Stepan Generalov
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -52,7 +52,11 @@ NSString *const kVideoTitle		= @"CustomVideoView";
 
 - (void)playMovieAtURL:(NSURL*)theURL
 {
+#if COCOS2D_VERSION >= 0x00020000
+    NSView *targetView = [[CCDirector sharedDirector] view];
+#else
 	NSView *targetView = [[CCDirector sharedDirector] openGLView];
+#endif
 	[self playMovieAtURL: theURL attachedInView: targetView];
 }
 
@@ -90,8 +94,13 @@ NSString *const kVideoTitle		= @"CustomVideoView";
 	[[self.videoViewController view] setFrame: [windowContentView bounds]];
 	
 	// Start handling events on movie view
-	[[CCEventDispatcher sharedDispatcher] addKeyboardDelegate: (MyMovieView *)[self.videoViewController view] 
-													 priority: NSIntegerMin ];
+#if COCOS2D_VERSION >= 0x00020000
+    CCEventDispatcher *eventDispatcher = [[CCDirector sharedDirector] eventDispatcher];
+#else
+    CCEventDispatcher *eventDispatcher = [CCEventDispatcher sharedDispatcher];
+#endif 
+	[eventDispatcher addKeyboardDelegate: (MyMovieView *)[self.videoViewController view] 
+                                priority: NSIntegerMin ];
 		
 	// Register for end notification
 	[[NSNotificationCenter defaultCenter] addObserver: self 
@@ -157,7 +166,12 @@ NSString *const kVideoTitle		= @"CustomVideoView";
 	[(MyMovieView*)[self.videoViewController view] setMovie:nil];
 	
 	// Disable keyboard for MyMoviewView.
-	[[CCEventDispatcher sharedDispatcher] removeKeyboardDelegate: (MyMovieView*)[self.videoViewController view] ];
+#if COCOS2D_VERSION >= 0x00020000
+    CCEventDispatcher *eventDispatcher = [[CCDirector sharedDirector] eventDispatcher];
+#else
+    CCEventDispatcher *eventDispatcher = [CCEventDispatcher sharedDispatcher];
+#endif
+	[eventDispatcher removeKeyboardDelegate: (MyMovieView*)[self.videoViewController view] ];
     
 	// switch from movie to retained view
 	NSView *windowContentView = [[self.videoViewController view] superview];
@@ -166,7 +180,7 @@ NSString *const kVideoTitle		= @"CustomVideoView";
 	[[self retainedView] setFrame:[windowContentView bounds]];
 	
 	// Stop handling events on movie view
-	[[CCEventDispatcher sharedDispatcher] removeKeyboardDelegate: self];
+	[eventDispatcher removeKeyboardDelegate: self];
 	[[windowContentView window] makeFirstResponder: self.retainedView ];
 	
 	
