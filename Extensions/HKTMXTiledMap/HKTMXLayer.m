@@ -41,6 +41,12 @@
 #import "ccMacros.h"
 #import "CCSprite.h"
 
+// Added for 2.0 Support
+#import "ccGLStateCache.h"
+#import "CCGLProgram.h"
+#import "CCShaderCache.h"
+#import "kazmath/GL/matrix.h"
+
 #pragma mark -
 #pragma mark HKTMXLayer
 
@@ -87,10 +93,14 @@
         color_.g = 255;
         color_.b = 255;
         
-        
-        
+#if GL_ES_VERSION_2_0
+        self.shaderProgram = [[CCShaderCache sharedShaderCache] programForKey:kCCShader_PositionTexture];        
 		texture_ = [[CCTextureCache sharedTextureCache] addImage:tilesetInfo.sourceImage];
-		tilesetInfo.imageSize = texture_.contentSizeInPixels;
+        tilesetInfo.imageSize = texture_.contentSize;
+#else        
+		texture_ = [[CCTextureCache sharedTextureCache] addImage:tilesetInfo.sourceImage];
+        tilesetInfo.imageSize = texture_.contentSizeInPixels;
+#endif
 		
 		// layerInfo
 		layerName_ = [layerInfo.name copy];
@@ -98,11 +108,11 @@
 		tiles_ = layerInfo.tiles;
 		minGID_ = tilesetInfo.firstGid;
 		maxGID_ = minGID_
-			+ (tilesetInfo.imageSize.width - tilesetInfo.margin * 2 + tilesetInfo.spacing)
-			/ (tilesetInfo.tileSize.width + tilesetInfo.spacing)
-			* (tilesetInfo.imageSize.height - tilesetInfo.margin * 2 + tilesetInfo.spacing)
-			/ (tilesetInfo.tileSize.height + tilesetInfo.spacing)
-			- 1;
+        + (tilesetInfo.imageSize.width - tilesetInfo.margin * 2 + tilesetInfo.spacing)
+        / (tilesetInfo.tileSize.width + tilesetInfo.spacing)
+        * (tilesetInfo.imageSize.height - tilesetInfo.margin * 2 + tilesetInfo.spacing)
+        / (tilesetInfo.tileSize.height + tilesetInfo.spacing)
+        - 1;
 		opacity_ = layerInfo.opacity;
 		properties_ = [layerInfo.properties mutableCopy];
 		
@@ -115,13 +125,18 @@
 		
 		// offset (after layer orientation is set);
 		CGPoint offset = [self calculateLayerOffset:layerInfo.offset];
+        
+#if GL_ES_VERSION_2_0
+        [self setPosition:offset];
+        [self setContentSize: CGSizeMake( layerSize_.width * mapTileSize_.width, layerSize_.height * mapTileSize_.height )];
+#else
 		[self setPositionInPixels:offset];
-		
 		[self setContentSizeInPixels: CGSizeMake( layerSize_.width * mapTileSize_.width, layerSize_.height * mapTileSize_.height )];
+#endif
 		
 		// adjust and validate tile IDs
 		NSAssert1(minGID_ <= maxGID_ + 1 && maxGID_ - minGID_ < 1000000,
-			@"TMX: Bad minGID/maxGID for layer %@", layerName_);
+                  @"TMX: Bad minGID/maxGID for layer %@", layerName_);
 		int tileCount = layerSize_.height * layerSize_.width;
 		for(int i=0; i < tileCount; i++)
 		{
@@ -132,7 +147,7 @@
             // JEB flip bits masked to compare true GID
 			NSAssert((tiles_[i] & kFlippedMask) == 0 || 
                      (((tiles_[i] & kFlippedMask) >= minGID_) && ((tiles_[i] & kFlippedMask) <= maxGID_)),
-				@"TMX: Only one tileset per layer is supported");
+                     @"TMX: Only one tileset per layer is supported");
 		}
 		
 		CGSize screenSize = [CCDirector sharedDirector].winSizeInPixels;
@@ -209,7 +224,7 @@
              {
                  animRules_[idx].delay = delay;
              }
-                 
+             
 		 }];
 #else
 		
@@ -307,7 +322,7 @@
 
 -(void) parseInternalProperties
 {
-
+    
 }
 
 #pragma mark CCTMXLayer - obtaining tiles/gids
@@ -316,7 +331,7 @@
 -(uint32_t) tileGIDAt:(CGPoint)pos
 {
 	NSAssert( pos.x < layerSize_.width && pos.y < layerSize_.height && pos.x >=0 && pos.y >=0, @"TMXLayer: invalid position");
-//	NSAssert( tiles_ && atlasIndexArray_, @"TMXLayer: the tiles map has been released");
+    //	NSAssert( tiles_ && atlasIndexArray_, @"TMXLayer: the tiles map has been released");
 	
 	NSInteger idx = pos.x + pos.y * layerSize_.width;
 	
@@ -449,6 +464,20 @@
 
 -(void) draw
 {
+    
+#if GL_ES_VERSION_2_0
+    
+    ccGLEnableVertexAttribs( kCCVertexAttribFlag_Position | kCCVertexAttribFlag_TexCoords );
+	ccGLBlendFunc( blendFunc_.src, blendFunc_.dst );
+	ccGLBindTexture2D( [texture_ name] );
+    
+	glBindBuffer(GL_ARRAY_BUFFER, buffers_[0]);
+    glVertexAttribPointer(kCCVertexAttrib_Position, 2, GL_FLOAT, GL_FALSE, 0, NULL);
+	glBindBuffer(GL_ARRAY_BUFFER, buffers_[1]);
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, buffers_[2]);
+    
+#else
+    
     // JEB Set Blend mode
     BOOL newBlend = ((blendFunc_.src != CC_BLEND_SRC) || (blendFunc_.dst != CC_BLEND_DST));
 	if( newBlend )
@@ -460,7 +489,7 @@
 		newBlend = YES;
 		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 	}
-
+    
     
 	glBindTexture(GL_TEXTURE_2D, texture_.name);
     // TODO: Do we EVER want a tiled map to be anti-aliased?
@@ -474,6 +503,9 @@
 	glVertexPointer(2, GL_FLOAT, 0, NULL);
 	glBindBuffer(GL_ARRAY_BUFFER, buffers_[1]);
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, buffers_[2]);
+    
+#endif    
+    
 	CGAffineTransform trans = [self worldToNodeTransform];
 	CGPoint baseTile = CGPointMake(floor(trans.tx / (mapTileSize_.width)),
 								   floor(trans.ty / (mapTileSize_.height)));
@@ -494,7 +526,7 @@
 	GLushort *indices = glMapBuffer(GL_ELEMENT_ARRAY_BUFFER, GL_WRITE_ONLY);
 #endif
     
-
+    
     
     
 	CGSize texSize = tileset_.imageSize;
@@ -507,7 +539,7 @@
 			if (baseTile.x + x < 0 || baseTile.x + x >= layerSize_.width)
 				continue;
 			int tileidx = (layerSize_.height - (baseTile.y + y) - 1) * layerSize_.width
-				+ baseTile.x + x;
+            + baseTile.x + x;
 			unsigned int tile = tiles_[tileidx];
 			if (!tile) continue;
 			unsigned int showtile;
@@ -553,7 +585,7 @@
 			dirtyAt_ = MIN(dirtyAt_, AC[tile_noflags].validUntil);
 			int screenidx = (y * (screenGridSize_.width)) + x;
 			CGRect tileTexture = [tileset_ rectForGID:(showtile & kFlippedMask)];
-
+            
 			GLfloat *texbase = texcoords + screenidx * 4 * 2;
 			GLushort *idxbase = indices + vertexCount;
 			int vertexbase = screenidx * 4;
@@ -581,7 +613,7 @@
             
             if (tile & kFlippedHorizontallyFlag)
                 CC_SWAP(left,right);
-
+            
             
             if (tile & kFlippedDiagonallyFlag)
             {
@@ -627,7 +659,24 @@
 	lastVertexCount_ = vertexCount;
 	
 texdone:
-
+    
+#if GL_ES_VERSION_2_0
+    
+    kmGLTranslatef(baseTile.x * mapTileSize_.width, baseTile.y * mapTileSize_.height, 0);
+    
+    CC_NODE_DRAW_SETUP();
+    
+    glVertexAttribPointer(kCCVertexAttrib_TexCoords, 2, GL_FLOAT, GL_FALSE, 0, NULL);
+    
+    glDrawElements(GL_TRIANGLES, vertexCount, GL_UNSIGNED_SHORT, NULL);
+	
+    glBindBuffer(GL_ARRAY_BUFFER, 0);
+    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
+    
+	CC_INCREMENT_GL_DRAWS(1);
+    
+#else
+    
 	glPushMatrix();
 	glTranslatef(baseTile.x * mapTileSize_.width, baseTile.y * mapTileSize_.height, 0);
 	glDisableClientState(GL_COLOR_ARRAY);
@@ -646,8 +695,8 @@ texdone:
     // JEB - Restore default blend
     if( newBlend )
 		glBlendFunc(CC_BLEND_SRC, CC_BLEND_DST);
-
-   
+#endif
+    
     
 }
 
