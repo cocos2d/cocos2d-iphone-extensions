@@ -211,6 +211,8 @@ typedef enum
         self.rubberEffectRecoveryTime = 0.2f;
         _rubberEffectRecovering = NO;
         _rubberEffectZooming = NO;
+        
+        _isTouchBeganCalled = NO;
 	}	
 	return self;
 }
@@ -219,7 +221,9 @@ typedef enum
 
 - (void) ccTouchesBegan: (NSSet *) touches 
 			  withEvent: (UIEvent *) event
-{	
+{
+	_isTouchBeganCalled = YES;
+	
 	for (UITouch *touch in [touches allObjects]) 
 	{
 		// Add new touche to the array with current touches
@@ -238,6 +242,13 @@ typedef enum
 - (void) ccTouchesMoved: (NSSet *) touches 
 			  withEvent: (UIEvent *) event
 {
+	// Fixes issue #108:
+	// ccTouchesMoved should never be called if ccTouchesBegan is not called first.
+	// However, when the scene is transitioning in, ccTouchesBegan is not called,
+	// causing self.touches to be empty, thus crashing the app due to an attempt
+	// to access an empty array.
+	if (!_isTouchBeganCalled) return;
+	
 	BOOL multitouch = [self.touches count] > 1;
 	if (multitouch)
 	{
@@ -317,6 +328,8 @@ typedef enum
 - (void) ccTouchesEnded: (NSSet *) touches 
 			  withEvent: (UIEvent *) event
 {
+	_isTouchBeganCalled = NO;
+	
     _singleTouchTimestamp = INFINITY;
     
     // Process click event in single touch.
@@ -349,6 +362,8 @@ typedef enum
 - (void) ccTouchesCancelled: (NSSet *) touches 
 				  withEvent: (UIEvent *) event
 {
+	_isTouchBeganCalled = NO;
+	
 	for (UITouch *touch in [touches allObjects]) 
 	{
 		// Remove touche from the array with current touches
