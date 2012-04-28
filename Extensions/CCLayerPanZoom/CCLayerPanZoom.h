@@ -99,6 +99,8 @@ typedef enum
     CGFloat _rubberEffectRatio;
     BOOL _rubberEffectRecovering;
     BOOL _rubberEffectZooming;
+    
+    BOOL _isTouchBeganCalled;
 }
 
 #pragma mark Zoom Options
