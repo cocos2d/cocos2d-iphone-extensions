@@ -57,6 +57,7 @@
 @implementation HKTMXLayer
 @synthesize layerSize = layerSize_, layerName = layerName_, tiles=tiles_;
 @synthesize tileset=tileset_;
+@synthesize texture=texture_;
 @synthesize layerOrientation=layerOrientation_;
 @synthesize mapTileSize=mapTileSize_;
 @synthesize properties=properties_;
@@ -367,7 +368,7 @@
 -(void) setTileFlipBits:(unsigned int)flipbits at:(CGPoint)pos
 {
 	NSAssert( pos.x < layerSize_.width && pos.y < layerSize_.height && pos.x >=0 && pos.y >=0, @"TMXLayer: invalid position");
-	NSAssert(!((flipbits & kFlippedMask) || ((flipbits & ~kFlippedMask)==~kFlippedMask) ), @"invalid flipbits");
+   
     
     
 	int idx = (int)pos.y * (int)layerSize_.width + pos.x;
@@ -570,8 +571,8 @@
 #else
             left   = (tileTexture.origin.x / texSize.width);
             right  = left + (tileTexture.size.width / texSize.width);
-            bottom = (tileTexture.origin.y / texSize.width);
-            top    = bottom + (tileTexture.size.height / texSize.width);
+            bottom = (tileTexture.origin.y / texSize.height);
+            top    = bottom + (tileTexture.size.height / texSize.height);
             
             
 #endif
@@ -583,28 +584,42 @@
                 CC_SWAP(left,right);
 
             
-            if (tile & kFlippedDiagonallyFlag)
+            switch (tile & kFlippedAllFlag) 
             {
-                texbase[0] = left;
-                texbase[1] = top;
-                texbase[2] = left;
-                texbase[3] = bottom;
-                texbase[4] = right;
-                texbase[5] = top;
-                texbase[6] = right;
-                texbase[7] = bottom; 
+                case 0x60000000:
+                case 0xA0000000:
+                    texbase[0] = left;
+                    texbase[1] = bottom; 
+                    texbase[2] = left;
+                    texbase[3] = top; 
+                    texbase[4] = right;
+                    texbase[5] = bottom; 
+                    texbase[6] = right;
+                    texbase[7] = top; 
+                    break;
+                        
+                case 0xe0000000:
+                case 0x20000000:
+                    texbase[0] = right;
+                    texbase[1] = top;
+                    texbase[2] = right;
+                    texbase[3] = bottom;
+                    texbase[4] = left;
+                    texbase[5] = top;
+                    texbase[6] = left;
+                    texbase[7] = bottom;
+                    break;
+                default:
+                    texbase[0] = left;
+                    texbase[1] = top;
+                    texbase[2] = right;
+                    texbase[3] = top;
+                    texbase[4] = left;
+                    texbase[5] = bottom;
+                    texbase[6] = right;
+                    texbase[7] = bottom;
             }
-            else
-            {
-                texbase[0] = left;
-                texbase[1] = top;
-                texbase[2] = right;
-                texbase[3] = top;
-                texbase[4] = left;
-                texbase[5] = bottom;
-                texbase[6] = right;
-                texbase[7] = bottom; 
-            }
+            
             // *****************************
 			
 			idxbase[0] = vertexbase;

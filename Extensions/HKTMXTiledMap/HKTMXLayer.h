@@ -46,6 +46,7 @@
 #define kFlippedHorizontallyFlag	0x80000000
 #define kFlippedVerticallyFlag		0x40000000
 #define kFlippedDiagonallyFlag      0x20000000
+#define kFlippedAllFlag             0xE0000000
 #define kFlippedMask				~(kFlippedHorizontallyFlag|kFlippedVerticallyFlag|kFlippedDiagonallyFlag)
 #define kGIDMask                    (kFlippedHorizontallyFlag|kFlippedVerticallyFlag|kFlippedDiagonallyFlag)
 
@@ -115,6 +116,7 @@ struct HKTMXAnimCacheEntry {
 }
 
 
+@property (nonatomic, readonly, retain) CCTexture2D			*texture;
 
 /** name of the layer */
 @property (nonatomic,readwrite,retain) NSString *layerName;

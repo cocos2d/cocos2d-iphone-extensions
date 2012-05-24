@@ -73,11 +73,18 @@
         if((flipbits & kTileRotated90) == kTileRotated90)
         {
             tile.rotation = 90;
+            
+            if(flipbits & kFlippedVerticallyFlag)
+                tile.flipY = YES;
+            
         }
         // Test for 270 rotation
         else if ((flipbits & kTileRotated270) == kTileRotated270)
         {
             tile.rotation = 270;
+            
+            if(flipbits & kFlippedHorizontallyFlag)
+                tile.flipX = YES;
         }
         else
         {
@@ -117,7 +124,7 @@
 }
 
 
-
+#if 1
 // JEB - The following is to aid performance if using "sprite" tiles
 -(void) visit
 {
@@ -161,6 +168,6 @@
     // Ensure CCNode visit is called
     [super visit];
 }
-
+#endif
 
 @end
