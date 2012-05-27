@@ -90,7 +90,7 @@
         
         
         
-		texture_ = [[CCTextureCache sharedTextureCache] addImage:tilesetInfo.sourceImage];
+		texture_ = [[[CCTextureCache sharedTextureCache] addImage:tilesetInfo.sourceImage] retain];
 		tilesetInfo.imageSize = texture_.contentSizeInPixels;
 		
 		// layerInfo
@@ -277,7 +277,7 @@
 	[layerName_ release];
 	[tileset_ release];
 	[properties_ release];
-	
+	[texture_ release];
 	free(tiles_);
 	free(animRules_);
 	free(animCache_);
