@@ -112,7 +112,7 @@
 	}
 	else if ( [theMovie respondsToSelector:@selector(setMovieControlMode:)] )
 	{
-		[theMovie setMovieControlMode: MPMovieControlModeHidden]; 
+		[theMovie setControlStyle: MPMovieControlStyleNone];
 	}	
 	
     // Register for the playback finished notification.
