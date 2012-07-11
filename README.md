@@ -21,7 +21,7 @@ How to get the source
 ===================== 
 
 ```
-    git clone git@github.com:cocos2d/cocos2d-iphone-extensions.git
+    git clone git://github.com/saim80/Cocos2D-Extensions.git
     cd cocos2d-iphone-extensions
 	
 	# init cocos2d-iphone submodules in order to build & run the tests.
