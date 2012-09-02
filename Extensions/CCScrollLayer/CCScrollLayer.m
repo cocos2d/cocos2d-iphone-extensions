@@ -163,6 +163,10 @@ enum
 
 - (void) visit
 {
+	 if (!visible_) //quick return in case not visible - make sure pages indicators don't show
+		return;
+    
+
 	[super visit];//< Will draw after glPopScene. 
 	
 	if (self.showPagesIndicator)
