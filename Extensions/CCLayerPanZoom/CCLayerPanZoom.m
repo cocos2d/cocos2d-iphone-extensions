@@ -283,7 +283,7 @@ typedef enum
         // Don't click with multitouch
 		self.touchDistance = INFINITY;
 	}
-	else
+	else if ([self.touches count] == 1)
 	{	        
         // Get the single touch and it's previous & current position.
         UITouch *touch = [self.touches objectAtIndex: 0];
