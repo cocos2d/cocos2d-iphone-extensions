@@ -356,6 +356,7 @@ enum
 #else
     CCTouchDispatcher *dispatcher = [CCTouchDispatcher sharedDispatcher];
 #endif
+	// First claim the touch and then cancel it on other handlers
     
 	// Enumerate through all targeted handlers.
 	for ( CCTargetedTouchHandler *handler in [dispatcher targetedHandlers] )
@@ -368,18 +369,24 @@ enum
 				[handler.claimedTouches addObject: aTouch];
 			}
 		}
-        else 
-        {
-            // Steal touch from other targeted delegates, if they claimed it.
-            if ([handler.claimedTouches containsObject: aTouch])
-            {
-                if ([handler.delegate respondsToSelector:@selector(ccTouchCancelled:withEvent:)])
-                {
-                    [handler.delegate ccTouchCancelled: aTouch withEvent: nil];
-                }
-                [handler.claimedTouches removeObject: aTouch];
-            }
-        }
+	}
+
+	// Enumerate through all targeted handlers.
+	for ( CCTargetedTouchHandler *handler in [dispatcher targetedHandlers] )
+	{
+		// The rest of the handlers.
+		if (handler.delegate != self)
+		{
+			// Steal touch from other targeted delegates, if they claimed it.
+			if ([handler.claimedTouches containsObject: aTouch])
+			{
+				if ([handler.delegate respondsToSelector:@selector(ccTouchCancelled:withEvent:)])
+				{
+					[handler.delegate ccTouchCancelled: aTouch withEvent: nil];
+				}
+				[handler.claimedTouches removeObject: aTouch];
+			}
+		}
 	}
 }
 
