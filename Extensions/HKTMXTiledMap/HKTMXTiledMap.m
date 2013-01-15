@@ -37,7 +37,7 @@
 #import "CCTMXObjectGroup.h"
 #import "CCSprite.h"
 #import "CCTextureCache.h"
-#import "CGPointExtension.h"
+#import "Support/CGPointExtension.h"
 #import "ccMacros.h"
 
 #pragma mark -
@@ -175,7 +175,7 @@
 
 -(HKTMXLayer*) layerNamed:(NSString *)layerName 
 {
-	for( HKTMXLayer *layer in children_ ) {
+	for( HKTMXLayer *layer in _children ) {
 		if([layer isKindOfClass:[HKTMXLayer class]]){
 			if( [layer.layerName isEqual:layerName] )
 				return layer;

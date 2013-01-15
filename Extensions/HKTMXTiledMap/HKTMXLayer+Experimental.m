@@ -35,7 +35,7 @@
 
 #import "HKTMXLayer+Experimental.h"
 #import "CCSprite.h"
-#import "CGPointExtension.h"
+#import "Support/CGPointExtension.h"
 #import "CCTMXXMLParser.h"
 #import "ccMacros.h"
 
@@ -65,7 +65,7 @@
             rect.size.height = (rect.size.height * 0.5);
         }
         tile = [CCSprite spriteWithTexture:texture_ rect:rect];
-		[tile setPositionInPixels: [self positionAt:pos]];
+		[tile setPosition: [self positionAt:pos]];
         tile.anchorPoint = CGPointZero;
         [tile setOpacity:opacity_];
         
@@ -98,8 +98,8 @@
 -(void) setTile:(CCSprite *)tile at:(CGPoint) pos
 {
     NSAssert( pos.x < layerSize_.width && pos.y < layerSize_.height && pos.x >=0 && pos.y >=0, @"TMXLayer: invalid position");
-    NSAssert( ((tile.contentSizeInPixels.width == mapTileSize_.width) && 
-               (tile.contentSizeInPixels.height == mapTileSize_.height)), @"TMXLayer: invalid tile");
+    NSAssert( ((tile.contentSize.width == mapTileSize_.width) &&
+               (tile.contentSize.height == mapTileSize_.height)), @"TMXLayer: invalid tile");
     
     // Remove current tile from location
     [self removeTileAt:pos];
@@ -110,10 +110,10 @@
     pos.y -= 0.5f;
     
     // Position in pixels for retina support
-    tile.positionInPixels = ccp((pos.x * mapTileSize_.width), (((layerSize_.height -1) * mapTileSize_.height) - pos.y * mapTileSize_.height));
+    tile.position = ccp((pos.x * mapTileSize_.width), (((layerSize_.height -1) * mapTileSize_.height) - pos.y * mapTileSize_.height));
     
     // Add sprite to layer via CCNode's addChild method
-    [super addChild:tile z:zOrder_ tag:0];
+    [super addChild:tile z:_zOrder tag:0];
 }
 
 
@@ -123,9 +123,9 @@
 {
     
     // Have any "Sprite" tiles been added to the layer
-    if(children_) 
+    if(_children)
     {
-		ccArray *arrayData = children_->data;
+		ccArray *arrayData = _children->data;
 		
 		
 		CGAffineTransform trans = [self worldToNodeTransform];
@@ -142,8 +142,8 @@
 			CCNode *child = arrayData->arr[i];
             
             // sprite position always positive so can cast intead of calling floor
-            CGPoint tileCoord = CGPointMake((int)(child.positionInPixels.x / mapTileSize_.width),
-                                            (int)(child.positionInPixels    .y / mapTileSize_.width));
+            CGPoint tileCoord = CGPointMake((int)(child.position.x / mapTileSize_.width),
+                                            (int)(child.position.y / mapTileSize_.height));
             
             // Should the tile be actually drawn.
             if ((tileCoord.x >= baseTile.x) && (tileCoord.y >= baseTile.y) &&

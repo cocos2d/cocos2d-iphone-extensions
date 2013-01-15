@@ -527,22 +527,22 @@
 
 -(BOOL) ccTouchBegan:(UITouch *)touch withEvent:(UIEvent *)event
 {	
-	if( state_ != kCCMenuStateWaiting || !visible_ || self.isDisabled )
+	if( _state != kCCMenuStateWaiting || !_visible || self.isDisabled )
 		return NO;
 	
 	curTouchLength_ = 0; //< every new touch should reset previous touch length
 	
-	selectedItem_ = [self itemForTouch:touch];
-	[selectedItem_ selected];
+	_selectedItem = [self itemForTouch:touch];
+	[_selectedItem selected];
 	
-	if( selectedItem_ ) {
-		state_ = kCCMenuStateTrackingTouch;
+	if( _selectedItem ) {
+		_state = kCCMenuStateTrackingTouch;
 		return YES;
 	}
 	
 	// start slide even if touch began outside of menuitems, but inside menu rect
 	if ( !CGRectIsNull(boundaryRect_) && [self isTouchForMe: touch] ){
-		state_ = kCCMenuStateTrackingTouch;
+		_state = kCCMenuStateTrackingTouch;
 		return YES;
 	}
 	
@@ -551,33 +551,33 @@
 
 -(void) ccTouchEnded:(UITouch *)touch withEvent:(UIEvent *)event
 {
-	NSAssert(state_ == kCCMenuStateTrackingTouch, @"[Menu ccTouchEnded] -- invalid state");
+	NSAssert(_state == kCCMenuStateTrackingTouch, @"[Menu ccTouchEnded] -- invalid state");
 	
-	[selectedItem_ unselected];
-	[selectedItem_ activate];
+	[_selectedItem unselected];
+	[_selectedItem activate];
 	
-	state_ = kCCMenuStateWaiting;
+	_state = kCCMenuStateWaiting;
 }
 
 -(void) ccTouchCancelled:(UITouch *)touch withEvent:(UIEvent *)event
 {
-	NSAssert(state_ == kCCMenuStateTrackingTouch, @"[Menu ccTouchCancelled] -- invalid state");
+	NSAssert(_state == kCCMenuStateTrackingTouch, @"[Menu ccTouchCancelled] -- invalid state");
 	
-	[selectedItem_ unselected];
+	[_selectedItem unselected];
 	
-	state_ = kCCMenuStateWaiting;
+	_state = kCCMenuStateWaiting;
 }
 
 -(void) ccTouchMoved:(UITouch *)touch withEvent:(UIEvent *)event
 {
-	NSAssert(state_ == kCCMenuStateTrackingTouch, @"[Menu ccTouchMoved] -- invalid state");
+	NSAssert(_state == kCCMenuStateTrackingTouch, @"[Menu ccTouchMoved] -- invalid state");
 	
 	CCMenuItem *currentItem = [self itemForTouch:touch];
 	
-	if (currentItem != selectedItem_) {
-		[selectedItem_ unselected];
-		selectedItem_ = currentItem;
-		[selectedItem_ selected];
+	if (currentItem != _selectedItem) {
+		[_selectedItem unselected];
+		_selectedItem = currentItem;
+		[_selectedItem selected];
 	}
 	
 	// scrolling is allowed only with non-zero boundaryRect
@@ -594,8 +594,8 @@
 		
 		if (curTouchLength_ >= self.minimumTouchLengthToSlide)
 		{
-			[selectedItem_ unselected];
-			selectedItem_ = nil;
+			[_selectedItem unselected];
+			_selectedItem = nil;
 			
 			// add delta
 			CGPoint newPosition = ccpAdd(self.position, delta );	

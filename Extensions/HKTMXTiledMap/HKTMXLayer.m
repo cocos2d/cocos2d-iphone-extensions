@@ -37,7 +37,7 @@
 #import "CCTMXXMLParser.h"
 #import "CCTextureCache.h"
 #import "CCDirector.h"
-#import "CGPointExtension.h"
+#import "Support/CGPointExtension.h"
 #import "ccMacros.h"
 #import "CCSprite.h"
 

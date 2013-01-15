@@ -84,7 +84,7 @@ struct HKTMXAnimCacheEntry {
 	double validUntil;
 };
 
-@interface HKTMXLayer : CCNode <CCRGBAProtocol, CCBlendProtocol>
+@interface HKTMXLayer : CCNodeRGBA <CCBlendProtocol>
 {
 	CCTMXTilesetInfo	*tileset_;
 	CCTexture2D			*texture_;

@@ -128,7 +128,7 @@ typedef enum
             delegate = _delegate, touches = _touches, touchDistance = _touchDistance, 
             minSpeed = _minSpeed, maxSpeed = _maxSpeed, topFrameMargin = _topFrameMargin, 
             bottomFrameMargin = _bottomFrameMargin, leftFrameMargin = _leftFrameMargin,
-            rightFrameMargin = _rightFrameMargin, scheduler = _scheduler, rubberEffectRecoveryTime = _rubberEffectRecoveryTime;
+            rightFrameMargin = _rightFrameMargin, rubberEffectRecoveryTime = _rubberEffectRecoveryTime;
 
 @dynamic maxScale; 
 - (void) setMaxScale:(CGFloat)maxScale
@@ -180,8 +180,8 @@ typedef enum
 {
 	if ((self = [super init])) 
 	{
-		self.isRelativeAnchorPoint = YES;
-		self.isTouchEnabled = YES;
+		self.ignoreAnchorPointForPosition = NO;
+		self.touchEnabled = YES;
 		
 		self.maxScale = 3.0f;
 		self.minScale = 0.5f;
@@ -392,18 +392,18 @@ typedef enum
 
 - (void) onEnter
 {
-    [super onEnter];
+	[super onEnter];
 	CCScheduler *scheduler = [[CCDirector sharedDirector] scheduler];
-    [scheduler scheduleUpdateForTarget: self 
-                                                  priority: 0 
-                                                    paused: NO];
+	[scheduler scheduleUpdateForTarget: self
+							  priority: 0
+								paused: NO];
 }
 
 - (void) onExit
 {
 	CCScheduler *scheduler = [[CCDirector sharedDirector] scheduler];
-    [scheduler unscheduleAllSelectorsForTarget: self];
-    [super onExit];
+	[scheduler unscheduleAllForTarget: self];
+	[super onExit];
 }
 
 #pragma mark Layer Modes related

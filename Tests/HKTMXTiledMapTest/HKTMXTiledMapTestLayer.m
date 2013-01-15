@@ -46,11 +46,11 @@ SYNTHESIZE_EXTENSION_TEST(HKTMXTiledMapTestLayer)
 		
 		// prepare scroll stuff
 #ifdef __IPHONE_OS_VERSION_MAX_ALLOWED
-		self.isTouchEnabled = YES;
+		self.touchEnabled = YES;
         // setting this, and running on an iPhone 4 causes a crash / assert
         //[[CCDirector sharedDirector] enableRetinaDisplay:YES];
 #elif __MAC_OS_X_VERSION_MIN_REQUIRED
-		self.isMouseEnabled = YES;
+		self.mouseEnabled = YES;
         [[CCDirector sharedDirector] setResizeMode:kCCDirectorResize_AutoScale];
 #endif
 		[[CCDirector sharedDirector] setProjection:kCCDirectorProjection2D];
@@ -84,7 +84,8 @@ SYNTHESIZE_EXTENSION_TEST(HKTMXTiledMapTestLayer)
 #ifdef __IPHONE_OS_VERSION_MAX_ALLOWED
 -(void) registerWithTouchDispatcher
 {
-	[[CCTouchDispatcher sharedDispatcher] addTargetedDelegate:self priority:kCCMenuTouchPriority swallowsTouches:YES];
+	CCTouchDispatcher *touchDispatcher = [[CCDirector sharedDirector] touchDispatcher];
+	[touchDispatcher addTargetedDelegate:self priority:kCCMenuHandlerPriority swallowsTouches:YES];
 }
 
 -(BOOL) ccTouchBegan:(UITouch *)touch withEvent:(UIEvent *)event
