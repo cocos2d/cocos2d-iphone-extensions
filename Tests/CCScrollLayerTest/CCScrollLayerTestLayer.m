@@ -43,11 +43,11 @@ SYNTHESIZE_EXTENSION_TEST(CCScrollLayerTestLayer)
 
 - (void) unselectSelectedItem
 {
-	if(state_ == kCCMenuStateTrackingTouch)
+	if(_state == kCCMenuStateTrackingTouch)
 	{
-		[selectedItem_ unselected];		
-		state_ = kCCMenuStateWaiting;
-		selectedItem_ = nil;
+		[_selectedItem unselected];
+		_state = kCCMenuStateWaiting;
+		_selectedItem = nil;
 	}
 }
 

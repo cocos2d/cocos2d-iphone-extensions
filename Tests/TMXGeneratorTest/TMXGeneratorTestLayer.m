@@ -105,9 +105,9 @@ enum
 	if( (self=[super init]))
 	{
 #ifdef __IPHONE_OS_VERSION_MAX_ALLOWED
-		self.isTouchEnabled = YES;
+		self.touchEnabled = YES;
 #elif defined(__MAC_OS_X_VERSION_MAX_ALLOWED)
-        self.isMouseEnabled = YES;
+        self.mouseEnabled = YES;
 #endif
 
 		// init class variables

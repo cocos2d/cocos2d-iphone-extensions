@@ -78,16 +78,16 @@
 	if ((self = [super init]))  
 	{   
 #ifdef __IPHONE_OS_VERSION_MAX_ALLOWED
-		self.isTouchEnabled = YES;  
+		self.touchEnabled = YES;
 #elif defined(__MAC_OS_X_VERSION_MAX_ALLOWED)
-		self.isMouseEnabled = YES;
+		self.mouseEnabled = YES;
 #endif
 		value = 0;  
 		
 		// add the slider background  
 		_bg = bgSprite; 
 		[self setContentSize:[_bg contentSize]];  
-		self.isRelativeAnchorPoint = YES;
+		self.ignoreAnchorPointForPosition = NO;
 		self.anchorPoint = ccp(0.5f,0.5f);
 		
 		_bg.position = CGPointMake([_bg contentSize].width / 2, [_bg contentSize].height / 2);  

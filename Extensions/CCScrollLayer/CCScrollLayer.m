@@ -31,7 +31,7 @@
 
 
 #import "CCScrollLayer.h"
-#import "CCGL.h"
+#import "Platforms/CCGL.h"
 
 enum 
 {
@@ -96,9 +96,9 @@ enum
 		
 		// Enable Touches/Mouse.
 #ifdef __IPHONE_OS_VERSION_MAX_ALLOWED
-		self.isTouchEnabled = YES;
+		self.touchEnabled = YES;
 #elif defined(__MAC_OS_X_VERSION_MAX_ALLOWED)
-        self.isMouseEnabled = YES;
+        self.mouseEnabled = YES;
 #endif
 		
 		self.stealTouches = YES;
@@ -178,9 +178,9 @@ enum
 		
 		// Set GL Values
 //		glEnable(GL_POINT_SMOOTH);
-		ccGLEnable(CC_GL_BLEND);
-		        
-		glBlendFunc( GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA );
+//		ccGLEnable(CC_GL_BLEND);
+		      
+		ccGLBlendFunc( GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA );
 		ccPointSize( 6.0 * CC_CONTENT_SCALE_FACTOR() );
 		
 		// Draw Gray Points

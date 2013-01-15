@@ -69,7 +69,7 @@ enum nodeTags
 		CCSprite *playNormal = [CCSprite spriteWithFile:@"btn-play-normal.png"];
 		CCSprite *playSelected = [CCSprite spriteWithFile:@"btn-play-selected.png"];
 		CCNode *node = [CCNode node];
-		node.isRelativeAnchorPoint = YES;
+		node.ignoreAnchorPointForPosition = NO;
 		node.contentSize = playNormal.contentSize;
 		node.anchorPoint = ccp(0.5f, 0.5f);
 		[node addChild: playNormal];

@@ -71,20 +71,19 @@
 
 #pragma mark Init/DeInit
 
--(id) initWithItems: (CCMenuItem*) item vaList: (va_list) args
+-(id) initWithArray:(NSArray *)arrayOfItems
 {
-	if ( (self = [super initWithItems:item vaList:args]) )
+	if ( (self = [super initWithArray:arrayOfItems]) )
 	{
-		self.isRelativeAnchorPoint = YES;
+		self.ignoreAnchorPointForPosition = NO;
 		selectedItemNumber_ = -1;
 		self.boundaryRect = CGRectNull;
 		self.minimumTouchLengthToSlide = 30.0f;
 #ifdef __MAC_OS_X_VERSION_MAX_ALLOWED
-		[self setIsKeyboardEnabled:YES];
+		[self setKeyboardEnabled:YES];
 #endif
 		
-		if (item)
-			[self alignItemsVertically];
+		[self alignItemsVertically];
 	}
 	return self;
 }
@@ -141,20 +140,21 @@
 
 - (void) selectNextMenuItem
 {
-	if ([children_ count] < 2)
+	CCArray *children = [self children];
+	if ([children count] < 2)
 		return;
 	
 	selectedItemNumber_++;
 	
 	// borders
-	if (selectedItemNumber_ >= (int)[children_ count])
+	if (selectedItemNumber_ >= (int)[children count])
 		selectedItemNumber_ = 0;
 	if (selectedItemNumber_ < 0)
-		selectedItemNumber_ = [children_ count] - 1;
+		selectedItemNumber_ = [children count] - 1;
 	
 	// select selected
 	int i = 0;
-	for (CCMenuItem *item in children_)
+	for (CCMenuItem *item in children)
 	{
 		[item unselected];
 		if ( i == selectedItemNumber_ )
@@ -165,20 +165,22 @@
 
 - (void) selectPrevMenuItem
 {
-	if ([children_ count] < 2)
+	CCArray *children = [self children];
+
+	if ([children count] < 2)
 		return;
 	
 	selectedItemNumber_--;
 	
 	// borders
-	if (selectedItemNumber_ >= (int)[children_ count])
+	if (selectedItemNumber_ >= (int)[children count])
 		selectedItemNumber_ = 0;
 	if (selectedItemNumber_ < 0)
-		selectedItemNumber_ = [children_ count] - 1;
+		selectedItemNumber_ = [children count] - 1;
 	
 	// select selected
 	int i = 0;
-	for (CCMenuItem *item in children_)
+	for (CCMenuItem *item in children)
 	{
 		if ( i == selectedItemNumber_ )
 			[item selected];
@@ -195,7 +197,7 @@
 		return;
 	
 	// Unselect selected menu item.
-	CCMenuItem *item = [children_ objectAtIndex: selectedItemNumber_];
+	CCMenuItem *item = [self.children objectAtIndex: selectedItemNumber_];
 	[item unselected];
 	selectedItemNumber_ = -1;
 	
@@ -205,14 +207,14 @@
 
 - (void) cancelSelectedItem
 {
-	if( selectedItem_ ) {
-		[selectedItem_ unselected];
-		selectedItem_ = nil;
+	if( _selectedItem ) {
+		[_selectedItem unselected];
+		_selectedItem = nil;
 	}
 	
 	selectedItemNumber_ = -1;
 
-	state_ = kCCMenuStateWaiting;
+	_state = kCCMenuStateWaiting;
 }
 
 #pragma mark Advanced Menu - Alignment
@@ -228,7 +230,7 @@
 	
 	// calculate and set contentSize,
 	CCMenuItem *item = nil;
-	CCARRAY_FOREACH(children_, item)
+	CCARRAY_FOREACH(_children, item)
 	{
         if (item)
         {
@@ -243,7 +245,7 @@
 	if (! bottomToTop)
 		y = height;
 	
-	CCARRAY_FOREACH(children_, item) 
+	CCARRAY_FOREACH(_children, item) 
     {
         if (item)
         {
@@ -261,8 +263,8 @@
 	}
 	
 	// Fix position of menuItem if it's the only one.
-	if ([children_ count] == 1)
-		[[children_ objectAtIndex: 0] setPosition: ccp(width / 2.0f, height / 2.0f ) ];
+	if ([_children count] == 1)
+		[[_children objectAtIndex: 0] setPosition: ccp(width / 2.0f, height / 2.0f ) ];
 	
 #ifdef __MAC_OS_X_VERSION_MAX_ALLOWED
 	if (bottomToTop)
@@ -291,7 +293,7 @@
 	
 	// calculate and set content size
 	CCMenuItem *item;
-	CCARRAY_FOREACH(children_, item)
+	CCARRAY_FOREACH(_children, item)
 	{
         if (item)
         {
@@ -306,7 +308,7 @@
 		x = width;
 	
 	// align items
-	CCARRAY_FOREACH(children_, item)
+	CCARRAY_FOREACH(_children, item)
 	{
         if (item)
         {
@@ -372,27 +374,27 @@
  
 -(BOOL) ccMouseDown:(NSEvent *)event
 {
-	if( ! visible_ || self.isDisabled)
+	if( ! _visible || self.isDisabled)
 		return NO;
 	
-	selectedItem_ = [self itemForMouseEvent:event];
+	_selectedItem = [self itemForMouseEvent:event];
 	
 	// Unselect previous selected by keyboard item.
-	if (children_.count > selectedItemNumber_ && selectedItemNumber_ >= 0)
+	if (_children.count > selectedItemNumber_ && selectedItemNumber_ >= 0)
 	{
-		CCMenuItem *item = [children_ objectAtIndex: selectedItemNumber_];
+		CCMenuItem *item = [_children objectAtIndex: selectedItemNumber_];
 		
-		if (selectedItem_ != item)
+		if (_selectedItem != item)
 		{
 			[item unselected];
 			selectedItemNumber_ = -1;
 		}
 	}
 	
-	[selectedItem_ selected];
+	[_selectedItem selected];
 	
-	if( selectedItem_ ) {
-		state_ = kCCMenuStateTrackingTouch;
+	if( _selectedItem ) {
+		_state = kCCMenuStateTrackingTouch;
 		return YES;
 	}
 	
@@ -437,7 +439,7 @@
 	// NEXT
 	if ( [keyCharacters rangeOfString:[NSString stringWithUnichar: downKeyBinding]].location != NSNotFound )
 	{
-		if ([children_ count] < 2)
+		if ([_children count] < 2)
 			return NO;
 		
 		[self selectNextMenuItem];
@@ -447,7 +449,7 @@
 	// PREV
 	if ( [keyCharacters rangeOfString:[NSString stringWithUnichar: upKeyBinding]].location != NSNotFound)
 	{
-		if ([children_ count] < 2)
+		if ([_children count] < 2)
 			return NO;
 		
 		[self selectPrevMenuItem];

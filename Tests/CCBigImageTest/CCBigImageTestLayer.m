@@ -50,9 +50,9 @@ enum nodeTags {
 		
 		// prepare scroll stuff
 #ifdef __IPHONE_OS_VERSION_MAX_ALLOWED
-		self.isTouchEnabled = YES;
+		self.touchEnabled = YES;
 #elif __MAC_OS_X_VERSION_MIN_REQUIRED
-		self.isMouseEnabled = YES;
+		self.mouseEnabled = YES;
 #endif
 		
 		// Create DynamicTiledNode with screen bounds additional preload zone size

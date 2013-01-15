@@ -360,7 +360,7 @@ enum nodeTags
 	
 	// Setup Menu Alignment
 	[menu alignItemsVerticallyWithPadding: 5 bottomToTop: NO]; //< also sets contentSize and keyBindings on Mac
-	menu.isRelativeAnchorPoint = YES;	
+	menu.ignoreAnchorPointForPosition = NO;
 	
 	return menu;
 }
@@ -382,7 +382,7 @@ enum nodeTags
 	
 	// Setup Menu Alignment
 	[menu alignItemsVerticallyWithPadding: 5 bottomToTop: YES]; //< also sets contentSize and keyBindings on Mac
-	menu.isRelativeAnchorPoint = YES;	
+	menu.ignoreAnchorPointForPosition = NO;
 	
 	return menu;
 }
@@ -552,7 +552,7 @@ enum nodeTags
 - (CCNode *) widget
 {
 	CCNode *widget = [CCNode node];
-	widget.isRelativeAnchorPoint = YES;
+	widget.ignoreAnchorPointForPosition = NO;
 	
 	// Prepare menuItems
 	CCMenuItemSprite *itemOne = 
