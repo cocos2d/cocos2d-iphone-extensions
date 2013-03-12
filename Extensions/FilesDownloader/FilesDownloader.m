@@ -63,7 +63,8 @@
 		_status = kDownloadStatusIdle;
 		
         // prepare size checkers
-        _filenames = [ files retain];
+        NSArray *uniqueFiles = [[NSSet setWithArray:files] allObjects];
+        _filenames = [ uniqueFiles retain];
 		self.sourcePath = aSourcePath;
         _fileSizes = [ [ NSMutableArray arrayWithCapacity: [_filenames count] ] retain];
         for ( int i = 0; i < [_filenames count]; ++i )
