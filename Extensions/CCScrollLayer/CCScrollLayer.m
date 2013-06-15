@@ -196,7 +196,7 @@ enum
         int blend_dst = 0;
         glGetIntegerv( GL_BLEND_SRC, &blend_src );
         glGetIntegerv( GL_BLEND_DST, &blend_dst );
-        glPointSize( 6.0 );
+        glPointSize( 6.0 * CC_CONTENT_SCALE_FACTOR() );
         
 #define DRAW_4B_FUNC glColor4ub        
 
