@@ -183,7 +183,7 @@ enum
 		// Set GL Values
 #if COCOS2D_VERSION >= 0x00020000
         ccGLEnable(CC_GL_BLEND);
-        ccPointSize( 6.0 * CC_CONTENT_SCALE_FACTOR() );
+        ccPointSize( 6.0 );
 #define DRAW_4B_FUNC ccDrawColor4B
         
 #else
