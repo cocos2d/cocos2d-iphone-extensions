@@ -12,6 +12,7 @@
  *
  * Copyright 2011-2012 Stepan Generalov
  * Copyright 2011 Brian Feller
+ * Copyright 2013 Christian Schuster
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -161,6 +162,9 @@ enum
 
 #pragma mark CCLayer Methods ReImpl
 
+// diameter of page indicators (unit: points)
+#define POINT_DIAMETER 6.0f
+
 - (void) visit
 {
 	[super visit];//< Will draw after glPopScene. 
@@ -183,8 +187,10 @@ enum
 		// Set GL Values
 #if COCOS2D_VERSION >= 0x00020000
         ccGLEnable(CC_GL_BLEND);
-        ccPointSize( 6.0 * CC_CONTENT_SCALE_FACTOR() );
-#define DRAW_4B_FUNC ccDrawColor4B
+        
+#define DRAW_4B_FUNC CCScrollLayer_circleShader_setColor
+#define DRAW_POINT_FUNC( point ) CCScrollLayer_circleShader_drawPoints( &(point), 1 )
+#define DRAW_POINTS_FUNC CCScrollLayer_circleShader_drawPoints
         
 #else
         glEnable(GL_POINT_SMOOTH);
@@ -196,9 +202,11 @@ enum
         int blend_dst = 0;
         glGetIntegerv( GL_BLEND_SRC, &blend_src );
         glGetIntegerv( GL_BLEND_DST, &blend_dst );
-        glPointSize( 6.0 * CC_CONTENT_SCALE_FACTOR() );
+        glPointSize( POINT_DIAMETER * CC_CONTENT_SCALE_FACTOR() );
         
-#define DRAW_4B_FUNC glColor4ub        
+#define DRAW_4B_FUNC glColor4ub
+#define DRAW_POINT_FUNC ccDrawPoint
+#define DRAW_POINTS_FUNC ccDrawPoints
 
 #endif
         glBlendFunc( GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA );
@@ -209,19 +217,17 @@ enum
                      pagesIndicatorNormalColor_.b,
                      pagesIndicatorNormalColor_.a);
         
-        ccDrawPoints( points, totalScreens );
+        DRAW_POINTS_FUNC( points, totalScreens );
                            
         // Draw White Point for Selected Page	
         DRAW_4B_FUNC(pagesIndicatorSelectedColor_.r,
                      pagesIndicatorSelectedColor_.g,
                      pagesIndicatorSelectedColor_.b,
                      pagesIndicatorSelectedColor_.a);
-        ccDrawPoint(points[currentScreen_]);
+        DRAW_POINT_FUNC(points[currentScreen_]);
                                                
         // Restore GL Values
-#if COCOS2D_VERSION >= 0x00020000
-        ccPointSize(1.0f);
-#else
+#if COCOS2D_VERSION < 0x00020000
         glPointSize(1.0f);
         glDisable(GL_POINT_SMOOTH);
         if (! blendWasEnabled)
@@ -232,6 +238,123 @@ enum
 #endif		
 	}
 }
+
+#pragma mark Shaders for circular page indicators with OpenGL ES 2.0
+
+#if COCOS2D_VERSION >= 0x00020000
+
+int CCScrollLayer_circleShader_colorUniformLocation;
+int CCScrollLayer_circleShader_softenUniformLocation;
+ccColor4F CCScrollLayer_circleShader_color;
+
+// The vertex shader applies the ModelViewProjection matrix from cocos2d to get the position, and provides the texture coordinate for the fragment shader.
+const GLchar *CCScrollLayer_circleShader_vertexShaderSource =
+    "uniform mat4 u_MVPMatrix;"
+    "attribute vec4 a_position;"
+    "attribute vec2 a_texCoord;"
+    "varying vec2 v_texCoord;"
+    "void main() {"
+    "    gl_Position = u_MVPMatrix * a_position;"
+    "    v_texCoord = a_texCoord;"
+    "}";
+
+// Each point is represented by a square (two triangles) with texture coordinates from (0,0) to (1,1).
+// The "u_color" uniform defines the color of the points.
+// The "u_soften" uniform defines the "smoothness" of the circle's outline.
+
+// The fragment shader computes d to be the texture-space distance between (0.5,0.5) and the current fragment's texture coordinates.
+// The computed alpha value is 0 for d <= 0.5-u_soften, and 1 for d >= 0.5+u_soften, and a smoothstep interpolation in between.
+const GLchar *CCScrollLayer_circleShader_fragmentShaderSource =
+    "uniform lowp vec4 u_color;"
+    "uniform mediump float u_soften;"
+    "varying mediump vec2 v_texCoord;"
+    "void main() {"
+    "    mediump float d = distance(v_texCoord, vec2(0.5, 0.5));"
+    "    lowp float alpha = 1.0 - smoothstep(0.5 - u_soften, 0.5 + u_soften, d);"
+    "    gl_FragColor = u_color * vec4(1.0, 1.0, 1.0, alpha);"
+    "}";
+
+CCGLProgram *CCScrollLayer_circleShader_getProgram() {
+    CCShaderCache *shaderCache = [CCShaderCache sharedShaderCache];
+    CCGLProgram *circleShader;
+    @synchronized (shaderCache) {
+        circleShader = [shaderCache programForKey:@"CCScrollLayer_circleShader"];
+        if ( circleShader == nil )
+        {
+            // load the shader, and store it in the shader cache
+            circleShader = [[CCGLProgram alloc] initWithVertexShaderByteArray:CCScrollLayer_circleShader_vertexShaderSource
+                                                      fragmentShaderByteArray:CCScrollLayer_circleShader_fragmentShaderSource];
+            [circleShader addAttribute:kCCAttributeNamePosition index:kCCVertexAttrib_Position];
+            [circleShader addAttribute:kCCAttributeNameTexCoord index:kCCVertexAttrib_TexCoords];
+            [circleShader link];
+            [circleShader updateUniforms];
+            [shaderCache addProgram:circleShader forKey:@"CCScrollLayer_circleShader"];
+            [circleShader release]; // shader is retained by cache
+            
+            // determine the location of the u_color and u_soften uniforms
+            CCScrollLayer_circleShader_colorUniformLocation = glGetUniformLocation(circleShader->program_, "u_color");
+            CCScrollLayer_circleShader_softenUniformLocation = glGetUniformLocation(circleShader->program_, "u_soften");
+        }
+    }
+    return circleShader;
+}
+
+void CCScrollLayer_circleShader_setColor( GLubyte r, GLubyte g, GLubyte b, GLubyte a ) {
+    CCScrollLayer_circleShader_color = ccc4FFromccc4B(ccc4(r, g, b, a));
+}
+
+void CCScrollLayer_circleShader_drawPoints( const CGPoint *points, NSUInteger numberOfPoints ) {
+    CCGLProgram *program = CCScrollLayer_circleShader_getProgram();
+    
+    // 2*u_soften (the width of the smooth border) in texture space corresponds to 1 pixel (empirical value, looks nice) in screen space
+    GLfloat soften = 0.5 / POINT_DIAMETER / CC_CONTENT_SCALE_FACTOR();
+    
+    // activate the shader, and set its uniforms
+    [program use];
+	[program setUniformForModelViewProjectionMatrix];
+    [program setUniformLocation:CCScrollLayer_circleShader_colorUniformLocation with4fv:&CCScrollLayer_circleShader_color count:1];
+    [program setUniformLocation:CCScrollLayer_circleShader_softenUniformLocation withF1:soften];
+    
+    // generate vertex positions and texture coordinates for all points (two triangles per point)
+    GLfloat position[12 * numberOfPoints];
+    GLfloat texCoords[12 * numberOfPoints];
+    GLfloat *positionPtr = position;
+    GLfloat *texCoordsPtr = texCoords;
+    for (int i = 0; i < numberOfPoints; ++i)
+    {
+        // position
+        GLfloat x0 = points[i].x - POINT_DIAMETER / 2.0;
+        GLfloat y0 = points[i].y - POINT_DIAMETER / 2.0;
+        GLfloat x1 = points[i].x + POINT_DIAMETER / 2.0;
+        GLfloat y1 = points[i].y + POINT_DIAMETER / 2.0;
+        *(positionPtr++) = x0; *(positionPtr++) = y0;
+        *(positionPtr++) = x1; *(positionPtr++) = y0;
+        *(positionPtr++) = x0; *(positionPtr++) = y1;
+        *(positionPtr++) = x1; *(positionPtr++) = y1;
+        *(positionPtr++) = x0; *(positionPtr++) = y1;
+        *(positionPtr++) = x1; *(positionPtr++) = y0;
+        
+        // texCoords
+        *(texCoordsPtr++) = 0; *(texCoordsPtr++) = 0;
+        *(texCoordsPtr++) = 1; *(texCoordsPtr++) = 0;
+        *(texCoordsPtr++) = 0; *(texCoordsPtr++) = 1;
+        *(texCoordsPtr++) = 1; *(texCoordsPtr++) = 1;
+        *(texCoordsPtr++) = 0; *(texCoordsPtr++) = 1;
+        *(texCoordsPtr++) = 1; *(texCoordsPtr++) = 0;
+    }
+    
+    // enable position and texture coordinate vertex attributes
+    glEnableVertexAttribArray( kCCVertexAttrib_Position );
+    glEnableVertexAttribArray( kCCVertexAttrib_TexCoords );
+    
+    // set pointers to vertex attributes
+    glVertexAttribPointer(kCCVertexAttrib_Position, 2, GL_FLOAT, GL_FALSE, 2 * sizeof(GLfloat), position);
+    glVertexAttribPointer(kCCVertexAttrib_TexCoords, 2, GL_FLOAT, GL_FALSE, 2 * sizeof(GLfloat), texCoords);
+    
+    glDrawArrays(GL_TRIANGLES, 0, 6 * numberOfPoints);
+}
+
+#endif
 
 #pragma mark Moving To / Selecting Pages
 
