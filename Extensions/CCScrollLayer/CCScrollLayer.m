@@ -185,6 +185,7 @@ enum
         ccGLEnable(CC_GL_BLEND);
         ccPointSize( 6.0 * CC_CONTENT_SCALE_FACTOR() );
 #define DRAW_4B_FUNC ccDrawColor4B
+#define GL_BLEND_FUNC ccGLBlendFunc
         
 #else
         glEnable(GL_POINT_SMOOTH);
@@ -198,10 +199,11 @@ enum
         glGetIntegerv( GL_BLEND_DST, &blend_dst );
         glPointSize( 6.0 * CC_CONTENT_SCALE_FACTOR() );
         
+#define GL_BLEND_FUNC glBlendFunc
 #define DRAW_4B_FUNC glColor4ub        
 
 #endif
-        glBlendFunc( GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA );
+        GL_BLEND_FUNC( GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA );
  		
  		// Draw Gray Points
         DRAW_4B_FUNC(pagesIndicatorNormalColor_.r,
@@ -228,7 +230,7 @@ enum
             glDisable(GL_BLEND);
         
         // always restore the blending functions too
-        glBlendFunc( blend_src, blend_dst );
+        GL_BLEND_FUNC( blend_src, blend_dst );
 #endif		
 	}
 }
