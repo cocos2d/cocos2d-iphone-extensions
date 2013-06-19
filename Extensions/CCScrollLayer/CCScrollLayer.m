@@ -183,6 +183,11 @@ enum
 			CGFloat pX = self.pagesIndicatorPosition.x + d * ( (CGFloat)i - 0.5f*(n-1.0f) );
 			points[i] = ccp (pX, pY);
 		}
+        
+        // switch points at index 0 and currentScreen to reduce number of draw calls
+        CGPoint tmp = points[0];
+        points[0] = points[currentScreen_];
+        points[currentScreen_] = tmp;
 		
 		// Set GL Values
 #if COCOS2D_VERSION >= 0x00020000
@@ -217,14 +222,14 @@ enum
                      pagesIndicatorNormalColor_.b,
                      pagesIndicatorNormalColor_.a);
         
-        DRAW_POINTS_FUNC( points, totalScreens );
+        DRAW_POINTS_FUNC( points + 1, totalScreens - 1 );
                            
         // Draw White Point for Selected Page	
         DRAW_4B_FUNC(pagesIndicatorSelectedColor_.r,
                      pagesIndicatorSelectedColor_.g,
                      pagesIndicatorSelectedColor_.b,
                      pagesIndicatorSelectedColor_.a);
-        DRAW_POINT_FUNC(points[currentScreen_]);
+        DRAW_POINT_FUNC(points[0]);
                                                
         // Restore GL Values
 #if COCOS2D_VERSION < 0x00020000
