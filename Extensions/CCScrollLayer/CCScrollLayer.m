@@ -263,20 +263,20 @@ const GLchar *CCScrollLayer_circleShader_vertexShaderSource =
     "    v_texCoord = a_texCoord;"
     "}";
 
-// Each point is represented by a square (two triangles) with texture coordinates from (0,0) to (1,1).
-// The "u_color" uniform defines the color of the points.
-// The "u_soften" uniform defines the "smoothness" of the circle's outline.
-
-// The fragment shader computes d to be the texture-space distance between (0.5,0.5) and the current fragment's texture coordinates.
-// The computed alpha value is 0 for d <= 0.5-u_soften, and 1 for d >= 0.5+u_soften, and a smoothstep interpolation in between.
+// The fragment shader renders a solid circle with radius 0.5 around (0,0), with a smoothed outline with width 2*u_soften.
+// The base color u_color is used to render the circle.
+// Let d be the texture-space distance between (0,0) and the current fragment's texture coordinates.
+// For d <= 0.5-u_soften, the opacity is 1.
+// For d >= 0.5+u_soften, the opacity is 0.
+// For |d-0.5| < u_soften, a smoothstep interpolation is used to determine the opacity.
 const GLchar *CCScrollLayer_circleShader_fragmentShaderSource =
     "uniform lowp vec4 u_color;"
     "uniform mediump float u_soften;"
     "varying mediump vec2 v_texCoord;"
     "void main() {"
-    "    mediump float d = distance(v_texCoord, vec2(0.5, 0.5));"
-    "    lowp float alpha = 1.0 - smoothstep(0.5 - u_soften, 0.5 + u_soften, d);"
-    "    gl_FragColor = u_color * vec4(1.0, 1.0, 1.0, alpha);"
+    "    mediump float d = length(v_texCoord);"
+    "    lowp float opacity = 1.0 - smoothstep(0.5 - u_soften, 0.5 + u_soften, d);"
+    "    gl_FragColor = u_color * vec4(1.0, 1.0, 1.0, opacity);"
     "}";
 
 CCGLProgram *CCScrollLayer_circleShader_getProgram() {
@@ -311,14 +311,16 @@ void CCScrollLayer_circleShader_setColor( GLubyte r, GLubyte g, GLubyte b, GLuby
 void CCScrollLayer_circleShader_drawPoints( const CGPoint *points, NSUInteger numberOfPoints ) {
     CCGLProgram *program = CCScrollLayer_circleShader_getProgram();
     
-    // 2*u_soften (the width of the smooth border) in texture space corresponds to 1 pixel (empirical value, looks nice) in screen space
-    GLfloat soften = 0.5 / POINT_DIAMETER / CC_CONTENT_SCALE_FACTOR();
+    // 1 unit in texture space corresponds to POINT_DIAMETER units in node space
+    GLfloat softenByPixels = 1.0; // half the soft border width in pixels
+    GLfloat softenByNodeUnits = softenByPixels / CC_CONTENT_SCALE_FACTOR();
+    GLfloat softenByTextureUnits = softenByNodeUnits / POINT_DIAMETER;
     
     // activate the shader, and set its uniforms
     [program use];
 	[program setUniformForModelViewProjectionMatrix];
     [program setUniformLocation:CCScrollLayer_circleShader_colorUniformLocation with4fv:&CCScrollLayer_circleShader_color count:1];
-    [program setUniformLocation:CCScrollLayer_circleShader_softenUniformLocation withF1:soften];
+    [program setUniformLocation:CCScrollLayer_circleShader_softenUniformLocation withF1:softenByTextureUnits];
     
     // generate vertex positions and texture coordinates for all points (two triangles per point)
     GLfloat position[12 * numberOfPoints];
@@ -328,10 +330,10 @@ void CCScrollLayer_circleShader_drawPoints( const CGPoint *points, NSUInteger nu
     for (int i = 0; i < numberOfPoints; ++i)
     {
         // position
-        GLfloat x0 = points[i].x - POINT_DIAMETER / 2.0;
-        GLfloat y0 = points[i].y - POINT_DIAMETER / 2.0;
-        GLfloat x1 = points[i].x + POINT_DIAMETER / 2.0;
-        GLfloat y1 = points[i].y + POINT_DIAMETER / 2.0;
+        GLfloat x0 = points[i].x - POINT_DIAMETER;
+        GLfloat y0 = points[i].y - POINT_DIAMETER;
+        GLfloat x1 = points[i].x + POINT_DIAMETER;
+        GLfloat y1 = points[i].y + POINT_DIAMETER;
         *(positionPtr++) = x0; *(positionPtr++) = y0;
         *(positionPtr++) = x1; *(positionPtr++) = y0;
         *(positionPtr++) = x0; *(positionPtr++) = y1;
@@ -340,12 +342,12 @@ void CCScrollLayer_circleShader_drawPoints( const CGPoint *points, NSUInteger nu
         *(positionPtr++) = x1; *(positionPtr++) = y0;
         
         // texCoords
-        *(texCoordsPtr++) = 0; *(texCoordsPtr++) = 0;
-        *(texCoordsPtr++) = 1; *(texCoordsPtr++) = 0;
-        *(texCoordsPtr++) = 0; *(texCoordsPtr++) = 1;
+        *(texCoordsPtr++) = -1; *(texCoordsPtr++) = -1;
+        *(texCoordsPtr++) = 1; *(texCoordsPtr++) = -1;
+        *(texCoordsPtr++) = -1; *(texCoordsPtr++) = 1;
         *(texCoordsPtr++) = 1; *(texCoordsPtr++) = 1;
-        *(texCoordsPtr++) = 0; *(texCoordsPtr++) = 1;
-        *(texCoordsPtr++) = 1; *(texCoordsPtr++) = 0;
+        *(texCoordsPtr++) = -1; *(texCoordsPtr++) = 1;
+        *(texCoordsPtr++) = 1; *(texCoordsPtr++) = -1;
     }
     
     // enable position and texture coordinate vertex attributes
